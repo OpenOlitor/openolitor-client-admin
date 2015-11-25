@@ -15,6 +15,15 @@ module.exports = function(grunt) {
     'API_URL': process.env.OO_API_URL || 'http://localhost:9004/' //replace @@API_URL with value
   };
 
+  var mandantenConfig = {
+    mandant1: {
+      'API_URL': process.env.OO_MANDANT1_API_URL || 'http://localhost:9004/' //replace @@API_URL with value
+    },
+    mandant2: {
+      'API_URL': process.env.OO_MANDANT2_API_URL || 'http://localhost:9005/' //replace @@API_URL with value
+    }
+  };
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -22,7 +31,8 @@ module.exports = function(grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: 'dist',
+      mandanten: 'mandanten'
     },
 
     // task used to replace config values in js files
@@ -46,6 +56,32 @@ module.exports = function(grunt) {
           flatten: true,
           src: ['.tmp/concat/scripts/scripts.js'],
           dest: '.tmp/concat/scripts'
+        }]
+      },
+      mandant1: {
+        options: {
+          patterns: [{
+            json: mandantenConfig.mandant1
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['<%= yeoman.mandanten %>/mandant1/scripts/*.scripts.js'],
+          dest: '<%= yeoman.mandanten %>/mandant1/scripts/'
+        }]
+      },
+      mandant2: {
+        options: {
+          patterns: [{
+            json: mandantenConfig.mandant2
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['<%= yeoman.mandanten %>/mandant2/scripts/*.scripts.js'],
+          dest: '<%= yeoman.mandanten %>/mandant2/scripts/'
         }]
       }
     },
@@ -148,6 +184,7 @@ module.exports = function(grunt) {
             '.tmp',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*',
+            '<%= yeoman.mandanten %>',
             '!<%= yeoman.dist %>/index.php'
           ]
         }]
@@ -367,6 +404,18 @@ module.exports = function(grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '**/*.css'
+      },
+      mandant1: {
+        expand: true,
+        cwd: '<%= yeoman.dist %>',
+        src: '**',
+        dest: '<%= yeoman.mandanten %>/mandant1'
+      },
+      mandant2: {
+        expand: true,
+        cwd: '<%= yeoman.dist %>',
+        src: '**',
+        dest: '<%= yeoman.mandanten %>/mandant2'
       }
     },
 
@@ -451,7 +500,18 @@ module.exports = function(grunt) {
           src: ['**/*'],
           dest: '/'
         }]
-      }
+      },
+      mandanten: {
+        options: {
+          archive: 'mandanten/openolitor-client-mandanten.zip'
+        },
+        files: [{
+          expand: true,
+          cwd: 'mandanten/',
+          src: ['**/*'],
+          dest: '/'
+        }]
+      },
     }
   });
 
@@ -507,7 +567,6 @@ module.exports = function(grunt) {
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'replace:prod',
     'ngAnnotate',
     'copy:dist',
     'cdnify',
@@ -516,7 +575,12 @@ module.exports = function(grunt) {
     'rev',
     'usemin',
     'htmlmin',
-    'compress'
+    'copy:mandant1',
+    'copy:mandant2',
+    'replace:mandant1',
+    'replace:mandant2',
+    'compress',
+    'compress:mandanten'
   ]);
 
   grunt.registerTask('i18nextract', ['nggettext_extract']);
