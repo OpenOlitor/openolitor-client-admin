@@ -28,7 +28,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     // Project settings
-    yeoman: {
+    openolitor: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
       dist: 'dist',
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['<%= yeoman.app %>/scripts/app.js'],
+          src: ['<%= openolitor.app %>/scripts/app.js'],
           dest: '.tmp/scripts'
         }]
       },
@@ -67,8 +67,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['<%= yeoman.mandanten %>/mandant1/scripts/*.scripts.js'],
-          dest: '<%= yeoman.mandanten %>/mandant1/scripts/'
+          src: ['<%= openolitor.mandanten %>/mandant1/scripts/*.scripts.js'],
+          dest: '<%= openolitor.mandanten %>/mandant1/scripts/'
         }]
       },
       mandant2: {
@@ -80,8 +80,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['<%= yeoman.mandanten %>/mandant2/scripts/*.scripts.js'],
-          dest: '<%= yeoman.mandanten %>/mandant2/scripts/'
+          src: ['<%= openolitor.mandanten %>/mandant2/scripts/*.scripts.js'],
+          dest: '<%= openolitor.mandanten %>/mandant2/scripts/'
         }]
       }
     },
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/**/*.js'],
+        files: ['<%= openolitor.app %>/scripts/**/*.js'],
         tasks: ['newer:jshint:all', 'replace:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -104,7 +104,7 @@ module.exports = function(grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
+        files: ['<%= openolitor.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
       },
       gruntfile: {
@@ -115,9 +115,9 @@ module.exports = function(grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= openolitor.app %>/{,*/}*.html',
           '.tmp/styles/**/*.css',
-          '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= openolitor.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -135,7 +135,7 @@ module.exports = function(grunt) {
           open: true,
           base: [
             '.tmp',
-            '<%= yeoman.app %>'
+            '<%= openolitor.app %>'
           ]
         }
       },
@@ -145,13 +145,13 @@ module.exports = function(grunt) {
           base: [
             '.tmp',
             'test',
-            '<%= yeoman.app %>'
+            '<%= openolitor.app %>'
           ]
         }
       },
       dist: {
         options: {
-          base: '<%= yeoman.dist %>'
+          base: '<%= openolitor.dist %>'
         }
       }
     },
@@ -164,8 +164,8 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js',
-        '!<%= yeoman.app %>/scripts/translations.js'
+        '<%= openolitor.app %>/scripts/{,*/}*.js',
+        '!<%= openolitor.app %>/scripts/translations.js'
       ],
       test: {
         options: {
@@ -182,10 +182,10 @@ module.exports = function(grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*',
-            '<%= yeoman.mandanten %>',
-            '!<%= yeoman.dist %>/index.php'
+            '<%= openolitor.dist %>/*',
+            '!<%= openolitor.dist %>/.git*',
+            '<%= openolitor.mandanten %>',
+            '!<%= openolitor.dist %>/index.php'
           ]
         }]
       },
@@ -210,29 +210,29 @@ module.exports = function(grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
-        //        cwd: '<%= yeoman.app %>'
+        //        cwd: '<%= openolitor.app %>'
       },
       app: {
-        src: ['<%= yeoman.app %>/index.html'],
+        src: ['<%= openolitor.app %>/index.html'],
         exclude: ['bower_components/bootstrap-sass-official/*'],
-        ignorePath: '<%= yeoman.app %>/'
+        ignorePath: '<%= openolitor.app %>/'
       },
       sass: {
-        src: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
-        ignorePath: '<%= yeoman.app %>/bower_components/'
+        src: ['<%= openolitor.app %>/styles/**/*.{scss,sass}'],
+        ignorePath: '<%= openolitor.app %>/bower_components/'
       }
     },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
+        sassDir: '<%= openolitor.app %>/styles',
         cssDir: '.tmp/styles',
         generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/fonts',
-        importPath: '<%= yeoman.app %>/bower_components',
+        imagesDir: '<%= openolitor.app %>/images',
+        javascriptsDir: '<%= openolitor.app %>/scripts',
+        fontsDir: '<%= openolitor.app %>/fonts',
+        importPath: '<%= openolitor.app %>/bower_components',
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
         httpFontsPath: '/fonts',
@@ -242,7 +242,7 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+          generatedImagesDir: '<%= openolitor.dist %>/images/generated'
         }
       },
       server: {
@@ -257,10 +257,10 @@ module.exports = function(grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/scripts/**/*.js',
-            '<%= yeoman.dist %>/styles/**/*.css',
-            '<%= yeoman.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= openolitor.dist %>/scripts/**/*.js',
+            '<%= openolitor.dist %>/styles/**/*.css',
+            '<%= openolitor.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= openolitor.dist %>/styles/fonts/*'
           ]
         }
       }
@@ -270,9 +270,9 @@ module.exports = function(grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= openolitor.app %>/index.html',
       options: {
-        dest: '<%= yeoman.dist %>',
+        dest: '<%= openolitor.dist %>',
         flow: {
           html: {
             steps: {
@@ -287,17 +287,17 @@ module.exports = function(grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/**/*.html'],
-      css: ['<%= yeoman.dist %>/styles/**/*.css'],
+      html: ['<%= openolitor.dist %>/**/*.html'],
+      css: ['<%= openolitor.dist %>/styles/**/*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= openolitor.dist %>', '<%= openolitor.dist %>/images']
       }
     },
 
     // The following *-min tasks produce minified files in the dist folder
     cssmin: {
       options: {
-        root: '<%= yeoman.app %>'
+        root: '<%= openolitor.app %>'
       }
     },
 
@@ -305,9 +305,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= openolitor.app %>/images',
           src: '**/*.{jpg,jpeg,gif}', // png doesn't work on buildserver
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= openolitor.dist %>/images'
         }]
       }
     },
@@ -316,9 +316,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= openolitor.app %>/images',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= openolitor.dist %>/images'
         }]
       }
     },
@@ -334,9 +334,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>',
+          cwd: '<%= openolitor.dist %>',
           src: ['*.html', 'scripts/**/*.html'],
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= openolitor.dist %>'
         }]
       }
     },
@@ -358,7 +358,7 @@ module.exports = function(grunt) {
     // Replace Google CDN references
     cdnify: {
       dist: {
-        html: ['<%= yeoman.dist %>/*.html']
+        html: ['<%= openolitor.dist %>/*.html']
       }
     },
 
@@ -368,8 +368,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
+          cwd: '<%= openolitor.app %>',
+          dest: '<%= openolitor.dist %>',
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
@@ -381,41 +381,41 @@ module.exports = function(grunt) {
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
+          dest: '<%= openolitor.dist %>/images',
           src: ['generated/*']
         }, {
           //for bootstrap fonts, maybe we could use the scss/less where the correct font url path will be inserted
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>/bower_components/bootstrap/dist',
+          cwd: '<%= openolitor.app %>/bower_components/bootstrap/dist',
           src: ['fonts/*.*'],
-          dest: '<%= yeoman.dist %>/bower_components/bootstrap/dist'
+          dest: '<%= openolitor.dist %>/bower_components/bootstrap/dist'
         }, {
           //for font-awesome
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>/bower_components/font-awsome',
+          cwd: '<%= openolitor.app %>/bower_components/font-awsome',
           src: ['fonts/*.*'],
-          dest: '<%= yeoman.dist %>/bower_components/font-awsome'
+          dest: '<%= openolitor.dist %>/bower_components/font-awsome'
         }]
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
+        cwd: '<%= openolitor.app %>/styles',
         dest: '.tmp/styles/',
         src: '**/*.css'
       },
       mandant1: {
         expand: true,
-        cwd: '<%= yeoman.dist %>',
+        cwd: '<%= openolitor.dist %>',
         src: '**',
-        dest: '<%= yeoman.mandanten %>/mandant1'
+        dest: '<%= openolitor.mandanten %>/mandant1'
       },
       mandant2: {
         expand: true,
-        cwd: '<%= yeoman.dist %>',
+        cwd: '<%= openolitor.dist %>',
         src: '**',
-        dest: '<%= yeoman.mandanten %>/mandant2'
+        dest: '<%= openolitor.mandanten %>/mandant2'
       }
     },
 
@@ -476,7 +476,7 @@ module.exports = function(grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'i18n/template.pot': ['<%= yeoman.app %>/**/*.html', '<%= yeoman.app %>/**/*.js', '!<%= yeoman.app %>/bower_components/**']
+          'i18n/template.pot': ['<%= openolitor.app %>/**/*.html', '<%= openolitor.app %>/**/*.js', '!<%= openolitor.app %>/bower_components/**']
         }
       }
     },
@@ -484,7 +484,7 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          '<%= yeoman.app %>/scripts/translations.js': ['i18n/*.po']
+          '<%= openolitor.app %>/scripts/translations.js': ['i18n/*.po']
         }
       }
     },
@@ -579,7 +579,7 @@ module.exports = function(grunt) {
     'copy:mandant2',
     'replace:mandant1',
     'replace:mandant2',
-    'compress',
+    'compress:main',
     'compress:mandanten'
   ]);
 
