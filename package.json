@@ -61,7 +61,7 @@
     "prestart": "npm install",
     "start": "http-server app -a localhost -p 3000",
     "pretest": "npm install",
-    "test": "grunt test",
+    "test": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js  --single-run",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
