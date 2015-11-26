@@ -54,14 +54,14 @@
     "time-grunt": "^1.1.1"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=5.0.0"
   },
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "http-server app -a localhost -p 3000",
     "pretest": "npm install",
-    "test": "karma start test/karma.conf.js",
+    "test": "grunt test",
     "test-single-run": "karma start test/karma.conf.js  --single-run",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
