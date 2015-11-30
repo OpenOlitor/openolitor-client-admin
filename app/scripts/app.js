@@ -25,7 +25,7 @@ angular
         redirectTo: '/abotypen'
       })
       .when('/abotypen', {
-        templateUrl: 'scripts/abotypen/abotypenoverview.html',
+        templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'AbotypenOverviewController',
         name: 'AbotypenOverview'
       }).otherwise({
