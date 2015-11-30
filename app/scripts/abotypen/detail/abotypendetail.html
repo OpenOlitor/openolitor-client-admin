@@ -1,0 +1,71 @@
+<div>
+  <h1>{{abotyp.name || 'Abotyp'|translate}}</h1>
+</div>
+<form name="abotypForm">
+  <div>
+    <h2 translate>Basisdaten</h2>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="name" translate>Name</label>
+      </div>
+      <div class="col-md-8">
+        <input type="text" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="aktiv" translate>Aktiv</label>
+      </div>
+      <div class="col-md-8">
+        <input bs-switch ng-model="abotyp.aktiv" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="lieferrhythmus" translate>Lieferrhythmus</label>
+      </div>
+      <div class="col-md-4">
+        <oo-dropdown dropdown-id="lieferrhythmus" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus"></oo-dropdown>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="preis" translate>Preis</label>
+      </div>
+      <div class="col-md-4 row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <div class="input-group-addon">{{abotyp.waehrung}}</div>
+            <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
+          </div>
+        </div>
+        <div class="col-md-1" style="line-height:30px">
+          <span translate>pro</span>
+        </div>
+        <div class="col-md-5">
+          <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit"></oo-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <h2 translate>Lieferungen</h2>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="letzteLieferung" translate>Letzte Lieferung</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-4">
+        <button ng-click="save()" ng-disabled="abotypForm.$invalid" class="btn btn-primary" translate>Speichern</button>
+        <button ng-click="cancel()" class="btn btn-default" translate>Abbrechen</button>
+      </div>
+      <div class="col-md-8" ng-if="isExisting()">
+        <button ng-click="delete()" class="btn btn-danger" translate>Löschen</button>
+      </div>
+    </div>
+  </div>
+</form>

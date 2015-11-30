@@ -6,7 +6,7 @@ angular.module('openolitor').filter('ooPreisProEinheit', function(gettext) {
       gettext(value.waehrung) +
       value.preis + ' ' +
       gettext('pro') + ' ' +
-      gettext(value.preisEinheit);
+      gettext(value.preiseinheit);
 
     return result;
   };

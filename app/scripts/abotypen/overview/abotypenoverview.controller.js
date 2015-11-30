@@ -9,21 +9,23 @@ angular.module('openolitor')
     $scope.loading = false;
 
     $scope.dummyEntries = [{
+      uid: 'c8926129-045d-4f78-9c79-0ee873aed785',
       name: 'abo1',
       anzahlAbonnenten: 12,
       letzteLieferung: '2015-10-30T18:21Z',
       lieferrhythmus: 'Zweiwoechentlich',
       preis: 20,
-      preisEinheit: 'Lieferung',
+      preiseinheit: 'Lieferung',
       waehrung: 'CHF',
       aktiv: true
     }, {
+      uid: '64546e82-4bd7-4fde-9c48-2d862a9ac4a1',
       name: 'abo2',
       anzahlAbonnenten: 12,
       letzteLieferung: '2015-10-30T19:12Z',
       lieferrhythmus: 'Zweiwoechentlich',
       preis: 400,
-      preisEinheit: 'Jahr',
+      preiseinheit: 'Jahr',
       waehrung: 'CHF',
       aktiv: false
     }];

@@ -14,7 +14,7 @@ describe('Filter: ooPreisProEinheit', function() {
   it('format preis + preisEinheit + waehrung to single string', function() {
     var input = {
       preis: 3,
-      preisEinheit: 'Tag',
+      preiseinheit: 'Tag',
       waehrung: 'CHF'
     };
 

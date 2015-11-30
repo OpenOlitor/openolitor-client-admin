@@ -1,5 +1,5 @@
 <div>
-  <h1 translate>Abotypen <a role="button" href="#/abotypen/create" class="btn btn-primary pull-right" translate>Neuer Abotyp</a></h1>
+  <h1 translate>Abotypen <a role="button" href="#/abotypen/new" class="btn btn-primary pull-right" translate>Neuer Abotyp</a></h1>
   <div class="filters">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -22,7 +22,7 @@
     <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
       <tr ng-repeat="abotyp in $data">
         <td title="'Name'|translate" sortable="'name'">
-          {{abotyp.name}}
+          <a ng-href="#/abotypen/{{abotyp.uid}}">{{abotyp.name}}</a>
         </td>
         <td title="'Anzahl Abonnenten'|translate" sortable="'anzahlAbonnenten'">
           {{abotyp.anzahlAbonnenten}}

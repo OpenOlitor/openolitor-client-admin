@@ -115,7 +115,7 @@ module.exports = function(grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= openolitor.app %>/{,*/}*.html',
+          '<%= openolitor.app %>/scripts/**/*.html',
           '.tmp/styles/**/*.css',
           '<%= openolitor.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
