@@ -60,7 +60,7 @@ angular.module('openolitor')
     };
 
     $scope.save = function() {
-      $scope.abotyp.$save(function(result) {
+      $scope.abotyp.$update(function(result) {
         $location.path('/abotypen/' + result.id);
       });
     };
