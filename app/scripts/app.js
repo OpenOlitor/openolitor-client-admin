@@ -45,7 +45,7 @@ angular
         controller: 'AbotypenDetailController',
         name: 'AbotypenDetail'
       })
-      .when('/abotypen/:uid', {
+      .when('/abotypen/:id', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
         name: 'AbotypenDetail'

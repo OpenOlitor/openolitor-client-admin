@@ -14,6 +14,14 @@
     </div>
     <div class="row form-group">
       <div class="col-md-4">
+        <label for="beschreibung" translate>Beschreibung</label>
+      </div>
+      <div class="col-md-8">
+        <textarea class="form-control" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
         <label for="aktiv" translate>Aktiv</label>
       </div>
       <div class="col-md-8">
@@ -47,9 +55,17 @@
         </div>
       </div>
     </div>
-
-    <h2 translate>Lieferungen</h2>
     <div class="row form-group">
+      <div class="col-md-4">
+        <label for="anzahlAbwesenheiten" translate>Anzahl Abwesenheiten</label>
+      </div>
+      <div class="col-md-8">
+        <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl Abwesenheiten'|translate}}"></input>
+      </div>
+    </div>
+
+    <h2 ng-if="isExisting()" translate>Lieferungen</h2>
+    <div ng-if="isExisting()" class="row form-group">
       <div class="col-md-4">
         <label for="letzteLieferung" translate>Letzte Lieferung</label>
       </div>

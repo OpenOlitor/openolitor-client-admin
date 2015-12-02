@@ -9,7 +9,7 @@ angular.module('openolitor')
     $scope.loading = false;
 
     $scope.dummyEntries = [{
-      uid: 'c8926129-045d-4f78-9c79-0ee873aed785',
+      id: 'c8926129-045d-4f78-9c79-0ee873aed785',
       name: 'abo1',
       anzahlAbonnenten: 12,
       letzteLieferung: '2015-10-30T18:21Z',
@@ -19,7 +19,7 @@ angular.module('openolitor')
       waehrung: 'CHF',
       aktiv: true
     }, {
-      uid: '64546e82-4bd7-4fde-9c48-2d862a9ac4a1',
+      id: '64546e82-4bd7-4fde-9c48-2d862a9ac4a1',
       name: 'abo2',
       anzahlAbonnenten: 12,
       letzteLieferung: '2015-10-30T19:12Z',
@@ -71,15 +71,17 @@ angular.module('openolitor')
       if ($scope.loading) {
         return;
       }
-      $scope.entries = $scope.dummyEntries;
+      //  $scope.entries = $scope.dummyEntries;
       $scope.tableParams.reload();
-      /*
+
       $scope.loading = true;
-      $scope.entries = AbotypenOverviewModel.query({q: $scope.query}, function(){
+      $scope.entries = AbotypenOverviewModel.query({
+        q: $scope.query
+      }, function() {
         $scope.tableParams.reload();
         $scope.loading = false;
       });
-      */
+
     }
 
     search();

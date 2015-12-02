@@ -7,11 +7,12 @@ angular.module('openolitor')
 
     var defaults = {
       model: {
-        uid: undefined,
+        id: undefined,
         lieferrhythmus: LIEFERRHYTHMEN.WOECHENTLICH,
         preiseinheit: PREISEINHEITEN.JAHR,
         waehrung: 'CHF',
-        aktiv: true
+        aktiv: true,
+        anzahlAbwesenheiten: 0
       }
     };
 
@@ -32,8 +33,8 @@ angular.module('openolitor')
     }, $scope.preiseinheiten);
 
     // dummy entry
-    $scope.abotyp = {
-      uid: 'c8926129-045d-4f78-9c79-0ee873aed785',
+    $scope.dummyEntry = {
+      id: 'c8926129-045d-4f78-9c79-0ee873aed785',
       name: 'abo1',
       anzahlAbonnenten: 12,
       letzteLieferung: '2015-10-30T18:21Z',
@@ -44,23 +45,23 @@ angular.module('openolitor')
       aktiv: true
     };
 
-    if (!$routeParams.uid) {
+    if (!$routeParams.id) {
       $scope.abotyp = new AbotypenDetailModel(defaults.model);
     } else {
       AbotypenDetailModel.get({
-        uid: $routeParams.uid
+        id: $routeParams.id
       }, function(result) {
         $scope.abotyp = result;
       });
     }
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.uid);
+      return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id);
     };
 
     $scope.save = function() {
       $scope.abotyp.$save(function(result) {
-        $location.path('/abotypen/' + result.uid);
+        $location.path('/abotypen/' + result.id);
       });
     };
 
