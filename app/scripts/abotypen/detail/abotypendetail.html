@@ -76,7 +76,8 @@
 
     <div class="row form-group">
       <div class="col-md-4">
-        <button ng-click="save()" ng-disabled="abotypForm.$invalid" class="btn btn-primary" translate>Speichern</button>
+        <button ng-if="!isExisting()" ng-click="save()" ng-disabled="abotypForm.$invalid" class="btn btn-primary">{{abotyp.name || 'Abotyp'|translate}} <span translate>erstellen</span></button>
+        <button ng-if="isExisting()" ng-click="update()" ng-disabled="abotypForm.$invalid" class="btn btn-primary">{{abotyp.name || 'Abotyp'|translate}} <span translate>speichern</span></button>
         <button ng-click="cancel()" class="btn btn-default" translate>Abbrechen</button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
