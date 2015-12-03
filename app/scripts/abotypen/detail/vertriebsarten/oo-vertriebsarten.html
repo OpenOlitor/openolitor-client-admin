@@ -1,0 +1,17 @@
+<div class="oo-vertriebsarten">
+  <h2 translate>Vertriebsarten</h2>
+  <div class="row form-group">
+    <div class="col-md-12">
+      <oo-vertriebsart vertriebsart="abotyp.vertriebsarten[0]"></oo-vertriebsart>
+    </div>
+  </div>
+  <div ng-repeat="vertriebsart in abotyp.vertriebsarten | limitTo : abotyp.vertriebsarten.length : 1" class="row">
+    <div class="col-md-12">
+      <oo-vertriebsart vertriebsart="vertriebsart"></oo-vertriebsart>
+      <a role="button" ng-href="" ng-click="removeVertriebsart($index)" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-minus"></a>
+    </div>
+  </div>
+  <div class="col-md12">
+    <a role="button" ng-href="" ng-click="addVertriebsart()" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-plus"></a>
+  </div>
+</div>

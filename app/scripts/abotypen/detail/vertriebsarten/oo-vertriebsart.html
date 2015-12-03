@@ -1,0 +1,28 @@
+<div class="oo-vertriebsart">
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="vertriebsart" translate>Vertriebsart</label>
+    </div>
+    <div class="form-group">
+      <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsarten" selected-prop="id" property="label" selected="vertriebsart.identifier"></oo-dropdown>
+    </div>
+    <div class="form-group" ng-if="isDepot()">
+      <label for="depot" translate>Depot</label>
+    </div>
+    <div class="form-group" ng-if="isDepot()">
+      <oo-dropdown placeholder="{{'Bitte wählen...'|translate}}" dropdown-id="depot" display-style="uib-dropdown" values="depots" selected-prop="id" property="name" selected="vertriebsart.depotId"></oo-dropdown>
+    </div>
+    <div class="form-group" ng-if="isHeimlieferung()">
+      <label for="depot" translate>Tour</label>
+    </div>
+    <div class="form-group" ng-if="isHeimlieferung()">
+      <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" selected-prop="id" property="name" selected="vertriebsart.tourId"></oo-dropdown>
+    </div>
+    <div class="form-group" ng-if="isPreselectionComplete()">
+      <label for="lieferzeitpunkte" translate>Lieferzeitpunkte</label>
+    </div>
+    <div class="form-group" ng-if="isPreselectionComplete()">
+      <oo-liefertage liefertage-list="vertriebsart.liefertage"></oo-liefertage>
+    </div>
+  </div>
+</div>

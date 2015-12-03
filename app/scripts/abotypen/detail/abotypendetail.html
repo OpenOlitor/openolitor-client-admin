@@ -64,15 +64,9 @@
       </div>
     </div>
 
-    <h2 ng-if="isExisting()" translate>Lieferungen</h2>
-    <div ng-if="isExisting()" class="row form-group">
-      <div class="col-md-4">
-        <label for="letzteLieferung" translate>Letzte Lieferung</label>
-      </div>
-      <div class="col-md-8">
-        <span>{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
-      </div>
-    </div>
+    <oo-vertriebsarten ng-if="isExisting()"></oo-vertriebsarten>
+
+    <div ng-if="isExisting()" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
 
     <div class="row form-group">
       <div class="col-md-4">

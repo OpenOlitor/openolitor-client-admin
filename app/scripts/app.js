@@ -27,6 +27,20 @@ angular
     MONAT: 'Monat',
     LIEFERUNG: 'Lieferung'
   })
+  .constant('VERTRIEBSARTEN', {
+    DEPOTLIEFERUNG: 'Depotlieferung',
+    HEIMLIEFERUNG: 'Heimlieferung',
+    POSTLIEFERUNG: 'Postlieferung'
+  })
+  .constant('LIEFERZEITPUNKTE', {
+    MONTAG: 'Montag',
+    DIENSTAG: 'Dienstag',
+    MITTWOCH: 'Mittwoch',
+    DONNERSTAG: 'Donnerstag',
+    FREITAG: 'Freitag',
+    SAMSTAG: 'Samstag',
+    SONNTAG: 'Sonntag'
+  })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })

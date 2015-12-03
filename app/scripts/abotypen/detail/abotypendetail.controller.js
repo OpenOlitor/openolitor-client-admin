@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams', '$location', 'gettext', 'AbotypenDetailModel', 'LIEFERRHYTHMEN', 'PREISEINHEITEN', function($scope, $filter, $routeParams, $location, gettext, AbotypenDetailModel, LIEFERRHYTHMEN, PREISEINHEITEN) {
+  .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams', '$location', 'gettext', 'AbotypenDetailModel', 'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'EnumUtil', function($scope, $filter, $routeParams, $location, gettext, AbotypenDetailModel, LIEFERRHYTHMEN, PREISEINHEITEN, EnumUtil) {
 
     var defaults = {
       model: {
@@ -16,21 +16,9 @@ angular.module('openolitor')
       }
     };
 
-    $scope.lieferrhythmen = [];
-    angular.forEach(LIEFERRHYTHMEN, function(value) {
-      this.push({
-        id: value,
-        label: gettext(value)
-      });
-    }, $scope.lieferrhythmen);
+    $scope.lieferrhythmen = EnumUtil.asArray(LIEFERRHYTHMEN);
 
-    $scope.preiseinheiten = [];
-    angular.forEach(PREISEINHEITEN, function(value) {
-      this.push({
-        id: value,
-        label: gettext(value)
-      });
-    }, $scope.preiseinheiten);
+    $scope.preiseinheiten = EnumUtil.asArray(PREISEINHEITEN);
 
     // dummy entry
     $scope.dummyEntry = {
@@ -42,7 +30,10 @@ angular.module('openolitor')
       preis: 20,
       preiseinheit: 'Lieferung',
       waehrung: 'CHF',
-      aktiv: true
+      aktiv: true,
+      vertriebsarten: [{
+        identifier: 'Depotlieferung'
+      }]
     };
 
     if (!$routeParams.id) {
