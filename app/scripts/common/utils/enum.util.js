@@ -8,7 +8,8 @@ angular.module('openolitor')
         angular.forEach(e, function(value) {
           this.push({
             id: value,
-            label: gettext(value)
+            label: gettext(value),
+            title: gettext(value)
           });
         }, result);
 

@@ -41,6 +41,11 @@ angular
     SAMSTAG: 'Samstag',
     SONNTAG: 'Sonntag'
   })
+  .constant('PERSONENTYPEN', {
+    VEREINSMITGLIED: 'Vereinsmitglied',
+    GOENNER: 'Goenner',
+    GENOSSENSCHAFTERIN: 'Genossenschafterin'
+  })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
@@ -63,7 +68,13 @@ angular
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
         name: 'AbotypenDetail'
-      }).otherwise({
+      })
+      .when('/personen', {
+        templateUrl: 'scripts/personen/overview/personenoverview.html',
+        controller: 'PersonenOverviewController',
+        name: 'PersonenOverview'
+      })
+      .otherwise({
         templateUrl: 'scripts/not-found.html'
       });
   });
