@@ -10,7 +10,7 @@ angular.module('openolitor')
       controller: function($scope) {
         $scope.addVertriebsart = function() {
           $scope.abotyp.vertriebsarten.push({
-            identifier: VERTRIEBSARTEN.DEPOTLIEFERUNG
+            typ: VERTRIEBSARTEN.DEPOTLIEFERUNG
           });
         };
 

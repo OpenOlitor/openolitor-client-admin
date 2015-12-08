@@ -17,8 +17,10 @@ angular.module('openolitor').directive('ooDropdown', function() {
       disabled: '@',
     },
     templateUrl: 'scripts/common/components/oo-dropdown.directive.html',
-    compile: function(element, attrs){
-      if (!attrs.displayStyle) { attrs.displayStyle = 'navbar'; }
+    compile: function(element, attrs) {
+      if (!attrs.displayStyle) {
+        attrs.displayStyle = 'navbar';
+      }
     },
     controller: function($scope) {
 
@@ -29,7 +31,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
 
       $scope.select = function(item) {
         $scope.isPlaceholder = false;
-        if(!angular.isUndefined($scope.selectedProp)) {
+        if (!angular.isUndefined($scope.selectedProp)) {
           $scope.selected = deepFind(item, $scope.selectedProp);
         } else {
           $scope.selected = item;
@@ -39,7 +41,9 @@ angular.module('openolitor').directive('ooDropdown', function() {
       };
 
       var deepFind = function(obj, path) {
-        var paths = path.split('.'), current = obj, i;
+        var paths = path.split('.'),
+          current = obj,
+          i;
 
         for (i = 0; i < paths.length; ++i) {
           if (current[paths[i]] === undefined) {
@@ -52,9 +56,9 @@ angular.module('openolitor').directive('ooDropdown', function() {
       };
 
       $scope.getDisplayedText = function(item) {
-        if(!angular.isUndefined($scope.selectedProp)) {
+        if (!angular.isUndefined($scope.selectedProp) || !angular.isUndefined($scope.property)) {
           return item[$scope.property];
-        } else if(!angular.isUndefined($scope.displayFunction)) {
+        } else if (!angular.isUndefined($scope.displayFunction)) {
           return $scope.displayFunction(item);
         } else {
           return item;
@@ -63,27 +67,27 @@ angular.module('openolitor').directive('ooDropdown', function() {
 
       $scope.updateDisplay = function() {
         $scope.isPlaceholder = angular.isUndefined($scope.selected);
-        if(!angular.isUndefined($scope.displayFunction) && !angular.isUndefined($scope.selectedItem)) {
+        if (!angular.isUndefined($scope.displayFunction) && !angular.isUndefined($scope.selectedItem)) {
           $scope.display = $scope.displayFunction($scope.selectedItem);
         } else if ($scope.property) {
-          if(!angular.isUndefined($scope.selected) && angular.isUndefined($scope.selectedItem)) {
+          if (!angular.isUndefined($scope.selected) && angular.isUndefined($scope.selectedItem)) {
             //initial state, get selected item to display
             angular.forEach($scope.values, function(value) {
-              if(!angular.isUndefined($scope.selectedProp)) {
-                if(deepFind(value, $scope.selectedProp) === $scope.selected) {
-                    $scope.display = value[$scope.property];
+              if (!angular.isUndefined($scope.selectedProp)) {
+                if (deepFind(value, $scope.selectedProp) === $scope.selected) {
+                  $scope.display = value[$scope.property];
                 }
               } else {
-                if(value === $scope.selected) {
-                    $scope.display = value;
+                if (value === $scope.selected) {
+                  $scope.display = value;
                 }
               }
             });
-          } else if(!angular.isUndefined($scope.selectedItem)) {
+          } else if (!angular.isUndefined($scope.selectedItem)) {
             $scope.display = $scope.selectedItem[$scope.property];
           }
         } else {
-          if(!angular.isUndefined($scope.selected) && angular.isUndefined($scope.selectedItem)) {
+          if (!angular.isUndefined($scope.selected) && angular.isUndefined($scope.selectedItem)) {
             $scope.display = $scope.selected;
           } else {
             $scope.display = $scope.selectedItem;
@@ -93,7 +97,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       $scope.updateDisplay();
 
       $scope.unwatchSelected = $scope.$watch('selected', function() {
-        if(!angular.isUndefined($scope.selected)) {
+        if (!angular.isUndefined($scope.selected)) {
           $scope.updateDisplay();
           $scope.unwatchSelected();
         }

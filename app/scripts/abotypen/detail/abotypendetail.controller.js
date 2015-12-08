@@ -12,7 +12,10 @@ angular.module('openolitor')
         preiseinheit: PREISEINHEITEN.JAHR,
         waehrung: 'CHF',
         aktiv: true,
-        anzahlAbwesenheiten: 0
+        anzahlAbwesenheiten: 0,
+        vertriebsarten: [{
+          typ: 'Depotlieferung'
+        }]
       }
     };
 
@@ -32,7 +35,7 @@ angular.module('openolitor')
       waehrung: 'CHF',
       aktiv: true,
       vertriebsarten: [{
-        identifier: 'Depotlieferung'
+        typ: 'Depotlieferung'
       }]
     };
 
