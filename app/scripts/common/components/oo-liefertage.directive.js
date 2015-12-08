@@ -14,6 +14,10 @@ angular.module('openolitor').directive('ooLiefertage', ['EnumUtil', 'LIEFERZEITP
 
       $scope.selectedLiefertage = {};
 
+      angular.forEach($scope.liefertageList, function(id) {
+        $scope.selectedLiefertage[id] = true;
+      });
+
       $scope.$watchCollection('selectedLiefertage', function() {
         $scope.liefertageList = [];
         angular.forEach($scope.selectedLiefertage, function(value, id) {

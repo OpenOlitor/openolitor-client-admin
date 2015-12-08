@@ -74,6 +74,11 @@ angular
         controller: 'PersonenOverviewController',
         name: 'PersonenOverview'
       })
+      .when('/personen/new', {
+        templateUrl: 'scripts/personen/detail/personendetail.html',
+        controller: 'PersonenDetailController',
+        name: 'PersonenDetail'
+      })
       .otherwise({
         templateUrl: 'scripts/not-found.html'
       });
