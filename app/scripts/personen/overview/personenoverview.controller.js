@@ -83,7 +83,7 @@ angular.module('openolitor')
         $scope.loading = false;
       });
 
-      $scope.entries = $scope.dummyEntries;
+      //$scope.entries = $scope.dummyEntries;
 
     }
 
