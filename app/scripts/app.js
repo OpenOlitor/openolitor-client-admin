@@ -94,6 +94,16 @@ angular
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
       })
+      .when('/abos/new', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail'
+      })
+      .when('/abos/:id', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail'
+      })
       .otherwise({
         templateUrl: 'scripts/not-found.html'
       });
