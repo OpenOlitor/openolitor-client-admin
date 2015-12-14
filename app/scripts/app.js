@@ -79,6 +79,11 @@ angular
         controller: 'PersonenDetailController',
         name: 'PersonenDetail'
       })
+      .when('/depots', {
+        templateUrl: 'scripts/depots/overview/depotsoverview.html',
+        controller: 'DepotsOverviewController',
+        name: 'DepotsOverview'
+      })
       .otherwise({
         templateUrl: 'scripts/not-found.html'
       });
