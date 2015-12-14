@@ -1,5 +1,5 @@
 <div>
-  <h1 translate>Personen <a role="button" href="#/personen/new" class="btn btn-primary pull-right" translate>Neue Person erfassen</a></h1>
+  <h1 translate>Abos <a role="button" href="#/abos/new" class="btn btn-primary pull-right" translate>Neues Abo</a></h1>
   <div class="filters">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -20,23 +20,18 @@
   </div>
   <div ng-show="entries">
     <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-      <tr ng-repeat="person in $data">
-        <td title="'Vorname'|translate" sortable="'vorname'">
-          <a ng-href="#/personen/{{person.id}}">{{person.vorname}}</a>
-        </td>
+      <tr ng-repeat="abo in $data">
         <td title="'Name'|translate" sortable="'name'">
-          <a ng-href="#/personen/{{person.id}}">{{person.name}}</a>
+          <a ng-href="#/abos/{{abo.id}}" translate>Details</a>
         </td>
-        <td title="'Strasse'|translate" sortable="'strasse+hausNummer'">
-          {{person.strasse}} {{person.hausNummer}}
+        <td title="'Abonnentin'|translate" sortable="'abo.personName+abo.personVorname'">
+          <a ng-href="#/personen/{{abo.personId}}" translate>{{abo.personName}} {{abo.personVorname}}</a>
         </td>
-        <td title="'PLZ Ort'|translate" sortable="'plz'">
-          {{person.plz}} {{person.ort}}
+        <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
+          <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
         </td>
-        <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="personentypen">
-          <span ng-repeat="typ in person.typen" class="badge">
-            {{typ|translate}}
-          </span>
+        <td title="'Depot'|translate" sortable="'abo.depotName'">
+          <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
         </td>
       </tr>
     </table>
