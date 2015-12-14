@@ -39,6 +39,10 @@
         <td title="'# Abos'|translate">
           {{depot.anzahlAbonnenten}}/{{depot.anzahlAbonnentenMax}}
         </td>
+        <td title="'Aktiv'|translate" sortable="'aktiv'">
+          <i ng-if="depot.aktiv" class="glyphicon glyphicon-ok"></i>
+          <i ng-if="!depot.aktiv" class="glyphicon glyphicon-remove"></i>
+        </td>
       </tr>
     </table>
   </div>

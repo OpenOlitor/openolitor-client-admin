@@ -1,0 +1,156 @@
+<div>
+  <h1>{{ fullName() || 'Depot'|translate}}</h1>
+</div>
+<form name="depotForm">
+  <div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="vorname" translate>Depotname</label>
+      </div>
+      <div class="col-md-8">
+        <input type="text" class="form-control" name="name" ng-model="depot.name" placeholder="{{'Eindeutige Bezeichnung'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="aktiv" translate>Status</label>
+      </div>
+      <div class="col-md-4">
+        <input bs-switch ng-model="depot.aktiv" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Aktiv'|translate}}" switch-off-text="{{'Inaktiv'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+      </div>
+      <div class="col-md-4" ng-if="isExisting()">
+        <button ng-click="delete()" class="btn btn-danger pull-right" translate>Depot löschen</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="strasse" translate>Strasse / Nr.</label>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="strasse" ng-model="depot.strasse" ng-required="!depot.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control" id="hausNummer" ng-model="depot.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="plz" translate>PLZ / Ort</label>
+      </div>
+      <div class="col-md-1">
+        <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="depot.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="ort" ng-model="depot.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="oeffnungszeiten" translate>Öffnungszeiten</label>
+      </div>
+      <div class="col-md-8">
+        <textarea class="form-control" name="oeffnungszeiten" ng-model="depot.oeffnungszeiten" placeholder="{{'Öffnungszeiten'|translate}}..."></textarea>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="iban" translate>IBAN</label>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="iban" ng-model="depot.iban" placeholder="{{'IBAN'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="bank" translate>Bank</label>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="bank" ng-model="depot.bank" placeholder="{{'Bank, PLZ Ort'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="beschreibung" translate>Beschreibung</label>
+      </div>
+      <div class="col-md-8">
+        <textarea class="form-control" name="beschreibung" ng-model="depot.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+      </div>
+    </div>
+
+
+    <h2 translate>Anprechperson</h2>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="apVorname" translate>Vorname</label>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="apVorname" ng-model="depot.apVorname" placeholder="{{'Vorname'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="apName" translate>Name</label>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="apName" ng-model="depot.apName" placeholder="{{'Name'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="apMail" translate>E-Mail</label>
+      </div>
+      <div class="col-md-5">
+        <input type="email" class="form-control" name="apMail" ng-model="depot.apMail" placeholder="{{'E-Mail'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="apTelefon" translate>Telefon</label>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="apTelefon" ng-model="depot.apTelefon" placeholder="{{'Telefon'|translate}}">
+      </div>
+    </div>
+
+    <h2 translate>Verantwortliche Person</h2>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="vVorname" translate>Vorname</label>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="vVorname" ng-model="depot.vVorname" placeholder="{{'Vorname'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="vName" translate>Name</label>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="vName" ng-model="depot.vName" placeholder="{{'Name'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="vMail" translate>E-Mail</label>
+      </div>
+      <div class="col-md-5">
+        <input type="email" class="form-control" name="vMail" ng-model="depot.vMail" placeholder="{{'E-Mail'|translate}}" required>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="vTelefon" translate>Telefon</label>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="vTelefon" ng-model="depot.vTelefon" placeholder="{{'Telefon'|translate}}">
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-4">
+        <button ng-click="save()" ng-disabled="depotForm.$invalid" class="btn btn-primary">{{fullName() || 'Depot'|translate}} <span ng-if="!isExisting()" translate>erstellen</span><span ng-if="isExisting()" translate>speichern</span></button>
+        <button ng-click="cancel()" class="btn btn-default" translate>Abbrechen</button>
+      </div>
+    </div>
+  </div>
+</form>
