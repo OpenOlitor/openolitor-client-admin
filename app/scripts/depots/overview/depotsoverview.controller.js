@@ -10,6 +10,7 @@ angular.module('openolitor')
 
     $scope.dummyEntries = [{
       id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
+      aktiv: true,
       name: 'Tingel-Kringel',
       apName: 'Tree',
       apVorname: 'Joshua',
@@ -21,6 +22,7 @@ angular.module('openolitor')
       anzahlAbonnentenMax: 10
     }, {
       id: '614275dc-29f5-4aa9-86eb-36ee873778c8',
+      aktiv: false,
       name: 'Punto',
       apName: 'Bochovski',
       apVorname: 'Josh',
