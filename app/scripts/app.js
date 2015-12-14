@@ -33,13 +33,13 @@ angular
     POSTLIEFERUNG: 'Postlieferung'
   })
   .constant('LIEFERZEITPUNKTE', {
-    MONTAG: {long: 'Montag', short: 'MO'},
-    DIENSTAG: {long: 'Dienstag', short: 'DI'},
-    MITTWOCH: {long: 'Mittwoch', short: 'MI'},
-    DONNERSTAG: {long: 'Donnerstag', short: 'DO'},
-    FREITAG: {long: 'Freitag', short: 'FR'},
-    SAMSTAG: {long: 'Samstag', short: 'SA'},
-    SONNTAG: {long: 'Sonntag', short: 'SO'}
+    MONTAG: {id: 'Montag', label: {long: 'Montag', short: 'MO'}},
+    DIENSTAG: {id: 'Dienstag', label: {long: 'Dienstag', short: 'DI'}},
+    MITTWOCH: {id: 'Mittwoch', label: {long: 'Mittwoch', short: 'MI'}},
+    DONNERSTAG: {id: 'Donnerstag', label: {long: 'Donnerstag', short: 'DO'}},
+    FREITAG: {id: 'Freitag', label: {long: 'Freitag', short: 'FR'}},
+    SAMSTAG: {id: 'Samstag', label: {long: 'Samstag', short: 'SA'}},
+    SONNTAG: {id: 'Sonntag', label: {long: 'Sonntag', short: 'SO'}}
   })
   .constant('PERSONENTYPEN', {
     VEREINSMITGLIED: 'Vereinsmitglied',
