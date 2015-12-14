@@ -36,7 +36,7 @@ angular.module('openolitor')
       beschreibung: 'Dies sind erstmal nur Testdaten'
     };
 
-    if (!$routeParams.id) {
+    if (!$routeParams.id || $routeParams.id === 'new') {
       $scope.depot = new DepotsDetailModel(defaults.model);
     } else {
       DepotsDetailModel.get({
@@ -44,7 +44,7 @@ angular.module('openolitor')
       }, function(result) {
         $scope.depot = result;
       });
-      $scope.depot = $scope.dummyEntry;
+      //$scope.depot = $scope.dummyEntry;
     }
 
     $scope.isExisting = function() {
