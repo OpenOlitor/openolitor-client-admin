@@ -23,7 +23,7 @@ angular.module('openolitor')
     }
 
     $scope.fullName = function() {
-      if ($scope.person.vorname && $scope.person.name) {
+      if ($scope.person && $scope.person.vorname && $scope.person.name) {
         return $scope.person.vorname + ' ' + $scope.person.name;
       }
       return undefined;

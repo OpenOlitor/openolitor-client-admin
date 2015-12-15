@@ -33,13 +33,55 @@ angular
     POSTLIEFERUNG: 'Postlieferung'
   })
   .constant('LIEFERZEITPUNKTE', {
-    MONTAG: {id: 'Montag', label: {long: 'Montag', short: 'MO'}},
-    DIENSTAG: {id: 'Dienstag', label: {long: 'Dienstag', short: 'DI'}},
-    MITTWOCH: {id: 'Mittwoch', label: {long: 'Mittwoch', short: 'MI'}},
-    DONNERSTAG: {id: 'Donnerstag', label: {long: 'Donnerstag', short: 'DO'}},
-    FREITAG: {id: 'Freitag', label: {long: 'Freitag', short: 'FR'}},
-    SAMSTAG: {id: 'Samstag', label: {long: 'Samstag', short: 'SA'}},
-    SONNTAG: {id: 'Sonntag', label: {long: 'Sonntag', short: 'SO'}}
+    MONTAG: {
+      id: 'Montag',
+      label: {
+        long: 'Montag',
+        short: 'MO'
+      }
+    },
+    DIENSTAG: {
+      id: 'Dienstag',
+      label: {
+        long: 'Dienstag',
+        short: 'DI'
+      }
+    },
+    MITTWOCH: {
+      id: 'Mittwoch',
+      label: {
+        long: 'Mittwoch',
+        short: 'MI'
+      }
+    },
+    DONNERSTAG: {
+      id: 'Donnerstag',
+      label: {
+        long: 'Donnerstag',
+        short: 'DO'
+      }
+    },
+    FREITAG: {
+      id: 'Freitag',
+      label: {
+        long: 'Freitag',
+        short: 'FR'
+      }
+    },
+    SAMSTAG: {
+      id: 'Samstag',
+      label: {
+        long: 'Samstag',
+        short: 'SA'
+      }
+    },
+    SONNTAG: {
+      id: 'Sonntag',
+      label: {
+        long: 'Sonntag',
+        short: 'SO'
+      }
+    }
   })
   .constant('PERSONENTYPEN', {
     VEREINSMITGLIED: 'Vereinsmitglied',
@@ -75,6 +117,11 @@ angular
         name: 'PersonenOverview'
       })
       .when('/personen/new', {
+        templateUrl: 'scripts/personen/detail/personendetail.html',
+        controller: 'PersonenDetailController',
+        name: 'PersonenDetail'
+      })
+      .when('/personen/:id', {
         templateUrl: 'scripts/personen/detail/personendetail.html',
         controller: 'PersonenDetailController',
         name: 'PersonenDetail'
