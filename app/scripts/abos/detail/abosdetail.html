@@ -1,23 +1,21 @@
 <div>
-  <h1><span translate>Abo für</span> {{abo.person.vorname}} {{abo.person.name}}</h1>
+  <h1><span translate>Abo für</span> {{person.vorname}} {{person.name}}</h1>
 </div>
 <form name="aboForm">
   <div>
     <div class="row form-group">
-      <div class="col-md-4">
+      <div class="col-md-2">
         <label for="abotyp" translate>Abotyp</label>
       </div>
       <div class="col-md-8">
         <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="abotypen" selected-prop="id" property="name" selected="abo.abotypId"></oo-dropdown>
       </div>
     </div>
-    <div class="row form-group">
+    <div ng-if="abotyp" class="row form-group">
       <div class="col-md-12">
-        <oo-vertriebsart vertriebsarten="abotyp.vertriebsarten" vertriebsart="abo.vertriebsart"></oo-vertriebsart>
+        <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
       </div>
     </div>
-
-    <div ng-if="isExisting()" ng-include="'scripts/abos/detail/lieferungen/lieferungen.html'"></div>
 
     <div class="row form-group">
       <div class="col-md-4">

@@ -103,11 +103,11 @@
 
     <section name="abos" ng-if="isExisting()">
       <h2 translate>Abos</h2>
-      <a role="button" href="#/abos/new?personId={{person.id}}" class="btn btn-primary" translate>Neues Abo</a>
+      <a role="button" href="#/personen/{{person.id}}/abos/new" class="btn btn-primary" translate>Neues Abo</a>
       <table class="table table-striped table-condensed">
         <tr ng-repeat="abo in person.abos">
           <td>
-            <a ng-href="#/abos/{{abo.id}}" translate>Details</a>
+            <a ng-href="#personen/{{person.id}}/abos/{{abo.id}}" translate>Details</a>
           </td>
           <td>
             <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>

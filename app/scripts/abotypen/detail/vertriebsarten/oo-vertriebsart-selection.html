@@ -1,0 +1,16 @@
+<div class="oo-vertriebsart-selection">
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="vertriebsart" translate>Vertriebsart</label>
+    </div>
+    <div class="form-group">
+      <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsartPermutations" property="label" selected="permutation"></oo-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="lieferzeitpunkte" translate>Gewünschter Lieferzeitpunkt</label>
+    </div>
+    <div class="form-group">
+      <oo-dropdown dropdown-id="liefertage" display-style="uib-dropdown" values="vertriebsart.liefertage" selected="abo.liefertag"></oo-dropdown>
+    </div>
+  </div>
+</div>

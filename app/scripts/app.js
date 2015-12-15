@@ -141,12 +141,12 @@ angular
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
       })
-      .when('/abos/new', {
+      .when('/personen/:personId/abos/new', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail'
       })
-      .when('/abos/:id', {
+      .when('/personen/:personId/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail'

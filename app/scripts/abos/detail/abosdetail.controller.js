@@ -3,7 +3,9 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams', '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel', 'AbotypenDetailModel', 'LIEFERRHYTHMEN', 'EnumUtil', function($scope, $filter, $routeParams, $location, gettext, AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel) {
+  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams', '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel', 'AbotypenDetailModel', 'PersonenDetailModel', 'VERTRIEBSARTEN', function($scope, $filter, $routeParams, $location, gettext, AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel, PersonenDetailModel, VERTRIEBSARTEN) {
+
+    $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
 
     var defaults = {
       model: {
@@ -13,10 +15,23 @@ angular.module('openolitor')
     };
 
     if (!$routeParams.id) {
-      $scope.abo = new AbosDetailModel(defaults.model);
+      PersonenDetailModel.get({
+        id: $routeParams.personId
+      }, function(person) {
+        $scope.person = person;
+        $scope.abo = new AbosDetailModel(defaults.model);
+        $scope.abo.personId = $scope.person.id;
+      });
     } else {
+      PersonenDetailModel.get({
+        id: $routeParams.personId
+      }, function(person) {
+        $scope.person = person;
+      });
+
       AbosDetailModel.get({
-        id: $routeParams.id
+        id: $routeParams.id,
+        personId: $routeParams.personId
       }, function(result) {
         $scope.abo = result;
       });
@@ -46,14 +61,35 @@ angular.module('openolitor')
       $scope.abo.$delete();
     };
 
+    function vertriebsartLabel(vertriebsart) {
+      switch (vertriebsart.typ) {
+        case VERTRIEBSARTEN.DEPOTLIEFERUNG:
+          return vertriebsart.typ + ' - ' + vertriebsart.depot.name;
+        case VERTRIEBSARTEN.HEIMLIEFERUNG:
+          return vertriebsart.typ + ' - ' + vertriebsart.tour.name;
+        default:
+          return vertriebsart.typ;
+      }
+    }
+
+    function createPermutations(abotyp) {
+      $scope.vertriebsartPermutations = [];
+      angular.forEach(abotyp.vertriebsarten, function(vertriebsart) {
+        $scope.vertriebsartPermutations.push({
+          label: vertriebsartLabel(vertriebsart),
+          vertriebsart: vertriebsart
+        });
+      });
+    }
+
     $scope.$watch('abo.abotypId', function(abotypId) {
       if (abotypId) {
         AbotypenDetailModel.get({
           id: abotypId
         }, function(abotyp) {
           $scope.abotyp = abotyp;
+          createPermutations($scope.abotyp);
         });
-        $scope.abotyp = {vertriebsarten:[{id: 'Depotlieferung', label: 'Depotlieferung'}]};
       }
     });
   }]);
