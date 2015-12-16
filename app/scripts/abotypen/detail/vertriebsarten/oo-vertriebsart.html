@@ -10,7 +10,7 @@
       <label for="depot" translate>Depot</label>
     </div>
     <div class="form-group" ng-if="isDepot()">
-      <oo-dropdown placeholder="{{'Bitte wählen...'|translate}}" dropdown-id="depot" display-style="uib-dropdown" values="depots" property="name" selected-prop="id" selected="vertriebsart.depotId"></oo-dropdown>
+      <oo-dropdown placeholder="{{'Bitte wählen...'|translate}}" dropdown-id="depot" display-style="uib-dropdown" values="depots" property="name" selected="vertriebsart.depot"></oo-dropdown>
     </div>
     <div class="form-group" ng-if="isHeimlieferung()">
       <label for="depot" translate>Tour</label>

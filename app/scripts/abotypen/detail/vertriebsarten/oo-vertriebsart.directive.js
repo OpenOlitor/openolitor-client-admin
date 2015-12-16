@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('openolitor')
-  .directive('ooVertriebsart', ['EnumUtil', 'VERTRIEBSARTEN', function(EnumUtil, VERTRIEBSARTEN) {
+  .directive('ooVertriebsart', ['EnumUtil', 'VERTRIEBSARTEN', 'DepotsOverviewModel', function(EnumUtil, VERTRIEBSARTEN, DepotsOverviewModel) {
     return {
       replace: true,
       restrict: 'E',
@@ -14,13 +14,7 @@ angular.module('openolitor')
         $scope.vertriebsarten = EnumUtil.asArray(VERTRIEBSARTEN);
 
         // get data from backend
-        $scope.depots = [{
-          id: 'b31a839f-e0f0-4a1f-9c7e-ceb835f25e1f',
-          name: 'Depot 1'
-        }, {
-          id: 'fbd78275-d7f6-48c0-8f92-b3c5ccb8924e',
-          name: 'Depot 2'
-        }];
+        $scope.depots = DepotsOverviewModel.query({});
 
         $scope.touren = [];
 

@@ -14,8 +14,14 @@ angular.module('openolitor').directive('ooPersonentypen', ['EnumUtil', 'PERSONEN
 
       $scope.selectedPersonentypen = {};
 
-      angular.forEach($scope.personentypenList, function(id) {
-        $scope.selectedPersonentypen[id] = true;
+      // initialize the set personentypen
+      var deregister = $scope.$watchCollection('personentypenList', function() {
+        if ($scope.personentypenList && $scope.personentypenList.length > 0) {
+          angular.forEach($scope.personentypenList, function(id) {
+            $scope.selectedPersonentypen[id] = true;
+          });
+          deregister();
+        }
       });
 
       $scope.$watchCollection('selectedPersonentypen', function() {

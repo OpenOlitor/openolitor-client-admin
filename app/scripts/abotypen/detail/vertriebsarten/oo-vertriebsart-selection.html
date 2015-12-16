@@ -4,13 +4,13 @@
       <label for="vertriebsart" translate>Vertriebsart</label>
     </div>
     <div class="form-group">
-      <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsartPermutations" property="label" selected="permutation"></oo-dropdown>
+      <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsartPermutations" property="label" selected-prop="vertriebsart" selected="abo.vertriebsart"></oo-dropdown>
     </div>
     <div class="form-group">
       <label for="lieferzeitpunkte" translate>Gewünschter Lieferzeitpunkt</label>
     </div>
     <div class="form-group">
-      <oo-dropdown dropdown-id="liefertage" display-style="uib-dropdown" values="vertriebsart.liefertage" selected="abo.liefertag"></oo-dropdown>
+      <oo-dropdown dropdown-id="liefertage" display-style="uib-dropdown" values="abo.vertriebsart.liefertage" selected="abo.lieferzeitpunkt"></oo-dropdown>
     </div>
   </div>
 </div>

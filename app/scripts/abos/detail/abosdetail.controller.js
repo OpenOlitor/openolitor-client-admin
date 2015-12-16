@@ -92,4 +92,17 @@ angular.module('openolitor')
         });
       }
     });
+
+    $scope.$watch('abo.vertriebsart', function(vertriebsart) {
+      if (vertriebsart) {
+        switch (vertriebsart.typ) {
+          case VERTRIEBSARTEN.DEPOTLIEFERUNG:
+            $scope.abo.depotId = vertriebsart.depot.id;
+            break;
+          case VERTRIEBSARTEN.HEIMLIEFERUNG:
+            $scope.abo.tourId = vertriebsart.tour.id;
+            break;
+        }
+      }
+    });
   }]);
