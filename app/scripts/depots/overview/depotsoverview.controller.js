@@ -8,32 +8,6 @@ angular.module('openolitor')
     $scope.entries = [];
     $scope.loading = false;
 
-    $scope.dummyEntries = [{
-      id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
-      aktiv: true,
-      name: 'Tingel-Kringel',
-      apName: 'Tree',
-      apVorname: 'Joshua',
-      apTelefon: '079 666 99 99',
-      vName: 'Baumann',
-      vVorname: 'Julie',
-      vTelefon: '079 666 99 98',
-      anzahlAbonnenten: 1,
-      anzahlAbonnentenMax: 10
-    }, {
-      id: '614275dc-29f5-4aa9-86eb-36ee873778c8',
-      aktiv: false,
-      name: 'Punto',
-      apName: 'Bochovski',
-      apVorname: 'Josh',
-      apTelefon: '079 666 99 89',
-      vName: 'Red',
-      vVorname: 'Till',
-      vTelefon: '079 666 99 78',
-      anzahlAbonnenten: 8,
-      anzahlAbonnentenMax: 88
-    }];
-
     $scope.search = {
       query: ''
     };
@@ -85,12 +59,6 @@ angular.module('openolitor')
         $scope.tableParams.reload();
         $scope.loading = false;
       });
-
-      //TODO Remove if conntected
-      $scope.entries = $scope.dummyEntries;
-      $scope.tableParams.reload();
-      $scope.loading = false;
-
     }
 
     search();
