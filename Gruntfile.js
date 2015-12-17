@@ -12,15 +12,18 @@ module.exports = function(grunt) {
 
   // text replace in js files used for environment specific configurations
   var config = {
-    'API_URL': process.env.OO_API_URL || 'http://localhost:9004/' //replace @@API_URL with value
+    'API_URL': process.env.OO_API_URL || 'http://localhost:9004/', //replace @@API_URL with value
+    'API_WS_URL': process.env.OO_API_WS_URL || 'ws://localhost:10004/' //replace @@API_URL with value
   };
 
   var mandantenConfig = {
     mandant1: {
-      'API_URL': process.env.OO_MANDANT1_API_URL || 'http://localhost:9004/' //replace @@API_URL with value
+      'API_URL': process.env.OO_MANDANT1_API_URL || 'http://localhost:9004/', //replace @@API_URL with value
+      'API_WS_URL': process.env.OO_MANDANT1_API_WS_URL || 'ws://localhost:10004/' //replace @@API_URL with value
     },
     mandant2: {
-      'API_URL': process.env.OO_MANDANT2_API_URL || 'http://localhost:9005/' //replace @@API_URL with value
+      'API_URL': process.env.OO_MANDANT2_API_URL || 'http://localhost:9005/', //replace @@API_URL with value
+      'API_WS_URL': process.env.OO_MANDANT2_API_WS_URL || 'ws://localhost:10005/' //replace @@API_URL with value
     }
   };
 
@@ -474,14 +477,14 @@ module.exports = function(grunt) {
 
     protractor: {
       options: {
-        configFile: 'test/protractor.conf.js', // Default config file 
-        keepAlive: true, // If false, the grunt process stops when the test fails. 
-        noColor: false, // If true, protractor will not use colors in its output. 
+        configFile: 'test/protractor.conf.js', // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
         args: {
-          // Arguments passed to the command 
+          // Arguments passed to the command
         }
       },
-      all: {} // Grunt requires at least one target to run so you can simply put 'all: {}' here too. 
+      all: {} // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
     },
 
     protractor_webdriver: {

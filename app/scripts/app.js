@@ -16,6 +16,7 @@ angular
     'gettext'
   ])
   .constant('API_URL', '@@API_URL')
+  .constant('API_WS_URL', '@@API_WS_URL')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: 'Woechentlich',
     ZWEIWOECHENTLICH: 'Zweiwoechentlich',
@@ -91,6 +92,21 @@ angular
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
+  .factory('msgBus', ['$rootScope', function($rootScope) {
+    var msgBus = {};
+    msgBus.emitMsg = function(msg) {
+      $rootScope.$emit(msg.type, msg);
+    };
+    msgBus.onMsg = function(msg, scope, func) {
+      var unbind = $rootScope.$on(msg, func);
+      scope.$on('$destroy', unbind);
+    };
+    return msgBus;
+  }])
+  .run(['ooClientMessageService', function(clientMessageService) {
+    console.log('Start clientMessageService');
+    clientMessageService.start();
+  }])
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
