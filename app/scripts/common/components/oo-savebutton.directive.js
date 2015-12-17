@@ -21,10 +21,15 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', function(msgBu
       $scope.loading = false;
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
-          $scope.model = msg.data;
-          $scope.loading = false;
-          $scope.$apply();
-        }
+          if (!$scope.loading) {
+            //TODO: Use alertservice to notify user to reload page before saving
+          }
+          else {          
+            //$scope.model = msg.data;
+            $scope.loading = false;
+            $scope.$apply();
+          } 
+       }
       });
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
