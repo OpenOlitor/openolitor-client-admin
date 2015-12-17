@@ -26,6 +26,13 @@ angular.module('openolitor')
       return angular.isDefined($scope.depot) && angular.isDefined($scope.depot.id);
     };
 
+    $scope.fullName = function() {
+      if ($scope.depot && $scope.depot.name) {
+        return $scope.depot.name;
+      }
+      return undefined;
+    };
+
     $scope.save = function() {
       $scope.depot.$save(function(result) {
         if (!$scope.isExisting()) {

@@ -148,8 +148,7 @@
 
     <div class="row form-group">
       <div class="col-md-4">
-        <button ng-click="save()" ng-disabled="depotForm.$invalid" class="btn btn-primary">{{fullName() || 'Depot'|translate}} <span ng-if="!isExisting()" translate>erstellen</span><span ng-if="isExisting()" translate>speichern</span></button>
-        <button ng-click="cancel()" class="btn btn-default" translate>Abbrechen</button>
+        <oo-save-button model="depot" form="depotForm" entity="Depot" on-save="save" on-cancel="cancel">{{fullName() || 'Depot'|translate}}</oo-save-button>
       </div>
     </div>
   </div>
