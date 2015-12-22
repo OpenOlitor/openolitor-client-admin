@@ -21,6 +21,8 @@ angular.module('openolitor')
         $scope.person = person;
         $scope.abo = new AbosDetailModel(defaults.model);
         $scope.abo.personId = $scope.person.id;
+        $scope.abo.personName = $scope.person.name;
+        $scope.abo.personVorname = $scope.person.vorname;
       });
     } else {
       PersonenDetailModel.get({
@@ -61,6 +63,7 @@ angular.module('openolitor')
       $scope.abo.$delete();
     };
 
+    // TODO introduce a generic way
     function vertriebsartLabel(vertriebsart) {
       switch (vertriebsart.typ) {
         case VERTRIEBSARTEN.DEPOTLIEFERUNG:
@@ -79,6 +82,9 @@ angular.module('openolitor')
           label: vertriebsartLabel(vertriebsart),
           vertriebsart: vertriebsart
         });
+        if ($scope.isExisting() && vertriebsart.depot.id === $scope.abo.depotId) {
+          $scope.abo.vertriebsart = vertriebsart;
+        }
       });
     }
 
@@ -88,6 +94,7 @@ angular.module('openolitor')
           id: abotypId
         }, function(abotyp) {
           $scope.abotyp = abotyp;
+          $scope.abo.abotypName = abotyp.name;
           createPermutations($scope.abotyp);
         });
       }
@@ -98,9 +105,11 @@ angular.module('openolitor')
         switch (vertriebsart.typ) {
           case VERTRIEBSARTEN.DEPOTLIEFERUNG:
             $scope.abo.depotId = vertriebsart.depot.id;
+            $scope.abo.depotName = vertriebsart.depot.name;
             break;
           case VERTRIEBSARTEN.HEIMLIEFERUNG:
             $scope.abo.tourId = vertriebsart.tour.id;
+            $scope.abo.tourName = vertriebsart.tour.name;
             break;
         }
       }

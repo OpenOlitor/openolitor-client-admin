@@ -8,26 +8,6 @@ angular.module('openolitor')
     $scope.entries = [];
     $scope.loading = false;
 
-    $scope.dummyEntries = [{
-      id: 'c8926129-045d-4f78-9c79-0ee873aed781',
-      personId: 'c8926129-045d-4f78-9c79-0ee873aed787',
-      personName: 'Calvert',
-      personVorname: 'Joshua',
-      abotypId: 'c8926129-045d-4f78-9c79-0ee873aed785',
-      abotypName: 'Vegi klein',
-      depotId: '614275dc-29f5-4aa9-86eb-36ee873778b8',
-      depotName: 'Tingel-Kringel'
-    }, {
-      id: 'c8926129-045d-4f78-9c79-0ee873aed785',
-      personId: 'c8926129-045d-4f78-9c79-0ee873aed783',
-      personName: 'Saldana',
-      personVorname: 'Ione',
-      abotypId: 'c8926129-045d-4f78-9c79-0ee873aed789',
-      abotypName: 'Vegi gross',
-      depotId: '614275dc-29f5-4aa9-86eb-36ee873778c8',
-      depotName: 'Punto'
-    }];
-
     $scope.search = {
       query: ''
     };
@@ -69,7 +49,6 @@ angular.module('openolitor')
       if ($scope.loading) {
         return;
       }
-      $scope.tableParams.reload();
 
       $scope.loading = true;
       $scope.entries = AbosOverviewModel.query({
@@ -78,10 +57,6 @@ angular.module('openolitor')
         $scope.tableParams.reload();
         $scope.loading = false;
       });
-
-      $scope.entries = $scope.dummyEntries;
-      $scope.tableParams.reload();
-      $scope.loading = false;
     }
 
     search();
