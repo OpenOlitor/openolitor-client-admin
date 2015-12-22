@@ -29,7 +29,7 @@ angular.module('openolitor')
         var wsUrl = API_WS_URL; // add param true to force wss://
         //append token to websocket url because normal http headers can't get controlled
         var securedUrl = wsUrl; //+ "?auth="+userService.getToken();
-        if (!(angular.isDefined($rootScope.messagingSocket))) {
+        if (!(angular.isDefined($rootScope.messagingSocket)) && wsUrl.substring(0, 2) !== '@@') {
           $rootScope.messagingSocket = new WebSocket(securedUrl);
           $rootScope.messagingSocket.onmessage = function(msg) {
             var data = JSON.parse(msg.data);
