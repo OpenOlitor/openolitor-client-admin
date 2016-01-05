@@ -108,20 +108,20 @@ angular
     clientMessageService.start();
   }])
   .config(['$provide', function($provide) {
-    $provide.decorator('$exceptionHandler', ['$log', '$injector', function($log, $injector) {
-      return function(exception) {
+    $provide.decorator('$exceptionHandler', ['$log', '$injector', 'alertService', function($log, $injector, alertService) {
+      return function(exception, cause) {
         // using the injector to retrieve scope and timeout, otherwise circular dependency
         var $rootScope = $injector.get('$rootScope');
-        var alertService = $injector.get('alertService');
+        var $timeout = $injector.get('$timeout');
 
-        $rootScope.$removeAlert = alertService.removeAlert();
-        alertService.addAlert('error', exception.message);
-
+        $rootScope.$removeAlert = alertService.removeAlert($rootScope);
+        alertService.addAlert($rootScope, $timeout, 'error', exception.message);
+        
         // log error default style
         $log.error.apply($log, arguments);
       };
     }]);
-  }])
+  }]);
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {

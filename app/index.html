@@ -58,7 +58,7 @@
     <![endif]-->
 
     <div class="container">
-
+      <div oo-error-overlay></div>
       <div ng-view=""></div>
 
     </div>
@@ -104,13 +104,16 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/common/filters/oo-preisproeinheit.filter.js"></script>
+  <script src="scripts/common/components/oo-erroroverlay.directive.js"></script>
   <script src="scripts/common/components/oo-dropdown.directive.js"></script>
   <script src="scripts/common/components/oo-liefertage.directive.js"></script>
   <script src="scripts/common/components/oo-datepicker.directive.js"></script>
   <script src="scripts/common/components/oo-personentypen.directive.js"></script>
   <script src="scripts/common/components/oo-savebutton.directive.js"></script>
+  <script src="scripts/common/components/oo-deletebutton.directive.js"></script>
   <script src="scripts/common/utils/enum.util.js"></script>
   <script src="scripts/common/services/oo-messages.service.js"></script>
+  <script src="scripts/common/services/oo-alert.service.js"></script>
 
   <script src="scripts/abotypen/overview/abotypenoverview.model.js"></script>
   <script src="scripts/abotypen/overview/abotypenoverview.controller.js"></script>

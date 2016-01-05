@@ -73,7 +73,7 @@
         <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="cancel">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
-        <button ng-click="delete()" class="btn btn-danger" translate>Löschen</button>
+        <oo-delete-button model="abotyp" entity="Abotyp" on-delete="delete" redirect-on-delete="/abotypen"></oo-delete-button>
       </div>
     </div>
   </div>

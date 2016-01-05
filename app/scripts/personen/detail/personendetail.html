@@ -124,7 +124,7 @@
         <oo-save-button model="person" form="personForm" entity="Person" on-save="save" on-cancel="cancel">{{fullName() || 'Person'|translate}}</oo-save-button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
-        <button ng-click="delete()" class="btn btn-danger" translate>Löschen</button>
+        <oo-delete-button model="person" entity="Person" on-delete="delete" redirect-on-delete="/personen"></oo-delete-button>
       </div>
     </div>
   </div>

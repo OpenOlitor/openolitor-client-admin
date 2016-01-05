@@ -26,14 +26,13 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', function(msgBu
         }
       };
 
-      $scope.loading = false;
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
-          if (!$scope.loading) {
+          if ($scope.model.actionInProgress !== 'updating') {
             //TODO: Use alertservice to notify user to reload page before saving
           } else {
             update(msg.data, $scope.model);
-            $scope.loading = false;
+            $scope.model.actionInProgress = undefined;
             $scope.$apply();
           }
         }
@@ -42,18 +41,18 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', function(msgBu
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
           update(msg.data, $scope.model);
-          $scope.loading = false;
+          $scope.model.actionInProgress = undefined;
           $scope.$apply();
         }
       });
 
       $scope.save = function() {
-        $scope.loading = true;
+        $scope.model.actionInProgress = 'updating';
         $scope.onSave();
       };
 
       $scope.cancel = function() {
-        $scope.loading = true;
+        $scope.model.actionInProgress = 'updating';
         $scope.onCancel();
       };
     }

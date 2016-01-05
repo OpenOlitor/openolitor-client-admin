@@ -22,7 +22,7 @@
         <oo-save-button model="abo" form="aboForm" entity="Abo" on-save="save" on-cancel="cancel">{{fullName() || 'Abo'|translate}}</oo-save-button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
-        <button ng-click="delete()" class="btn btn-danger" translate>Löschen</button>
+        <oo-delete-button model="abo" entity="Abo" on-delete="delete" redirect-on-delete="/abos"></oo-delete-button>
       </div>
     </div>
   </div>
