@@ -18,23 +18,30 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', function(msgBu
         return !$scope.model || $scope.model.id === undefined;
       };
 
+      var update = function(src, dest) {
+        for (var key in src) {
+          if (src.hasOwnProperty(key)) {
+            dest[key] = src[key];
+          }
+        }
+      };
+
       $scope.loading = false;
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
           if (!$scope.loading) {
             //TODO: Use alertservice to notify user to reload page before saving
-          }
-          else {          
-            //$scope.model = msg.data;
+          } else {
+            update(msg.data, $scope.model);
             $scope.loading = false;
             $scope.$apply();
-          } 
-       }
+          }
+        }
       });
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
-          $scope.model = msg.data;
+          update(msg.data, $scope.model);
           $scope.loading = false;
           $scope.$apply();
         }

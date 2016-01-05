@@ -23,7 +23,7 @@ angular.module('openolitor')
     }
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.depot) && angular.isDefined($scope.depot.id);
+      return angular.isDefined($scope.depot) && angular.isDefined($scope.depot.id) && !$location.path().endsWith('new');
     };
 
     $scope.fullName = function() {

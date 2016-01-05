@@ -30,7 +30,7 @@ angular.module('openolitor')
     };
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.person) && angular.isDefined($scope.person.id);
+      return angular.isDefined($scope.person) && angular.isDefined($scope.person.id) && !$location.path().endsWith('new');
     };
 
     $scope.save = function() {

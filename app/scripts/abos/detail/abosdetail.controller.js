@@ -44,7 +44,7 @@ angular.module('openolitor')
     });
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.abo) && angular.isDefined($scope.abo.id);
+      return angular.isDefined($scope.abo) && angular.isDefined($scope.abo.id) && !$location.path().endsWith('new');
     };
 
     $scope.save = function() {
