@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openolitor').directive('ooSaveButton', ['msgBus', function(msgBus) {
+angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext', 'alertService', function(msgBus, gettext, alertService) {
   return {
     restrict: 'E',
     replace: true,
@@ -29,7 +29,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', function(msgBu
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
           if ($scope.model.actionInProgress !== 'updating') {
-            //TODO: Use alertservice to notify user to reload page before saving
+            alertService.addAlert('info', gettext($scope.entity + ' wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu.'));
           } else {
             update(msg.data, $scope.model);
             $scope.model.actionInProgress = undefined;
