@@ -14,6 +14,11 @@ angular.module('openolitor')
       }
     };
 
+    var basePath = '/abos';
+    if ($routeParams.personId) {
+      basePath = '/personen/' + $routeParams.personId + basePath;
+    }
+
     if (!$routeParams.id) {
       PersonenDetailModel.get({
         id: $routeParams.personId
@@ -44,19 +49,19 @@ angular.module('openolitor')
     });
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.abo) && angular.isDefined($scope.abo.id) && !$location.path().endsWith('new');
+      return angular.isDefined($scope.abo) && angular.isDefined($scope.abo.id);
     };
 
     $scope.save = function() {
-      $scope.abo.$save(function(result) {
-        if (!$scope.isExisting()) {
-          $location.path('/abos/' + result.id);
-        }
-      });
+      $scope.abo.$save();
+    };
+
+    $scope.created = function(id) {
+      $location.path(basePath + '/' + id);
     };
 
     $scope.cancel = function() {
-      $location.path('/abos');
+      $location.path(basePath);
     };
 
     $scope.delete = function() {

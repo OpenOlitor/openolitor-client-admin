@@ -50,15 +50,15 @@ angular.module('openolitor')
     }
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id) && !$location.path().endsWith('new');
+      return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id);
     };
 
     $scope.save = function() {
-      $scope.abotyp.$save(function(result) {
-        if (!$scope.isExisting()) {
-          $location.path('/abotypen/' + result.id);
-        }
-      });
+      $scope.abotyp.$save();
+    };
+
+    $scope.created = function(id) {
+      $location.path('/abotypen/' + id);
     };
 
     $scope.cancel = function() {

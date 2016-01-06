@@ -23,7 +23,7 @@ angular.module('openolitor')
     }
 
     $scope.isExisting = function() {
-      return angular.isDefined($scope.depot) && angular.isDefined($scope.depot.id) && !$location.path().endsWith('new');
+      return angular.isDefined($scope.depot) && angular.isDefined($scope.depot.id);
     };
 
     $scope.fullName = function() {
@@ -34,11 +34,11 @@ angular.module('openolitor')
     };
 
     $scope.save = function() {
-      $scope.depot.$save(function(result) {
-        if (!$scope.isExisting()) {
-          $location.path('/depots/' + result.id);
-        }
-      });
+      $scope.depot.$save();
+    };
+
+    $scope.created = function(id) {
+      $location.path('/depots/' + id);
     };
 
     $scope.cancel = function() {

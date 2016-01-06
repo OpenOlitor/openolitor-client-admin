@@ -70,7 +70,7 @@
 
     <div class="row form-group">
       <div class="col-md-4">
-        <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="cancel">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
+        <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="cancel" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
         <oo-delete-button model="abotyp" entity="Abotyp" on-delete="delete" redirect-on-delete="/abotypen"></oo-delete-button>

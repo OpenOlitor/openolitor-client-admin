@@ -9,7 +9,8 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext', 'al
       model: '=',
       onSave: '=',
       onCancel: '=',
-      form: '='
+      form: '=',
+      onCreated: '='
     },
     transclude: true,
     templateUrl: 'scripts/common/components/oo-savebutton.directive.html',
@@ -39,9 +40,12 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext', 'al
       });
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
-        if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
+        if ($scope.model && msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
           update(msg.data, $scope.model);
           $scope.model.actionInProgress = undefined;
+          if ($scope.onCreated) {
+            $scope.onCreated(msg.data.id);
+          }
           $scope.$apply();
         }
       });
