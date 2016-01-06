@@ -57,12 +57,12 @@ angular.module('openolitor')
       $scope.abotyp.$save();
     };
 
-    $scope.created = function(id) {
-      $location.path('/abotypen/' + id);
+    $scope.backToList = function() {
+      $location.path('/abotypen');
     };
 
-    $scope.cancel = function() {
-      $location.path('/abotypen');
+    $scope.created = function(id) {
+      $location.path('/abotypen/' + id);
     };
 
     $scope.delete = function() {

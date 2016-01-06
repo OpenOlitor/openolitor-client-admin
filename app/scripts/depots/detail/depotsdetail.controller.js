@@ -41,7 +41,7 @@ angular.module('openolitor')
       $location.path('/depots/' + id);
     };
 
-    $scope.cancel = function() {
+    $scope.backToList = function() {
       $location.path('/depots');
     };
 

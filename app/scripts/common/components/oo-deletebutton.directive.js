@@ -1,22 +1,30 @@
 'use strict';
 
-angular.module('openolitor').directive('ooDeleteButton', ['$location', 'msgBus', 'gettext', 'alertService', function($location, msgBus, gettext, alertService) {
+angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext', 'alertService', function(msgBus, gettext, alertService) {
   return {
     restrict: 'E',
     replace: true,
     scope: {
       entity: '@',
+      entities: '=?',
       model: '=',
       onDelete: '=',
       form: '=',
-      redirectOnDelete: '@'
+      onDeleted: '='
     },
     transclude: true,
     templateUrl: 'scripts/common/components/oo-deletebutton.directive.html',
     controller: function($scope) {
 
+      var entityMatches = function(entity) {
+        if (angular.isArray($scope.entities)) {
+          return $scope.entities.indexOf(entity) > -1;
+        } else {
+          return $scope.entity === entity;
+        }
+      };
       msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
-        if (msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
+        if (entityMatches(msg.entity) && msg.data.id === $scope.model.id) {
           if ($scope.model.actionInProgress !== 'deleting') {
             alertService.addAlert('info', gettext($scope.entity + ' wurde durch eine andere Person gelöscht.'));
           } else {
@@ -25,7 +33,7 @@ angular.module('openolitor').directive('ooDeleteButton', ['$location', 'msgBus',
             $scope.$apply();
           }
           //redirect to main page
-          $location.path($scope.redirectOnDelete);
+          $scope.onDeleted(msg.data.id);
         }
       });
 

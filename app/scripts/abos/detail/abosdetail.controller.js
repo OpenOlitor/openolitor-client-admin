@@ -3,9 +3,10 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams', '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel', 'AbotypenDetailModel', 'PersonenDetailModel', 'VERTRIEBSARTEN', function($scope, $filter, $routeParams, $location, gettext, AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel, PersonenDetailModel, VERTRIEBSARTEN) {
+  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams', '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel', 'AbotypenDetailModel', 'PersonenDetailModel', 'VERTRIEBSARTEN', 'ABOTYPEN_ARRAY', function($scope, $filter, $routeParams, $location, gettext, AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel, PersonenDetailModel, VERTRIEBSARTEN, ABOTYPEN_ARRAY) {
 
     $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
+    $scope.ABOTYPEN_ARRAY = ABOTYPEN_ARRAY;
 
     var defaults = {
       model: {
@@ -16,7 +17,7 @@ angular.module('openolitor')
 
     var basePath = '/abos';
     if ($routeParams.personId) {
-      basePath = '/personen/' + $routeParams.personId + basePath;
+      basePath = '/personen/' + $routeParams.personId;
     }
 
     if (!$routeParams.id) {
@@ -56,8 +57,12 @@ angular.module('openolitor')
       $scope.abo.$save();
     };
 
-    $scope.created = function(id) {
-      $location.path(basePath + '/' + id);
+    $scope.backToList = function(id) {
+      if ($routeParams.personId) {
+        $location.path(basePath);
+      } else {
+        $location.path(basePath + '/' + id);
+      }
     };
 
     $scope.cancel = function() {
@@ -68,7 +73,6 @@ angular.module('openolitor')
       $scope.abo.$delete();
     };
 
-    // TODO introduce a generic way
     function vertriebsartLabel(vertriebsart) {
       switch (vertriebsart.typ) {
         case VERTRIEBSARTEN.DEPOTLIEFERUNG:

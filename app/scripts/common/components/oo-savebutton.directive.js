@@ -6,6 +6,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext', 'al
     replace: true,
     scope: {
       entity: '@',
+      entities: '=?',
       model: '=',
       onSave: '=',
       onCancel: '=',
@@ -39,8 +40,16 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext', 'al
         }
       });
 
+      var entityMatches = function(entity) {
+        if (angular.isArray($scope.entities)) {
+          return $scope.entities.indexOf(entity) > -1;
+        } else {
+          return $scope.entity === entity;
+        }
+      };
+
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
-        if ($scope.model && msg.entity === $scope.entity && msg.data.id === $scope.model.id) {
+        if ($scope.model && entityMatches(msg.entity) && msg.data.id === $scope.model.id) {
           update(msg.data, $scope.model);
           $scope.model.actionInProgress = undefined;
           if ($scope.onCreated) {

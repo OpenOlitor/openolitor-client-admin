@@ -33,6 +33,12 @@ angular
     HEIMLIEFERUNG: 'Heimlieferung',
     POSTLIEFERUNG: 'Postlieferung'
   })
+  .constant('ABOTYPEN', {
+    DEPOTLIEFERUNGABO: 'DepotlieferungAbo',
+    HEIMLIEFERUNGABO: 'HeimlieferungAbo',
+    POSTLIEFERUNGABO: 'PostlieferungAbo'
+  })
+  .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo', 'PostlieferungAbo'])
   .constant('LIEFERZEITPUNKTE', {
     MONTAG: {
       id: 'Montag',

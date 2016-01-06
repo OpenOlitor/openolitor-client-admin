@@ -19,10 +19,10 @@
 
     <div class="row form-group">
       <div class="col-md-4">
-        <oo-save-button model="abo" form="aboForm" entity="Abo" on-save="save" on-cancel="cancel" on-created="created">{{fullName() || 'Abo'|translate}}</oo-save-button>
+        <oo-save-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" on-save="save" on-cancel="cancel" on-created="backToList">{{fullName() || 'Abo'|translate}}</oo-save-button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
-        <oo-delete-button model="abo" entity="Abo" on-delete="delete" redirect-on-delete="/abos"></oo-delete-button>
+        <oo-delete-button model="abo" entity="Abo" entities="ABOTYPEN_ARRAY" on-delete="delete" on-deleted="backToList"></oo-delete-button>
       </div>
     </div>
   </div>
