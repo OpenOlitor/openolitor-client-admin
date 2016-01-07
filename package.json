@@ -7,14 +7,17 @@
     "url": "git://github.com/OpenOlitor/openolitor-client.git"
   },
   "license": "GPL-3.0",
-  "dependencies": {},
+  "dependencies": {
+    "pako": "^0.2.8"
+  },
   "devDependencies": {
+    "bower": "1.6.8",
     "grunt": "^0.4.5",
     "grunt-angular-gettext": "^2.1.0",
     "grunt-autoprefixer": "^3.0.3",
     "grunt-concurrent": "^2.1.0",
     "grunt-contrib-clean": "^0.7.0",
-    "grunt-contrib-compass": "^1.0.3",
+    "grunt-contrib-compass": "^1.0.4",
     "grunt-contrib-compress": "^0.14.0",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-connect": "^0.11.2",
@@ -37,7 +40,6 @@
     "grunt-svgmin": "^3.1.0",
     "grunt-usemin": "^3.1.1",
     "grunt-wiredep": "^2.0.0",
-    "bower": "1.6.8",
     "http-server": "^0.8.5",
     "jasmine-core": "^2.2.0",
     "jshint-stylish": "^2.1.0",
@@ -49,8 +51,8 @@
     "karma-ng-html2js-preprocessor": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
     "load-grunt-tasks": "^3.3.0",
-    "protractor": "^2.1.0",
     "phantomjs": "^1.9.19",
+    "protractor": "^2.1.0",
     "shelljs": "^0.5.3",
     "time-grunt": "^1.1.1"
   },
