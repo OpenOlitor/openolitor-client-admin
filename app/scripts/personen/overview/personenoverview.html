@@ -33,6 +33,9 @@
         <td title="'PLZ Ort'|translate" sortable="'plz'">
           {{person.plz}} {{person.ort}}
         </td>
+        <td title="'# Abos'|translate" sortable="'anzahlAbos'">
+          {{person.anzahlAbos}}
+        </td>
         <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="personentypen">
           <span ng-repeat="typ in person.typen" class="badge">
             {{typ|translate}}

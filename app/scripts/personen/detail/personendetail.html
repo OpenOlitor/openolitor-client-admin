@@ -105,7 +105,7 @@
         <oo-save-button model="person" form="personForm" entity="Person" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Person'|translate}}</oo-save-button>
       </div>
       <div class="col-md-8" ng-if="isExisting()">
-        <oo-delete-button model="person" entity="Person" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+        <oo-delete-button ng-if="person.anzahlAbos === 0" model="person" entity="Person" on-delete="delete" on-deleted="backToList"></oo-delete-button>
       </div>
     </div>
     <section name="abos" ng-if="isExisting()">
