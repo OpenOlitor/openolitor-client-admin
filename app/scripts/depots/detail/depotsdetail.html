@@ -19,7 +19,7 @@
         <input bs-switch ng-model="depot.aktiv" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Aktiv'|translate}}" switch-off-text="{{'Inaktiv'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
       </div>
       <div class="col-md-4" ng-if="isExisting()">
-        <oo-delete-button model="depot" entity="Depot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+        <oo-delete-button ng-if="depot.anzahlAbonnenten === 0" model="depot" entity="Depot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
       </div>
     </div>
     <div class="row form-group">
