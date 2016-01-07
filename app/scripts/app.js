@@ -90,7 +90,7 @@ angular
       }
     }
   })
-  .constant('PERSONENTYPEN', {
+  .constant('KUNDENTYPEN', {
     VEREINSMITGLIED: 'Vereinsmitglied',
     GOENNER: 'Goenner',
     GENOSSENSCHAFTERIN: 'Genossenschafterin'
@@ -148,20 +148,20 @@ angular
         controller: 'AbotypenDetailController',
         name: 'AbotypenDetail'
       })
-      .when('/personen', {
-        templateUrl: 'scripts/personen/overview/personenoverview.html',
-        controller: 'PersonenOverviewController',
-        name: 'PersonenOverview'
+      .when('/kunden', {
+        templateUrl: 'scripts/kunden/overview/kundenoverview.html',
+        controller: 'KundenOverviewController',
+        name: 'KundenOverview'
       })
-      .when('/personen/new', {
-        templateUrl: 'scripts/personen/detail/personendetail.html',
-        controller: 'PersonenDetailController',
-        name: 'PersonenDetail'
+      .when('/kundenn/new', {
+        templateUrl: 'scripts/kunden/detail/kundedetail.html',
+        controller: 'KundeDetailController',
+        name: 'KundeDetail'
       })
-      .when('/personen/:id', {
-        templateUrl: 'scripts/personen/detail/personendetail.html',
-        controller: 'PersonenDetailController',
-        name: 'PersonenDetail'
+      .when('/kunden/:id', {
+        templateUrl: 'scripts/kunde/detail/kundedetail.html',
+        controller: 'KundeDetailController',
+        name: 'KundeDetail'
       })
       .when('/depots', {
         templateUrl: 'scripts/depots/overview/depotsoverview.html',
@@ -178,12 +178,12 @@ angular
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
       })
-      .when('/personen/:personId/abos/new', {
+      .when('/kunde/:kundeId/abos/new', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail'
       })
-      .when('/personen/:personId/abos/:id', {
+      .when('/kunden/:kundeId/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail'
