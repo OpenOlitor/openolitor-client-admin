@@ -1,39 +1,58 @@
-<div>
-  <h1 translate>Abos</h1>
-  <div class="filters">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <span>
-          <ul class="nav navbar-nav navbar-right">
-            <form class="navbar-form" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
-              </div>
-            </form>
-          </ul>
-        </span>
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title" translate>Abos</h3>
       </div>
-    </nav>
+      <div class="panel-body">
+        <div class="filters">
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <span>
+                <ul class="nav navbar-nav navbar-right">
+                  <form class="navbar-form" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+                    </div>
+                  </form>
+                </ul>
+              </span>
+            </div>
+          </nav>
+        </div>
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+            <tr ng-repeat="abo in $data">
+              <td title="'Name'|translate" sortable="'name'">
+                <a ng-href="#/personen/{{abo.personId}}/abos/{{abo.id}}" translate>Details</a>
+              </td>
+              <td title="'Abonnentin'|translate" sortable="'abo.personName+abo.personVorname'">
+                <a ng-href="#/personen/{{abo.personId}}" translate>{{abo.personName}} {{abo.personVorname}}</a>
+              </td>
+              <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
+                <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
+              </td>
+              <td title="'Depot'|translate" sortable="'abo.depotName'">
+                <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-  <div ng-hide="entries">
-    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-  </div>
-  <div ng-show="entries">
-    <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-      <tr ng-repeat="abo in $data">
-        <td title="'Name'|translate" sortable="'name'">
-          <a ng-href="#/personen/{{abo.personId}}/abos/{{abo.id}}" translate>Details</a>
-        </td>
-        <td title="'Abonnentin'|translate" sortable="'abo.personName+abo.personVorname'">
-          <a ng-href="#/personen/{{abo.personId}}" translate>{{abo.personName}} {{abo.personVorname}}</a>
-        </td>
-        <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
-          <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
-        </td>
-        <td title="'Depot'|translate" sortable="'abo.depotName'">
-          <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
-        </td>
-      </tr>
-    </table>
+  <div class="context content-box col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Context Example</h3>
+      </div>
+      <div class="panel-body">
+        Example
+      </div>
+    </div>
   </div>
 </div>

@@ -16,3 +16,53 @@ input.ng-invalid {
 .nav-item {
   padding: 10px 15px;
 }
+
+
+.wrapper:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.6;
+    //TODO change with own image
+    background-image: url('http://blog.echo-online.de/dippeblog/files/2013/08/Gem%C3%BCse.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.content {
+}
+
+.content-box {
+  background: rgba(255,255,255,0.9);
+  margin-top: 10px;
+  margin-left: 30px;
+  padding-left: 30px;
+  padding-top:30px;
+  padding-right:30px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .content {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .content {
+    width: 800px;
+  }
+}

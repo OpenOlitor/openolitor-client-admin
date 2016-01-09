@@ -48,24 +48,17 @@
     <div class="wrapper">
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-          <li class="sidebar-brand"></li>
           <li><a class="nav-item" href="" ng-href="#/depots" translate><i class="fa fa-cubes"></i> Depots</a></li>
           <li><a class="nav-item" href="" ng-href="#/abotypen" translate><i class="fa fa-calculator"></i> Abotypen</a></li>
           <li><a class="nav-item" href="" ng-href="#/kunden" translate><i class="fa fa-user"></i> Kunden</a></li>
           <li><a class="nav-item" href="" ng-href="#/abos" translate><i class="fa fa-shopping-cart"></i> Abos</a></li>
+        </ul>
       </div>
         <!--[if lt IE 9]>
             <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
         <![endif]-->
       <div id="page-content-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div oo-error-overlay></div>
-              <div ng-view=""></div>
-            </div>
-          </div>
-        </div>
+        <div ng-view=""></div>        
       </div>
     </div>
 
