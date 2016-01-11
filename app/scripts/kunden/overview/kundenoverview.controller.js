@@ -3,17 +3,16 @@
 /**
  */
 angular.module('openolitor')
-  .controller('PersonenOverviewController', ['$scope', '$filter', 'PersonenOverviewModel', 'ngTableParams', 'PERSONENTYPEN', 'EnumUtil', function($scope, $filter, PersonenOverviewModel, ngTableParams, PERSONENTYPEN, EnumUtil) {
+  .controller('KundenOverviewController', ['$scope', '$filter', 'KundenOverviewModel', 'ngTableParams', 'KUNDENTYPEN', 'EnumUtil', function($scope, $filter, KundenOverviewModel, ngTableParams, KUNDENTYPEN, EnumUtil) {
 
     $scope.entries = [];
     $scope.loading = false;
 
-    $scope.personentypen = EnumUtil.asArray(PERSONENTYPEN);
+    $scope.kundentypen = EnumUtil.asArray(KUNDENTYPEN);
 
     $scope.dummyEntries = [{
       id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
-      name: 'Calvert',
-      vorname: 'Joshua',
+      bezeichnung: 'Calvert Joshua',
       strasse: 'Jupiterstrasse',
       hausNummer: 40,
       plz: 3020,
@@ -21,8 +20,7 @@ angular.module('openolitor')
       typen: ['Goenner', 'Vereinsmitglied']
     }, {
       id: '88827d1d-293c-405a-b0fb-aa392efe6d50',
-      name: 'Saldana',
-      vorname: 'Ione',
+      name: 'WG Bern',
       strasse: 'Jupiterstrasse',
       hausNummer: 23,
       plz: 3015,
@@ -76,7 +74,7 @@ angular.module('openolitor')
       $scope.tableParams.reload();
 
       $scope.loading = true;
-      $scope.entries = PersonenOverviewModel.query({
+      $scope.entries = KundenOverviewModel.query({
         q: $scope.query
       }, function() {
         $scope.tableParams.reload();

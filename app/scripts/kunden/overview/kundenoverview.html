@@ -1,50 +1,48 @@
 <div class="row">
 <div class="content content-box col-md-9">
   <div oo-error-overlay></div>
-  <h1 translate>Personen <a role="button" href="#/personen/new" class="btn btn-primary pull-right" translate>Neue Person erfassen</a></h1>
-  <div class="filters">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <span>
-          <ul class="nav navbar-nav navbar-right">
-            <form class="navbar-form" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
-              </div>
-            </form>
-          </ul>
-        </span>
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3  class="panel-title" translate>Kunden
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+          </div>
+        </form>
+      </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div ng-hide="entries">
+        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-    </nav>
+      <div ng-show="entries">
+        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+          <tr ng-repeat="kunde in $data">
+            <td title="'Bezeichnung'|translate" sortable="'bezeichnung'">
+              <a ng-href="#/kunden/{{kunde.id}}">{{kunde.bezeichnung}}</a>
+            </td>
+            <td title="'Strasse'|translate" sortable="'strasse+hausNummer'">
+              {{kunde.strasse}} {{kunde.hausNummer}}
+            </td>
+            <td title="'PLZ Ort'|translate" sortable="'plz'">
+              {{kunde.plz}} {{kunde.ort}}
+            </td>
+            <td title="'# Abos'|translate" sortable="'anzahlAbos'">
+              {{kunde.anzahlAbos}}
+            </td>
+            <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="kundentypen">
+              <span ng-repeat="typ in kunde.typen" class="badge">
+                {{typ|translate}}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <span class="pull-right"><a role="button" href="#/kunden/new" class="btn btn-primary" translate>Neuen Kunden erfassen</a></span>
+      <div class="clearfix"></div>
+    </div>
   </div>
-  <div ng-hide="entries">
-    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-  </div>
-  <div ng-show="entries">
-    <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-      <tr ng-repeat="person in $data">
-        <td title="'Vorname'|translate" sortable="'vorname'">
-          <a ng-href="#/personen/{{person.id}}">{{person.vorname}}</a>
-        </td>
-        <td title="'Name'|translate" sortable="'name'">
-          <a ng-href="#/personen/{{person.id}}">{{person.name}}</a>
-        </td>
-        <td title="'Strasse'|translate" sortable="'strasse+hausNummer'">
-          {{person.strasse}} {{person.hausNummer}}
-        </td>
-        <td title="'PLZ Ort'|translate" sortable="'plz'">
-          {{person.plz}} {{person.ort}}
-        </td>
-        <td title="'# Abos'|translate" sortable="'anzahlAbos'">
-          {{person.anzahlAbos}}
-        </td>
-        <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="personentypen">
-          <span ng-repeat="typ in person.typen" class="badge">
-            {{typ|translate}}
-          </span>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
 </div>

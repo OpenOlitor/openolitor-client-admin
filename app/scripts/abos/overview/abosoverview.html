@@ -2,25 +2,15 @@
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Abos</h3>
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title" translate>Abos
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+          </div>
+        </form></h3>
       </div>
       <div class="panel-body">
-        <div class="filters">
-          <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <span>
-                <ul class="nav navbar-nav navbar-right">
-                  <form class="navbar-form" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
-                    </div>
-                  </form>
-                </ul>
-              </span>
-            </div>
-          </nav>
-        </div>
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>

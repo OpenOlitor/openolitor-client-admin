@@ -153,14 +153,14 @@ angular
         controller: 'KundenOverviewController',
         name: 'KundenOverview'
       })
-      .when('/kundenn/new', {
-        templateUrl: 'scripts/kunden/detail/kundedetail.html',
-        controller: 'KundeDetailController',
+      .when('/kunden/new', {
+        templateUrl: 'scripts/kunden/detail/kundendetail.html',
+        controller: 'KundenDetailController',
         name: 'KundeDetail'
       })
       .when('/kunden/:id', {
-        templateUrl: 'scripts/kunde/detail/kundedetail.html',
-        controller: 'KundeDetailController',
+        templateUrl: 'scripts/kunden/detail/kundendetail.html',
+        controller: 'KundenDetailController',
         name: 'KundeDetail'
       })
       .when('/depots', {
