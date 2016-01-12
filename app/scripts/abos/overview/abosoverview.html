@@ -17,11 +17,8 @@
         <div ng-show="entries">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
             <tr ng-repeat="abo in $data">
-              <td title="'Name'|translate" sortable="'name'">
-                <a ng-href="#/personen/{{abo.personId}}/abos/{{abo.id}}" translate>Details</a>
-              </td>
-              <td title="'Abonnentin'|translate" sortable="'abo.personName+abo.personVorname'">
-                <a ng-href="#/personen/{{abo.personId}}" translate>{{abo.personName}} {{abo.personVorname}}</a>
+              <td title="'Abonnentin'|translate" sortable="'abo.kunde'">
+                <a ng-href="#/kunden/{{abo.kundeId}}" translate>{{abo.personName}} {{abo.personVorname}}</a>
               </td>
               <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
                 <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>

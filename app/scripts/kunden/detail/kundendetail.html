@@ -75,7 +75,7 @@
           </div>
           <div class="panel panel-default"  ng-if="isExisting()">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title" translate>Pendenzen <button role="button" href="#/kunden/{{kunde.id}}/pendenzen/new" class="btn btn-primary" translate>Neues Pendenz</button></h3>
+              <h3 class="panel-title" translate>Pendenzen <a role="button" href="#/kunden/{{kunde.id}}/pendenzen/new" class="btn btn-primary pull-right" translate><span class="glyphicon glyphicon-plus"></span> Neues Pendenz</a></h3>
             </div>
             <div class="panel-body">
               <table class="table table-striped table-condensed">
@@ -86,14 +86,11 @@
           </div>
           <div class="panel panel-default"  ng-if="isExisting()">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title" translate>Abos <button role="button" href="#/kunden/{{kunde.id}}/abos/new" class="btn btn-primary" translate>Neues Abo</button></h3>
+              <h3 class="panel-title" translate>Abos <a role="button" href="#/kunden/{{kunde.id}}/abos/new" class="btn btn-primary pull-right" translate><span class="glyphicon glyphicon-plus"></span> Neues Abo</a></h3>
             </div>
             <div class="panel-body">
               <table class="table table-striped table-condensed">
-                <tr ng-repeat="abo in kunde.abos">
-                  <td>
-                    <a ng-href="#kunden/{{kunde.id}}/abos/{{abo.id}}" translate>Details</a>
-                  </td>
+                <tr ng-repeat="abo in kunde.abos">                
                   <td>
                     <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
                   </td>

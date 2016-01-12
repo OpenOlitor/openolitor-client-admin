@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .factory('AbosDetailModel', function($resource, API_URL) {
-    return $resource(API_URL + 'personen/:personId/abos/:id', {
+    return $resource(API_URL + 'kunden/:kundeId/abos/:id', {
       id: '@id',
-      personId: '@personId'
+      kundeId: '@kundeId'
     });
   });

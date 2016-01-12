@@ -38,7 +38,9 @@ angular
     HEIMLIEFERUNGABO: 'HeimlieferungAbo',
     POSTLIEFERUNGABO: 'PostlieferungAbo'
   })
-  .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo', 'PostlieferungAbo'])
+  .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
+    'PostlieferungAbo'
+  ])
   .constant('LIEFERZEITPUNKTE', {
     MONTAG: {
       id: 'Montag',
@@ -114,7 +116,8 @@ angular
     clientMessageService.start();
   }])
   .config(['$provide', function($provide) {
-    $provide.decorator('$exceptionHandler', ['$log', '$injector', function($log, $injector) {
+    $provide.decorator('$exceptionHandler', ['$log', '$injector', function(
+      $log, $injector) {
       return function(exception) {
         // using the injector to retrieve scope and timeout, otherwise circular dependency
         var $rootScope = $injector.get('$rootScope');
@@ -163,6 +166,16 @@ angular
         controller: 'KundenDetailController',
         name: 'KundeDetail'
       })
+      .when('/kunden/:kundeId/abos/new', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail'
+      })
+      .when('/kunden/:kundeId/abos/:id', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail'
+      })
       .when('/depots', {
         templateUrl: 'scripts/depots/overview/depotsoverview.html',
         controller: 'DepotsOverviewController',
@@ -177,16 +190,6 @@ angular
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
-      })
-      .when('/kunde/:kundeId/abos/new', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail'
-      })
-      .when('/kunden/:kundeId/abos/:id', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail'
       })
       .otherwise({
         templateUrl: 'scripts/not-found.html'
