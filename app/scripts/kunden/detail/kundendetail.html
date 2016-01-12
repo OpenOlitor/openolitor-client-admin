@@ -2,166 +2,182 @@
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
     <form name="kundeForm">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title">{{ fullName() || 'Kunde'|translate}}</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="typen" translate>Typen</label>
-              </div>
-              <div class="col-md-8">
-                <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row form-group">
+            <div class="col-md-2">
+              <label for="typen" translate>Kundentyp</label>
+            </div>
+            <div class="col-md-10">
+              <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
+              <div class="btn-group pull-right" role="group">
+                <oo-save-button model="kunde" form="kundeForm" entity="Kunde" on-save="save" on-cancel="backToList" on-created="created">{{kundeBezeichnung() || 'Kunde'|translate}}</oo-save-button>
+                <oo-delete-button ng-if="kunde.anzahlAbos === 0" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
               </div>
             </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="bezeichnung" translate>Bezeichnung</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="bezeichnung" ng-model="kunde.bezeichnung" placeholder="{{'Bezeichnung'|translate}}" required>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="strasse" translate>Strasse / Nr.</label>
-              </div>
-              <div class="col-md-4">
-                <input type="text" class="form-control" id="strasse" ng-model="person.strasse" ng-required="!person.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
-              </div>
-              <div class="col-md-1">
-                <input type="text" class="form-control" id="hausNummer" ng-model="person.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="adressZusatz" translate>Adresszusatz</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="adressZusatz" ng-model="person.adressZusatz" placeholder="{{'Adresszusatz'|translate}}">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="plz" translate>PLZ / Ort</label>
-              </div>
-              <div class="col-md-1">
-                <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="person.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
-              </div>
-              <div class="col-md-4">
-                <input type="text" class="form-control" id="ort" ng-model="person.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="bemerkungen" translate>Bemerkungen</label>
-              </div>
-              <div class="col-md-8">
-                <textarea class="form-control" name="bemerkungen" ng-model="kunde.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..."></textarea>
-              </div>
-            </div>
-            <div class="panel-footer">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <oo-save-button model="kunde" form="kundeForm" entity="Kunde" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Kunde'|translate}}</oo-save-button>
-                </div>
-                <div class="col-md-8" ng-if="isExisting()">
-                  <oo-delete-button ng-if="kunde.anzahlAbos === 0" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default"  ng-if="isExisting()">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title" translate>Abos <button role="button" href="#/kunden/{{kunde.id}}/abos/new" class="btn btn-primary" translate>Neues Abo</button></h3>
-          </div>
-          <div class="panel-body">
-            <table class="table table-striped table-condensed">
-              <tr ng-repeat="abo in kunde.abos">
-                <td>
-                  <a ng-href="#kunden/{{kunde.id}}/abos/{{abo.id}}" translate>Details</a>
-                </td>
-                <td>
-                  <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
-                </td>
-                <td>
-                  <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
-                </td>
-              </tr>
-            </table>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="panel panel-default" ng-repeat="person in kunde.personen">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title">{{ fullName() || 'Ansprechperson'|translate}}</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title" translate>Adresse</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group" ng-if="kunde.personen.length > 1">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Anschrift</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bezeichnung" ng-model="kunde.bezeichnung" placeholder="{{'Anschrift oder bezeichnung'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="strasse" translate>Strasse / Nr.</label>
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="strasse" ng-model="person.strasse" ng-required="!person.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                </div>
+                <div class="col-md-2">
+                  <input type="text" class="form-control" id="hausNummer" ng-model="person.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="adressZusatz" translate>Adresszusatz</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="adressZusatz" ng-model="person.adressZusatz" placeholder="{{'Adresszusatz'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="plz" translate>PLZ / Ort</label>
+                </div>
+                <div class="col-md-2">
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="person.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="ort" ng-model="person.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bemerkungen" translate>Bemerkungen</label>
+                </div>
+                <div class="col-md-8">
+                  <textarea class="form-control" name="bemerkungen" ng-model="kunde.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..."></textarea>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="panel-body">
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="vorname" translate>Vorname</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="vorname" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" required>
-              </div>
+          <div class="panel panel-default"  ng-if="isExisting()">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title" translate>Pendenzen <button role="button" href="#/kunden/{{kunde.id}}/pendenzen/new" class="btn btn-primary" translate>Neues Pendenz</button></h3>
             </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="name" translate>Name</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
-              </div>
+            <div class="panel-body">
+              <table class="table table-striped table-condensed">
+                <tr ng-repeat="pendenz in kunde.pendenzen">
+                </tr>
+              </table>
             </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="email" translate>Email</label>
-              </div>
-              <div class="col-md-8">
-                <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'Email'|translate}}" required>
-              </div>
+          </div>
+          <div class="panel panel-default"  ng-if="isExisting()">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title" translate>Abos <button role="button" href="#/kunden/{{kunde.id}}/abos/new" class="btn btn-primary" translate>Neues Abo</button></h3>
             </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="emailAlternative" translate>Alternative Emailadresse</label>
-              </div>
-              <div class="col-md-8">
-                <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative Emailadresse'|translate}}">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="telefon" translate>Telefon</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="telefon" ng-model="person.telefon" placeholder="{{'Telefon'|translate}}">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="telefonAlternative" translate>Alternative Telefonnummer</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="telefonAlternative" ng-model="person.telefonAlternative" placeholder="{{'Alternative Telefonnummer'|translate}}">
-              </div>
-            </div>
-            <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
-              <div class="col-md-4">
-                <label for="bemerkungen" translate>Bemerkungen</label>
-              </div>
-              <div class="col-md-8">
-                <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..."></textarea>
-              </div>
+            <div class="panel-body">
+              <table class="table table-striped table-condensed">
+                <tr ng-repeat="abo in kunde.abos">
+                  <td>
+                    <a ng-href="#kunden/{{kunde.id}}/abos/{{abo.id}}" translate>Details</a>
+                  </td>
+                  <td>
+                    <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
+                  </td>
+                  <td>
+                    <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <a role="button" translate>Ansprechperson hinzufügen</a>
+        <div class="col-md-6">
+          <div class="panel panel-default" ng-repeat="person in kunde.personen track by $index">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">
+                <a data-toggle="collapse" data-target="#apartner_{{$index}}"><b>{{ fullName($index) || 'Ansprechperson'|translate}}</b>{{personInfos($index)}}</a>
+                <ul class="pull-right"  ng-click="removePerson($index)" ng-if="kunde.personen.length > 1">
+                  <a role="button" translate><span class="glyphicon glyphicon-minus"></span></a>
+                </ul>
+              </h3>
+            </div>
+            <div id="apartner_{{$index}}" class="panel-body panel-collapse collapse" ng-class="personClass($index)">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="vorname" translate>Vorname</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="vorname" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="name" translate>Name</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="email" translate>Email</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'Email'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="emailAlternative" translate>Email alt.</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative Emailadresse'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="telefonMobil" translate>Telefon Mobil</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'Telefon Mobil'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="telefonFestnetz" translate>Telefon Festnetz</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'Telefon Festnetz'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
+                <div class="col-md-4">
+                  <label for="bemerkungen" translate>Bemerkungen</label>
+                </div>
+                <div class="col-md-8">
+                  <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" ng-click="addPerson()">
+              <a role="button" translate><span class="glyphicon glyphicon-plus"></span> Ansprechperson hinzufügen</a>
+            </div>
           </div>
         </div>
       </div>
