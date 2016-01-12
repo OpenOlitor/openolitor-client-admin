@@ -17,52 +17,50 @@
   <!-- endbower -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/font-awsome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" />
   <!-- endbuild -->
 
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/simple-sidebar.css">
   <!-- endbuild -->
 </head>
 
 <body class="white" ng-app="openolitor">
-  <div id="container">
-    <div>
-      <div class="admin-ch-header">
-        <a href="/" class="brand hidden-xs" id="logo" title="OpenOlitor">
-          <h2 translate>OpenOlitor</h2>
-          <br>
-        </a>
-        <nav id="metanav" role="navigation">
-          <ul class="hnav clearfix" id="langnav">
-            <li class="hor-nav"><a role="button" ng-click="$root.changeLang('de')" title="Deutsch" ng-class="{active: activeLang() === 'de'}">DE</a></li>
-            <li class="hor-nav"><a role="button" ng-click="$root.changeLang('fr')" title="Français" ng-class="{active: activeLang() === 'fr'}">FR</a></li>
-          </ul>
-        </nav>
+    <!-- top navbar -->
+    <div class="navbar navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <a class="navbar-brand" href="">OpenOlitor</a>
+        <p class="navbar-text">Willkommen auf der RVL Administrations - Plattform</p>
+        <ul class="nav navbar-nav pull-right">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hans Muster <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Einstellungen</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.container -->
+    </div>
+    <div class="wrapper">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li><a class="nav-item" href="" ng-href="#/depots" translate><i class="fa fa-cubes"></i> Depots</a></li>
+          <li><a class="nav-item" href="" ng-href="#/abotypen" translate><i class="fa fa-calculator"></i> Abotypen</a></li>
+          <li><a class="nav-item" href="" ng-href="#/kunden" translate><i class="fa fa-user"></i> Kunden</a></li>
+          <li><a class="nav-item" href="" ng-href="#/abos" translate><i class="fa fa-shopping-cart"></i> Abos</a></li>
+        </ul>
+      </div>
+        <!--[if lt IE 9]>
+            <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
+        <![endif]-->
+      <div id="page-content-wrapper">
+        <div ng-view=""></div>
       </div>
     </div>
-
-    <nav role="navigation" class="clearfix headsep" id="mainnav">
-      <h2 class="visuallyhidden">Navigation</h2>
-      <ul class="hnav hidden-phone nav">
-        <li id="globalnav-item-eichreg" class="">
-          <a href="" ng-href="#/abotypen" translate>Abotypen</span></a>
-          <a href="" ng-href="#/personen" translate>Personen</span></a>
-          <a href="" ng-href="#/depots" translate>Depots</span></a>
-          <a href="" ng-href="#/abos" translate>Abos</span></a>
-        </li>
-      </ul>
-    </nav>
-
-    <!--[if lt IE 9]>
-        <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
-    <![endif]-->
-
-    <div class="container">
-      <div oo-error-overlay></div>
-      <div ng-view=""></div>
-
-    </div>
-  </div>
 
   <!-- build:js(.) scripts/oldieshim.js -->
   <!--[if lt IE 9]>
@@ -95,6 +93,7 @@
   <script src="bower_components/json3/lib/json3.js"></script>
   <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
   <script src="bower_components/ng-table-export/ng-table-export.js"></script>
+  <script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -108,7 +107,7 @@
   <script src="scripts/common/components/oo-dropdown.directive.js"></script>
   <script src="scripts/common/components/oo-liefertage.directive.js"></script>
   <script src="scripts/common/components/oo-datepicker.directive.js"></script>
-  <script src="scripts/common/components/oo-personentypen.directive.js"></script>
+  <script src="scripts/common/components/oo-kundentypen.directive.js"></script>
   <script src="scripts/common/components/oo-savebutton.directive.js"></script>
   <script src="scripts/common/components/oo-deletebutton.directive.js"></script>
   <script src="scripts/common/utils/enum.util.js"></script>
@@ -122,10 +121,10 @@
   <script src="scripts/abotypen/detail/abotypendetail.model.js"></script>
   <script src="scripts/abotypen/detail/abotypendetail.controller.js"></script>
 
-  <script src="scripts/personen/overview/personenoverview.model.js"></script>
-  <script src="scripts/personen/overview/personenoverview.controller.js"></script>
-  <script src="scripts/personen/detail/personendetail.model.js"></script>
-  <script src="scripts/personen/detail/personendetail.controller.js"></script>
+  <script src="scripts/kunden/overview/kundenoverview.model.js"></script>
+  <script src="scripts/kunden/overview/kundenoverview.controller.js"></script>
+  <script src="scripts/kunden/detail/kundendetail.model.js"></script>
+  <script src="scripts/kunden/detail/kundendetail.controller.js"></script>
 
   <script src="scripts/depots/overview/depotsoverview.model.js"></script>
   <script src="scripts/depots/overview/depotsoverview.controller.js"></script>

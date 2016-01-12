@@ -3,12 +3,33 @@
 /**
  */
 angular.module('openolitor')
-  .controller('DepotsOverviewController', ['$scope', '$filter',
-    'DepotsOverviewModel', 'ngTableParams',
-    function($scope, $filter, DepotsOverviewModel, ngTableParams) {
+  .controller('KundenOverviewController', ['$scope', '$filter',
+    'KundenOverviewModel', 'ngTableParams', 'KUNDENTYPEN', 'EnumUtil',
+    function($scope, $filter, KundenOverviewModel, ngTableParams, KUNDENTYPEN,
+      EnumUtil) {
 
       $scope.entries = [];
       $scope.loading = false;
+
+      $scope.kundentypen = EnumUtil.asArray(KUNDENTYPEN);
+
+      $scope.dummyEntries = [{
+        id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
+        bezeichnung: 'Calvert Joshua',
+        strasse: 'Jupiterstrasse',
+        hausNummer: 40,
+        plz: 3020,
+        ort: 'Bern',
+        typen: ['Goenner', 'Vereinsmitglied']
+      }, {
+        id: '88827d1d-293c-405a-b0fb-aa392efe6d50',
+        bezeichnung: 'WG Bern',
+        strasse: 'Jupiterstrasse',
+        hausNummer: 23,
+        plz: 3015,
+        ort: 'Bern',
+        typen: ['Vereinsmitglied']
+      }];
 
       $scope.search = {
         query: ''
@@ -41,7 +62,7 @@ angular.module('openolitor')
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')(filteredData, params.filter());
+            orderedData = $filter('filter')($scope.entries, params.filter());
 
             params.total(orderedData.length);
             $defer.resolve(orderedData);
@@ -54,24 +75,22 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
+        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
-      }
-
-      function load() {
-        if ($scope.loading) {
-          return;
-        }
 
         $scope.loading = true;
-        $scope.entries = DepotsOverviewModel.query({
+        $scope.entries = KundenOverviewModel.query({
           q: $scope.query
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
+
+        //$scope.entries = $scope.dummyEntries;
+
       }
 
-      load();
+      search();
 
       $scope.$watch('search.query', function() {
         search();

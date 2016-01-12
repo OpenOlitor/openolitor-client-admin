@@ -1,49 +1,50 @@
-<div>
-  <h1 translate>Depots <a role="button" href="#/depots/new" class="btn btn-primary pull-right" translate>Neues Depot erfassen</a></h1>
-  <div class="filters">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <span>
-          <ul class="nav navbar-nav navbar-right">
-            <form class="navbar-form" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
-              </div>
-            </form>
-          </ul>
-        </span>
+<div class="row">
+<div class="content-box col-md-9 content">
+  <div oo-error-overlay></div>
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3  class="panel-title" translate>Depots
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <a role="button" href="#/depots/new" class="btn btn-primary" translate><span class="glyphicon glyphicon-plus"></span> Depot erstellen</a>
+          </div>
+        </form>
+      </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div ng-hide="entries">
+        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-    </nav>
-  </div>
-  <div ng-hide="entries">
-    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-  </div>
-  <div ng-show="entries">
-    <table ng-table="tableParams" class="table table-striped">
-      <tr ng-repeat="depot in $data">
-        <td title="'Name'|translate" sortable="'name'">
-          <a ng-href="#/depots/{{depot.id}}">{{depot.name}}</a>
-        </td>
-        <td title="'Ansprechpartner'|translate" sortable="'apName+apVorname'">
-          {{depot.apName}} {{depot.apVorname}}
-        </td>
-        <td title="'AP Tel'|translate" sortable="'apTelefon'">
-          <a href="tel:{{depot.apTelefon}}">{{depot.apTelefon}}</a>
-        </td>
-        <td title="'Verantwortliche_r'|translate" sortable="'vName+vVorname'">
-          {{depot.vName}} {{depot.vVorname}}
-        </td>
-        <td title="'Ver. Tel'|translate" sortable="'vTelefon'">
-          <a href="tel:{{depot.apTelefon}}">{{depot.vTelefon}}</a>
-        </td>
-        <td title="'# Abos'|translate">
-          {{depot.anzahlAbonnenten}}/{{depot.anzahlAbonnentenMax}}
-        </td>
-        <td title="'Aktiv'|translate" sortable="'aktiv'">
-          <i ng-if="depot.aktiv" class="glyphicon glyphicon-ok"></i>
-          <i ng-if="!depot.aktiv" class="glyphicon glyphicon-remove"></i>
-        </td>
-      </tr>
-    </table>
+      <div ng-show="entries">
+        <table ng-table="tableParams" class="table table-striped">
+          <tr ng-repeat="depot in $data">
+            <td title="'Name'|translate" sortable="'name'">
+              <a ng-href="#/depots/{{depot.id}}">{{depot.name}}</a>
+            </td>
+            <td title="'Ansprechpartner'|translate" sortable="'apName+apVorname'">
+              {{depot.apName}} {{depot.apVorname}}
+            </td>
+            <td title="'AP Tel'|translate" sortable="'apTelefon'">
+              <a href="tel:{{depot.apTelefon}}">{{depot.apTelefon}}</a>
+            </td>
+            <td title="'Verantwortliche_r'|translate" sortable="'vName+vVorname'">
+              {{depot.vName}} {{depot.vVorname}}
+            </td>
+            <td title="'Ver. Tel'|translate" sortable="'vTelefon'">
+              <a href="tel:{{depot.apTelefon}}">{{depot.vTelefon}}</a>
+            </td>
+            <td title="'# Abos'|translate">
+              {{depot.anzahlAbonnenten}}/{{depot.anzahlAbonnentenMax}}
+            </td>
+            <td title="'Aktiv'|translate" sortable="'aktiv'">
+              <i ng-if="depot.aktiv" class="glyphicon glyphicon-ok"></i>
+              <i ng-if="!depot.aktiv" class="glyphicon glyphicon-remove"></i>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

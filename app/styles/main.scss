@@ -1,9 +1,81 @@
 body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  padding-top:30px;
+  padding-left: 60px;
 }
-
 
 //ng validator
 input.ng-invalid {
   border-color: red;
+}
+
+.navbar-fixed-top {
+  background-color: #e7e7e7;
+}
+
+.nav-item {
+  padding: 10px 15px;
+}
+
+
+.wrapper:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.6;
+    background-image: url('/images/background.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.content {
+}
+
+.content-box {
+  background: rgba(255,255,255,0.6);
+  margin-top: 10px;
+  margin-left: 30px;
+  padding-left: 30px;
+  padding-top:30px;
+  padding-right:30px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .content {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .content {
+    width: 800px;
+  }
+}
+@media (min-width: 1400px) {
+  .content {
+    width: 1000px;
+  }
+}
+@media (min-width: 1600px) {
+  .content {
+    width: 1200px;
+  }
+}
+
+.panel-title > a[role=button]{
+  color: #fff;
 }

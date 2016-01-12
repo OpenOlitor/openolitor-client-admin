@@ -1,46 +1,48 @@
-<div>
-  <h1 translate>Abotypen <a role="button" href="#/abotypen/new" class="btn btn-primary pull-right" translate>Neuer Abotyp</a></h1>
-  <div class="filters">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <span>
-          <ul class="nav navbar-nav navbar-right">
-            <form class="navbar-form" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
-              </div>
-            </form>
-          </ul>
-        </span>
+<div class="row">
+<div class="content content-box col-md-9">
+  <div oo-error-overlay></div>
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3  class="panel-title" translate>Abotypen
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <a role="button" href="#/abotypen/new" class="btn btn-primary" translate><span class="glyphicon glyphicon-plus"></span> Abotyp erstellen</a>
+          </div>
+        </form>
+      </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div ng-hide="entries">
+        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-    </nav>
+      <div ng-show="entries">
+        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+          <tr ng-repeat="abotyp in $data">
+            <td title="'Name'|translate" sortable="'name'">
+              <a ng-href="#/abotypen/{{abotyp.id}}">{{abotyp.name}}</a>
+            </td>
+            <td title="'Anzahl Abonnenten'|translate" sortable="'anzahlAbonnenten'">
+              {{abotyp.anzahlAbonnenten}}
+            </td>
+            <td title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
+              {{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}
+            </td>
+            <td title="'Lieferrhythmus'|translate" sortable="'lieferrhythmus'">
+              {{abotyp.lieferrhythmus|translate}}
+            </td>
+            <td title="'Preis'|translate" sortable="'preis'">
+              <span ng-bind="abotyp|ooPreisProEinheit" />
+            </td>
+            <td title="'Aktiv'|translate" sortable="'aktiv'">
+              <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
+              <i ng-if="!abotyp.aktiv" class="glyphicon glyphicon-remove"></i>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
-  <div ng-hide="entries">
-    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-  </div>
-  <div ng-show="entries">
-    <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-      <tr ng-repeat="abotyp in $data">
-        <td title="'Name'|translate" sortable="'name'">
-          <a ng-href="#/abotypen/{{abotyp.id}}">{{abotyp.name}}</a>
-        </td>
-        <td title="'Anzahl Abonnenten'|translate" sortable="'anzahlAbonnenten'">
-          {{abotyp.anzahlAbonnenten}}
-        </td>
-        <td title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
-          {{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}
-        </td>
-        <td title="'Lieferrhythmus'|translate" sortable="'lieferrhythmus'">
-          {{abotyp.lieferrhythmus|translate}}
-        </td>
-        <td title="'Preis'|translate" sortable="'preis'">
-          <span ng-bind="abotyp|ooPreisProEinheit" />
-        </td>
-        <td title="'Aktiv'|translate" sortable="'aktiv'">
-          <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
-          <i ng-if="!abotyp.aktiv" class="glyphicon glyphicon-remove"></i>
-        </td>
-      </tr>
-    </table>
-  </div>
+</div>
 </div>

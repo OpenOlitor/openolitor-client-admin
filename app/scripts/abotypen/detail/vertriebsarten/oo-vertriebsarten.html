@@ -1,19 +1,25 @@
-<div class="oo-vertriebsarten">
-  <div class="row form-group">
-    <h2 class="col-md-5" translate>Vertriebsarten <a role="button" ng-href="" ng-click="addVertriebsart()" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-plus"></a></h2>
+<div class="panel panel-default oo-vertriebsarten">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title" translate>Vertriebsarten
+      <div class="btn-group pull-right" role="group">
+        <a role="button" ng-href="" ng-click="addVertriebsart()" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-plus"></a>
+      </div>
+    </h3>
   </div>
-  <div class="row form-group">
-    <div class="col-md-11">
-      <oo-vertriebsart vertriebsart="abotyp.vertriebsarten[0]"></oo-vertriebsart>
-    </div>
-  </div>
-  <div ng-repeat="vertriebsart in abotyp.vertriebsarten | limitTo : abotyp.vertriebsarten.length : 1">
+  <div class="panel-body">
     <div class="row form-group">
       <div class="col-md-11">
-        <oo-vertriebsart vertriebsart="vertriebsart"></oo-vertriebsart>
+        <oo-vertriebsart vertriebsart="abotyp.vertriebsarten[0]"></oo-vertriebsart>
       </div>
-      <div class="col-md-1">
-        <a role="button" ng-href="" ng-click="removeVertriebsart($index)" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-minus"></a>
+    </div>
+    <div ng-repeat="vertriebsart in abotyp.vertriebsarten | limitTo : abotyp.vertriebsarten.length : 1">
+      <div class="row form-group">
+        <div class="col-md-11">
+          <oo-vertriebsart vertriebsart="vertriebsart"></oo-vertriebsart>
+        </div>
+        <div class="col-md-1">
+          <a role="button" ng-href="" ng-click="removeVertriebsart($index)" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-minus"></a>
+        </div>
       </div>
     </div>
   </div>
