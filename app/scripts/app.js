@@ -92,11 +92,6 @@ angular
       }
     }
   })
-  .constant('KUNDENTYPEN', {
-    VEREINSMITGLIED: 'Vereinsmitglied',
-    GOENNER: 'Goenner',
-    GENOSSENSCHAFTERIN: 'Genossenschafterin'
-  })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })

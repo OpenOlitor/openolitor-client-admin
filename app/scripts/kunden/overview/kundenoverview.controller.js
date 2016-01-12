@@ -4,14 +4,15 @@
  */
 angular.module('openolitor')
   .controller('KundenOverviewController', ['$scope', '$filter',
-    'KundenOverviewModel', 'ngTableParams', 'KUNDENTYPEN', 'EnumUtil',
-    function($scope, $filter, KundenOverviewModel, ngTableParams, KUNDENTYPEN,
+    'KundenOverviewModel', 'ngTableParams', 'KundentypenService', 'EnumUtil',
+    function($scope, $filter, KundenOverviewModel, ngTableParams,
+      KundentypenService,
       EnumUtil) {
 
       $scope.entries = [];
       $scope.loading = false;
 
-      $scope.kundentypen = EnumUtil.asArray(KUNDENTYPEN);
+      $scope.kundentypen = KundentypenService.getKundentypen.list;
 
       $scope.dummyEntries = [{
         id: '614275dc-29f5-4aa9-86eb-36ee873778b8',

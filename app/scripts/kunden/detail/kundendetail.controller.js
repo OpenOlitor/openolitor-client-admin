@@ -4,14 +4,14 @@
  */
 angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'KundenDetailModel', 'KUNDENTYPEN',
+    '$location', 'gettext', 'KundenDetailModel', 'KundentypenService',
     function($scope, $filter, $routeParams, $location, gettext,
-      KundenDetailModel, KUNDENTYPEN) {
+      KundenDetailModel, KundentypenService) {
 
       var defaults = {
         model: {
           id: undefined,
-          typen: [KUNDENTYPEN.VEREINSMITGLIED],
+          typen: [KundentypenService.VEREINSMITGLIED],
           ansprechpersonen: [{
             id: undefined
           }]
@@ -54,7 +54,8 @@ angular.module('openolitor')
       }
 
       $scope.personClass = function(index) {
-        if ($scope.kunde.ansprechpersonen[index].id === undefined) {
+        if ($scope.kunde.ansprechpersonen[index].id === undefined || $scope
+          .kunde.ansprechpersonen.length === 1) {
           return "in";
         }
       }
