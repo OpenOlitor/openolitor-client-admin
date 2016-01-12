@@ -186,6 +186,11 @@ angular
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
       })
+      .when('/settings', {
+        templateUrl: 'scripts/projekt/settings/projektsettings.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings'
+      })
       .otherwise({
         templateUrl: 'scripts/not-found.html'
       });

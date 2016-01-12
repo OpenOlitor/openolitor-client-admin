@@ -4,10 +4,9 @@
  */
 angular.module('openolitor')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter',
-    'KundenOverviewModel', 'ngTableParams', 'KundentypenService', 'EnumUtil',
+    'KundenOverviewModel', 'ngTableParams', 'KundentypenService',
     function($q, $scope, $filter, KundenOverviewModel, ngTableParams,
-      KundentypenService,
-      EnumUtil) {
+      KundentypenService) {
 
       $scope.entries = [];
       $scope.loading = false;
