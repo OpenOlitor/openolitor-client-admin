@@ -28,8 +28,7 @@ input.ng-invalid {
     height: 100%;
     z-index: 1;
     opacity: 0.6;
-    //TODO change with own image
-    background-image: url('http://blog.echo-online.de/dippeblog/files/2013/08/Gem%C3%BCse.jpg');
+    background-image: url('/images/background.jpg');
     background-repeat: no-repeat;
     background-position: 50% 0;
     -ms-background-size: cover;

@@ -25,7 +25,7 @@
               <h3 class="panel-title" translate>Adresse</h3>
             </div>
             <div class="panel-body">
-              <div class="row form-group" ng-if="kunde.personen.length > 1">
+              <div class="row form-group" ng-if="kunde.ansprechpersonen.length > 1">
                 <div class="col-md-4">
                   <label for="bezeichnung" translate>Anschrift</label>
                 </div>
@@ -38,10 +38,10 @@
                   <label for="strasse" translate>Strasse / Nr.</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" id="strasse" ng-model="person.strasse" ng-required="!person.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                  <input type="text" class="form-control" id="strasse" ng-model="kunde.strasse" ng-required="!kunde.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
                 </div>
                 <div class="col-md-2">
-                  <input type="text" class="form-control" id="hausNummer" ng-model="person.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
                 </div>
               </div>
               <div class="row form-group">
@@ -49,7 +49,7 @@
                   <label for="adressZusatz" translate>Adresszusatz</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatz" ng-model="person.adressZusatz" placeholder="{{'Adresszusatz'|translate}}">
+                  <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatz" placeholder="{{'Adresszusatz'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -57,10 +57,10 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-2">
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="person.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="kunde.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" id="ort" ng-model="person.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+                  <input type="text" class="form-control" id="ort" ng-model="kunde.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
                 </div>
               </div>
               <div class="row form-group">
@@ -106,11 +106,11 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="panel panel-default" ng-repeat="person in kunde.personen track by $index">
+          <div class="panel panel-default" ng-repeat="person in kunde.ansprechpersonen track by $index">
             <div class="panel-heading clearfix">
               <h3 class="panel-title">
                 <a data-toggle="collapse" data-target="#apartner_{{$index}}"><b>{{ fullName($index) || 'Ansprechperson'|translate}}</b>{{personInfos($index)}}</a>
-                <ul class="pull-right"  ng-click="removePerson($index)" ng-if="kunde.personen.length > 1">
+                <ul class="pull-right"  ng-click="removePerson($index)" ng-if="kunde.ansprechpersonen.length > 1">
                   <a role="button" translate><span class="glyphicon glyphicon-minus"></span></a>
                 </ul>
               </h3>

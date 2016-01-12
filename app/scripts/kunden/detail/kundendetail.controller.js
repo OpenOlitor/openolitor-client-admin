@@ -12,7 +12,7 @@ angular.module('openolitor')
         model: {
           id: undefined,
           typen: [KUNDENTYPEN.VEREINSMITGLIED],
-          personen: [{
+          ansprechpersonen: [{
             id: undefined
           }]
         }
@@ -29,8 +29,8 @@ angular.module('openolitor')
       }
 
       $scope.kundeBezeichnung = function() {
-        if ($scope.kunde && $scope.kunde.personen) {
-          if ($scope.kunde.personen.length > 1) {
+        if ($scope.kunde && $scope.kunde.ansprechpersonen) {
+          if ($scope.kunde.ansprechpersonen.length > 1) {
             return $scope.kunde.bezeichnung;
           } else {
             return $scope.fullName(0);
@@ -41,36 +41,38 @@ angular.module('openolitor')
 
       $scope.personInfos = function(index) {
         var name = '';
-        if ($scope.kunde.personen[index].email) {
-          name = name + ', ' + $scope.kunde.personen[index].email;
+        if ($scope.kunde.ansprechpersonen[index].email) {
+          name = name + ', ' + $scope.kunde.ansprechpersonen[index].email;
         }
-        if ($scope.kunde.personen[index].telefonMobil) {
-          name = name + ', ' + $scope.kunde.personen[index].telefonMobil;
+        if ($scope.kunde.ansprechpersonen[index].telefonMobil) {
+          name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonMobil;
         }
-        if ($scope.kunde.personen[index].telefonFestnetz) {
-          name = name + ', ' + $scope.kunde.personen[index].telefonFestnetz;
+        if ($scope.kunde.ansprechpersonen[index].telefonFestnetz) {
+          name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonFestnetz;
         }
         return name;
       }
 
       $scope.personClass = function(index) {
-        if ($scope.kunde.personen[index].id === undefined) {
+        if ($scope.kunde.ansprechpersonen[index].id === undefined) {
           return "in";
         }
       }
 
       $scope.fullName = function(index) {
-        if ($scope.kunde && $scope.kunde.personen && $scope.kunde.personen[
-            index] && $scope.kunde.personen[index].vorname && $scope.kunde.personen[
+        if ($scope.kunde && $scope.kunde.ansprechpersonen && $scope.kunde.ansprechpersonen[
+            index] && $scope.kunde.ansprechpersonen[index].vorname &&
+          $scope.kunde.ansprechpersonen[
             index].name) {
-          return $scope.kunde.personen[index].vorname + ' ' + $scope.kunde.personen[
-            index].name;
+          return $scope.kunde.ansprechpersonen[index].vorname + ' ' +
+            $scope.kunde.ansprechpersonen[
+              index].name;
         }
         return undefined;
       };
 
       $scope.addPerson = function() {
-        $scope.kunde.personen.push({
+        $scope.kunde.ansprechpersonen.push({
           id: undefined
         });
       }
