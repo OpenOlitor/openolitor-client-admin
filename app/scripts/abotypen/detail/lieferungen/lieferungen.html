@@ -1,9 +1,15 @@
-<h2 translate>Lieferungen</h2>
-<div class="row form-group">
-  <div class="col-md-4">
-    <label for="letzteLieferung" translate>Letzte Lieferung</label>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title" translate>Lieferungen</h3>
   </div>
-  <div class="col-md-8">
-    <span>{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
+  <div class="panel-body">
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="letzteLieferung" translate>Letzte Lieferung</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
+      </div>
+    </div>
   </div>
 </div>
