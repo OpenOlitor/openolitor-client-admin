@@ -33,7 +33,7 @@ angular.module('openolitor').directive('ooKundentypen', ['KundentypenService',
           }
         };
 
-        var deregister = $scope.$watch(KundentypenService.getKundentypen,
+        $scope.$watch(KundentypenService.getKundentypen,
           function(list) {
             if (list) {
               $scope.allKundentypen = list;
