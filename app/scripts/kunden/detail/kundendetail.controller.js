@@ -87,6 +87,10 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
+        //force rewriting of ansprechperson
+        if ($scope.kunde.ansprechpersonen.length === 1) {
+          $scope.kunde.bezeichnung = undefined;
+        }
         $scope.kunde.$save();
       };
 
