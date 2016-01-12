@@ -77,6 +77,10 @@ angular.module('openolitor')
         });
       }
 
+      $scope.removePerson = function(index) {
+        $scope.kunde.ansprechpersonen.splice(index, 1);
+      }
+
       $scope.isExisting = function() {
         return angular.isDefined($scope.kunde) && angular.isDefined($scope.kunde
           .id);
