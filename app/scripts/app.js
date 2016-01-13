@@ -92,11 +92,6 @@ angular
       }
     }
   })
-  .constant('KUNDENTYPEN', {
-    VEREINSMITGLIED: 'Vereinsmitglied',
-    GOENNER: 'Goenner',
-    GENOSSENSCHAFTERIN: 'Genossenschafterin'
-  })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
@@ -190,6 +185,11 @@ angular
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
+      })
+      .when('/settings', {
+        templateUrl: 'scripts/projekt/settings/projektsettings.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings'
       })
       .otherwise({
         templateUrl: 'scripts/not-found.html'

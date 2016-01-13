@@ -3,15 +3,27 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KundenOverviewController', ['$scope', '$filter',
-    'KundenOverviewModel', 'ngTableParams', 'KUNDENTYPEN', 'EnumUtil',
-    function($scope, $filter, KundenOverviewModel, ngTableParams, KUNDENTYPEN,
-      EnumUtil) {
+  .controller('KundenOverviewController', ['$q', '$scope', '$filter',
+    'KundenOverviewModel', 'ngTableParams', 'KundentypenService',
+    function($q, $scope, $filter, KundenOverviewModel, ngTableParams,
+      KundentypenService) {
 
       $scope.entries = [];
       $scope.loading = false;
 
-      $scope.kundentypen = EnumUtil.asArray(KUNDENTYPEN);
+      $scope.kundentypen = [];
+      $scope.$watch(KundentypenService.getKundentypen,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              $scope.kundentypen.push({
+                'id': item,
+                'title': item
+              });
+            });
+            $scope.tableParams.reload();
+          }
+        });
 
       $scope.dummyEntries = [{
         id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
@@ -57,7 +69,8 @@ angular.module('openolitor')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries, $scope
+            var filteredData = $filter('filter')($scope.entries,
+              $scope
               .search.query);
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
