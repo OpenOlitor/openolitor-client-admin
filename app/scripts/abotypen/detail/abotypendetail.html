@@ -56,10 +56,10 @@
                     <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
                   </div>
                 </div>
-                <div class="col-md-1" style="line-height:30px">
+                <div class="col-md-2" style="line-height:30px">
                   <span translate>pro</span>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit"></oo-dropdown>
                 </div>
               </div>

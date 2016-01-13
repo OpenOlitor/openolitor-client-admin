@@ -26,7 +26,8 @@ angular
     JAHR: 'Jahr',
     QUARTAL: 'Quartal',
     MONAT: 'Monat',
-    LIEFERUNG: 'Lieferung'
+    LIEFERUNG: 'Lieferung',
+    ABO: 'Aboende'
   })
   .constant('VERTRIEBSARTEN', {
     DEPOTLIEFERUNG: 'Depotlieferung',
