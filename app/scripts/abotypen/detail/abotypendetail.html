@@ -12,7 +12,6 @@
           </h3>
         </div>
         <div class="panel-body">
-          <div>
             <div class="row form-group">
               <div class="col-md-4">
                 <label for="name" translate>Name</label>
@@ -31,10 +30,24 @@
             </div>
             <div class="row form-group">
               <div class="col-md-4">
-                <label for="aktiv" translate>Aktiv</label>
+                <label for="aktiv_von" translate>Aktiv</label>
               </div>
-              <div class="col-md-8">
-                <input bs-switch ng-model="abotyp.aktiv" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              <div class="col-md-6 row">
+                <div class="col-md-4">
+                  <datetimepicker ng-model="abotyp.aktivVon" date-format="dd.MM.yyyy" hidden-date="false" hidden-time="true" is-open="ctrl.open.aktivVon" date-ng-click="openCalendar($event, 'aktivVon')" date-opened="ctrl.open.aktivVon"
+                  min-date="abotyp.aktivBis"
+                  show-spinners="true">
+                  </datetimepicker>
+                </div>
+                <div class="col-md-2">
+                  <label for="aktiv_bis" translate>bis</label>
+                </div>
+                <div class="col-md-4">
+                  <datetimepicker ng-model="abotyp.aktivBis" date-format="dd.MM.yyyy" hidden-date="false"  hidden-time="true" is-open="ctrl.open.aktivBis" date-ng-click="openCalendar($event, 'aktivBis')" date-opened="ctrl.open.aktivBis"
+                  min-date="abotyp.aktivVon"
+                  show-spinners="true">
+                  </datetimepicker>
+                </div>
               </div>
             </div>
             <div class="row form-group">
@@ -49,28 +62,45 @@
               <div class="col-md-4">
                 <label for="preis" translate>Preis</label>
               </div>
-              <div class="col-md-4 row">
-                <div class="col-md-6">
+              <div class="col-md-6 row">
+                <div class="col-md-4">
                   <div class="input-group">
                     <div class="input-group-addon">{{abotyp.waehrung}}</div>
                     <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
                   </div>
                 </div>
-                <div class="col-md-2" style="line-height:30px">
+                <div class="col-md-1" style="line-height:30px">
                   <span translate>pro</span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit"></oo-dropdown>
                 </div>
               </div>
             </div>
             <div class="row form-group">
               <div class="col-md-4">
-                <label for="anzahlAbwesenheiten" translate>Anzahl Abwesenheiten</label>
+                <label for="laufzeit" translate>Laufzeit</label>
               </div>
-              <div class="col-md-8">
-                <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl Abwesenheiten'|translate}}"></input>
+              <div class="col-md-2">
+                <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}"></input>
               </div>
+              <div class="col-md-4">
+                <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit"></oo-dropdown>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="panel-title" translate>Zusatzdaten</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="anzahlAbwesenheiten" translate>Anzahl Abwesenheiten</label>
+            </div>
+            <div class="col-md-8">
+              <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl Abwesenheiten'|translate}}"></input>
             </div>
           </div>
         </div>

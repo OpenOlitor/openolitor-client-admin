@@ -11,6 +11,7 @@ angular
     'ngTouch',
     'ngTable',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'ipCookie',
     'frapontillo.bootstrap-switch',
     'gettext'
@@ -33,6 +34,10 @@ angular
     DEPOTLIEFERUNG: 'Depotlieferung',
     HEIMLIEFERUNG: 'Heimlieferung',
     POSTLIEFERUNG: 'Postlieferung'
+  })
+  .constant('LAUFZEITEINHEITEN', {
+    LIEFERUNGEN: 'Lieferungen',
+    MONATE: 'Monate'
   })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: 'DepotlieferungAbo',
