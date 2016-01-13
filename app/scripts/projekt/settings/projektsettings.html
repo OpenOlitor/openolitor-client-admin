@@ -1,42 +1,48 @@
 <div class="row">
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
-    <form name="settingsForm">
       <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
-      <div class="col-md-9">
+      <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <h3 class="panel-title" translate>Kundentypen
-              <div class="btn-group pull-right" role="group">
-                <a role="button" ng-href="" ng-click="addKundentyp()" ng-hide="readOnly" class="btn btn-default glyphicon glyphicon-plus"></a>
-              </div>
+              <form name="createKundentypForm" class="navbar-form pull-right">
+                <div class="form-group" ng-class="{ 'has-error' : createKundentypForm.kundentyp.$invalid && createKundentypForm.kundentyp.$touched }" >
+                  <input type="text" name="kundentyp" class="form-control" placeholder="{{'Kundentyp Name...'|translate}}" ng-model="template.kundentyp" required>
+                  <a ng-disabled="createKundentypForm.$invalid || template.creating" role="button" ng-href="" ng-click="addKundentyp()" class="btn btn-default" translate><span class="glyphicon glyphicon-plus"></span> Erstellen<i ng-show="template.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                  <a role="button" ng-click="save()" ng-disabled="template.updating || !hasChanges()" class="btn btn-primary" translate><i class="fa fa-floppy-o"></i> Speichern</span> <i ng-show="template.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                </div>
+              </form>
             </h3>
           </div>
           <div class="panel-body">
-            <div ng-hide="kundentypen">
-              <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-            </div>
-            <div ng-show="kundentypen">
-              <table ng-table="kundentypenTableParams" class="table table-striped">
-                <tr ng-repeat="kundentyp in $data">
-                  <td title="'Kundentyp'|translate" sortable="'kundentyp'">
-                    {{kundentyp.kundentyp}}
-                  </td>
-                  <td title="'Beschreibung'|translate" sortable="'beschreibung'">
-                    {{kundentyp.beschreibung}}
-                  </td>
-                  <td title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
-                    {{kundentyp.anzahlVerknuepfungen}}
-                  </td>
-                  <td>
-                    <a href="" ng-click="deleteKundentyp(kundentyp)"><i class="fa fa-times"></i></a>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <form name="settingsForm">
+              <div ng-hide="kundentypen">
+                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+              </div>
+              <div ng-show="kundentypen">
+                <table ng-table="kundentypenTableParams" class="table table-striped">
+                  <tr ng-repeat="kundentyp in $data">
+                    <td title="'Kundentyp'|translate" sortable="'kundentyp'">
+                      {{kundentyp.kundentyp}}
+                    </td>
+                    <td title="'Beschreibung'|translate" sortable="'beschreibung'">
+                      <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChanged(kundentyp)"></textarea>
+                    </td>
+                    <td title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
+                      {{kundentyp.anzahlVerknuepfungen}}
+                    </td>
+                    <td>
+                      <a href="" ng-click="deleteKundentyp(kundentyp)" ng-show="!deletingKundentyp(kundentyp)"><i class="fa fa-times"></i></a>
+                       <i ng-show="deletingKundentyp(kundentyp)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </form>
+
   </div>
 </div>

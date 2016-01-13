@@ -3,18 +3,45 @@
 /**
  */
 angular.module('openolitor')
-  .factory('KundentypenService', ['KundentypenModel',
-    function(KundentypenModel) {
+  .factory('KundentypenService', ['$rootScope', 'KundentypenModel', 'msgBus',
+    function($rootScope, KundentypenModel, msgBus) {
 
       var kundentypen;
 
-      KundentypenModel.query({}, function(result) {
-        kundentypen = result;
+      var load = function() {
+        KundentypenModel.query({}, function(result) {
+          kundentypen = result;
+        });
+      };
+      load();
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          load();
+          $rootScope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          load();
+          $rootScope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $rootScope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          load();
+          $rootScope.$apply();
+        }
       });
 
       return {
         getKundentypen: function() {
           return kundentypen
+        },
+        addKundentyp: function(kundentyp) {
+          KundentypenModel
         },
         VEREINSMITGLIED: 'Vereinsmitglied'
       }

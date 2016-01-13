@@ -6,7 +6,12 @@ angular.module('openolitor')
   .controller('ProjektSettingsController', ['$scope', '$filter',
     'ngTableParams',
     'KundentypenService',
-    function($scope, $filter, ngTableParams, KundentypenService) {
+    'KundentypenModel',
+    'msgBus',
+    function($scope, $filter, ngTableParams, KundentypenService,
+      KundentypenModel, msgBus) {
+
+      $scope.template = {};
 
       //watch for set of kundentypen
       $scope.$watch(KundentypenService.getKundentypen,
@@ -22,13 +27,92 @@ angular.module('openolitor')
           }
         });
 
+      $scope.changedKundentypen = {};
+      $scope.deletingKundentypen = {};
+      $scope.modelChanged = function(kundentyp) {
+        if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
+          $scope.changedKundentypen[kundentyp.kundentyp] = kundentyp;
+        }
+      };
+      $scope.hasChanges = function() {
+        return Object.getOwnPropertyNames($scope.changedKundentypen).length >
+          0;
+      };
+
+      $scope.save = function() {
+        if (!$scope.hasChanges()) {
+          return;
+        }
+        $scope.template.updating = true;
+        angular.forEach($scope.changedKundentypen, function(kundentyp) {
+          kundentyp.$save();
+        });
+      };
+
+      $scope.deletingKundentyp = function(kundentyp) {
+        return $scope.deletingKundentypen[kundentyp.kundentyp];
+      };
+
+      $scope.deleteKundentyp = function(kundentyp) {
+        $scope.deletingKundentypen[kundentyp.kundentyp] = true;
+        kundentyp.$delete();
+      }
 
       $scope.addKundentyp = function() {
-        $scope.kundentypen.push({
-          id: undefined
+        if ($scope.createKundentypForm.$invalid) {
+
+          angular.forEach($scope.createKundentypForm.$error, function(
+            field) {
+            angular.forEach(field, function(errorField) {
+              errorField.$setTouched();
+            })
+          });
+          return;
+        }
+        var newModel = new KundentypenModel({
+          id: undefined,
+          kundentyp: $scope.template.kundentyp
         });
-        $scope.kundentypenTableParams.reload();
+        newModel.$save();
+        $scope.template.creating = true;
+        $scope.template.kundentyp = undefined;
       };
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          $scope.template.creating = undefined;
+
+          $scope.kundentypen.push(new KundentypenModel(msg.data));
+          $scope.kundentypenTableParams.reload();
+
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          $scope.template.updating = undefined;
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          $scope.template.deleting = undefined;
+          $scope.deletingKundentypen[msg.data.id] = undefined;
+          angular.forEach($scope.kundentypen, function(kundentyp) {
+            if (kundentyp.id === msg.data.id) {
+              var index = $scope.kundentypen.indexOf(kundentyp)
+              if (index > -1) {
+                $scope.kundentypen.splice(index, 1);
+              }
+            }
+          })
+
+          $scope.kundentypenTableParams.reload();
+          $scope.$apply();
+        }
+      });
 
       if (!$scope.kundentypenTableParams) {
         //use default tableParams

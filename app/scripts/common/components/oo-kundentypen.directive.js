@@ -22,12 +22,14 @@ angular.module('openolitor').directive('ooKundentypen', ['KundentypenService',
 
         var rebuildKundentypenList = function() {
           if ($scope.kundentypenList && $scope.allKundentypen) {
-            $scope.kundentypen = $scope.allKundentypen.slice(0);
-            //remove already selected kundentypen
-            angular.forEach($scope.kundentypenList, function(id) {
-              var index = $scope.kundentypen.indexOf(id);
-              if (index >= 0) {
-                $scope.kundentypen.splice(index, 1);
+            $scope.kundentypen = [];
+            angular.forEach($scope.allKundentypen, function(kundentyp) {
+              //check if system or custom kundentyp, use only id
+              var id = (kundentyp.kundentyp) ? kundentyp.kundentyp :
+                kundentyp;
+              var index = $scope.kundentypenList.indexOf(id);
+              if (index < 0) {
+                $scope.kundentypen.push(id);
               }
             });
           }
