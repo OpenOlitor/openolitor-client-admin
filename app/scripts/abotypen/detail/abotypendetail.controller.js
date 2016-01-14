@@ -59,6 +59,16 @@ angular.module('openolitor')
         }]
       };
 
+      $scope.dummyLieferungen = [{
+        datum: '31.01.2016',
+        anzahlAbwesenheiten: 0,
+        anzahlAbos: 135
+      }, {
+        datum: '15.02.2016',
+        anzahlAbwesenheiten: 2,
+        anzahlAbos: 130
+      }, ];
+
       $scope.abotypStyle = {};
 
       if (!$routeParams.id) {

@@ -8,7 +8,25 @@
         <label for="letzteLieferung" translate>Letzte Lieferung</label>
       </div>
       <div class="col-md-8">
-        <span>{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
+        <span name="letzteLieferung">{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-12">
+        <label for="lieferungen" translate>Geplante Lieferungen</label>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-12">
+        <div class="panel">
+          <div ng-repeat="lieferung in dummyLieferungen">
+            <label class="btn btn-primary">
+            {{lieferung.datum}}
+              <i class="fa fa-times"></i>
+              <i ng-if="lieferung.anzahlAbwesenheiten > 1" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
+          </label>
+        </div>
+        </div>
       </div>
     </div>
   </div>
