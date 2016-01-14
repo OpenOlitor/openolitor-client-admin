@@ -33,20 +33,24 @@
                 <label for="aktiv_von" translate>Aktiv</label>
               </div>
               <div class="col-md-6 row">
-                <div class="col-md-4">
-                  <datetimepicker ng-model="abotyp.aktivVon" date-format="dd.MM.yyyy" hidden-date="false" hidden-time="true" is-open="ctrl.open.aktivVon" date-ng-click="openCalendar($event, 'aktivVon')" date-opened="ctrl.open.aktivVon"
-                  min-date="abotyp.aktivBis"
-                  show-spinners="true">
-                  </datetimepicker>
+                <div class="col-md-5">
+                  <p class="input-group">
+                      <input type="text" class="form-control" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="abotyp.aktivBis" />
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivVon')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                  </p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1" style="line-height:30px">
                   <label for="aktiv_bis" translate>bis</label>
                 </div>
-                <div class="col-md-4">
-                  <datetimepicker ng-model="abotyp.aktivBis" date-format="dd.MM.yyyy" hidden-date="false"  hidden-time="true" is-open="ctrl.open.aktivBis" date-ng-click="openCalendar($event, 'aktivBis')" date-opened="ctrl.open.aktivBis"
-                  min-date="abotyp.aktivVon"
-                  show-spinners="true">
-                  </datetimepicker>
+                <div class="col-md-5">
+                  <p class="input-group">
+                      <input type="text" class="form-control" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivBis')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                  </p>
                 </div>
               </div>
             </div>
