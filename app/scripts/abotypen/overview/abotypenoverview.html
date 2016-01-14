@@ -20,6 +20,9 @@
       <div ng-show="entries">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
           <tr ng-repeat="abotyp in $data">
+            <td>
+              <span class="color-box" ng-style="style(abotyp)"></span>
+            </td>
             <td title="'Name'|translate" sortable="'name'">
               <a ng-href="#/abotypen/{{abotyp.id}}">{{abotyp.name}}</a>
             </td>

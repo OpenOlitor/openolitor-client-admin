@@ -59,6 +59,8 @@ angular.module('openolitor')
         }]
       };
 
+      $scope.abotypStyle = {};
+
       if (!$routeParams.id) {
         $scope.abotyp = new AbotypenDetailModel(defaults.model);
       } else {
@@ -68,6 +70,14 @@ angular.module('openolitor')
           $scope.abotyp = result;
         });
       }
+
+      $scope.$watch('abotyp.farbCode', function(newValue) {
+        if (newValue) {
+          $scope.abotypStyle = {
+            'background-color': $scope.abotyp.farbCode
+          }
+        }
+      });
 
       $scope.isExisting = function() {
         return angular.isDefined($scope.abotyp) && angular.isDefined($scope

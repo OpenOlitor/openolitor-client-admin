@@ -79,3 +79,13 @@ input.ng-invalid {
 .panel-title > a[role=button]{
   color: #fff;
 }
+
+.color-box {   
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px 5px 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0,0,0,.2);
+}

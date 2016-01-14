@@ -4,7 +4,7 @@
     <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
     <form name="abotypForm">
       <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+        <div class="panel-heading clearfix" ng-style="abotypStyle" >
           <h3 class="panel-title">{{'Abotyp ' + abotyp.name || 'Abotyp'|translate}}
             <div class="btn-group pull-right" role="group">
               <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
@@ -135,7 +135,9 @@
         </div>
       </div>
       <oo-vertriebsarten></oo-vertriebsarten>
-      <div ng-if="isExisting()" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
     </form>
+  </div>
+  <div class="content-box col-md-3" ng-if="isExisting()">
+    <div ng-if="isExisting()" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
   </div>
 </div>

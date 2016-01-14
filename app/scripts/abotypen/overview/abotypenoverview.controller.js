@@ -93,6 +93,14 @@ angular.module('openolitor')
         });
       }
 
+      $scope.style = function(abotyp) {
+        if (abotyp.farbCode) {
+          return {
+            'background-color': abotyp.farbCode
+          }
+        }
+      }
+
       load();
 
       $scope.$watch('search.query', function() {
