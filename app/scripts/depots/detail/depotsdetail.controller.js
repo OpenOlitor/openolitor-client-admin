@@ -38,7 +38,7 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
-        $scope.depot.$save();
+        return $scope.depot.$save();
       };
 
       $scope.created = function(id) {
@@ -50,7 +50,7 @@ angular.module('openolitor')
       };
 
       $scope.delete = function() {
-        $scope.depot.$delete();
+        return $scope.depot.$delete();
       };
     }
   ]);

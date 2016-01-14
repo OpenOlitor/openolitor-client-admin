@@ -1,5 +1,56 @@
 'use strict';
 
+var regexIso8601 =
+  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?$/;
+// Matches YYYY-MM-ddThh:mm:ss.sssZ where .sss is optional
+//var regexIso8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
+
+function convertDateStringsToDates(input) {
+  // Ignore things that aren't objects.
+  if (typeof input !== "object") return input;
+
+  for (var key in input) {
+    if (!input.hasOwnProperty(key)) continue;
+
+    var value = input[key];
+    var match;
+    // Check for string properties which look like dates.
+    if (typeof value === "string" && (match = value.match(regexIso8601))) {
+      var milliseconds = Date.parse(match[0])
+      if (!isNaN(milliseconds)) {
+        input[key] = new Date(milliseconds);
+      }
+    } else if (typeof value === "object") {
+      // Recurse into object
+      input[key] = convertDateStringsToDates(value);
+    }
+  }
+  return input;
+}
+
+function convertDateToDateStrings(input) {
+  // Ignore things that aren't objects.
+  if (typeof input !== "object") return input;
+
+  for (var key in input) {
+    if (!input.hasOwnProperty(key)) continue;
+
+    var value = input[key];
+    var match;
+    // Check for string properties which look like dates.
+    if (value instanceof Date) {
+      var text = value.toISOString();
+      if (text) {
+        input[key] = text;
+      }
+    } else if (typeof value === "object") {
+      // Recurse into object
+      input[key] = convertDateToDateStrings(value);
+    }
+  }
+  return input;
+}
+
 /**
  */
 angular
@@ -12,6 +63,7 @@ angular
     'ngTable',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
+    'color.picker',
     'ipCookie',
     'frapontillo.bootstrap-switch',
     'gettext'
@@ -116,21 +168,31 @@ angular
     console.log('Start clientMessageService');
     clientMessageService.start();
   }])
+  .config(["$httpProvider", function($httpProvider) {
+    $httpProvider.defaults.transformResponse.push(function(responseData) {
+      return convertDateStringsToDates(responseData);
+    });
+    //$httpProvider.defaults.transformRequest = function(requestData) {
+    //return angular.toJson(convertDateToDateStrings(requestData));
+    //};
+  }])
   .config(['$provide', function($provide) {
-    $provide.decorator('$exceptionHandler', ['$log', '$injector', function(
-      $log, $injector) {
-      return function(exception) {
-        // using the injector to retrieve scope and timeout, otherwise circular dependency
-        var $rootScope = $injector.get('$rootScope');
-        var alertService = $injector.get('alertService');
+    $provide.decorator('$exceptionHandler', ['$log', '$injector',
+      function(
+        $log, $injector) {
+        return function(exception) {
+          // using the injector to retrieve scope and timeout, otherwise circular dependency
+          var $rootScope = $injector.get('$rootScope');
+          var alertService = $injector.get('alertService');
 
-        $rootScope.$removeAlert = alertService.removeAlert();
-        alertService.addAlert('error', exception.message);
+          $rootScope.$removeAlert = alertService.removeAlert();
+          alertService.addAlert('error', exception.message);
 
-        // log error default style
-        $log.error.apply($log, arguments);
-      };
-    }]);
+          // log error default style
+          $log.error.apply($log, arguments);
+        };
+      }
+    ]);
   }])
   .config(function($routeProvider) {
     $routeProvider

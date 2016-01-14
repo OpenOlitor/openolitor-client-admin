@@ -15,9 +15,11 @@ angular.module('openolitor')
           id: undefined,
           lieferrhythmus: LIEFERRHYTHMEN.WOECHENTLICH,
           preiseinheit: PREISEINHEITEN.JAHR,
+          laufzeiteinheit: LAUFZEITEINHEITEN.MONATE,
           waehrung: 'CHF',
-          aktiv: true,
-          anzahlAbwesenheiten: 0,
+          anzahlAbwesenheiten: undefined,
+          farbCode: '',
+          aktiv: 1,
           vertriebsarten: [{
             typ: 'Depotlieferung'
           }]
@@ -73,7 +75,7 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
-        $scope.abotyp.$save();
+        return $scope.abotyp.$save();
       };
 
       $scope.backToList = function() {
@@ -85,7 +87,7 @@ angular.module('openolitor')
       };
 
       $scope.delete = function() {
-        $scope.abotyp.$delete();
+        return $scope.abotyp.$delete();
       };
     }
   ]);

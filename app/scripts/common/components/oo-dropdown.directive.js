@@ -14,7 +14,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       dropdownId: '@',
       displayStyle: '@',
       label: '=',
-      disabled: '@',
+      disabled: '@'
     },
     templateUrl: 'scripts/common/components/oo-dropdown.directive.html',
     compile: function(element, attrs) {
@@ -56,7 +56,8 @@ angular.module('openolitor').directive('ooDropdown', function() {
       };
 
       $scope.getDisplayedText = function(item) {
-        if (!angular.isUndefined($scope.selectedProp) || !angular.isUndefined($scope.property)) {
+        if (!angular.isUndefined($scope.selectedProp) || !angular.isUndefined(
+            $scope.property)) {
           return item[$scope.property];
         } else if (!angular.isUndefined($scope.displayFunction)) {
           return $scope.displayFunction(item);
@@ -67,14 +68,17 @@ angular.module('openolitor').directive('ooDropdown', function() {
 
       $scope.updateDisplay = function() {
         $scope.isPlaceholder = angular.isUndefined($scope.selected);
-        if (!angular.isUndefined($scope.displayFunction) && !angular.isUndefined($scope.selectedItem)) {
+        if (!angular.isUndefined($scope.displayFunction) && !angular.isUndefined(
+            $scope.selectedItem)) {
           $scope.display = $scope.displayFunction($scope.selectedItem);
         } else if ($scope.property) {
-          if (!angular.isUndefined($scope.selected) && angular.isUndefined($scope.selectedItem)) {
+          if (!angular.isUndefined($scope.selected) && angular.isUndefined(
+              $scope.selectedItem)) {
             //initial state, get selected item to display
             angular.forEach($scope.values, function(value) {
               if (!angular.isUndefined($scope.selectedProp)) {
-                if (deepFind(value, $scope.selectedProp) === $scope.selected) {
+                if (deepFind(value, $scope.selectedProp) === $scope
+                  .selected) {
                   $scope.display = value[$scope.property];
                 }
               } else {
@@ -87,7 +91,8 @@ angular.module('openolitor').directive('ooDropdown', function() {
             $scope.display = $scope.selectedItem[$scope.property];
           }
         } else {
-          if (!angular.isUndefined($scope.selected) && angular.isUndefined($scope.selectedItem)) {
+          if (!angular.isUndefined($scope.selected) && angular.isUndefined(
+              $scope.selectedItem)) {
             $scope.display = $scope.selected;
           } else {
             $scope.display = $scope.selectedItem;

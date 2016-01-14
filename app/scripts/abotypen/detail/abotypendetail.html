@@ -1,6 +1,7 @@
 <div class="row">
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
+    <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
     <form name="abotypForm">
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -59,7 +60,7 @@
                 <label for="lieferrhythmus" translate>Lieferrhythmus</label>
               </div>
               <div class="col-md-4">
-                <oo-dropdown dropdown-id="lieferrhythmus" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus"></oo-dropdown>
+                <oo-dropdown dropdown-id="lieferrhythmus" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group">
@@ -77,7 +78,7 @@
                   <span translate>pro</span>
                 </div>
                 <div class="col-md-3">
-                  <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit"></oo-dropdown>
+                  <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>
@@ -86,10 +87,10 @@
                 <label for="laufzeit" translate>Laufzeit</label>
               </div>
               <div class="col-md-2">
-                <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}"></input>
+                <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
               </div>
               <div class="col-md-4">
-                <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit"></oo-dropdown>
+                <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
               </div>
             </div>
         </div>
@@ -103,8 +104,32 @@
             <div class="col-md-4">
               <label for="anzahlAbwesenheiten" translate>Anzahl Abwesenheiten</label>
             </div>
-            <div class="col-md-8">
-              <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl Abwesenheiten'|translate}}"></input>
+            <div class="col-md-2">
+              <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="farbCode" translate>Farbe-Code</label>
+            </div>
+            <div class="col-md-2">
+              <color-picker ng-model="abotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="preis" translate>Zielpreis</label>
+            </div>
+            <div class="col-md-6 row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="input-group-addon">{{abotyp.waehrung}}</div>
+                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.zielpreis"></input>
+                </div>
+              </div>
+              <div class="col-md-3" style="line-height:30px">
+                <span translate>pro Lieferung</span>
+              </div>
             </div>
           </div>
         </div>

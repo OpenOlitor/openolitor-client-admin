@@ -92,7 +92,7 @@ angular.module('openolitor')
         if ($scope.kunde.ansprechpersonen.length === 1) {
           $scope.kunde.bezeichnung = undefined;
         }
-        $scope.kunde.$save();
+        return $scope.kunde.$save();
       };
 
       $scope.created = function(id) {
@@ -104,7 +104,7 @@ angular.module('openolitor')
       };
 
       $scope.delete = function() {
-        $scope.kunde.$delete();
+        return $scope.kunde.$delete();
       };
     }
   ]);
