@@ -60,7 +60,7 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
-        $scope.abo.$save();
+        return $scope.abo.$save();
       };
 
       $scope.backToList = function(id) {
@@ -76,7 +76,7 @@ angular.module('openolitor')
       };
 
       $scope.delete = function() {
-        $scope.abo.$delete();
+        return $scope.abo.$delete();
       };
 
       function vertriebsartLabel(vertriebsart) {

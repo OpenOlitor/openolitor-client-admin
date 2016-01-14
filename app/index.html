@@ -11,9 +11,9 @@
   <!-- build:css(app) styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
-  <link rel="stylesheet" href="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
   <link rel="stylesheet" href="bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" />
   <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-color-picker/angularjs-color-picker.css" />
   <!-- endbower -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/font-awsome/css/font-awesome.css" />
@@ -59,7 +59,7 @@
             <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
         <![endif]-->
       <div id="page-content-wrapper">
-        <div ng-view=""></div>
+        <div ng-view="" ng-cloak></div>
       </div>
     </div>
 
@@ -89,12 +89,14 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
   <script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
   <script src="bower_components/json3/lib/json3.js"></script>
   <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
   <script src="bower_components/ng-table-export/ng-table-export.js"></script>
   <script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+  <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
+  <script src="bower_components/tinycolor/tinycolor.js"></script>
+  <script src="bower_components/angular-color-picker/angularjs-color-picker.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
