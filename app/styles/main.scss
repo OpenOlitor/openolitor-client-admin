@@ -1,7 +1,6 @@
 body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   padding-top:30px;
-  padding-left: 60px;
 }
 
 //ng validator
@@ -80,7 +79,7 @@ input.ng-invalid {
   color: #fff;
 }
 
-.color-box {   
+.color-box {
     float: left;
     width: 20px;
     height: 20px;
@@ -88,4 +87,79 @@ input.ng-invalid {
     border-width: 1px;
     border-style: solid;
     border-color: rgba(0,0,0,.2);
+}
+
+.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .menu, .menu.active {
+  -webkit-transition: 250ms all;
+  transition: 250ms all;
+}
+
+.menu-opener {
+  cursor: pointer;
+  height: 40px;
+  position: absolute;
+  top: 80px;
+  left: 210px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 40px;
+  z-index:2000;
+}
+.menu-opener.active {
+  background: #B7B7B7;
+  left: 0px;
+}
+
+.menu-opener:hover {
+  background: #C7C7C7;
+}
+
+.menu-opener:hover > .menu-opener-inner::after,  .menu-opener:hover > .menu-opener-inner::before {
+  background:white;
+}
+
+.menu-opener-inner {
+  background: #fff;
+  height: .5rem;
+  margin-left: .75rem;
+  margin-top: 1.75rem;
+  width: 2.5rem;
+}
+
+.menu-opener-inner::before, .menu-opener-inner::after {
+  content: '';
+  display: block;
+  height: .5rem;
+  width: 2.5rem;
+}
+
+.menu-opener-inner::before {
+  background: white;
+  -webkit-transform: translateY(-0.75rem);
+  -ms-transform: translateY(-0.75rem);
+  transform: translateY(-0.75rem);
+}
+.menu-opener-inner::after {
+  background: white;
+  -webkit-transform: translateY(0.25rem);
+  -ms-transform: translateY(0.25rem);
+  transform: translateY(0.25rem);
+}
+.menu-opener-inner.active {
+  background: transparent;
+}
+
+.menu-opener-inner.active::before {
+  background: #B7B7B7;
+  -webkit-transform: translateY(0rem) rotate(-45deg);
+  -ms-transform: translateY(0rem) rotate(-45deg);
+  transform: translateY(0rem) rotate(-45deg);
+}
+.menu-opener-inner.active::after {
+  background: #B7B7B7;
+  -webkit-transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+  -ms-transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+  transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
 }

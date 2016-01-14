@@ -45,7 +45,10 @@
         </ul>
       </div><!-- /.container -->
     </div>
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
+      <nav class="menu-opener">
+        <div class="menu-opener-inner active"></div>
+      </nav>
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li><a class="nav-item" href="" ng-href="#/depots" translate><i class="fa fa-cubes"></i> Depots</a></li>
@@ -144,6 +147,20 @@
 
   <script src="scripts/projekt/settings/projektsettings.controller.js"></script>
   <!-- endbuild -->
+
+  <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $(".menu-opener").click(function(e){
+      e.preventDefault();
+      $(".menu-opener, .menu-opener-inner, .menu").toggleClass("active");
+      $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 </body>
 
 </html>
