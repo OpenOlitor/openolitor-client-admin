@@ -173,7 +173,6 @@ angular
     $httpProvider.defaults.transformResponse.push(function(responseData) {
       return convertDateStringsToDates(responseData);
     });
-    d
   }])
   .config(['$provide', function($provide) {
     $provide.decorator('$exceptionHandler', ['$log', '$injector',

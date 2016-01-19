@@ -90,7 +90,7 @@
                 <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
               </div>
               <div class="col-md-2">
-                <input ng-if="abotyp.laufzeiteinheit !== UNBESCHRAENKT" type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
+                <input ng-if="abotyp.laufzeiteinheit !== unbeschraenkt" type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
               </div>
             </div>
             <div class="row form-group">
@@ -110,7 +110,7 @@
         <div class="panel-body">
           <div class="row form-group">
             <div class="col-md-4">
-              <label for="anzahlAbwesenheiten" translate>Anzahl Doll Abwesenheiten</label>
+              <label for="anzahlAbwesenheiten" translate>Anzahl Soll Abwesenheiten</label>
             </div>
             <div class="col-md-2">
               <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
@@ -140,7 +140,7 @@
               </div>
             </div>
           </div>
-          <div class="row form-group">
+          <div class="row form-group"  ng-if="isExisting()">
             <div class="col-md-4">
               <label for="farbCode" translate>Anzahl aktive Abonnemente</label>
             </div>
@@ -154,6 +154,6 @@
     </form>
   </div>
   <div class="content-box col-md-3" ng-if="isExisting()">
-    <div ng-if="isExisting()" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    <div ng-if="isExisting()" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
   </div>
 </div>
