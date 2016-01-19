@@ -4,9 +4,10 @@
  */
 angular.module('openolitor')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'AbotypenDetailModel', 'LIEFERRHYTHMEN',
+    '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel',
+    'LIEFERRHYTHMEN',
     'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil',
-    function($scope, $filter, $routeParams, $location, gettext,
+    function($scope, $filter, $routeParams, $location, gettext, ngTableParams,
       AbotypenDetailModel, LIEFERRHYTHMEN, PREISEINHEITEN, LAUFZEITEINHEITEN,
       EnumUtil) {
 
@@ -62,12 +63,16 @@ angular.module('openolitor')
       $scope.dummyLieferungen = [{
         datum: '31.01.2016',
         anzahlAbwesenheiten: 0,
-        anzahlAbos: 135
+        anzahlAbos: 135,
+        status: 'Geplant'
       }, {
         datum: '15.02.2016',
         anzahlAbwesenheiten: 2,
-        anzahlAbos: 130
+        anzahlAbos: 130,
+        status: 'Offen'
       }, ];
+
+      $scope.lieferungen = $scope.dummyLieferungen;
 
       $scope.abotypStyle = {};
 
@@ -88,6 +93,29 @@ angular.module('openolitor')
           }
         }
       });
+
+      $scope.hasLieferungen = function() {
+        return $scope.lieferungen !== undefined;
+      };
+
+      if (!$scope.lieferungenTableParams) {
+        //use default tableParams
+        $scope.lieferungenTableParams = new ngTableParams({ // jshint ignore:line
+          counts: [],
+          sorting: {
+            name: 'asc'
+          }
+        }, {
+          getData: function($defer, params) {
+            if (!$scope.lieferungen) {
+              return;
+            }
+            params.total($scope.lieferungen.length);
+            $defer.resolve($scope.lieferungen);
+          }
+
+        });
+      }
 
       $scope.isExisting = function() {
         return angular.isDefined($scope.abotyp) && angular.isDefined($scope

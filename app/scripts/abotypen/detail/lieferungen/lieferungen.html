@@ -4,10 +4,10 @@
   </div>
   <div class="panel-body">
     <div class="row form-group">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="letzteLieferung" translate>Letzte Lieferung</label>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <span name="letzteLieferung">{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
       </div>
     </div>
@@ -19,12 +19,22 @@
     <div class="row form-group">
       <div class="col-md-12">
         <div class="panel">
-          <div ng-repeat="lieferung in dummyLieferungen">
-            <label class="btn btn-primary">
-            {{lieferung.datum}}
-              <i class="fa fa-times"></i>
-              <i ng-if="lieferung.anzahlAbwesenheiten > 1" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
-          </label>
+          <script type="text/ng-template" id="removePagerRow.html">
+            <!-- nothing -->
+          </script>
+          <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+            <tr ng-repeat="lieferung in $data">
+              <td title="'Datum'|translate">
+                {{lieferung.datum}}
+              </td>
+              <td title="'Abw.'|translate">
+                <i ng-if="lieferung.anzahlAbwesenheiten > 1" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
+              </td>
+              <td>
+                <a href="" ng-click="" ng-if="!lieferung.status === 'Offen'"><i class="glyphicon glyphicon-remove"></i></a>
+              </td>
+            </tr>
+          </table>
         </div>
         </div>
       </div>
