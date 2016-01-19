@@ -15,7 +15,7 @@ angular.module('openolitor')
         model: {
           id: undefined,
           lieferrhythmus: LIEFERRHYTHMEN.WOECHENTLICH,
-          preiseinheit: PREISEINHEITEN.JAHR,
+          preiseinheit: PREISEINHEITEN.LIEFERUMG,
           laufzeiteinheit: LAUFZEITEINHEITEN.MONATE,
           waehrung: 'CHF',
           anzahlAbwesenheiten: undefined,

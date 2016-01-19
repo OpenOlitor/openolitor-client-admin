@@ -86,11 +86,19 @@
               <div class="col-md-4">
                 <label for="laufzeit" translate>Laufzeit</label>
               </div>
-              <div class="col-md-2">
-                <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
-              </div>
               <div class="col-md-4">
                 <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
+              </div>
+              <div class="col-md-2">
+                <input ng-if="abotyp.laufzeiteinheit !== UNBESCHRAENKT" type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="lieferrhythmus" translate>Saldo Mindestbestand</label>
+              </div>
+              <div class="col-md-4">
+                <input type="number" step="1" class="form-control" name="saldoMindestbestand" ng-model="abotyp.saldoMindestbestand" placeholder="{{'Saldo'|translate}}"></input>
               </div>
             </div>
         </div>
@@ -102,7 +110,7 @@
         <div class="panel-body">
           <div class="row form-group">
             <div class="col-md-4">
-              <label for="anzahlAbwesenheiten" translate>Anzahl Abwesenheiten</label>
+              <label for="anzahlAbwesenheiten" translate>Anzahl Doll Abwesenheiten</label>
             </div>
             <div class="col-md-2">
               <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
@@ -130,6 +138,14 @@
               <div class="col-md-3" style="line-height:30px">
                 <span translate>pro Lieferung</span>
               </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="farbCode" translate>Anzahl aktive Abonnemente</label>
+            </div>
+            <div class="col-md-2">
+              {{abotyp.anzahlAbonnenten}}
             </div>
           </div>
         </div>

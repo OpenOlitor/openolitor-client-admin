@@ -76,11 +76,11 @@ angular
     MONATLICH: 'Monatlich',
   })
   .constant('PREISEINHEITEN', {
-    JAHR: 'Jahr',
-    QUARTAL: 'Quartal',
-    MONAT: 'Monat',
-    LIEFERUNG: 'Lieferung',
-    ABO: 'Aboende'
+    //JAHR: 'Jahr',
+    //QUARTAL: 'Quartal',
+    //MONAT: 'Monat',
+    LIEFERUNG: 'Lieferung'
+      //ABO: 'Aboende'
   })
   .constant('VERTRIEBSARTEN', {
     DEPOTLIEFERUNG: 'Depotlieferung',
@@ -88,6 +88,7 @@ angular
     POSTLIEFERUNG: 'Postlieferung'
   })
   .constant('LAUFZEITEINHEITEN', {
+    UNBESCHRAENKT: 'Unbeschraenkt',
     LIEFERUNGEN: 'Lieferungen',
     MONATE: 'Monate'
   })
@@ -172,9 +173,7 @@ angular
     $httpProvider.defaults.transformResponse.push(function(responseData) {
       return convertDateStringsToDates(responseData);
     });
-    //$httpProvider.defaults.transformRequest = function(requestData) {
-    //return angular.toJson(convertDateToDateStrings(requestData));
-    //};
+    d
   }])
   .config(['$provide', function($provide) {
     $provide.decorator('$exceptionHandler', ['$log', '$injector',
