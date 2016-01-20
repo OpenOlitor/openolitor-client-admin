@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title" translate>Lieferungen<span class="pull-right" ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i><span></h3>
+    <h3 class="panel-title" translate>Lieferungen<span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i><span></h3>
   </div>
   <div class="panel-body">
     <div class="row form-group">
@@ -12,8 +12,26 @@
       </div>
     </div>
     <div class="row form-group">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <label for="lieferungen" translate>Geplante Lieferungen</label>
+      </div>
+      <div class="col-md-2 dropdown">
+        <div uib-dropdown class="pull-right" is-open="status.open">
+          <a role="button" href="" class="btn btn-default" uib-dropdown-toggle translate><span class="glyphicon glyphicon-plus"></span> </a>
+          <div uib-dropdown-menu class="dropdown-form">
+            <form class="form" name="formCreateLieferung">
+              <div class="form-group">
+                  <p class="input-group">
+                      <input type="text" name="datum" class="form-control input-date" date-disabled="datumExistiert(date)" datetime-picker="dd.MM.yyyy" placeholder="{{'Lieferdatum'|translate}}" ng-model="template.datum" is-open="open.lieferdat" enable-time="false" min-date="now" required/>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'lieferdat')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                  </p>
+              </div>
+              <a href="" role="button" ng-disabled="formCreateLieferung.$invalid" ng-click="addLieferung()" class="btn btn-primary" translate><i class="fa fa-floppy-o"></i> Erstellen</a>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row form-group">
@@ -25,13 +43,14 @@
         <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
             <tr ng-repeat="lieferung in $data">
               <td title="'Datum'|translate">
-                {{lieferung.datum}}
+                {{lieferung.datum|date:"dd.MM.yyyy"}}
               </td>
               <td title="'Abw.'|translate">
                 <i ng-if="lieferung.anzahlAbwesenheiten > 1" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
               </td>
               <td>
-                <a href="" ng-click="" ng-if="lieferung.status === 'Offen'"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="" ng-hide="deletingLieferung(lieferung)" ng-click="deleteLieferung(lieferung)" ng-if="lieferung.status === 'Offen'"><i class="glyphicon glyphicon-remove"></i></a>
+                <i ng-show="deletingLieferung(lieferung)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
               </td>
             </tr>
           </table>

@@ -163,3 +163,45 @@ input.ng-invalid {
   -ms-transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
   transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
 }
+
+ .dropdown-form {
+   padding:17px;
+   border-radius: 6px;
+ }
+
+ .input-date {
+   min-width: 100px;
+ }
+
+ .dropdown>.dropdown-form:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -6px;
+  left: 9px;
+ }
+
+ .dropdown>.dropdown-form:after{
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  position: absolute;
+  top: -5px;
+  left: 10px;
+ }
+
+ .dropdown .pull-right>.dropdown-form:before{
+   left: auto;
+   right: 12px;
+ }
+
+ .dropdown .pull-right>.dropdown-form:after{
+   left: auto;
+   right: 12px;
+ }

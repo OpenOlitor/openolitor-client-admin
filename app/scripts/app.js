@@ -74,6 +74,7 @@ angular
     WOECHENTLICH: 'Woechentlich',
     ZWEIWOECHENTLICH: 'Zweiwoechentlich',
     MONATLICH: 'Monatlich',
+    UNREGELMAESSIG: 'Unregelmaessig'
   })
   .constant('PREISEINHEITEN', {
     //JAHR: 'Jahr',
@@ -96,6 +97,11 @@ angular
     DEPOTLIEFERUNGABO: 'DepotlieferungAbo',
     HEIMLIEFERUNGABO: 'HeimlieferungAbo',
     POSTLIEFERUNGABO: 'PostlieferungAbo'
+  })
+  .constant('LIEFERSTATUS', {
+    OFFEN: 'Offen',
+    INBEARBEITUNG: 'InBearbeitung',
+    BEARBEITET: 'Bearbeitet'
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'

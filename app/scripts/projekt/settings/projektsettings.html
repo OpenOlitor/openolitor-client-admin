@@ -33,7 +33,7 @@
                       {{kundentyp.anzahlVerknuepfungen}}
                     </td>
                     <td>
-                      <a href="" ng-click="deleteKundentyp(kundentyp)" ng-show="!deletingKundentyp(kundentyp)"><i class="fa fa-times"></i></a>
+                      <a href="" ng-click="deleteKundentyp(kundentyp)" ng-hide="deletingKundentyp(kundentyp)"><i class="fa fa-times"></i></a>
                        <i ng-show="deletingKundentyp(kundentyp)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                     </td>
                   </tr>
