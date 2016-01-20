@@ -1,10 +1,10 @@
 <div class="panel panel-default oo-vertriebsarten">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title" translate>Vertriebsarten
+    <h3 class="panel-title dropdown" translate>Vertriebsarten
         <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
         <div uib-dropdown class="btn-group pull-right" role="group">
           <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> </a>
-          <ul uib-dropdown-menu role="menu">
+          <ul uib-dropdown-menu role="menu" class="dropdown-form">
             <li role="menuitem" ng-repeat="typ in vertriebsartenTypen"><a href="" ng-click="addVertriebsart(typ)">{{typ.label}}</a></li>
           </ul>
         </div>
