@@ -392,14 +392,14 @@ module.exports = function(grunt) {
           dot: true,
           cwd: '<%= openolitor.app %>/bower_components/bootstrap/dist',
           src: ['fonts/*.*'],
-          dest: '<%= openolitor.dist %>/bower_components/bootstrap/dist'
+          dest: '<%= openolitor.dist %>'
         }, {
           //for font-awesome
           expand: true,
           dot: true,
           cwd: '<%= openolitor.app %>/bower_components/font-awsome',
           src: ['fonts/*.*'],
-          dest: '<%= openolitor.dist %>/bower_components/font-awsome'
+          dest: '<%= openolitor.dist %>'
         }]
       },
       styles: {
