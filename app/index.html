@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" />
   <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
   <link rel="stylesheet" href="bower_components/angular-color-picker/angularjs-color-picker.css" />
+  <link rel="stylesheet" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.css" />
   <!-- endbower -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/font-awsome/css/font-awesome.css" />
@@ -22,49 +23,48 @@
 
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/simple-sidebar.css">
   <!-- endbuild -->
 </head>
 
 <body class="white" ng-app="openolitor">
     <!-- top navbar -->
-    <div class="navbar navbar-fixed-top">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand" href="">OpenOlitor</a>
-        <p class="navbar-text">Willkommen auf der RVL Administrations - Plattform</p>
-        <ul class="nav navbar-nav pull-right">
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hans Muster <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Einstellungen</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.container -->
-    </div>
-    <div id="wrapper" class="wrapper">
-      <nav class="menu-opener">
-        <div class="menu-opener-inner active"></div>
-      </nav>
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li><a class="nav-item" href="" ng-href="#/depots" translate><i class="fa fa-cubes"></i> Depots</a></li>
-          <li><a class="nav-item" href="" ng-href="#/abotypen" translate><i class="fa fa-calculator"></i> Abotypen</a></li>
-          <li><a class="nav-item" href="" ng-href="#/kunden" translate><i class="fa fa-user"></i> Kunden</a></li>
-          <li><a class="nav-item" href="" ng-href="#/abos" translate><i class="fa fa-shopping-cart"></i> Abos</a></li>
-          <li><a class="nav-item" href="" ng-href="#/settings" translate><i class="fa fa-cogs"></i> Projekteinstellungen</a></li>
-        </ul>
-      </div>
-        <!--[if lt IE 9]>
-            <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
-        <![endif]-->
-      <div id="page-content-wrapper">
-        <div ng-view="" ng-cloak></div>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div>
+          <hamburger-toggle state="tgState" class="hamburger-toggle"></hamburger-toggle>
+          <a class="navbar-brand" href="">OpenOlitor</a>
+          <p class="navbar-text">Administrationsumgebung für <span>Initiativen-Name</span></p>
+          <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hans Muster <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Einstellungen</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+
+    <div class="sidenav" ng-class="{open: tgState}">
+      <ul class="sidebar-nav">
+        <li><a class="nav-item" href="" ng-href="#/depots" translate><i class="fa fa-cubes"></i> <span translate>Depots</span></a></li>
+        <li><a class="nav-item" href="" ng-href="#/abotypen" translate><i class="fa fa-calculator"></i> <span translate>Abotypen</span></a></li>
+        <li><a class="nav-item" href="" ng-href="#/kunden" translate><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
+        <li><a class="nav-item" href="" ng-href="#/abos" translate><i class="fa fa-shopping-cart"></i> <span translate>Abos</span></a></li>
+        <li><a class="nav-item" href="" ng-href="#/settings" translate><i class="fa fa-cogs"></i> <span translate>Projekteinstellungen</span></a></li>
+      </ul>
+    </div>
+
+    <div class="master-content content" ng-class="{'sidenav-open': tgState}">
+      <!--[if lt IE 9]>
+          <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
+      <![endif]-->
+      <div ng-view="" ng-cloak class="container-fluid"></div>
+    </div>
+
 
   <!-- build:js(.) scripts/oldieshim.js -->
   <!--[if lt IE 9]>
@@ -100,6 +100,7 @@
   <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
   <script src="bower_components/tinycolor/tinycolor.js"></script>
   <script src="bower_components/angular-color-picker/angularjs-color-picker.js"></script>
+  <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -149,20 +150,6 @@
 
   <script src="scripts/projekt/settings/projektsettings.controller.js"></script>
   <!-- endbuild -->
-
-  <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-
-    $(".menu-opener").click(function(e){
-      e.preventDefault();
-      $(".menu-opener, .menu-opener-inner, .menu").toggleClass("active");
-      $("#wrapper").toggleClass("toggled");
-    });
-    </script>
 </body>
 
 </html>

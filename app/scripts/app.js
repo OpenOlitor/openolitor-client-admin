@@ -7,7 +7,7 @@ var regexIso8601 =
 
 function convertDateStringsToDates(input) {
   // Ignore things that aren't objects.
-  if (typeof input !== "object") return input;
+  if (typeof input !== 'object') return input;
 
   for (var key in input) {
     if (!input.hasOwnProperty(key)) continue;
@@ -15,12 +15,12 @@ function convertDateStringsToDates(input) {
     var value = input[key];
     var match;
     // Check for string properties which look like dates.
-    if (typeof value === "string" && (match = value.match(regexIso8601))) {
+    if (typeof value === 'string' && (match = value.match(regexIso8601))) {
       var milliseconds = Date.parse(match[0])
       if (!isNaN(milliseconds)) {
         input[key] = new Date(milliseconds);
       }
-    } else if (typeof value === "object") {
+    } else if (typeof value === 'object') {
       // Recurse into object
       input[key] = convertDateStringsToDates(value);
     }
@@ -66,7 +66,8 @@ angular
     'color.picker',
     'ipCookie',
     'frapontillo.bootstrap-switch',
-    'gettext'
+    'gettext',
+    'ngHamburger'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -157,8 +158,23 @@ angular
       }
     }
   })
-  .run(function($rootScope, $location) {
+  .run(function($rootScope, $location, $window) {
     $rootScope.location = $location;
+
+    var checkSize = function() {
+      if($window.innerWidth >= 1200) {
+        $rootScope.$apply(function() {
+          $rootScope.tgState = true;
+        });
+      }
+    };
+
+    angular.element($window).bind('resize', function() {
+      checkSize();
+    });
+
+    checkSize();
+
   })
   .factory('msgBus', ['$rootScope', function($rootScope) {
     var msgBus = {};
@@ -175,7 +191,7 @@ angular
     console.log('Start clientMessageService');
     clientMessageService.start();
   }])
-  .config(["$httpProvider", function($httpProvider) {
+  .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.transformResponse.push(function(responseData) {
       return convertDateStringsToDates(responseData);
     });
