@@ -158,24 +158,25 @@ angular
       }
     }
   })
-  .run(function($rootScope, $location, $window) {
+  .run(function($rootScope, $location) {
     $rootScope.location = $location;
 
-    var checkSize = function() {
-      if($window.innerWidth >= 1200) {
-        $rootScope.$apply(function() {
-          $rootScope.tgState = true;
-        });
-      }
-    };
-
+  })
+  .controller('openolitorRootController', ['checkSize', '$window', function(checkSize, $window) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
 
+    //initial launch
     checkSize();
-
-  })
+  }])
+  .factory('checkSize', ['$rootScope', '$window', function($rootScope, $window) {
+    return function() {
+      if($window.innerWidth >= 1200) {
+        $rootScope.tgState = true;
+      }
+    };
+  }])
   .factory('msgBus', ['$rootScope', function($rootScope) {
     var msgBus = {};
     msgBus.emitMsg = function(msg) {
