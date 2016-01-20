@@ -7,7 +7,7 @@ angular.module('openolitor')
     'AbotypenOverviewModel', 'ngTableParams',
     function($scope, $filter, AbotypenOverviewModel, ngTableParams) {
 
-      $scope.entries = [];
+      $scope.entries = undefined;
       $scope.loading = false;
 
       $scope.dummyEntries = [{

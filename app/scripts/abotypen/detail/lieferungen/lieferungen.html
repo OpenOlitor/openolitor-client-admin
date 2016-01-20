@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title" translate>Lieferungen</h3>
+    <h3 class="panel-title" translate>Lieferungen<span class="pull-right" ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i><span></h3>
   </div>
   <div class="panel-body">
     <div class="row form-group">
@@ -22,7 +22,7 @@
           <script type="text/ng-template" id="removePagerRow.html">
             <!-- nothing -->
           </script>
-          <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+        <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
             <tr ng-repeat="lieferung in $data">
               <td title="'Datum'|translate">
                 {{lieferung.datum}}
@@ -35,7 +35,6 @@
               </td>
             </tr>
           </table>
-        </div>
         </div>
       </div>
     </div>
