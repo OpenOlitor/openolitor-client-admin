@@ -29,17 +29,6 @@ angular.module('openolitor').directive('ooDropdown', function() {
       $scope.isPlaceholder = true;
       $scope.selectedItem = undefined;
 
-      $scope.select = function(item) {
-        $scope.isPlaceholder = false;
-        if (!angular.isUndefined($scope.selectedProp)) {
-          $scope.selected = deepFind(item, $scope.selectedProp);
-        } else {
-          $scope.selected = item;
-        }
-        $scope.selectedItem = item;
-        $scope.updateDisplay();
-      };
-
       var deepFind = function(obj, path) {
         var paths = path.split('.'),
           current = obj,
@@ -53,6 +42,17 @@ angular.module('openolitor').directive('ooDropdown', function() {
           }
         }
         return current;
+      };
+
+      $scope.select = function(item) {
+        $scope.isPlaceholder = false;
+        if (angular.isDefined($scope.selectedProp)) {
+          $scope.selected = deepFind(item, $scope.selectedProp);
+        } else {
+          $scope.selected = item;
+        }
+        $scope.selectedItem = item;
+        $scope.updateDisplay();
       };
 
       $scope.getDisplayedText = function(item) {

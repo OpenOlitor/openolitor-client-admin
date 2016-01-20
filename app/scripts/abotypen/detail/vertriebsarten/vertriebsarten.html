@@ -1,0 +1,29 @@
+<div class="panel panel-default oo-vertriebsarten">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title" translate>Vertriebsarten
+        <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
+        <div uib-dropdown class="btn-group pull-right" role="group">
+          <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> </a>
+          <ul uib-dropdown-menu role="menu">
+            <li role="menuitem" ng-repeat="typ in vertriebsartenTypen"><a href="" ng-click="addVertriebsart(typ)">{{typ.label}}</a></li>
+          </ul>
+        </div>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div ng-repeat="vertriebsart in vertriebsarten">
+      <div class="row form-group">
+        <div class="col-md-10">
+          <oo-vertriebsart vertriebsart="vertriebsart"></oo-vertriebsart>
+        </div>
+        <div class="col-md-2">
+          <div class="btn-group"  ng-hide="updatingVertriebsart(vertriebsart)">
+            <a role="button" ng-href="" ng-hide="invalidVertriebsart(vertriebsart)" ng-click="updateVertriebsart(vertriebsart)" class="btn btn-primary"><i class="fa fa-floppy-o"></i></a>
+            <a role="button" ng-href="" ng-hide="vertriebsarten.length < 2" ng-click="deleteVertriebsart(vertriebsart)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+          <i ng-show="updatingVertriebsart(vertriebsart)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

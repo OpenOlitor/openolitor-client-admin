@@ -10,16 +10,12 @@ angular.module('openolitor')
     function($scope, $routeParams, $location, gettext, ngTableParams,
       msgBus, LieferungenListModel, LIEFERSTATUS) {
 
-      var defaults = {
-        model: {}
-      };
-
       $scope.now = new Date();
       $scope.template = {};
       $scope.deletingLieferung = {};
       $scope.status = {
         open: false
-      }
+      };
 
       $scope.dummyLieferungen = [{
         datum: '31.01.2016',
@@ -72,7 +68,7 @@ angular.module('openolitor')
       $scope.deleteLieferung = function(lieferung) {
         $scope.deletingLieferung[lieferung.id] = true;
         lieferung.$delete();
-      }
+      };
 
       if (!$scope.lieferungenTableParams) {
         //use default tableParams
@@ -126,12 +122,12 @@ angular.module('openolitor')
           $scope.deletingLieferung[msg.data.id] = undefined;
           angular.forEach($scope.lieferungen, function(lieferung) {
             if (lieferung.id === msg.data.id) {
-              var index = $scope.lieferungen.indexOf(lieferung)
+              var index = $scope.lieferungen.indexOf(lieferung);
               if (index > -1) {
                 $scope.lieferungen.splice(index, 1);
               }
             }
-          })
+          });
 
           $scope.lieferungenTableParams.reload();
           $scope.$apply();

@@ -7,7 +7,7 @@ angular.module('openolitor').directive('ooLiefertage', ['EnumUtil',
       restrict: 'E',
       replace: true,
       scope: {
-        liefertageList: '=',
+        liefertag: '=',
         required: '='
       },
       transclude: true,
@@ -15,29 +15,14 @@ angular.module('openolitor').directive('ooLiefertage', ['EnumUtil',
       controller: function($scope) {
         $scope.liefertage = EnumUtil.asArray(LIEFERZEITPUNKTE);
 
-        $scope.selectedLiefertage = {};
+        $scope.isSelected = function(liefertag) {
+          return ($scope.liefertag && $scope.liefertag === liefertag.id) ?
+            'active' : '';
+        };
 
-        // initialize the set liefertage
-        var deregister = $scope.$watchCollection('liefertageList',
-          function() {
-            if ($scope.liefertageList && $scope.liefertageList.length >
-              0) {
-              angular.forEach($scope.liefertageList, function(id) {
-                $scope.selectedLiefertage[id] = true;
-              });
-              deregister();
-            }
-          });
-
-        $scope.$watchCollection('selectedLiefertage', function() {
-          $scope.liefertageList = [];
-          angular.forEach($scope.selectedLiefertage, function(value,
-            id) {
-            if (value) {
-              $scope.liefertageList.push(id);
-            }
-          });
-        });
+        $scope.selectedLiefertag = function(liefertag) {
+          $scope.liefertag = liefertag.id;
+        };
       }
     };
   }

@@ -46,8 +46,8 @@
                   <label for="aktiv_bis" translate>bis</label>
                 </div>
                 <div class="col-md-3">
+                  <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
                   <p class="input-group">
-                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
                       <span class="input-group-btn">
                           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivBis')"><i class="fa fa-calendar"></i></button>
                       </span>
@@ -98,7 +98,7 @@
                 <label for="lieferrhythmus" translate>Saldo Mindestbestand</label>
               </div>
               <div class="col-md-4">
-                <input type="number" step="1" class="form-control" name="saldoMindestbestand" ng-model="abotyp.saldoMindestbestand" placeholder="{{'Saldo'|translate}}"></input>
+                <input type="number" step="1" class="form-control" name="saldoMindestbestand" ng-model="abotyp.saldoMindestbestand" placeholder="{{'Saldo'|translate}}" required></input>
               </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
           </div>
         </div>
       </div>
-      <oo-vertriebsarten></oo-vertriebsarten>
+      <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
     </form>
   </div>
   <div class="content-box col-md-3" ng-if="isExisting()">

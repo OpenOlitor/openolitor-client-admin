@@ -20,10 +20,7 @@ angular.module('openolitor')
           waehrung: 'CHF',
           anzahlAbwesenheiten: undefined,
           farbCode: '',
-          aktiv: 1,
-          vertriebsarten: [{
-            typ: 'Depotlieferung'
-          }]
+          aktiv: 1
         }
       };
       $scope.unbeschraenkt = LAUFZEITEINHEITEN.UNBESCHRAENKT;
@@ -55,10 +52,7 @@ angular.module('openolitor')
         preis: 20,
         preiseinheit: 'Lieferung',
         waehrung: 'CHF',
-        aktiv: true,
-        vertriebsarten: [{
-          typ: 'Depotlieferung'
-        }]
+        aktiv: true
       };
 
       $scope.abotypStyle = {};
