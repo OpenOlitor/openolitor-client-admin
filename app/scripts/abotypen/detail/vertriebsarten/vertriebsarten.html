@@ -11,19 +11,42 @@
     </h3>
   </div>
   <div class="panel-body">
-    <div ng-repeat="vertriebsart in vertriebsarten">
-      <div class="row form-group">
-        <div class="col-md-10">
-          <oo-vertriebsart vertriebsart="vertriebsart"></oo-vertriebsart>
-        </div>
-        <div class="col-md-2">
-          <div class="btn-group"  ng-hide="updatingVertriebsart(vertriebsart)">
-            <a role="button" ng-href="" ng-hide="invalidVertriebsart(vertriebsart)" ng-click="updateVertriebsart(vertriebsart)" class="btn btn-primary"><i class="fa fa-floppy-o"></i></a>
-            <a role="button" ng-href="" ng-hide="vertriebsarten.length < 2" ng-click="deleteVertriebsart(vertriebsart)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
-          </div>
-          <i ng-show="updatingVertriebsart(vertriebsart)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-        </div>
-      </div>
-    </div>
+    <table class="table">
+      <tbody>
+        <tr ng-repeat="vertriebsart in vertriebsarten" ng-class="vertriebsartClass(vertriebsart)" ng-click="selectVertriebsart(vertriebsart)" >
+          <td><label translate>{{vertriebsart.typ}}</label></td>
+          <td>
+            <div class="form-group" ng-if="isDepot(vertriebsart)">
+              <label for="depot" translate>Depot</label>
+            </div>
+            <div class="form-group" ng-if="isDepot(vertriebsart)">
+              <oo-dropdown placeholder="{{'Bitte wählen...'|translate}}" dropdown-id="depot" display-style="uib-dropdown" values="depots" property="name" selected-prop="id" selected="vertriebsart.depotId" required></oo-dropdown>
+            </div>
+            <div class="form-group" ng-if="isHeimlieferung(vertriebsart)">
+              <label for="depot" translate>Tour</label>
+            </div>
+            <div class="form-group" ng-if="isHeimlieferung(vertriebsart)">
+              <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" selected-prop="id" property="name" selected="vertriebsart.tour.id" required></oo-dropdown>
+            </div>
+          </td>
+          <td>
+            <div class="form-group" ng-if="isPreselectionComplete(vertriebsart)">
+              <label for="lieferzeitpunkte" translate>Liefertag</label>
+            </div>
+            <div class="form-group" ng-if="isPreselectionComplete(vertriebsart)">
+              <oo-liefertage liefertag="vertriebsart.liefertag" required></oo-liefertage>
+            </div>
+          </td>
+          <td>
+            <div class="btn-group"  ng-hide="updatingVertriebsart(vertriebsart)">
+              <a role="button" ng-href="" ng-hide="invalidVertriebsart(vertriebsart)" ng-click="updateVertriebsart(vertriebsart)" class="btn btn-primary"><i class="fa fa-floppy-o"></i></a>
+              <a role="button" ng-href="" ng-hide="vertriebsarten.length < 2" ng-click="deleteVertriebsart(vertriebsart)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+              <a role="button" ng-href="" ng-show="vertriebsart.id" ng-click="selectVertriebsart(vertriebsart)" class="btn btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></a>
+            </div>
+            <i ng-show="updatingVertriebsart(vertriebsart)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

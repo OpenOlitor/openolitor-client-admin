@@ -5,10 +5,10 @@
 angular.module('openolitor')
   .controller('VertriebsartenListController', ['$scope', '$routeParams',
     'EnumUtil', 'msgBus',
-    'VertriebsartenListModel', 'VERTRIEBSARTEN',
+    'VertriebsartenListModel', 'DepotsOverviewModel', 'VERTRIEBSARTEN',
 
     function($scope, $routeParams, EnumUtil,
-      msgBus, VertriebsartenListModel, VERTRIEBSARTEN) {
+      msgBus, VertriebsartenListModel, DepotsOverviewModel, VERTRIEBSARTEN) {
 
       $scope.updatingVertriebsart = {};
       $scope.status = {
@@ -61,6 +61,19 @@ angular.module('openolitor')
         vertriebsart.$save();
       };
 
+      $scope.selectVertriebsart = function(vertriebsart) {
+        if ($scope.$parent.$parent.selectedVertriebsart === vertriebsart) {
+          $scope.$parent.$parent.selectedVertriebsart = undefined;
+        } else {
+          $scope.$parent.$parent.selectedVertriebsart = vertriebsart;
+        }
+      };
+
+      $scope.vertriebsartClass = function(vertriebsart) {
+        return ($scope.$parent.$parent.selectedVertriebsart ===
+          vertriebsart) ? 'active' : '';
+      };
+
       function load() {
         if ($scope.loading) {
           return;
@@ -87,6 +100,25 @@ angular.module('openolitor')
             dest[key] = src[key];
           }
         }
+      };
+
+      // get data from backend
+      $scope.depots = DepotsOverviewModel.query({});
+
+      $scope.touren = [];
+
+      $scope.isDepot = function(vertriebsart) {
+        return vertriebsart && VERTRIEBSARTEN.DEPOTLIEFERUNG ===
+          vertriebsart.typ;
+      };
+
+      $scope.isHeimlieferung = function(vertriebsart) {
+        return vertriebsart && VERTRIEBSARTEN.HEIMLIEFERUNG ===
+          vertriebsart.typ;
+      };
+
+      $scope.isPreselectionComplete = function(vertriebsart) {
+        return vertriebsart && vertriebsart.typ;
       };
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {

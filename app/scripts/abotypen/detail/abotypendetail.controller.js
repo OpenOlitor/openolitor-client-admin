@@ -24,6 +24,7 @@ angular.module('openolitor')
         }
       };
       $scope.unbeschraenkt = LAUFZEITEINHEITEN.UNBESCHRAENKT;
+      $scope.selectedVertriebsart = undefined;
 
       $scope.open = {
         aktivVon: false,
