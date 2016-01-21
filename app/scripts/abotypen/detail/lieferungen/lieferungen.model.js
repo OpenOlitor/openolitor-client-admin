@@ -7,6 +7,7 @@ angular.module('openolitor')
     return $resource(API_URL +
       'abotypen/:abotypId/vertriebsarten/:vertriebsartId/lieferungen/:id', {
         id: '@id',
-        abotypId: '@abotypId'
+        abotypId: '@abotypId',
+        vertriebsartId: '@vertriebsartId'
       });
   });

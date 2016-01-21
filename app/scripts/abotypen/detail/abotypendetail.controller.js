@@ -4,11 +4,12 @@
  */
 angular.module('openolitor')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel',
+    '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN',
     'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil',
     function($scope, $filter, $routeParams, $location, gettext, ngTableParams,
-      AbotypenDetailModel, LIEFERRHYTHMEN, PREISEINHEITEN, LAUFZEITEINHEITEN,
+      AbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
+      LAUFZEITEINHEITEN,
       EnumUtil) {
 
       var defaults = {
@@ -72,7 +73,7 @@ angular.module('openolitor')
         if (newValue) {
           $scope.abotypStyle = {
             'background-color': $scope.abotyp.farbCode
-          }
+          };
         }
       });
 
@@ -96,5 +97,9 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.abotyp.$delete();
       };
+
+      msgBus.onMsg('VertriebsartSelected', $scope, function(event, msg) {
+        $scope.selectedVertriebsart = msg.vertriebsart;
+      });
     }
   ]);

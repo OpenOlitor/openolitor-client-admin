@@ -62,15 +62,20 @@ angular.module('openolitor')
       };
 
       $scope.selectVertriebsart = function(vertriebsart) {
-        if ($scope.$parent.$parent.selectedVertriebsart === vertriebsart) {
-          $scope.$parent.$parent.selectedVertriebsart = undefined;
+        if ($scope.selectedVertriebsart === vertriebsart) {
+          $scope.selectedVertriebsart = undefined;
         } else {
-          $scope.$parent.$parent.selectedVertriebsart = vertriebsart;
+          $scope.selectedVertriebsart = vertriebsart;
         }
+        var msg = {
+          type: 'VertriebsartSelected',
+          vertriebsart: $scope.selectedVertriebsart
+        };
+        msgBus.emitMsg(msg);
       };
 
       $scope.vertriebsartClass = function(vertriebsart) {
-        return ($scope.$parent.$parent.selectedVertriebsart ===
+        return ($scope.selectedVertriebsart ===
           vertriebsart) ? 'active' : '';
       };
 
