@@ -97,9 +97,9 @@ angular.module('openolitor')
         if (abotyp.farbCode) {
           return {
             'background-color': abotyp.farbCode
-          }
+          };
         }
-      }
+      };
 
       load();
 

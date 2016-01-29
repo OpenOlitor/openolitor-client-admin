@@ -5,8 +5,9 @@
 angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'KundenDetailModel', 'KundentypenService',
+    'EnumUtil', 'PENDENZSTATUS',
     function($scope, $filter, $routeParams, $location, gettext,
-      KundenDetailModel, KundentypenService) {
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS) {
 
       var defaults = {
         model: {
@@ -14,12 +15,16 @@ angular.module('openolitor')
           typen: [KundentypenService.VEREINSMITGLIED],
           ansprechpersonen: [{
             id: undefined
-          }]
+          }],
+          pendenzen: [],
         }
       };
 
+      $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
+
       if (!$routeParams.id) {
         $scope.kunde = new KundenDetailModel(defaults.model);
+        $scope.pendenzen = [];
       } else {
         KundenDetailModel.get({
           id: $routeParams.id
@@ -27,6 +32,16 @@ angular.module('openolitor')
           $scope.kunde = result;
         });
       }
+
+      $scope.open = {
+        pendenzdatum: false,
+      };
+      $scope.openCalendar = function(e, date) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.open[date] = true;
+      };
 
       $scope.kundeBezeichnung = function() {
         if ($scope.kunde && $scope.kunde.ansprechpersonen) {
@@ -51,14 +66,14 @@ angular.module('openolitor')
           name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonFestnetz;
         }
         return name;
-      }
+      };
 
       $scope.personClass = function(index) {
         if ($scope.kunde.ansprechpersonen[index].id === undefined || $scope
           .kunde.ansprechpersonen.length === 1) {
-          return "in";
+          return 'in';
         }
-      }
+      };
 
       $scope.fullName = function(index) {
         if ($scope.kunde && $scope.kunde.ansprechpersonen && $scope.kunde.ansprechpersonen[
@@ -76,11 +91,31 @@ angular.module('openolitor')
         $scope.kunde.ansprechpersonen.push({
           id: undefined
         });
-      }
+      };
 
       $scope.removePerson = function(index) {
         $scope.kunde.ansprechpersonen.splice(index, 1);
-      }
+      };
+
+      $scope.addPendenz = function() {
+        $scope.kunde.pendenzen.push({
+          id: undefined,
+          datum: new Date(),
+          status: PENDENZSTATUS.AUSSTEHEND,
+          editable: true
+        });
+      };
+
+      $scope.editPendenz = function(pendenz) {
+        pendenz.editable = true;
+      };
+
+      $scope.deletePendenz = function(pendenz) {
+        var index = $scope.kunde.pendenzen.indexOf(pendenz);
+        if (index > -1) {
+            $scope.kunde.pendenzen.splice(index, 1);
+        }
+      };
 
       $scope.isExisting = function() {
         return angular.isDefined($scope.kunde) && angular.isDefined($scope.kunde
@@ -92,6 +127,9 @@ angular.module('openolitor')
         if ($scope.kunde.ansprechpersonen.length === 1) {
           $scope.kunde.bezeichnung = undefined;
         }
+        angular.forEach($scope.kunde.pendenzen, function(value) {
+          value.editable = false;
+        });
         return $scope.kunde.$save();
       };
 

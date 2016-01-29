@@ -38,12 +38,12 @@ angular.module('openolitor')
 
       return {
         getKundentypen: function() {
-          return kundentypen
+          return kundentypen;
         },
         addKundentyp: function(kundentyp) {
           KundentypenModel
         },
         VEREINSMITGLIED: 'Vereinsmitglied'
-      }
+      };
     }
   ]);

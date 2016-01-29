@@ -7,16 +7,16 @@ var regexIso8601 =
 
 function convertDateStringsToDates(input) {
   // Ignore things that aren't objects.
-  if (typeof input !== 'object') return input;
+  if (typeof input !== 'object') { return input; }
 
   for (var key in input) {
-    if (!input.hasOwnProperty(key)) continue;
+    if (!input.hasOwnProperty(key)) { continue; }
 
     var value = input[key];
     var match;
     // Check for string properties which look like dates.
     if (typeof value === 'string' && (match = value.match(regexIso8601))) {
-      var milliseconds = Date.parse(match[0])
+      var milliseconds = Date.parse(match[0]);
       if (!isNaN(milliseconds)) {
         input[key] = new Date(milliseconds);
       }
@@ -30,20 +30,19 @@ function convertDateStringsToDates(input) {
 
 function convertDateToDateStrings(input) {
   // Ignore things that aren't objects.
-  if (typeof input !== "object") return input;
+  if (typeof input !== 'object') { return input; }
 
   for (var key in input) {
-    if (!input.hasOwnProperty(key)) continue;
+    if (!input.hasOwnProperty(key)) { continue; }
 
     var value = input[key];
-    var match;
     // Check for string properties which look like dates.
     if (value instanceof Date) {
       var text = value.toISOString();
       if (text) {
         input[key] = text;
       }
-    } else if (typeof value === "object") {
+    } else if (typeof value === 'object') {
       // Recurse into object
       input[key] = convertDateToDateStrings(value);
     }
@@ -157,6 +156,11 @@ angular
         short: 'SO'
       }
     }
+  })
+  .constant('PENDENZSTATUS', {
+    AUSSTEHEND: 'Ausstehend',
+    ERLEDIGT: 'Erledigt',
+    NICHTERLEDIGT: 'NichtErledigt'
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
