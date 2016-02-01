@@ -4,10 +4,10 @@
  */
 angular.module('openolitor')
   .controller('LieferungenListController', ['$scope', '$routeParams',
-    '$location', 'gettext', 'ngTableParams', 'msgBus',
+    '$location', '$uibModal','$log','gettext', 'ngTableParams', 'msgBus',
     'LieferungenListModel', 'LIEFERSTATUS',
 
-    function($scope, $routeParams, $location, gettext, ngTableParams,
+    function($scope, $routeParams, $location, $uibModal,$log,gettext, ngTableParams,
       msgBus, LieferungenListModel, LIEFERSTATUS) {
 
       $scope.now = new Date();
@@ -90,6 +90,40 @@ angular.module('openolitor')
         });
       }
 
+
+      $scope.generateLieferungen = function(lieferdaten) {
+      };
+
+      $scope.showGenerateLieferungenDialog = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/abotypen/detail/lieferungen/generate-lieferungen.html',
+          controller: 'GenerateLieferungenController',
+          resolve: {
+            von: function() {
+              if (!$scope.lieferungen || $scope.lieferungen.length === 0) {
+                return new Date();
+              }
+              else {
+                return $scope.lieferungen[$scope.lieferungen.length -1].datum;
+              }
+            },
+            abotyp: function() {
+              return $scope.abotyp;
+            },
+            vertriebsart: function() {
+              return $scope.selectedVertriebsart;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (lieferungen) {
+          $scope.generateLieferungen(lieferungen);
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
       function load() {
         if ($scope.loading) {
           return;
@@ -112,6 +146,10 @@ angular.module('openolitor')
         if ($scope.selectedVertriebsart) {
           load();
         }
+      });
+
+      msgBus.onMsg('AbotypLoaded', $scope, function(event, msg) {
+        $scope.abotyp = msg.abotyp;
       });
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {

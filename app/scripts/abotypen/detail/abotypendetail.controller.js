@@ -66,6 +66,12 @@ angular.module('openolitor')
           id: $routeParams.id
         }, function(result) {
           $scope.abotyp = result;
+
+          var msg = {
+            type: 'AbotypLoaded',
+            abotyp: $scope.abotyp
+          };
+          msgBus.emitMsg(msg);
         });
       }
 

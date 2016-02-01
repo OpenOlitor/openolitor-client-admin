@@ -79,6 +79,7 @@ angular.module('openolitor')
           vertriebsart) ? 'active' : '';
       };
 
+
       function load() {
         if ($scope.loading) {
           return;

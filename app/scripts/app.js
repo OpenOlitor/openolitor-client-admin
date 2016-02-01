@@ -66,7 +66,8 @@ angular
     'ipCookie',
     'frapontillo.bootstrap-switch',
     'gettext',
-    'ngHamburger'
+    'ngHamburger',
+    'angularMoment'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -112,49 +113,56 @@ angular
       label: {
         long: 'Montag',
         short: 'MO'
-      }
+      },
+      value: 1
     },
     DIENSTAG: {
       id: 'Dienstag',
       label: {
         long: 'Dienstag',
         short: 'DI'
-      }
+      },
+      value: 2
     },
     MITTWOCH: {
       id: 'Mittwoch',
       label: {
         long: 'Mittwoch',
         short: 'MI'
-      }
+      },
+      value: 3
     },
     DONNERSTAG: {
       id: 'Donnerstag',
       label: {
         long: 'Donnerstag',
         short: 'DO'
-      }
+      },
+      value: 4
     },
     FREITAG: {
       id: 'Freitag',
       label: {
         long: 'Freitag',
         short: 'FR'
-      }
+      },
+      value: 5
     },
     SAMSTAG: {
       id: 'Samstag',
       label: {
         long: 'Samstag',
         short: 'SA'
-      }
+      },
+      value: 6
     },
     SONNTAG: {
       id: 'Sonntag',
       label: {
         long: 'Sonntag',
         short: 'SO'
-      }
+      },
+      value: 7
     }
   })
   .constant('PENDENZSTATUS', {
