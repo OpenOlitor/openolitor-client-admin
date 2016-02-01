@@ -39,7 +39,7 @@
                   <div class="col-md-4">
                     <label for="strasse" translate>Strasse / Nr.</label>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <input type="text" class="form-control" id="strasse" ng-model="depot.strasse" ng-required="!depot.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
                   </div>
                   <div class="col-md-2">
@@ -50,10 +50,10 @@
                   <div class="col-md-4">
                     <label for="plz" translate>PLZ / Ort</label>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="depot.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-5">
                     <input type="text" class="form-control" id="ort" ng-model="depot.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
                   </div>
                 </div>
@@ -69,16 +69,16 @@
                   <div class="col-md-4">
                     <label for="iban" translate>IBAN</label>
                   </div>
-                  <div class="col-md-5">
-                    <input type="text" class="form-control" name="iban" ng-model="depot.iban" placeholder="{{'IBAN'|translate}}" required>
+                  <div class="col-md-7">
+                    <input type="text" class="form-control" name="iban" ng-model="depot.iban" placeholder="{{'CH...'|translate}}">
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="bank" translate>Bank</label>
                   </div>
-                  <div class="col-md-5">
-                    <input type="text" class="form-control" name="bank" ng-model="depot.bank" placeholder="{{'Bank, PLZ Ort'|translate}}" required>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="bank" ng-model="depot.bank" placeholder="{{'Bank, PLZ Ort'|translate}}">
                   </div>
                 </div>
                 <div class="row form-group">
@@ -103,7 +103,7 @@
                 <div class="col-md-4">
                   <label for="apVorname" translate>Vorname</label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <input type="text" class="form-control" name="apVorname" ng-model="depot.apVorname" placeholder="{{'Vorname'|translate}}" required>
                 </div>
               </div>
@@ -111,7 +111,7 @@
                 <div class="col-md-4">
                   <label for="apName" translate>Name</label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <input type="text" class="form-control" name="apName" ng-model="depot.apName" placeholder="{{'Name'|translate}}" required>
                 </div>
               </div>
@@ -119,7 +119,7 @@
                 <div class="col-md-4">
                   <label for="apEmail" translate>E-Mail</label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <input type="email" class="form-control" name="apEmail" ng-model="depot.apEmail" placeholder="{{'E-Mail'|translate}}" required>
                 </div>
               </div>
@@ -127,8 +127,8 @@
                 <div class="col-md-4">
                   <label for="apTelefon" translate>Telefon</label>
                 </div>
-                <div class="col-md-4">
-                  <input type="text" class="form-control" name="apTelefon" ng-model="depot.apTelefon" placeholder="{{'Telefon'|translate}}">
+                <div class="col-md-5">
+                  <input type="text" class="form-control" name="apTelefon" ng-model="depot.apTelefon" placeholder="{{'+41...'|translate}}">
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@
                 <div class="col-md-4">
                   <label for="vVorname" translate>Vorname</label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <input type="text" class="form-control" name="vVorname" ng-model="depot.vVorname" placeholder="{{'Vorname'|translate}}" required>
                 </div>
               </div>
@@ -151,7 +151,7 @@
                 <div class="col-md-4">
                   <label for="vName" translate>Name</label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <input type="text" class="form-control" name="vName" ng-model="depot.vName" placeholder="{{'Name'|translate}}" required>
                 </div>
               </div>
@@ -159,7 +159,7 @@
                 <div class="col-md-4">
                   <label for="vEmail" translate>E-Mail</label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <input type="email" class="form-control" name="vEmail" ng-model="depot.vEmail" placeholder="{{'E-Mail'|translate}}" required>
                 </div>
               </div>
@@ -167,8 +167,8 @@
                 <div class="col-md-4">
                   <label for="vTelefon" translate>Telefon</label>
                 </div>
-                <div class="col-md-4">
-                  <input type="text" class="form-control" name="vTelefon" ng-model="depot.vTelefon" placeholder="{{'Telefon'|translate}}">
+                <div class="col-md-5">
+                  <input type="text" class="form-control" name="vTelefon" ng-model="depot.vTelefon" placeholder="{{'+41...'|translate}}">
                 </div>
               </div>
             </div>
