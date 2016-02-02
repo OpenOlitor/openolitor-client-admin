@@ -1,29 +1,36 @@
-<div>
-  <h1><span translate>Abo für</span> {{kunde.bezeichnung}}</h1>
-</div>
-<form name="aboForm">
-  <div>
-    <div class="row form-group">
-      <div class="col-md-2">
-        <label for="abotyp" translate>Abotyp</label>
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <form name="depotForm">
+      <div class="row form-group">
+        <div class="col-md-12">
+          <h3><span translate>Abo für</span> {{kunde.bezeichnung}}
+            <div class="btn-group pull-right" role="group">
+              <oo-save-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" on-save="save" on-cancel="cancel" on-created="backToList">{{fullName() || 'Abo'|translate}}</oo-save-button>
+              <oo-delete-button model="abo" entity="Abo" entities="ABOTYPEN_ARRAY" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+            </div>
+          </h3>
+        </div>
       </div>
-      <div class="col-md-8">
-        <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="abotyp" translate>Abotyp</label>
+                </div>
+                <div class="col-md-8">
+                  <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+                </div>
+              </div>
+              <div ng-if="abotyp">
+                <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div ng-if="abotyp" class="row form-group">
-      <div class="col-md-12">
-        <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
-      </div>
-    </div>
-
-    <div class="row form-group">
-      <div class="col-md-4">
-        <oo-save-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" on-save="save" on-cancel="cancel" on-created="backToList">{{fullName() || 'Abo'|translate}}</oo-save-button>
-      </div>
-      <div class="col-md-8" ng-if="isExisting()">
-        <oo-delete-button model="abo" entity="Abo" entities="ABOTYPEN_ARRAY" on-delete="delete" on-deleted="backToList"></oo-delete-button>
-      </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>

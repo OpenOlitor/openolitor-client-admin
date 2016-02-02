@@ -198,7 +198,7 @@
               <table class="table table-striped table-condensed">
                 <tr ng-repeat="abo in kunde.abos track by $index">
                   <td>
-                    <a ng-href="#/abos/{{abo.id}}" translate>#{{$index}}</a>
+                    <a ng-href="#/abos/{{abo.id}}" translate># {{$index+1}}</a>
                   </td>
                   <td>
                     <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>

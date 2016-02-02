@@ -18,13 +18,16 @@
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
             <tr ng-repeat="abo in $data">
               <td title="'Abonnentin'|translate" sortable="'abo.kunde'">
-                <a ng-href="#/kunden/{{abo.kundeId}}" translate>{{abo.personName}} {{abo.personVorname}}</a>
+                <a ng-href="#/kunden/{{abo.kundeId}}" translate>{{abo.kunde}}</a>
               </td>
               <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
                 <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
               </td>
               <td title="'Depot'|translate" sortable="'abo.depotName'">
                 <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
+              </td>
+              <td>
+                <a role="button" class="btn btn-sm btn-primary" ng-href="#/abos/{{abo.id}}"><span class="glyphicon glyphicon-edit"></span></a>
               </td>
             </tr>
           </table>

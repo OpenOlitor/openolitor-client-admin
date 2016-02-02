@@ -262,11 +262,6 @@ angular
         controller: 'KundenDetailController',
         name: 'KundeDetail'
       })
-      .when('/kunden/:kundeId/abos/new', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail'
-      })
       .when('/kunden/:kundeId/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
@@ -286,6 +281,14 @@ angular
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
+      })
+      .when('/abos/:id', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail',
+        resolve: {
+          createKundeId: function() { return undefined; }
+        }
       })
       .when('/pendenzen', {
         templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
