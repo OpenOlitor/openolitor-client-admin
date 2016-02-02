@@ -1,8 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title" translate><span class="navbar-brand" translate>Lieferungen</span>
-      <button role="button" href="" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right" translate><i class="fa fa-calculator"></i> </button>
-      <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
+    <h3 class="panel-title" translate>Lieferungen
+      <button role="button" href="" ng-if="canGenerateLieferungen()" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right" translate><i class="fa fa-calculator"></i> </button>
+      <span class="pull-right" ng-show="showLoading()"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
     </h3>
   </div>
   <div class="panel-body">
@@ -18,7 +18,7 @@
       <div class="col-md-10">
         <label for="lieferungen" translate>Geplante Lieferungen</label>
       </div>
-      <div class="col-md-2 dropdown">
+      <div class="col-md-2 dropdown" ng-if="!showLoading()">
         <div uib-dropdown class="pull-right" is-open="status.open">
           <a role="button" href="" class="btn btn-default" uib-dropdown-toggle translate><span class="glyphicon glyphicon-plus"></span> </a>
           <div uib-dropdown-menu class="dropdown-form">

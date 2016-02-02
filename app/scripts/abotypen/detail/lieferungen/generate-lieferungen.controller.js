@@ -3,9 +3,9 @@
 /**
  */
 angular.module('openolitor')
-  .controller('GenerateLieferungenController', ['$scope', '$modalInstance','$log', 'abotyp', 'vertriebsart', 'von','moment','LIEFERZEITPUNKTE','LIEFERRHYTHMEN',
+  .controller('GenerateLieferungenController', ['$scope', '$uibModalInstance','$log', 'abotyp', 'vertriebsart', 'von','moment','LIEFERZEITPUNKTE','LIEFERRHYTHMEN',
 
-    function($scope, $modalInstance, $log, abotyp, vertriebsart, von, moment, LIEFERZEITPUNKTE,LIEFERRHYTHMEN) {
+    function($scope, $uibModalInstance, $log, abotyp, vertriebsart, von, moment, LIEFERZEITPUNKTE,LIEFERRHYTHMEN) {
       $scope.von = von;
       $scope.initVon = von;
       $scope.abotyp = abotyp;
@@ -17,11 +17,11 @@ angular.module('openolitor')
       });
 
       $scope.ok = function () {
-        $modalInstance.close($scope.lieferdaten);
+        $uibModalInstance.close($scope.lieferdaten);
       };
 
       $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
       };
 
       $scope.deleteLieferdatum = function(lieferdatum) {
@@ -64,8 +64,8 @@ angular.module('openolitor')
             stepEinheit = 'w';
           }
           else if (abotyp.lieferrhythmus === LIEFERRHYTHMEN.MONATLICH) {
-            step = 1;
-            stepEinheit = 'M';
+            //wie sollen lieferdaten für monatliche Lieferungen berechnet werden? 1. Liefertag im Monat?
+            return;
           }
           else {
             //lieferdaten können nicht berechnet werden
@@ -74,7 +74,7 @@ angular.module('openolitor')
 
           $scope.lieferdaten = [];
           while (!start.isAfter(end)) {
-            $scope.lieferdaten.push(start.valueOf());
+            $scope.lieferdaten.push(new Date(start.valueOf()));
 
             start = start.add(step, stepEinheit);
           }

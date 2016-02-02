@@ -5,13 +5,15 @@
 angular.module('openolitor')
   .controller('LieferungenListController', ['$scope', '$routeParams',
     '$location', '$uibModal', '$log', 'gettext', 'ngTableParams', 'msgBus',
-    'LieferungenListModel', 'LIEFERSTATUS',
+    'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN',
 
     function($scope, $routeParams, $location, $uibModal, $log, gettext, ngTableParams,
-      msgBus, LieferungenListModel, LIEFERSTATUS) {
+      msgBus, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN) {
 
       $scope.now = new Date();
-      $scope.template = {};
+      $scope.template = {
+        creating: 0
+      };
       $scope.deletingLieferung = {};
       $scope.status = {
         open: false
@@ -45,7 +47,7 @@ angular.module('openolitor')
           vertriebsartId: $scope.selectedVertriebsart.id
         });
         newModel.$save();
-        $scope.template.creating = true;
+        $scope.template.creating = $scope.template.creating+1;
         $scope.template.datum = undefined;
         $scope.status.open = false;
       };
@@ -92,6 +94,24 @@ angular.module('openolitor')
 
 
       $scope.generateLieferungen = function(lieferdaten) {
+        angular.forEach(lieferdaten, function(lieferdat){
+          var newModel = new LieferungenListModel({
+            datum: lieferdat,
+            abotypId: $routeParams.id,
+            vertriebsartId: $scope.selectedVertriebsart.id
+          });
+          newModel.$save();
+          $scope.template.creating = $scope.template.creating+1;
+        });
+      };
+
+      $scope.canGenerateLieferungen = function() {
+        return ($scope.abotyp.lieferrhythmus === LIEFERRHYTHMEN.WOECHENTLICH ||
+          $scope.abotyp.lieferrhythmus === LIEFERRHYTHMEN.ZWEIWOECHENTLICH) && !$scope.showLoading();
+      };
+
+      $scope.showLoading = function() {
+        return $scope.loading || $scope.template.creating > 0;
       };
 
       $scope.showGenerateLieferungenDialog = function() {
@@ -154,7 +174,7 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === 'Lieferung') {
-          $scope.template.creating = undefined;
+          $scope.template.creating = $scope.template.creating - 1;
 
           $scope.lieferungen.push(new LieferungenListModel(msg.data));
           $scope.lieferungenTableParams.reload();
