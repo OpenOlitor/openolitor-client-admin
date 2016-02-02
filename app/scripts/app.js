@@ -230,7 +230,7 @@ angular
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
-        redirectTo: '/abotypen'
+        redirectTo: '/abos'
       })
       .when('/abotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
@@ -286,6 +286,11 @@ angular
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
         name: 'AbosOverview'
+      })
+      .when('/pendenzen', {
+        templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
+        controller: 'PendenzenOverviewController',
+        name: 'PendenzenOverview'
       })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',

@@ -3,13 +3,13 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams', 'createKundeId',
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
-    'AbotypenDetailModel', 'KundenDetailModel', 'VERTRIEBSARTEN',
+    'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel', 'VERTRIEBSARTEN',
     'ABOTYPEN_ARRAY',
-    function($scope, $filter, $routeParams, $location, gettext,
+    function($scope, $filter, $routeParams, createKundeId, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
-      KundenDetailModel, VERTRIEBSARTEN, ABOTYPEN_ARRAY) {
+      KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN, ABOTYPEN_ARRAY) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = ABOTYPEN_ARRAY;
@@ -21,6 +21,14 @@ angular.module('openolitor')
         }
       };
 
+      var getKundeId = function() {
+        if(angular.isDefined($routeParams.kundeId)) {
+          return $routeParams.kundeId;
+        } else {
+          return createKundeId;
+        }
+      };
+
       var basePath = '/abos';
       if ($routeParams.kundeId) {
         basePath = '/kunden/' + $routeParams.kundeId;
@@ -28,7 +36,7 @@ angular.module('openolitor')
 
       if (!$routeParams.id) {
         KundenDetailModel.get({
-          id: $routeParams.kundeId
+          id: getKundeId()
         }, function(kunde) {
           $scope.kunde = kunde;
           $scope.abo = new AbosDetailModel(defaults.model);
@@ -37,14 +45,14 @@ angular.module('openolitor')
         });
       } else {
         KundenDetailModel.get({
-          id: $routeParams.kundeId
+          id: getKundeId()
         }, function(kunde) {
           $scope.kunde = kunde;
         });
 
         AbosDetailModel.get({
           id: $routeParams.id,
-          kundeId: $routeParams.kundeId
+          kundeId: getKundeId()
         }, function(result) {
           $scope.abo = result;
         });
@@ -92,15 +100,19 @@ angular.module('openolitor')
 
       function createPermutations(abotyp) {
         $scope.vertriebsartPermutations = [];
-        angular.forEach(abotyp.vertriebsarten, function(vertriebsart) {
-          $scope.vertriebsartPermutations.push({
-            label: vertriebsartLabel(vertriebsart),
-            vertriebsart: vertriebsart
+        abotyp.vertriebsarten = VertriebsartenListModel.query({
+          abotypId: $routeParams.id
+        }, function() {
+          angular.forEach(abotyp.vertriebsarten, function(vertriebsart) {
+            $scope.vertriebsartPermutations.push({
+              label: vertriebsartLabel(vertriebsart),
+              vertriebsart: vertriebsart
+            });
+            if ($scope.isExisting() && vertriebsart.depot.id === $scope.abo
+              .depotId) {
+              $scope.abo.vertriebsart = vertriebsart;
+            }
           });
-          if ($scope.isExisting() && vertriebsart.depot.id === $scope.abo
-            .depotId) {
-            $scope.abo.vertriebsart = vertriebsart;
-          }
         });
       }
 

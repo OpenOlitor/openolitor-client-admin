@@ -4,10 +4,10 @@
  */
 angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'KundenDetailModel', 'KundentypenService',
-    'EnumUtil', 'PENDENZSTATUS',
-    function($scope, $filter, $routeParams, $location, gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS) {
+    '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'KundentypenService',
+    'EnumUtil', 'PENDENZSTATUS', '$log',
+    function($scope, $filter, $routeParams, $location, $uibModal, gettext,
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, $log) {
 
       var defaults = {
         model: {
@@ -143,6 +143,25 @@ angular.module('openolitor')
 
       $scope.delete = function() {
         return $scope.kunde.$delete();
+      };
+
+      $scope.showCreateAboDialog = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/kunden/detail/abo/create-abo.html',
+          controller: 'AbosDetailController',
+          resolve: {
+            createKundeId: function() {
+              return $scope.kunde.id;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (abo) {
+          $scope.createAbo(abo);
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
       };
     }
   ]);

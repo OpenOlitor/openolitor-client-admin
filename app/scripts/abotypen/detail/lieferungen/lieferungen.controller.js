@@ -4,10 +4,10 @@
  */
 angular.module('openolitor')
   .controller('LieferungenListController', ['$scope', '$routeParams',
-    '$location', '$uibModal','$log','gettext', 'ngTableParams', 'msgBus',
+    '$location', '$uibModal', '$log', 'gettext', 'ngTableParams', 'msgBus',
     'LieferungenListModel', 'LIEFERSTATUS',
 
-    function($scope, $routeParams, $location, $uibModal,$log,gettext, ngTableParams,
+    function($scope, $routeParams, $location, $uibModal, $log, gettext, ngTableParams,
       msgBus, LieferungenListModel, LIEFERSTATUS) {
 
       $scope.now = new Date();

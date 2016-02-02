@@ -27,13 +27,13 @@
   <!-- endbuild -->
 </head>
 
-<body class="white" ng-app="openolitor" ng-controller="openolitorRootController">
+<body class="white openolitor" ng-app="openolitor" ng-controller="openolitorRootController">
     <!-- top navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div>
           <hamburger-toggle state="tgState" class="hamburger-toggle"></hamburger-toggle>
-          <a class="navbar-brand" href="">OpenOlitor</a>
+          <a class="navbar-brand" ng-href="#/abos">OpenOlitor</a>
           <p class="navbar-text">Administrationsumgebung für <span>Initiativen-Name</span></p>
           <ul class="nav navbar-nav pull-right">
             <li class="dropdown">
@@ -55,6 +55,7 @@
         <li><a class="nav-item" href="" ng-href="#/abotypen" translate><i class="fa fa-calculator"></i> <span translate>Abotypen</span></a></li>
         <li><a class="nav-item" href="" ng-href="#/kunden" translate><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
         <li><a class="nav-item" href="" ng-href="#/abos" translate><i class="fa fa-shopping-cart"></i> <span translate>Abos</span></a></li>
+        <li><a class="nav-item" href="" ng-href="#/pendenzen" translate><i class="fa fa-sticky-note"></i> <span translate>Pendenzen</span></a></li>
         <li><a class="nav-item" href="" ng-href="#/settings" translate><i class="fa fa-cogs"></i> <span translate>Projekteinstellungen</span></a></li>
       </ul>
     </div>
@@ -152,6 +153,9 @@
   <script src="scripts/abos/overview/abosoverview.controller.js"></script>
   <script src="scripts/abos/detail/abosdetail.model.js"></script>
   <script src="scripts/abos/detail/abosdetail.controller.js"></script>
+
+  <script src="scripts/pendenzen/overview/pendenzenoverview.model.js"></script>
+  <script src="scripts/pendenzen/overview/pendenzenoverview.controller.js"></script>
 
   <script src="scripts/projekt/settings/projektsettings.controller.js"></script>
   <!-- endbuild -->
