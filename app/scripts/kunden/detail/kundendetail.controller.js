@@ -55,14 +55,16 @@ angular.module('openolitor')
       };
 
       $scope.personInfos = function(index) {
-        var name = '';
+        var name = ' ';
+        var foundPhone = false;
         if ($scope.kunde.ansprechpersonen[index].email) {
-          name = name + ', ' + $scope.kunde.ansprechpersonen[index].email;
+          name = $scope.kunde.ansprechpersonen[index].email;
         }
         if ($scope.kunde.ansprechpersonen[index].telefonMobil) {
           name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonMobil;
+          foundPhone = true;
         }
-        if ($scope.kunde.ansprechpersonen[index].telefonFestnetz) {
+        if (!foundPhone && $scope.kunde.ansprechpersonen[index].telefonFestnetz) {
           name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonFestnetz;
         }
         return name;

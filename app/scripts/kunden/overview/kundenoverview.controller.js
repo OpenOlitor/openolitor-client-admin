@@ -16,9 +16,12 @@ angular.module('openolitor')
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {
+              //check if system or custom kundentyp, use only id
+              var id = (item.kundentyp) ? item.kundentyp :
+                item;
               $scope.kundentypen.push({
-                'id': item,
-                'title': item
+                'id': id,
+                'title': id
               });
             });
             $scope.tableParams.reload();
