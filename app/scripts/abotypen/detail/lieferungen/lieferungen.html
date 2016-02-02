@@ -1,13 +1,16 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title" translate><span class="navbar-brand" translate>Lieferungen</span><a role="button" href="" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right" translate><i class="fa fa-calculator"></i> </a><span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span></h3>
+    <h3 class="panel-title" translate><span class="navbar-brand" translate>Lieferungen</span>
+      <button role="button" href="" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right" translate><i class="fa fa-calculator"></i> </button>
+      <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
+    </h3>
   </div>
   <div class="panel-body">
     <div class="row form-group">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <label for="letzteLieferung" translate>Letzte Lieferung</label>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <span name="letzteLieferung">{{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}</span>
       </div>
     </div>

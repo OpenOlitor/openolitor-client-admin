@@ -88,6 +88,10 @@ angular.module('openolitor')
           .abotyp.id);
       };
 
+      $scope.isVertriebsartExisting = function() {
+        return angular.isDefined($scope.selectedVertriebsart) && angular.isDefined($scope.selectedVertriebsart.id);
+      };
+
       $scope.save = function() {
         return $scope.abotyp.$save();
       };

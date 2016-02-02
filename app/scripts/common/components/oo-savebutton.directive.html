@@ -1,4 +1,10 @@
 <span>
-<button ng-click="save()" ng-disabled="form.$invalid || model.actionInProgress" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span ng-transclude></span> <span ng-if="isNew()" translate>erstellen</span><span ng-if="!isNew()" translate>speichern</span> <i ng-show="model.actionInProgress === 'updating'" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></button>
+  <button ng-click="save()" ng-disabled="form.$invalid || model.actionInProgress" class="btn btn-primary">
+    <i class="fa fa-floppy-o"></i>
+    <span ng-transclude></span>
+    <span ng-if="isNew()" translate>erstellen</span>
+    <span ng-if="!isNew()" translate>speichern</span>
+    <i ng-show="model.actionInProgress === 'updating'" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+  </button>
 <!--button ng-click="cancel()" ng-disabled="model.actionInProgress" class="btn btn-default" translate>Abbrechen</button-->
 </span>

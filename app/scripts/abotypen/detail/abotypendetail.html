@@ -34,7 +34,7 @@
                 <label for="aktiv_von" translate>Aktiv</label>
               </div>
               <div class="col-md-8 row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <p class="input-group">
                     <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="abotyp.aktivBis" />
                     <span class="input-group-btn">
@@ -42,10 +42,10 @@
                     </span>
                   </p>
                 </div>
-                <div class="col-md-1" style="line-height:30px">
+                <div class="col-md-2" style="line-height:30px">
                   <label for="aktiv_bis" translate>bis</label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <p class="input-group">
                     <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
                     <span class="input-group-btn">
@@ -67,14 +67,14 @@
               <div class="col-md-4">
                 <label for="preis" translate>Preis</label>
               </div>
-              <div class="col-md-6 row">
-                <div class="col-md-4">
+              <div class="col-md-8 row">
+                <div class="col-md-5">
                   <div class="input-group">
                     <div class="input-group-addon">{{abotyp.waehrung}}</div>
                     <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
                   </div>
                 </div>
-                <div class="col-md-1" style="line-height:30px">
+                <div class="col-md-2" style="line-height:30px">
                   <span translate>pro</span>
                 </div>
                 <div class="col-md-3">
@@ -97,7 +97,7 @@
               <div class="col-md-4">
                 <label for="lieferrhythmus" translate>Saldo Mindestbestand</label>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <input type="number" step="1" class="form-control" name="saldoMindestbestand" ng-model="abotyp.saldoMindestbestand" placeholder="{{'Saldo'|translate}}" required></input>
               </div>
             </div>
@@ -120,7 +120,7 @@
             <div class="col-md-4">
               <label for="farbCode" translate>Farbe-Code</label>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               <color-picker ng-model="abotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
             </div>
           </div>
@@ -129,13 +129,13 @@
               <label for="preis" translate>Zielpreis</label>
             </div>
             <div class="col-md-6 row">
-              <div class="col-md-4">
+              <div class="col-md-7">
                 <div class="input-group">
                   <div class="input-group-addon">{{abotyp.waehrung}}</div>
                   <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.zielpreis"></input>
                 </div>
               </div>
-              <div class="col-md-3" style="line-height:30px">
+              <div class="col-md-5" style="line-height:30px">
                 <span translate>pro Lieferung</span>
               </div>
             </div>
@@ -156,8 +156,8 @@
   <div class="row">
     <div class="content content-box col-md-9">
       <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
+    </div>
+    <div class="content-box col-md-3" ng-if="isVertriebsartExisting()">
+      <div ng-if="isVertriebsartExisting() && selectedVertriebsart" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    </div>
   </div>
-  <div class="content-box col-md-3" ng-if="isExisting()">
-    <div ng-if="isExisting() && selectedVertriebsart" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
-  </div>
-</div>
