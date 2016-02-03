@@ -12,18 +12,15 @@ module.exports = function(grunt) {
 
   // text replace in js files used for environment specific configurations
   var config = {
-    'API_URL': process.env.OO_API_URL || 'http://localhost:9004/', //replace @@API_URL with value
-    'API_WS_URL': process.env.OO_API_WS_URL || 'ws://localhost:10004/' //replace @@API_URL with value
+    'API_URL': process.env.OO_API_URL || 'http://localhost:9003/m1/', //replace @@API_URL with value
   };
 
   var mandantenConfig = {
     mandant1: {
-      'API_URL': process.env.OO_MANDANT1_API_URL || 'http://localhost:9004/', //replace @@API_URL with value
-      'API_WS_URL': process.env.OO_MANDANT1_API_WS_URL || 'ws://localhost:10004/' //replace @@API_URL with value
+      'API_URL': process.env.OO_MANDANT1_API_URL || 'http://localhost:9003/m1/', //replace @@API_URL with value
     },
     mandant2: {
-      'API_URL': process.env.OO_MANDANT2_API_URL || 'http://localhost:9005/', //replace @@API_URL with value
-      'API_WS_URL': process.env.OO_MANDANT2_API_WS_URL || 'ws://localhost:10005/' //replace @@API_URL with value
+      'API_URL': process.env.OO_MANDANT2_API_URL || 'http://localhost:9003/m2/', //replace @@API_URL with value
     }
   };
 
