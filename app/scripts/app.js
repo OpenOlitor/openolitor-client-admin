@@ -60,6 +60,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngTable',
+    'ngFileSaver',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'color.picker',
@@ -187,6 +188,14 @@ angular
       if($window.innerWidth >= 1200) {
         $rootScope.tgState = true;
       }
+    };
+  }])
+  .factory('exportTable', ['FileSaver', function(FileSaver) {
+    return function (elementId, fileName) {
+      var blob = new Blob([angular.element(elementId).html()], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
+      });
+      FileSaver.saveAs(blob, fileName);
     };
   }])
   .factory('msgBus', ['$rootScope', function($rootScope) {

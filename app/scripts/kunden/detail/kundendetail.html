@@ -83,8 +83,12 @@
           <div class="panel panel-default" ng-repeat="person in kunde.ansprechpersonen track by $index">
             <div class="panel-heading clearfix">
               <h3 class="panel-title">
-                <a data-toggle="collapse" data-target="#apartner_{{$index}}" class="navbar-brand"><b>{{ fullName($index) || 'Ansprechperson'|translate}}&nbsp;</b><small>{{personInfos($index)}}</small></a>
-                <ul class="pull-right" ng-click="removePerson($index)" ng-if="kunde.ansprechpersonen.length > 1">
+                <a data-toggle="collapse" data-target="#apartner_{{$index}}" class="navbar-brand"><b>{{ fullName($index) || 'Ansprechperson'|translate}}&nbsp;</b></a>
+                <small>
+                  <a class="navbar-text" ng-href="mailto:{{personEmail($index)}}">{{personEmail($index)}}</a>
+                  <a class="navbar-text" ng-href="phone:{{personPhone($index)}}">{{personPhone($index)}}</a>
+                </small>
+                <ul class="navbar-btn pull-right" ng-click="removePerson($index)" ng-if="kunde.ansprechpersonen.length > 1">
                   <a role="button" translate><span class="fa fa-times"></span></a>
                 </ul>
               </h3>

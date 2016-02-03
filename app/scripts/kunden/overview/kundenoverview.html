@@ -17,8 +17,8 @@
       <div ng-hide="entries">
         <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-      <div ng-show="entries">
-        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+      <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
+        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="kunde in $data">
             <td title="'Bezeichnung'|translate" sortable="'bezeichnung'">
               <a ng-href="#/kunden/{{kunde.id}}">{{kunde.bezeichnung}}</a>

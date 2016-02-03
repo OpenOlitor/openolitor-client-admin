@@ -54,20 +54,25 @@ angular.module('openolitor')
         return undefined;
       };
 
-      $scope.personInfos = function(index) {
-        var name = ' ';
-        var foundPhone = false;
+      $scope.personEmail = function(index) {
+        var ret = ' ';
         if ($scope.kunde.ansprechpersonen[index].email) {
-          name = $scope.kunde.ansprechpersonen[index].email;
+          ret = $scope.kunde.ansprechpersonen[index].email;
         }
+        return ret;
+      };
+
+      $scope.personPhone = function(index) {
+        var ret = ' ';
+        var foundPhone = false;
         if ($scope.kunde.ansprechpersonen[index].telefonMobil) {
-          name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonMobil;
+          ret = $scope.kunde.ansprechpersonen[index].telefonMobil;
           foundPhone = true;
         }
         if (!foundPhone && $scope.kunde.ansprechpersonen[index].telefonFestnetz) {
-          name = name + ', ' + $scope.kunde.ansprechpersonen[index].telefonFestnetz;
+          ret = $scope.kunde.ansprechpersonen[index].telefonFestnetz;
         }
-        return name;
+        return ret;
       };
 
       $scope.personClass = function(index) {

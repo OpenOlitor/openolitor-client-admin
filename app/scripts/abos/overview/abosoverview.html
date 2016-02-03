@@ -14,14 +14,14 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries">
-          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data">
-              <td title="'Abonnentin'|translate" sortable="'abo.kunde'">
-                <a ng-href="#/kunden/{{abo.kundeId}}" translate>{{abo.kunde}}</a>
-              </td>
               <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
                 <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
+              </td>
+              <td title="'Abonnentin'|translate" sortable="'abo.kunde'">
+                <a ng-href="#/kunden/{{abo.kundeId}}" translate>{{abo.kunde}}</a>
               </td>
               <td title="'Depot'|translate" sortable="'abo.depotName'">
                 <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
