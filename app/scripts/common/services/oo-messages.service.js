@@ -28,29 +28,26 @@ angular.module('openolitor')
           //Auth.isLoggedIn().then(function(loggedIn) {
           //if (loggedIn) {
           console.log('registering websocket, request websocket url');
-          $http.get(API_WS_URL).then(function(response) {
-            var wsUrl = response.data;
-            console.log('registering websocket, bind to '+wsUrl);            
-            //append token to websocket url because normal http headers can't get controlled
-            var securedUrl = wsUrl; //+ "?auth="+userService.getToken();
-            if (!(angular.isDefined($rootScope.messagingSocket)) && wsUrl.substring(
-                0, 2) !== '@@') {
-              $rootScope.messagingSocket = new WebSocket(securedUrl);
-              $rootScope.messagingSocket.onmessage = function(msg) {
-                var data = convertDateStringsToDates(JSON.parse(msg.data));
-                console.log('received event');
-                console.log(data);
-                msgBus.emitMsg(data);
-              };
-              $rootScope.messagingSocket.onopen = function(event) {
-                console.log('onopen : ' + event);
-                //send hello command to server
-                send('HelloServer', {
-                  client: 'someClientName'
-                });
-              };
-            }
-          });
+          var wsUrl = API_WS_URL.replace('http://', 'ws://');
+          console.log('registering websocket, bind to '+wsUrl);
+          //append token to websocket url because normal http headers can't get controlled
+          var securedUrl = wsUrl; //+ "?auth="+userService.getToken();
+          if (!(angular.isDefined($rootScope.messagingSocket))) {
+            $rootScope.messagingSocket = new WebSocket(securedUrl);
+            $rootScope.messagingSocket.onmessage = function(msg) {
+              var data = convertDateStringsToDates(JSON.parse(msg.data));
+              console.log('received event');
+              console.log(data);
+              msgBus.emitMsg(data);
+            };
+            $rootScope.messagingSocket.onopen = function(event) {
+              console.log('onopen : ' + event);
+              //send hello command to server
+              send('HelloServer', {
+                client: 'someClientName'
+              });
+            };
+          }
           //}
           //                });
           //            });
