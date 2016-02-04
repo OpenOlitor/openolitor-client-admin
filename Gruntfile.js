@@ -10,17 +10,35 @@ module.exports = function(grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var API_URL_CONFIG = {
+    'dev' : {
+      'm1': 'http://localhost:9003/m1/',
+      'm2': 'http://localhost:9003/m2/'
+    },
+    'test' : {
+      'm1': 'http://test.openolitor.ch/m1/'
+    },
+    'prod' : {
+      'm1': 'http://localhost:9003/m1/',
+      'm2': 'http://localhost:9003/m2/'
+    }
+  };
+  var env = 'dev';
+  if(grunt.option('env') !== null && grunt.option('env') !== undefined) {
+    env = grunt.option('env');
+  }
+
   // text replace in js files used for environment specific configurations
   var config = {
-    'API_URL': process.env.OO_API_URL || 'http://localhost:9003/m1/', //replace @@API_URL with value
+    'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
   };
 
   var mandantenConfig = {
     mandant1: {
-      'API_URL': process.env.OO_MANDANT1_API_URL || 'http://localhost:9003/m1/', //replace @@API_URL with value
+      'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
     },
     mandant2: {
-      'API_URL': process.env.OO_MANDANT2_API_URL || 'http://localhost:9003/m2/', //replace @@API_URL with value
+      'API_URL': API_URL_CONFIG[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
     }
   };
 
