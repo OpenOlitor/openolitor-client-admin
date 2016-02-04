@@ -6,7 +6,7 @@
             <span ng-bind="count"></span>
         </button>
     </div>
-    <div ng-controller="NgTableExportContrller"> <button ng-click="exportData()" ng-show="showExport" class="btn btn-default" translate><span class="fa fa-table"></span></button></div>
+    <div ng-controller="NgTableExportController"> <button ng-click="exportData()" ng-show="showExport" class="btn btn-default" translate><span class="fa fa-table"></span></button></div>
     <ul ng-if="pages.length" class="pagination ng-table-pagination">
         <li ng-class="{'disabled': !page.active && !page.current, 'active': page.current}" ng-repeat="page in pages" ng-switch="page.type">
             <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo;</a>
