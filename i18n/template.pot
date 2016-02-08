@@ -1,0 +1,618 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: app/scripts/depots/overview/depotsoverview.html:38
+#: app/scripts/kunden/overview/kundenoverview.html:32
+msgid "# Abos"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:32
+msgid "# Verknüpfungen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:205
+msgid "# {{$index+1}}"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:142
+msgid "+41 ..."
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:134
+msgid "+41 7..."
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:131
+#: app/scripts/depots/detail/depotsdetail.html:171
+msgid "+41..."
+msgstr ""
+
+#: app/scripts/not-found.html:2
+msgid "404 - Seite konnte nicht gefunden werden"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:4
+msgid "<i class=\"fa fa-calculator\"></i>"
+msgstr ""
+
+#: app/index.html:55
+msgid "<i class=\"fa fa-calculator\"></i> <span translate=\"\">Abotypen</span>"
+msgstr ""
+
+#: app/index.html:59
+msgid "<i class=\"fa fa-cogs\"></i> <span translate=\"\">Projekteinstellungen</span>"
+msgstr ""
+
+#: app/index.html:54
+msgid "<i class=\"fa fa-cubes\"></i> <span translate=\"\">Depots</span>"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:34
+msgid "<i class=\"fa fa-floppy-o\"></i> Erstellen"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:13
+msgid "<i class=\"fa fa-floppy-o\"></i> Speichern <i ng-show=\"template.updating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
+msgstr ""
+
+#: app/index.html:57
+msgid "<i class=\"fa fa-shopping-cart\"></i> <span translate=\"\">Abos</span>"
+msgstr ""
+
+#: app/index.html:58
+msgid "<i class=\"fa fa-sticky-note\"></i> <span translate=\"\">Pendenzen</span>"
+msgstr ""
+
+#: app/index.html:56
+msgid "<i class=\"fa fa-user\"></i> <span translate=\"\">Kunden</span>"
+msgstr ""
+
+#: app/scripts/common/ngtable/oo-ngtable-paginationTemplate.html:9
+msgid "<span class=\"fa fa-table\"></span>"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:92
+msgid "<span class=\"fa fa-times\"></span>"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:23
+msgid "<span class=\"glyphicon glyphicon-plus\"></span>"
+msgstr ""
+
+#: app/scripts/abotypen/overview/abotypenoverview.html:11
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Abotyp erstellen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:157
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Ansprechperson hinzufügen"
+msgstr ""
+
+#: app/scripts/depots/overview/depotsoverview.html:10
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Depot erstellen"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:12
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Erstellen<i ng-show=\"template.creating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
+msgstr ""
+
+#: app/scripts/kunden/overview/kundenoverview.html:10
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Kunde erstellen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:166
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Neue Pendenz"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:199
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Neues Abo"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:6
+msgid ""
+"<span class=\"navbar-brand\" translate=\"\">Abos</span>\n"
+"        <form class=\"navbar-form pull-right\" role=\"search\">\n"
+"          <div class=\"form-group\">\n"
+"            <input type=\"text\" class=\"form-control\" placeholder=\"{{'Volltextsuche...'|translate}}\" ng-model=\"search.query\">\n"
+"          </div>\n"
+"        </form>"
+msgstr ""
+
+#: app/scripts/depots/overview/depotsoverview.html:29
+msgid "AP Tel"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:38
+#: app/scripts/kunden/detail/abo/create-abo.html:22
+msgid "Abbrechen"
+msgstr ""
+
+#: app/scripts/kunden/detail/abo/create-abo.html:21
+msgid "Abo erstellen"
+msgstr ""
+
+#: app/scripts/kunden/detail/abo/create-abo.html:2
+msgid "Abo erstellen für {{kunde.bezeichnung}}"
+msgstr ""
+
+#: app/scripts/abos/detail/abosdetail.html:7
+msgid "Abo für"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:23
+msgid "Abonnentin"
+msgstr ""
+
+#: app/index.html:57
+#: app/scripts/abos/overview/abosoverview.html:6
+#: app/scripts/kunden/detail/kundendetail.html:199
+msgid "Abos"
+msgstr ""
+
+#: app/scripts/abos/detail/abosdetail.html:21
+#: app/scripts/abos/overview/abosoverview.html:20
+#: app/scripts/kunden/detail/abo/create-abo.html:8
+msgid "Abotyp"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:8
+msgid "Abotyp ' + abotyp.name || 'Abotyp"
+msgstr ""
+
+#: app/index.html:55
+#: app/scripts/abotypen/overview/abotypenoverview.html:6
+msgid "Abotypen"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:51
+msgid "Abw."
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:30
+msgid "Adresse"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:54
+msgid "Adresszusatz"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:34
+#: app/scripts/abotypen/overview/abotypenoverview.html:42
+#: app/scripts/depots/detail/depotsdetail.html:35
+#: app/scripts/depots/overview/depotsoverview.html:41
+msgid "Aktiv"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:126
+msgid "Alternative E-Mail-Adresse"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:99
+msgid "Anprechperson"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:35
+msgid "Anschrift"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:38
+msgid "Anschrift oder bezeichnung"
+msgstr ""
+
+#: app/scripts/depots/overview/depotsoverview.html:26
+msgid "Ansprechpartner"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:116
+msgid "Anzahl"
+msgstr ""
+
+#: app/scripts/abotypen/overview/abotypenoverview.html:30
+msgid "Anzahl Abonnenten"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:113
+msgid "Anzahl Soll Abwesenheiten"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:145
+msgid "Anzahl aktive Abonnemente"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:78
+msgid "Bank"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:81
+msgid "Bank, PLZ Ort"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:18
+msgid "Basisdaten"
+msgstr ""
+
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:25
+msgid "Bemerkung"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:147
+#: app/scripts/kunden/detail/kundendetail.html:73
+#: app/scripts/kunden/detail/kundendetail.html:76
+msgid "Bemerkungen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:150
+msgid "Bemerkungen zu dieser Person"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:26
+#: app/scripts/abotypen/detail/abotypendetail.html:29
+#: app/scripts/depots/detail/depotsdetail.html:86
+#: app/scripts/depots/detail/depotsdetail.html:89
+#: app/scripts/projekt/settings/projektsettings.html:29
+#: app/scripts/projekt/settings/projektsettings.html:30
+msgid "Beschreibung"
+msgstr ""
+
+#: app/scripts/kunden/overview/kundenoverview.html:23
+msgid "Bezeichnung"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:16
+msgid "Bis"
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:23
+msgid "Bitte wählen..."
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:73
+msgid "CH..."
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:48
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:22
+msgid "Datum"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:26
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:20
+msgid "Depot"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:24
+msgid "Depotname"
+msgstr ""
+
+#: app/index.html:54
+#: app/scripts/depots/overview/depotsoverview.html:6
+msgid "Depots"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:5
+msgid "Dieser Abotyp ist derzeit nicht aktiv"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:120
+#: app/scripts/depots/detail/depotsdetail.html:123
+#: app/scripts/depots/detail/depotsdetail.html:160
+#: app/scripts/depots/detail/depotsdetail.html:163
+#: app/scripts/kunden/detail/kundendetail.html:118
+msgid "E-Mail"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:27
+msgid "Eindeutige Bezeichnung"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:115
+msgid "Email"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:123
+msgid "Email alt."
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:121
+msgid "Farbe-Code"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:19
+msgid "Geplante Lieferungen"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:70
+msgid "IBAN"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:35
+msgid "Inaktiv"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:9
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:31
+msgid "Kunde"
+msgstr ""
+
+#: app/index.html:56
+#: app/scripts/kunden/overview/kundenoverview.html:6
+msgid "Kunden"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:13
+#: app/scripts/projekt/settings/projektsettings.html:26
+msgid "Kundentyp"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:11
+msgid "Kundentyp Name..."
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:8
+msgid "Kundentypen"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:87
+#: app/scripts/abotypen/detail/abotypendetail.html:93
+msgid "Laufzeit"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:11
+#: app/scripts/abotypen/overview/abotypenoverview.html:33
+msgid "Letzte Lieferung"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:37
+msgid "Lieferdaten erstellen"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:2
+msgid "Lieferdaten generieren"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:28
+msgid "Lieferdatum"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:60
+#: app/scripts/abotypen/overview/abotypenoverview.html:36
+msgid "Lieferrhythmus"
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:34
+msgid "Liefertag"
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/lieferungen.html:3
+msgid ""
+"Lieferungen\n"
+"      <button role=\"button\" href=\"\" ng-if=\"canGenerateLieferungen()\" ng-click=\"showGenerateLieferungenDialog()\" class=\"btn btn-default pull-right\" translate=\"\"><i class=\"fa fa-calculator\"></i> </button>\n"
+"      <span class=\"pull-right\" ng-show=\"showLoading()\"><i class=\"fa fa-circle-o-notch fa-spin fa-lg\"></i></span>"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:18
+#: app/scripts/abotypen/detail/abotypendetail.html:21
+#: app/scripts/abotypen/overview/abotypenoverview.html:27
+#: app/scripts/depots/detail/depotsdetail.html:112
+#: app/scripts/depots/detail/depotsdetail.html:115
+#: app/scripts/depots/detail/depotsdetail.html:152
+#: app/scripts/depots/detail/depotsdetail.html:155
+#: app/scripts/depots/overview/depotsoverview.html:23
+#: app/scripts/kunden/detail/kundendetail.html:107
+#: app/scripts/kunden/detail/kundendetail.html:110
+msgid "Name"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:46
+#: app/scripts/kunden/detail/kundendetail.html:49
+msgid "Nr"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:57
+#: app/scripts/kunden/detail/kundendetail.html:68
+msgid "Ort"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:54
+#: app/scripts/kunden/detail/kundendetail.html:65
+msgid "PLZ"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:51
+#: app/scripts/kunden/detail/kundendetail.html:62
+msgid "PLZ / Ort"
+msgstr ""
+
+#: app/scripts/kunden/overview/kundenoverview.html:29
+msgid "PLZ Ort"
+msgstr ""
+
+#: app/index.html:58
+#: app/scripts/kunden/detail/kundendetail.html:166
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:6
+msgid "Pendenzen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:57
+msgid "Postfach, Etage, c/o, ..."
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:135
+#: app/scripts/abotypen/detail/abotypendetail.html:68
+#: app/scripts/abotypen/detail/abotypendetail.html:74
+#: app/scripts/abotypen/overview/abotypenoverview.html:39
+msgid "Preis"
+msgstr ""
+
+#: app/index.html:59
+#: app/scripts/projekt/settings/projektsettings.html:4
+msgid "Projekteinstellungen"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:101
+msgid "Saldo"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:98
+msgid "Saldo Mindestbestand"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:32
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:28
+msgid "Status"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:43
+#: app/scripts/kunden/detail/kundendetail.html:46
+#: app/scripts/kunden/overview/kundenoverview.html:26
+msgid "Strasse"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:40
+#: app/scripts/kunden/detail/kundendetail.html:43
+msgid "Strasse / Nr."
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:128
+#: app/scripts/depots/detail/depotsdetail.html:168
+msgid "Telefon"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:139
+msgid "Telefon Festnetz"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:131
+msgid "Telefon Mobil"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:179
+msgid "Text..."
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:26
+msgid "Tour"
+msgstr ""
+
+#: app/scripts/depots/overview/depotsoverview.html:35
+msgid "Ver. Tel"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:139
+msgid "Verantwortliche Person"
+msgstr ""
+
+#: app/scripts/depots/overview/depotsoverview.html:32
+msgid "Verantwortliche_r"
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html:4
+msgid "Vertriebsart"
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:3
+msgid ""
+"Vertriebsarten\n"
+"        <span class=\"pull-right\" ng-show=\"loading || template.updating\"><i class=\"fa fa-circle-o-notch fa-spin fa-2x\"></i></span>\n"
+"        <div uib-dropdown=\"\" class=\"btn-group pull-right\" role=\"group\">\n"
+"          <a uib-dropdown-toggle=\"\" role=\"button\" ng-href=\"\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> </a>\n"
+"          <ul uib-dropdown-menu=\"\" role=\"menu\" class=\"dropdown-form\">\n"
+"            <li role=\"menuitem\" ng-repeat=\"typ in vertriebsartenTypen\"><a href=\"\" ng-click=\"addVertriebsart(typ)\">{{typ.label}}</a></li>\n"
+"          </ul>\n"
+"        </div>"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:9
+#: app/scripts/abotypen/overview/abotypenoverview.html:10
+#: app/scripts/depots/overview/depotsoverview.html:9
+#: app/scripts/kunden/overview/kundenoverview.html:9
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:9
+msgid "Volltextsuche..."
+msgstr ""
+
+#: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:7
+msgid "Von"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:104
+#: app/scripts/depots/detail/depotsdetail.html:107
+#: app/scripts/depots/detail/depotsdetail.html:144
+#: app/scripts/depots/detail/depotsdetail.html:147
+#: app/scripts/kunden/detail/kundendetail.html:102
+#: app/scripts/kunden/detail/kundendetail.html:99
+msgid "Vorname"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:129
+msgid "Zielpreis"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:108
+msgid "Zusatzdaten"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:46
+msgid "bis"
+msgstr ""
+
+#: app/scripts/common/components/oo-savebutton.directive.html:5
+msgid "erstellen"
+msgstr ""
+
+#: app/scripts/common/components/oo-deletebutton.directive.js:49
+msgid "konnte nicht gelöscht werden. Fehler:"
+msgstr ""
+
+#: app/scripts/common/components/oo-savebutton.directive.js:72
+msgid "konnte nicht gespeichert werden. Fehler:"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:78
+#: app/scripts/common/filters/oo-preisproeinheit.filter.js:8
+msgid "pro"
+msgstr ""
+
+#: app/scripts/abotypen/detail/abotypendetail.html:139
+msgid "pro Lieferung"
+msgstr ""
+
+#: app/scripts/common/components/oo-savebutton.directive.html:6
+msgid "speichern"
+msgstr ""
+
+#: app/scripts/common/components/oo-deletebutton.directive.js:32
+msgid "wurde durch eine andere Person gelöscht."
+msgstr ""
+
+#: app/scripts/common/components/oo-savebutton.directive.js:37
+msgid "wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu."
+msgstr ""
+
+#: app/scripts/common/components/oo-deletebutton.directive.js:36
+msgid "wurde erfolgreich gelöscht."
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:21
+#: app/scripts/kunden/detail/kundendetail.html:208
+msgid "{{abo.abotypName}}"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:27
+#: app/scripts/kunden/detail/kundendetail.html:211
+msgid "{{abo.depotName}}"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:24
+msgid "{{abo.kunde}}"
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:17
+msgid "{{vertriebsart.typ}}"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:62
+#: app/scripts/depots/detail/depotsdetail.html:65
+msgid "Öffnungszeiten"
+msgstr ""
