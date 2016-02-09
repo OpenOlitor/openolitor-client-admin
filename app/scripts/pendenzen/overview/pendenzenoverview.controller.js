@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$filter',
-    'PendenzenOverviewModel', 'ngTableParams',
-    function($q, $scope, $filter, PendenzenOverviewModel, ngTableParams) {
+    'PendenzenOverviewModel', 'ngTableParams', 'PENDENZSTATUS',
+    function($q, $scope, $filter, PendenzenOverviewModel, ngTableParams, PENDENZSTATUS) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -13,6 +13,14 @@ angular.module('openolitor')
       $scope.search = {
         query: ''
       };
+
+      $scope.statusL = [];
+      angular.forEach(PENDENZSTATUS, function(value, key) {
+        $scope.statusL.push({
+          'id': key,
+          'title': value
+        });
+      });
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -25,7 +33,8 @@ angular.module('openolitor')
           count: 10,
           sorting: {
             name: 'asc'
-          }
+          },
+          filter: { status: 'AUSSTEHEND' }
         }, {
           filterDelay: 0,
           groupOptions: {
