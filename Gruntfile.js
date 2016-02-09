@@ -31,14 +31,17 @@ module.exports = function(grunt) {
   // text replace in js files used for environment specific configurations
   var config = {
     'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
+    'API_WS_URL': API_URL_CONFIG[env].m1+'ws' || 'http://localhost:9003/m1/ws' //replace @@API_WS_URL with value
   };
 
   var mandantenConfig = {
     mandant1: {
       'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
+      'API_WS_URL': API_URL_CONFIG[env].m1+'ws' || 'http://localhost:9003/m1/ws' //replace @@API_WS_URL with value
     },
     mandant2: {
       'API_URL': API_URL_CONFIG[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
+      'API_WS_URL': API_URL_CONFIG[env].m2+'ws' || 'http://localhost:9003/m2/ws' //replace @@API_WS_URL with value
     }
   };
 

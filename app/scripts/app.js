@@ -71,7 +71,7 @@ angular
     'angularMoment'
   ])
   .constant('API_URL', '@@API_URL')
-  .constant('API_WS_URL', '@@API_URLws')
+  .constant('API_WS_URL', '@@API_WS_URL')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: 'Woechentlich',
     ZWEIWOECHENTLICH: 'Zweiwoechentlich',
