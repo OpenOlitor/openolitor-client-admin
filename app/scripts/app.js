@@ -175,10 +175,14 @@ angular
     $rootScope.location = $location;
 
   })
-  .controller('openolitorRootController', ['checkSize', '$window', function(checkSize, $window) {
+  .controller('openolitorRootController', ['$scope', '$location', 'checkSize', '$window', function($scope, $location, checkSize, $window) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
+
+    $scope.currentPathContains = function(pathJunk) {
+      return $location.url().indexOf(pathJunk) !== -1;
+    };
 
     //initial launch
     checkSize();

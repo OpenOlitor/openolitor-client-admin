@@ -31,6 +31,11 @@ input.ng-invalid {
   padding: 10px 15px;
 }
 
+.nav-item.sublevel-1 {
+  padding: 5px 35px;
+}
+
+
 .master-content {
   margin-top: 61px;
   margin-left: 10px;
@@ -191,6 +196,13 @@ left: 10px;
   text-align: left;
 }
 
+.openolitor .ng-table-filters select{
+  padding: 3px 6px;
+  font-size: 12px;
+  height: 24px;
+  border-radius: 3px;
+}
+
 //navbar styles
 
 .navbar .hamburger-toggle {
@@ -258,6 +270,12 @@ left: 10px;
   margin-left: -45px;
 }
 
+.sidebar-nav .sublevel-1 .fa {
+  font-size: 120%;
+  width: 50px;
+  margin-left: -45px;
+}
+
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -276,7 +294,7 @@ left: 10px;
     line-height: 40px;
 }
 
-.sidebar-nav li a {
+.sidebar-nav li a, .sidebar-nav li>span {
     display: block;
     text-decoration: none;
     color: #999999;
@@ -291,6 +309,10 @@ left: 10px;
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
     text-decoration: none;
+}
+
+.sidebar-nav li a.active {
+    background: rgba(211, 214, 140, 0.64);
 }
 
 .sidebar-nav > .sidebar-brand {
