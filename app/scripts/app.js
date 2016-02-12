@@ -280,6 +280,26 @@ angular
         controller: 'AbosDetailController',
         name: 'AbosDetail'
       })
+      .when('/produzenten', {
+        templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
+        controller: 'ProduzentenOverviewController',
+        name: 'ProduzentenOverview'
+      })
+      .when('/produzenten/new', {
+        templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
+        controller: 'ProduzentenDetailController',
+        name: 'ProduzentenDetail'
+      })
+      .when('/produzenten/:id', {
+        templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
+        controller: 'ProduzentenDetailController',
+        name: 'ProduzentenDetail'
+      })
+      .when('/produzenten/:produzentId/abos/:id', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail'
+      })
       .when('/depots', {
         templateUrl: 'scripts/depots/overview/depotsoverview.html',
         controller: 'DepotsOverviewController',

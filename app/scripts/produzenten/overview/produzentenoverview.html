@@ -1,0 +1,40 @@
+<div class="row">
+<div class="content content-box col-md-9">
+  <div oo-error-overlay></div>
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3  class="panel-title"><span class="navbar-brand" translate>Produzenten</span>
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <a role="button" href="#/produzenten/new" class="btn btn-primary" translate><span class="glyphicon glyphicon-plus"></span> Produzent erstellen</a>
+          </div>
+        </form>
+      </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div ng-hide="entries">
+        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+      </div>
+      <div ng-show="entries" id="produzentTable" display-export="true" export-file-name="Produzenten">
+        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+          <tr ng-repeat="produzent in $data">
+            <td title="'KRZ'|translate" sortable="'kurzzeichen'">
+              <a ng-href="#/produzenten/{{produzent.id}}">{{produzent.kurzzeichen}}</a>
+            </td>
+            <td title="'Bezeichnung'|translate" sortable="'kurzzeichen'">
+              {{produzent.name}} {{produzent.vorname}}
+            </td>
+            <td title="'Strasse'|translate" sortable="'strasse+hausNummer'">
+              {{produzent.strasse}} {{produzent.hausNummer}}
+            </td>
+            <td title="'PLZ Ort'|translate" sortable="'plz'">
+              {{produzent.plz}} {{produzent.ort}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

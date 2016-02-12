@@ -63,7 +63,7 @@
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots" ><i class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('touren')}]" href="" ng-href="#/touren" ><i class="fa fa-map-signs"></i> <span translate>Touren*</span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abotypen')}]" href="" ng-href="#/abotypen" ><i class="fa fa-clone"></i> <span translate>Abotypen</span></a></li>
-        <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produzenten')}]" href="" ng-href="#/produzenten" ><i class="fa fa-leaf"></i> <span translate>Produzenten*</span></a></li>
+        <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produzenten')}]" href="" ng-href="#/produzenten" ><i class="fa fa-leaf"></i> <span translate>Produzenten</span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produkte')}]" href="" ng-href="#/produkte" ><i class="fa fa-pagelines"></i> <span translate>Produkte*</span></a></li>
         <li><a class="nav-item" ng-class="[{active:currentPathContains('settings')}]" href="" ng-href="#/settings" ><i class="fa fa-cogs"></i> <span translate>Projekteinstellungen</span></a></li>
       </ul>
@@ -159,6 +159,11 @@
   <script src="scripts/kunden/overview/kundenoverview.controller.js"></script>
   <script src="scripts/kunden/detail/kundendetail.model.js"></script>
   <script src="scripts/kunden/detail/kundendetail.controller.js"></script>
+
+  <script src="scripts/produzenten/overview/produzentenoverview.model.js"></script>
+  <script src="scripts/produzenten/overview/produzentenoverview.controller.js"></script>
+  <script src="scripts/produzenten/detail/produzentendetail.model.js"></script>
+  <script src="scripts/produzenten/detail/produzentendetail.controller.js"></script>
 
   <script src="scripts/depots/overview/depotsoverview.model.js"></script>
   <script src="scripts/depots/overview/depotsoverview.controller.js"></script>
