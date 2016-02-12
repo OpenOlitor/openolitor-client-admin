@@ -1,3 +1,5 @@
 <span>
-  <button ng-click="delete()" ng-disabled="model.actionInProgress" class="btn btn-danger"><i class="fa fa-times"></i> Löschen <i ng-show="model.actionInProgress === 'deleting'" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></button>
+  <button ng-click="delete()" ng-disabled="model.actionInProgress" class="btn btn-danger" ng-class="{'btn-sm':small}">
+    <i class="fa fa-times"></i> <span ng-if="!notext">Löschen</span> <i ng-show="model.actionInProgress === 'deleting'" class="fa fa-circle-o-notch fa-spin" ng-cloak></i>
+  </button>
 </span>

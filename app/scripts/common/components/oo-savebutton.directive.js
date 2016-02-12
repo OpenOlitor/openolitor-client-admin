@@ -14,12 +14,19 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         onCancel: '=',
         form: '=',
         onCreated: '=',
+        reduced: '@?',
         notext: '@?',
         small: '@?'
       },
       transclude: true,
       templateUrl: 'scripts/common/components/oo-savebutton.directive.html',
       controller: function($scope) {
+
+        if(!angular.isUndefined($scope.reduced) && $scope.reduced) {
+          $scope.notext = true;
+          $scope.small = true;
+        }
+
         $scope.isNew = function() {
           return !$scope.model || $scope.model.id === undefined;
         };

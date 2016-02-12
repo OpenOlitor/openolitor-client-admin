@@ -9,6 +9,7 @@ angular.module('openolitor')
 
       $scope.entries = [];
       $scope.loading = false;
+      $scope.editing = false;
 
       $scope.search = {
         query: ''
@@ -21,8 +22,8 @@ angular.module('openolitor')
         model: {
           id: undefined,
           name: '',
-          verfuegbarVon: MONATE.JANUAR,
-          verfuegbarBis: MONATE.DEZEMBER,
+          verfuegbarVon: $scope.monate[0].id,
+          verfuegbarBis: $scope.monate[11].id,
           kategorien: [],
           produzenten: [],
           einheit: LIEFEREINHEIT.KILOGRAMM,
@@ -100,20 +101,36 @@ angular.module('openolitor')
 
       //search();
 
+      function clone(obj) {
+        if (null === obj || 'object' !== typeof obj) {
+          return obj;
+        }
+        var copy = obj.constructor();
+        for (var attr in obj) {
+          if (obj.hasOwnProperty(attr)) {
+            copy[attr] = clone(obj[attr]);
+          }
+        }
+        return copy;
+      }
+
       $scope.produktErstellen = function() {
         if(angular.isUndefined($scope.entries)) {
           $scope.entries = [];
         }
+        $scope.editing = true;
         $scope.entries.push(clone(defaults.model));
         $scope.tableParams.reload();
       };
 
       $scope.edit = function(produkt) {
         produkt.editable = true;
+        $scope.editing = true;
       };
 
       $scope.save = function(produkt) {
         produkt.editable = false;
+        $scope.editing = false;
         $scope.produkt = new ProdukteModel(produkt);
         return $scope.produkt.$save();
       };
@@ -135,20 +152,6 @@ angular.module('openolitor')
         });
         return month.label.short;
       };
-
-      function clone(obj) {
-        if (null === obj || 'object' !== typeof obj) {
-          return obj;
-        }
-        var copy = obj.constructor();
-        for (var attr in obj) {
-          if (obj.hasOwnProperty(attr)) {
-            copy[attr] = clone(obj[attr]);
-          }
-        }
-        return copy;
-      }
-
 
     }
   ]);

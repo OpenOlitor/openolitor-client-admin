@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h3 translate>Sind Sie sicher?</h3>
+</div>'
+<div class="modal-body">
+ <div>
+   <span ng-if="message">{{message()}}</span>
+   <span ng-if="!message" translate>Soll der Löschvorgang fortgesetzt werden?</span>
+ </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" ng-show="true" ng-click="ok()" translate>Löschen</button>
+    <button class="btn btn-primary" ng-click="cancel()" translate>Abbrechen</button>
+</div>

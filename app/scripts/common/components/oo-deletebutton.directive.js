@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
-  'alertService',
-  function(msgBus, gettext, alertService) {
+  'alertService', '$uibModal',
+  function(msgBus, gettext, alertService, $uibModal) {
     return {
       restrict: 'E',
       replace: true,
@@ -12,11 +12,21 @@ angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
         model: '=',
         onDelete: '=',
         form: '=',
-        onDeleted: '='
+        onDeleted: '=',
+        confirm: '@?',
+        confirmMessage: '=?',
+        reduced: '@?',
+        notext: '@?',
+        small: '@?'
       },
       transclude: true,
       templateUrl: 'scripts/common/components/oo-deletebutton.directive.html',
       controller: function($scope) {
+
+        if(!angular.isUndefined($scope.reduced) && $scope.reduced) {
+          $scope.notext = true;
+          $scope.small = true;
+        }
 
         var entityMatches = function(entity) {
           if (angular.isArray($scope.entities)) {
@@ -38,13 +48,40 @@ angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
               $scope.$apply();
             }
             //redirect to main page
-            $scope.onDeleted(msg.data.id);
+            if(angular.isDefined($scope.onDeleted)) {
+              $scope.onDeleted(msg.data.id);
+            }
           }
         });
 
+        $scope.modalDialog = function(executeOnOK) {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'scripts/common/components/oo-deletebutton.directive.modal.html',
+            controller: 'ooDeleteButtonModalInstanceCtrl',
+            resolve: {
+              message: function() {
+                return $scope.confirmMessage;
+              }
+            }
+          });
+
+          modalInstance.result.then(function () {
+            executeOnOK();
+          });
+        };
+
         $scope.delete = function() {
+          if(angular.isDefined($scope.confirm) && $scope.confirm) {
+            $scope.modalDialog($scope.deleteAction);
+          } else {
+            $scope.deleteAction();
+          }
+        };
+
+        $scope.deleteAction = function() {
           $scope.model.actionInProgress = 'deleting';
-          $scope.onDelete().catch(function(req) {
+          $scope.onDelete($scope.model).catch(function(req) {
             $scope.model.actionInProgress = undefined;
             alertService.addAlert('error', gettext($scope.entity +
                 ' konnte nicht gelöscht werden. Fehler: ') +
@@ -57,3 +94,14 @@ angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
     };
   }
 ]);
+
+angular.module('openolitor').controller('ooDeleteButtonModalInstanceCtrl', function ($scope, $uibModalInstance) {
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
