@@ -7,11 +7,14 @@ angular.module('openolitor')
     'ngTableParams',
     'KundentypenService',
     'KundentypenModel',
+    'ProduktekategorienService',
+    'ProduktekategorienModel',
     'msgBus',
     function($scope, $filter, ngTableParams, KundentypenService,
-      KundentypenModel, msgBus) {
+      KundentypenModel, ProduktekategorienService, ProduktekategorienModel, msgBus) {
 
-      $scope.template = {};
+      $scope.templateKundentyp = {};
+      $scope.templateProduktekategorie = {};
 
       //watch for set of kundentypen
       $scope.$watch(KundentypenService.getKundentypen,
@@ -27,23 +30,49 @@ angular.module('openolitor')
           }
         });
 
+        //watch for set of kundentypen
+        $scope.$watch(ProduktekategorienService.getProduktekategorien,
+          function(list) {
+            if (list) {
+              $scope.produktekategorien = [];
+              angular.forEach(list, function(item) {
+                if (item.id) {
+                  $scope.produktekategorien.push(item);
+                }
+              });
+              $scope.produktekategorienTableParams.reload();
+            }
+          });
+
       $scope.changedKundentypen = {};
       $scope.deletingKundentypen = {};
-      $scope.modelChanged = function(kundentyp) {
+      $scope.changedProduktekategorien = {};
+      $scope.deletingProduktekategorien = {};
+      $scope.modelChangedKundentyp = function(kundentyp) {
         if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
           $scope.changedKundentypen[kundentyp.kundentyp] = kundentyp;
         }
       };
-      $scope.hasChanges = function() {
+      $scope.hasChangesKundentypen = function() {
         return Object.getOwnPropertyNames($scope.changedKundentypen).length >
           0;
       };
 
-      $scope.save = function() {
-        if (!$scope.hasChanges()) {
+      $scope.modelChangedProduktekategorie = function(produktekategorie) {
+        if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
+          $scope.changedProduktekategorien[produktekategorie.id] = produktekategorie;
+        }
+      };
+      $scope.hasChangesProduktekategorien = function() {
+        return Object.getOwnPropertyNames($scope.changedProduktekategorien).length >
+          0;
+      };
+
+      $scope.saveKundentypen = function() {
+        if (!$scope.hasChangesKundentypen()) {
           return;
         }
-        $scope.template.updating = true;
+        $scope.templateKundentyp.updating = true;
         angular.forEach($scope.changedKundentypen, function(kundentyp) {
           kundentyp.$save();
         });
@@ -56,7 +85,7 @@ angular.module('openolitor')
       $scope.deleteKundentyp = function(kundentyp) {
         $scope.deletingKundentypen[kundentyp.kundentyp] = true;
         kundentyp.$delete();
-      }
+      };
 
       $scope.addKundentyp = function() {
         if ($scope.createKundentypForm.$invalid) {
@@ -65,53 +94,113 @@ angular.module('openolitor')
             field) {
             angular.forEach(field, function(errorField) {
               errorField.$setTouched();
-            })
+            });
           });
           return;
         }
         var newModel = new KundentypenModel({
           id: undefined,
-          kundentyp: $scope.template.kundentyp
+          kundentyp: $scope.templateKundentyp.kundentyp
         });
         newModel.$save();
-        $scope.template.creating = true;
-        $scope.template.kundentyp = undefined;
+        $scope.templateKundentyp.creating = true;
+        $scope.templateKundentyp.kundentyp = undefined;
+      };
+
+      $scope.saveProduktekategorie = function() {
+        if (!$scope.hasChangesProduktekategorien()) {
+          return;
+        }
+        $scope.templateKundentyp.updating = true;
+        angular.forEach($scope.changedProduktekategorien, function(produktekategorie) {
+          produktekategorie.$save();
+        });
+      };
+
+      $scope.deletingProduktekategorie = function(produktekategorie) {
+        return $scope.deletingKundentypen[produktekategorie.id];
+      };
+
+      $scope.deleteProduktekategorie = function(produktekategorie) {
+        $scope.deletingProduktekategorie[produktekategorie.id] = true;
+        produktekategorie.$delete();
+      };
+
+      $scope.addProduktekategorie = function() {
+        if ($scope.createProduktekategorieForm.$invalid) {
+
+          angular.forEach($scope.createProduktekategorieForm.$error, function(
+            field) {
+            angular.forEach(field, function(errorField) {
+              errorField.$setTouched();
+            });
+          });
+          return;
+        }
+        var newModel = new ProduktekategorienModel({
+          id: undefined,
+          beschreibung: $scope.templateProduktekategorie.produktekategorie
+        });
+        newModel.$save();
+        $scope.templateProduktekategorie.creating = true;
+        $scope.templateProduktekategorie.produktekategorie = undefined;
       };
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === 'CustomKundentyp') {
-          $scope.template.creating = undefined;
+          $scope.templateKundentyp.creating = undefined;
 
           $scope.kundentypen.push(new KundentypenModel(msg.data));
           $scope.kundentypenTableParams.reload();
 
           $scope.$apply();
-        }
+        } else if (msg.entity === 'Produktekategorie') {
+            $scope.templateProduktekategorie.creating = undefined;
+
+            $scope.produktekategorien.push(new ProduktekategorienModel(msg.data));
+            $scope.produktekategorienTableParams.reload();
+
+            $scope.$apply();
+          }
       });
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === 'CustomKundentyp') {
-          $scope.template.updating = undefined;
+          $scope.templateKundentyp.updating = undefined;
           $scope.$apply();
         }
       });
 
       msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
         if (msg.entity === 'CustomKundentyp') {
-          $scope.template.deleting = undefined;
+          $scope.templateKundentyp.deleting = undefined;
           $scope.deletingKundentypen[msg.data.id] = undefined;
           angular.forEach($scope.kundentypen, function(kundentyp) {
             if (kundentyp.id === msg.data.id) {
-              var index = $scope.kundentypen.indexOf(kundentyp)
+              var index = $scope.kundentypen.indexOf(kundentyp);
               if (index > -1) {
                 $scope.kundentypen.splice(index, 1);
               }
             }
-          })
+          });
 
           $scope.kundentypenTableParams.reload();
           $scope.$apply();
-        }
+        } else if (msg.entity === 'Produktekategorie') {
+            $scope.templateProduktekategorie.deleting = undefined;
+            $scope.deletingProduktekategorie[msg.data.id] = undefined;
+            angular.forEach($scope.produktekategorien, function(produktekategorie) {
+              if (produktekategorie.id === msg.data.id) {
+                var index = $scope.produktekategorien.indexOf(produktekategorie);
+                if (index > -1) {
+                  $scope.produktekategorien.splice(index, 1);
+                }
+              }
+            });
+
+            $scope.produktekategorienTableParams.reload();
+            $scope.$apply();
+          }
       });
 
       if (!$scope.kundentypenTableParams) {
@@ -135,6 +224,35 @@ angular.module('openolitor')
             var orderedData = params.sorting ?
               $filter('orderBy')($scope.kundentypen, params.orderBy()) :
               $scope.kundentypen;
+
+            params.total(orderedData.length);
+            $defer.resolve(orderedData);
+          }
+
+        });
+      }
+
+      if (!$scope.produktekategorienTableParams) {
+        //use default tableParams
+        $scope.produktekategorienTableParams = new ngTableParams({ // jshint ignore:line
+          page: 1,
+          count: 10,
+          sorting: {
+            name: 'asc'
+          }
+        }, {
+          filterDelay: 0,
+          groupOptions: {
+            isExpanded: true
+          },
+          getData: function($defer, params) {
+            if (!$scope.produktekategorien) {
+              return;
+            }
+            // use build-in angular filter
+            var orderedData = params.sorting ?
+              $filter('orderBy')($scope.produktekategorien, params.orderBy()) :
+              $scope.produktekategorien;
 
             params.total(orderedData.length);
             $defer.resolve(orderedData);
