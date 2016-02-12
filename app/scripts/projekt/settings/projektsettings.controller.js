@@ -30,19 +30,19 @@ angular.module('openolitor')
           }
         });
 
-        //watch for set of kundentypen
-        $scope.$watch(ProduktekategorienService.getProduktekategorien,
-          function(list) {
-            if (list) {
-              $scope.produktekategorien = [];
-              angular.forEach(list, function(item) {
-                if (item.id) {
-                  $scope.produktekategorien.push(item);
-                }
-              });
-              $scope.produktekategorienTableParams.reload();
-            }
-          });
+      //watch for set of kundentypen
+      $scope.$watch(ProduktekategorienService.getProduktekategorien,
+        function(list) {
+          if (list) {
+            $scope.produktekategorien = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.produktekategorien.push(item);
+              }
+            });
+            $scope.produktekategorienTableParams.reload();
+          }
+        });
 
       $scope.changedKundentypen = {};
       $scope.deletingKundentypen = {};

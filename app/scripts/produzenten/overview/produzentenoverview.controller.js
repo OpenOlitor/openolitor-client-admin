@@ -73,9 +73,5 @@ angular.module('openolitor')
 
       search();
 
-      $scope.$watch('search.query', function() {
-        search();
-      }, true);
-
     }
   ]);

@@ -105,6 +105,12 @@ angular
     INBEARBEITUNG: 'InBearbeitung',
     BEARBEITET: 'Bearbeitet'
   })
+  .constant('LIEFEREINHEIT', {
+    STUECK: 'Stueck',
+    BUND: 'Bund',
+    GRAMM: 'Gramm',
+    KILOGRAMM: 'Kilogramm',
+  })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
@@ -164,6 +170,104 @@ angular
         short: 'SO'
       },
       value: 7
+    }
+  })
+  .constant('MONATE', {
+    JANUAR: {
+      id: 'Januar',
+      label: {
+        long: 'Januar',
+        short: 'Jan'
+      },
+      value: 1
+    },
+    FEBRUAR: {
+      id: 'Februar',
+      label: {
+        long: 'Februar',
+        short: 'Feb'
+      },
+      value: 2
+    },
+    MAERZ: {
+      id: 'Maerz',
+      label: {
+        long: 'März',
+        short: 'Mar'
+      },
+      value: 3
+    },
+    APRIL: {
+      id: 'April',
+      label: {
+        long: 'April',
+        short: 'Apr'
+      },
+      value: 4
+    },
+    MAI: {
+      id: 'Mai',
+      label: {
+        long: 'Mai',
+        short: 'Mai'
+      },
+      value: 5
+    },
+    JUNI: {
+      id: 'Juni',
+      label: {
+        long: 'Juni',
+        short: 'Jun'
+      },
+      value: 6
+    },
+    JULI: {
+      id: 'Juli',
+      label: {
+        long: 'Juli',
+        short: 'Jul'
+      },
+      value: 7
+    },
+    AUGUST: {
+      id: 'August',
+      label: {
+        long: 'August',
+        short: 'Aug'
+      },
+      value: 8
+    },
+    SEPTEMBER: {
+      id: 'September',
+      label: {
+        long: 'September',
+        short: 'Sep'
+      },
+      value: 9
+    },
+    OKTOBER: {
+      id: 'Oktober',
+      label: {
+        long: 'Oktober',
+        short: 'Okt'
+      },
+      value: 10
+    },
+    NOVEMBER: {
+      id: 'November',
+      label: {
+        long: 'November',
+        short: 'Nov'
+      },
+      value: 11
+    },
+    DEZEMBER: {
+      id: 'Dezember',
+      label: {
+        long: 'Dezember',
+        short: 'Dez'
+      },
+      value: 12
     }
   })
   .constant('PENDENZSTATUS', {
@@ -299,6 +403,11 @@ angular
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail'
+      })
+      .when('/produkte', {
+        templateUrl: 'scripts/produkte/overview/produkteoverview.html',
+        controller: 'ProdukteOverviewController',
+        name: 'ProdukteOverview'
       })
       .when('/depots', {
         templateUrl: 'scripts/depots/overview/depotsoverview.html',

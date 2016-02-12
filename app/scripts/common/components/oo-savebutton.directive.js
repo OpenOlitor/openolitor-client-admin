@@ -13,7 +13,9 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         onSave: '=',
         onCancel: '=',
         form: '=',
-        onCreated: '='
+        onCreated: '=',
+        notext: '@?',
+        small: '@?'
       },
       transclude: true,
       templateUrl: 'scripts/common/components/oo-savebutton.directive.html',
@@ -67,7 +69,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
 
         $scope.save = function() {
           $scope.model.actionInProgress = 'updating';
-          $scope.onSave().catch(function(req) {
+          $scope.onSave($scope.model).catch(function(req) {
             $scope.model.actionInProgress = undefined;
             alertService.addAlert('error', gettext($scope.entity +
                 ' konnte nicht gespeichert werden. Fehler: ') +
