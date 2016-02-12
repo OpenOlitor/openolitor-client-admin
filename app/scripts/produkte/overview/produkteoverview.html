@@ -47,8 +47,8 @@
                 </div>
               </span>
             </td>
+            <td title="'Einheit'|translate" sortable="'einheit'">
               <span ng-hide="produkt.editable">{{produkt.einheit}}</span>
-              <td title="'Einheit'|translate" sortable="'einheit'">
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label" selected="produkt.einheit" ng-required></oo-dropdown>
               </span>
