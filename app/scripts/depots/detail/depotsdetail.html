@@ -21,10 +21,18 @@
               <div>
                 <div class="row form-group">
                   <div class="col-md-4">
-                    <label for="vorname" translate>Depotname</label>
+                    <label for="name" translate>Depotname</label>
                   </div>
                   <div class="col-md-8">
                     <input type="text" class="form-control" name="name" ng-model="depot.name" placeholder="{{'Eindeutige Bezeichnung'|translate}}" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="kurzzeichen" translate>Kurzzeichen</label>
+                  </div>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" name="kurzzeichen" ng-model="depot.kurzzeichen" ng-maxlength="6" placeholder="{{'KRZ'|translate}}" required>
                   </div>
                 </div>
                 <div class="row form-group">
