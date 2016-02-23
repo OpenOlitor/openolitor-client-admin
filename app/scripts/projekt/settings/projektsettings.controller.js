@@ -30,7 +30,7 @@ angular.module('openolitor')
           }
         });
 
-      //watch for set of kundentypen
+      //watch for set of produktekategorien
       $scope.$watch(ProduktekategorienService.getProduktekategorien,
         function(list) {
           if (list) {

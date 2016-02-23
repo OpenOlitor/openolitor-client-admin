@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
-    'ProduzentenOverviewModel', 'ngTableParams',
-    function($q, $scope, $filter, ProduzentenOverviewModel, ngTableParams) {
+    'ProduzentenModel', 'ngTableParams',
+    function($q, $scope, $filter, ProduzentenModel, ngTableParams) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -60,7 +60,7 @@ angular.module('openolitor')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = ProduzentenOverviewModel.query({
+        $scope.entries = ProduzentenModel.query({
           q: $scope.query
         }, function() {
           $scope.tableParams.reload();

@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
-    'ProdukteModel', 'ProdukteService', 'ngTableParams', 'EnumUtil', 'LIEFEREINHEIT', 'MONATE',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ngTableParams, EnumUtil, LIEFEREINHEIT, MONATE) {
+    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'LIEFEREINHEIT', 'MONATE',
+    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, LIEFEREINHEIT, MONATE) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -32,7 +32,41 @@ angular.module('openolitor')
         }
       };
 
-      //watch for set of kundentypen
+      //watch for set of produktekategorien
+      $scope.kategorienL = [];
+      $scope.$watch(ProduktekategorienService.getProduktekategorien,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.kategorienL.push({
+                  'id': item.id,
+                  'title': item.beschreibung
+                });
+              }
+            });
+            $scope.tableParams.reload();
+          }
+        });
+
+      //watch for set of produzenten
+      $scope.produzentenL = [];
+      $scope.$watch(ProduzentenService.getProduzenten,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.produzentenL.push({
+                  'id': item.id,
+                  'title': item.kurzzeichen
+                });
+              }
+            });
+            $scope.tableParams.reload();
+          }
+        });
+
+      //watch for set of produkte
       $scope.$watch(ProdukteService.getProdukte,
         function(list) {
           if (list) {
@@ -151,6 +185,28 @@ angular.module('openolitor')
           }
         });
         return month.label.short;
+      };
+
+      $scope.removeProduzent = function(produkt, produzent) {
+        alert('test');
+      };
+
+      $scope.removeKategorie = function(produkt, kategorie) {
+        alert('test');
+      };
+
+      $scope.addProduzentFunc = function(produkt) {
+        var addProduzent = function(produzent) {
+          alert(' ' + produzent + produkt);
+        };
+        return addProduzent;
+      };
+
+      $scope.addKategorieFunc = function(produkt) {
+        var addKategorie = function(kategorie) {
+          alert(' ' + kategorie + produkt);
+        };
+        return addKategorie;
       };
 
     }

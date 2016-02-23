@@ -9,6 +9,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       values: '=',
       selected: '=',
       selectedProp: '@',
+      selectedFunction: '&?',
       property: '@',
       displayFunction: '=',
       dropdownId: '@',
@@ -52,6 +53,9 @@ angular.module('openolitor').directive('ooDropdown', function() {
           $scope.selected = item;
         }
         $scope.selectedItem = item;
+        if(angular.isDefined($scope.selectedFunction)) {
+          $scope.selectedFunction()($scope.selectedItem);
+        }
         $scope.updateDisplay();
       };
 
