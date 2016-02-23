@@ -28,28 +28,6 @@ function convertDateStringsToDates(input) {
   return input;
 }
 
-function convertDateToDateStrings(input) {
-  // Ignore things that aren't objects.
-  if (typeof input !== 'object') { return input; }
-
-  for (var key in input) {
-    if (!input.hasOwnProperty(key)) { continue; }
-
-    var value = input[key];
-    // Check for string properties which look like dates.
-    if (value instanceof Date) {
-      var text = value.toISOString();
-      if (text) {
-        input[key] = text;
-      }
-    } else if (typeof value === 'object') {
-      // Recurse into object
-      input[key] = convertDateToDateStrings(value);
-    }
-  }
-  return input;
-}
-
 /**
  */
 angular
@@ -306,6 +284,21 @@ angular
       FileSaver.saveAs(blob, fileName);
     };
   }])
+  .factory('cloneObj', function() {
+     var cloneObjFun = function (obj) {
+      if (null === obj || 'object' !== typeof obj) {
+        return obj;
+      }
+      var copy = obj.constructor();
+      for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) {
+          copy[attr] = cloneObjFun(obj[attr]);
+        }
+      }
+      return copy;
+    };
+    return cloneObjFun;
+  })
   .factory('msgBus', ['$rootScope', function($rootScope) {
     var msgBus = {};
     msgBus.emitMsg = function(msg) {
@@ -431,6 +424,11 @@ angular
         resolve: {
           createKundeId: function() { return undefined; }
         }
+      })
+      .when('/touren', {
+        templateUrl: 'scripts/touren/overview/tourenoverview.html',
+        controller: 'TourenOverviewController',
+        name: 'TourenOverview'
       })
       .when('/pendenzen', {
         templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',

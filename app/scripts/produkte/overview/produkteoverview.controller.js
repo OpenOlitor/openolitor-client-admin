@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
-    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'LIEFEREINHEIT', 'MONATE',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, LIEFEREINHEIT, MONATE) {
+    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE',
+    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -135,25 +135,12 @@ angular.module('openolitor')
 
       //search();
 
-      function clone(obj) {
-        if (null === obj || 'object' !== typeof obj) {
-          return obj;
-        }
-        var copy = obj.constructor();
-        for (var attr in obj) {
-          if (obj.hasOwnProperty(attr)) {
-            copy[attr] = clone(obj[attr]);
-          }
-        }
-        return copy;
-      }
-
       $scope.produktErstellen = function() {
         if(angular.isUndefined($scope.entries)) {
           $scope.entries = [];
         }
         $scope.editing = true;
-        $scope.entries.push(clone(defaults.model));
+        $scope.entries.push(cloneObj(defaults.model));
         $scope.tableParams.reload();
       };
 

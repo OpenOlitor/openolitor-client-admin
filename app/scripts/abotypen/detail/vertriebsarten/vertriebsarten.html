@@ -26,7 +26,7 @@
               <label for="depot" translate>Tour</label>
             </div>
             <div class="form-group" ng-if="isHeimlieferung(vertriebsart)">
-              <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" selected-prop="id" property="name" selected="vertriebsart.tour.id" required></oo-dropdown>
+              <oo-dropdown placeholder="{{'Bitte wählen...'|translate}}" dropdown-id="tour" display-style="uib-dropdown" values="touren" selected-prop="id" property="name" selected="vertriebsart.tourId" required></oo-dropdown>
             </div>
           </td>
           <td>

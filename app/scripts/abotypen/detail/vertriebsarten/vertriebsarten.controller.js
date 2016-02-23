@@ -5,10 +5,10 @@
 angular.module('openolitor')
   .controller('VertriebsartenListController', ['$scope', '$routeParams',
     'EnumUtil', 'msgBus',
-    'VertriebsartenListModel', 'DepotsOverviewModel', 'VERTRIEBSARTEN',
+    'VertriebsartenListModel', 'DepotsOverviewModel', 'TourenOverviewModel', 'VERTRIEBSARTEN',
 
     function($scope, $routeParams, EnumUtil,
-      msgBus, VertriebsartenListModel, DepotsOverviewModel, VERTRIEBSARTEN) {
+      msgBus, VertriebsartenListModel, DepotsOverviewModel, TourenOverviewModel, VERTRIEBSARTEN) {
 
       $scope.updatingVertriebsart = {};
       $scope.status = {
@@ -111,7 +111,7 @@ angular.module('openolitor')
       // get data from backend
       $scope.depots = DepotsOverviewModel.query({});
 
-      $scope.touren = [];
+      $scope.touren = TourenOverviewModel.query({});
 
       $scope.isDepot = function(vertriebsart) {
         return vertriebsart && VERTRIEBSARTEN.DEPOTLIEFERUNG ===

@@ -61,7 +61,7 @@
         <li ng-show="menushow['buchhaltung']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkauf')}]" href="" ng-href="#/einkauf" ><i class="fa fa-shopping-bag"></i> <span translate>Einkauf*</span></a></li>
         <li><a class="nav-item" ng-click="menushow['stammdaten'] = !menushow['stammdaten']"><span><i class="fa fa-database"></i> <span translate>Stammdaten</span></span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots" ><i class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
-        <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('touren')}]" href="" ng-href="#/touren" ><i class="fa fa-map-signs"></i> <span translate>Touren*</span></a></li>
+        <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('touren')}]" href="" ng-href="#/touren" ><i class="fa fa-map-signs"></i> <span translate>Touren</span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abotypen')}]" href="" ng-href="#/abotypen" ><i class="fa fa-clone"></i> <span translate>Abotypen</span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produzenten')}]" href="" ng-href="#/produzenten" ><i class="fa fa-leaf"></i> <span translate>Produzenten</span></a></li>
         <li ng-show="menushow['stammdaten']"><a class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produkte')}]" href="" ng-href="#/produkte" ><i class="fa fa-pagelines"></i> <span translate>Produkte</span></a></li>
@@ -174,6 +174,9 @@
   <script src="scripts/depots/overview/depotsoverview.controller.js"></script>
   <script src="scripts/depots/detail/depotsdetail.model.js"></script>
   <script src="scripts/depots/detail/depotsdetail.controller.js"></script>
+
+  <script src="scripts/touren/overview/tourenoverview.model.js"></script>
+  <script src="scripts/touren/overview/tourenoverview.controller.js"></script>
 
   <script src="scripts/abos/overview/abosoverview.model.js"></script>
   <script src="scripts/abos/overview/abosoverview.controller.js"></script>
