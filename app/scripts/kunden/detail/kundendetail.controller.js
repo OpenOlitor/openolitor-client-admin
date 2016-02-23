@@ -129,6 +129,14 @@ angular.module('openolitor')
           .id);
       };
 
+      $scope.hasLieferadresse = function() {
+        return angular.isDefined($scope.kunde) && (
+          (angular.isDefined($scope.kunde.strasseLieferung) && $scope.kunde.strasseLieferung !== '') ||
+          (angular.isDefined($scope.kunde.plzLieferung) && $scope.kunde.plzLieferung !== '') ||
+          (angular.isDefined($scope.kunde.ortLieferung) && $scope.kunde.ortLieferung !== '')
+        );
+      };
+
       $scope.save = function() {
         //force rewriting of ansprechperson
         if ($scope.kunde.ansprechpersonen.length === 1) {
