@@ -435,6 +435,11 @@ angular
         controller: 'PendenzenOverviewController',
         name: 'PendenzenOverview'
       })
+      .when('/korbplanung', {
+        templateUrl: 'scripts/korbplanung/korbplanung.html',
+        controller: 'KorbplanungController',
+        name: 'Korbplanung'
+      })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',

@@ -196,11 +196,43 @@ left: 10px;
   text-align: left;
 }
 
-.openolitor .ng-table-filters select{
+.openolitor .ng-table-filters select,
+.openolitor .ng-table th.filter .input-filter{
   padding: 3px 6px;
   font-size: 12px;
   height: 24px;
   border-radius: 3px;
+}
+
+.openolitor .table-small select,
+.openolitor .table-small input,
+.openolitor .table-small .btn,
+.openolitor .table-small .input-group-addon{
+  padding: 1px 6px;
+  font-size: 12px;
+  height: 24px;
+  border-radius: 3px;
+}
+
+.openolitor .table-small > thead > tr > th,
+.openolitor .table-small > tbody > tr > th,
+.openolitor .table-small > tfoot > tr > th,
+.openolitor .table-small > thead > tr > td,
+.openolitor .table-small > tbody > tr > td,
+.openolitor .table-small > tfoot > tr > td {
+  padding: 4px;
+}
+
+.openolitor .table-planung input{
+  width: 8em;
+}
+
+.openolitor .table-planung .input-group-addon{
+  width: 4em;
+}
+
+.openolitor .table-planung .base-preis {
+  color: #AF9E9E;
 }
 
 //navbar styles
@@ -232,23 +264,33 @@ left: 10px;
   background: #fff;
   z-index: 10;
 }
+
 .sidenav.open {
   width: 210px;
 }
+
 .navbar {
   z-index: 100;
 }
+
 .navbar-brand {
   margin-left: 25px !important;
 }
+
 .container.panel {
   min-height: 500px
 }
+
+.panel-fixed-height-100 {
+  min-height: 100vh;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
 }
+
 .adsbygoogle {
   width: 320px !important;
   height: 270px !important;
@@ -256,6 +298,7 @@ left: 10px;
   border: 1px solid #eee;
   padding: 10px;
 }
+
 @media (max-width: 940px) {
   .adsbygoogle {
     float: none !important;
