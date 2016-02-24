@@ -117,24 +117,6 @@ angular.module('openolitor')
         });
       }
 
-      function search() {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.tableParams.reload();
-
-        $scope.loading = true;
-        $scope.entries = ProdukteModel.query({
-          q: $scope.query
-        }, function() {
-          $scope.tableParams.reload();
-          $scope.loading = false;
-        });
-      }
-
-      //search();
-
       $scope.produktErstellen = function() {
         if(angular.isUndefined($scope.entries)) {
           $scope.entries = [];

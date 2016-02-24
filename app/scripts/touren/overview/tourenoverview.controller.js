@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('TourenOverviewController', ['$scope', '$filter',
-    'TourenOverviewModel', 'ngTableParams', 'cloneObj',
-    function($scope, $filter, TourenOverviewModel, ngTableParams, cloneObj) {
+    'TourenService', 'TourenModel', 'ngTableParams', 'cloneObj',
+    function($scope, $filter, TourenService, TourenModel, ngTableParams, cloneObj) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -26,6 +26,20 @@ angular.module('openolitor')
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
+
+      //watch for set of produkte
+      $scope.$watch(TourenService.getTouren,
+        function(list) {
+          if (list) {
+            $scope.entries = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.entries.push(item);
+              }
+            });
+            $scope.tableParams.reload();
+          }
+        });
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -66,22 +80,6 @@ angular.module('openolitor')
         $scope.tableParams.reload();
       }
 
-      function load() {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.loading = true;
-        $scope.entries = TourenOverviewModel.query({
-          q: $scope.query
-        }, function() {
-          $scope.tableParams.reload();
-          $scope.loading = false;
-        });
-      }
-
-      load();
-
       $scope.$watch('search.query', function() {
         search();
       }, true);
@@ -103,13 +101,13 @@ angular.module('openolitor')
       $scope.save = function(tour) {
         tour.editable = false;
         $scope.editing = false;
-        $scope.tour = new TourenOverviewModel(tour);
+        $scope.tour = new TourenModel(tour);
         return $scope.tour.$save();
       };
 
       $scope.delete = function(tour) {
         tour.editable = false;
-        $scope.tour = new TourenOverviewModel(tour);
+        $scope.tour = new TourenModel(tour);
         return $scope.tour.$delete();
       };
 
