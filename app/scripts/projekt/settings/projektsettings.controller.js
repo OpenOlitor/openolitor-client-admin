@@ -63,9 +63,9 @@ angular.module('openolitor')
           $scope.changedProduktekategorien[produktekategorie.id] = produktekategorie;
         }
       };
+
       $scope.hasChangesProduktekategorien = function() {
-        return Object.getOwnPropertyNames($scope.changedProduktekategorien).length >
-          0;
+        return Object.getOwnPropertyNames($scope.changedProduktekategorien).length > 0;
       };
 
       $scope.saveKundentypen = function() {
@@ -111,7 +111,7 @@ angular.module('openolitor')
         if (!$scope.hasChangesProduktekategorien()) {
           return;
         }
-        $scope.templateKundentyp.updating = true;
+        $scope.templateProduktekategorie.updating = true;
         angular.forEach($scope.changedProduktekategorien, function(produktekategorie) {
           produktekategorie.$save();
         });

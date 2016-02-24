@@ -52,6 +52,7 @@
                 <div class="form-group" ng-class="{ 'has-error' : createProduktekategorieForm.produktekategorie.$invalid && createProduktekategorieForm.produktekategorie.$touched }" >
                   <input type="text" name="produktekategorie" class="form-control" placeholder="{{'Produktekategorie Name...'|translate}}" ng-model="templateProduktekategorie.produktekategorie" required>
                   <a ng-disabled="createProduktekategorieForm.$invalid || templateProduktekategorie.creating" role="button" ng-href="" ng-click="addProduktekategorie()" class="btn btn-default" translate><span class="glyphicon glyphicon-plus"></span> Erstellen<i ng-show="templateProduktekategorie.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                  <a role="button" ng-click="saveProduktekategorie()" ng-disabled="templateProduktekategorie.updating || !hasChangesProduktekategorien()" class="btn btn-primary" translate><i class="fa fa-floppy-o"></i> Speichern</span> <i ng-show="templateProduktekategorie.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
                 </div>
               </form>
             </h3>
