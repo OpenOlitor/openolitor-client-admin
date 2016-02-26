@@ -235,6 +235,14 @@ left: 10px;
   color: #AF9E9E;
 }
 
+.openolitor .table-planung .liefersumme {
+  opacity: 0.7;
+}
+
+.openolitor .table-planung .liefersumme.red {
+  color: red;
+}
+
 //navbar styles
 
 .navbar .hamburger-toggle {
@@ -372,4 +380,19 @@ left: 10px;
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 170px;
+    text-align: center;
+    padding: 50px 10px;
+    margin-left: 10px;
+}
+
+
+/* Drag and Drop*/
+ul[dnd-list], ul[dnd-list] > li {
+    position: relative;
 }

@@ -171,22 +171,28 @@ angular.module('openolitor')
 
       $scope.dummyAboEntries = [{
         name: 'Vegan Gross',
-        lieferdatum: 'Di, 03.05.2016'
+        lieferdatum: 'Di, 03.05.2016',
+        zielpreis: 30
       }, {
         name: 'Vegan Klein',
-        lieferdatum: 'Di, 03.05.2016'
+        lieferdatum: 'Di, 03.05.2016',
+        zielpreis: 23
       }, {
         name: 'Vegi Gross',
-        lieferdatum: 'Di, 03.05.2016'
+        lieferdatum: 'Di, 03.05.2016',
+        zielpreis: 30
       }, {
         name: 'Vegi Klein',
-        lieferdatum: 'Di, 03.05.2016'
+        lieferdatum: 'Di, 03.05.2016',
+        zielpreis: 23
       }, {
         name: 'Fleisch Gross',
-        lieferdatum: 'Mi, 04.05.2016'
+        lieferdatum: 'Mi, 04.05.2016',
+        zielpreis: 30
       }, {
         name: 'Fleisch Klein',
-        lieferdatum: 'Mi, 04.05.2016'
+        lieferdatum: 'Mi, 04.05.2016',
+        zielpreis: 23
       }];
 
       $scope.search = {
@@ -197,7 +203,7 @@ angular.module('openolitor')
 
       $scope.korbEntries = $scope.dummyKorbEntries;
 
-      $scope.abos = $scope.dummyAboEntries;
+      $scope.abotypen = $scope.dummyAboEntries;
 
       //watch for set of produzenten
       $scope.produzentenL = [];
@@ -248,6 +254,20 @@ angular.module('openolitor')
         });
       }
 
+      $scope.getTotal = function(produkteEntries) {
+        var total = 0;
+        angular.forEach(produkteEntries, function(korbprodukt) {
+          if(angular.isDefined(korbprodukt.preisEinheit) && angular.isDefined(korbprodukt.menge)) {
+            total += korbprodukt.preisEinheit * korbprodukt.menge;
+          }
+        });
+        return total;
+      };
+
+      $scope.getDiff = function(aboZielpreis, produkteEntries) {
+        return aboZielpreis - $scope.getTotal(produkteEntries);
+      };
+
       if (!$scope.tableParamsKorb) {
         //use default tableParams
         $scope.tableParamsKorb = new ngTableParams({ // jshint ignore:line
@@ -278,6 +298,33 @@ angular.module('openolitor')
 
         });
       }
+
+      $scope.dragOver = function(ev) {
+        ev.preventDefault();
+      };
+
+      $scope.dragOut = function(ev) {
+        ev.preventDefault();
+      };
+
+      $scope.dragProdukt = function(ev, produkt) {
+        $scope.ddData = [{bezeichnung:$scope.produkteEntries[0].bezeichnung, preisEinheit: 0.027, einheit: 'g', produzent: []}];
+      };
+
+      $scope.dragAbotyp = function(ev, abotyp) {
+        $scope.ddData = [];
+        angular.forEach($scope.korbEntries, function(produkt2add) {
+          $scope.ddData.push({bezeichnung:produkt2add.bezeichnung, preisEinheit: 0.027, einheit: 'g', produzent: []});
+        });
+      };
+
+      $scope.drop = function(ev) {
+          ev.preventDefault();
+          $scope.korbEntries = $scope.korbEntries.concat($scope.ddData);
+
+          $scope.ddData = undefined;
+          $scope.tableParamsKorb.reload();
+      };
 
     }
   ]);

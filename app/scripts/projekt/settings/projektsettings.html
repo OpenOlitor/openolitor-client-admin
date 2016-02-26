@@ -2,6 +2,87 @@
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
       <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
+
+      <form name="projektForm">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">
+                <span class="navbar-brand" translate>Stammdaten</span>
+                <span class="pull-right">
+                  <oo-save-button model="projekt" form="projektForm" entity="Projekt" on-save="saveProjekt"><span translate>Stammdaten</span></oo-save-button>
+                </span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Bezeichnung</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bezeichnung" ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="strasse" translate>Strasse / Nr.</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="strasse" ng-model="projekt.strasse" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                </div>
+                <div class="col-md-2">
+                  <input type="text" class="form-control" id="hausNummer" ng-model="projekt.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="adressZusatz" translate>Adresszusatz</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="adressZusatz" ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="plz" translate>PLZ / Ort</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="4">
+                </div>
+                <div class="col-md-5">
+                  <input type="text" class="form-control" id="ort" ng-model="projekt.ort" placeholder="{{'Ort'|translate}}" maxlength="35">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title"><span class="navbar-brand" translate>Dateien</span></h3>
+          </div>
+          <div class="panel-body">
+            <div class="row form-group">
+              <div class="col-md-2">
+                <label for="logo" translate>Logo</label>
+              </div>
+              <div class="col-md-5">
+                <div class="button drop-box" ngf-select ng-model="logoFile" name="logoFile" ngf-pattern="'image/*'"
+                  ngf-accept="'image/*'" ngf-max-size="1MB" ngf-min-height="200" ngf-select="uploadLogo($logoFile)"
+                  ngf-resize="{width: 400, height: 400}" ngf-resize-if="$width > 1000 || $height > 1000">
+                  <span translage>Logo auswählen oder einfügen</span>
+                </div>
+              </div>
+              <div class="col-md-5" ng-show="projekt.logoId">
+                <img ng-src="{{BASE_URL/projekt.logoId}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading clearfix">

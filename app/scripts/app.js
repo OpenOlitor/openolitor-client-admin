@@ -46,7 +46,8 @@ angular
     'frapontillo.bootstrap-switch',
     'gettext',
     'ngHamburger',
-    'angularMoment'
+    'angularMoment',
+    'ngFileUpload'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -257,7 +258,7 @@ angular
     $rootScope.location = $location;
 
   })
-  .controller('openolitorRootController', ['$scope', '$location', 'checkSize', '$window', function($scope, $location, checkSize, $window) {
+  .controller('OpenOlitorRootController', ['$scope', 'ProjektModel', '$location', 'checkSize', '$window', function($scope, ProjektModel, $location, checkSize, $window) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
@@ -268,6 +269,9 @@ angular
 
     //initial launch
     checkSize();
+
+    $scope.projekt = ProjektModel.query({});
+
   }])
   .factory('checkSize', ['$rootScope', '$window', function($rootScope, $window) {
     return function() {

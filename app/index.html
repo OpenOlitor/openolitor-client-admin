@@ -27,7 +27,7 @@
   <!-- endbuild -->
 </head>
 
-<body class="white openolitor" ng-app="openolitor" ng-controller="openolitorRootController">
+<body class="white openolitor" ng-app="openolitor" ng-controller="OpenOlitorRootController">
     <!-- top navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -119,6 +119,7 @@
   <script src="bower_components/blob-polyfill/Blob.js"></script>
   <script src="bower_components/file-saver.js/FileSaver.js"></script>
   <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -128,6 +129,7 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/common/filters/oo-preisproeinheit.filter.js"></script>
+  <script src="scripts/common/filters/oo-chf.filter.js"></script>
   <script src="scripts/common/components/oo-erroroverlay.directive.js"></script>
   <script src="scripts/common/components/oo-dropdown.directive.js"></script>
   <script src="scripts/common/components/oo-liefertage.directive.js"></script>
@@ -191,6 +193,7 @@
 
   <script src="scripts/korbplanung/korbplanung.controller.js"></script>
 
+  <script src="scripts/projekt/projekt.model.js"></script>
   <script src="scripts/projekt/settings/projektsettings.controller.js"></script>
   <!-- endbuild -->
 </body>

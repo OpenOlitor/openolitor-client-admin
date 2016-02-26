@@ -9,9 +9,12 @@ angular.module('openolitor')
     'KundentypenModel',
     'ProduktekategorienService',
     'ProduktekategorienModel',
+    'ProjektModel',
+    'Upload',
     'msgBus',
     function($scope, $filter, ngTableParams, KundentypenService,
-      KundentypenModel, ProduktekategorienService, ProduktekategorienModel, msgBus) {
+      KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
+      ProjektModel, Upload, msgBus) {
 
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
@@ -260,5 +263,30 @@ angular.module('openolitor')
 
         });
       }
+
+      ProjektModel.get({id: 'id'}, function(result) {
+        $scope.projekt = result;
+      }, function() {
+        $scope.projekt = new ProjektModel({waehrung: 'CHF'});
+      });
+
+      $scope.saveProjekt = function() {
+        $scope.projekt.$save();
+      };
+
+      // upload on file select or drop
+      $scope.upload = function (file) {
+          Upload.upload({
+              url: 'upload/url',
+              data: {file: file, 'username': $scope.username}
+          }).then(function (resp) {
+              console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+          }, function (resp) {
+              console.log('Error status: ' + resp.status);
+          }, function (evt) {
+              var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+              console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+          });
+      };
     }
   ]);
