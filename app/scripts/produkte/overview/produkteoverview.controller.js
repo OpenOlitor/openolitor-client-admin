@@ -122,18 +122,22 @@ angular.module('openolitor')
           $scope.entries = [];
         }
         $scope.editing = true;
-        $scope.entries.push(cloneObj(defaults.model));
+        var newProdukt = cloneObj(defaults.model);
+        $scope.editingProdukt = newProdukt;
+        $scope.entries.push(newProdukt);
         $scope.tableParams.reload();
       };
 
       $scope.edit = function(produkt) {
         produkt.editable = true;
+        $scope.editingProdukt = produkt;
         $scope.editing = true;
       };
 
       $scope.save = function(produkt) {
         produkt.editable = false;
         $scope.editing = false;
+        $scope.editingProdukt = undefined;
         $scope.produkt = new ProdukteModel(produkt);
         return $scope.produkt.$save();
       };
@@ -157,23 +161,37 @@ angular.module('openolitor')
       };
 
       $scope.removeProduzent = function(produkt, produzent) {
-        alert('test');
+        angular.forEach(produkt.produzenten, function(value, key) {
+          if(value === produzent) {
+            produkt.produzenten.splice(key, 1);
+          }
+        });
       };
 
       $scope.removeKategorie = function(produkt, kategorie) {
-        alert('test');
+        angular.forEach(produkt.kategorien, function(value, key) {
+          if(value === kategorie) {
+            produkt.kategorien.splice(key, 1);
+          }
+        });
       };
 
-      $scope.addProduzentFunc = function(produkt) {
+      $scope.addProduzentFunc = function() {
         var addProduzent = function(produzent) {
-          alert(' ' + produzent + produkt);
+          if($scope.editingProdukt.produzenten.indexOf(produzent.title) === -1 ) {
+            $scope.editingProdukt.produzenten.push(produzent.title);
+          }
+          return true; //reset dropdown
         };
         return addProduzent;
       };
 
-      $scope.addKategorieFunc = function(produkt) {
+      $scope.addKategorieFunc = function() {
         var addKategorie = function(kategorie) {
-          alert(' ' + kategorie + produkt);
+          if($scope.editingProdukt.kategorien.indexOf(kategorie.title) === -1 ) {
+            $scope.editingProdukt.kategorien.push(kategorie.title);
+          }
+          return true; //reset dropdown
         };
         return addKategorie;
       };

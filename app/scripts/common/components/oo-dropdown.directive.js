@@ -54,7 +54,11 @@ angular.module('openolitor').directive('ooDropdown', function() {
         }
         $scope.selectedItem = item;
         if(angular.isDefined($scope.selectedFunction)) {
-          $scope.selectedFunction()($scope.selectedItem);
+          if($scope.selectedFunction()($scope.selectedItem)) {
+            //if functions returns 'true', selection is reset
+            $scope.selectedItem = undefined;
+            $scope.selected = undefined;
+          }
         }
         $scope.updateDisplay();
       };

@@ -55,20 +55,20 @@
             </td>
             <td title="'Kategorien'|translate" filter="{kategorien: 'select'}" filter-data="kategorienL" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-repeat="kategorie in produkt.kategorien" class="badge">
-                {{kategorie.bezeichnung}}
-                <span ng-show="produkt.editable" ng-click="removeKategorie(kategorie)" class="glyphicon glyphicon-remove"></span>
+                {{kategorie}}
+                <span ng-show="produkt.editable" ng-click="removeKategorie(produkt, kategorie)" class="glyphicon glyphicon-remove"></span>
               </span>
               <span ng-show="produkt.editable" class="dropdown pull-right">
-                <oo-dropdown dropdown-id="produktekategorie" display-style="uib-dropdown" values="kategorienL" property="title" selected-prop="id" selected="produkt.addedVertriebsart" selected-function="addKategorieFunc()" required></oo-dropdown>
+                <oo-dropdown dropdown-id="produktekategorie" display-style="uib-dropdown" values="kategorienL" property="title" selected-prop="id" selected-function="addKategorieFunc()" required></oo-dropdown>
               </span>
             </td>
             <td title="'Produzenten'|translate" filter="{produzenten: 'select'}" filter-data="produzentenL" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-repeat="produzent in produkt.produzenten" class="badge">
-                {{produzent.kurzzeichen}}
-                <span ng-show="produkt.editable" ng-click="removeProduzent(kategorie)" class="glyphicon glyphicon-remove"></span>
+                {{produzent}}
+                <span ng-show="produkt.editable" ng-click="removeProduzent(produkt, produzent)" class="glyphicon glyphicon-remove"></span>
               </span>
               <span ng-show="produkt.editable" class="dropdown pull-right">
-                <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="produzentenL" property="title" selected-prop="id" selected="produkt.addedProduzent" selected-function="addProduzentFunc()"required></oo-dropdown>
+                <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="produzentenL" property="title" selected-prop="id" selected-function="addProduzentFunc()" required></oo-dropdown>
               </span>
             </td>
 
