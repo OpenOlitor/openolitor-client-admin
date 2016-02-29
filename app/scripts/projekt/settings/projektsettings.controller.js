@@ -9,15 +9,17 @@ angular.module('openolitor')
     'KundentypenModel',
     'ProduktekategorienService',
     'ProduktekategorienModel',
+    'ProjektService',
     'ProjektModel',
     'Upload',
     'msgBus',
     function($scope, $filter, ngTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-      ProjektModel, Upload, msgBus) {
+      ProjektService, ProjektModel, Upload, msgBus) {
 
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
+      $scope.projekt = {waehrung: 'CHF'};
 
       //watch for set of kundentypen
       $scope.$watch(KundentypenService.getKundentypen,
@@ -44,6 +46,14 @@ angular.module('openolitor')
               }
             });
             $scope.produktekategorienTableParams.reload();
+          }
+        });
+
+      //watch for existing projekt
+      $scope.$watch(ProjektService.getProjekt,
+        function(projekt) {
+          if (projekt) {
+            $scope.projekt = projekt;
           }
         });
 
@@ -263,12 +273,6 @@ angular.module('openolitor')
 
         });
       }
-
-      ProjektModel.get({id: 'id'}, function(result) {
-        $scope.projekt = result;
-      }, function() {
-        $scope.projekt = new ProjektModel({waehrung: 'CHF'});
-      });
 
       $scope.saveProjekt = function() {
         $scope.projekt.$save();
