@@ -34,7 +34,7 @@
         <div>
           <hamburger-toggle state="tgState" class="hamburger-toggle"></hamburger-toggle>
           <a class="navbar-brand" ng-href="#/abos">OpenOlitor</a>
-          <p class="navbar-text">Administrationsumgebung für <span>Initiativen-Name</span></p>
+          <p class="navbar-text">Administrationsumgebung für <span>{{projekt.bezeichnung}}</span></p>
           <ul class="nav navbar-nav pull-right">
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hans Muster <span class="caret"></span></a>
@@ -77,6 +77,10 @@
       <![endif]-->
       <div ng-view="" ng-cloak class="container-fluid"></div>
     </div>
+
+    <footer>
+      <a href="http://www.openolitor.ch" target="_blank">www.openolitor.ch</a> Build #{{buildNr}}
+    </footer>
 
 
   <!-- build:js(.) scripts/oldieshim.js -->
@@ -128,6 +132,7 @@
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
+  <script src="scripts/root.js"></script>
   <script src="scripts/common/filters/oo-preisproeinheit.filter.js"></script>
   <script src="scripts/common/filters/oo-chf.filter.js"></script>
   <script src="scripts/common/components/oo-erroroverlay.directive.js"></script>
@@ -191,7 +196,9 @@
   <script src="scripts/pendenzen/overview/pendenzenoverview.model.js"></script>
   <script src="scripts/pendenzen/overview/pendenzenoverview.controller.js"></script>
 
-  <script src="scripts/korbplanung/korbplanung.controller.js"></script>
+  <script src="scripts/korbplanung/overview/korbplanungoverview.controller.js"></script>
+  <script src="scripts/korbplanung/detail/korbplanung.controller.js"></script>
+  <script src="scripts/korbplanung/korbplanung.model.js"></script>
 
   <script src="scripts/projekt/projekt.model.js"></script>
   <script src="scripts/projekt/projekt.service.js"></script>

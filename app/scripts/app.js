@@ -51,6 +51,7 @@ angular
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
+  .constant('BUILD_NR', '@@BUILD_NR')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: 'Woechentlich',
     ZWEIWOECHENTLICH: 'Zweiwoechentlich',
@@ -258,21 +259,6 @@ angular
     $rootScope.location = $location;
 
   })
-  .controller('OpenOlitorRootController', ['$scope', 'ProjektModel', '$location', 'checkSize', '$window', function($scope, ProjektModel, $location, checkSize, $window) {
-    angular.element($window).bind('resize', function() {
-      checkSize();
-    });
-
-    $scope.currentPathContains = function(pathJunk) {
-      return $location.url().indexOf(pathJunk) !== -1;
-    };
-
-    //initial launch
-    checkSize();
-
-    $scope.projekt = ProjektModel.query({});
-
-  }])
   .factory('checkSize', ['$rootScope', '$window', function($rootScope, $window) {
     return function() {
       if($window.innerWidth >= 1200) {
@@ -440,9 +426,14 @@ angular
         name: 'PendenzenOverview'
       })
       .when('/korbplanung', {
-        templateUrl: 'scripts/korbplanung/korbplanung.html',
-        controller: 'KorbplanungController',
-        name: 'Korbplanung'
+        templateUrl: 'scripts/korbplanung/overview/korbplanungoverview.html',
+        controller: 'KorbplanungOverviewController',
+        name: 'KorbplanungDetail'
+      })
+      .when('/korbplanung/:id', {
+        templateUrl: 'scripts/korbplanung/detail/korbplanungdetail.html',
+        controller: 'KorbplanungDetailController',
+        name: 'KorbplanungOverview'
       })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',

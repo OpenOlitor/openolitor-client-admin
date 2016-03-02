@@ -275,7 +275,7 @@ angular.module('openolitor')
       }
 
       $scope.saveProjekt = function() {
-        $scope.projekt.$save();
+        return $scope.projekt.$save();
       };
 
       // upload on file select or drop

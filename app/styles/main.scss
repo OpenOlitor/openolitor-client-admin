@@ -35,7 +35,6 @@ input.ng-invalid {
   padding: 5px 35px;
 }
 
-
 .master-content {
   margin-top: 61px;
   margin-left: 10px;
@@ -293,10 +292,23 @@ left: 10px;
   min-height: 100vh;
 }
 
-.footer {
+footer, .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+.openolitor>footer {
+  text-align: right;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 5px;
+}
+
+.openolitor>footer a:link, .openolitor>footer a:active, .openolitor>footer a:visited{
+  color: #82C5FF;
 }
 
 .adsbygoogle {
