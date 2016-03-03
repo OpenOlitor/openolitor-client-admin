@@ -54,6 +54,8 @@ angular.module('openolitor')
         function(projekt) {
           if (projekt) {
             $scope.projekt = projekt;
+          } else {
+            $scope.projekt = new ProjektModel($scope.projekt);
           }
         });
 
