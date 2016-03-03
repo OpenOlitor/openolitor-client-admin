@@ -12,7 +12,8 @@
               <div class="col-md-8">
                 <div class="pull-right" role="group">
                   <a role="button" ng-href="#/korbplanung/id/produzentenoverview" class="btn btn-default" translate><span class="fa fa-step-forward"></span> Produzenten-Übersicht</a>
-                  <button role="button" ng-click="planungAbschliessen()" class="btn btn-primary" translate><span class="fa fa-check"></span> Planung abschliessen</button>
+                  <oo-save-button model="kunde" form="kundeForm" entity="Korbplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
+                  <button role="button" ng-click="planungAbschliessen()" class="btn btn-success" translate><span class="fa fa-check"></span> Planung abschliessen</button>
                 </div>
               </div>
             </h3>
@@ -28,9 +29,8 @@
             </div>
             <div class="panel-body">
               <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-                <tr ng-repeat="produkt in $data"
-                  draggable="true" ondragstart="angular.element($('#korbplanung')).scope().dragProdukt(event)">
-                  <td>&#8942;</td>
+                <tr ng-repeat="produkt in $data">
+                <td><span draggable="true" ondragstart="angular.element($('#korbplanung')).scope().dragProdukt(event)" title="My tip">&#8942</span></td>
                   <td title="'Produkt'|translate" sortable="'bezeichnung'" filter="{bezeichnung: 'text'}">
                     {{produkt.bezeichnung}}
                   </td>
@@ -63,9 +63,8 @@
             </div>
             <div class="panel-body">
               <table ng-table="tableParamsKorb" class="table table-striped table-small table-planung" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-                <tr ng-repeat="korbprodukt in $data"
-                  draggable="true">
-                  <td>&#8942;</td>
+                <tr ng-repeat="korbprodukt in $data">
+                  <td><span draggable="true" ondragstart="angular.element($('#korbplanung')).scope().dragProdukt(event)">&#8942</span></td>
                   <td title="'Produkt'|translate">
                     {{korbprodukt.bezeichnung}}
                   </td>

@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KorbplanungController', ['$scope', 'ngTableParams', '$filter', 'ProduzentenService',
+  .controller('KorbplanungDetailController', ['$scope', 'ngTableParams', '$filter', 'ProduzentenService',
     function($scope, ngTableParams, $filter, ProduzentenService) {
       $scope.test = [];
 
