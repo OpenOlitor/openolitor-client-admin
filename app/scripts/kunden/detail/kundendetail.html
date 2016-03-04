@@ -253,7 +253,14 @@
                     <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
                   </td>
                   <td>
-                    <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
+                    <span ng-show="abo.depotId">
+                      <span translate>Depot:</span>
+                      <a ng-href="#/depots/{{abo.depotId}}">{{abo.depotName}}</a>
+                    </span>
+                    <span ng-show="abo.tourId">
+                      <span translate>Tour:</span>
+                      <a ng-href="#/depots/{{abo.tourId}}">{{abo.tourName}}</a>
+                    </span>
                   </td>
                 </tr>
               </table>

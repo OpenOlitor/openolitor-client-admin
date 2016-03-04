@@ -138,6 +138,7 @@ angular.module('openolitor')
             case VERTRIEBSARTEN.HEIMLIEFERUNG:
               $scope.abo.tourId = vertriebsart.tour.id;
               $scope.abo.tourName = vertriebsart.tour.name;
+              $scope.abo.liefertag = vertriebsart.liefertag;
               break;
           }
         }
