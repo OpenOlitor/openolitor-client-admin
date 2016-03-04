@@ -22,15 +22,19 @@ angular.module('openolitor')
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
 
-      if (!$routeParams.id) {
-        $scope.kunde = new KundenDetailModel(defaults.model);
-        $scope.pendenzen = [];
-      } else {
+      $scope.loadKunde = function() {
         KundenDetailModel.get({
           id: $routeParams.id
         }, function(result) {
           $scope.kunde = result;
         });
+      };
+
+      if (!$routeParams.id) {
+        $scope.kunde = new KundenDetailModel(defaults.model);
+        $scope.pendenzen = [];
+      } else {
+        $scope.loadKunde();
       }
 
       $scope.open = {
@@ -172,8 +176,8 @@ angular.module('openolitor')
           }
         });
 
-        modalInstance.result.then(function (abo) {
-          $scope.createAbo(abo);
+        modalInstance.result.then(function () {
+          $scope.loadKunde();
         }, function () {
           $log.info('Modal dismissed at: ' + new Date());
         });
