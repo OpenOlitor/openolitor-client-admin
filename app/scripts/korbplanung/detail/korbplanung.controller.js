@@ -263,15 +263,19 @@ angular.module('openolitor')
             total: 0
           };
         }
+        var anzahl = abotypLieferung.anzahl;
+        if(!angular.isUndefined($scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].positionen[korbprodukt.bezeichnung + korbprodukt.menge])) {
+          anzahl += $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].positionen[korbprodukt.bezeichnung + korbprodukt.menge].anzahl;
+        }
         $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].positionen[korbprodukt.bezeichnung + korbprodukt.menge] = {
-          anzahl: abotypLieferung.anzahl,
+          anzahl: anzahl,
           produkteBezeichnung: korbprodukt.bezeichnung,
           menge: korbprodukt.menge,
           einheit: korbprodukt.einheit,
           preisEinheit: korbprodukt.preisEinheit,
-          preis: (korbprodukt.preisEinheit * korbprodukt.menge * abotypLieferung.anzahl)
+          preis: (korbprodukt.preisEinheit * korbprodukt.menge * anzahl)
         };
-        $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].total += (korbprodukt.preisEinheit * korbprodukt.menge * abotypLieferung.anzahl);
+        $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].total += (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
       };
 
       $scope.recalculateBestellungen = function() {
