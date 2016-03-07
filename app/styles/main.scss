@@ -17,6 +17,11 @@ h1, h2, h3 {
   letter-spacing: 0.7px;
 }
 
+h3 .small {
+  margin-top: 9px;
+  margin-right: 5px;
+}
+
 //ng validator
 input.ng-invalid {
   border-color: red;
@@ -154,26 +159,26 @@ input.ng-invalid {
 }
 
 .dropdown>.dropdown-form:before {
-content: '';
-display: inline-block;
-border-left: 7px solid transparent;
-border-right: 7px solid transparent;
-border-bottom: 7px solid #ccc;
-border-bottom-color: rgba(0, 0, 0, 0.2);
-position: absolute;
-top: -6px;
-left: 9px;
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -6px;
+  left: 9px;
 }
 
 .dropdown>.dropdown-form:after{
-content: '';
-display: inline-block;
-border-left: 6px solid transparent;
-border-right: 6px solid transparent;
-border-bottom: 6px solid #ffffff;
-position: absolute;
-top: -5px;
-left: 10px;
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  position: absolute;
+  top: -5px;
+  left: 10px;
 }
 
 .dropdown .pull-right>.dropdown-form:before{
@@ -254,6 +259,16 @@ left: 10px;
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
 }
+
+.content .show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.content .show-hide.ng-hide {
+  opacity:0;
+}
+
 .content.sidenav-open {
   padding-left: 210px;
 }
@@ -404,8 +419,31 @@ footer, .footer {
     margin-left: 10px;
 }
 
+/* Drag'n'drop */
 
-/* Drag and Drop*/
-ul[dnd-list], ul[dnd-list] > li {
-    position: relative;
+/* Special Korbplanung */
+#korbplanung .korbplanung-title .navbar-brand {
+  margin-left: 0px !important;
+  padding-left: 0px;
+}
+
+#korbplanung .korbplanung-title .navbar-brand .pre-info {
+  color: #ADADAD;
+  font-size: 85%;
+}
+
+#korbplanung .panel-korbplanung {
+  min-height: 30vh;
+}
+
+#korbplanung .oo-over {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red !important;
+}
+
+#korbplanung .oo-target {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
 }
