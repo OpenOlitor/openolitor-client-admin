@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('OpenOlitorRootController', ['$scope', 'ProjektModel', '$location', 'checkSize', '$window', 'BUILD_NR',
-  function($scope, ProjektModel, $location, checkSize, $window, BUILD_NR) {
+  .controller('OpenOlitorRootController', ['$scope', 'ProjektModel', '$location', 'checkSize', '$window', '$timeout', 'BUILD_NR',
+  function($scope, ProjektModel, $location, checkSize, $window, $timeout, BUILD_NR) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
@@ -19,5 +19,10 @@ angular.module('openolitor')
     $scope.projekt = ProjektModel.query({});
 
     $scope.buildNr = BUILD_NR;
+
+    $timeout(function() {
+      $scope.menushow[angular.element( '.sidebar-nav .active' ).parent().attr('activate-id')] = true;
+    }, 0);
+
 
   }]);
