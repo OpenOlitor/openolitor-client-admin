@@ -11,31 +11,31 @@ angular.module('openolitor')
         bezeichnung: 'Karotten',
         preis: 6.70,
         einheit: 'Kilo',
-        produzenten: ['FH','D','AKJ','SA'],
+        produzenten: [{id:'FH'},{id:'D'},{id:'AKJ'},{id:'SA'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813778b8',
         bezeichnung: 'Kartoffeln',
         preis: 3.70,
         einheit: 'Kilo',
-        produzenten: ['D','AKJ','SA'],
+        produzenten: [{id:'FH'},{id:'D'},{id:'AKJ'},{id:'SA'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813778b8',
         bezeichnung: 'Nüssler',
         preis: 1.80,
         einheit: '100g',
-        produzenten: ['D','AKJ','FH'],
+        produzenten: [{id:'FH'},{id:'AKJ'},{id:'SA'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813178b8',
         bezeichnung: 'Radiesli',
         preis: 4.10,
         einheit: 'Bund',
-        produzenten: ['RAD'],
+        produzenten: [{id:'RAD'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813178b8',
         bezeichnung: 'Peterli',
         preis: 3.80,
         einheit: 'Bund',
-        produzenten: ['RAD'],
+        produzenten: [{id:'D'},{id:'AKJ'},{id:'SA'}],
       }];
 
       $scope.dummyAbotypLieferungEntries = [{
@@ -98,22 +98,7 @@ angular.module('openolitor')
 
       $scope.displayMode = 'korbinhalt';
 
-      //watch for set of produzenten
-      $scope.produzentenL = [];
-      $scope.$watch(ProduzentenService.getProduzenten,
-        function(list) {
-          if (list) {
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.produzentenL.push({
-                  'id': item.id,
-                  'title': item.kurzzeichen
-                });
-              }
-            });
-            $scope.tableParams.reload();
-          }
-        });
+      $scope.bestellungen = {};
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -150,6 +135,14 @@ angular.module('openolitor')
       $scope.addAbotypenL = AbotypenOverviewModel.query({
         aktiv: true
       });
+
+      $scope.removeProdukt = function(abotypLieferung, korbprodukt) {
+        var index = abotypLieferung.korbEntries.indexOf(korbprodukt);
+        if (index > -1) {
+          abotypLieferung.korbEntries.splice(index, 1);
+          abotypLieferung.tableParamsKorb.reload();
+        }
+      };
 
       $scope.getTotal = function(produkteEntries) {
         var total = 0;
@@ -214,7 +207,6 @@ angular.module('openolitor')
       });
 
       $scope.dropProdukt = function(dragEl, dropEl, type) {
-
         if(dragEl === dropEl) {
           return;
         }
@@ -231,12 +223,12 @@ angular.module('openolitor')
               preisEinheit: produkt.preis,
               einheit: produkt.einheit,
               produzentenL: produkt.produzenten,
-              produzent: produzent
+              produzent: produzent.id
             };
             drop.scope().abotypLieferung.korbEntries.push(prodEntry);
             break;
           case 'korbprod':
-            var prodKorb = cloneObj(drag.scope().produkt);
+            var prodKorb = cloneObj(drag.scope().korbprodukt);
             drop.scope().abotypLieferung.korbEntries.push(prodKorb);
             break;
           case 'korb':
@@ -252,8 +244,43 @@ angular.module('openolitor')
         drop.scope().abotypLieferung.tableParamsKorb.reload();
       };
 
-      $scope.recalulateBestellungen = function() {
+      var addEntryToBestellungen = function(abotypLieferung, korbprodukt) {
+        var produzent = korbprodukt.produzent;
+        if(angular.isUndefined(produzent)) {
+          produzent = 'Noch nicht definierter Produzent';
+        }
 
+        if(angular.isUndefined($scope.bestellungen[produzent])) {
+          $scope.bestellungen[produzent] = {
+            produzent: produzent,
+            lieferungen: {}
+          };
+        }
+        if(angular.isUndefined($scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum])) {
+          $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum] = {
+            datum: abotypLieferung.lieferdatum,
+            positionen: {},
+            total: 0
+          };
+        }
+        $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].positionen[korbprodukt.bezeichnung + korbprodukt.menge] = {
+          anzahl: abotypLieferung.anzahl,
+          produkteBezeichnung: korbprodukt.bezeichnung,
+          menge: korbprodukt.menge,
+          einheit: korbprodukt.einheit,
+          preisEinheit: korbprodukt.preisEinheit,
+          preis: (korbprodukt.preisEinheit * korbprodukt.menge * abotypLieferung.anzahl)
+        };
+        $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].total += (korbprodukt.preisEinheit * korbprodukt.menge * abotypLieferung.anzahl);
+      };
+
+      $scope.recalculateBestellungen = function() {
+        $scope.bestellungen = {};
+        angular.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+          angular.forEach(abotypLieferung.korbEntries, function(korbprodukt) {
+            addEntryToBestellungen(abotypLieferung, korbprodukt);
+          });
+        });
       };
 
     }

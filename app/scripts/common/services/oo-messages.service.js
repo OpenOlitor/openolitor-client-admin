@@ -2,8 +2,8 @@
 
 angular.module('openolitor')
   .factory('ooClientMessageService', ['$http', '$location', '$q', '$rootScope',
-    'msgBus', 'API_WS_URL',
-    function($http, $location, $q, $rootScope, msgBus, API_WS_URL) {
+    'msgBus', 'API_WS_URL', 'BUILD_NR',
+    function($http, $location, $q, $rootScope, msgBus, API_WS_URL, BUILD_NR) {
 
       var send = function(eventType, eventData) {
         //append type to event data
@@ -22,11 +22,6 @@ angular.module('openolitor')
         send: send,
         //start websocket based messaging
         start: function() {
-          //$rootScope.$watch(
-          //  userService.getUser,
-          //function() {
-          //Auth.isLoggedIn().then(function(loggedIn) {
-          //if (loggedIn) {
           console.log('registering websocket, request websocket url');
           var wsUrl = API_WS_URL.replace('http://', 'ws://');
           console.log('registering websocket, bind to '+wsUrl);
@@ -44,14 +39,10 @@ angular.module('openolitor')
               console.log('onopen : ' + event);
               //send hello command to server
               send('HelloServer', {
-                client: 'someClientName'
+                client: 'angularClient_' + BUILD_NR
               });
             };
           }
-          //}
-          //                });
-          //            });
-          //      }
         }
       };
     }

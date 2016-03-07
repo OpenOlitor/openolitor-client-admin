@@ -24,7 +24,11 @@ h3 .small {
 
 //ng validator
 input.ng-invalid {
-  border-color: red;
+  border-color: #D60000;
+}
+
+.panel-title input.ng-invalid {
+  border-color: #cccccc; //default bootstrap forms border-color
 }
 
 .navbar-fixed-top {
@@ -227,24 +231,62 @@ input.ng-invalid {
   padding: 4px;
 }
 
-.openolitor .table-planung input{
+/* Special Korbplanung */
+#korbplanung .korbplanung-title .navbar-brand {
+  margin-left: 0px !important;
+  padding-left: 0px;
+}
+
+#korbplanung .korbplanung-title .navbar-brand .pre-info {
+  color: #ADADAD;
+  font-size: 85%;
+}
+
+#korbplanung .panel-korbplanung {
+  min-height: 30vh;
+}
+
+#korbplanung .panel-fixed-height-full {
+  min-height: calc(100vh - 180px);
+}
+
+#korbplanung .table-korbplanung input{
   width: 8em;
 }
 
-.openolitor .table-planung .input-group-addon{
+#korbplanung .table-korbplanung .input-group-addon{
   width: 4em;
 }
 
-.openolitor .table-planung .base-preis {
+#korbplanung .table-korbplanung .base-preis {
   color: #AF9E9E;
 }
 
-.openolitor .table-planung .liefersumme {
+#korbplanung .table-korbplanung .liefersumme {
   opacity: 0.7;
 }
 
-.openolitor .table-planung .liefersumme.red {
+#korbplanung .table-korbplanung .liefersumme.red {
   color: red;
+}
+
+#korbplanung .table-korbplanung tfoot {
+  font-weight: bold;
+}
+
+/* Drag'n'drop */
+#korbplanung .oo-over {
+  border-style: solid;
+  border-width: 1px;
+  border-color: red !important;
+  box-shadow: 4px 4px 10px red;
+}
+
+#korbplanung .oo-target {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  box-shadow: 4px 4px 10px grey;
 }
 
 //navbar styles
@@ -302,10 +344,6 @@ input.ng-invalid {
 
 .container.panel {
   min-height: 500px
-}
-
-.panel-fixed-height-100 {
-  min-height: 100vh;
 }
 
 footer, .footer {
@@ -417,33 +455,4 @@ footer, .footer {
     text-align: center;
     padding: 50px 10px;
     margin-left: 10px;
-}
-
-/* Drag'n'drop */
-
-/* Special Korbplanung */
-#korbplanung .korbplanung-title .navbar-brand {
-  margin-left: 0px !important;
-  padding-left: 0px;
-}
-
-#korbplanung .korbplanung-title .navbar-brand .pre-info {
-  color: #ADADAD;
-  font-size: 85%;
-}
-
-#korbplanung .panel-korbplanung {
-  min-height: 30vh;
-}
-
-#korbplanung .oo-over {
-  border-style: solid;
-  border-width: 2px;
-  border-color: red !important;
-}
-
-#korbplanung .oo-target {
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
 }

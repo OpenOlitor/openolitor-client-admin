@@ -86,6 +86,7 @@ angular.module('openolitor').directive('ooDropTarget', ['$rootScope', 'uuid', fu
                 var data = e.originalEvent.dataTransfer.getData('text');
                 var type = e.originalEvent.dataTransfer.getData('type');
 
+                enteredCounter = 0;
                 $rootScope.$emit('OO-DRAG-END');
                 scope.onDrop({dragEl: data, dropEl: id, type: type});
             });
