@@ -195,6 +195,11 @@ angular.module('openolitor')
         }
       };
 
+      $scope.calculatePreis = function(korbprodukt) {
+        korbprodukt.preis = (korbprodukt.preisEinheit * korbprodukt.menge);
+        return korbprodukt.preis;
+      };
+
       $scope.getDurchschnittspreisInfo = function(abotypLieferung) {
         return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
       };

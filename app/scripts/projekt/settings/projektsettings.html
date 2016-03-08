@@ -54,6 +54,30 @@
                 </div>
               </div>
             </div>
+
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">
+                <span class="navbar-brand" translate>Konfigurationen</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
+                </div>
+                <div class="col-md-4">
+                  <input bs-switch ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+              <div class="row form-group" ng-show="projekt.preiseSichtbar">
+                <div class="col-md-8">
+                  <label for="bezeichnung" translate>Preise editierbar</label>
+                </div>
+                <div class="col-md-4">
+                  <input bs-switch ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
