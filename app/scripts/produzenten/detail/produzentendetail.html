@@ -101,6 +101,14 @@
                   </div>
                 </div>
               </div>
+              <div class="row form-group" ng-if="produzent.mwst">
+                <div class="col-md-4">
+                  <label for="bemerkungen" translate>MWST-Nr</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="mwstNr" ng-model="produzent.mwstNr" ng-required="produzent.mwst" placeholder="{{'CHE-xxx.yyy.zzz MWST '|translate}}">
+                </div>
+              </div>
             </div>
           </div>
         </div>
