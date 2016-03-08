@@ -43,8 +43,14 @@
               <span ng-show="produkt.editable">
                 <div class="input-group">
                   <div class="input-group-addon">{{'CHF'|translate}}</div>
-                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="produkt.preis" required></input>
+                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="preis" ng-model="produkt.preis" required></input>
                 </div>
+              </span>
+            </td>
+            <td title="'Standardmenge'|translate" sortable="'standardmenge'">
+              <span ng-hide="produkt.editable">{{produkt.standardmenge}}</span>
+              <span ng-show="produkt.editable">
+                <input type="number" placeholder="{{'Menge'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="standardmenge" ng-model="produkt.standardmenge"></input>
               </span>
             </td>
             <td title="'Einheit'|translate" sortable="'einheit'">

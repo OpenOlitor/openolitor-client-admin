@@ -10,30 +10,35 @@ angular.module('openolitor')
         id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
         bezeichnung: 'Karotten',
         preis: 6.70,
+        standardmenge: 0.75,
         einheit: 'Kilo',
         produzenten: [{id:'FH'},{id:'D'},{id:'AKJ'},{id:'SA'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813778b8',
         bezeichnung: 'Kartoffeln',
         preis: 3.70,
+        standardmenge: 1.2,
         einheit: 'Kilo',
         produzenten: [{id:'FH'},{id:'D'},{id:'AKJ'},{id:'SA'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813778b8',
         bezeichnung: 'Nüssler',
         preis: 1.80,
-        einheit: '100g',
+        standardmenge: 150,
+        einheit: 'Gramm',
         produzenten: [{id:'FH'},{id:'AKJ'},{id:'SA'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813178b8',
         bezeichnung: 'Radiesli',
         preis: 4.10,
+        standardmenge: 1,
         einheit: 'Bund',
         produzenten: [{id:'RAD'}],
       }, {
         id: '614275dc-29f5-4aa9-86eb-36ee813178b8',
         bezeichnung: 'Peterli',
         preis: 3.80,
+        standardmenge: '',
         einheit: 'Bund',
         produzenten: [{id:'D'},{id:'AKJ'},{id:'SA'}],
       }];
@@ -256,6 +261,7 @@ angular.module('openolitor')
             var prodEntry = {
               bezeichnung:produkt.bezeichnung,
               preisEinheit: produkt.preis,
+              menge: produkt.standardmenge,
               einheit: produkt.einheit,
               produzentenL: produkt.produzenten,
               produzent: produzent.id
