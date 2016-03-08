@@ -136,6 +136,30 @@ angular.module('openolitor')
         aktiv: true
       });
 
+      $scope.addAbotypToPlanungFunc = function() {
+        return $scope.addAbotypToPlanung;
+      };
+
+      $scope.addAbotypToPlanung = function(abotyp) {
+        $scope.abotypenLieferungen.push({
+          name: abotyp.name,
+          lieferdatum: 'Di, 03.05.2016',  /* TODO muss später zur konkreten Lieferung passen*/
+          zielpreis: abotyp.zielpreis,
+          durchschnittspreis: 23.01,  /* TODO  muss später zur konkreten Lieferung passen*/
+          anzahlLieferungen: 20,  /* TODO  muss später zur konkreten Lieferung passen*/
+          anzahl: abotyp.anzahlAbonnenten, /* TODO  muss später zur konkreten Lieferung passen*/
+          farbcode: abotyp.farbCode,
+          korbEntries: []
+        });
+      };
+
+      $scope.removeAbotypFromPlanung = function(abotypLieferung) {
+        var index = $scope.abotypenLieferungen.indexOf(abotypLieferung);
+        if (index > -1) {
+          $scope.abotypenLieferungen.splice(index, 1);
+        }
+      };
+
       $scope.removeProdukt = function(abotypLieferung, korbprodukt) {
         var index = abotypLieferung.korbEntries.indexOf(korbprodukt);
         if (index > -1) {
@@ -207,12 +231,23 @@ angular.module('openolitor')
       });
 
       $scope.dropProdukt = function(dragEl, dropEl, type) {
-        if(dragEl === dropEl) {
+        var drop = angular.element('#' + dropEl);
+        var drag = angular.element('#' + dragEl);
+
+        if(dragEl === dropEl || drag.scope().abotypLieferung === drop.scope().abotypLieferung) {
           return;
         }
 
-        var drop = angular.element('#' + dropEl);
-        var drag = angular.element('#' + dragEl);
+        var notInKorb = function(korbEntries, prodEntry) {
+          var ret = true;
+          angular.forEach(korbEntries, function(entry) {
+            if(prodEntry.bezeichnung === entry.bezeichnung) {
+              ret = false;
+              return;
+            }
+          });
+          return ret;
+        };
 
         switch(type) {
           case 'prod':
@@ -225,16 +260,16 @@ angular.module('openolitor')
               produzentenL: produkt.produzenten,
               produzent: produzent.id
             };
-            drop.scope().abotypLieferung.korbEntries.push(prodEntry);
+            if(notInKorb(drop.scope().abotypLieferung.korbEntries, prodEntry)) { drop.scope().abotypLieferung.korbEntries.push(prodEntry); }
             break;
           case 'korbprod':
             var prodKorb = cloneObj(drag.scope().korbprodukt);
-            drop.scope().abotypLieferung.korbEntries.push(prodKorb);
+            if(notInKorb(drop.scope().abotypLieferung.korbEntries, prodKorb)) { drop.scope().abotypLieferung.korbEntries.push(prodKorb); }
             break;
           case 'korb':
             angular.forEach(drag.scope().abotypLieferung.korbEntries, function(produkt2add) {
               var prodEntry = cloneObj(produkt2add);
-              drop.scope().abotypLieferung.korbEntries.push(prodEntry);
+              if(notInKorb(drop.scope().abotypLieferung.korbEntries, prodEntry)) { drop.scope().abotypLieferung.korbEntries.push(prodEntry); }
             });
             break;
           default:

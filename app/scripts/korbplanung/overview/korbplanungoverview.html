@@ -27,7 +27,15 @@
                 {{abotyp.name}} {{abotyp.lieferdatum}}
               </span>
             </td>
-            <td title="'Abgeschlossen'|translate">
+            <td title="'Depots / Touren'|translate">
+              <span ng-repeat="tour in korplanung.touren" class="badge">
+                {{tour.name}} {{tour.datum}}
+              </span>
+              <span ng-repeat="depot in korplanung.depots" class="badge">
+                {{depot.name}} {{depot.datum}}
+              </span>
+            </td>
+            <td title="'Status'|translate">
               <i ng-if="korplanung.status === 'abgeschlossen' || korplanung.status === 'verrechnet'" class="glyphicon glyphicon-ok"></i>
               <i ng-if="korplanung.aktiv  === 'inPlanung'" class="glyphicon glyphicon-remove"></i>
             </td>

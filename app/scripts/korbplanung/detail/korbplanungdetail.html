@@ -14,15 +14,15 @@
                   <ul class="nav navbar-nav">
                     <li class="small" translate>Abotyp hinzufügen:</li>
                     <li>
-                      <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="addAbotypenL" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+                      <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="addAbotypenL" property="name" selected-prop="id" selected="abo.abotypId" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
                     </li>
                   </ul>
                 </div>
                 <div class="col-md-6">
                   <div class="pull-right" role="group">
-                    <button type="button" role="button" ng-click="recalculateBestellungen(); displayMode = 'lieferanten'" class="btn btn-default" translate><span class="fa fa-step-forward"></span> Produzenten-Übersicht</button>
+                    <button type="button" role="button" ng-click="recalculateBestellungen(); displayMode = 'lieferanten'" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
                     <oo-save-button model="kunde" form="kundeForm" entity="Korbplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
-                    <button role="button" ng-click="planungAbschliessen()" class="btn btn-success" translate><span class="fa fa-check"></span> Planung abschliessen</button>
+                    <button role="button" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span</button>
                   </div>
                 </div>
               </h3>
@@ -65,7 +65,7 @@
                     <small><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.lieferdatum}}</small>
                     <button role="button" class="btn btn-default"
                       oo-draggable="true" oo-draged-type="'korb'" translate><span class="fa fa-files-o"></span></button>
-                    <button role="button" ng-click="removeFromPlanung(abotypLieferung)" class="btn btn-default" translate><span class="fa fa-times"></span></button>
+                    <button type="button" role="button" ng-click="removeAbotypFromPlanung(abotypLieferung)" class="btn btn-default" translate><span class="fa fa-times"></span></button>
                   </span>
                 </h3>
               </div>
