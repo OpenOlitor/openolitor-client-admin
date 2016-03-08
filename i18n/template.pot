@@ -4,77 +4,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:146
+#: app/scripts/korbplanung/overview/korbplanungoverview.html:22
+msgid "#"
+msgstr ""
+
+#: app/scripts/abotypen/overview/abotypenoverview.html:30
+msgid "# Abonnenten"
+msgstr ""
+
 #: app/scripts/depots/overview/depotsoverview.html:38
 #: app/scripts/kunden/overview/kundenoverview.html:32
 msgid "# Abos"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:32
+#: app/scripts/projekt/settings/projektsettings.html:113
 msgid "# Verknüpfungen"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:205
+#: app/scripts/kunden/detail/kundendetail.html:250
 msgid "# {{$index+1}}"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:142
+#: app/scripts/produzenten/detail/produzentendetail.html:100
+msgid "%"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:187
+#: app/scripts/produzenten/detail/produzentendetail.html:165
 msgid "+41 ..."
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:134
+#: app/scripts/kunden/detail/kundendetail.html:179
+#: app/scripts/produzenten/detail/produzentendetail.html:157
 msgid "+41 7..."
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:131
-#: app/scripts/depots/detail/depotsdetail.html:171
+#: app/scripts/depots/detail/depotsdetail.html:139
+#: app/scripts/depots/detail/depotsdetail.html:179
 msgid "+41..."
 msgstr ""
 
-#: app/scripts/not-found.html:2
-msgid "404 - Seite konnte nicht gefunden werden"
+#: app/scripts/produzenten/detail/produzentendetail.html:99
+msgid "2.0"
 msgstr ""
 
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:4
 msgid "<i class=\"fa fa-calculator\"></i>"
 msgstr ""
 
-#: app/index.html:55
-msgid "<i class=\"fa fa-calculator\"></i> <span translate=\"\">Abotypen</span>"
-msgstr ""
-
-#: app/index.html:59
-msgid "<i class=\"fa fa-cogs\"></i> <span translate=\"\">Projekteinstellungen</span>"
-msgstr ""
-
-#: app/index.html:54
-msgid "<i class=\"fa fa-cubes\"></i> <span translate=\"\">Depots</span>"
-msgstr ""
-
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:34
 msgid "<i class=\"fa fa-floppy-o\"></i> Erstellen"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:13
-msgid "<i class=\"fa fa-floppy-o\"></i> Speichern <i ng-show=\"template.updating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
+#: app/scripts/projekt/settings/projektsettings.html:94
+msgid "<i class=\"fa fa-floppy-o\"></i> Speichern <i ng-show=\"templateKundentyp.updating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
 msgstr ""
 
-#: app/index.html:57
-msgid "<i class=\"fa fa-shopping-cart\"></i> <span translate=\"\">Abos</span>"
+#: app/scripts/projekt/settings/projektsettings.html:136
+msgid "<i class=\"fa fa-floppy-o\"></i> Speichern <i ng-show=\"templateProduktekategorie.updating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
 msgstr ""
 
-#: app/index.html:58
-msgid "<i class=\"fa fa-sticky-note\"></i> <span translate=\"\">Pendenzen</span>"
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:128
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:25
+msgid "<span class=\"fa fa-check\"></span> Planung abschliessen"
 msgstr ""
 
-#: app/index.html:56
-msgid "<i class=\"fa fa-user\"></i> <span translate=\"\">Kunden</span>"
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:66
+msgid "<span class=\"fa fa-files-o\"></span>"
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:126
+msgid "<span class=\"fa fa-step-backward\"></span> Übersicht der Körbe"
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:23
+msgid "<span class=\"fa fa-step-forward\"></span> Produzenten-Übersicht"
 msgstr ""
 
 #: app/scripts/common/ngtable/oo-ngtable-paginationTemplate.html:9
 msgid "<span class=\"fa fa-table\"></span>"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:92
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:68
+#: app/scripts/kunden/detail/kundendetail.html:137
 msgid "<span class=\"fa fa-times\"></span>"
 msgstr ""
 
@@ -86,7 +99,7 @@ msgstr ""
 msgid "<span class=\"glyphicon glyphicon-plus\"></span> Abotyp erstellen"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:157
+#: app/scripts/kunden/detail/kundendetail.html:202
 msgid "<span class=\"glyphicon glyphicon-plus\"></span> Ansprechperson hinzufügen"
 msgstr ""
 
@@ -94,20 +107,40 @@ msgstr ""
 msgid "<span class=\"glyphicon glyphicon-plus\"></span> Depot erstellen"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:12
-msgid "<span class=\"glyphicon glyphicon-plus\"></span> Erstellen<i ng-show=\"template.creating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
+#: app/scripts/projekt/settings/projektsettings.html:93
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Erstellen<i ng-show=\"templateKundentyp.creating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:135
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Erstellen<i ng-show=\"templateProduktekategorie.creating\" ng-cloak=\"\" class=\"fa fa-circle-o-notch fa-spin\"></i>"
 msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.html:10
 msgid "<span class=\"glyphicon glyphicon-plus\"></span> Kunde erstellen"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:166
+#: app/scripts/korbplanung/overview/korbplanungoverview.html:9
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Neue Korplanung generieren"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:211
 msgid "<span class=\"glyphicon glyphicon-plus\"></span> Neue Pendenz"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:199
+#: app/scripts/kunden/detail/kundendetail.html:244
 msgid "<span class=\"glyphicon glyphicon-plus\"></span> Neues Abo"
+msgstr ""
+
+#: app/scripts/produkte/overview/produkteoverview.html:10
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Produkt erstellen"
+msgstr ""
+
+#: app/scripts/produzenten/overview/produzentenoverview.html:10
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Produzent erstellen"
+msgstr ""
+
+#: app/scripts/touren/overview/tourenoverview.html:10
+msgid "<span class=\"glyphicon glyphicon-plus\"></span> Tour erstellen"
 msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:6
@@ -125,6 +158,7 @@ msgid "AP Tel"
 msgstr ""
 
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:38
+#: app/scripts/common/components/oo-deletebutton.directive.modal.html:13
 #: app/scripts/kunden/detail/abo/create-abo.html:22
 msgid "Abbrechen"
 msgstr ""
@@ -145,9 +179,9 @@ msgstr ""
 msgid "Abonnentin"
 msgstr ""
 
-#: app/index.html:57
+#: app/index.html:55
 #: app/scripts/abos/overview/abosoverview.html:6
-#: app/scripts/kunden/detail/kundendetail.html:199
+#: app/scripts/kunden/detail/kundendetail.html:244
 msgid "Abos"
 msgstr ""
 
@@ -161,8 +195,13 @@ msgstr ""
 msgid "Abotyp ' + abotyp.name || 'Abotyp"
 msgstr ""
 
-#: app/index.html:55
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:15
+msgid "Abotyp hinzufügen:"
+msgstr ""
+
+#: app/index.html:65
 #: app/scripts/abotypen/overview/abotypenoverview.html:6
+#: app/scripts/korbplanung/overview/korbplanungoverview.html:25
 msgid "Abotypen"
 msgstr ""
 
@@ -170,26 +209,39 @@ msgstr ""
 msgid "Abw."
 msgstr ""
 
+#: app/scripts/kunden/detail/kundendetail.html:86
+msgid "Abweichende Lieferadresse"
+msgstr ""
+
 #: app/scripts/kunden/detail/kundendetail.html:30
 msgid "Adresse"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:54
+#: app/scripts/produzenten/detail/produzentendetail.html:127
+#: app/scripts/projekt/settings/projektsettings.html:39
 msgid "Adresszusatz"
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:34
 #: app/scripts/abotypen/overview/abotypenoverview.html:42
-#: app/scripts/depots/detail/depotsdetail.html:35
+#: app/scripts/depots/detail/depotsdetail.html:43
 #: app/scripts/depots/overview/depotsoverview.html:41
+#: app/scripts/produzenten/detail/produzentendetail.html:31
+#: app/scripts/produzenten/detail/produzentendetail.html:34
+#: app/scripts/produzenten/overview/produzentenoverview.html:35
 msgid "Aktiv"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:126
+#: app/scripts/kunden/detail/kundendetail.html:171
 msgid "Alternative E-Mail-Adresse"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:99
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:36
+msgid "Angebot"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:107
 msgid "Anprechperson"
 msgstr ""
 
@@ -198,7 +250,7 @@ msgid "Anschrift"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:38
-msgid "Anschrift oder bezeichnung"
+msgid "Anschrift oder Bezeichnung"
 msgstr ""
 
 #: app/scripts/depots/overview/depotsoverview.html:26
@@ -209,10 +261,6 @@ msgstr ""
 msgid "Anzahl"
 msgstr ""
 
-#: app/scripts/abotypen/overview/abotypenoverview.html:30
-msgid "Anzahl Abonnenten"
-msgstr ""
-
 #: app/scripts/abotypen/detail/abotypendetail.html:113
 msgid "Anzahl Soll Abwesenheiten"
 msgstr ""
@@ -221,15 +269,18 @@ msgstr ""
 msgid "Anzahl aktive Abonnemente"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:78
+#: app/scripts/depots/detail/depotsdetail.html:86
+#: app/scripts/produzenten/detail/produzentendetail.html:71
 msgid "Bank"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:81
+#: app/scripts/depots/detail/depotsdetail.html:89
+#: app/scripts/produzenten/detail/produzentendetail.html:74
 msgid "Bank, PLZ Ort"
 msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:18
+#: app/scripts/produzenten/detail/produzentendetail.html:26
 msgid "Basisdaten"
 msgstr ""
 
@@ -237,39 +288,69 @@ msgstr ""
 msgid "Bemerkung"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:147
+#: app/scripts/kunden/detail/kundendetail.html:192
 #: app/scripts/kunden/detail/kundendetail.html:73
 #: app/scripts/kunden/detail/kundendetail.html:76
+#: app/scripts/produzenten/detail/produzentendetail.html:79
 msgid "Bemerkungen"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:150
+#: app/scripts/produzenten/detail/produzentendetail.html:82
+msgid "Bemerkungen zu diesem Produzenten"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:195
 msgid "Bemerkungen zu dieser Person"
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:26
 #: app/scripts/abotypen/detail/abotypendetail.html:29
-#: app/scripts/depots/detail/depotsdetail.html:86
-#: app/scripts/depots/detail/depotsdetail.html:89
-#: app/scripts/projekt/settings/projektsettings.html:29
-#: app/scripts/projekt/settings/projektsettings.html:30
+#: app/scripts/depots/detail/depotsdetail.html:94
+#: app/scripts/depots/detail/depotsdetail.html:97
+#: app/scripts/projekt/settings/projektsettings.html:110
+#: app/scripts/projekt/settings/projektsettings.html:111
+#: app/scripts/projekt/settings/projektsettings.html:150
+#: app/scripts/touren/overview/tourenoverview.html:32
 msgid "Beschreibung"
 msgstr ""
 
+#: app/scripts/touren/overview/tourenoverview.html:29
+msgid "Beschrieb"
+msgstr ""
+
 #: app/scripts/kunden/overview/kundenoverview.html:23
+#: app/scripts/produkte/overview/produkteoverview.html:23
+#: app/scripts/produzenten/overview/produzentenoverview.html:26
+#: app/scripts/projekt/settings/projektsettings.html:149
+#: app/scripts/projekt/settings/projektsettings.html:20
 msgid "Bezeichnung"
 msgstr ""
 
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:16
+#: app/scripts/produkte/overview/produkteoverview.html:35
 msgid "Bis"
 msgstr ""
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:23
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:29
 msgid "Bitte wählen..."
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:73
+#: app/index.html:59
+msgid "Buchhaltung"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:81
+#: app/scripts/produzenten/detail/produzentendetail.html:66
 msgid "CH..."
+msgstr ""
+
+#: app/scripts/produkte/overview/produkteoverview.html:45
+msgid "CHF"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:64
+msgid "Dateien"
 msgstr ""
 
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:48
@@ -282,24 +363,37 @@ msgstr ""
 msgid "Depot"
 msgstr ""
 
+#: app/scripts/kunden/detail/kundendetail.html:257
+msgid "Depot:"
+msgstr ""
+
 #: app/scripts/depots/detail/depotsdetail.html:24
 msgid "Depotname"
 msgstr ""
 
-#: app/index.html:54
+#: app/index.html:63
 #: app/scripts/depots/overview/depotsoverview.html:6
 msgid "Depots"
+msgstr ""
+
+#: app/scripts/korbplanung/overview/korbplanungoverview.html:30
+msgid "Depots / Touren"
+msgstr ""
+
+#: app/scripts/not-found.html:9
+msgid "Diese Seite konnte nicht gefunden werden!"
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:5
 msgid "Dieser Abotyp ist derzeit nicht aktiv"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:120
-#: app/scripts/depots/detail/depotsdetail.html:123
-#: app/scripts/depots/detail/depotsdetail.html:160
-#: app/scripts/depots/detail/depotsdetail.html:163
-#: app/scripts/kunden/detail/kundendetail.html:118
+#: app/scripts/depots/detail/depotsdetail.html:128
+#: app/scripts/depots/detail/depotsdetail.html:131
+#: app/scripts/depots/detail/depotsdetail.html:168
+#: app/scripts/depots/detail/depotsdetail.html:171
+#: app/scripts/kunden/detail/kundendetail.html:163
+#: app/scripts/produzenten/detail/produzentendetail.html:149
 msgid "E-Mail"
 msgstr ""
 
@@ -307,12 +401,33 @@ msgstr ""
 msgid "Eindeutige Bezeichnung"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:115
+#: app/scripts/produkte/overview/produkteoverview.html:50
+msgid "Einheit"
+msgstr ""
+
+#: app/index.html:61
+msgid "Einkauf*"
+msgstr ""
+
+#: app/index.html:68
+msgid "Einstellungen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:160
+#: app/scripts/produzenten/detail/produzentendetail.html:146
 msgid "Email"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:123
+#: app/scripts/kunden/detail/kundendetail.html:168
 msgid "Email alt."
+msgstr ""
+
+#: app/scripts/not-found.html:6
+msgid "Error 404"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:110
+msgid "Etage, Hinterlegung, ..."
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:121
@@ -323,12 +438,40 @@ msgstr ""
 msgid "Geplante Lieferungen"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:70
+#: app/scripts/depots/detail/depotsdetail.html:78
+#: app/scripts/produzenten/detail/produzentendetail.html:63
 msgid "IBAN"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:35
+#: app/scripts/depots/detail/depotsdetail.html:43
+#: app/scripts/produzenten/detail/produzentendetail.html:34
 msgid "Inaktiv"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:90
+msgid "Ja"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:35
+#: app/scripts/produzenten/detail/produzentendetail.html:42
+#: app/scripts/produzenten/overview/produzentenoverview.html:23
+msgid "KRZ"
+msgstr ""
+
+#: app/scripts/produkte/overview/produkteoverview.html:56
+msgid "Kategorien"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:111
+msgid "Kontaktdaten"
+msgstr ""
+
+#: app/index.html:57
+msgid "Korbplanung<sup>UI</sup>"
+msgstr ""
+
+#: app/scripts/korbplanung/overview/korbplanungoverview.html:6
+msgid "Korbplanungen"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:9
@@ -336,22 +479,27 @@ msgstr ""
 msgid "Kunde"
 msgstr ""
 
-#: app/index.html:56
+#: app/index.html:54
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:13
-#: app/scripts/projekt/settings/projektsettings.html:26
+#: app/scripts/projekt/settings/projektsettings.html:107
 msgid "Kundentyp"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:11
+#: app/scripts/projekt/settings/projektsettings.html:92
 msgid "Kundentyp Name..."
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:8
+#: app/scripts/projekt/settings/projektsettings.html:89
 msgid "Kundentypen"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:32
+#: app/scripts/produzenten/detail/produzentendetail.html:39
+msgid "Kurzzeichen"
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:87
@@ -392,63 +540,191 @@ msgid ""
 "      <span class=\"pull-right\" ng-show=\"showLoading()\"><i class=\"fa fa-circle-o-notch fa-spin fa-lg\"></i></span>"
 msgstr ""
 
+#: app/index.html:58
+msgid "Lieferungen*"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:69
+msgid "Logo"
+msgstr ""
+
+#: app/scripts/common/components/oo-deletebutton.directive.modal.html:12
+msgid "Löschen"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:87
+msgid "MWST-Pflicht"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:95
+msgid "MWST-Satz"
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:147
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:79
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:81
+msgid "Menge"
+msgstr ""
+
 #: app/scripts/abotypen/detail/abotypendetail.html:18
 #: app/scripts/abotypen/detail/abotypendetail.html:21
 #: app/scripts/abotypen/overview/abotypenoverview.html:27
-#: app/scripts/depots/detail/depotsdetail.html:112
-#: app/scripts/depots/detail/depotsdetail.html:115
-#: app/scripts/depots/detail/depotsdetail.html:152
-#: app/scripts/depots/detail/depotsdetail.html:155
+#: app/scripts/depots/detail/depotsdetail.html:120
+#: app/scripts/depots/detail/depotsdetail.html:123
+#: app/scripts/depots/detail/depotsdetail.html:160
+#: app/scripts/depots/detail/depotsdetail.html:163
 #: app/scripts/depots/overview/depotsoverview.html:23
-#: app/scripts/kunden/detail/kundendetail.html:107
-#: app/scripts/kunden/detail/kundendetail.html:110
+#: app/scripts/kunden/detail/kundendetail.html:152
+#: app/scripts/kunden/detail/kundendetail.html:155
+#: app/scripts/touren/overview/tourenoverview.html:23
 msgid "Name"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:46
-#: app/scripts/kunden/detail/kundendetail.html:49
-msgid "Nr"
+#: app/scripts/produzenten/detail/produzentendetail.html:47
+msgid "Name / Betrieb"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:57
-#: app/scripts/kunden/detail/kundendetail.html:68
-msgid "Ort"
+#: app/scripts/produzenten/detail/produzentendetail.html:50
+msgid "Name oder Betriebsbezeichnung"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:23
+msgid "Name oder Bezeichnung"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:90
+msgid "Nein"
+msgstr ""
+
+#: app/scripts/produkte/overview/produkteoverview.html:26
+#: app/scripts/touren/overview/tourenoverview.html:26
+msgid "Neue Bezeichnung"
 msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:54
+#: app/scripts/kunden/detail/kundendetail.html:102
+#: app/scripts/kunden/detail/kundendetail.html:49
+#: app/scripts/produzenten/detail/produzentendetail.html:122
+#: app/scripts/projekt/settings/projektsettings.html:34
+msgid "Nr"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:65
+#: app/scripts/kunden/detail/kundendetail.html:121
+#: app/scripts/kunden/detail/kundendetail.html:68
+#: app/scripts/produzenten/detail/produzentendetail.html:141
+#: app/scripts/projekt/settings/projektsettings.html:53
+msgid "Ort"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:62
+#: app/scripts/kunden/detail/kundendetail.html:118
 #: app/scripts/kunden/detail/kundendetail.html:65
+#: app/scripts/produzenten/detail/produzentendetail.html:138
+#: app/scripts/projekt/settings/projektsettings.html:50
 msgid "PLZ"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:51
+#: app/scripts/depots/detail/depotsdetail.html:59
+#: app/scripts/kunden/detail/kundendetail.html:115
 #: app/scripts/kunden/detail/kundendetail.html:62
+#: app/scripts/produzenten/detail/produzentendetail.html:135
+#: app/scripts/projekt/settings/projektsettings.html:47
 msgid "PLZ / Ort"
 msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.html:29
+#: app/scripts/produzenten/overview/produzentenoverview.html:32
 msgid "PLZ Ort"
 msgstr ""
 
-#: app/index.html:58
-#: app/scripts/kunden/detail/kundendetail.html:166
+#: app/index.html:56
+#: app/scripts/kunden/detail/kundendetail.html:211
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:6
 msgid "Pendenzen"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:57
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:127
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:24
+msgid "Planung"
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:10
+msgid "Planung #1: Korbinhalt"
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:121
+msgid "Planung: Zusammenzug Lieferanten"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:130
 msgid "Postfach, Etage, c/o, ..."
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:57
+#: app/scripts/projekt/settings/projektsettings.html:42
+msgid "Postfach, c/o, ..."
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:135
 #: app/scripts/abotypen/detail/abotypendetail.html:68
 #: app/scripts/abotypen/detail/abotypendetail.html:74
 #: app/scripts/abotypen/overview/abotypenoverview.html:39
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:45
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:85
+#: app/scripts/produkte/overview/produkteoverview.html:41
+#: app/scripts/produkte/overview/produkteoverview.html:46
 msgid "Preis"
 msgstr ""
 
-#: app/index.html:59
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:149
+msgid "Preis / Einheit"
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:48
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:93
+msgid "Prod."
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:148
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:42
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:76
+msgid "Produkt"
+msgstr ""
+
+#: app/index.html:67
+#: app/scripts/produkte/overview/produkteoverview.html:6
+msgid "Produkte"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:134
+msgid "Produktekategorie Name..."
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.html:131
+msgid "Produktekategorien"
+msgstr ""
+
+#: app/scripts/produzenten/detail/produzentendetail.html:9
+msgid "Produzent"
+msgstr ""
+
+#: app/index.html:66
+#: app/scripts/produkte/overview/produkteoverview.html:65
+#: app/scripts/produzenten/overview/produzentenoverview.html:6
+msgid "Produzenten"
+msgstr ""
+
+#: app/index.html:69
+msgid "Projekt"
+msgstr ""
+
 #: app/scripts/projekt/settings/projektsettings.html:4
 msgid "Projekteinstellungen"
+msgstr ""
+
+#: app/index.html:60
+msgid "Rechnungen*"
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:101
@@ -459,48 +735,90 @@ msgstr ""
 msgid "Saldo Mindestbestand"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:32
+#: app/scripts/common/components/oo-deletebutton.directive.modal.html:2
+msgid "Sind Sie sicher?"
+msgstr ""
+
+#: app/scripts/common/components/oo-deletebutton.directive.modal.html:7
+msgid "Soll der Löschvorgang fortgesetzt werden?"
+msgstr ""
+
+#: app/index.html:62
+#: app/scripts/projekt/settings/projektsettings.html:11
+#: app/scripts/projekt/settings/projektsettings.html:13
+msgid "Stammdaten"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:40
+#: app/scripts/korbplanung/overview/korbplanungoverview.html:38
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:28
 msgid "Status"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:43
+#: app/scripts/depots/detail/depotsdetail.html:51
 #: app/scripts/kunden/detail/kundendetail.html:46
+#: app/scripts/kunden/detail/kundendetail.html:99
 #: app/scripts/kunden/overview/kundenoverview.html:26
+#: app/scripts/produzenten/detail/produzentendetail.html:119
+#: app/scripts/produzenten/overview/produzentenoverview.html:29
+#: app/scripts/projekt/settings/projektsettings.html:31
 msgid "Strasse"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:40
+#: app/scripts/depots/detail/depotsdetail.html:48
 #: app/scripts/kunden/detail/kundendetail.html:43
+#: app/scripts/kunden/detail/kundendetail.html:96
+#: app/scripts/produzenten/detail/produzentendetail.html:116
+#: app/scripts/projekt/settings/projektsettings.html:28
 msgid "Strasse / Nr."
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:128
-#: app/scripts/depots/detail/depotsdetail.html:168
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:150
+msgid "Summe"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:136
+#: app/scripts/depots/detail/depotsdetail.html:176
 msgid "Telefon"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:139
+#: app/scripts/kunden/detail/kundendetail.html:184
+#: app/scripts/produzenten/detail/produzentendetail.html:162
 msgid "Telefon Festnetz"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:131
+#: app/scripts/kunden/detail/kundendetail.html:176
+#: app/scripts/produzenten/detail/produzentendetail.html:154
 msgid "Telefon Mobil"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:179
+#: app/scripts/kunden/detail/kundendetail.html:224
 msgid "Text..."
+msgstr ""
+
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:104
+#: app/scripts/korbplanung/detail/korbplanungdetail.html:176
+msgid "Total"
 msgstr ""
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:26
 msgid "Tour"
 msgstr ""
 
+#: app/scripts/kunden/detail/kundendetail.html:261
+msgid "Tour:"
+msgstr ""
+
+#: app/index.html:64
+#: app/scripts/touren/overview/tourenoverview.html:6
+msgid "Touren"
+msgstr ""
+
 #: app/scripts/depots/overview/depotsoverview.html:35
 msgid "Ver. Tel"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:139
+#: app/scripts/depots/detail/depotsdetail.html:147
 msgid "Verantwortliche Person"
 msgstr ""
 
@@ -529,19 +847,29 @@ msgstr ""
 #: app/scripts/depots/overview/depotsoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:9
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:9
+#: app/scripts/produkte/overview/produkteoverview.html:9
+#: app/scripts/produzenten/overview/produzentenoverview.html:9
+#: app/scripts/touren/overview/tourenoverview.html:9
 msgid "Volltextsuche..."
 msgstr ""
 
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:7
+#: app/scripts/produkte/overview/produkteoverview.html:29
 msgid "Von"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:104
-#: app/scripts/depots/detail/depotsdetail.html:107
-#: app/scripts/depots/detail/depotsdetail.html:144
-#: app/scripts/depots/detail/depotsdetail.html:147
-#: app/scripts/kunden/detail/kundendetail.html:102
-#: app/scripts/kunden/detail/kundendetail.html:99
+#: app/index.html:70
+msgid "Vorlagen*"
+msgstr ""
+
+#: app/scripts/depots/detail/depotsdetail.html:112
+#: app/scripts/depots/detail/depotsdetail.html:115
+#: app/scripts/depots/detail/depotsdetail.html:152
+#: app/scripts/depots/detail/depotsdetail.html:155
+#: app/scripts/kunden/detail/kundendetail.html:144
+#: app/scripts/kunden/detail/kundendetail.html:147
+#: app/scripts/produzenten/detail/produzentendetail.html:55
+#: app/scripts/produzenten/detail/produzentendetail.html:58
 msgid "Vorname"
 msgstr ""
 
@@ -553,6 +881,10 @@ msgstr ""
 msgid "Zusatzdaten"
 msgstr ""
 
+#: app/scripts/kunden/detail/kundendetail.html:107
+msgid "Zusatzinfos"
+msgstr ""
+
 #: app/scripts/abotypen/detail/abotypendetail.html:46
 msgid "bis"
 msgstr ""
@@ -561,11 +893,11 @@ msgstr ""
 msgid "erstellen"
 msgstr ""
 
-#: app/scripts/common/components/oo-deletebutton.directive.js:49
+#: app/scripts/common/components/oo-deletebutton.directive.js:86
 msgid "konnte nicht gelöscht werden. Fehler:"
 msgstr ""
 
-#: app/scripts/common/components/oo-savebutton.directive.js:72
+#: app/scripts/common/components/oo-savebutton.directive.js:81
 msgid "konnte nicht gespeichert werden. Fehler:"
 msgstr ""
 
@@ -582,25 +914,24 @@ msgstr ""
 msgid "speichern"
 msgstr ""
 
-#: app/scripts/common/components/oo-deletebutton.directive.js:32
+#: app/scripts/common/components/oo-deletebutton.directive.js:42
 msgid "wurde durch eine andere Person gelöscht."
 msgstr ""
 
-#: app/scripts/common/components/oo-savebutton.directive.js:37
+#: app/scripts/common/components/oo-savebutton.directive.js:46
 msgid "wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu."
 msgstr ""
 
-#: app/scripts/common/components/oo-deletebutton.directive.js:36
+#: app/scripts/common/components/oo-deletebutton.directive.js:46
 msgid "wurde erfolgreich gelöscht."
 msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:21
-#: app/scripts/kunden/detail/kundendetail.html:208
+#: app/scripts/kunden/detail/kundendetail.html:253
 msgid "{{abo.abotypName}}"
 msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:27
-#: app/scripts/kunden/detail/kundendetail.html:211
 msgid "{{abo.depotName}}"
 msgstr ""
 
@@ -612,7 +943,7 @@ msgstr ""
 msgid "{{vertriebsart.typ}}"
 msgstr ""
 
-#: app/scripts/depots/detail/depotsdetail.html:62
-#: app/scripts/depots/detail/depotsdetail.html:65
+#: app/scripts/depots/detail/depotsdetail.html:70
+#: app/scripts/depots/detail/depotsdetail.html:73
 msgid "Öffnungszeiten"
 msgstr ""
