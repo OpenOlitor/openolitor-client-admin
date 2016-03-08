@@ -294,6 +294,7 @@ angular.module('openolitor')
         if(angular.isUndefined($scope.bestellungen[produzent])) {
           $scope.bestellungen[produzent] = {
             produzent: produzent,
+            total: 0,
             lieferungen: {}
           };
         }
@@ -314,9 +315,11 @@ angular.module('openolitor')
           menge: korbprodukt.menge,
           einheit: korbprodukt.einheit,
           preisEinheit: korbprodukt.preisEinheit,
+          mengeTotal: (korbprodukt.menge * anzahl),
           preis: (korbprodukt.preisEinheit * korbprodukt.menge * anzahl)
         };
         $scope.bestellungen[produzent].lieferungen[abotypLieferung.lieferdatum].total += (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
+        $scope.bestellungen[produzent].total += (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
       };
 
       $scope.recalculateBestellungen = function() {
@@ -326,6 +329,10 @@ angular.module('openolitor')
             addEntryToBestellungen(abotypLieferung, korbprodukt);
           });
         });
+      };
+
+      $scope.hasMultipleLieferungen = function(bestellung) {
+        return Object.keys(bestellung.lieferungen).length > 1
       };
 
     }
