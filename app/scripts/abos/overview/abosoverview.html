@@ -3,7 +3,7 @@
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h3 class="panel-title" translate><span class="navbar-brand" translate>Abos</span>
+        <h3 class="panel-title"><span class="navbar-brand" translate>Abos</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
@@ -18,13 +18,13 @@
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data">
               <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
-                <a ng-href="#/abotypen/{{abo.abotypId}}" translate>{{abo.abotypName}}</a>
+                <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
               </td>
               <td title="'Abonnentin'|translate" sortable="'abo.kunde'">
-                <a ng-href="#/kunden/{{abo.kundeId}}" translate>{{abo.kunde}}</a>
+                <a ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
               </td>
               <td title="'Depot'|translate" sortable="'abo.depotName'">
-                <a ng-href="#/depots/{{abo.depotId}}" translate>{{abo.depotName}}</a>
+                <a ng-href="#/depots/{{abo.depotId}}">{{abo.depotName}}</a>
               </td>
               <td>
                 <a role="button" class="btn btn-sm btn-primary" ng-href="#/abos/{{abo.id}}"><span class="glyphicon glyphicon-edit"></span></a>

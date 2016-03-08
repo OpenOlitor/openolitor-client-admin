@@ -17,11 +17,9 @@ angular.module('openolitor').directive('ooDraggable', ['$rootScope', 'uuid', fun
                 id = uuid.new();
                 angular.element(el).attr('id', id);
             }
-            console.log(id);
             el.bind('dragstart', function (e) {
                 e.originalEvent.dataTransfer.setData('text', id);
                 e.originalEvent.dataTransfer.setData('type', scope.ooDragedType);
-                console.log('drag');
                 $rootScope.$emit('OO-DRAG-START');
             });
 

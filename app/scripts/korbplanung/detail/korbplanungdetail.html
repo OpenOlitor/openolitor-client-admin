@@ -64,8 +64,8 @@
                   <span class="pull-right">
                     <small><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.lieferdatum}}</small>
                     <button role="button" class="btn btn-default"
-                      oo-draggable="true" oo-draged-type="'korb'" translate><span class="fa fa-files-o"></span></button>
-                    <button type="button" role="button" ng-click="removeAbotypFromPlanung(abotypLieferung)" class="btn btn-default" translate><span class="fa fa-times"></span></button>
+                      oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></button>
+                    <button type="button" role="button" ng-click="removeAbotypFromPlanung(abotypLieferung)" class="btn btn-default"><span class="fa fa-times"></span></button>
                   </span>
                 </h3>
               </div>
@@ -123,9 +123,9 @@
                 </div>
                 <div class="col-md-8">
                   <div class="pull-right" role="group">
-                    <button type="button" role="button" ng-click="displayMode = 'korbinhalt'" class="btn btn-default" translate><span class="fa fa-step-backward"></span> Übersicht der Körbe</button>
+                    <button type="button" role="button" ng-click="displayMode = 'korbinhalt'" class="btn btn-default"><span class="fa fa-step-backward"></span> <span translate>Übersicht der Körbe</span></button>
                     <oo-save-button model="kunde" form="kundeForm" entity="Korbplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
-                    <button role="button" ng-click="planungAbschliessen()" class="btn btn-success" translate><span class="fa fa-check"></span> Planung abschliessen</button>
+                    <button role="button" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
                   </div>
                 </div>
               </h3>

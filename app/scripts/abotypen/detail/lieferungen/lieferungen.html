@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title" translate>Lieferungen
-      <button role="button" href="" ng-if="canGenerateLieferungen()" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right" translate><i class="fa fa-calculator"></i> </button>
+    <h3 class="panel-title"><span translate>Lieferungen</span>
+      <button role="button" href="" ng-if="canGenerateLieferungen()" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right"><i class="fa fa-calculator"></i> </button>
       <span class="pull-right" ng-show="showLoading()"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
     </h3>
   </div>
@@ -20,7 +20,7 @@
       </div>
       <div class="col-md-2 dropdown" ng-if="!showLoading()">
         <div uib-dropdown class="pull-right" is-open="status.open">
-          <a role="button" href="" class="btn btn-default" uib-dropdown-toggle translate><span class="glyphicon glyphicon-plus"></span> </a>
+          <a role="button" href="" class="btn btn-default" uib-dropdown-toggle><span class="glyphicon glyphicon-plus"></span> </a>
           <div uib-dropdown-menu class="dropdown-form">
             <form class="form" name="formCreateLieferung">
               <div class="form-group">
@@ -31,7 +31,7 @@
                       </span>
                   </p>
               </div>
-              <a href="" role="button" ng-disabled="formCreateLieferung.$invalid" ng-click="addLieferung()" class="btn btn-primary" translate><i class="fa fa-floppy-o"></i> Erstellen</a>
+              <a href="" role="button" ng-disabled="formCreateLieferung.$invalid" ng-click="addLieferung()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Erstellen</span></a>
             </form>
           </div>
         </div>

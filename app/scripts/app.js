@@ -257,7 +257,6 @@ angular
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
-
   })
   .factory('checkSize', ['$rootScope', '$window', function($rootScope, $window) {
     return function() {

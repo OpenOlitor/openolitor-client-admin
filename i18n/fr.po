@@ -3,6 +3,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.8.4\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
 
 #: app/scripts/korbplanung/detail/korbplanungdetail.html:146
 #: app/scripts/korbplanung/overview/korbplanungoverview.html:22
@@ -24,6 +32,10 @@ msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:113
 msgid "# Verknüpfungen"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:255
+msgid "# {{$index+1}}"
 msgstr ""
 
 #: app/scripts/produzenten/detail/produzentendetail.html:100
@@ -75,8 +87,7 @@ msgstr ""
 msgid "Abonnentin"
 msgstr ""
 
-#: app/index.html:55
-#: app/scripts/abos/overview/abosoverview.html:6
+#: app/index.html:55 app/scripts/abos/overview/abosoverview.html:6
 #: app/scripts/kunden/detail/kundendetail.html:248
 msgid "Abos"
 msgstr ""
@@ -99,8 +110,7 @@ msgstr ""
 msgid "Abotyp hinzufügen:"
 msgstr ""
 
-#: app/index.html:65
-#: app/scripts/abotypen/overview/abotypenoverview.html:6
+#: app/index.html:65 app/scripts/abotypen/overview/abotypenoverview.html:6
 #: app/scripts/korbplanung/overview/korbplanungoverview.html:25
 msgid "Abotypen"
 msgstr ""
@@ -115,7 +125,7 @@ msgstr ""
 
 #: app/index.html:37
 msgid "Administrationsumgebung für"
-msgstr ""
+msgstr "Outil d'administration pour"
 
 #: app/scripts/kunden/detail/kundendetail.html:30
 msgid "Adresse"
@@ -283,8 +293,7 @@ msgstr ""
 msgid "Depotname"
 msgstr ""
 
-#: app/index.html:63
-#: app/scripts/depots/overview/depotsoverview.html:6
+#: app/index.html:63 app/scripts/depots/overview/depotsoverview.html:6
 msgid "Depots"
 msgstr ""
 
@@ -401,8 +410,7 @@ msgstr ""
 msgid "Kunde erstellen"
 msgstr ""
 
-#: app/index.html:54
-#: app/scripts/kunden/overview/kundenoverview.html:6
+#: app/index.html:54 app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
 msgstr ""
 
@@ -569,8 +577,7 @@ msgstr ""
 msgid "PLZ Ort"
 msgstr ""
 
-#: app/index.html:56
-#: app/scripts/kunden/detail/kundendetail.html:212
+#: app/index.html:56 app/scripts/kunden/detail/kundendetail.html:212
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:6
 msgid "Pendenzen"
 msgstr ""
@@ -632,8 +639,7 @@ msgstr ""
 msgid "Produkt erstellen"
 msgstr ""
 
-#: app/index.html:67
-#: app/scripts/produkte/overview/produkteoverview.html:6
+#: app/index.html:67 app/scripts/produkte/overview/produkteoverview.html:6
 msgid "Produkte"
 msgstr ""
 
@@ -653,8 +659,7 @@ msgstr ""
 msgid "Produzent erstellen"
 msgstr ""
 
-#: app/index.html:66
-#: app/scripts/produkte/overview/produkteoverview.html:65
+#: app/index.html:66 app/scripts/produkte/overview/produkteoverview.html:65
 #: app/scripts/produzenten/overview/produzentenoverview.html:6
 msgid "Produzenten"
 msgstr ""
@@ -696,8 +701,7 @@ msgstr ""
 msgid "Speichern"
 msgstr ""
 
-#: app/index.html:62
-#: app/scripts/projekt/settings/projektsettings.html:11
+#: app/index.html:62 app/scripts/projekt/settings/projektsettings.html:11
 #: app/scripts/projekt/settings/projektsettings.html:13
 msgid "Stammdaten"
 msgstr ""
@@ -766,8 +770,7 @@ msgstr ""
 msgid "Tour:"
 msgstr ""
 
-#: app/index.html:64
-#: app/scripts/touren/overview/tourenoverview.html:6
+#: app/index.html:64 app/scripts/touren/overview/tourenoverview.html:6
 msgid "Touren"
 msgstr ""
 
@@ -873,6 +876,23 @@ msgstr ""
 
 #: app/scripts/common/components/oo-deletebutton.directive.js:46
 msgid "wurde erfolgreich gelöscht."
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:21
+#: app/scripts/kunden/detail/kundendetail.html:258
+msgid "{{abo.abotypName}}"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:27
+msgid "{{abo.depotName}}"
+msgstr ""
+
+#: app/scripts/abos/overview/abosoverview.html:24
+msgid "{{abo.kunde}}"
+msgstr ""
+
+#: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:17
+msgid "{{vertriebsart.typ}}"
 msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:70

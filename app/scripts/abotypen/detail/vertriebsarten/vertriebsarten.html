@@ -1,6 +1,6 @@
 <div class="panel panel-default oo-vertriebsarten">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title dropdown" translate>Vertriebsarten
+    <h3 class="panel-title dropdown"><span translate>Vertriebsarten</span>
         <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
         <div uib-dropdown class="btn-group pull-right" role="group">
           <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> </a>
@@ -14,7 +14,7 @@
     <table class="table">
       <tbody>
         <tr ng-repeat="vertriebsart in vertriebsarten" ng-class="vertriebsartClass(vertriebsart)" ng-click="selectVertriebsart(vertriebsart)" >
-          <td><label translate>{{vertriebsart.typ}}</label></td>
+          <td><label>{{vertriebsart.typ}}</label></td>
           <td>
             <div class="form-group" ng-if="isDepot(vertriebsart)">
               <label for="depot" translate>Depot</label>

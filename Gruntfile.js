@@ -528,7 +528,7 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          '<%= openolitor.app %>/scripts/translations.js': ['i18n/*.po']
+          '<%= openolitor.app %>/scripts/i18n/translations.js': ['i18n/*.po']
         }
       }
     },

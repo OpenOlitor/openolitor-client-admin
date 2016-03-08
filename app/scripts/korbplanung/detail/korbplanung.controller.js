@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KorbplanungDetailController', ['$scope', 'ngTableParams', '$filter', 'ProduzentenService', 'AbotypenOverviewModel', 'cloneObj',
-    function($scope, ngTableParams, $filter, ProduzentenService, AbotypenOverviewModel, cloneObj) {
+  .controller('KorbplanungDetailController', ['$scope', 'ngTableParams', '$filter', 'ProduzentenService', 'AbotypenOverviewModel', 'cloneObj', 'gettext',
+    function($scope, ngTableParams, $filter, ProduzentenService, AbotypenOverviewModel, cloneObj, gettext) {
 
       $scope.dummyProdukteEntries = [{
         id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
@@ -191,7 +191,7 @@ angular.module('openolitor')
       };
 
       $scope.getDurchschnittspreisInfo = function(abotypLieferung) {
-        return $filter('translate')('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
+        return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
       };
 
       $scope.addTableParams = function(abotypLieferung) {

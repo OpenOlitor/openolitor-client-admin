@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('OpenOlitorRootController', ['$scope', 'ProjektModel', '$location', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-  function($scope, ProjektModel, $location, checkSize, $window, $timeout, BUILD_NR) {
+  .controller('OpenOlitorRootController', ['$scope', 'ProjektModel', 'gettextCatalog', '$location', 'checkSize', '$window', '$timeout', 'BUILD_NR',
+  function($scope, ProjektModel, gettextCatalog, $location, checkSize, $window, $timeout, BUILD_NR) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
@@ -24,5 +24,19 @@ angular.module('openolitor')
       $scope.menushow[angular.element( '.sidebar-nav .active' ).parent().attr('activate-id')] = true;
     }, 0);
 
+    $scope.changeLang = function(lang) {
+      if (!angular.isUndefined(lang)) {
+        gettextCatalog.setCurrentLanguage(lang);
+        $scope.$emit('languageChanged');
+      }
+    };
+
+    $scope.activeLang = function() {
+      return gettextCatalog.getCurrentLanguage();
+    };
+
+    if ($scope.activeLang() !== 'de' || $scope.activeLang() !== 'fr') {
+      $scope.changeLang('de');
+    }
 
   }]);
