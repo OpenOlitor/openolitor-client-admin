@@ -8,7 +8,7 @@
             <div class="row form-group">
               <h3>
                 <div class="col-md-4" translate>
-                  Planung: Korbinhalt
+                  Planung #1: Korbinhalt
                 </div>
                 <div class="col-md-2">
                   <ul class="nav navbar-nav">
@@ -104,6 +104,7 @@
                       <td translate>Total</td>
                       <td>{{getTotal(abotypLieferung.korbEntries)| ooCHF}}</td>
                       <td><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.korbEntries) < 0}">&#916; {{getDiff(abotypLieferung.zielpreis, abotypLieferung.korbEntries)| ooCHF}}</span></td>
+                      <td></td>
                     </tr>
                   </tfoot>
                 </table>
