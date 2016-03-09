@@ -89,11 +89,11 @@ angular.module('openolitor')
       function vertriebsartLabel(vertriebsart) {
         switch (vertriebsart.typ) {
           case VERTRIEBSARTEN.DEPOTLIEFERUNG:
-            return vertriebsart.typ + ' - ' + vertriebsart.depot.name;
+            return vertriebsart.typ + ' - ' + vertriebsart.depot.name + ' - ' + vertriebsart.liefertag;
           case VERTRIEBSARTEN.HEIMLIEFERUNG:
-            return vertriebsart.typ + ' - ' + vertriebsart.tour.name;
+            return vertriebsart.typ + ' - ' + vertriebsart.tour.name + ' - ' + vertriebsart.liefertag;
           default:
-            return vertriebsart.typ;
+            return vertriebsart.typ + ' - ' + vertriebsart.liefertag;
         }
       }
 

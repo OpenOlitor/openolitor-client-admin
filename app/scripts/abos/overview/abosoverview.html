@@ -17,7 +17,7 @@
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
-              <td data-title="'Abotyp'|translate" sortable="'abo.abotypName'">
+              <td data-title="'Abotyp'|translate" sortable="'abo.abotypName'" filter="{name: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
               </td>
               <td data-title="'Abonnentin'|translate" sortable="'abo.kunde'">

@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('AbosOverviewController', ['$scope', '$filter',
-    'AbosOverviewModel', 'ngTableParams',
-    function($scope, $filter, AbosOverviewModel, ngTableParams) {
+    'AbosOverviewModel', 'ngTableParams', 'AbotypenOverviewModel',
+    function($scope, $filter, AbosOverviewModel, ngTableParams, AbotypenOverviewModel) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -17,6 +17,18 @@ angular.module('openolitor')
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
+
+      $scope.abotypL = [];
+      AbotypenOverviewModel.query({
+        q: ''
+      }, function(list) {
+        angular.forEach(list, function(abotyp, key) {
+          $scope.abotypL.push({
+            'id': abotyp.id,
+            'title': abotyp.name
+          });
+        });
+      });
 
       if (!$scope.tableParams) {
         //use default tableParams

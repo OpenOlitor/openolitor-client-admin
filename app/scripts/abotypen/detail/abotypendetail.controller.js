@@ -5,8 +5,7 @@
 angular.module('openolitor')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel', 'msgBus',
-    'LIEFERRHYTHMEN',
-    'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil',
+    'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil',
     function($scope, $filter, $routeParams, $location, gettext, ngTableParams,
       AbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN,
@@ -21,6 +20,7 @@ angular.module('openolitor')
           waehrung: 'CHF',
           anzahlAbwesenheiten: undefined,
           farbCode: '',
+          adminProzente: 0,
           aktiv: 1
         }
       };
