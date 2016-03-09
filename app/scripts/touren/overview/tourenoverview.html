@@ -6,7 +6,7 @@
       <h3  class="panel-title"><span class="navbar-brand" translate>Touren</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query.$">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query.$">
             <a role="button" ng-click="tourErstellen()" ng-disabled="editing" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Tour erstellen</a>
           </div>
         </form>
@@ -19,7 +19,7 @@
       </div>
       <div ng-show="entries" id="tourTable" display-export="true" export-file-name="touren">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="tour in $data track by tour.id | filter: search.query">
+          <tr ng-repeat="tour in $data | filter: search.query.$ track by tour.id">
             <td title="'Name'|translate" sortable="'name'" ng-class="[{'col-md-3': tour.editable}]">
               <span ng-hide="tour.editable">{{tour.name}}</span>
               <span ng-show="tour.editable">

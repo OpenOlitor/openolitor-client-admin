@@ -6,7 +6,7 @@
         <h3 class="panel-title"><span class="navbar-brand" translate>Abos</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
           </div>
         </form></h3>
       </div>
@@ -16,7 +16,7 @@
         </div>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-            <tr ng-repeat="abo in $data">
+            <tr ng-repeat="abo in $data | filter: search.query.$">
               <td title="'Abotyp'|translate" sortable="'abo.abotypName'">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
               </td>

@@ -19,7 +19,11 @@ angular.module('openolitor')
 
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
-      $scope.projekt = {waehrung: 'CHF'};
+      $scope.projekt = {
+        preiseSichtbar: true,
+        preiseEditierbar: false,
+        waehrung: 'CHF'
+      };
 
       //watch for set of kundentypen
       $scope.$watch(KundentypenService.getKundentypen,

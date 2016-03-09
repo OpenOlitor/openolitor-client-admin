@@ -6,7 +6,7 @@
       <h3  class="panel-title"><span class="navbar-brand" translate>Depots</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
             <a role="button" href="#/depots/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Depot erstellen</span></a>
           </div>
         </form>
@@ -19,7 +19,7 @@
       </div>
       <div ng-show="entries">
         <table ng-table="tableParams" class="table table-striped">
-          <tr ng-repeat="depot in $data">
+          <tr ng-repeat="depot in $data | filter: search.query.$ ">
             <td title="'Name'|translate" sortable="'name'">
               <a ng-href="#/depots/{{depot.id}}">{{depot.name}}</a>
             </td>

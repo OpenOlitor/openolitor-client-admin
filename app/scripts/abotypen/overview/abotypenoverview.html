@@ -7,7 +7,7 @@
         <span class="pull-right">
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
             <a role="button" href="#/abotypen/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Abotyp erstellen</span></a>
           </div>
         </form>
@@ -20,7 +20,7 @@
       </div>
       <div ng-show="entries">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-          <tr ng-repeat="abotyp in $data">
+          <tr ng-repeat="abotyp in $data | filter: search.query.$">
             <td>
               <span class="color-box" ng-style="style(abotyp)"></span>
             </td>

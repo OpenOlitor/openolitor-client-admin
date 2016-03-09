@@ -189,7 +189,7 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         '<%= openolitor.app %>/scripts/{,*/}*.js',
-        '!<%= openolitor.app %>/scripts/translations.js'
+        '!<%= openolitor.app %>/scripts/i18n/translations.js'
       ],
       test: {
         options: {

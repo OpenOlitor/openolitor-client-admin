@@ -6,7 +6,7 @@
       <h3  class="panel-title"><span class="navbar-brand" translate>Produzenten</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query.$">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query.$">
             <a role="button" href="#/produzenten/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Produzent erstellen</span></a>
           </div>
         </form>
@@ -19,7 +19,7 @@
       </div>
       <div ng-show="entries" id="produzentTable" display-export="true" export-file-name="Produzenten">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="produzent in $data | filter: search.query">
+          <tr ng-repeat="produzent in $data | filter: search.query.$">
             <td title="'KRZ'|translate" sortable="'kurzzeichen'">
               <a ng-href="#/produzenten/{{produzent.id}}">{{produzent.kurzzeichen}}</a>
             </td>

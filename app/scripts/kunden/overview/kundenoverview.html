@@ -6,7 +6,7 @@
       <h3  class="panel-title"><span class="navbar-brand" translate>Kunden</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Volltextsuche...'|translate}}" ng-model="search.query">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
             <a role="button" href="#/kunden/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Kunde erstellen</span></a>
           </div>
         </form>
@@ -19,7 +19,7 @@
       </div>
       <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="kunde in $data">
+          <tr ng-repeat="kunde in $data | filter: search.query.$">
             <td title="'Bezeichnung'|translate" sortable="'bezeichnung'">
               <a ng-href="#/kunden/{{kunde.id}}">{{kunde.bezeichnung}}</a>
             </td>
