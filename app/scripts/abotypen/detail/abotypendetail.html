@@ -110,7 +110,7 @@
         <div class="panel-body">
           <div class="row form-group">
             <div class="col-md-4">
-              <label for="anzahlAbwesenheiten" translate>Anzahl Soll Abwesenheiten</label>
+              <label for="anzahlAbwesenheiten" translate>Anzahl Soll-Abwesenheiten</label>
             </div>
             <div class="col-md-2">
               <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
@@ -126,17 +126,30 @@
           </div>
           <div class="row form-group">
             <div class="col-md-4">
-              <label for="preis" translate>Zielpreis</label>
+              <label for="zielpreis" translate>Zielpreis</label>
             </div>
             <div class="col-md-6 row">
               <div class="col-md-7">
                 <div class="input-group">
                   <div class="input-group-addon">{{abotyp.waehrung}}</div>
-                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="preis" ng-model="abotyp.zielpreis"></input>
+                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="zielpreis" ng-model="abotyp.zielpreis"></input>
                 </div>
               </div>
               <div class="col-md-5" style="line-height:30px">
                 <span translate>pro Lieferung</span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="adminProzente" translate>Administrations-Anteil</label>
+            </div>
+            <div class="col-md-6 row">
+              <div class="col-md-7">
+                <div class="input-group">
+                  <input type="number" placeholder="{{'Satz'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" class="form-control" name="adminProzente" ng-model="abotyp.adminProzente"></input>
+                  <div class="input-group-addon" translate>%</div>
+                </div>
               </div>
             </div>
           </div>
