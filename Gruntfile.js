@@ -32,19 +32,19 @@ module.exports = function(grunt) {
   var config = {
     'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
     'API_WS_URL': API_URL_CONFIG[env].m1+'ws' || 'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
-    'BUILD_NR': grunt.option('buildnr') || 'undefined - Use grunt build --buildnr=123 to specify'
+    'BUILD_NR': grunt.option('buildnr') || 'dev'
   };
 
   var mandantenConfig = {
     mandant1: {
       'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
       'API_WS_URL': API_URL_CONFIG[env].m1+'ws' || 'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
-      'BUILD_NR': grunt.option('buildnr') || 'undefined - Use grunt build --buildnr=123 to specify'
+      'BUILD_NR': grunt.option('buildnr') || 'dev'
     },
     mandant2: {
       'API_URL': API_URL_CONFIG[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
       'API_WS_URL': API_URL_CONFIG[env].m2+'ws' || 'http://localhost:9003/m2/ws', //replace @@API_WS_URL with value
-      'BUILD_NR': grunt.option('buildnr') || 'undefined - Use grunt build --buildnr=123 to specify'
+      'BUILD_NR': grunt.option('buildnr') || 'dev'
     }
   };
 
