@@ -20,13 +20,13 @@
       <div ng-show="entries" id="tourTable" display-export="true" export-file-name="touren">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="tour in $data | filter: search.query.$ track by tour.id">
-            <td title="'Name'|translate" sortable="'name'" ng-class="[{'col-md-3': tour.editable}]">
+            <td data-title="'Name'|translate" sortable="'name'" ng-class="[{'col-md-3': tour.editable}]">
               <span ng-hide="tour.editable">{{tour.name}}</span>
               <span ng-show="tour.editable">
                 <input type="text" class="form-control" name="name" ng-model="tour.name" placeholder="{{'Neue Bezeichnung'|translate}}" required>
               </span>
             </td>
-            <td title="'Beschrieb'|translate" sortable="'beschreibung'" ng-class="[{'col-md-7': tour.editable}]">
+            <td data-title="'Beschrieb'|translate" sortable="'beschreibung'" ng-class="[{'col-md-7': tour.editable}]">
               <span ng-hide="tour.editable">{{tour.beschreibung}}</span>
               <span ng-show="tour.editable">
                 <input type="text" class="form-control" name="beschreibung" ng-model="tour.beschreibung" placeholder="{{'Beschreibung'|translate}}" required>

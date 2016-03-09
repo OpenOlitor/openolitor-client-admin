@@ -20,16 +20,16 @@
       <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="kunde in $data | filter: search.query.$">
-            <td title="'Bezeichnung'|translate" sortable="'bezeichnung'">
+            <td data-title="'Bezeichnung'|translate" sortable="'bezeichnung'">
               <a ng-href="#/kunden/{{kunde.id}}">{{kunde.bezeichnung}}</a>
             </td>
-            <td title="'Strasse'|translate" sortable="'strasse+hausNummer'">
+            <td data-title="'Strasse'|translate" sortable="'strasse+hausNummer'">
               {{kunde.strasse}} {{kunde.hausNummer}}
             </td>
-            <td title="'PLZ Ort'|translate" sortable="'plz'">
+            <td data-title="'PLZ Ort'|translate" sortable="'plz'">
               {{kunde.plz}} {{kunde.ort}}
             </td>
-            <td title="'# Abos'|translate" sortable="'anzahlAbos'">
+            <td data-title="'# Abos'|translate" sortable="'anzahlAbos'">
               {{kunde.anzahlAbos}}
             </td>
             <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="kundentypen">

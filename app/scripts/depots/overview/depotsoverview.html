@@ -20,25 +20,25 @@
       <div ng-show="entries">
         <table ng-table="tableParams" class="table table-striped">
           <tr ng-repeat="depot in $data | filter: search.query.$ ">
-            <td title="'Name'|translate" sortable="'name'">
+            <td data-title="'Name'|translate" sortable="'name'">
               <a ng-href="#/depots/{{depot.id}}">{{depot.name}}</a>
             </td>
-            <td title="'Ansprechpartner'|translate" sortable="'apName+apVorname'">
+            <td data-title="'Ansprechpartner'|translate" sortable="'apName+apVorname'">
               {{depot.apName}} {{depot.apVorname}}
             </td>
-            <td title="'AP Tel'|translate" sortable="'apTelefon'">
+            <td data-title="'AP Tel'|translate" sortable="'apTelefon'">
               <a href="tel:{{depot.apTelefon}}">{{depot.apTelefon}}</a>
             </td>
-            <td title="'Verantwortliche_r'|translate" sortable="'vName+vVorname'">
+            <td data-title="'Verantwortliche_r'|translate" sortable="'vName+vVorname'">
               {{depot.vName}} {{depot.vVorname}}
             </td>
-            <td title="'Ver. Tel'|translate" sortable="'vTelefon'">
+            <td data-title="'Ver. Tel'|translate" sortable="'vTelefon'">
               <a href="tel:{{depot.apTelefon}}">{{depot.vTelefon}}</a>
             </td>
-            <td title="'# Abos'|translate">
+            <td data-title="'# Abos'|translate">
               {{depot.anzahlAbonnenten}}/{{depot.anzahlAbonnentenMax}}
             </td>
-            <td title="'Aktiv'|translate" sortable="'aktiv'">
+            <td data-title="'Aktiv'|translate" sortable="'aktiv'">
               <i ng-if="depot.aktiv" class="glyphicon glyphicon-ok"></i>
               <i ng-if="!depot.aktiv" class="glyphicon glyphicon-remove"></i>
             </td>

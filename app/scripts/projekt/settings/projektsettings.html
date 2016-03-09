@@ -128,13 +128,13 @@
               <div ng-show="kundentypen">
                 <table ng-table="kundentypenTableParams" class="table table-striped">
                   <tr ng-repeat="kundentyp in $data">
-                    <td title="'Kundentyp'|translate" sortable="'kundentyp'">
+                    <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">
                       {{kundentyp.kundentyp}}
                     </td>
-                    <td title="'Beschreibung'|translate" sortable="'beschreibung'">
+                    <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
                       <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></textarea>
                     </td>
-                    <td title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
+                    <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
                       {{kundentyp.anzahlVerknuepfungen}}
                     </td>
                     <td>
@@ -170,7 +170,7 @@
               <div ng-show="produktekategorien">
                 <table ng-table="produktekategorienTableParams" class="table table-striped">
                   <tr ng-repeat="produktekategorie in $data">
-                    <td title="'Bezeichnung'|translate" sortable="'beschreibung'">
+                    <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
                       <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedProduktekategorie(produktekategorie)"></input>
                     </td>
                     <td>

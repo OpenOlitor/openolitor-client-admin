@@ -19,15 +19,15 @@
       <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="korplanung in $data">
-            <td title="'#'|translate" sortable="'nr'">
+            <td data-title="'#'|translate" sortable="'nr'">
               <a ng-href="#/korplanung/{{korplanung.id}}">{{korplanung.nr}}</a>
             </td>
-            <td title="'Abotypen'|translate">
+            <td data-title="'Abotypen'|translate">
               <span ng-repeat="abotyp in korplanung.abotypen" class="badge">
                 {{abotyp.name}} {{abotyp.lieferdatum}}
               </span>
             </td>
-            <td title="'Depots / Touren'|translate">
+            <td data-title="'Depots / Touren'|translate">
               <span ng-repeat="tour in korplanung.touren" class="badge">
                 {{tour.name}} {{tour.datum}}
               </span>
@@ -35,7 +35,7 @@
                 {{depot.name}} {{depot.datum}}
               </span>
             </td>
-            <td title="'Status'|translate">
+            <td data-title="'Status'|translate">
               <i ng-if="korplanung.status === 'abgeschlossen' || korplanung.status === 'verrechnet'" class="glyphicon glyphicon-ok"></i>
               <i ng-if="korplanung.aktiv  === 'inPlanung'" class="glyphicon glyphicon-remove"></i>
             </td>

@@ -20,19 +20,19 @@
       <div ng-show="entries" id="produzentTable" display-export="true" export-file-name="Produzenten">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="produzent in $data | filter: search.query.$">
-            <td title="'KRZ'|translate" sortable="'kurzzeichen'">
+            <td data-title="'KRZ'|translate" sortable="'kurzzeichen'">
               <a ng-href="#/produzenten/{{produzent.id}}">{{produzent.kurzzeichen}}</a>
             </td>
-            <td title="'Bezeichnung'|translate" sortable="'kurzzeichen'">
+            <td data-title="'Bezeichnung'|translate" sortable="'kurzzeichen'">
               {{produzent.name}} {{produzent.vorname}}
             </td>
-            <td title="'Strasse'|translate" sortable="'strasse+hausNummer'">
+            <td data-title="'Strasse'|translate" sortable="'strasse+hausNummer'">
               {{produzent.strasse}} {{produzent.hausNummer}}
             </td>
-            <td title="'PLZ Ort'|translate" sortable="'plz'">
+            <td data-title="'PLZ Ort'|translate" sortable="'plz'">
               {{produzent.plz}} {{produzent.ort}}
             </td>
-            <td title="'Aktiv'|translate" sortable="'aktiv'">
+            <td data-title="'Aktiv'|translate" sortable="'aktiv'">
               <i ng-if="produzent.aktiv" class="glyphicon glyphicon-ok"></i>
               <i ng-if="!produzent.aktiv" class="glyphicon glyphicon-remove"></i>
             </td>

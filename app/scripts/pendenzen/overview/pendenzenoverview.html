@@ -19,16 +19,16 @@
       <div ng-show="entries">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
           <tr ng-repeat="pendenz in $data | filter: search.query.$">
-            <td title="'Datum'|translate" sortable="'datum'">
+            <td data-title="'Datum'|translate" sortable="'datum'">
               {{pendenz.datum|date:"dd.MM.yyyy"}}
             </td>
-            <td title="'Bemerkung'|translate" sortable="'bemerkung'">
+            <td data-title="'Bemerkung'|translate" sortable="'bemerkung'">
               {{pendenz.bemerkung}}
             </td>
-            <td title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
+            <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
               {{pendenz.status}}
             </td>
-            <td title="'Kunde'|translate">
+            <td data-title="'Kunde'|translate">
               <a ng-href="#/kunden/{{pendenz.kundeId}}">{{pendenz.kundeBezeichnung}}</a>
             </td>
           </tr>

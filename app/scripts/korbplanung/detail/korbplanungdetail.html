@@ -39,13 +39,13 @@
                 <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
                   <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'">
                     <td><span oo-draggable="true" oo-draged-type="'prod'">&#8942</span></td>
-                    <td title="'Produkt'|translate" sortable="'bezeichnung'" filter="{bezeichnung: 'text'}">
+                    <td data-title="'Produkt'|translate" sortable="'bezeichnung'" filter="{bezeichnung: 'text'}">
                       {{produkt.bezeichnung}}
                     </td>
-                    <td title="'Preis'|translate" filter="{preis: 'number'}">
+                    <td data-title="'Preis'|translate" filter="{preis: 'number'}">
                       {{produkt.preis | ooCHF}} / {{produkt.einheit}}
                     </td>
-                    <td title="'Prod.'|translate" filter="{produzent: 'select'}" filter-data="produzentenL">
+                    <td data-title="'Prod.'|translate" filter="{produzent: 'select'}" filter-data="produzentenL">
                       <span ng-repeat="produzent in produkt.produzenten">{{produzent.id}}&nbsp;</span>
                     </td>
                   </tr>
@@ -73,16 +73,16 @@
                 <table ng-table="abotypLieferung.tableParamsKorb" class="table table-striped table-small table-korbplanung" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
                   <tr ng-repeat="korbprodukt in $data | orderBy:'bezeichnung'">
                     <td><span oo-draggable="true" oo-draged-type="'korbprod'">&#8942</span></td>
-                    <td title="'Produkt'|translate">
+                    <td data-title="'Produkt'|translate">
                       {{korbprodukt.bezeichnung}}
                     </td>
-                    <td title="'Menge'|translate">
+                    <td data-title="'Menge'|translate">
                       <div class="input-group">
                         <input type="number" placeholder="{{'Menge'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="menge" ng-model="korbprodukt.menge" required></input>
                         <div class="input-group-addon">{{korbprodukt.einheit|translate}}</div>
                       </div>
                     </td>
-                    <td title="'Preis'|translate" ng-show="projekt.preiseSichtbar">
+                    <td data-title="'Preis'|translate" ng-show="projekt.preiseSichtbar">
                       <span ng-show="korbprodukt.menge && !projekt.preiseEditierbar">
                         {{calculatePreis(korbprodukt)| ooCHF}}
                       </span>
@@ -93,7 +93,7 @@
                         {{korbprodukt.preisEinheit}}
                       </span>
                     </td>
-                    <td title="'Prod.'|translate">
+                    <td data-title="'Prod.'|translate">
                       <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="id" selected-prop="id" selected="korbprodukt.produzent" required></oo-dropdown>
                     </td>
                     <td>

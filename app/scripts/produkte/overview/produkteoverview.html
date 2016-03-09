@@ -20,25 +20,25 @@
       <div ng-show="entries" id="produktTable" display-export="true" export-file-name="Produkte">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="produkt in $data track by produkt.id | filter: search.query.$">
-            <td title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
+            <td data-title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-hide="produkt.editable">{{produkt.name}}</span>
               <span ng-show="produkt.editable">
                 <input type="text" class="form-control" name="kurzzeichen" ng-model="produkt.name" placeholder="{{'Neue Bezeichnung'|translate}}" required>
               </span>
             </td>
-            <td title="'Von'|translate" sortable="'verfuegbarVon'">
+            <td data-title="'Von'|translate" sortable="'verfuegbarVon'">
               <span ng-hide="produkt.editable">{{getMonthShort(produkt.verfuegbarVon)|translate}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="verfuegbarVon" display-style="uib-dropdown" values="monate" selected-prop="id" property="shortLabel" selected="produkt.verfuegbarVon" ng-required></oo-dropdown>
               </span>
             </td>
-            <td title="'Bis'|translate" sortable="'verfuegbarBis'">
+            <td data-title="'Bis'|translate" sortable="'verfuegbarBis'">
               <span ng-hide="produkt.editable">{{getMonthShort(produkt.verfuegbarBis)|translate}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="verfuegbarBis" display-style="uib-dropdown" values="monate" selected-prop="id" property="shortLabel" selected="produkt.verfuegbarBis" ng-required></oo-dropdown>
               </span>
             </td>
-            <td title="'Preis'|translate" sortable="'preis'" ng-class="[{'col-md-2': produkt.editable}]">
+            <td data-title="'Preis'|translate" sortable="'preis'" ng-class="[{'col-md-2': produkt.editable}]">
               <span ng-hide="produkt.editable">{{produkt.preis| ooCHF:true}}</span>
               <span ng-show="produkt.editable">
                 <div class="input-group">
@@ -47,19 +47,19 @@
                 </div>
               </span>
             </td>
-            <td title="'Standardmenge'|translate" sortable="'standardmenge'">
+            <td data-title="'Standardmenge'|translate" sortable="'standardmenge'">
               <span ng-hide="produkt.editable">{{produkt.standardmenge}}</span>
               <span ng-show="produkt.editable">
                 <input type="number" placeholder="{{'Menge'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="standardmenge" ng-model="produkt.standardmenge"></input>
               </span>
             </td>
-            <td title="'Einheit'|translate" sortable="'einheit'">
+            <td data-title="'Einheit'|translate" sortable="'einheit'">
               <span ng-hide="produkt.editable">{{produkt.einheit}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label" selected="produkt.einheit" ng-required></oo-dropdown>
               </span>
             </td>
-            <td title="'Kategorien'|translate" filter="{kategorien: 'select'}" filter-data="kategorienL" ng-class="[{'col-md-3': produkt.editable}]">
+            <td data-title="'Kategorien'|translate" filter="{kategorien: 'select'}" filter-data="kategorienL" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-repeat="kategorie in produkt.kategorien" class="badge">
                 {{kategorie}}
                 <span ng-show="produkt.editable" ng-click="removeKategorie(produkt, kategorie)" class="glyphicon glyphicon-remove"></span>
@@ -68,7 +68,7 @@
                 <oo-dropdown dropdown-id="produktekategorie" display-style="uib-dropdown" values="kategorienL" property="title" selected-prop="id" selected-function="addKategorieFunc()" required></oo-dropdown>
               </span>
             </td>
-            <td title="'Produzenten'|translate" filter="{produzenten: 'select'}" filter-data="produzentenL" ng-class="[{'col-md-3': produkt.editable}]">
+            <td data-title="'Produzenten'|translate" filter="{produzenten: 'select'}" filter-data="produzentenL" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-repeat="produzent in produkt.produzenten" class="badge">
                 {{produzent}}
                 <span ng-show="produkt.editable" ng-click="removeProduzent(produkt, produzent)" class="glyphicon glyphicon-remove"></span>
