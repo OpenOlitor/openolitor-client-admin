@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <form name="depotForm">
       <div class="row form-group">
@@ -18,7 +18,6 @@
               <h3 class="panel-title"><span class="navbar-brand" translate>Basisdaten</span></h3>
             </div>
             <div class="panel-body">
-              <div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="name" translate>Depotname</label>
@@ -65,6 +64,27 @@
                     <input type="text" class="form-control" id="ort" ng-model="depot.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
                   </div>
                 </div>
+              </div>
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title" translate>Zusatzdaten</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="anzahlAbonnentenMax" translate>Maximal Abos pro Liefertag</label>
+                  </div>
+                  <div class="col-md-2">
+                      <input type="text" pattern="[0-9]{4}" class="form-control" id="anzahlAbonnentenMax" ng-model="depot.anzahlAbonnentenMax" required placeholder="{{'Anzahl'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="farbCode" translate>Farbe-Code</label>
+                  </div>
+                  <div class="col-md-3">
+                    <color-picker ng-model="depot.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
+                  </div>
+                </div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="oeffnungszeiten" translate>Öffnungszeiten</label>
@@ -73,6 +93,11 @@
                     <textarea class="form-control" name="oeffnungszeiten" ng-model="depot.oeffnungszeiten" placeholder="{{'Öffnungszeiten'|translate}}..."></textarea>
                   </div>
                 </div>
+              </div>
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title" translate>Kontodaten</h3>
+              </div>
+              <div class="panel-body">
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="iban" translate>IBAN</label>
@@ -99,7 +124,6 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
         <div class="col-md-6">
           <div class="panel panel-default">
