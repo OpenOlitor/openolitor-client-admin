@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('OpenOlitorRootController', ['$scope', 'ServerModel', 'ProjektModel', 'gettextCatalog', '$location', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-  function($scope, ServerModel, ProjektModel, gettextCatalog, $location, checkSize, $window, $timeout, BUILD_NR) {
+  .controller('OpenOlitorRootController', ['$scope', 'ServerService', 'ProjektModel', 'gettextCatalog', '$location', 'checkSize', '$window', '$timeout', 'BUILD_NR',
+  function($scope, ServerService, ProjektModel, gettextCatalog, $location, checkSize, $window, $timeout, BUILD_NR) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
@@ -16,9 +16,15 @@ angular.module('openolitor')
     //initial launch
     checkSize();
 
+    $scope.connected = false;
+
     $scope.projekt = ProjektModel.query({});
 
-    $scope.serverInfo = ServerModel.query({});
+    $scope.$watch(ServerService.getStaticServerInfo,
+      function(info) {
+        $scope.serverInfo = info;
+        $scope.connected = true;
+      });
 
     $scope.buildNr = BUILD_NR;
 
