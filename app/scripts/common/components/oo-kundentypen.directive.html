@@ -1,7 +1,7 @@
 <div class="btn-group" data-toggle="buttons">
-  <label ng-repeat="kundentyp in kundentypenList" class="btn btn-primary">{{kundentyp}} <i ng-if="kundentypenList.length > 1" class="fa fa-times" ng-click="removeKundentyp(kundentyp)"></i></label>
+  <label ng-repeat="kundentyp in kundentypenList" class="btn btn-primary btn-sm">{{kundentyp}} <i ng-if="kundentypenList.length > 1" class="fa fa-times" ng-click="removeKundentyp(kundentyp)"></i></label>
   <div class="btn-group" role="group">
-    <button ng-show="kundentypen.length > 0"  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button ng-show="kundentypen.length > 0"  class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" >

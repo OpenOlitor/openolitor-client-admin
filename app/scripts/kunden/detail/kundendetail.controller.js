@@ -3,11 +3,11 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KundenDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('KundenDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'KundentypenService',
-    'EnumUtil', 'PENDENZSTATUS', '$log',
-    function($scope, $filter, $routeParams, $location, $uibModal, gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, $log) {
+    'EnumUtil', 'PENDENZSTATUS', 'msgBus', '$log',
+    function($scope, $rootScope, $filter, $routeParams, $location, $uibModal, gettext,
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, msgBus, $log) {
 
       var defaults = {
         model: {
@@ -36,6 +36,13 @@ angular.module('openolitor')
       } else {
         $scope.loadKunde();
       }
+
+      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
+        if (msg.entity === 'Kunde') {
+          $scope.loadKunde();
+          $rootScope.$apply();
+        }
+      });
 
       $scope.open = {
         pendenzdatum: false,
@@ -177,7 +184,7 @@ angular.module('openolitor')
         });
 
         modalInstance.result.then(function () {
-          $scope.loadKunde();
+
         }, function () {
           $log.info('Modal dismissed at: ' + new Date());
         });
