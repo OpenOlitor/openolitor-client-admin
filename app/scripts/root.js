@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('OpenOlitorRootController', ['$scope', 'ServerService', 'ProjektModel', 'gettextCatalog', '$location', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-  function($scope, ServerService, ProjektModel, gettextCatalog, $location, checkSize, $window, $timeout, BUILD_NR) {
+  .controller('OpenOlitorRootController', ['$scope', '$rootScope', 'ServerService', 'ProjektModel', 'gettextCatalog', '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
+  function($scope, $rootScope, ServerService, ProjektModel, gettextCatalog, $location, msgBus, checkSize, $window, $timeout, BUILD_NR) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
@@ -22,11 +22,27 @@ angular.module('openolitor')
 
     $scope.$watch(ServerService.getStaticServerInfo,
       function(info) {
-        $scope.serverInfo = info;
-        $scope.connected = true;
+        if(!angular.isUndefined(info)) {
+          $scope.serverInfo = info;
+          $scope.connected = true;
+        }
       });
 
     $scope.buildNr = BUILD_NR;
+
+    msgBus.onMsg('WebSocketClosed', $rootScope, function(event, msg) {
+      $scope.connected = false;
+      $scope.messagingSocketClosedReason = msg.reason;
+      $scope.$apply();
+    });
+
+    msgBus.onMsg('WebSocketOpen', $rootScope, function(event, msg) {
+      $scope.connected = true;
+      $scope.messagingSocketClosedReason = '';
+      $scope.$apply();
+    });
+
+
 
     $timeout(function() {
       $scope.menushow[angular.element( '.sidebar-nav .active' ).parent().attr('activate-id')] = true;
