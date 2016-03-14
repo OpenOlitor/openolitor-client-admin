@@ -61,7 +61,8 @@ angular.module('openolitor')
           count: 10,
           sorting: {
             name: 'asc'
-          }
+          },
+          filter: { typen: '' }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -73,8 +74,7 @@ angular.module('openolitor')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope
-              .search.query);
+              $scope.search.query);
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;

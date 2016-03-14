@@ -22,7 +22,7 @@ angular.module('openolitor')
       AbotypenOverviewModel.query({
         q: ''
       }, function(list) {
-        angular.forEach(list, function(abotyp, key) {
+        angular.forEach(list, function(abotyp) {
           $scope.abotypL.push({
             'id': abotyp.id,
             'title': abotyp.name
@@ -36,8 +36,9 @@ angular.module('openolitor')
           page: 1,
           count: 10,
           sorting: {
-            name: 'asc'
-          }
+            kunde: 'asc'
+          },
+          filter: { abotypId: '' }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -53,6 +54,7 @@ angular.module('openolitor')
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
+            orderedData = $filter('filter')($scope.entries, params.filter());
 
             params.total(orderedData.length);
             $defer.resolve(orderedData);

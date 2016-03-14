@@ -78,7 +78,7 @@ angular.module('openolitor')
         $scope.lieferungenTableParams = new ngTableParams({ // jshint ignore:line
           counts: [],
           sorting: {
-            name: 'asc'
+            datum: 'asc'
           }
         }, {
           getData: function($defer, params) {
