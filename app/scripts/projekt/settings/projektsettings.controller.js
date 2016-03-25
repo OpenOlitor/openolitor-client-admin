@@ -11,19 +11,28 @@ angular.module('openolitor')
     'ProduktekategorienModel',
     'ProjektService',
     'ProjektModel',
+    'EnumUtil',
+    'MONATE',
     'Upload',
     'msgBus',
     function($scope, $filter, ngTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-      ProjektService, ProjektModel, Upload, msgBus) {
+      ProjektService, ProjektModel, EnumUtil, MONATE, Upload, msgBus) {
 
+      $scope.editMode = false;
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
       $scope.projekt = {
         preiseSichtbar: true,
         preiseEditierbar: false,
+        emailErforderlich: true,
         waehrung: 'CHF'
       };
+
+      $scope.monate = EnumUtil.asArray(MONATE);
+      for(var i = 1; i >= 31; i++) {
+
+      }
 
       //watch for set of kundentypen
       $scope.$watch(KundentypenService.getKundentypen,
@@ -62,6 +71,10 @@ angular.module('openolitor')
             $scope.projekt = new ProjektModel($scope.projekt);
           }
         });
+
+      $scope.switchToEditMode = function() {
+        $scope.editMode = true;
+      };
 
       $scope.changedKundentypen = {};
       $scope.deletingKundentypen = {};

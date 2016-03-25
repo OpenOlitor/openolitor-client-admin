@@ -9,7 +9,13 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title">
                 <span class="navbar-brand" translate>Stammdaten</span>
-                <span class="pull-right">
+                <span class="pull-right" ng-if="!editMode">
+                  <button ng-click="switchToEditMode()" class="btn btn-danger">
+                    <i class="fa fa-floppy-o"></i>
+                    <span translate>Einstellungen editieren</span>
+                  </button>
+                </span>
+                <span class="pull-right" ng-if="editMode">
                   <oo-save-button model="projekt" form="projektForm" entity="Projekt" on-save="saveProjekt"><span translate>Stammdaten</span></oo-save-button>
                 </span>
               </h3>
@@ -20,7 +26,7 @@
                   <label for="bezeichnung" translate>Bezeichnung</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="bezeichnung" ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" required>
+                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" required>
                 </div>
               </div>
               <div class="row form-group">
@@ -28,10 +34,10 @@
                   <label for="strasse" translate>Strasse / Nr.</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" id="strasse" ng-model="projekt.strasse" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                  <input type="text" class="form-control" id="strasse" ng-disabled="!editMode"  ng-model="projekt.strasse" placeholder="{{'Strasse'|translate}}" maxlength="30">
                 </div>
                 <div class="col-md-2">
-                  <input type="text" class="form-control" id="hausNummer" ng-model="projekt.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  <input type="text" class="form-control" id="hausNummer" ng-disabled="!editMode" ng-model="projekt.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
                 </div>
               </div>
               <div class="row form-group">
@@ -39,7 +45,7 @@
                   <label for="adressZusatz" translate>Adresszusatz</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatz" ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  <input type="text" class="form-control" name="adressZusatz" ng-disabled="!editMode" ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -47,10 +53,29 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="4">
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-disabled="!editMode" ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="4">
                 </div>
                 <div class="col-md-5">
-                  <input type="text" class="form-control" id="ort" ng-model="projekt.ort" placeholder="{{'Ort'|translate}}" maxlength="35">
+                  <input type="text" class="form-control" id="ort" ng-disabled="!editMode" ng-model="projekt.ort" placeholder="{{'Ort'|translate}}" maxlength="35">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="waehrung" translate>Währung</label>
+                </div>
+                <div class="col-md-7">
+                  DropDown
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="geschaeftsjahr" translate>Start des Geschäftsjahrs</label>
+                </div>
+                <div class="col-md-3">
+                  <oo-dropdown dropdown-id="geschaeftsjahr.tag" display-style="uib-dropdown" values="tage" selected-prop="id" property="label" selected="projekt.geschaeftsjahr.tag" ng-required></oo-dropdown>
+                </div>
+                <div class="col-md-5">
+                  <oo-dropdown dropdown-id="geschaeftsjahr.monat" display-style="uib-dropdown" values="monate" selected-prop="id" property="label" selected="projekt.geschaeftsjahr.monat" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>
@@ -66,15 +91,23 @@
                   <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch ng-readonly="!editMode" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
               <div class="row form-group" ng-show="projekt.preiseSichtbar">
                 <div class="col-md-8">
-                  <label for="bezeichnung" translate>Preise editierbar</label>
+                  <label for="preiseEditierbar" translate>Preise editierbar</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch ng-readonly="!editMode" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+              <div class="row form-group" ng-show="projekt.preiseSichtbar">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Kunden E-Mail erforderlich</label>
+                </div>
+                <div class="col-md-4">
+                  <input bs-switch ng-readonly="!editMode" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
             </div>
