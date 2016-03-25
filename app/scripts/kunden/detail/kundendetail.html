@@ -160,7 +160,7 @@
                   <label for="email" translate>Email</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" required>
+                  <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" ng-required="$root.projekt.emailErforderlich">
                 </div>
               </div>
               <div class="row form-group">
