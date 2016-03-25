@@ -63,8 +63,8 @@
                     {{abotypLieferung.name}}</span>
                   <span class="pull-right">
                     <small ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.lieferdatum}}</small>
-                    <button role="button" class="btn btn-default"
-                      oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></button>
+                    <span class="btn btn-default"
+                      oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
                     <button type="button" role="button" ng-click="removeAbotypFromPlanung(abotypLieferung)" class="btn btn-default"><span class="fa fa-times"></span></button>
                   </span>
                 </h3>
