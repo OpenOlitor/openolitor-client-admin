@@ -69,8 +69,10 @@ angular.module('openolitor')
         function(projekt) {
           if (projekt) {
             $scope.projekt = projekt;
+            $scope.logoUrl = $scope.generateLogoUrl();
           } else {
             $scope.projekt = new ProjektModel($scope.projekt);
+            $scope.logoUrl = undefined;
           }
         });
 
@@ -312,26 +314,24 @@ angular.module('openolitor')
           return;
         }
         Upload.upload({
-          url: $scope.logoUrl(),
-          headers: {
-            'Content-Type': file.type
-          },
+          url: $scope.logoUrl,
           data: {
             file: file
           }
         }).then(function(resp) {
           console.log('Success ' + resp.config.data.file.name +
             'uploaded. Response: ' + resp.data);
+          //regenerate logo url to reload image
+          $scope.logoUrl = $scope.generateLogoUrl();
         }, function(resp) {
           console.log('Error status: ' + resp.status);
-        }, function(evt) {
-          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          console.log('progress: ' + progressPercentage + '% ');
         });
       };
 
-      $scope.logoUrl = function() {
-        return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
+      $scope.generateLogoUrl = function() {
+        return API_URL + 'projekt/' + $scope.projekt.id + '/logo?' + new Date()
+          .getTime();
       };
+      $scope.logoUrl = $scope.generateLogoUrl();
     }
   ]);
