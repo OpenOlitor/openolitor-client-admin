@@ -15,9 +15,11 @@ angular.module('openolitor')
     'MONATE',
     'Upload',
     'msgBus',
+    'API_URL',
     function($scope, $filter, ngTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-      ProjektService, ProjektModel, EnumUtil, MONATE, Upload, msgBus) {
+      ProjektService, ProjektModel, EnumUtil, MONATE, Upload, msgBus, API_URL
+    ) {
 
       $scope.editMode = false;
       $scope.templateKundentyp = {};
@@ -30,7 +32,7 @@ angular.module('openolitor')
       };
 
       $scope.monate = EnumUtil.asArray(MONATE);
-      for(var i = 1; i >= 31; i++) {
+      for (var i = 1; i >= 31; i++) {
 
       }
 
@@ -92,12 +94,14 @@ angular.module('openolitor')
 
       $scope.modelChangedProduktekategorie = function(produktekategorie) {
         if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
-          $scope.changedProduktekategorien[produktekategorie.id] = produktekategorie;
+          $scope.changedProduktekategorien[produktekategorie.id] =
+            produktekategorie;
         }
       };
 
       $scope.hasChangesProduktekategorien = function() {
-        return Object.getOwnPropertyNames($scope.changedProduktekategorien).length > 0;
+        return Object.getOwnPropertyNames($scope.changedProduktekategorien)
+          .length > 0;
       };
 
       $scope.saveKundentypen = function() {
@@ -144,7 +148,8 @@ angular.module('openolitor')
           return;
         }
         $scope.templateProduktekategorie.updating = true;
-        angular.forEach($scope.changedProduktekategorien, function(produktekategorie) {
+        angular.forEach($scope.changedProduktekategorien, function(
+          produktekategorie) {
           produktekategorie.$save();
         });
       };
@@ -161,12 +166,13 @@ angular.module('openolitor')
       $scope.addProduktekategorie = function() {
         if ($scope.createProduktekategorieForm.$invalid) {
 
-          angular.forEach($scope.createProduktekategorieForm.$error, function(
-            field) {
-            angular.forEach(field, function(errorField) {
-              errorField.$setTouched();
+          angular.forEach($scope.createProduktekategorieForm.$error,
+            function(
+              field) {
+              angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+              });
             });
-          });
           return;
         }
         var newModel = new ProduktekategorienModel({
@@ -187,13 +193,13 @@ angular.module('openolitor')
 
           $scope.$apply();
         } else if (msg.entity === 'Produktekategorie') {
-            $scope.templateProduktekategorie.creating = undefined;
+          $scope.templateProduktekategorie.creating = undefined;
 
-            $scope.produktekategorien.push(new ProduktekategorienModel(msg.data));
-            $scope.produktekategorienTableParams.reload();
+          $scope.produktekategorien.push(new ProduktekategorienModel(msg.data));
+          $scope.produktekategorienTableParams.reload();
 
-            $scope.$apply();
-          }
+          $scope.$apply();
+        }
       });
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
@@ -219,20 +225,22 @@ angular.module('openolitor')
           $scope.kundentypenTableParams.reload();
           $scope.$apply();
         } else if (msg.entity === 'Produktekategorie') {
-            $scope.templateProduktekategorie.deleting = undefined;
-            $scope.deletingProduktekategorie[msg.data.id] = undefined;
-            angular.forEach($scope.produktekategorien, function(produktekategorie) {
-              if (produktekategorie.id === msg.data.id) {
-                var index = $scope.produktekategorien.indexOf(produktekategorie);
-                if (index > -1) {
-                  $scope.produktekategorien.splice(index, 1);
-                }
+          $scope.templateProduktekategorie.deleting = undefined;
+          $scope.deletingProduktekategorie[msg.data.id] = undefined;
+          angular.forEach($scope.produktekategorien, function(
+            produktekategorie) {
+            if (produktekategorie.id === msg.data.id) {
+              var index = $scope.produktekategorien.indexOf(
+                produktekategorie);
+              if (index > -1) {
+                $scope.produktekategorien.splice(index, 1);
               }
-            });
+            }
+          });
 
-            $scope.produktekategorienTableParams.reload();
-            $scope.$apply();
-          }
+          $scope.produktekategorienTableParams.reload();
+          $scope.$apply();
+        }
       });
 
       if (!$scope.kundentypenTableParams) {
@@ -297,19 +305,33 @@ angular.module('openolitor')
         return $scope.projekt.$save();
       };
 
+      $scope.logoFile = undefined;
       // upload on file select or drop
-      $scope.upload = function (file) {
-          Upload.upload({
-              url: 'upload/url',
-              data: {file: file, 'username': $scope.username}
-          }).then(function (resp) {
-              console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-          }, function (resp) {
-              console.log('Error status: ' + resp.status);
-          }, function (evt) {
-              var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-              console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-          });
+      $scope.uploadLogo = function(file) {
+        if (!file) {
+          return;
+        }
+        Upload.upload({
+          url: $scope.logoUrl(),
+          headers: {
+            'Content-Type': file.type
+          },
+          data: {
+            file: file
+          }
+        }).then(function(resp) {
+          console.log('Success ' + resp.config.data.file.name +
+            'uploaded. Response: ' + resp.data);
+        }, function(resp) {
+          console.log('Error status: ' + resp.status);
+        }, function(evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ');
+        });
+      };
+
+      $scope.logoUrl = function() {
+        return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
       };
     }
   ]);
