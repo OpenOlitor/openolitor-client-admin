@@ -126,14 +126,14 @@
                 <label for="logo" translate>Logo</label>
               </div>
               <div class="col-md-5">
-                <div class="button drop-box" ngf-select ng-model="logoFile" name="logoFile" ngf-pattern="'image/*'"
-                  ngf-accept="'image/*'" ngf-max-size="1MB" ngf-min-height="200" ngf-select="uploadLogo($logoFile)"
-                  ngf-resize="{width: 400, height: 400}" ngf-resize-if="$width > 1000 || $height > 1000">
+                <div class="button drop-box" ng-model="logoFile" name="logoFile" ngf-pattern="'image/*'"
+                  ngf-accept="'image/*'" ngf-max-size="1MB" ngf-select="uploadLogo($file)" ngf-drop="uploadLogo($file)"
+                  ngf-resize="{width: 400, height: 400}">
                   <span translate>Logo auswählen oder einfügen</span>
                 </div>
               </div>
-              <div class="col-md-5" ng-show="projekt.logoId">
-                <img ng-src="{{BASE_URL/projekt.logoId}}" />
+              <div class="col-md-5" ng-show="logoUrl">
+                <img ng-src="{{logoUrl}}" />
               </div>
             </div>
           </div>
