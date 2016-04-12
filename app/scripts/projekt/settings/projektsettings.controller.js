@@ -74,12 +74,7 @@ angular.module('openolitor')
         function(projekt) {
           if (projekt) {
             $scope.projekt = projekt;
-            $scope.logoUrl = $scope.generateLogoUrl();
-
-            if(!angular.isUndefined($scope.projekt.geschaeftsjahr)) {
-              $scope.projekt.geschaeftsjahr.tag = $scope.projekt.geschaeftsjahr.getDate();
-              $scope.projekt.geschaeftsjahr.monat = $scope.projekt.geschaeftsjahr.getMonth() + 1;
-            }
+            $scope.logoUrl = $scope.generateLogoUrl();  
           } else {
             $scope.projekt = new ProjektModel($scope.projekt);
             $scope.logoUrl = undefined;
