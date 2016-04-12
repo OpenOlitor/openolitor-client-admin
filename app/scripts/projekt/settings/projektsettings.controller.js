@@ -74,7 +74,7 @@ angular.module('openolitor')
         function(projekt) {
           if (projekt) {
             $scope.projekt = projekt;
-            $scope.logoUrl = $scope.generateLogoUrl();  
+            $scope.logoUrl = $scope.generateLogoUrl();
           } else {
             $scope.projekt = new ProjektModel($scope.projekt);
             $scope.logoUrl = undefined;
