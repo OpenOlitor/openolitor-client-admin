@@ -15,7 +15,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       dropdownId: '@',
       displayStyle: '@',
       label: '=',
-      disabled: '@'
+      disabled: '='
     },
     templateUrl: 'scripts/common/components/oo-dropdown.directive.html',
     compile: function(element, attrs) {
