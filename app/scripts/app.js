@@ -94,6 +94,43 @@ angular
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
+  .constant('WAEHRUNG', {
+    CHF: {
+      id: 'CHF',
+      label: {
+        long: 'Schweizer Franken',
+        short: 'CHF'
+      }
+    },
+    EUR: {
+      id: 'EUR',
+      label: {
+        long: 'Euro',
+        short: '€'
+      }
+    },
+    USD: {
+      id: 'USD',
+      label: {
+        long: 'US Dollar',
+        short: '$'
+      }
+    },
+    GBP: {
+      id: 'GBP',
+      label: {
+        long: 'Britisches Pfund',
+        short: '£'
+      }
+    },
+    CAD: {
+      id: 'CAD',
+      label: {
+        long: 'Kanadischer Dollar',
+        short: 'CAD'
+      }
+    },
+  })
   .constant('LIEFERZEITPUNKTE', {
     MONTAG: {
       id: 'Montag',
