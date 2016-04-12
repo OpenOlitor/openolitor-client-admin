@@ -64,18 +64,18 @@
                   <label for="waehrung" translate>Währung</label>
                 </div>
                 <div class="col-md-7">
-                  DropDown
+                  <oo-dropdown dropdown-id="waehrung" disabled="!editMode" display-style="uib-dropdown" values="waehrungen" selected-prop="id" property="label" selected="projekt.waehrung" ng-required></oo-dropdown>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="geschaeftsjahr" translate>Start des Geschäftsjahrs</label>
+                  <label for="geschaeftsjahr" translate>Start des Geschäftsjahres</label>
                 </div>
-                <div class="col-md-3">
-                  <oo-dropdown dropdown-id="geschaeftsjahr.tag" display-style="uib-dropdown" values="tage" selected-prop="id" property="label" selected="projekt.geschaeftsjahr.tag" ng-required></oo-dropdown>
+                <div class="col-md-2">
+                  <oo-dropdown dropdown-id="geschaeftsjahr.tag" disabled="!editMode" display-style="uib-dropdown" values="tage" selected-prop="id" property="id" selected="projekt.geschaeftsjahr.tag" ng-required></oo-dropdown>
                 </div>
                 <div class="col-md-5">
-                  <oo-dropdown dropdown-id="geschaeftsjahr.monat" display-style="uib-dropdown" values="monate" selected-prop="id" property="label" selected="projekt.geschaeftsjahr.monat" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="geschaeftsjahr.monat" disabled="!editMode" display-style="uib-dropdown" values="monate" selected-prop="value" property="label" selected="projekt.geschaeftsjahr.monat" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@
                   <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch ng-readonly="!editMode" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch noop-switch-readonly="!editMode" ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
               <div class="row form-group" ng-show="projekt.preiseSichtbar">
@@ -99,7 +99,7 @@
                   <label for="preiseEditierbar" translate>Preise editierbar</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch ng-readonly="!editMode" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch noop-switch-readonly="!editMode" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
               <div class="row form-group" ng-show="projekt.preiseSichtbar">
@@ -107,7 +107,7 @@
                   <label for="emailErforderlich" translate>Kunden E-Mail erforderlich</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch ng-readonly="!editMode" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch noop-switch-readonly="!editMode" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
             </div>

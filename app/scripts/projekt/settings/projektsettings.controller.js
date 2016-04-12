@@ -13,11 +13,12 @@ angular.module('openolitor')
     'ProjektModel',
     'EnumUtil',
     'MONATE',
+    'WAEHRUNG',
     'Upload',
     'msgBus',
     function($scope, $filter, ngTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-      ProjektService, ProjektModel, EnumUtil, MONATE, Upload, msgBus) {
+      ProjektService, ProjektModel, EnumUtil, MONATE, WAEHRUNG, Upload, msgBus) {
 
       $scope.editMode = false;
       $scope.templateKundentyp = {};
@@ -26,12 +27,17 @@ angular.module('openolitor')
         preiseSichtbar: true,
         preiseEditierbar: false,
         emailErforderlich: true,
-        waehrung: 'CHF'
+        waehrung: 'CHF',
+        geschaeftsjahr: new Date(new Date().getYear(), 1, 1)
       };
 
-      $scope.monate = EnumUtil.asArray(MONATE);
-      for(var i = 1; i >= 31; i++) {
+      $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
+      $scope.monate = EnumUtil.asArray(MONATE);
+
+      $scope.tage = Array();
+      for (var i=1; i<=31; i++) {
+        $scope.tage.push({id: i});
       }
 
       //watch for set of kundentypen
@@ -67,6 +73,10 @@ angular.module('openolitor')
         function(projekt) {
           if (projekt) {
             $scope.projekt = projekt;
+            if(!angular.isUndefined($scope.projekt.geschaeftsjahr)) {
+              $scope.projekt.geschaeftsjahr.tag = $scope.projekt.geschaeftsjahr.getDate();
+              $scope.projekt.geschaeftsjahr.monat = $scope.projekt.geschaeftsjahr.getMonth() + 1;
+            }
           } else {
             $scope.projekt = new ProjektModel($scope.projekt);
           }
@@ -294,6 +304,11 @@ angular.module('openolitor')
       }
 
       $scope.saveProjekt = function() {
+        var tag = $scope.projekt.geschaeftsjahr.tag;
+        var monat = $scope.projekt.geschaeftsjahr.monat - 1;
+        $scope.projekt.geschaeftsjahr = new Date();
+        $scope.projekt.geschaeftsjahr.setDate(tag);
+        $scope.projekt.geschaeftsjahr.setMonth(monat);
         return $scope.projekt.$save();
       };
 
