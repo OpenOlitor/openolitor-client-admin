@@ -103,6 +103,8 @@ angular.module('openolitor')
 
       $scope.displayMode = 'korbinhalt';
 
+      $scope.produzentenL = new Array();
+
       $scope.bestellungen = {};
 
       if (!$scope.tableParams) {
@@ -129,6 +131,17 @@ angular.module('openolitor')
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
             orderedData = $filter('filter')(orderedData, params.filter());
+
+            var produzentenRawL = new Array();
+            angular.forEach(orderedData, function(item) {
+              angular.forEach(item.produzenten, function(produzent) {
+                produzentenRawL.push({
+                  'id': produzent.id,
+                  'title': produzent.id
+                });
+              });
+            });
+            $scope.produzentenL = $filter('orderBy')($filter('unique')(produzentenRawL, 'id'), 'id');
 
             params.total(orderedData.length);
             $defer.resolve(orderedData);
