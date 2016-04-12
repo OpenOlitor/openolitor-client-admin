@@ -75,13 +75,13 @@ angular.module('openolitor')
         function(projekt) {
           if (projekt) {
             $scope.projekt = projekt;
-            if(!angular.isUndefined($scope.projekt.geschaeftsjahr)) {
-              $scope.projekt.geschaeftsjahr.tag = $scope.projekt.geschaeftsjahr.getDate();
-              $scope.projekt.geschaeftsjahr.monat = $scope.projekt.geschaeftsjahr.getMonth() + 1;
-            }
           } else {
             $scope.projekt = new ProjektModel($scope.projekt);
             $scope.logoUrl = undefined;
+          }
+          if(!angular.isUndefined($scope.projekt.geschaeftsjahr)) {
+            $scope.projekt.geschaeftsjahr.tag = $scope.projekt.geschaeftsjahr.getDate();
+            $scope.projekt.geschaeftsjahr.monat = $scope.projekt.geschaeftsjahr.getMonth() + 1;
           }
         });
 

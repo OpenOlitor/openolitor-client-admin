@@ -43,6 +43,7 @@ angular
     'ngTouch',
     'ngTable',
     'ngFileSaver',
+    'angular.filter',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'color.picker',
