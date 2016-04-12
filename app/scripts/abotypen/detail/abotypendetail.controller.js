@@ -21,6 +21,7 @@ angular.module('openolitor')
           anzahlAbwesenheiten: undefined,
           farbCode: '',
           adminProzente: 0,
+          wirdGeplant: true,
           aktiv: 1
         }
       };
