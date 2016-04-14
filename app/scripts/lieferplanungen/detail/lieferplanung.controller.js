@@ -80,6 +80,8 @@ angular.module('openolitor')
 
       $scope.displayMode = 'korbinhalt';
 
+      $scope.produzentenL = [];
+
       $scope.bestellungen = {};
 
       if (!$scope.tableParams) {
