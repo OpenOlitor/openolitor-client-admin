@@ -4,13 +4,13 @@
  */
 angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
-    '$routeParams',
+    '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService',
-    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'msgBus', '$log',
-    function($scope, $rootScope, $filter, $routeParams, $location, $uibModal,
+    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'API_URL', 'msgBus', '$log',
+    function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
       gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE,
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE, API_URL,
       msgBus, $log) {
 
       var defaults = {
@@ -44,7 +44,6 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Kunde') {
-          $scope.loadKunde();
           $rootScope.$apply();
         }
       });
@@ -121,7 +120,11 @@ angular.module('openolitor')
       };
 
       $scope.removePerson = function(index) {
-        $scope.kunde.ansprechpersonen.splice(index, 1);
+        var person = $scope.kunde.ansprechpersonen.splice(index, 1);
+        //remove as well from remote side
+        if ($routeParams.id && person[0].id) {
+          $http.delete(API_URL + 'kunden/' + $routeParams.id + '/personen/' + person[0].id);
+        }
       };
 
       $scope.addPendenz = function() {
