@@ -495,15 +495,15 @@ angular
         controller: 'PendenzenOverviewController',
         name: 'PendenzenOverview'
       })
-      .when('/korbplanung', {
-        templateUrl: 'scripts/korbplanung/overview/korbplanungoverview.html',
-        controller: 'KorbplanungOverviewController',
-        name: 'KorbplanungDetail'
+      .when('/lieferplanung', {
+        templateUrl: 'scripts/lieferplanungen/overview/lieferplanungoverview.html',
+        controller: 'LieferplanungOverviewController',
+        name: 'LieferplanungOverview'
       })
-      .when('/korbplanung/:id', {
-        templateUrl: 'scripts/korbplanung/detail/korbplanungdetail.html',
-        controller: 'KorbplanungDetailController',
-        name: 'KorbplanungOverview'
+      .when('/lieferplanung/:id', {
+        templateUrl: 'scripts/lieferplanungen/detail/lieferplanungdetail.html',
+        controller: 'LieferplanungDetailController',
+        name: 'LieferplanungDetail'
       })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
