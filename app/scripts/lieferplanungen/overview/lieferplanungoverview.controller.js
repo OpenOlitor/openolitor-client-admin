@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
-    'LieferplanungModel', 'ngTableParams',
-    function($q, $scope, $filter, LieferplanungModel, ngTableParams) {
+    'LieferplanungModel', 'ngTableParams', 'msgBus',
+    function($q, $scope, $filter, LieferplanungModel, ngTableParams, msgBus) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -51,7 +51,7 @@ angular.module('openolitor')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = KorbplanungModel.query({ }, function() {
+        $scope.entries = LieferplanungModel.query({ }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
@@ -59,6 +59,18 @@ angular.module('openolitor')
       }
 
       search();
+
+      $scope.createNewLieferplanung = function() {
+        $scope.newLieferplanung = new LieferplanungModel({bemerkungen: '', status: 'Offen'});
+        return $scope.newLieferplanung.$save();
+      }
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferplanung') {
+          //$scope.templateKundentyp.updating = undefined;
+          $scope.$apply();
+        }
+      });
 
     }
   ]);
