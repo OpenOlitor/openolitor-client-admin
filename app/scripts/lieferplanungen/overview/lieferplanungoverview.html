@@ -3,10 +3,10 @@
   <div oo-error-overlay></div>
   <div class="panel panel-default">
     <div class="panel-heading clearfix">
-      <h3  class="panel-title"><span class="navbar-brand" translate>Korbplanungen</span>
+      <h3  class="panel-title"><span class="navbar-brand" translate>Lieferplanungen</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <a role="button" href="#/korbplanung/UIdemo" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Korplanung generieren</span></a>
+            <button role="button" ng-click="createNewLieferplanung()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Lieferplanung generieren</span></button>
           </div>
         </form>
       </span>
@@ -18,26 +18,26 @@
       </div>
       <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="korplanung in $data">
+          <tr ng-repeat="lieferplanung in $data">
             <td data-title="'#'|translate" sortable="'nr'">
-              <a ng-href="#/korplanung/{{korplanung.id}}">{{korplanung.nr}}</a>
+              <a ng-href="#/lieferplanung/{{lieferplanung.id}}">{{lieferplanung.nr}}</a>
             </td>
             <td data-title="'Abotypen'|translate">
-              <span ng-repeat="abotyp in korplanung.abotypen" class="badge">
+              <span ng-repeat="abotyp in lieferplanung.abotypen" class="badge">
                 {{abotyp.name}} {{abotyp.lieferdatum}}
               </span>
             </td>
             <td data-title="'Depots / Touren'|translate">
-              <span ng-repeat="tour in korplanung.touren" class="badge">
+              <span ng-repeat="tour in lieferplanung.touren" class="badge">
                 {{tour.name}} {{tour.datum}}
               </span>
-              <span ng-repeat="depot in korplanung.depots" class="badge">
+              <span ng-repeat="depot in lieferplanung.depots" class="badge">
                 {{depot.name}} {{depot.datum}}
               </span>
             </td>
             <td data-title="'Status'|translate">
-              <i ng-if="korplanung.status === 'abgeschlossen' || korplanung.status === 'verrechnet'" class="glyphicon glyphicon-ok"></i>
-              <i ng-if="korplanung.aktiv  === 'inPlanung'" class="glyphicon glyphicon-remove"></i>
+              <i ng-if="lieferplanung.status === 'Abgeschlossen' || lieferplanung.status === 'Verrechnet'" class="glyphicon glyphicon-ok"></i>
+              <i ng-if="lieferplanung.aktiv  === 'InPlanung'" class="glyphicon glyphicon-remove"></i>
             </td>
           </tr>
         </table>
