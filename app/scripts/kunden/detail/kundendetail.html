@@ -125,7 +125,91 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div ng-controller="PersonenListController" ng-include="'scripts/kunden/detail/personen/personen.html'"></div>
+          <div class="panel panel-default" ng-repeat="person in kunde.ansprechpersonen track by $index">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">
+                <a data-toggle="collapse" data-target="#apartner_{{$index}}" class="navbar-brand">{{ fullName($index) || 'Ansprechperson'|translate}}&nbsp;</a>
+                <small>
+                  <a class="navbar-text" ng-href="mailto:{{personEmail($index)}}">{{personEmail($index)}}</a>
+                  <a class="navbar-text" ng-href="phone:{{personPhone($index)}}">{{personPhone($index)}}</a>
+                </small>
+                <ul class="navbar-btn pull-right" ng-click="removePerson($index)" ng-if="kunde.ansprechpersonen.length > 1">
+                  <a role="button"><span class="fa fa-times"></span></a>
+                </ul>
+              </h3>
+            </div>
+            <div id="apartner_{{$index}}" class="panel-body panel-collapse collapse" ng-class="personClass($index)">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="anrede" translate>Anrede</label>
+                </div>
+                <div class="col-md-8">
+                  <oo-dropdown dropdown-id="anrede" display-style="uib-dropdown" selected-prop="id" property="label" values="anreden" selected="person.anrede"></oo-dropdown>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="vorname" translate>Vorname</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="vorname" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="name" translate>Name</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="email" translate>Email</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" ng-required="$root.projekt.emailErforderlich">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="emailAlternative" translate>Email alt.</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="telefonMobil" translate>Telefon Mobil</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="telefonFestnetz" translate>Telefon Festnetz</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
+                <div class="col-md-4">
+                  <label for="bemerkungen" translate>Bemerkungen</label>
+                </div>
+                <div class="col-md-8">
+                  <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div ng-click="addPerson()">
+              <a role="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Ansprechperson hinzufügen</span></a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">

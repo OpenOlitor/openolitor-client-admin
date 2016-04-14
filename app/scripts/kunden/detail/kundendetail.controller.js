@@ -7,11 +7,10 @@ angular.module('openolitor')
     '$routeParams',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService',
-    'EnumUtil', 'PENDENZSTATUS', 'msgBus', '$log',
+    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'msgBus', '$log',
     function($scope, $rootScope, $filter, $routeParams, $location, $uibModal,
       gettext,
-      KundenDetailModel, PersonDetailModel, KundentypenService, EnumUtil,
-      PENDENZSTATUS, ANREDE,
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE,
       msgBus, $log) {
 
       var defaults = {
@@ -26,6 +25,7 @@ angular.module('openolitor')
       };
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
+      $scope.anreden = EnumUtil.asArray(ANREDE);
 
       $scope.loadKunde = function() {
         KundenDetailModel.get({
@@ -115,12 +115,13 @@ angular.module('openolitor')
       };
 
       $scope.addPerson = function() {
-        $scope.kunde.ansprechpersonen.push({});
+        $scope.kunde.ansprechpersonen.push({
+          id: undefined
+        });
       };
 
       $scope.removePerson = function(index) {
-        var ansprechperson = $scope.kunde.ansprechpersonen.splice(index, 1);
-        ansprechperson.$delete();
+        $scope.kunde.ansprechpersonen.splice(index, 1);
       };
 
       $scope.addPendenz = function() {
