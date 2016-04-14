@@ -141,6 +141,14 @@
             <div id="apartner_{{$index}}" class="panel-body panel-collapse collapse" ng-class="personClass($index)">
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="anrede" translate>Anrede</label>
+                </div>
+                <div class="col-md-8">
+                  <oo-dropdown dropdown-id="anrede" display-style="uib-dropdown" selected-prop="id" property="label" values="anreden" selected="person.anrede"></oo-dropdown>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="vorname" translate>Vorname</label>
                 </div>
                 <div class="col-md-8">
