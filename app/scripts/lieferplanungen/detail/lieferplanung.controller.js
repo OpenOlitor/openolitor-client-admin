@@ -16,6 +16,8 @@ angular.module('openolitor')
         $scope.planung = result;
       });
 
+      $scope.produzentenL = [];
+
       //watch for set of produkte
       $scope.$watch(ProdukteService.getProdukte,
         function(list) {
@@ -77,8 +79,6 @@ angular.module('openolitor')
       $scope.abotypenLieferungen = $scope.dummyAbotypLieferungEntries;
 
       $scope.displayMode = 'korbinhalt';
-
-      $scope.produzentenL = new Array();
 
       $scope.bestellungen = {};
 
@@ -165,7 +165,7 @@ angular.module('openolitor')
         var total = 0;
         angular.forEach(produkteEntries, function(korbprodukt) {
           if(angular.isDefined(korbprodukt.preisEinheit) && angular.isDefined(korbprodukt.menge)) {
-            total += korbprodukt.preisEinheit * korbprodukt.menge;
+            total += korbprodukt.preis;
           }
         });
         return total;
