@@ -75,14 +75,14 @@
               </div>
               <div class="panel-body">
                 <table ng-table="abotypLieferung.tableParamsKorb" class="table table-striped table-small table-lieferplanung" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-                  <tr ng-repeat="korbprodukt in $data | orderBy:'bezeichnung'">
+                  <tr ng-repeat="korbprodukt in $data | orderBy:'produktBeschrieb'">
                     <td><span oo-draggable="true" oo-draged-type="'korbprod'">&#8942</span></td>
                     <td data-title="'Produkt'|translate">
                       <span ng-hide="korbprodukt.unlisted">
                         {{korbprodukt.produktBeschrieb}}
                       </span>
                       <span ng-show="korbprodukt.unlisted">
-                        <input type="text" class="form-control large" name="korbprodukt.name" ng-model="korbprodukt.name" placeholder="{{'Produktbez.'|translate}}" required>
+                        <input type="text" class="form-control large" name="korbprodukt.name" ng-model="korbprodukt.produktBeschrieb" placeholder="{{'Produktbez.'|translate}}" required>
                       </span>
                     </td>
                     <td data-title="'Menge'|translate">
@@ -103,7 +103,7 @@
                       </span>
                     </td>
                     <td data-title="'Prod.'|translate">
-                      <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="id" selected-prop="id" selected="korbprodukt.produzent" required></oo-dropdown>
+                      <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="id" selected-prop="id" selected="korbprodukt.produzentKurzzeichen" required></oo-dropdown>
                     </td>
                     <td>
                       <button type="button" class="btn btn-default btn-sm" ng-click="removeProdukt(abotypLieferung, korbprodukt)"><span class="fa fa-times"></span></button>
@@ -157,9 +157,10 @@
                     <tr>
                       <th translate>#</th>
                       <th translate>Menge / Einheit</th>
-                      <th translate>Menge Total</th>
                       <th translate>Produkt</th>
+                      <th translate>Menge Total</th>
                       <th translate ng-show="projekt.preiseSichtbar">Preis / Einheit</th>
+                      <th translate ng-show="projekt.preiseSichtbar">Preis / Packung</th>
                       <th translate ng-show="projekt.preiseSichtbar">Summe</th>
                     </tr>
                   </thead>
@@ -172,24 +173,25 @@
                         {{position.menge}} {{position.einheit}}
                       </td>
                       <td>
-                        {{position.mengeTotal}} {{position.einheit}}
+                        {{position.produktBeschrieb}}
                       </td>
                       <td>
-                        {{position.produkteBezeichnung}}
+                        {{position.mengeTotal}} {{position.einheit}}
                       </td>
                       <td ng-show="projekt.preiseSichtbar">
                         {{position.preisEinheit | ooCHF}}
+                      </td>
+                      <td ng-show="projekt.preiseSichtbar">
+                        {{position.preisPackung | ooCHF}}
                       </td>
                       <td ng-show="projekt.preiseSichtbar">
                         {{position.preis | ooCHF}}
                       </td>
                     </tr>
                   </tbody>
-                  <tfoot>
+                  <tfoot ng-show="projekt.preiseSichtbar">
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td colspan="4"></td>
                       <td colspan="2" translate>
                         Total
                       </td>
@@ -197,13 +199,50 @@
                         {{lieferung.total | ooCHF}}
                       </td>
                     </tr>
+                    <tr ng-if="produzentIstBesteuert(bestellung.produzentId)">
+                      <td colspan="4"></td>
+                      <td colspan="2">
+                        <span translate>MWST</span> {{produzentSteuersatz(bestellung.produzentId)}}%
+                      </td>
+                      <td>
+                        {{lieferung.steuer | ooCHF}}
+                      </td>
+                    </tr>
+                    <tr ng-if="produzentIstBesteuert(bestellung.produzentId)">
+                      <td colspan="4"></td>
+                      <td colspan="2" translate>
+                        Total (inkl. MWST)
+                      </td>
+                      <td>
+                        {{lieferung.totalSteuer | ooCHF}}
+                      </td>
+                    </tr>
                   </tfoot>
                 </table>
               </div>
               <div class="panel-footer" ng-show="hasMultipleLieferungen(bestellung) && projekt.preiseSichtbar">
                 <div class="row">
-                  <div class="col-md-offset-8 col-md-4">
-                    <span translate>Total über alle Lieferungen</span> {{bestellung.total | ooCHF}}
+                  <div class="col-md-offset-4 col-md-5">
+                    <span translate>Total über alle Lieferungen</span>
+                  </div>
+                  <div class="col-md-3">
+                    {{bestellung.total | ooCHF}}
+                  </div>
+                </div>
+                <div class="row" ng-if="produzentIstBesteuert(bestellung.produzentId)">
+                  <div class="col-md-offset-4 col-md-5">
+                    <span translate>MWST</span>
+                  </div>
+                  <div class="col-md-3">
+                    {{bestellung.steuer | ooCHF}}
+                  </div>
+                </div>
+                <div class="row" ng-if="produzentIstBesteuert(bestellung.produzentId)">
+                  <div class="col-md-offset-4 col-md-5">
+                    <span translate>Total über alle Lieferungen (inkl. MWST)</span>
+                  </div>
+                  <div class="col-md-3">
+                    {{bestellung.totalSteuer | ooCHF}}
                   </div>
                 </div>
               </div>
