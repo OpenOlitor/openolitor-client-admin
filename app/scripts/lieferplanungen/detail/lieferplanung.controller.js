@@ -88,7 +88,7 @@ angular.module('openolitor')
           page: 1,
           count: 10000,
           sorting: {
-            bezeichnung: 'asc'
+            name: 'asc'
           }
         }, {
           filterDelay: 0,
