@@ -66,7 +66,6 @@ angular.module('openolitor')
         $scope.planung = result;
       });
 
-      $scope.produzentenL = [];
       //watch for set of produkte
       $scope.$watch(ProdukteService.getProdukte,
         function(list) {
@@ -87,7 +86,7 @@ angular.module('openolitor')
         angular.forEach($scope.alleProduzentenL, function(produzent) {
           if(angular.isUndefined(extract) || extract.indexOf(produzent.kurzzeichen) > -1) {
             produzentenRawL.push({
-              'id': produzent.kurzzeichen,
+              'id': produzent.id,
               'title': produzent.kurzzeichen
             });
           }
@@ -102,6 +101,28 @@ angular.module('openolitor')
           }
         }
       );
+
+      var getProduzent = function(produzentId) {
+        var ret = {};
+        angular.forEach($scope.alleProduzentenL, function(produzent) {
+          if(produzent.id === produzentId) {
+            ret = produzent;
+            return;
+          }
+        });
+        return ret;
+      };
+
+      var getProduzentByKurzzeichen = function(kurzzeichen) {
+        var ret = {};
+        angular.forEach($scope.alleProduzentenL, function(produzent) {
+          if(produzent.kurzzeichen === kurzzeichen) {
+            ret = produzent;
+            return;
+          }
+        });
+        return ret;
+      };
 
       $scope.abotypenLieferungen = $scope.dummyAbotypLieferungEntries;
 
@@ -208,6 +229,15 @@ angular.module('openolitor')
         return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
       };
 
+      $scope.selectedProduzentFunc = function() {
+        var selectedProduzent = function(produzent, korbprodukt) {
+          korbprodukt.produzentId = produzent.id;
+          korbprodukt.produzentKurzzeichen = produzent.title;
+          return false; //not resetting dropdown
+        };
+        return selectedProduzent;
+      };
+
       $scope.addTableParams = function(abotypLieferung) {
         if (!abotypLieferung.tableParamsKorb) {
           //use default tableParams
@@ -255,7 +285,7 @@ angular.module('openolitor')
         var notInKorb = function(korbEntries, prodEntry) {
           var ret = true;
           angular.forEach(korbEntries, function(entry) {
-            if(prodEntry.name === entry.name) {
+            if(prodEntry.produktBeschrieb === entry.produktBeschrieb) {
               ret = false;
               return;
             }
@@ -283,7 +313,7 @@ angular.module('openolitor')
             break;
           case 'prod':
             var produkt = drag.scope().produkt;
-            var produzent = (angular.isDefined(produkt.produzenten) && produkt.produzenten.length === 1) ? produkt.produzenten[0] : {id: undefined, label: undefined};
+            var produzent = (angular.isDefined(produkt.produzenten) && produkt.produzenten.length === 1) ? getProduzentByKurzzeichen(produkt.produzenten[0]) : {id: undefined, label: undefined};
             var prodEntry = {
               lieferungId: drop.scope().abotypLieferung.id,
               anzahl: drop.scope().abotypLieferung.anzahl,
@@ -294,7 +324,7 @@ angular.module('openolitor')
               einheit: produkt.einheit,
               produzentenL: $scope.extractProduzentenFilter(produkt.produzenten),
               produzentId: produzent.id,
-              produzentKurzzeichen: produzent.label
+              produzentKurzzeichen: produzent.kurzzeichen
             };
             if(notInKorb(drop.scope().abotypLieferung.korbEntries, prodEntry)) { drop.scope().abotypLieferung.korbEntries.push(prodEntry); }
             break;
@@ -322,8 +352,10 @@ angular.module('openolitor')
         }
 
         if(angular.isUndefined($scope.bestellungen[produzent])) {
+          var produzentObj = getProduzentByKurzzeichen(produzent);
           $scope.bestellungen[produzent] = {
-            produzent: produzent,
+            produzentId: produzentObj.id || undefined,
+            produzentKurzzeichen: produzent,
             total: 0,
             steuer: 0,
             totalSteuer: 0,
@@ -382,11 +414,13 @@ angular.module('openolitor')
       };
 
       $scope.produzentIstBesteuert = function(produzentId) {
-        return true;
+        var prod = getProduzent(produzentId);
+        return prod.mwst || false;
       };
 
       $scope.produzentSteuersatz = function(produzentId) {
-        return 2;
+        var prod = getProduzent(produzentId);
+        return prod.mwstSatz || 0;
       };
 
     }
