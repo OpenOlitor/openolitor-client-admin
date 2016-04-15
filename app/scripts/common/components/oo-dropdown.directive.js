@@ -10,6 +10,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       selected: '=',
       selectedProp: '@',
       selectedFunction: '&?',
+      selectedFunctionScope: '=',
       property: '@',
       displayFunction: '=',
       dropdownId: '@',
@@ -54,7 +55,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
         }
         $scope.selectedItem = item;
         if(angular.isDefined($scope.selectedFunction)) {
-          if($scope.selectedFunction()($scope.selectedItem)) {
+          if($scope.selectedFunction()($scope.selectedItem, $scope.selectedFunctionScope)) {
             //if functions returns 'true', selection is reset
             $scope.selectedItem = undefined;
             $scope.selected = undefined;

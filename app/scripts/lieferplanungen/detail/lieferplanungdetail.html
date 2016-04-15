@@ -103,7 +103,7 @@
                       </span>
                     </td>
                     <td data-title="'Prod.'|translate">
-                      <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="id" selected-prop="id" selected="korbprodukt.produzentKurzzeichen" required></oo-dropdown>
+                      <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="title" selected-prop="id" selected="korbprodukt.produzentId" selected-function="selectedProduzentFunc()" selected-function-scope="korbprodukt" required></oo-dropdown>
                     </td>
                     <td>
                       <button type="button" class="btn btn-default btn-sm" ng-click="removeProdukt(abotypLieferung, korbprodukt)"><span class="fa fa-times"></span></button>
@@ -148,7 +148,7 @@
           <div class="col-md-8">
             <div class="panel panel-default">
               <div class="panel-heading clearfix">
-                <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzent}}</span></h3>
+                <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzentKurzzeichen}}</span></h3>
               </div>
               <div class="panel-body" ng-repeat="(id, lieferung) in bestellung.lieferungen">
                 <span translate>Lieferung vom</span> {{lieferung.datum}}
