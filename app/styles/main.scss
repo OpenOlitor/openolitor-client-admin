@@ -209,6 +209,7 @@ input.ng-invalid {
   padding: 3px 6px;
   font-size: 12px;
   height: 24px;
+  min-height: 24px;
   border-radius: 3px;
 }
 
@@ -231,58 +232,66 @@ input.ng-invalid {
   padding: 4px;
 }
 
-/* Special Korbplanung */
-#korbplanung .korbplanung-title .navbar-brand {
+/* Special Lieferplanung */
+#lieferplanung .lieferplanung-title .navbar-brand {
   margin-left: 0px !important;
   padding-left: 0px;
 }
 
-#korbplanung .korbplanung-title .navbar-brand .pre-info {
+#lieferplanung .lieferplanung-title .navbar-brand .pre-info {
   color: #ADADAD;
   font-size: 85%;
 }
 
-#korbplanung .panel-korbplanung {
+#lieferplanung .panel-lieferplanung {
   min-height: 30vh;
 }
 
-#korbplanung .panel-fixed-height-full {
+#lieferplanung .lieferplanung-produkte {
+  min-height: calc( 100vh - 130px);
+}
+
+#lieferplanung .panel-fixed-height-full {
   min-height: calc(100vh - 180px);
 }
 
-#korbplanung .table-korbplanung input{
+#lieferplanung .table-lieferplanung input{
+  width: 5em;
+}
+
+#lieferplanung .table-lieferplanung input.large {
   width: 8em;
 }
 
-#korbplanung .table-korbplanung .input-group-addon{
+#lieferplanung .table-lieferplanung .input-group-addon{
   width: 4em;
 }
 
-#korbplanung .table-korbplanung .base-preis {
+#lieferplanung .table-lieferplanung .base-preis {
   color: #AF9E9E;
 }
 
-#korbplanung .table-korbplanung .liefersumme {
+#lieferplanung .table-lieferplanung .liefersumme {
   opacity: 0.7;
 }
 
-#korbplanung .table-korbplanung .liefersumme.red {
+#lieferplanung .table-lieferplanung .liefersumme.red {
   color: red;
 }
 
-#korbplanung .table-korbplanung tfoot {
+#lieferplanung .table-lieferplanung tfoot {
   font-weight: bold;
 }
 
 /* Drag'n'drop */
-#korbplanung .oo-over {
+#lieferplanung .oo-over {
   border-style: solid;
   border-width: 1px;
   border-color: red !important;
   box-shadow: 4px 4px 10px red;
 }
 
-#korbplanung .oo-target {
+#lieferplanung .oo-target {
   border-style: solid;
   border-width: 1px;
   border-color: black;
