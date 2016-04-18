@@ -28,6 +28,13 @@ function convertDateStringsToDates(input) {
   return input;
 }
 
+/* This is a pseudo-function in order to enable gettext-extractor to find the translations that need to be done in the constants.
+   As described in https://github.com/rubenv/angular-gettext/issues/67
+*/
+function gettext(string) {
+  return string;
+}
+
 /**
  */
 angular
@@ -87,10 +94,34 @@ angular
     BEARBEITET: 'Bearbeitet'
   })
   .constant('LIEFEREINHEIT', {
-    STUECK: 'Stueck',
-    BUND: 'Bund',
-    GRAMM: 'Gramm',
-    KILOGRAMM: 'Kilogramm',
+    STUECK: {
+      id: 'STUECK',
+      label: {
+        long: gettext('St.'),
+        short: gettext('Stück')
+      }
+    },
+    BUND: {
+      id: 'BUND',
+      label: {
+        long: gettext('Bu.'),
+        short: gettext('Bund')
+      }
+    },
+    GRAMM: {
+      id: 'GRAMM',
+      label: {
+        long: gettext('gr'),
+        short: gettext('Gramm')
+      }
+    },
+    KILOGRAMM: {
+      id: 'KILOGRAMM',
+      label: {
+        long: gettext('kg'),
+        short: gettext('Kilogramm')
+      }
+    }
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
@@ -99,36 +130,36 @@ angular
     CHF: {
       id: 'CHF',
       label: {
-        long: 'Schweizer Franken',
-        short: 'CHF'
+        long: gettext('Schweizer Franken'),
+        short: gettext('CHF')
       }
     },
     EUR: {
       id: 'EUR',
       label: {
-        long: 'Euro',
-        short: '€'
+        long: gettext('Euro'),
+        short: gettext('€')
       }
     },
     USD: {
       id: 'USD',
       label: {
-        long: 'US Dollar',
-        short: '$'
+        long: gettext('US Dollar'),
+        short: gettext('$')
       }
     },
     GBP: {
       id: 'GBP',
       label: {
-        long: 'Britisches Pfund',
-        short: '£'
+        long: gettext('Britisches Pfund'),
+        short: gettext('£')
       }
     },
     CAD: {
       id: 'CAD',
       label: {
-        long: 'Kanadischer Dollar',
-        short: 'CAD'
+        long: gettext('Kanadischer Dollar'),
+        short: gettext('CAD')
       }
     },
   })
@@ -136,56 +167,56 @@ angular
     MONTAG: {
       id: 'Montag',
       label: {
-        long: 'Montag',
-        short: 'MO'
+        long: gettext('Montag'),
+        short: gettext('MO')
       },
       value: 1
     },
     DIENSTAG: {
       id: 'Dienstag',
       label: {
-        long: 'Dienstag',
-        short: 'DI'
+        long: gettext('Dienstag'),
+        short: gettext('DI')
       },
       value: 2
     },
     MITTWOCH: {
       id: 'Mittwoch',
       label: {
-        long: 'Mittwoch',
-        short: 'MI'
+        long: gettext('Mittwoch'),
+        short: gettext('MI')
       },
       value: 3
     },
     DONNERSTAG: {
       id: 'Donnerstag',
       label: {
-        long: 'Donnerstag',
-        short: 'DO'
+        long: gettext('Donnerstag'),
+        short: gettext('DO')
       },
       value: 4
     },
     FREITAG: {
       id: 'Freitag',
       label: {
-        long: 'Freitag',
-        short: 'FR'
+        long: gettext('Freitag'),
+        short: gettext('FR')
       },
       value: 5
     },
     SAMSTAG: {
       id: 'Samstag',
       label: {
-        long: 'Samstag',
-        short: 'SA'
+        long: gettext('Samstag'),
+        short: gettext('SA')
       },
       value: 6
     },
     SONNTAG: {
       id: 'Sonntag',
       label: {
-        long: 'Sonntag',
-        short: 'SO'
+        long: gettext('Sonntag'),
+        short: gettext('SO')
       },
       value: 7
     }
@@ -194,96 +225,96 @@ angular
     JANUAR: {
       id: 'Januar',
       label: {
-        long: 'Januar',
-        short: 'Jan'
+        long: gettext('Januar'),
+        short: gettext('Jan')
       },
       value: 1
     },
     FEBRUAR: {
       id: 'Februar',
       label: {
-        long: 'Februar',
-        short: 'Feb'
+        long: gettext('Februar'),
+        short: gettext('Feb')
       },
       value: 2
     },
     MAERZ: {
       id: 'Maerz',
       label: {
-        long: 'März',
-        short: 'Mar'
+        long: gettext('März'),
+        short: gettext('Mar')
       },
       value: 3
     },
     APRIL: {
       id: 'April',
       label: {
-        long: 'April',
-        short: 'Apr'
+        long: gettext('April'),
+        short: gettext('Apr')
       },
       value: 4
     },
     MAI: {
       id: 'Mai',
       label: {
-        long: 'Mai',
-        short: 'Mai'
+        long: gettext('Mai'),
+        short: gettext('Mai')
       },
       value: 5
     },
     JUNI: {
       id: 'Juni',
       label: {
-        long: 'Juni',
-        short: 'Jun'
+        long: gettext('Juni'),
+        short: gettext('Jun')
       },
       value: 6
     },
     JULI: {
       id: 'Juli',
       label: {
-        long: 'Juli',
-        short: 'Jul'
+        long: gettext('Juli'),
+        short: gettext('Jul')
       },
       value: 7
     },
     AUGUST: {
       id: 'August',
       label: {
-        long: 'August',
-        short: 'Aug'
+        long: gettext('August'),
+        short: gettext('Aug')
       },
       value: 8
     },
     SEPTEMBER: {
       id: 'September',
       label: {
-        long: 'September',
-        short: 'Sep'
+        long: gettext('September'),
+        short: gettext('Sep')
       },
       value: 9
     },
     OKTOBER: {
       id: 'Oktober',
       label: {
-        long: 'Oktober',
-        short: 'Okt'
+        long: gettext('Oktober'),
+        short: gettext('Okt')
       },
       value: 10
     },
     NOVEMBER: {
       id: 'November',
       label: {
-        long: 'November',
-        short: 'Nov'
+        long: gettext('November'),
+        short: gettext('Nov')
       },
       value: 11
     },
     DEZEMBER: {
       id: 'Dezember',
       label: {
-        long: 'Dezember',
-        short: 'Dez'
+        long: gettext('Dezember'),
+        short: gettext('Dez')
       },
       value: 12
     }
