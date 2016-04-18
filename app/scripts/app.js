@@ -146,7 +146,8 @@ angular
       id: 'EUR',
       label: {
         long: gettext('Euro'),
-        short: gettext('€')      }
+        short: gettext('€')
+      }
     },
     USD: {
       id: 'USD',
