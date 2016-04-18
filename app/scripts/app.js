@@ -444,6 +444,26 @@ angular
         controller: 'KorbplanungDetailController',
         name: 'KorbplanungOverview'
       })
+      .when('/rechnungen', {
+        templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
+        controller: 'RechnungenOverviewController',
+        name: 'RechnungenOverview'
+      })
+      .when('/rechnungen/new', {
+        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+        controller: 'RechnungenDetailController',
+        name: 'RechnungenDetail'
+      })
+      .when('/rechnungen/:id', {
+        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+        controller: 'RechnungenDetailController',
+        name: 'RechnungenDetail'
+      })
+      .when('/kunden/:kundeId/rechnungen/new', {
+        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+        controller: 'RechnungenDetailController',
+        name: 'RechnungenDetail'
+      })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
