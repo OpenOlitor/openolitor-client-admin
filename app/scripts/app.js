@@ -337,7 +337,7 @@ angular
   .filter('fromNow', function() {
     return function(input) {
       //TODO: replace with current locale
-      moment.updateLocale('de');
+      moment.locale('de');
       return moment(input).fromNow();
     };
   })
