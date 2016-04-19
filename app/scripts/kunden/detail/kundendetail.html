@@ -30,6 +30,14 @@
               <h3 class="panel-title"><span class="navbar-brand" translate>Adresse</span></h3>
             </div>
             <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="strasse" translate>Kunde Nr.</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" id="id" ng-model="kunde.id" disabled="true">
+                </div>
+              </div>
               <div class="row form-group" ng-if="kunde.ansprechpersonen.length > 1">
                 <div class="col-md-4">
                   <label for="bezeichnung" translate>Anschrift</label>

@@ -8,9 +8,11 @@ angular.module('openolitor')
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService',
     'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'API_URL', 'msgBus', '$log',
-    function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
+    function($scope, $rootScope, $filter, $routeParams, $http, $location,
+      $uibModal,
       gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE, API_URL,
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE,
+      API_URL,
       msgBus, $log) {
 
       var defaults = {
@@ -50,14 +52,18 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (msg.entity === 'Person') {
-          angular.forEach($scope.kunde.ansprechpersonen, function(person) {
-            if (person.anrede == msg.data.anrede && person.vorname === msg.data.vorname && person.name === msg.data.name) {
-              //set id that entity won't get created twice
-              person.id = msg.data.id;
-              $scope.$apply();
-              return;
-            }
-          });
+          if ($scope.kunde && $scope.kunde.ansprechpersonen) {
+            angular.forEach($scope.kunde.ansprechpersonen, function(
+              person) {
+              if (person.anrede == msg.data.anrede && person.vorname ===
+                msg.data.vorname && person.name === msg.data.name) {
+                //set id that entity won't get created twice
+                person.id = msg.data.id;
+                $scope.$apply();
+                return;
+              }
+            });
+          }
         }
       });
 
@@ -136,7 +142,8 @@ angular.module('openolitor')
         var person = $scope.kunde.ansprechpersonen.splice(index, 1);
         //remove as well from remote side
         if ($routeParams.id && person[0].id) {
-          $http.delete(API_URL + 'kunden/' + $routeParams.id + '/personen/' + person[0].id);
+          $http.delete(API_URL + 'kunden/' + $routeParams.id + '/personen/' +
+            person[0].id);
         }
       };
 
