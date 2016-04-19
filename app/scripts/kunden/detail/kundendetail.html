@@ -62,7 +62,7 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="kunde.plz" required placeholder="{{'PLZ'|translate}}" maxlength="4">
+                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
                 </div>
                 <div class="col-md-5">
                   <input type="text" class="form-control" id="ort" ng-model="kunde.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
@@ -76,6 +76,9 @@
                   <textarea class="form-control" name="bemerkungen" ng-model="kunde.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..."></textarea>
                 </div>
               </div>
+            </div>
+            <div class="panel-footer">
+              {{'Erstellt: '|translate}}{{kunde.erstelldat | fromNow}} / {{'Bearbeitet: '|translate}}{{kunde.modifidat | fromNow}}
             </div>
           </div>
 
@@ -115,7 +118,7 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="4">
+                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5">
                 </div>
                 <div class="col-md-5">
                   <input type="text" class="form-control" id="ort" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35">
@@ -139,6 +142,14 @@
               </h3>
             </div>
             <div id="apartner_{{$index}}" class="panel-body panel-collapse collapse" ng-class="personClass($index)">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="anrede" translate>Anrede</label>
+                </div>
+                <div class="col-md-8">
+                  <oo-dropdown dropdown-id="anrede" display-style="uib-dropdown" selected-prop="id" property="label" values="anreden" selected="person.anrede"></oo-dropdown>
+                </div>
+              </div>
               <div class="row form-group">
                 <div class="col-md-4">
                   <label for="vorname" translate>Vorname</label>
@@ -195,6 +206,9 @@
                   <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}"></textarea>
                 </div>
               </div>
+            </div>
+            <div class="panel-footer">
+              {{'Erstellt: '|translate}}{{person.erstelldat | fromNow}}
             </div>
           </div>
           <div class="pull-right">

@@ -3,11 +3,15 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KundenDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
-    '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'KundentypenService',
-    'EnumUtil', 'PENDENZSTATUS', 'msgBus', '$log',
-    function($scope, $rootScope, $filter, $routeParams, $location, $uibModal, gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, msgBus, $log) {
+  .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
+    '$routeParams', '$http',
+    '$location', '$uibModal', 'gettext', 'KundenDetailModel',
+    'KundentypenService',
+    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'API_URL', 'msgBus', '$log',
+    function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
+      gettext,
+      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE, API_URL,
+      msgBus, $log) {
 
       var defaults = {
         model: {
@@ -21,6 +25,7 @@ angular.module('openolitor')
       };
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
+      $scope.anreden = EnumUtil.asArray(ANREDE);
 
       $scope.loadKunde = function() {
         KundenDetailModel.get({
@@ -39,8 +44,20 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Kunde') {
-          $scope.loadKunde();
-          $rootScope.$apply();
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (msg.entity === 'Person') {
+          angular.forEach($scope.kunde.ansprechpersonen, function(person) {
+            if (person.anrede == msg.data.anrede && person.vorname === msg.data.vorname && person.name === msg.data.name) {
+              //set id that entity won't get created twice
+              person.id = msg.data.id;
+              $scope.$apply();
+              return;
+            }
+          });
         }
       });
 
@@ -98,7 +115,11 @@ angular.module('openolitor')
             index] && $scope.kunde.ansprechpersonen[index].vorname &&
           $scope.kunde.ansprechpersonen[
             index].name) {
-          return $scope.kunde.ansprechpersonen[index].vorname + ' ' +
+          var anrede = ($scope.kunde.ansprechpersonen[index].anrede) ?
+            $scope.kunde.ansprechpersonen[index].anrede + ' ' : '';
+
+          return anrede + $scope.kunde.ansprechpersonen[index].vorname +
+            ' ' +
             $scope.kunde.ansprechpersonen[
               index].name;
         }
@@ -112,7 +133,11 @@ angular.module('openolitor')
       };
 
       $scope.removePerson = function(index) {
-        $scope.kunde.ansprechpersonen.splice(index, 1);
+        var person = $scope.kunde.ansprechpersonen.splice(index, 1);
+        //remove as well from remote side
+        if ($routeParams.id && person[0].id) {
+          $http.delete(API_URL + 'kunden/' + $routeParams.id + '/personen/' + person[0].id);
+        }
       };
 
       $scope.addPendenz = function() {
@@ -131,7 +156,7 @@ angular.module('openolitor')
       $scope.deletePendenz = function(pendenz) {
         var index = $scope.kunde.pendenzen.indexOf(pendenz);
         if (index > -1) {
-            $scope.kunde.pendenzen.splice(index, 1);
+          $scope.kunde.pendenzen.splice(index, 1);
         }
       };
 
@@ -142,9 +167,12 @@ angular.module('openolitor')
 
       $scope.hasLieferadresse = function() {
         return angular.isDefined($scope.kunde) && (
-          (angular.isDefined($scope.kunde.strasseLieferung) && $scope.kunde.strasseLieferung !== '') ||
-          (angular.isDefined($scope.kunde.plzLieferung) && $scope.kunde.plzLieferung !== '') ||
-          (angular.isDefined($scope.kunde.ortLieferung) && $scope.kunde.ortLieferung !== '')
+          (angular.isDefined($scope.kunde.strasseLieferung) && $scope.kunde
+            .strasseLieferung !== '') ||
+          (angular.isDefined($scope.kunde.plzLieferung) && $scope.kunde.plzLieferung !==
+            '') ||
+          (angular.isDefined($scope.kunde.ortLieferung) && $scope.kunde.ortLieferung !==
+            '')
         );
       };
 
@@ -183,9 +211,9 @@ angular.module('openolitor')
           }
         });
 
-        modalInstance.result.then(function () {
+        modalInstance.result.then(function() {
 
-        }, function () {
+        }, function() {
           $log.info('Modal dismissed at: ' + new Date());
         });
       };

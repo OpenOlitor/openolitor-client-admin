@@ -53,7 +53,7 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="plz" ng-disabled="!editMode" ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="4">
+                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-disabled="!editMode" ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="5">
                 </div>
                 <div class="col-md-5">
                   <input type="text" class="form-control" id="ort" ng-disabled="!editMode" ng-model="projekt.ort" placeholder="{{'Ort'|translate}}" maxlength="35">

@@ -7,10 +7,14 @@ var regexIso8601 =
 
 function convertDateStringsToDates(input) {
   // Ignore things that aren't objects.
-  if (typeof input !== 'object') { return input; }
+  if (typeof input !== 'object') {
+    return input;
+  }
 
   for (var key in input) {
-    if (!input.hasOwnProperty(key)) { continue; }
+    if (!input.hasOwnProperty(key)) {
+      continue;
+    }
 
     var value = input[key];
     var match;
@@ -74,6 +78,10 @@ angular
     UNBESCHRAENKT: 'Unbeschraenkt',
     LIEFERUNGEN: 'Lieferungen',
     MONATE: 'Monate'
+  })
+  .constant('ANREDE', {
+    HERR: 'Herr',
+    FRAU: 'Frau'
   })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: 'DepotlieferungAbo',
@@ -260,21 +268,21 @@ angular
   })
   .factory('checkSize', ['$rootScope', '$window', function($rootScope, $window) {
     return function() {
-      if($window.innerWidth >= 1200) {
+      if ($window.innerWidth >= 1200) {
         $rootScope.tgState = true;
       }
     };
   }])
   .factory('exportTable', ['FileSaver', function(FileSaver) {
-    return function (elementId, fileName) {
+    return function(elementId, fileName) {
       var blob = new Blob([angular.element(elementId).html()], {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
       });
       FileSaver.saveAs(blob, fileName);
     };
   }])
   .factory('cloneObj', function() {
-     var cloneObjFun = function (obj) {
+    var cloneObjFun = function(obj) {
       if (null === obj || 'object' !== typeof obj) {
         return obj;
       }
@@ -326,6 +334,13 @@ angular
       }
     ]);
   }])
+  .filter('fromNow', function() {
+    return function(input) {
+      //TODO: replace with current locale
+      moment.locale('de');
+      return moment(input).fromNow();
+    };
+  })
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
@@ -411,7 +426,9 @@ angular
         controller: 'AbosDetailController',
         name: 'AbosDetail',
         resolve: {
-          createKundeId: function() { return undefined; }
+          createKundeId: function() {
+            return undefined;
+          }
         }
       })
       .when('/touren', {
