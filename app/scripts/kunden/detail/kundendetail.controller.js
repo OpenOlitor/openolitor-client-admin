@@ -44,7 +44,20 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Kunde') {
-          $rootScope.$apply();
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (msg.entity === 'Person') {
+          angular.forEach($scope.kunde.ansprechpersonen, function(person) {
+            if (person.anrede == msg.data.anrede && person.vorname === msg.data.vorname && person.name === msg.data.name) {
+              //set id that entity won't get created twice
+              person.id = msg.data.id;
+              $scope.$apply();
+              return;
+            }
+          });
         }
       });
 
