@@ -31,11 +31,20 @@
                   <label for="Kunde" translate>Kunde</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" ng-model="kunde" placeholder="Kunde suchen..." uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" required>
+                  <input type="text" ng-model="kunde" placeholder="Kunde suchen..." uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="loadKunde()" required>
                   <i ng-show="loadingKunden" class="glyphicon glyphicon-refresh"></i>
                   <div ng-show="noResults">
                     <i class="glyphicon glyphicon-remove"></i> <span translate>Keine Kunden</span>
                   </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="abotyp" translate>Abo</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" name="abo" ng-model="abo" hidden required />
+                  <oo-dropdown dropdown-id="abo" display-style="uib-dropdown" values="kunde.abos" display-function="aboLabel" selected="abo" selection-required="true"></oo-dropdown>
                 </div>
               </div>
               <ng-include src="'scripts/kunden/detail/kundenadresse.html'"></ng-include>

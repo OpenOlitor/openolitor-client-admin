@@ -6,11 +6,11 @@ angular.module('openolitor')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
+    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'AbosOverviewModel',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel) {
+      msgBus, $log, moment, KundenOverviewModel, AbosOverviewModel) {
 
       var defaults = {
         model: {
@@ -63,6 +63,33 @@ angular.module('openolitor')
         });
       }
 
+      if (!$routeParams.aboId) {
+        $scope.abo = undefined;
+      } else {
+        AbosOverviewModel.get({
+          id: $routeParams.aboId
+        }, function(abo) {
+          $scope.abo = abo;
+        });
+      }
+
+      $scope.loadKunde = function() {
+        if ($scope.kunde) {
+          KundenOverviewModel.get({
+            id: $scope.kunde.id
+          }, function(kunde) {
+            $scope.kunde = kunde;
+          });
+        }
+      };
+
+      $scope.aboLabel = function(abo) {
+        if (!abo) {
+          return 'nothing here';
+        }
+        return abo.abotypName + ', ' + abo.depotName;
+      };
+
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Rechnung') {
           $rootScope.$apply();
@@ -72,6 +99,7 @@ angular.module('openolitor')
       $scope.open = {
         rechnungsdatum: false,
       };
+
       $scope.openCalendar = function(e, date) {
         e.preventDefault();
         e.stopPropagation();

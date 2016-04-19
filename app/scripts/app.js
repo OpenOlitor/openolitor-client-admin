@@ -471,6 +471,11 @@ angular
         controller: 'RechnungenDetailController',
         name: 'RechnungenDetail'
       })
+      .when('/kunden/:kundeId/abos/:aboId/rechnungen/new', {
+        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+        controller: 'RechnungenDetailController',
+        name: 'RechnungenDetail'
+      })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
