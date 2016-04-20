@@ -44,10 +44,55 @@
                 </div>
                 <div class="col-md-8">
                   <input type="text" name="abo" ng-model="abo" hidden required />
-                  <oo-dropdown dropdown-id="abo" display-style="uib-dropdown" values="kunde.abos" display-function="aboLabel" selected="abo" selection-required="true"></oo-dropdown>
+                  <oo-dropdown dropdown-id="abo" display-style="uib-dropdown" values="kunde.abos" display-function="aboLabel" selected="abo" selection-required="true" selected-function="selectedAbo"></oo-dropdown>
                 </div>
               </div>
-              <ng-include src="'scripts/kunden/detail/kundenadresse.html'"></ng-include>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="strasse" translate>Kunde Nr.</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" id="id" ng-model="rechnung.id" disabled="true">
+                </div>
+              </div>
+              <div class="row form-group" ng-if="rechnung.ansprechpersonen.length > 1">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Anschrift</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bezeichnung" ng-model="rechnung.bezeichnung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="strasse" translate>Strasse / Nr.</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="strasse" ng-model="rechnung.strasse" ng-required="!rechnung.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                </div>
+                <div class="col-md-2">
+                  <input type="text" class="form-control" id="hausNummer" ng-model="rechnung.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="adressZusatz" translate>Adresszusatz</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="adressZusatz" ng-model="rechnung.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="plz" translate>PLZ / Ort</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="rechnung.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
+                </div>
+                <div class="col-md-5">
+                  <input type="text" class="form-control" id="ort" ng-model="rechnung.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,39 +134,39 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="rechnungsdatum" translate>Rechnungsdatum</label>
+                  <label for="rechnungsDatum" translate>Rechnungsdatum</label>
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.rechnungsdatum" is-open="open.rechnungsdatum" enable-time="false" max-date="rechnung.rechnungsdatum" />
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" />
                     <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'rechnungsdatum')"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'rechnungsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
                   </p>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="faelligkeitsdatum" translate>Fälligkeitsdatum</label>
+                  <label for="faelligkeitsDatum" translate>Fälligkeitsdatum</label>
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.faelligkeitsdatum" is-open="open.faelligkeitsdatum" enable-time="false" max-date="rechnung.faelligkeitsdatum" />
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnung.faelligkeitsDatum" />
                     <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'faelligkeitsdatum')"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'faelligkeitsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
                   </p>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="eingangsdatum" translate>Eingangsdatum</label>
+                  <label for="eingangsDatum" translate>Eingangsdatum</label>
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.eingangsdatum" is-open="open.eingangsdatum" enable-time="false" max-date="rechnung.eingangsdatum" />
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.eingangsDatum" is-open="open.eingangsDatum" enable-time="false" max-date="rechnung.eingangsDatum" />
                     <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'eingangsdatum')"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'eingangsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
                   </p>
                 </div>

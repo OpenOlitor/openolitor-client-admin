@@ -15,8 +15,8 @@ angular.module('openolitor')
       var defaults = {
         model: {
           id: undefined,
-          rechnungsdatum: new Date(),
-          faelligkeitsdatum: moment().add(1, 'month').subtract(1, 'day').valueOf()
+          rechnungsDatum: new Date(),
+          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf())
         }
       };
 
@@ -56,11 +56,7 @@ angular.module('openolitor')
       if (!$routeParams.kundeId) {
         $scope.kunde = undefined;
       } else {
-        KundenOverviewModel.get({
-          id: $routeParams.kundeId
-        }, function(kunde) {
-          $scope.kunde = kunde;
-        });
+        $scope.resolveKunde($routeParams.kundeId);
       }
 
       if (!$routeParams.aboId) {
@@ -70,17 +66,34 @@ angular.module('openolitor')
           id: $routeParams.aboId
         }, function(abo) {
           $scope.abo = abo;
+          $scope.rechnung.aboId = abo.id;
         });
       }
 
+      $scope.resolveKunde = function(id) {
+        KundenOverviewModel.get({
+          id: id
+        }, function(kunde) {
+          $scope.kunde = kunde;
+          $scope.rechnung.kundeId = kunde.id;
+          $scope.rechnung.bezeichnung = kunde.bezeichnung;
+          $scope.rechnung.strasse = kunde.strasse;
+          $scope.rechnung.hausNummer = kunde.hausNummer;
+          $scope.rechnung.adressZusatz = kunde.adressZusatz;
+          $scope.rechnung.plz = kunde.plz;
+          $scope.rechnung.ort = kunde.ort;
+        });
+      };
+
       $scope.loadKunde = function() {
         if ($scope.kunde) {
-          KundenOverviewModel.get({
-            id: $scope.kunde.id
-          }, function(kunde) {
-            $scope.kunde = kunde;
-          });
+          $scope.resolveKunde($scope.kunde.id);
         }
+      };
+
+      $scope.selectedAbo = function(abo) {
+        $scope.rechnung.aboId = abo.id;
+        return false;
       };
 
       $scope.aboLabel = function(abo) {
