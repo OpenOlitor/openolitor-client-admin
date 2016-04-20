@@ -6,12 +6,13 @@ angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
-    'KundentypenService',
+    'KundentypenService', 'alertService',
     'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'API_URL', 'msgBus', '$log',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE,
+      KundenDetailModel, KundentypenService, alertService, EnumUtil,
+      PENDENZSTATUS, ANREDE,
       API_URL,
       msgBus, $log) {
 
@@ -55,7 +56,7 @@ angular.module('openolitor')
           if ($scope.kunde && $scope.kunde.ansprechpersonen) {
             angular.forEach($scope.kunde.ansprechpersonen, function(
               person) {
-              if (person.anrede == msg.data.anrede && person.vorname ===
+              if (person.anrede === msg.data.anrede && person.vorname ===
                 msg.data.vorname && person.name === msg.data.name) {
                 //set id that entity won't get created twice
                 person.id = msg.data.id;
@@ -205,24 +206,40 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.kunde.$delete();
       };
+      $scope.isNewAbo = function() {
+        return $scope.newAbo !== undefined;
+      };
 
       $scope.showCreateAboDialog = function() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'scripts/kunden/detail/abo/create-abo.html',
-          controller: 'AbosDetailController',
-          resolve: {
-            createKundeId: function() {
-              return $scope.kunde.id;
-            }
-          }
-        });
-
-        modalInstance.result.then(function() {
-
-        }, function() {
-          $log.info('Modal dismissed at: ' + new Date());
-        });
+        $scope.newAbo = {};
       };
+
+      $scope.onAboCreated = function() {
+        $scope.newAbo = undefined;
+      };
+
+      $scope.onAboCreateCanceled = function() {
+        $scope.newAbo = undefined;
+      };
+
+      var isAboEntity = function(entity) {
+        return (entity === 'DepotlieferungAbo' || entity ===
+          'PostlieferungAbo' ||
+          entity === 'HeimlieferungAbo');
+      };
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.kunde) {
+            if ($scope.kunde.abos) {
+              $scope.kunde.abos.push(msg.data);
+            } else {
+              $scope.kunde.abos = [msg.data];
+            }
+            alertService.addAlert('info', 'Abo wurde erstellt');
+            $scope.$apply();
+          }
+        }
+      });
     }
   ]);

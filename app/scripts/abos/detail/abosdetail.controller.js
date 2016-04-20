@@ -5,11 +5,13 @@
 angular.module('openolitor')
   .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
-    'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel', 'VERTRIEBSARTEN',
-    'ABOTYPEN_ARRAY', 'createKundeId',
+    'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel',
+    'VERTRIEBSARTEN',
+    'ABOTYPEN_ARRAY', 'moment',
     function($scope, $filter, $routeParams, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
-      KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN, ABOTYPEN_ARRAY, createKundeId) {
+      KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN,
+      ABOTYPEN_ARRAY, moment) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = ABOTYPEN_ARRAY;
@@ -21,11 +23,21 @@ angular.module('openolitor')
         }
       };
 
+      $scope.open = {
+        start: false
+      };
+      $scope.openCalendar = function(e, date) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.open[date] = true;
+      };
+
       var getKundeId = function() {
-        if(angular.isDefined($routeParams.kundeId)) {
+        if (angular.isDefined($routeParams.kundeId)) {
           return $routeParams.kundeId;
         } else {
-          return createKundeId;
+          return $scope.createKundeId;
         }
       };
 
@@ -34,7 +46,7 @@ angular.module('openolitor')
         basePath = '/kunden/' + $routeParams.kundeId;
       }
 
-      if (angular.isDefined(createKundeId)) {
+      if (angular.isDefined($scope.createKundeId)) {
         KundenDetailModel.get({
           id: getKundeId()
         }, function(kunde) {
@@ -42,6 +54,7 @@ angular.module('openolitor')
           $scope.abo = new AbosDetailModel(defaults.model);
           $scope.abo.kundeId = $scope.kunde.id;
           $scope.abo.kunde = $scope.kunde.bezeichnung;
+          $scope.abo.start = moment().startOf('day').toDate();
         });
       } else {
         AbosDetailModel.get({
@@ -89,9 +102,11 @@ angular.module('openolitor')
       function vertriebsartLabel(vertriebsart) {
         switch (vertriebsart.typ) {
           case VERTRIEBSARTEN.DEPOTLIEFERUNG:
-            return vertriebsart.typ + ' - ' + vertriebsart.depot.name + ' - ' + vertriebsart.liefertag;
+            return vertriebsart.typ + ' - ' + vertriebsart.depot.name + ' - ' +
+              vertriebsart.liefertag;
           case VERTRIEBSARTEN.HEIMLIEFERUNG:
-            return vertriebsart.typ + ' - ' + vertriebsart.tour.name + ' - ' + vertriebsart.liefertag;
+            return vertriebsart.typ + ' - ' + vertriebsart.tour.name + ' - ' +
+              vertriebsart.liefertag;
           default:
             return vertriebsart.typ + ' - ' + vertriebsart.liefertag;
         }
@@ -107,7 +122,8 @@ angular.module('openolitor')
               label: vertriebsartLabel(vertriebsart),
               vertriebsart: vertriebsart
             });
-            if ($scope.isExisting() && angular.isDefined(vertriebsart.depot) && vertriebsart.depot.id === $scope.abo
+            if ($scope.isExisting() && angular.isDefined(vertriebsart
+                .depot) && vertriebsart.depot.id === $scope.abo
               .depotId) {
               $scope.abo.vertriebsart = vertriebsart;
             }

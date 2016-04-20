@@ -341,6 +341,22 @@ angular
       return moment(input).fromNow();
     };
   })
+  .filter('lastElement', function() {
+    return function(input) {
+      if (angular.isArray(input)) {
+        return input[input.length - 1];
+      }
+      return input;
+    };
+  })
+  .filter('firstElement', function() {
+    return function(input) {
+      if (angular.isArray(input)) {
+        return input[0];
+      }
+      return input;
+    };
+  })
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
