@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title">
+      <span class="navbar-brand" translate>Abo erstellen für {{kunde.bezeichnung}}</span>
+    </h3>
+  </div>
+  <div class="panel-body">
+   <div class="row form-group">
+     <div class="col-md-3">
+       <label for="abotyp" translate>Abotyp</label>
+     </div>
+     <div class="col-md-8">
+       <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+     </div>
+   </div>
+   <div ng-show="abotyp">
+     <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
+   </div>
+   <div class="row form-group" ng-show="abo.vertriebsart">
+     <div class="col-md-3">
+       <label for="abotyp" translate>Start</label>
+     </div>
+     <div class="col-md-8">
+       <p class="input-group">
+         <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" />
+         <span class="input-group-btn">
+           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+         </span>
+       </p>
+     </div>
+   </div>
+ </div>
+  <div class="panel-footer">
+      <button class="btn btn-primary" ng-show="true" ng-click="save();onSave();" translate>Abo erstellen</button>
+      <button class="btn btn-warning" ng-click="onCancel();" translate>Abbrechen</button>
+  </div>
+</div>

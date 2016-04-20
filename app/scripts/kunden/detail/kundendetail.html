@@ -1,8 +1,8 @@
-<div class="row">
-  <div class="content content-box col-md-9">
-    <div oo-error-overlay></div>
-    <form name="kundeForm">
-      <div class="row">
+<div>
+  <form name="kundeForm">
+    <div class="row">
+      <div class="content content-box col-md-9">
+        <div oo-error-overlay></div>
         <div class="col-md-12">
           <div class="row form-group">
             <h3>
@@ -23,189 +23,249 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title"><span class="navbar-brand" translate>Adresse</span></h3>
+    </div>
+    <div class="row">
+      <div class="content content-box col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title"><span class="navbar-brand" translate>Adresse</span></h3>
+              </div>
+              <div class="panel-body">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="strasse" translate>Kunde Nr.</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="id" ng-model="kunde.id" disabled="true">
+                  </div>
+                </div>
+                <div class="row form-group" ng-if="kunde.ansprechpersonen.length > 1">
+                  <div class="col-md-4">
+                    <label for="bezeichnung" translate>Anschrift</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="bezeichnung" ng-model="kunde.bezeichnung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="strasse" translate>Strasse / Nr.</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="strasse" ng-model="kunde.strasse" ng-required="!kunde.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="adressZusatz" translate>Adresszusatz</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="plz" translate>PLZ / Ort</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" id="ort" ng-model="kunde.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="bemerkungen" translate>Bemerkungen</label>
+                  </div>
+                  <div class="col-md-8">
+                    <textarea class="form-control" name="bemerkungen" ng-model="kunde.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..."></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-footer">
+                {{'Erstellt: '|translate}}{{kunde.erstelldat | fromNow}} / {{'Bearbeitet: '|translate}}{{kunde.modifidat | fromNow}}
+              </div>
             </div>
-            <div class="panel-body">
-              <ng-include src="'scripts/kunden/detail/kundenadresse.html'"></ng-include>
-            </div>
-            <div class="panel-footer">
-              {{'Erstellt: '|translate}}{{kunde.erstelldat | fromNow}} / {{'Bearbeitet: '|translate}}{{kunde.modifidat | fromNow}}
-            </div>
-          </div>
 
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <a data-toggle="collapse" data-target="#lieferadresse" class="navbar-brand">
-                  <span translate>Abweichende Lieferadresse</span>
-                </a>
-              </h3>
-              <div class="btn-group pull-right" role="group">
-                <a role="button" class="btn btn-default" data-toggle="collapse" data-target="#lieferadresse"><span class="glyphicon glyphicon-menu-down"></span></a>
-              </div>
-            </div>
-            <div id="lieferadresse" class="panel-body panel-collapse collapse" ng-class="[{'in': hasLieferadresse()}]">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="strasse" translate>Strasse / Nr.</label>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="strasse" ng-model="kunde.strasseLieferung" placeholder="{{'Strasse'|translate}}" maxlength="30">
-                </div>
-                <div class="col-md-2">
-                  <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummerLieferung" placeholder="{{'Nr'|translate}}" maxlength="10">
+            <div class="panel panel-default">
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title">
+                  <a data-toggle="collapse" data-target="#lieferadresse" class="navbar-brand">
+                    <span translate>Abweichende Lieferadresse</span>
+                  </a>
+                </h3>
+                <div class="btn-group pull-right" role="group">
+                  <a role="button" class="btn btn-default" data-toggle="collapse" data-target="#lieferadresse"><span class="glyphicon glyphicon-menu-down"></span></a>
                 </div>
               </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="adressZusatz" translate>Zusatzinfos</label>
+              <div id="lieferadresse" class="panel-body panel-collapse collapse" ng-class="[{'in': hasLieferadresse()}]">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="strasse" translate>Strasse / Nr.</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="strasse" ng-model="kunde.strasseLieferung" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummerLieferung" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  </div>
                 </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatzLieferung" placeholder="{{'Etage, Hinterlegung, ...'|translate}}">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="adressZusatz" translate>Zusatzinfos</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatzLieferung" placeholder="{{'Etage, Hinterlegung, ...'|translate}}">
+                  </div>
                 </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="plz" translate>PLZ / Ort</label>
-                </div>
-                <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5">
-                </div>
-                <div class="col-md-5">
-                  <input type="text" class="form-control" id="ort" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="plz" translate>PLZ / Ort</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" id="ort" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="panel panel-default" ng-repeat="person in kunde.ansprechpersonen track by $index">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <a data-toggle="collapse" data-target="#apartner_{{$index}}" class="navbar-brand">{{ fullName($index) || 'Ansprechperson'|translate}}&nbsp;</a>
-                <small>
-                  <a class="navbar-text" ng-href="mailto:{{personEmail($index)}}">{{personEmail($index)}}</a>
-                  <a class="navbar-text" ng-href="phone:{{personPhone($index)}}">{{personPhone($index)}}</a>
-                </small>
-                <ul class="navbar-btn pull-right" ng-click="removePerson($index)" ng-if="kunde.ansprechpersonen.length > 1">
-                  <a role="button"><span class="fa fa-times"></span></a>
-                </ul>
-              </h3>
+          <div class="col-md-6">
+            <div class="panel panel-default" ng-repeat="person in kunde.ansprechpersonen track by $index">
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title">
+                  <a data-toggle="collapse" data-target="#apartner_{{$index}}" class="navbar-brand">{{ fullName($index) || 'Ansprechperson'|translate}}&nbsp;</a>
+                  <small>
+                    <a class="navbar-text" ng-href="mailto:{{personEmail($index)}}">{{personEmail($index)}}</a>
+                    <a class="navbar-text" ng-href="phone:{{personPhone($index)}}">{{personPhone($index)}}</a>
+                  </small>
+                  <ul class="navbar-btn pull-right" ng-click="removePerson($index)" ng-if="kunde.ansprechpersonen.length > 1">
+                    <a role="button"><span class="fa fa-times"></span></a>
+                  </ul>
+                </h3>
+              </div>
+              <div id="apartner_{{$index}}" class="panel-body panel-collapse collapse" ng-class="personClass($index)">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="anrede" translate>Anrede</label>
+                  </div>
+                  <div class="col-md-8">
+                    <oo-dropdown dropdown-id="anrede" display-style="uib-dropdown" selected-prop="id" property="label" values="anreden" selected="person.anrede"></oo-dropdown>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="vorname" translate>Vorname</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="vorname" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="name" translate>Name</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="email" translate>Email</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" ng-required="$root.projekt.emailErforderlich">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="emailAlternative" translate>Email alt.</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="telefonMobil" translate>Telefon Mobil</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="telefonFestnetz" translate>Telefon Festnetz</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
+                  <div class="col-md-4">
+                    <label for="bemerkungen" translate>Bemerkungen</label>
+                  </div>
+                  <div class="col-md-8">
+                    <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-footer">
+                {{'Erstellt: '|translate}}{{person.erstelldat | fromNow}}
+              </div>
             </div>
-            <div id="apartner_{{$index}}" class="panel-body panel-collapse collapse" ng-class="personClass($index)">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="anrede" translate>Anrede</label>
-                </div>
-                <div class="col-md-8">
-                  <oo-dropdown dropdown-id="anrede" display-style="uib-dropdown" selected-prop="id" property="label" values="anreden" selected="person.anrede"></oo-dropdown>
-                </div>
+            <div class="pull-right">
+              <div ng-click="addPerson()">
+                <a role="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Ansprechperson hinzufügen</span></a>
               </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="vorname" translate>Vorname</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="vorname" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" required>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="name" translate>Name</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="email" translate>Email</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" ng-required="$root.projekt.emailErforderlich">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="emailAlternative" translate>Email alt.</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="telefonMobil" translate>Telefon Mobil</label>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="telefonFestnetz" translate>Telefon Festnetz</label>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
-                </div>
-              </div>
-              <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
-                <div class="col-md-4">
-                  <label for="bemerkungen" translate>Bemerkungen</label>
-                </div>
-                <div class="col-md-8">
-                  <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}"></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="panel-footer">
-              {{'Erstellt: '|translate}}{{person.erstelldat | fromNow}}
-            </div>
-          </div>
-          <div class="pull-right">
-            <div ng-click="addPerson()">
-              <a role="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Ansprechperson hinzufügen</span></a>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default"  ng-if="isExisting()">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Pendenzen</span>
-                <a role="button" ng-click="addPendenz()" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Pendenz</span></a>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div ng-repeat="pendenz in kunde.pendenzen | orderBy : '-datum'">
-                <div class="row form-group" ng-show="pendenz.editable">
-                  <div class="col-md-2">
-                    <div class="input-group">
-                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" is-open="open.pendenzdatum" ng-model="pendenz.datum" enable-time="false" />
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'pendenzdatum')"><i class="fa fa-calendar"></i></button>
-                      </span>
-                    </div>
+    </div>
+    <div class="row">
+      <div class="content content-box col-md-9">
+        <div class="panel panel-default"  ng-if="isExisting()">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Pendenzen / History</span>
+              <a role="button" ng-click="addPendenz()" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Pendenz</span></a>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div ng-repeat="pendenz in kunde.pendenzen | orderBy : '-datum'">
+              <div class="row form-group" ng-show="pendenz.editable">
+                <div class="col-md-2">
+                  <div class="input-group">
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" is-open="open.pendenzdatum" ng-model="pendenz.datum" enable-time="false" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'pendenzdatum')"><i class="fa fa-calendar"></i></button>
+                    </span>
                   </div>
-                  <div class="col-md-6"><input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}"></div>
-                  <div class="col-md-3"><oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown></div>
                 </div>
+                <div class="col-md-6"><input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}"></div>
+                <div class="col-md-3"><oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown></div>
+              </div>
 
-                <div class="row form-group" ng-hide="pendenz.editable">
-                  <div class="col-md-2">{{pendenz.datum|date:"dd.MM.yyyy"}}</div>
-                  <div class="col-md-6">{{pendenz.bemerkung}}</div>
-                  <div class="col-md-2">{{pendenz.status}}</div>
-                  <div class="col-md-2">
-                    <div class="pull-right">
-                      <a role="button" class="btn btn-sm btn-primary" ng-click="editPendenz(pendenz)"><span class="glyphicon glyphicon-edit"></span></a>
-                      <a role="button" class="btn btn-sm btn-primary" ng-click="deletePendenz(pendenz)"><span class="glyphicon glyphicon-remove"></span></a>
-                    </div>
+              <div class="row form-group" ng-hide="pendenz.editable">
+                <div class="col-md-2">{{pendenz.datum|date:"dd.MM.yyyy"}}</div>
+                <div class="col-md-6">{{pendenz.bemerkung}}</div>
+                <div class="col-md-2">{{pendenz.status}}</div>
+                <div class="col-md-2">
+                  <div class="pull-right" ng-if="!pendenz.generiert">
+                    <a role="button" class="btn btn-sm btn-primary" ng-click="editPendenz(pendenz)"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a role="button" class="btn btn-sm btn-primary" ng-click="deletePendenz(pendenz)"><span class="glyphicon glyphicon-remove"></span></a>
+                  </div>
+                  <div class="pull-right" ng-if="pendenz.generiert">
+                    <i class="fa fa-history" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
@@ -259,5 +319,16 @@
         </div>
       </div>
     </form>
+  </div>
+  <div class="row">
+    <div class="content content-box col-md-9">
+      <div ng-if="isExisting()" ng-include="'scripts/kunden/detail/abo/abos.html'"></div>
+    </div>
+    <div class="content-box col-md-3" ng-if="isNewAbo()">
+      <oo-abos-new kunde-id="kunde.id" on-save="onAboCreated()" on-cancel="onAboCreateCanceled()"></oo-abos-new>
+    </div>
+    <div class="content-box col-md-3" ng-if="selectedAbo">
+      <oo-abos-detail kunde-id="kunde.id" abo-id="selectedAbo.id"></oo-abos-detail>
+    </div>
   </div>
 </div>

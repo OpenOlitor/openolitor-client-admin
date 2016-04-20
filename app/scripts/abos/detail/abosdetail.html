@@ -1,35 +1,70 @@
-<div class="row">
-  <div class="content content-box col-md-9">
-    <div oo-error-overlay></div>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title"><span>#{{abo.id}} </span><span translate>Abo für</span><span> {{kunde.bezeichnung}}</span>
+        <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
+        <div uib-dropdown class="btn-group pull-right" role="group">
+          <oo-save-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" on-save="save" on-cancel="cancel" on-created="backToList"></oo-save-button>
+        </div>
+    </h3>
+  </div>
+  <div class="panel-body">
     <form name="depotForm">
       <div class="row form-group">
-        <div class="col-md-12">
-          <h3><span translate>Abo für</span> {{kunde.bezeichnung}}
-            <div class="btn-group pull-right" role="group">
-              <oo-save-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" on-save="save" on-cancel="cancel" on-created="backToList">{{fullName() || 'Abo'|translate}}</oo-save-button>
-              <oo-delete-button model="abo" entity="Abo" entities="ABOTYPEN_ARRAY" on-delete="delete" on-deleted="backToList"></oo-delete-button>
-            </div>
-          </h3>
+        <div class="col-md-3">
+          <label translate>Abotyp</label>
+        </div>
+        <div class="col-md-9">{{abo.abotypName}}</div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-3">
+          <label translate>Vertriebsart</label>
+        </div>
+        <div class="col-md-9">{{vertriebsart()}} - {{abo.liefertag}}</div>
+      </div>
+      <div class="row form-group" ng-if="abo.depotName">
+        <div class="col-md-3">
+          <label translate>Depot</label>
+        </div>
+        <div class="col-md-9">{{abo.depotName}}</div>
+      </div>
+      <div class="row form-group" ng-if="abo.tourName">
+        <div class="col-md-3">
+          <label translate>Tour</label>
+        </div>
+        <div class="col-md-9">{{abo.tourName}}</div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-3">
+          <label translate>Laufzeit</label>
+        </div>
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" max-date="abo.ende" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" enable-time="false" min-date="abo.start" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="abotyp" translate>Abotyp</label>
-                </div>
-                <div class="col-md-8">
-                  <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
-                </div>
-              </div>
-              <div ng-if="abotyp">
-                <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
-              </div>
-            </div>
-          </div>
+      <div class="row form-group">
+        <div class="col-md-3">
+          <label translate>Saldo Total</label>
         </div>
+        <div class="col-md-9" tooltip-popup-close-delay="1000" uib-tooltip-html="saldoTooltip(abo)"><span ng-class="saldoClass(abo)">{{aboSaldo(abo)}}</span></div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label translate>Letzte Lieferung</label>
+        </div>
+        <div class="col-md-8">{{abo.letzteLieferung | date: 'dd.MM.yyyy'}}</div>
       </div>
     </form>
   </div>

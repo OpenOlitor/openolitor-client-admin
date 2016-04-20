@@ -6,14 +6,14 @@ angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
-    'KundentypenService',
-    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'API_URL', 'msgBus', '$log',
+    'KundentypenService', 'alertService',
+    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL', 'msgBus',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
-      KundenDetailModel, KundentypenService, EnumUtil, PENDENZSTATUS, ANREDE,
-      API_URL,
-      msgBus, $log) {
+      KundenDetailModel, KundentypenService, alertService, EnumUtil,
+      PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
+      msgBus) {
 
       var defaults = {
         model: {
@@ -26,8 +26,14 @@ angular.module('openolitor')
         }
       };
 
+      $scope.abotypenArray = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
+        return typ.id;
+      });
+
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
       $scope.anreden = EnumUtil.asArray(ANREDE);
+      $scope.updatingAbo = {};
+      $scope.selectedAbo = undefined;
 
       $scope.loadKunde = function() {
         KundenDetailModel.get({
@@ -55,7 +61,7 @@ angular.module('openolitor')
           if ($scope.kunde && $scope.kunde.ansprechpersonen) {
             angular.forEach($scope.kunde.ansprechpersonen, function(
               person) {
-              if (person.anrede == msg.data.anrede && person.vorname ===
+              if (person.anrede === msg.data.anrede && person.vorname ===
                 msg.data.vorname && person.name === msg.data.name) {
                 //set id that entity won't get created twice
                 person.id = msg.data.id;
@@ -205,24 +211,73 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.kunde.$delete();
       };
+      $scope.isNewAbo = function() {
+        return $scope.newAbo !== undefined;
+      };
 
       $scope.showCreateAboDialog = function() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'scripts/kunden/detail/abo/create-abo.html',
-          controller: 'AbosDetailController',
-          resolve: {
-            createKundeId: function() {
-              return $scope.kunde.id;
-            }
-          }
-        });
-
-        modalInstance.result.then(function() {
-
-        }, function() {
-          $log.info('Modal dismissed at: ' + new Date());
-        });
+        $scope.newAbo = {};
       };
+
+      $scope.onAboCreated = function() {
+        $scope.newAbo = undefined;
+      };
+
+      $scope.onAboCreateCanceled = function() {
+        $scope.newAbo = undefined;
+      };
+
+      $scope.updatingAbo = function(abo) {
+        return abo.id && $scope.updatingAbo[
+          abo.id];
+      };
+
+      $scope.selectAbo = function(abo) {
+        if ($scope.selectedAbo === abo) {
+          $scope.selectedAbo = undefined;
+        } else {
+          $scope.selectedAbo = abo;
+        }
+      };
+
+      var isAboEntity = function(entity) {
+        return $scope.abotypenArray.indexOf(entity) > -1;
+      };
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.kunde) {
+            if ($scope.kunde.abos) {
+              $scope.kunde.abos.push(msg.data);
+            } else {
+              $scope.kunde.abos = [msg.data];
+            }
+            alertService.addAlert('info', 'Abo wurde erstellt');
+            $scope.$apply();
+          }
+        }
+      });
+
+      var update = function(src, dest) {
+        for (var key in src) {
+          if (src.hasOwnProperty(key)) {
+            dest[key] = src[key];
+          }
+        }
+      };
+
+      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.kunde) {
+            angular.forEach($scope.kunde.abos, function(abo) {
+              if (abo.id === msg.data.id) {
+                update(msg.data, abo);
+                $scope.$apply();
+                return;
+              }
+            });
+          }
+        }
+      });
     }
   ]);
