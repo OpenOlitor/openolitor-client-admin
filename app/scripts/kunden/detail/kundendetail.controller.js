@@ -7,14 +7,13 @@ angular.module('openolitor')
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService', 'alertService',
-    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'API_URL', 'msgBus', '$log',
+    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL', 'msgBus',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       KundenDetailModel, KundentypenService, alertService, EnumUtil,
-      PENDENZSTATUS, ANREDE,
-      API_URL,
-      msgBus, $log) {
+      PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
+      msgBus) {
 
       var defaults = {
         model: {
@@ -26,6 +25,10 @@ angular.module('openolitor')
           pendenzen: [],
         }
       };
+
+      $scope.abotypenArray = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
+        return typ.id;
+      });
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
       $scope.anreden = EnumUtil.asArray(ANREDE);
@@ -238,9 +241,7 @@ angular.module('openolitor')
       };
 
       var isAboEntity = function(entity) {
-        return (entity === 'DepotlieferungAbo' || entity ===
-          'PostlieferungAbo' ||
-          entity === 'HeimlieferungAbo');
+        return $scope.abotypenArray.indexOf(entity) > -1;
       };
 
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
@@ -253,6 +254,28 @@ angular.module('openolitor')
             }
             alertService.addAlert('info', 'Abo wurde erstellt');
             $scope.$apply();
+          }
+        }
+      });
+
+      var update = function(src, dest) {
+        for (var key in src) {
+          if (src.hasOwnProperty(key)) {
+            dest[key] = src[key];
+          }
+        }
+      };
+
+      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.kunde) {
+            angular.forEach($scope.kunde.abos, function(abo) {
+              if (abo.id === msg.data.id) {
+                update(msg.data, abo);
+                $scope.$apply();
+                return;
+              }
+            });
           }
         }
       });

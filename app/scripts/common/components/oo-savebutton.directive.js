@@ -22,7 +22,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
       templateUrl: 'scripts/common/components/oo-savebutton.directive.html',
       controller: function($scope) {
 
-        if(!angular.isUndefined($scope.reduced) && $scope.reduced) {
+        if (!angular.isUndefined($scope.reduced) && $scope.reduced) {
           $scope.notext = true;
           $scope.small = true;
         }
@@ -39,8 +39,16 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
           }
         };
 
+        var entityMatches = function(entity) {
+          if (angular.isArray($scope.entities)) {
+            return $scope.entities.indexOf(entity) > -1;
+          } else {
+            return $scope.entity === entity;
+          }
+        };
+
         msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-          if (msg.entity === $scope.entity && msg.data.id === $scope.model
+          if (entityMatches(msg.entity) && msg.data.id === $scope.model
             .id) {
             if ($scope.model.actionInProgress !== 'updating') {
               alertService.addAlert('info', $scope.entity + gettext(
@@ -53,14 +61,6 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
             }
           }
         });
-
-        var entityMatches = function(entity) {
-          if (angular.isArray($scope.entities)) {
-            return $scope.entities.indexOf(entity) > -1;
-          } else {
-            return $scope.entity === entity;
-          }
-        };
 
         msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
           if ($scope.model && entityMatches(msg.entity) && msg.data.id ===

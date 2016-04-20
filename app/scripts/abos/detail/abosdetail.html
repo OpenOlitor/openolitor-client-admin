@@ -39,7 +39,7 @@
         </div>
         <div class="col-md-4">
           <p class="input-group">
-            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" max-date="abo.start" />
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" max-date="abo.ende" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
             </span>
@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-4">
           <p class="input-group">
-            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" enable-time="false" max-date="abo.ende" />
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" enable-time="false" min-date="abo.start" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
             </span>

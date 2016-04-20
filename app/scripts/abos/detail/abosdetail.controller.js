@@ -7,14 +7,16 @@ angular.module('openolitor')
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN_ARRAY', 'moment',
+    'ABOTYPEN', 'moment', 'EnumUtil',
     function($scope, $filter, $routeParams, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN,
-      ABOTYPEN_ARRAY, moment) {
+      ABOTYPEN, moment, EnumUtil) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
-      $scope.ABOTYPEN_ARRAY = ABOTYPEN_ARRAY;
+      $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
+        return typ.id;
+      });
 
       var defaults = {
         model: {
@@ -33,12 +35,6 @@ angular.module('openolitor')
         $scope.open[date] = true;
       };
 
-      $scope.$watch('aboId', function(id) {
-        if (id && (!$scope.abo || $scope.abo.id !== id)) {
-          loadAboDetail();
-        }
-      });
-
       var getKundeId = function() {
         if (angular.isDefined($routeParams.kundeId)) {
           return $routeParams.kundeId;
@@ -54,11 +50,6 @@ angular.module('openolitor')
           return $scope.id;
         }
       };
-
-      var basePath = '/abos';
-      if ($routeParams.kundeId) {
-        basePath = '/kunden/' + $routeParams.kundeId;
-      }
 
       var loadAboDetail = function() {
         if ($scope.loading === getAboId()) {
@@ -80,6 +71,17 @@ angular.module('openolitor')
           }
         });
       };
+
+      $scope.$watch('aboId', function(id) {
+        if (id && (!$scope.abo || $scope.abo.id !== id)) {
+          loadAboDetail();
+        }
+      });
+
+      var basePath = '/abos';
+      if ($routeParams.kundeId) {
+        basePath = '/kunden/' + $routeParams.kundeId;
+      }
 
       if (!angular.isDefined(getAboId())) {
         KundenDetailModel.get({
