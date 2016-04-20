@@ -62,7 +62,9 @@ angular.module('openolitor')
           sorting: {
             name: 'asc'
           },
-          filter: { typen: '' }
+          filter: {
+            typen: ''
+          }
         }, {
           filterDelay: 0,
           groupOptions: {

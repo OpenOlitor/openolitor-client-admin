@@ -14,6 +14,19 @@
    <div ng-if="abotyp">
      <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
    </div>
+   <div class="row form-group" ng-if="abo.vertriebsart">
+     <div class="col-md-3">
+       <label for="abotyp" translate>Start</label>
+     </div>
+     <div class="col-md-8">
+       <p class="input-group">
+         <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" max-date="abo.start" />
+         <span class="input-group-btn">
+           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+         </span>
+       </p>
+     </div>
+   </div>
  </div>
 
 </div>

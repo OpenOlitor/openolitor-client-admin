@@ -55,7 +55,7 @@ angular.module('openolitor')
           if ($scope.kunde && $scope.kunde.ansprechpersonen) {
             angular.forEach($scope.kunde.ansprechpersonen, function(
               person) {
-              if (person.anrede == msg.data.anrede && person.vorname ===
+              if (person.anrede === msg.data.anrede && person.vorname ===
                 msg.data.vorname && person.name === msg.data.name) {
                 //set id that entity won't get created twice
                 person.id = msg.data.id;
