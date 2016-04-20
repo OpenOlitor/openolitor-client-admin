@@ -6,7 +6,7 @@ angular.module('openolitor').directive('ooAbosNew', [
       restrict: 'E',
       replace: true,
       scope: {
-        createKundeId: '=',
+        kundeId: '=',
         onSave: '&',
         onCancel: '&'
       },

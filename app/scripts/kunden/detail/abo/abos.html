@@ -16,6 +16,7 @@
           <th tanslate>Letzte Lieferung</th>
           <th tanslate># Abw.</th>
           <th tanslate># Lieferungen</th>
+          <th> </th>
       </tr>
       <tr ng-repeat="abo in kunde.abos track by $index">
         <td>
@@ -51,6 +52,14 @@
         </td>
         <td>
           {{abo.anzahlLieferungen | lastElement}}
+        </td>
+        <td>
+          <div class="pull-right">
+            <div class="btn-group" ng-hide="updatingAbo(abo)">
+              <button role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+            </div>
+            <i ng-show="updatingAbo(abo)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+          </div>
         </td>
       </tr>
     </table>

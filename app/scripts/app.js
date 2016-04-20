@@ -99,9 +99,6 @@ angular
     GRAMM: 'Gramm',
     KILOGRAMM: 'Kilogramm',
   })
-  .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
-    'PostlieferungAbo'
-  ])
   .constant('LIEFERZEITPUNKTE', {
     MONTAG: {
       id: 'Montag',
