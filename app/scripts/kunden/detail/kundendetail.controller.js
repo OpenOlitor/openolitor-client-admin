@@ -29,6 +29,8 @@ angular.module('openolitor')
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
       $scope.anreden = EnumUtil.asArray(ANREDE);
+      $scope.updatingAbo = {};
+      $scope.selectedAbo = undefined;
 
       $scope.loadKunde = function() {
         KundenDetailModel.get({
@@ -220,6 +222,19 @@ angular.module('openolitor')
 
       $scope.onAboCreateCanceled = function() {
         $scope.newAbo = undefined;
+      };
+
+      $scope.updatingAbo = function(abo) {
+        return abo.id && $scope.updatingAbo[
+          abo.id];
+      };
+
+      $scope.selectAbo = function(abo) {
+        if ($scope.selectedAbo === abo) {
+          $scope.selectedAbo = undefined;
+        } else {
+          $scope.selectedAbo = abo;
+        }
       };
 
       var isAboEntity = function(entity) {

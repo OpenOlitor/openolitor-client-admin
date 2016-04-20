@@ -6,7 +6,8 @@ angular.module('openolitor').directive('ooAbosDetail', [
       restrict: 'E',
       replace: true,
       scope: {
-        createKundeId: '='
+        kundeId: '=',
+        aboId: '='
       },
       transclude: true,
       templateUrl: 'scripts/abos/detail/abosdetail.html',
