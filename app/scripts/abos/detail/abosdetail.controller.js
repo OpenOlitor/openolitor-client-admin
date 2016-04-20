@@ -7,11 +7,11 @@ angular.module('openolitor')
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN_ARRAY', 'createKundeId', 'moment',
+    'ABOTYPEN_ARRAY', 'moment',
     function($scope, $filter, $routeParams, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN,
-      ABOTYPEN_ARRAY, createKundeId, moment) {
+      ABOTYPEN_ARRAY, moment) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = ABOTYPEN_ARRAY;
@@ -37,7 +37,7 @@ angular.module('openolitor')
         if (angular.isDefined($routeParams.kundeId)) {
           return $routeParams.kundeId;
         } else {
-          return createKundeId;
+          return $scope.createKundeId;
         }
       };
 
@@ -46,7 +46,7 @@ angular.module('openolitor')
         basePath = '/kunden/' + $routeParams.kundeId;
       }
 
-      if (angular.isDefined(createKundeId)) {
+      if (angular.isDefined($scope.createKundeId)) {
         KundenDetailModel.get({
           id: getKundeId()
         }, function(kunde) {
