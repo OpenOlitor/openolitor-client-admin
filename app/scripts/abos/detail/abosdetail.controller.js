@@ -28,6 +28,7 @@ angular.module('openolitor')
       $scope.open = {
         start: false
       };
+
       $scope.openCalendar = function(e, date) {
         e.preventDefault();
         e.stopPropagation();

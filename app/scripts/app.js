@@ -354,6 +354,19 @@ angular
       return input;
     };
   })
+  .filter('notIn', function() {
+    return function(items, property, elements) {
+      var filtered = [];
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var val = item[property];
+        if (elements.indexOf(val) > -1) {
+          filtered.push(item);
+        }
+      }
+      return filtered;
+    };
+  })
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
