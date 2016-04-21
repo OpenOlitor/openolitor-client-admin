@@ -46,7 +46,7 @@
         <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
             <tr ng-repeat="lieferung in $data">
               <td data-title="'Datum'|translate">
-                {{lieferung.datum|date:"dd.MM.yyyy"}}
+                {{lieferung.datum|date:"EEE, dd.MM.yyyy"}}
               </td>
               <td data-title="'Abw.'|translate">
                 <i ng-if="lieferung.anzahlAbwesenheiten > 1" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>

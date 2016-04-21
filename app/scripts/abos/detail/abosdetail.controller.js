@@ -73,7 +73,7 @@ angular.module('openolitor')
         });
       };
 
-      $scope.$watch('aboId', function(id) {
+      var unwatchAboId = $scope.$watch('aboId', function(id) {
         if (id && (!$scope.abo || $scope.abo.id !== id)) {
           loadAboDetail();
         }
@@ -165,7 +165,7 @@ angular.module('openolitor')
         });
       }
 
-      $scope.$watch('abo.abotypId', function(abotypId) {
+      var unwatchAbotypId = $scope.$watch('abo.abotypId', function(abotypId) {
         if (abotypId) {
           AbotypenDetailModel.get({
             id: abotypId
@@ -177,7 +177,8 @@ angular.module('openolitor')
         }
       });
 
-      $scope.$watch('abo.vertriebsart', function(vertriebsart) {
+      var unwatchVetriebsartId = $scope.$watch('abo.vertriebsart', function(
+        vertriebsart) {
         if (vertriebsart) {
           switch (vertriebsart.typ) {
             case VERTRIEBSARTEN.DEPOTLIEFERUNG:
@@ -229,5 +230,11 @@ angular.module('openolitor')
           return '';
         }
       };
+
+      $scope.$on('destroy', function() {
+        unwatchAboId();
+        unwatchAbotypId();
+        unwatchVetriebsartId();
+      });
     }
   ]);
