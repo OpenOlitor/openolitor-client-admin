@@ -67,7 +67,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       $scope.getDisplayedText = function(item) {
         if (!angular.isUndefined($scope.selectedProp) || !angular.isUndefined(
             $scope.property)) {
-          return item[$scope.property];
+          return deepFind(item, $scope.property);
         } else if (!angular.isUndefined($scope.displayFunction)) {
           return $scope.displayFunction(item);
         } else {
@@ -88,7 +88,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
               if (!angular.isUndefined($scope.selectedProp)) {
                 if (deepFind(value, $scope.selectedProp) === $scope
                   .selected) {
-                  $scope.display = value[$scope.property];
+                  $scope.display = deepFind(value, $scope.property);
                 }
               } else {
                 if (value === $scope.selected) {
@@ -97,7 +97,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
               }
             });
           } else if (!angular.isUndefined($scope.selectedItem)) {
-            $scope.display = $scope.selectedItem[$scope.property];
+            $scope.display = deepFind($scope.selectedItem, $scope.property);
           }
         } else {
           if (!angular.isUndefined($scope.selected) && angular.isUndefined(

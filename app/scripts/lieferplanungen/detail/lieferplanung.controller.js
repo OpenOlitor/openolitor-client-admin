@@ -56,6 +56,8 @@ angular.module('openolitor')
         korbEntries: []
       }];
 
+      $scope.liefereinheiten = LIEFEREINHEIT;
+
       $scope.search = {
         query: ''
       };

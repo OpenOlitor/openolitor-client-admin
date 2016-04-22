@@ -47,7 +47,7 @@
                       {{produkt.name}}
                     </td>
                     <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
-                      {{produkt.preis | ooCHF}} / {{produkt.einheit}}
+                      {{produkt.preis | ooCHF}} / {{produkt.einheit|translate}}
                     </td>
                     <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter()">
                       <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
@@ -88,7 +88,15 @@
                     <td data-title="'Menge'|translate">
                       <div class="input-group">
                         <input type="number" placeholder="{{'Menge'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="menge" ng-model="korbprodukt.menge" required></input>
-                        <div class="input-group-addon">{{korbprodukt.einheit|translate}}</div>
+                      </div>
+                    </td>
+                    <td>
+                        <span ng-if="!korbprodukt.unlisted">
+                          <div>{{liefereinheiten[korbprodukt.einheit.toUpperCase()].label.short}}</div>
+                        </span>
+                        <span ng-if="korbprodukt.unlisted">
+                          <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected="korbprodukt.einheit" ng-required></oo-dropdown>
+                        </span>
                       </div>
                     </td>
                     <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
@@ -111,6 +119,7 @@
                   </tr>
                   <tfoot ng-show="projekt.preiseSichtbar">
                     <tr>
+                      <td></td>
                       <td></td>
                       <td></td>
                       <td translate>Total</td>
@@ -170,13 +179,13 @@
                         {{position.anzahl}}x
                       </td>
                       <td>
-                        {{position.menge}} {{position.einheit}}
+                        {{position.menge}} {{position.einheit|translate}}
                       </td>
                       <td>
                         {{position.produktBeschrieb}}
                       </td>
                       <td>
-                        {{position.mengeTotal}} {{position.einheit}}
+                        {{position.mengeTotal}} {{position.einheit|translate}}
                       </td>
                       <td ng-show="projekt.preiseSichtbar">
                         {{position.preisEinheit | ooCHF}}
