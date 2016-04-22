@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'LIEFEREINHEIT', 'cloneObj', 'gettext',
-    function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, LIEFEREINHEIT, cloneObj, gettext) {
+  .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'LIEFEREINHEIT', 'cloneObj', 'gettext', '$location',
+    function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, LIEFEREINHEIT, cloneObj, gettext, $location) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -392,6 +392,14 @@ angular.module('openolitor')
       $scope.produzentSteuersatz = function(produzentId) {
         var prod = getProduzent(produzentId);
         return prod.mwstSatz || 0;
+      };
+
+      $scope.save = function() {
+        return $scope.planung.$save();
+      };
+
+      $scope.backToList = function() {
+        $location.path('/lieferplanung');
       };
 
     }
