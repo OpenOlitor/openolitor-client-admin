@@ -6,56 +6,6 @@ angular.module('openolitor')
   .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'LIEFEREINHEIT', 'cloneObj', 'gettext',
     function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, LIEFEREINHEIT, cloneObj, gettext) {
 
-      $scope.dummyAbotypLieferungEntries = [{
-        name: 'Vegan Gross',
-        lieferdatum: 'Di, 03.05.2016',
-        zielpreis: 30,
-        durchschnittspreis: 28.88,
-        anzahlLieferungen: 20,
-        anzahl: 12,
-        korbEntries: []
-      }, {
-        name: 'Vegan Klein',
-        lieferdatum: 'Di, 03.05.2016',
-        zielpreis: 23,
-        durchschnittspreis: 23.01,
-        anzahlLieferungen: 20,
-        anzahl: 40,
-        korbEntries: []
-      }, {
-        name: 'Vegi Gross',
-        lieferdatum: 'Di, 03.05.2016',
-        zielpreis: 30,
-        durchschnittspreis: 30.18,
-        anzahlLieferungen: 20,
-        anzahl: 17,
-        korbEntries: []
-      }, {
-        name: 'Vegi Klein',
-        lieferdatum: 'Di, 03.05.2016',
-        zielpreis: 23,
-        durchschnittspreis: 22.92,
-        anzahlLieferungen: 20,
-        anzahl: 91,
-        korbEntries: []
-      }, {
-        name: 'Fleisch Gross',
-        lieferdatum: 'Mi, 04.05.2016',
-        zielpreis: 30,
-        durchschnittspreis: 29.38,
-        anzahlLieferungen: 20,
-        anzahl: 4,
-        korbEntries: []
-      }, {
-        name: 'Fleisch Klein',
-        lieferdatum: 'Mi, 04.05.2016',
-        zielpreis: 23,
-        durchschnittspreis: 23.12,
-        anzahlLieferungen: 20,
-        anzahl: 62,
-        korbEntries: []
-      }];
-
       $scope.liefereinheiten = LIEFEREINHEIT;
 
       $scope.search = {
@@ -104,6 +54,12 @@ angular.module('openolitor')
         }
       );
 
+      LieferplanungModel.getLieferungen({
+        id: $routeParams.id
+      }, function(result) {
+        $scope.abotypenLieferungen = result;
+      });
+
       var getProduzent = function(produzentId) {
         var ret = {};
         angular.forEach($scope.alleProduzentenL, function(produzent) {
@@ -125,8 +81,6 @@ angular.module('openolitor')
         });
         return ret;
       };
-
-      $scope.abotypenLieferungen = $scope.dummyAbotypLieferungEntries;
 
       $scope.displayMode = 'korbinhalt';
 
