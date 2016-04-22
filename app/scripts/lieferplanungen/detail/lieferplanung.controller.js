@@ -6,6 +6,8 @@ angular.module('openolitor')
   .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'LIEFEREINHEIT', 'cloneObj', 'gettext',
     function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, LIEFEREINHEIT, cloneObj, gettext) {
 
+      $scope.liefereinheiten = LIEFEREINHEIT;
+
       $scope.search = {
         query: ''
       };
@@ -54,6 +56,12 @@ angular.module('openolitor')
         }
       );
 
+      LieferplanungModel.getLieferungen({
+        id: $routeParams.id
+      }, function(result) {
+        $scope.abotypenLieferungen = result;
+      });
+
       var getProduzent = function(produzentId) {
         var ret = {};
         angular.forEach($scope.alleProduzentenL, function(produzent) {
@@ -75,8 +83,6 @@ angular.module('openolitor')
         });
         return ret;
       };
-
-      $scope.abotypenLieferungen = $scope.dummyAbotypLieferungEntries;
 
       $scope.displayMode = 'korbinhalt';
 
