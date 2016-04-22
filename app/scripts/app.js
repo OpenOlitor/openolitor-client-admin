@@ -105,29 +105,29 @@ angular
     STUECK: {
       id: 'STUECK',
       label: {
-        long: gettext('St.'),
-        short: gettext('Stück')
+        long: gettext('Stück'),
+        short: gettext('St.')
       }
     },
     BUND: {
       id: 'BUND',
       label: {
-        long: gettext('Bu.'),
-        short: gettext('Bund')
+        long: gettext('Bund'),
+        short: gettext('Bu.')
       }
     },
     GRAMM: {
       id: 'GRAMM',
       label: {
-        long: gettext('gr'),
-        short: gettext('Gramm')
+        long: gettext('Gramm'),
+        short: gettext('gr')
       }
     },
     KILOGRAMM: {
       id: 'KILOGRAMM',
       label: {
-        long: gettext('kg'),
-        short: gettext('Kilogramm')
+        long: gettext('Kilogramm'),
+        short: gettext('kg')
       }
     }
   })

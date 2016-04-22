@@ -16,7 +16,7 @@ angular.module('openolitor')
       };
 
       $scope.monate = EnumUtil.asArray(MONATE);
-      $scope.liefereinheiten = EnumUtil.asArray(LIEFEREINHEIT);
+      $scope.liefereinheiten = LIEFEREINHEIT;
 
       var defaults = {
         model: {
@@ -26,7 +26,7 @@ angular.module('openolitor')
           verfuegbarBis: $scope.monate[11].id,
           kategorien: [],
           produzenten: [],
-          einheit: LIEFEREINHEIT.KILOGRAMM,
+          einheit: LIEFEREINHEIT.KILOGRAMM.id,
           preis: 0.00,
           editable: true
         }
