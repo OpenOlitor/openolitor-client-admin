@@ -40,8 +40,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         };
 
         msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-          if (msg.entity === $scope.entity && msg.data.id === $scope.model
-            .id) {
+          if (msg.entity === $scope.entity && !angular.isUndefined($scope.model) && msg.data.id === $scope.model.id) {
             if ($scope.model.actionInProgress !== 'updating') {
               alertService.addAlert('info', $scope.entity + gettext(
                 ' wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu.'

@@ -21,7 +21,7 @@
                 <div class="col-md-6">
                   <div class="pull-right" role="group">
                     <button type="button" role="button" ng-click="recalculateBestellungen(); displayMode = 'lieferanten'" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
-                    <oo-save-button model="kunde" form="kundeForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
+                    <oo-save-button model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
                     <button role="button" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span</button>
                   </div>
                 </div>
