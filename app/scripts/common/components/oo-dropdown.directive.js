@@ -15,7 +15,8 @@ angular.module('openolitor').directive('ooDropdown', function() {
       dropdownId: '@',
       displayStyle: '@',
       label: '=',
-      disabled: '@'
+      disabled: '@',
+      selectionRequired: '='
     },
     templateUrl: 'scripts/common/components/oo-dropdown.directive.html',
     compile: function(element, attrs) {
@@ -71,6 +72,14 @@ angular.module('openolitor').directive('ooDropdown', function() {
           return $scope.displayFunction(item);
         } else {
           return item;
+        }
+      };
+
+      $scope.getClass = function() {
+        if($scope.selectionRequired && angular.isUndefined($scope.selected)) {
+          return 'oo-invalid';
+        } else {
+          return '';
         }
       };
 
