@@ -46,6 +46,21 @@ angular.module('openolitor')
         });
       };
 
+      function resolveKunde(id) {
+        KundenOverviewModel.get({
+          id: id
+        }, function(kunde) {
+          $scope.kunde = kunde;
+          $scope.rechnung.kundeId = kunde.id;
+          $scope.rechnung.bezeichnung = kunde.bezeichnung;
+          $scope.rechnung.strasse = kunde.strasse;
+          $scope.rechnung.hausNummer = kunde.hausNummer;
+          $scope.rechnung.adressZusatz = kunde.adressZusatz;
+          $scope.rechnung.plz = kunde.plz;
+          $scope.rechnung.ort = kunde.ort;
+        });
+      }
+
       if (!$routeParams.id) {
         $scope.rechnung = new RechnungenDetailModel(defaults.model);
         $scope.pendenzen = [];
@@ -56,7 +71,7 @@ angular.module('openolitor')
       if (!$routeParams.kundeId) {
         $scope.kunde = undefined;
       } else {
-        $scope.resolveKunde($routeParams.kundeId);
+        resolveKunde($routeParams.kundeId);
       }
 
       if (!$routeParams.aboId) {
@@ -70,24 +85,9 @@ angular.module('openolitor')
         });
       }
 
-      $scope.resolveKunde = function(id) {
-        KundenOverviewModel.get({
-          id: id
-        }, function(kunde) {
-          $scope.kunde = kunde;
-          $scope.rechnung.kundeId = kunde.id;
-          $scope.rechnung.bezeichnung = kunde.bezeichnung;
-          $scope.rechnung.strasse = kunde.strasse;
-          $scope.rechnung.hausNummer = kunde.hausNummer;
-          $scope.rechnung.adressZusatz = kunde.adressZusatz;
-          $scope.rechnung.plz = kunde.plz;
-          $scope.rechnung.ort = kunde.ort;
-        });
-      };
-
       $scope.loadKunde = function() {
         if ($scope.kunde) {
-          $scope.resolveKunde($scope.kunde.id);
+          resolveKunde($scope.kunde.id);
         }
       };
 
