@@ -6,15 +6,16 @@ angular.module('openolitor')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'AbosOverviewModel',
+    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel', 'AbosOverviewModel',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel, AbosOverviewModel) {
+      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, AbosOverviewModel) {
 
       var defaults = {
         model: {
           id: undefined,
+          waehrung: 'CHF',
           rechnungsDatum: new Date(),
           faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf())
         }
@@ -38,16 +39,27 @@ angular.module('openolitor')
         });
       };
 
+      function resolveAbo(id) {
+        AbosOverviewModel.get({
+          id: id
+        }, function(abo) {
+          $scope.abo = abo;
+          $scope.rechnung.aboId = abo.id;
+        });
+      }
+
       $scope.loadRechnung = function() {
         RechnungenDetailModel.get({
           id: $routeParams.id
         }, function(result) {
           $scope.rechnung = result;
+          resolveKunde(result.kunde.id);
+          $scope.abo = result.abo;
         });
       };
 
       function resolveKunde(id) {
-        KundenOverviewModel.get({
+        return KundenDetailModel.get({
           id: id
         }, function(kunde) {
           $scope.kunde = kunde;
@@ -77,22 +89,12 @@ angular.module('openolitor')
       if (!$routeParams.aboId) {
         $scope.abo = undefined;
       } else {
-        AbosOverviewModel.get({
-          id: $routeParams.aboId
-        }, function(abo) {
-          $scope.abo = abo;
-          $scope.rechnung.aboId = abo.id;
-        });
+        resolveAbo($routeParams.aboId);
       }
-
-      $scope.loadKunde = function() {
-        if ($scope.kunde) {
-          resolveKunde($scope.kunde.id);
-        }
-      };
 
       $scope.selectedAbo = function(abo) {
         $scope.rechnung.aboId = abo.id;
+        $scope.abo = abo;
         return false;
       };
 
@@ -100,6 +102,7 @@ angular.module('openolitor')
         if (!abo) {
           return 'nothing here';
         }
+
         return abo.abotypName + ', ' + abo.depotName;
       };
 

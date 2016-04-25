@@ -26,7 +26,7 @@ angular.module('openolitor')
           sorting: {
             name: 'asc'
           },
-          filter: { typen: '' }
+          filter: { status: '' }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -65,9 +65,6 @@ angular.module('openolitor')
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
-        //$scope.entries = $scope.dummyEntries;
-
       }
 
       search();

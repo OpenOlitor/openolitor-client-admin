@@ -17,7 +17,7 @@
       <div ng-hide="entries">
         <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-      <div ng-show="entries" id="rechnungTable" display-export="true" export-file-name="Rechnungen">
+      <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="rechnung in $data | filter: search.query.$">
             <td data-title="'Titel'|translate" sortable="'titel'">
@@ -29,11 +29,11 @@
             <td data-title="'Status'|translate" sortable="'status'">
               {{rechnung.status}}
             </td>
-            <td data-title="'Erstelldatum'|translate" sortable="'erstelldatum'">
-              {{rechnung.erstelldatum}}
+            <td data-title="'Rechnnungsdatum'|translate" sortable="'rechnungsDatum'">
+              {{rechnung.rechnungsDatum | date}}
             </td>
-            <td data-title="'Fälligkeit'|translate" sortable="'faelligkeit'">
-              {{rechnung.faelligkeit}}
+            <td data-title="'Fälligkeit'|translate" sortable="'faelligkeitsDatum'">
+              {{rechnung.faelligkeitsDatum | date}}
             </td>
           </tr>
         </table>
