@@ -6,15 +6,16 @@ angular.module('openolitor')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'AbosOverviewModel',
+    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel', 'AbosOverviewModel',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel, AbosOverviewModel) {
+      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, AbosOverviewModel) {
 
       var defaults = {
         model: {
           id: undefined,
+          waehrung: 'CHF',
           rechnungsDatum: new Date(),
           faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf())
         }
@@ -38,40 +39,27 @@ angular.module('openolitor')
         });
       };
 
-      $scope.loadRechnung = function() {
-        RechnungenDetailModel.get({
-          id: $routeParams.id
-        }, function(result) {
-          $scope.rechnung = result;
-        });
-      };
-
-      if (!$routeParams.id) {
-        $scope.rechnung = new RechnungenDetailModel(defaults.model);
-        $scope.pendenzen = [];
-      } else {
-        $scope.loadRechnung();
-      }
-
-      if (!$routeParams.kundeId) {
-        $scope.kunde = undefined;
-      } else {
-        $scope.resolveKunde($routeParams.kundeId);
-      }
-
-      if (!$routeParams.aboId) {
-        $scope.abo = undefined;
-      } else {
+      function resolveAbo(id) {
         AbosOverviewModel.get({
-          id: $routeParams.aboId
+          id: id
         }, function(abo) {
           $scope.abo = abo;
           $scope.rechnung.aboId = abo.id;
         });
       }
 
-      $scope.resolveKunde = function(id) {
-        KundenOverviewModel.get({
+      $scope.loadRechnung = function() {
+        RechnungenDetailModel.get({
+          id: $routeParams.id
+        }, function(result) {
+          $scope.rechnung = result;
+          resolveKunde(result.kunde.id);
+          $scope.abo = result.abo;
+        });
+      };
+
+      function resolveKunde(id) {
+        return KundenDetailModel.get({
           id: id
         }, function(kunde) {
           $scope.kunde = kunde;
@@ -83,16 +71,30 @@ angular.module('openolitor')
           $scope.rechnung.plz = kunde.plz;
           $scope.rechnung.ort = kunde.ort;
         });
-      };
+      }
 
-      $scope.loadKunde = function() {
-        if ($scope.kunde) {
-          $scope.resolveKunde($scope.kunde.id);
-        }
-      };
+      if (!$routeParams.id) {
+        $scope.rechnung = new RechnungenDetailModel(defaults.model);
+        $scope.pendenzen = [];
+      } else {
+        $scope.loadRechnung();
+      }
+
+      if (!$routeParams.kundeId) {
+        $scope.kunde = undefined;
+      } else {
+        resolveKunde($routeParams.kundeId);
+      }
+
+      if (!$routeParams.aboId) {
+        $scope.abo = undefined;
+      } else {
+        resolveAbo($routeParams.aboId);
+      }
 
       $scope.selectedAbo = function(abo) {
         $scope.rechnung.aboId = abo.id;
+        $scope.abo = abo;
         return false;
       };
 
@@ -100,6 +102,7 @@ angular.module('openolitor')
         if (!abo) {
           return 'nothing here';
         }
+
         return abo.abotypName + ', ' + abo.depotName;
       };
 
