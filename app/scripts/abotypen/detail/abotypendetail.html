@@ -2,7 +2,7 @@
       <div oo-error-overlay></div>
     <form name="abotypForm">
   <div class="content content-box col-md-9">
-    <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
+    <div class="alert alert-warning" ng-if="!isAktiv()" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
       <div class="panel panel-default">
         <div class="panel-heading clearfix abotypHeader" ng-style="abotypStyle" >
           <h3 class="panel-title"><span class=" navbar-brand">{{'Abotyp ' + abotyp.name || 'Abotyp'|translate}}</span>
