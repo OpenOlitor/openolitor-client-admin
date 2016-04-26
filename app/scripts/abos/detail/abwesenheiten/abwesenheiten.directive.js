@@ -98,6 +98,7 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
         msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
           if (msg.entity === 'Abwesenheit') {
             $scope.template.creating = $scope.template.creating - 1;
+            msg.data.kundeId = $scope.abo.kundeId;
             $scope.abwesenheiten.push(new AbwesenheitenListModel(msg.data));
 
             $scope.$apply();
