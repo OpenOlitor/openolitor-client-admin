@@ -108,6 +108,15 @@
             <div class="panel-body">
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="status" translate>Status</label>
+                </div>
+                <div class="col-md-8">
+                  <span ng-if="isExisting()" class="badge">{{rechnung.status|translate}}</span>
+                  <span ng-if="!isExisting()" class="badge" translate>Neu</span>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="titel" translate>Titel</label>
                 </div>
                 <div class="col-md-8">
