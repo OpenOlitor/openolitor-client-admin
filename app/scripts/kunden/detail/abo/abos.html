@@ -48,10 +48,10 @@
           {{abo.letzteLieferung | date : 'dd.MM.yyyy'}}
         </td>
         <td>
-          {{abo.anzahlAbwesenheiten | lastElement}}
+          {{abo.anzahlAbwesenheiten | lastElement:'value'}}
         </td>
         <td>
-          {{abo.anzahlLieferungen | lastElement}}
+          {{abo.anzahlLieferungen | lastElement:'value'}}
         </td>
         <td>
           <div class="pull-right">

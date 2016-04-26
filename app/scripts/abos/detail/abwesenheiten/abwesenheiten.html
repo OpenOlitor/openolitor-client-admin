@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <label translate>Abwesenheiten</label>
       </div>
-      <div class="col-md-8 dropdown">{{abo.anzahlAbwesenheiten | lastElement}}<span nf-if="abo.abotyp.anzahlAbwesenheiten > 0"> / {{abo.abotyp.anzahlAbwesenheiten}}</span>
+      <div class="col-md-8 dropdown">{{abo.anzahlAbwesenheiten | lastElement:'value'}}<span nf-if="abo.abotyp.anzahlAbwesenheiten > 0"> / {{abo.abotyp.anzahlAbwesenheiten}}</span>
         <div uib-dropdown class="btn-group pull-right" role="group" ng-show="abo.lieferdaten.length > 0">
           <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> </a>
           <ul uib-dropdown-menu role="menu" class="dropdown-form">

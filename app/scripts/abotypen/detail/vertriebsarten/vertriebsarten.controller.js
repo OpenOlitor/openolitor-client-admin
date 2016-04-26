@@ -4,11 +4,13 @@
  */
 angular.module('openolitor')
   .controller('VertriebsartenListController', ['$scope', '$routeParams',
-    'EnumUtil', 'msgBus',
-    'VertriebsartenListModel', 'DepotsOverviewModel', 'TourenModel', 'VERTRIEBSARTEN',
+    'EnumUtil', 'DataUtil', 'msgBus',
+    'VertriebsartenListModel', 'DepotsOverviewModel', 'TourenModel',
+    'VERTRIEBSARTEN',
 
-    function($scope, $routeParams, EnumUtil,
-      msgBus, VertriebsartenListModel, DepotsOverviewModel, TourenModel, VERTRIEBSARTEN) {
+    function($scope, $routeParams, EnumUtil, DataUtil,
+      msgBus, VertriebsartenListModel, DepotsOverviewModel, TourenModel,
+      VERTRIEBSARTEN) {
 
       $scope.updatingVertriebsart = {};
       $scope.status = {
@@ -100,14 +102,6 @@ angular.module('openolitor')
           entity === 'Heimlieferung');
       };
 
-      var update = function(src, dest) {
-        for (var key in src) {
-          if (src.hasOwnProperty(key)) {
-            dest[key] = src[key];
-          }
-        }
-      };
-
       // get data from backend
       $scope.depots = DepotsOverviewModel.query({});
 
@@ -139,7 +133,7 @@ angular.module('openolitor')
             angular.forEach($scope.vertriebsarten, function(
               vertriebsart) {
               if (vertriebsart.id === msg.data.id) {
-                update(newVertriebsart, vertriebsart);
+                DataUtil.update(newVertriebsart, vertriebsart);
               }
             });
           });
