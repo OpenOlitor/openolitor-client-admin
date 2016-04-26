@@ -116,6 +116,14 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="anzahlLieferungen" translate>Für Anzahl Lieferungen</label>
+                </div>
+                <div class="col-md-8">
+                  <input ng-disabled="isExisting()" type="number" class="form-control" id="anzahlLieferungen" ng-model="rechnung.anzahlLieferungen" required placeholder="{{'Anzahl Lieferungen'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="betrag" translate>Betrag</label>
                 </div>
                 <div class="col-md-8">
