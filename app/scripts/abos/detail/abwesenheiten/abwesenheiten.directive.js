@@ -19,10 +19,10 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
         };
 
         $scope.abwesenheitsDaten = function() {
-          if (!$scope.abo || !$scope.abo.abwesenheiten) {
+          if (!$scope.abwesenheiten) {
             return [];
           }
-          return $scope.abo.abwesenheiten.map(function(i) {
+          return $scope.abwesenheiten.map(function(i) {
             return i.lieferungId;
           });
         };
@@ -55,6 +55,7 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
           if (abo) {
             $scope.abwesenheiten = $scope.abo.abwesenheiten.map(
               function(abw) {
+                abw.kundeId = $scope.abo.kundeId;
                 return new AbwesenheitenListModel(abw);
               });
             if ($scope.abwesenheitenTableParams) {
@@ -67,11 +68,12 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
         });
 
         $scope.isLieferungOpen = function(abw) {
-          var lieferung = lodash.filter($scope.abo.lieferungen,
+          var lieferung = lodash.filter($scope.abo.lieferdaten,
             function(l) {
               return l.id === abw.lieferungId;
-            })
-          return lieferung && lieferung.status === 'Offen';
+            });
+          return lieferung && lieferung.length === 1 && lieferung[0].status ===
+            'Offen';
         };
 
         if (!$scope.abwesenheitenTableParams) {
@@ -109,7 +111,7 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
             angular.forEach($scope.abwesenheiten, function(
               abw) {
               if (abw.id === msg.data.id) {
-                var index = $scope.vertriebsarten.indexOf(
+                var index = $scope.abwesenheiten.indexOf(
                   abw);
                 if (index > -1) {
                   $scope.abwesenheiten.splice(index, 1);

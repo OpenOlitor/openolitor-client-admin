@@ -8,7 +8,7 @@
         <div uib-dropdown class="btn-group pull-right" role="group" ng-show="abo.lieferdaten.length > 0">
           <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> </a>
           <ul uib-dropdown-menu role="menu" class="dropdown-form">
-            <li role="menuitem" ng-repeat="lieferdat in abo.lieferdaten | filter: notIn: 'id': abwesenheitsDaten()"><a href="" ng-click="addAbwesenheit(lieferdat)">{{lieferdat.datum | date: 'EEE, dd.MM.yyyy'}}</a></li>
+            <li role="menuitem" ng-repeat="lieferdat in abo.lieferdaten | notIn:'id':abwesenheitsDaten()"><a href="" ng-click="addAbwesenheit(lieferdat)">{{lieferdat.datum | date: 'EEE, dd.MM.yyyy'}}</a></li>
           </ul>
         </div>
       </div>
@@ -32,7 +32,7 @@
           </script>
           {{$data}}
         <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
-            <tr ng-repeat="abw in $data | filter:(showAllAbwesenheiten || '') && {abw: {lieferung : {status: 'Offen'}}}")>
+            <tr ng-repeat="abw in $data | filter:(showAllAbwesenheiten || '') && {abw: {lieferung : {status: 'Offen'}}} | orderBy:'datum'")>
               <td data-title="'Datum'|translate">
                 {{abw.datum|date:"EEE, dd.MM.yyyy"}}
               </td>
@@ -40,8 +40,10 @@
                 <i ng-if="abw.bemerkung"  class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{abw.bemerkung}}" tooltip-popup-close-delay="500"></i>
               </td>
               <td header="'headerSwitch.html'">
-                <a href="" ng-hide="deletingAbwesenheit(abw)" ng-click="deleteAbwesenheit(abw)" ng-if="abw.lieferung.status === 'Offen'"><i class="glyphicon glyphicon-remove"></i></a>
-                <i ng-show="deletingAbwesenheit(abw)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                <span  class="pull-right">
+                  <a href="" ng-hide="deletingAbwesenheit(abw)" ng-click="deleteAbwesenheit(abw)" ng-if="isLieferungOpen(abw)"><i class="glyphicon glyphicon-remove"></i></a>
+                  <i ng-show="deletingAbwesenheit(abw)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
               </td>
             </tr>
           </table>

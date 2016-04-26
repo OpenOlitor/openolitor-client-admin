@@ -358,10 +358,13 @@ angular
   .filter('notIn', function() {
     return function(items, property, elements) {
       var filtered = [];
+      if (!items) {
+        return filtered;
+      }
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
         var val = item[property];
-        if (elements.indexOf(val) > -1) {
+        if (elements.indexOf(val) < 0) {
           filtered.push(item);
         }
       }
