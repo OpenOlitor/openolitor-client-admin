@@ -18,17 +18,30 @@
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
+              <td data-title="'Nr.'|translate" sortable="'abo.id'" filter="{id: 'number'}">
+                <a ng-click="selectAbo(abo)">{{abo.id}}</a>
+              </td>
               <td data-title="'Abotyp'|translate" sortable="'abo.abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
               </td>
               <td data-title="'Abonnentin'|translate" sortable="'abo.kunde'">
                 <a ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
               </td>
-              <td data-title="'Depot'|translate" sortable="'abo.depotName'">
-                <a ng-href="#/depots/{{abo.depotId}}">{{abo.depotName}}</a>
+              <td data-title="'Start'|translate" sortable="'abo.start'">
+                {{abo.start | date:'dd.MM.yyyy'}}
+              </td>
+              <td data-title="'Ende'|translate" sortable="'abo.ende'">
+                {{abo.ende | date:'dd.MM.yyyy'}}
+              </td>
+              <td data-title="'Depot/Tour'|translate">
+                <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
+                <a ng-href="#/tours/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
+              </td>
+              <td data-title="'Letzte Lieferung'|translate" sortable="'abo.letzteLieferung'">
+                {{abo.letzteLieferung | date:'EEE, dd.MM.yyyy'}}
               </td>
               <td>
-                <a role="button" class="btn btn-sm btn-primary" ng-href="#/abos/{{abo.id}}"><span class="glyphicon glyphicon-edit"></span></a>
+                <a role="button" class="btn btn-sm btn-primary" ng-click="selectAbo(abo)"><span class="glyphicon glyphicon-edit"></span></a>
               </td>
             </tr>
           </table>
