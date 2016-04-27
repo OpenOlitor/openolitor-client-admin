@@ -5,11 +5,11 @@
 angular.module('openolitor')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel', 'msgBus',
-    'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil',
+    'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil', 'moment',
     function($scope, $filter, $routeParams, $location, gettext, ngTableParams,
       AbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN,
-      EnumUtil) {
+      EnumUtil, moment) {
 
       var defaults = {
         model: {
@@ -107,6 +107,17 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.abotyp.$delete();
       };
+
+      $scope.isAktiv = function() {
+        if(!$scope.abotyp) {
+          return true;
+        }
+        var now = moment();
+        var abotyp = $scope.abotyp;
+        return (abotyp.aktivVon ? moment(abotyp.aktivVon).isBefore(now) : true) &&
+          (abotyp.aktivBis ? moment(abotyp.aktivBis).isAfter(now) : true);
+      };
+
 
       msgBus.onMsg('VertriebsartSelected', $scope, function(event, msg) {
         $scope.selectedVertriebsart = msg.vertriebsart;

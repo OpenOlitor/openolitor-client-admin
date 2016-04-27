@@ -4,33 +4,11 @@
  */
 angular.module('openolitor')
   .controller('AbotypenOverviewController', ['$scope', '$filter',
-    'AbotypenOverviewModel', 'ngTableParams',
-    function($scope, $filter, AbotypenOverviewModel, ngTableParams) {
+    'AbotypenOverviewModel', 'ngTableParams', 'moment',
+    function($scope, $filter, AbotypenOverviewModel, ngTableParams, moment) {
 
       $scope.entries = undefined;
       $scope.loading = false;
-
-      $scope.dummyEntries = [{
-        id: 'c8926129-045d-4f78-9c79-0ee873aed785',
-        name: 'abo1',
-        anzahlAbonnenten: 12,
-        letzteLieferung: '2015-10-30T18:21Z',
-        lieferrhythmus: 'Zweiwoechentlich',
-        preis: 20,
-        preiseinheit: 'Lieferung',
-        waehrung: 'CHF',
-        aktiv: true
-      }, {
-        id: '64546e82-4bd7-4fde-9c48-2d862a9ac4a1',
-        name: 'abo2',
-        anzahlAbonnenten: 12,
-        letzteLieferung: '2015-10-30T19:12Z',
-        lieferrhythmus: 'Zweiwoechentlich',
-        preis: 400,
-        preiseinheit: 'Jahr',
-        waehrung: 'CHF',
-        aktiv: false
-      }];
 
       $scope.search = {
         query: ''
@@ -75,7 +53,6 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
       }
 
@@ -92,6 +69,12 @@ angular.module('openolitor')
           $scope.loading = false;
         });
       }
+
+      $scope.isAktiv = function(abotyp) {
+        var now = moment();
+        return (abotyp.aktivVon ? moment(abotyp.aktivVon).isBefore(now) : true) &&
+          (abotyp.aktivBis ? moment(abotyp.aktivBis).isAfter(now) : true);
+      };
 
       $scope.style = function(abotyp) {
         if (abotyp.farbCode) {
