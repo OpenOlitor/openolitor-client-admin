@@ -40,8 +40,8 @@
               <span ng-bind="abotyp|ooPreisProEinheit" />
             </td>
             <td data-title="'Aktiv'|translate" sortable="'aktiv'">
-              <i ng-if="isAktiv(abotyp)" class="glyphicon glyphicon-ok"></i>
-              <i ng-if="!isAktiv(abotyp)" class="glyphicon glyphicon-remove"></i>
+              <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
+              <i ng-if="!abotyp.aktiv" class="glyphicon glyphicon-remove"></i>
             </td>
           </tr>
         </table>
