@@ -19,7 +19,7 @@
       </div>
       <div ng-show="entries" id="produktTable" display-export="true" export-file-name="Produkte">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="produkt in $data track by produkt.id | filter: search.query.$">
+          <tr ng-repeat="produkt in $data | filter: search.query.$">
             <td data-title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-hide="produkt.editable">{{produkt.name}}</span>
               <span ng-show="produkt.editable">
@@ -54,9 +54,9 @@
               </span>
             </td>
             <td data-title="'Einheit'|translate" sortable="'einheit'">
-              <span ng-hide="produkt.editable">{{produkt.einheit}}</span>
+              <span ng-hide="produkt.editable">{{liefereinheiten[produkt.einheit.toUpperCase()].label.short}}</span>
               <span ng-show="produkt.editable">
-                <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label" selected="produkt.einheit" ng-required></oo-dropdown>
+                <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected="produkt.einheit" ng-required></oo-dropdown>
               </span>
             </td>
             <td data-title="'Kategorien'|translate" filter="{kategorien: 'select'}" filter-data="kategorienL" ng-class="[{'col-md-3': produkt.editable}]">

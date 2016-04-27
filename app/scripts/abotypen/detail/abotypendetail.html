@@ -108,6 +108,14 @@
         <div class="panel-body">
           <div class="row form-group">
             <div class="col-md-4">
+              <label for="wirdGeplant" translate>Wird standartmässig geplant</label>
+            </div>
+            <div class="col-md-2">
+              <input bs-switch ng-model="abotyp.wirdGeplant" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
               <label for="anzahlAbwesenheiten" translate>Anzahl Soll-Abwesenheiten</label>
             </div>
             <div class="col-md-2">

@@ -48,7 +48,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         };
 
         msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-          if (entityMatches(msg.entity) && msg.data.id === $scope.model
+          if (entityMatches(msg.entity) && !angular.isUndefined($scope.model) && msg.data.id === $scope.model
             .id) {
             if ($scope.model.actionInProgress !== 'updating') {
               alertService.addAlert('info', $scope.entity + gettext(
