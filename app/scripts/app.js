@@ -102,6 +102,13 @@ angular
     INBEARBEITUNG: 'InBearbeitung',
     BEARBEITET: 'Bearbeitet'
   })
+  .constant('RECHNUNGSTATUS', {
+    ERSTELLT: 'Erstellt',
+    VERSCHICKT: 'Verschickt',
+    BEZAHLT: 'Bezahlt',
+    MAHNUNG_VERSCHICKT: 'MahnungVerschickt',
+    STORNIERT: 'Storniert'
+  })
   .constant('LIEFEREINHEIT', {
     STUECK: {
       id: 'STUECK',
