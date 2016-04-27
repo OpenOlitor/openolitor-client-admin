@@ -3,12 +3,16 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KorbplanungOverviewController', ['$q', '$scope', '$filter',
-    'KorbplanungModel', 'ngTableParams',
-    function($q, $scope, $filter, KorbplanungModel, ngTableParams) {
+  .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
+    'RechnungenOverviewModel', 'ngTableParams',
+    function($q, $scope, $filter, RechnungenOverviewModel, ngTableParams) {
 
       $scope.entries = [];
       $scope.loading = false;
+
+      $scope.search = {
+        query: ''
+      };
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -21,7 +25,8 @@ angular.module('openolitor')
           count: 10,
           sorting: {
             name: 'asc'
-          }
+          },
+          filter: { status: '' }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -32,9 +37,11 @@ angular.module('openolitor')
               return;
             }
             // use build-in angular filter
+            var filteredData = $filter('filter')($scope.entries,
+              $scope.search.query);
             var orderedData = params.sorting ?
-              $filter('orderBy')($scope.entries, params.orderBy()) :
-              $scope.entries;
+              $filter('orderBy')(filteredData, params.orderBy()) :
+              filteredData;
             orderedData = $filter('filter')($scope.entries, params.filter());
 
             params.total(orderedData.length);
@@ -48,17 +55,23 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
+        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = KorbplanungModel.query({ }, function() {
+        $scope.entries = RechnungenOverviewModel.query({
+          q: $scope.query
+        }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
       }
 
       search();
+
+      $scope.$watch('search.query', function() {
+        search();
+      }, true);
 
     }
   ]);

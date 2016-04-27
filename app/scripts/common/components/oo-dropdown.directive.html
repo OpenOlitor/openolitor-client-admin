@@ -9,14 +9,14 @@
       </a>
       <ul class="uib-dropdown-menu" role="menu" area-labeled-by="{{dropdownId}}">
         <li ng-repeat="item in values" role="menuitem">
-          <a href="" ng-click="select(item)">{{property !== undefined ? item[property] : item}}</a>
+          <a href="" ng-click="select(item)">{{(property !== undefined ? item[property] : item) | translate }}</a>
         </li>
       </ul>
     </li>
   </ul>
 
   <div ng-if="displayStyle === 'uib-dropdown'" uib-dropdown>
-    <button type="button" uib-dropdown-toggle class="btn btn-default uib-dropdown-toggle" data-toggle="uib-dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="disabled">
+    <button type="button" uib-dropdown-toggle class="btn btn-default uib-dropdown-toggle" ng-class="getClass()" data-toggle="uib-dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="disabled">
       <span ng-if="!isPlaceholder">{{display}}</span>
       <span class="placeholder" ng-if="isPlaceholder">{{placeholder}}</span>
       <span class="caret"></span>
