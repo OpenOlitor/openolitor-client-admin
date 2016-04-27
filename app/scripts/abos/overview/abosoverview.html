@@ -60,7 +60,12 @@
                 {{abo.guthabenVertraglich}}
               </td>
               <td  header="'headerShowAll.html'">
-                <a role="button" class="btn btn-sm btn-primary" ng-click="selectAbo(abo)"><span class="glyphicon glyphicon-edit"></span></a>
+                <div class="pull-right">
+                  <div class="btn-group" ng-hide="updatingAbo(abo)">
+                    <button uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                  </div>
+                  <i ng-show="updatingAbo(abo)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </div>
               </td>
             </tr>
           </table>
@@ -68,14 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="context content-box col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Context Example</h3>
-      </div>
-      <div class="panel-body">
-        Example
-      </div>
-    </div>
+  <div class="context content-box col-md-3" ng-if="selectedAbo">
+    <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>
   </div>
 </div>

@@ -9,6 +9,7 @@ angular.module('openolitor')
 
       $scope.entries = [];
       $scope.loading = false;
+      $scope.selectedAbo = undefined;
 
       $scope.search = {
         query: ''
@@ -69,6 +70,15 @@ angular.module('openolitor')
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;
         $scope.tableParams.reload();
+      };
+
+      $scope.selectAbo = function(abo) {
+        if ($scope.selectedAbo === abo) {
+          $scope.selectedAbo = undefined;
+        }
+        else {
+          $scope.selectedAbo = abo;
+        }
       };
 
       if (!$scope.tableParams) {
