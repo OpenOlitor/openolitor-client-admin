@@ -58,7 +58,7 @@
         <div class="col-md-3">
           <label translate>Saldo Total</label>
         </div>
-        <div class="col-md-9" tooltip-popup-close-delay="1000" uib-tooltip-html="saldoTooltip(abo)"><span ng-class="saldoClass(abo)">{{aboSaldo(abo)}}</span></div>
+        <div class="col-md-9" tooltip-popup-close-delay="500" uib-tooltip-html="saldoTooltip(abo)"><span ng-class="saldoClass(abo)">{{aboSaldo(abo)}}</span></div>
       </div>
       <div class="row form-group">
         <div class="col-md-4">
@@ -66,6 +66,7 @@
         </div>
         <div class="col-md-8">{{abo.letzteLieferung | date: 'dd.MM.yyyy'}}</div>
       </div>
+      <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>
     </form>
   </div>
 </div>

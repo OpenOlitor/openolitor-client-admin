@@ -7,11 +7,12 @@ angular.module('openolitor')
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN', 'moment', 'EnumUtil',
+    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus',
+
     function($scope, $filter, $routeParams, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN,
-      ABOTYPEN, moment, EnumUtil) {
+      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -28,6 +29,7 @@ angular.module('openolitor')
       $scope.open = {
         start: false
       };
+
       $scope.openCalendar = function(e, date) {
         e.preventDefault();
         e.stopPropagation();
@@ -72,7 +74,7 @@ angular.module('openolitor')
         });
       };
 
-      $scope.$watch('aboId', function(id) {
+      var unwatchAboId = $scope.$watch('aboId', function(id) {
         if (id && (!$scope.abo || $scope.abo.id !== id)) {
           loadAboDetail();
         }
@@ -164,7 +166,7 @@ angular.module('openolitor')
         });
       }
 
-      $scope.$watch('abo.abotypId', function(abotypId) {
+      var unwatchAbotypId = $scope.$watch('abo.abotypId', function(abotypId) {
         if (abotypId) {
           AbotypenDetailModel.get({
             id: abotypId
@@ -176,7 +178,8 @@ angular.module('openolitor')
         }
       });
 
-      $scope.$watch('abo.vertriebsart', function(vertriebsart) {
+      var unwatchVetriebsartId = $scope.$watch('abo.vertriebsart', function(
+        vertriebsart) {
         if (vertriebsart) {
           switch (vertriebsart.typ) {
             case VERTRIEBSARTEN.DEPOTLIEFERUNG:
@@ -228,5 +231,25 @@ angular.module('openolitor')
           return '';
         }
       };
+
+      $scope.$on('destroy', function() {
+        unwatchAboId();
+        unwatchAbotypId();
+        unwatchVetriebsartId();
+      });
+
+      var isAboEntity = function(entity) {
+        return $scope.ABOTYPEN_ARRAY.indexOf(entity) > -1;
+      };
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.abo && $scope.abo.id === msg.data.id) {
+            DataUtil.update(msg.data, $scope.abo);
+            $scope.$apply();
+            return;
+          }
+        }
+      });
     }
   ]);

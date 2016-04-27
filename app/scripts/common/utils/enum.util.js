@@ -12,7 +12,8 @@ angular.module('openolitor')
               .label.long) || gettext(value),
             shortLabel: value.label && value.label.short && gettext(
               value.label.short) || gettext(value),
-            title: gettext(value)
+            title: gettext(value),
+            value: value.value || value
           });
         }, result);
 

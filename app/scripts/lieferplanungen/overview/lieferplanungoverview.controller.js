@@ -3,9 +3,9 @@
 /**
  */
 angular.module('openolitor')
-  .controller('KorbplanungOverviewController', ['$q', '$scope', '$filter',
-    'KorbplanungModel', 'ngTableParams',
-    function($q, $scope, $filter, KorbplanungModel, ngTableParams) {
+  .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
+    'LieferplanungModel', 'ngTableParams', 'msgBus', '$location',
+    function($q, $scope, $filter, LieferplanungModel, ngTableParams, msgBus, $location) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -51,7 +51,7 @@ angular.module('openolitor')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = KorbplanungModel.query({ }, function() {
+        $scope.entries = LieferplanungModel.query({ }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
@@ -59,6 +59,18 @@ angular.module('openolitor')
       }
 
       search();
+
+      $scope.createNewLieferplanung = function() {
+        $scope.newLieferplanung = new LieferplanungModel({bemerkungen: '', status: 'Offen'});
+        return $scope.newLieferplanung.$save();
+      };
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferplanung') {
+          $location.url('/lieferplanung/' + msg.data.id);
+          $scope.$apply();
+        }
+      });
 
     }
   ]);

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
-  'alertService',
-  function(msgBus, gettext, alertService) {
+  'alertService', 'DataUtil',
+  function(msgBus, gettext, alertService, DataUtil) {
     return {
       restrict: 'E',
       replace: true,
@@ -31,14 +31,6 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
           return !$scope.model || $scope.model.id === undefined;
         };
 
-        var update = function(src, dest) {
-          for (var key in src) {
-            if (src.hasOwnProperty(key)) {
-              dest[key] = src[key];
-            }
-          }
-        };
-
         var entityMatches = function(entity) {
           if (angular.isArray($scope.entities)) {
             return $scope.entities.indexOf(entity) > -1;
@@ -48,14 +40,14 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         };
 
         msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-          if (entityMatches(msg.entity) && msg.data.id === $scope.model
+          if (entityMatches(msg.entity) && !angular.isUndefined($scope.model) && msg.data.id === $scope.model
             .id) {
             if ($scope.model.actionInProgress !== 'updating') {
               alertService.addAlert('info', $scope.entity + gettext(
                 ' wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu.'
               ));
             } else {
-              update(msg.data, $scope.model);
+              DataUtil.update(msg.data, $scope.model);
               $scope.model.actionInProgress = undefined;
               $scope.$apply();
             }
@@ -65,7 +57,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
           if ($scope.model && entityMatches(msg.entity) && msg.data.id ===
             $scope.model.id) {
-            update(msg.data, $scope.model);
+            DataUtil.update(msg.data, $scope.model);
             $scope.model.actionInProgress = undefined;
             if ($scope.onCreated) {
               $scope.onCreated(msg.data.id);

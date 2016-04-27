@@ -7,7 +7,8 @@ angular.module('openolitor')
     '$location', '$uibModal', '$log', 'gettext', 'ngTableParams', 'msgBus',
     'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN',
 
-    function($scope, $routeParams, $location, $uibModal, $log, gettext, ngTableParams,
+    function($scope, $routeParams, $location, $uibModal, $log, gettext,
+      ngTableParams,
       msgBus, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN) {
 
       $scope.now = new Date();
@@ -18,19 +19,6 @@ angular.module('openolitor')
       $scope.status = {
         open: false
       };
-
-      $scope.dummyLieferungen = [{
-        datum: '31.01.2016',
-        anzahlAbwesenheiten: 0,
-        anzahlAbos: 135,
-        status: LIEFERSTATUS.INBEARBEITUNG
-      }, {
-        datum: '15.02.2016',
-        anzahlAbwesenheiten: 2,
-        anzahlAbos: 130,
-        status: LIEFERSTATUS.OFFEN
-      }, ];
-
       $scope.lieferungen = undefined;
 
       $scope.hasLieferungen = function() {
@@ -43,11 +31,11 @@ angular.module('openolitor')
         }
         var newModel = new LieferungenListModel({
           datum: $scope.template.datum,
-          abotypId: $routeParams.id,
+          abotypId: parseInt($routeParams.id),
           vertriebsartId: $scope.selectedVertriebsart.id
         });
         newModel.$save();
-        $scope.template.creating = $scope.template.creating+1;
+        $scope.template.creating = $scope.template.creating + 1;
         $scope.template.datum = undefined;
         $scope.status.open = false;
       };
@@ -94,20 +82,21 @@ angular.module('openolitor')
 
 
       $scope.generateLieferungen = function(lieferdaten) {
-        angular.forEach(lieferdaten, function(lieferdat){
+        angular.forEach(lieferdaten, function(lieferdat) {
           var newModel = new LieferungenListModel({
             datum: lieferdat,
-            abotypId: $routeParams.id,
+            abotypId: parseInt($routeParams.id),
             vertriebsartId: $scope.selectedVertriebsart.id
           });
           newModel.$save();
-          $scope.template.creating = $scope.template.creating+1;
+          $scope.template.creating = $scope.template.creating + 1;
         });
       };
 
       $scope.canGenerateLieferungen = function() {
         return ($scope.abotyp.lieferrhythmus === LIEFERRHYTHMEN.WOECHENTLICH ||
-          $scope.abotyp.lieferrhythmus === LIEFERRHYTHMEN.ZWEIWOECHENTLICH) && !$scope.showLoading();
+          $scope.abotyp.lieferrhythmus === LIEFERRHYTHMEN.ZWEIWOECHENTLICH
+        ) && !$scope.showLoading();
       };
 
       $scope.showLoading = function() {
@@ -121,11 +110,12 @@ angular.module('openolitor')
           controller: 'GenerateLieferungenController',
           resolve: {
             von: function() {
-              if (!$scope.lieferungen || $scope.lieferungen.length === 0) {
+              if (!$scope.lieferungen || $scope.lieferungen.length ===
+                0) {
                 return new Date();
-              }
-              else {
-                return $scope.lieferungen[$scope.lieferungen.length -1].datum;
+              } else {
+                return $scope.lieferungen[$scope.lieferungen.length -
+                  1].datum;
               }
             },
             abotyp: function() {
@@ -137,9 +127,9 @@ angular.module('openolitor')
           }
         });
 
-        modalInstance.result.then(function (lieferungen) {
+        modalInstance.result.then(function(lieferungen) {
           $scope.generateLieferungen(lieferungen);
-        }, function () {
+        }, function() {
           $log.info('Modal dismissed at: ' + new Date());
         });
       };
@@ -151,7 +141,7 @@ angular.module('openolitor')
 
         $scope.loading = true;
         $scope.lieferungen = LieferungenListModel.query({
-          abotypId: $routeParams.id,
+          abotypId: parseInt($routeParams.id),
           vertriebsartId: $scope.selectedVertriebsart.id
         }, function() {
           $scope.lieferungenTableParams.reload();
