@@ -72,8 +72,7 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
             function(l) {
               return l.id === abw.lieferungId;
             });
-          return lieferung && lieferung.length === 1 && lieferung[0].status ===
-            'Offen';
+          return lieferung && lieferung.length === 1 && !lieferung[0].lieferplaningId;
         };
 
         if (!$scope.abwesenheitenTableParams) {

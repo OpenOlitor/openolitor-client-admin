@@ -57,7 +57,7 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
         msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
           if ($scope.model && entityMatches(msg.entity) && msg.data.id ===
             $scope.model.id) {
-            update(msg.data, $scope.model);
+            DataUtil.update(msg.data, $scope.model);
             $scope.model.actionInProgress = undefined;
             if ($scope.onCreated) {
               $scope.onCreated(msg.data.id);
