@@ -7,10 +7,11 @@ angular.module('openolitor')
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel', 'AbosOverviewModel',
+    'RECHNUNGSTATUS',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, AbosOverviewModel) {
+      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, AbosOverviewModel, RECHNUNGSTATUS) {
 
       var defaults = {
         model: {
@@ -55,6 +56,7 @@ angular.module('openolitor')
           $scope.rechnung = result;
           resolveKunde(result.kunde.id);
           $scope.abo = result.abo;
+          $scope.rechnung.aboId = result.abo.id;
         });
       };
 
@@ -128,6 +130,10 @@ angular.module('openolitor')
           .id);
       };
 
+      $scope.isDeletable = function() {
+        return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
+      };
+
       $scope.save = function() {
         return $scope.rechnung.$save();
       };
@@ -143,5 +149,19 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.rechnung.$delete();
       };
+
+      $scope.$watchGroup(['rechnung.einbezahlterBetrag', 'rechnung.eingangsDatum'],
+        function(newValues) {
+          if (!$scope.rechnung) {
+            return;
+          }
+
+          if (newValues[0] && newValues[1]) {
+            $scope.oldRechnungStatus = $scope.rechnung.status;
+            $scope.rechnung.status = RECHNUNGSTATUS.BEZAHLT;
+          } else if ($scope.oldRechnungStatus) {
+            $scope.rechnung.status = $scope.oldRechnungStatus;
+          }
+        });
     }
   ]);
