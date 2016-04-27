@@ -8,13 +8,13 @@ angular.module('openolitor')
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
-    'msgBus',
+    'msgBus', 'lodash',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       KundenDetailModel, KundentypenService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
-      msgBus) {
+      msgBus, lodash) {
 
       var defaults = {
         model: {
@@ -41,6 +41,16 @@ angular.module('openolitor')
           id: $routeParams.id
         }, function(result) {
           $scope.kunde = result;
+
+          if ($routeParams.aboId) {
+            var abo = lodash.filter($scope.kunde.abos,
+              function(a) {
+                return a.id === parseInt($routeParams.aboId);
+              });
+            if (abo && abo.length === 1) {
+              $scope.selectAbo(abo[0]);
+            }
+          }
         });
       };
 

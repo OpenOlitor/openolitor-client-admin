@@ -11,7 +11,7 @@
           <th tanslate>Abotyp</th>
           <th tanslate>Start</th>
           <th tanslate>Ende</th>
-          <th tanslate>Saldo</th>
+          <th tanslate>Guthaben</th>
           <th tanslate>Depot/Tour</th>
           <th tanslate>Letzte Lieferung</th>
           <th tanslate># Abw.</th>
@@ -32,7 +32,7 @@
           {{abo.ende | date : 'dd.MM.yyyy'}}
         </td>
         <td>
-          {{abo.saldo + abo.saldoInRechnung}}
+          {{abo.guthaben + abo.guthabenInRechnung}}
         </td>
         <td>
           <span ng-show="abo.depotId">
