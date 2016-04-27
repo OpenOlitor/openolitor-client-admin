@@ -196,16 +196,17 @@ angular.module('openolitor')
         }
       });
 
-      $scope.aboSaldo = function(abo) {
+      $scope.aboGuthaben = function(abo) {
         if (!abo) {
           return;
         }
-        return abo.saldo + abo.saldoInRechnung;
+        return abo.guthaben + abo.guthabenInRechnung;
       };
 
-      $scope.saldoTooltip = function(abo) {
-        return abo.saldo + ' ' + gettext('bezahlt') + ' + ' + abo.saldoInRechnung +
-          ' ' + gettext('verrechnet') + ' = ' + $scope.aboSaldo(abo) + ' ' +
+      $scope.guthabenTooltip = function(abo) {
+        return abo.guthaben + ' ' + gettext('bezahlt') + ' + ' + abo.guthabenInRechnung +
+          ' ' + gettext('verrechnet') + ' = ' + $scope.aboGuthaben(abo) +
+          ' ' +
           gettext('total');
       };
 
@@ -222,10 +223,10 @@ angular.module('openolitor')
         }
       };
 
-      $scope.saldoClass = function(abo) {
-        if (abo && abo.abotyp && ($scope.aboSaldo(abo) < abo.abotyp.saldoMindestbestand)) {
+      $scope.guthabenClass = function(abo) {
+        if (abo && abo.abotyp && ($scope.aboGuthaben(abo) < abo.abotyp.guthabenMindestbestand)) {
           return 'error';
-        } else if (abo && ($scope.aboSaldo(abo) < 0)) {
+        } else if (abo && ($scope.aboGuthaben(abo) < 0)) {
           return 'warning';
         } else {
           return '';
