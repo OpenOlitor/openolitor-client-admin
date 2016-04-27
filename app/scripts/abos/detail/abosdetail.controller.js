@@ -200,11 +200,21 @@ angular.module('openolitor')
         if (!abo) {
           return;
         }
-        return abo.guthaben + abo.guthabenInRechnung;
+        var vertrag = '';
+        if (abo.guthabenVertraglich) {
+          vertrag = abo.guthabenVertraglich + ' / ';
+        }
+        return vertrag + (abo.guthaben + abo.guthabenInRechnung);
       };
 
       $scope.guthabenTooltip = function(abo) {
-        return abo.guthaben + ' ' + gettext('bezahlt') + ' + ' + abo.guthabenInRechnung +
+        var vertrag = '';
+        if (abo.guthabenVertraglich) {
+          vertrag = '<b>' + gettext('Vertraglich') + ':</b> ' + abo.guthabenVertraglich +
+            '<br />';
+        }
+        return '<b>' + gettext('Aktuell') + ':</b> ' + abo.guthaben + ' ' +
+          gettext('bezahlt') + ' + ' + abo.guthabenInRechnung +
           ' ' + gettext('verrechnet') + ' = ' + $scope.aboGuthaben(abo) +
           ' ' +
           gettext('total');
