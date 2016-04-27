@@ -18,6 +18,10 @@
         <script type="text/ng-template" id="headerCheckbox.html">
           <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
         </script>
+        <script type="text/ng-template" id="headerShowAll.html">
+          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" ng-click="toggleShowAll()" tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" ng-click="toggleShowAll()" tooltip="{{'Wichtigste Spalten einblenden' | translate}}"></i>
+        </script>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
@@ -55,7 +59,7 @@
               <td ng-if="showAll"  data-title="'Guthaben vertraglich'|translate" sortable="'abo.guthabenVertraglich'"  filter="{guthabenVertraglich: 'number'}">
                 {{abo.guthabenVertraglich}}
               </td>
-              <td>
+              <td  header="'headerShowAll.html'">
                 <a role="button" class="btn btn-sm btn-primary" ng-click="selectAbo(abo)"><span class="glyphicon glyphicon-edit"></span></a>
               </td>
             </tr>

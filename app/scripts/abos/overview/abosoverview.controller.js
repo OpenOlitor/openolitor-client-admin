@@ -63,8 +63,13 @@ angular.module('openolitor')
         }
         else {
           $scope.checkboxes.css = 'select-all';
-        }        
+        }
       }, true);
+
+      $scope.toggleShowAll = function() {
+        $scope.showAll = !$scope.showAll;
+        $scope.tableParams.reload();
+      };
 
       if (!$scope.tableParams) {
         //use default tableParams
