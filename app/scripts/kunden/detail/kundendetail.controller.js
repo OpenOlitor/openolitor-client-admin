@@ -7,11 +7,12 @@ angular.module('openolitor')
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService', 'alertService',
-    'EnumUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL', 'msgBus',
+    'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
+    'msgBus',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
-      KundenDetailModel, KundentypenService, alertService, EnumUtil,
+      KundenDetailModel, KundentypenService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
       msgBus) {
 
@@ -258,20 +259,12 @@ angular.module('openolitor')
         }
       });
 
-      var update = function(src, dest) {
-        for (var key in src) {
-          if (src.hasOwnProperty(key)) {
-            dest[key] = src[key];
-          }
-        }
-      };
-
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (isAboEntity(msg.entity)) {
           if ($scope.kunde) {
             angular.forEach($scope.kunde.abos, function(abo) {
               if (abo.id === msg.data.id) {
-                update(msg.data, abo);
+                DataUtil.update(msg.data, abo);
                 $scope.$apply();
                 return;
               }

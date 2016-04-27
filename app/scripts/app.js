@@ -59,7 +59,8 @@ angular
     'gettext',
     'ngHamburger',
     'angularMoment',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngLodash'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -411,19 +412,61 @@ angular
     };
   })
   .filter('lastElement', function() {
-    return function(input) {
-      if (angular.isArray(input)) {
-        return input[input.length - 1];
+    return function(input, property) {
+      if (!input) {
+        return;
       }
-      return input;
+      if (angular.isArray(input)) {
+        if (!input[input.length - 1]) {
+          return;
+        } else if (property) {
+          return input[input.length - 1][property];
+        } else {
+          return input[input.length - 1];
+        }
+      }
+      if (input && property) {
+        return input[property];
+      } else {
+        return input;
+      }
     };
   })
   .filter('firstElement', function() {
-    return function(input) {
-      if (angular.isArray(input)) {
-        return input[0];
+    return function(input, property) {
+      if (!input) {
+        return;
       }
-      return input;
+      if (angular.isArray(input)) {
+        if (!input[0]) {
+          return;
+        } else if (property) {
+          return input[0][property];
+        } else {
+          return input[0];
+        }
+      }
+      if (input && property) {
+        return input[property];
+      } else {
+        return input;
+      }
+    };
+  })
+  .filter('notIn', function() {
+    return function(items, property, elements) {
+      var filtered = [];
+      if (!items) {
+        return filtered;
+      }
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var val = item[property];
+        if (elements.indexOf(val) < 0) {
+          filtered.push(item);
+        }
+      }
+      return filtered;
     };
   })
   .config(function($routeProvider) {

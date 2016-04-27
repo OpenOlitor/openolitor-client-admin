@@ -16,7 +16,7 @@
     </div>
     <div class="row form-group">
       <div class="col-md-10">
-        <label for="lieferungen" translate>Geplante Lieferungen</label>
+        <label for="lieferungen" translate>Geplante Lieferdaten</label>
       </div>
       <div class="col-md-2 dropdown" ng-if="!showLoading()">
         <div uib-dropdown class="pull-right" is-open="status.open">
@@ -46,13 +46,13 @@
         <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
             <tr ng-repeat="lieferung in $data">
               <td data-title="'Datum'|translate">
-                {{lieferung.datum|date:"dd.MM.yyyy"}}
+                {{lieferung.datum|date:"EEE, dd.MM.yyyy"}}
               </td>
               <td data-title="'Abw.'|translate">
-                <i ng-if="lieferung.anzahlAbwesenheiten > 1" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
+                <i ng-if="lieferung.anzahlAbwesenheiten > 0" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
               </td>
               <td>
-                <a href="" ng-hide="deletingLieferung(lieferung)" ng-click="deleteLieferung(lieferung)" ng-if="lieferung.status === 'Offen'"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="" ng-hide="deletingLieferung(lieferung)" ng-click="deleteLieferung(lieferung)" ng-if="!lieferung.lieferplanungId && lieferung.anzahlAbwesenheiten < 1"><i class="glyphicon glyphicon-remove"></i></a>
                 <i ng-show="deletingLieferung(lieferung)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
               </td>
             </tr>
