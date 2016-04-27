@@ -13,6 +13,11 @@ angular.module('openolitor')
       $scope.search = {
         query: ''
       };
+      $scope.checkboxes = {
+        checked: false,
+        items: {},
+        css: ''
+      };
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -29,6 +34,37 @@ angular.module('openolitor')
           });
         });
       });
+
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        angular.forEach($scope.entries, function(item) {
+          $scope.checkboxes.items[item.id] = value;
+        });
+      });
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        var checked = 0, unchecked = 0,
+            total = $scope.entries.length;
+        angular.forEach($scope.entries, function(item) {
+          checked   +=  ($scope.checkboxes.items[item.id]) || 0;
+          unchecked += (!$scope.checkboxes.items[item.id]) || 0;
+        });
+        if ((unchecked === 0) || (checked === 0)) {
+          $scope.checkboxes.checked = (checked === total);
+        }
+        // grayed checkbox
+        if ((checked !== 0 && unchecked !== 0)) {
+          $scope.checkboxes.css = 'select-all:indeterminate';
+        }
+        else {
+          $scope.checkboxes.css = 'select-all';
+        }        
+      }, true);
 
       if (!$scope.tableParams) {
         //use default tableParams

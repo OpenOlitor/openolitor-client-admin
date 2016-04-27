@@ -15,9 +15,15 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
+        <script type="text/ng-template" id="headerCheckbox.html">
+          <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+        </script>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
+              <td header="'headerCheckbox.html'">
+                <input type="checkbox" ng-model="checkboxes.items[abo.id]" />
+              </td>
               <td data-title="'Nr.'|translate" sortable="'abo.id'" filter="{id: 'number'}">
                 <a ng-click="selectAbo(abo)">{{abo.id}}</a>
               </td>
@@ -37,8 +43,17 @@
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
                 <a ng-href="#/tours/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
               </td>
-              <td data-title="'Letzte Lieferung'|translate" sortable="'abo.letzteLieferung'">
+              <td ng-if="showAll"  data-title="'Letzte Lieferung'|translate" sortable="'abo.letzteLieferung'">
                 {{abo.letzteLieferung | date:'EEE, dd.MM.yyyy'}}
+              </td>
+              <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'abo.guthaben'"  filter="{guthaben: 'number'}">
+                {{abo.guthaben}}
+              </td>
+              <td ng-if="showAll"  data-title="'Guthaben in Rechnung'|translate" sortable="'abo.guthabenInRechnung'" filter="{guthabenInRechnung: 'number'}">
+                {{abo.guthabenInRechnung}}
+              </td>
+              <td ng-if="showAll"  data-title="'Guthaben vertraglich'|translate" sortable="'abo.guthabenVertraglich'"  filter="{guthabenVertraglich: 'number'}">
+                {{abo.guthabenVertraglich}}
               </td>
               <td>
                 <a role="button" class="btn btn-sm btn-primary" ng-click="selectAbo(abo)"><span class="glyphicon glyphicon-edit"></span></a>
