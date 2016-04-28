@@ -39,9 +39,6 @@ angular.module('openolitor')
       return {
         getTouren: function() {
           return touren;
-        },
-        addTour: function(tour) {
-          TourenModel
         }
       };
     }

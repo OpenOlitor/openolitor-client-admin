@@ -20,6 +20,6 @@ describe('Filter: ooPreisProEinheit', function() {
 
     var result = $filter('ooPreisProEinheit')(input);
 
-    expect(result).toEqual('CHF3 pro Tag');
+    expect(result).toEqual('CHF 3 pro Tag');
   });
 });
