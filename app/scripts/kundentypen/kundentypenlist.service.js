@@ -40,9 +40,6 @@ angular.module('openolitor')
         getKundentypen: function() {
           return kundentypen;
         },
-        addKundentyp: function(kundentyp) {
-          KundentypenModel
-        },
         VEREINSMITGLIED: 'Vereinsmitglied'
       };
     }
