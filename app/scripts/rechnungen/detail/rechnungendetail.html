@@ -11,7 +11,7 @@
               </div>
               <div class="col-md-10">
                 <div class="btn-group pull-right" role="group">
-                  <oo-save-button model="rechnung" form="rechnungForm" entity="Rechnung" on-save="save" on-cancel="backToList" on-created="created">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-save-button>
+                  <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-save-button>
                   <oo-delete-button ng-if="isDeletable()" model="rechnung" entity="Rechnung" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
@@ -144,17 +144,6 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="einbezahlterBetrag" translate>Einbezahlter Betrag</labeln>
-                </div>
-                <div class="col-md-8">
-                  <div class="input-group">
-                    <div class="input-group-addon">{{'CHF'|translate}}</div>
-                    <input type="number" ng-required="isExisting()" placeholder="{{'Einbezahlter Betrag'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="einbezahlterBetrag" ng-model="rechnung.einbezahlterBetrag"></input>
-                  </div>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
                   <label for="rechnungsDatum" translate>Rechnungsdatum</label>
                 </div>
                 <div class="col-md-4">
@@ -181,11 +170,22 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="einbezahlterBetrag" translate>Einbezahlter Betrag</labeln>
+                </div>
+                <div class="col-md-8">
+                  <div class="input-group">
+                    <div class="input-group-addon">{{'CHF'|translate}}</div>
+                    <input type="number" ng-required="isVerschickt()" placeholder="{{'Einbezahlter Betrag'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="1" class="form-control" name="einbezahlterBetrag" ng-model="rechnung.einbezahlterBetrag"></input>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="eingangsDatum" translate>Eingangsdatum</label>
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" ng-required="isExisting()" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.eingangsDatum" is-open="open.eingangsDatum" enable-time="false" max-date="rechnung.eingangsDatum" />
+                    <input type="text" ng-required="isVerschickt()" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.eingangsDatum" is-open="open.eingangsDatum" enable-time="false" max-date="rechnung.eingangsDatum" />
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'eingangsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
