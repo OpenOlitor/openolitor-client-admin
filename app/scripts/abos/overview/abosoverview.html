@@ -15,9 +15,19 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
+        <script type="text/ng-template" id="headerCheckbox.html">
+          <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+        </script>
+        <script type="text/ng-template" id="headerShowAll.html">
+          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" ng-click="toggleShowAll()" tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" ng-click="toggleShowAll()" tooltip="{{'Wichtigste Spalten einblenden' | translate}}"></i>
+        </script>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
+              <td header="'headerCheckbox.html'">
+                <input type="checkbox" ng-model="checkboxes.items[abo.id]" />
+              </td>
               <td data-title="'Nr.'|translate" sortable="'abo.id'" filter="{id: 'number'}">
                 <a ng-click="selectAbo(abo)">{{abo.id}}</a>
               </td>
@@ -37,11 +47,25 @@
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
                 <a ng-href="#/tours/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
               </td>
-              <td data-title="'Letzte Lieferung'|translate" sortable="'abo.letzteLieferung'">
+              <td ng-if="showAll"  data-title="'Letzte Lieferung'|translate" sortable="'abo.letzteLieferung'">
                 {{abo.letzteLieferung | date:'EEE, dd.MM.yyyy'}}
               </td>
-              <td>
-                <a role="button" class="btn btn-sm btn-primary" ng-click="selectAbo(abo)"><span class="glyphicon glyphicon-edit"></span></a>
+              <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'abo.guthaben'"  filter="{guthaben: 'number'}">
+                {{abo.guthaben}}
+              </td>
+              <td ng-if="showAll"  data-title="'Guthaben in Rechnung'|translate" sortable="'abo.guthabenInRechnung'" filter="{guthabenInRechnung: 'number'}">
+                {{abo.guthabenInRechnung}}
+              </td>
+              <td ng-if="showAll"  data-title="'Guthaben vertraglich'|translate" sortable="'abo.guthabenVertraglich'"  filter="{guthabenVertraglich: 'number'}">
+                {{abo.guthabenVertraglich}}
+              </td>
+              <td  header="'headerShowAll.html'">
+                <div class="pull-right">
+                  <div class="btn-group" ng-hide="updatingAbo(abo)">
+                    <button uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                  </div>
+                  <i ng-show="updatingAbo(abo)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </div>
               </td>
             </tr>
           </table>
@@ -49,14 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="context content-box col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Context Example</h3>
-      </div>
-      <div class="panel-body">
-        Example
-      </div>
-    </div>
+  <div class="context content-box col-md-3" ng-if="selectedAbo">
+    <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>
   </div>
 </div>

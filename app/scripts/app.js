@@ -559,12 +559,7 @@ angular
       .when('/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
-        name: 'AbosDetail',
-        resolve: {
-          createKundeId: function() {
-            return undefined;
-          }
-        }
+        name: 'AbosDetail'
       })
       .when('/touren', {
         templateUrl: 'scripts/touren/overview/tourenoverview.html',
