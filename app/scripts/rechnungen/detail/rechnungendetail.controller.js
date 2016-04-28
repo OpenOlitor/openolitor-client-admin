@@ -18,7 +18,8 @@ angular.module('openolitor')
           id: undefined,
           waehrung: 'CHF',
           rechnungsDatum: new Date(),
-          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf())
+          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf()),
+          status: RECHNUNGSTATUS.ERSTELLT
         }
       };
 
@@ -149,6 +150,50 @@ angular.module('openolitor')
       $scope.backToList = function() {
         $location.path('/rechnungen');
       };
+
+      $scope.actions = [{
+        labelFunction: function() {
+          if ($scope.isExisting()) {
+            return 'speichern';
+          } else {
+            return 'erstellen';
+          }
+        },
+        onExecute: function() {
+          return $scope.rechnung.$save();
+        }
+      }, {
+        label: 'verschickt',
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function() {
+          $scope.rechnung.status = RECHNUNGSTATUS.VERSCHICKT;
+          return $scope.rechnung.$save();
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.ERSTELLT;
+        }
+      }, {
+        label: 'Mahnung verschickt',
+        iconClass: 'fa fa-exclamation',
+        onExecute: function() {
+          $scope.rechnung.status = RECHNUNGSTATUS.MAHNUNG_VERSCHICKT;
+          return $scope.rechnung.$save();
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
+        },
+        noEntityText: true
+      }, {
+        label: 'stornieren',
+        iconClass: 'fa fa-times',
+        onExecute: function() {
+          $scope.rechnung.status = RECHNUNGSTATUS.STORNIERT;
+          return $scope.rechnung.$save();
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
+        }
+      }];
 
       $scope.delete = function() {
         return $scope.rechnung.$delete();

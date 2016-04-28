@@ -11,7 +11,7 @@
               </div>
               <div class="col-md-10">
                 <div class="btn-group pull-right" role="group">
-                  <oo-save-button model="rechnung" form="rechnungForm" entity="Rechnung" on-save="save" on-cancel="backToList" on-created="created">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-save-button>
+                  <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-save-button>
                   <oo-delete-button ng-if="isDeletable()" model="rechnung" entity="Rechnung" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
