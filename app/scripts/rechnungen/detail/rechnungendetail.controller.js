@@ -130,6 +130,10 @@ angular.module('openolitor')
           .id);
       };
 
+      $scope.isVerschickt = function() {
+        return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+      };
+
       $scope.isDeletable = function() {
         return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
       };
