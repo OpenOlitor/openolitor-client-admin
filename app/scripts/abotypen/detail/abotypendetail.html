@@ -97,7 +97,19 @@
               </div>
               <div class="col-md-1">
                 <input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden required />
-                <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
+                <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="kuendigungsfrist" translate>Kündigungsfrist</label>
+              </div>
+              <div class="col-md-2">
+                <input type="number" step="1" class="form-control" name="kuendigungsfrist.wert" ng-model="abotyp.kuendigungsfrist.wert" placeholder="{{'Frist'|translate}}" ng-required="abotyp.laufzeiteinheit === unbeschraenkt"></input>
+              </div>
+              <div class="col-md-1">
+                <input type="text" name="kuendigungsfristeinheit" ng-model="abotyp.kuendigungsfrist.einheit" hidden required />
+                <oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group">
