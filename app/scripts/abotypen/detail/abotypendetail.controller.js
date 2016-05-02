@@ -18,9 +18,6 @@ angular.module('openolitor')
           lieferrhythmus: LIEFERRHYTHMEN.WOECHENTLICH,
           preiseinheit: PREISEINHEITEN.LIEFERUNG,
           laufzeiteinheit: LAUFZEITEINHEITEN.UNBESCHRAENKT,
-          vertragslaufzeit: {
-            einheit: FRISTEINHEITEN.Monate
-          },
           waehrung: 'CHF',
           anzahlAbwesenheiten: undefined,
           farbCode: '',

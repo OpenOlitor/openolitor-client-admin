@@ -8,7 +8,24 @@
     </h3>
   </div>
   <div class="panel-body">
-    <form name="depotForm">
+    <script type="text/ng-template" id="kuendigungsterminTooltipTemplate.html">
+      <span translate>Die Kündigungs muss bis spätestens am <b>{{kuendigungsfrist(abo) | date: 'EEE, dd.MM.yyyy'}}</b> eingereicht werden</span>
+    </script>
+    <form name="depotForm">      
+      <div class="row form-group" ng-if="abo.ende === undefined">
+        <div class="col-md-12">
+          <div class="alert alert-info" role="alert"  ng-if="abo.abotyp.laufzeiteinheit === 'Unbeschraenkt'">
+            {{'Nächster Kündigungstermin:'|translate}} <b>{{kuendigungstermin(abo) | date: 'dd.MM.yyyy'}}</b>
+            <i class="fa fa-info-circle" aria-hidden="true" ng-if="abo.abotyp.kuendigungsfrist" uib-tooltip-template="'kuendigungsterminTooltipTemplate.html'"></i>
+          </div>
+          <div class="alert alert-info" role="alert"  ng-if="abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich > 0">
+            {{'Gültig für'|translate}} <b>{{abo.guthabenVertraglich}}</b> {{'Lieferungen'|translate}}
+          </div>
+          <div class="alert alert-danger" role="alert" ng-if="abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich === 0" translate>
+            Keine Lieferungen mehr ausstehend
+          </div>
+        </div>
+      </div>
       <div class="row form-group">
         <div class="col-md-3">
           <label translate>Abotyp</label>

@@ -200,11 +200,7 @@ angular.module('openolitor')
         if (!abo) {
           return;
         }
-        var vertrag = '';
-        if (abo.guthabenVertraglich) {
-          vertrag = abo.guthabenVertraglich + ' / ';
-        }
-        return vertrag + (abo.guthaben + abo.guthabenInRechnung);
+        return (abo.guthaben + abo.guthabenInRechnung);
       };
 
       $scope.guthabenTooltip = function(abo) {
@@ -241,6 +237,25 @@ angular.module('openolitor')
         } else {
           return '';
         }
+      };
+
+      $scope.kuendigungstermin = function(abo) {
+        var einheit = (abo.abotyp.vertragslaufzeit.einheit === 'Wochen') ?
+          'w' : 'M';
+        var now = moment();
+        var laufzeit = moment(abo.start);
+        do {
+          laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert, einheit);
+        } while (laufzeit.isBefore(now));
+        return laufzeit.endOf(einheit).toDate();
+      };
+
+      $scope.kuendigungsfrist = function(abo) {
+        var termin = $scope.kuendigungstermin(abo);
+        var einheit = (abo.abotyp.kuendigungsfrist.einheit === 'Wochen') ?
+          'w' : 'M';
+        return moment(termin).subtract(abo.abotyp.kuendigungsfrist.wert,
+          einheit).toDate();
       };
 
       $scope.$on('destroy', function() {
