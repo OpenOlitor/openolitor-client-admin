@@ -163,32 +163,39 @@ angular.module('openolitor')
           return $scope.rechnung.$save();
         }
       }, {
-        label: 'verschickt',
+        label: 'verschicken',
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
-          $scope.rechnung.status = RECHNUNGSTATUS.VERSCHICKT;
-          return $scope.rechnung.$save();
+          return $scope.rechnung.$verschicken();
         },
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.ERSTELLT;
         }
       }, {
-        label: 'Mahnung verschickt',
+        label: 'Mahnung verschicken',
         iconClass: 'fa fa-exclamation',
         onExecute: function() {
-          $scope.rechnung.status = RECHNUNGSTATUS.MAHNUNG_VERSCHICKT;
-          return $scope.rechnung.$save();
+          return $scope.rechnung.$mahnungVerschicken();
         },
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
         },
         noEntityText: true
       }, {
+        label: 'bezahlen',
+        iconClass: 'fa fa-usd',
+        onExecute: function() {
+          return $scope.rechnung.$bezahlen();
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && ($scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT && $scope.rechnung.status !== RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
+        }
+      }, {
         label: 'stornieren',
         iconClass: 'fa fa-times',
         onExecute: function() {
           $scope.rechnung.status = RECHNUNGSTATUS.STORNIERT;
-          return $scope.rechnung.$save();
+          return $scope.rechnung.$stornieren();
         },
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
@@ -198,19 +205,5 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.rechnung.$delete();
       };
-
-      $scope.$watchGroup(['rechnung.einbezahlterBetrag', 'rechnung.eingangsDatum'],
-        function(newValues) {
-          if (!$scope.rechnung) {
-            return;
-          }
-
-          if (newValues[0] && newValues[1]) {
-            $scope.oldRechnungStatus = $scope.rechnung.status;
-            $scope.rechnung.status = RECHNUNGSTATUS.BEZAHLT;
-          } else if ($scope.oldRechnungStatus) {
-            $scope.rechnung.status = $scope.oldRechnungStatus;
-          }
-        });
     }
   ]);
