@@ -88,6 +88,10 @@ angular
     LIEFERUNGEN: 'Lieferungen',
     MONATE: 'Monate'
   })
+  .constant('FRISTEINHEITEN', {
+    MONATE: 'Monate',
+    WOCHEN: 'Wochen'
+  })
   .constant('ANREDE', {
     HERR: 'Herr',
     FRAU: 'Frau'

@@ -5,10 +5,11 @@
 angular.module('openolitor')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel', 'msgBus',
-    'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'EnumUtil',
+    'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',
+    'EnumUtil',
     function($scope, $filter, $routeParams, $location, gettext, ngTableParams,
       AbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
-      LAUFZEITEINHEITEN,
+      LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {
 
       var defaults = {
@@ -44,6 +45,8 @@ angular.module('openolitor')
       $scope.preiseinheiten = EnumUtil.asArray(PREISEINHEITEN);
 
       $scope.laufzeiteinheiten = EnumUtil.asArray(LAUFZEITEINHEITEN);
+
+      $scope.fristeinheiten = EnumUtil.asArray(FRISTEINHEITEN);
 
       // dummy entry
       $scope.dummyEntry = {
@@ -90,7 +93,8 @@ angular.module('openolitor')
       };
 
       $scope.isVertriebsartExisting = function() {
-        return angular.isDefined($scope.selectedVertriebsart) && angular.isDefined($scope.selectedVertriebsart.id);
+        return angular.isDefined($scope.selectedVertriebsart) && angular.isDefined(
+          $scope.selectedVertriebsart.id);
       };
 
       $scope.save = function() {
