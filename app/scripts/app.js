@@ -404,7 +404,7 @@ angular
     $provide.decorator('$exceptionHandler', ['$log', '$injector',
       function($log, $injector) {
         return function(exception) {
-          // using the injector to retrieve services
+          // using the injector to retrieve services, otherwise circular dependency
           var alertService = $injector.get('alertService');
           alertService.addAlert('error', exception.message);
           // log error default style
