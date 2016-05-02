@@ -39,9 +39,6 @@ angular.module('openolitor')
       return {
         getProduktekategorien: function() {
           return produktekategorien;
-        },
-        addProduktekategorien: function(produktekategorie) {
-          ProduktekategorienModel
         }
       };
     }

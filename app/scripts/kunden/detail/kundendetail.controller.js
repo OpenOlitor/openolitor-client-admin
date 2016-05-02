@@ -24,6 +24,7 @@ angular.module('openolitor')
             id: undefined
           }],
           pendenzen: [],
+          abweichendeLieferadresse: false
         }
       };
 

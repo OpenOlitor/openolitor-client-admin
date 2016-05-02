@@ -21,7 +21,7 @@ angular.module('openolitor')
     $scope.$watch(ProjektService.getProjekt,
       function(projekt) {
         $scope.projekt = projekt;
-        return $rootScope.projekt;
+        $rootScope.projekt = projekt;
       });
 
     $scope.$watch(ServerService.getStaticServerInfo,
@@ -40,7 +40,7 @@ angular.module('openolitor')
       $scope.$apply();
     });
 
-    msgBus.onMsg('WebSocketOpen', $rootScope, function(event, msg) {
+    msgBus.onMsg('WebSocketOpen', $rootScope, function() {
       $scope.connected = true;
       $scope.messagingSocketClosedReason = '';
       $scope.$apply();

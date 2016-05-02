@@ -88,6 +88,10 @@ angular
     LIEFERUNGEN: gettext('Lieferungen'),
     MONATE: gettext('Monate')
   })
+  .constant('FRISTEINHEITEN', {
+    MONATE: 'Monate',
+    WOCHEN: 'Wochen'
+  })
   .constant('ANREDE', {
     HERR: gettext('Herr'),
     FRAU: gettext('Frau')

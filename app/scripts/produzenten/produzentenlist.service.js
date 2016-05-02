@@ -39,9 +39,6 @@ angular.module('openolitor')
       return {
         getProduzenten: function() {
           return produzenten;
-        },
-        addProduzent: function(produzent) {
-          ProduzentenModel
         }
       };
     }

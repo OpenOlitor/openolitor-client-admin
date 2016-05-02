@@ -26,7 +26,6 @@ describe('Controller: AbotypenOverviewController', function() {
   }));
 
   it('should initialize scope variables', function() {
-    expect($scope.entries).toBeDefined();
     expect($scope.loading).toBeDefined();
   });
 
