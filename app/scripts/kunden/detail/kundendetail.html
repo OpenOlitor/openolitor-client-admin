@@ -51,6 +51,14 @@
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
+                    <label for="adressZusatz" translate>Adresszusatz</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
                     <label for="strasse" translate>Strasse / Nr.</label>
                   </div>
                   <div class="col-md-6">
@@ -58,14 +66,6 @@
                   </div>
                   <div class="col-md-2">
                     <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-md-4">
-                    <label for="adressZusatz" translate>Adresszusatz</label>
-                  </div>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
                   </div>
                 </div>
                 <div class="row form-group">
@@ -97,7 +97,7 @@
               <div class="panel-heading clearfix">
                 <h3 class="panel-title">
                   <a data-toggle="collapse" data-target="#lieferadresse" class="navbar-brand">
-                    <span translate>Abweichende Lieferadresse</span>
+                    <span translate>Lieferadresse</span>
                   </a>
                 </h3>
                 <div class="btn-group pull-right" role="group">
@@ -107,32 +107,58 @@
               <div id="lieferadresse" class="panel-body panel-collapse collapse" ng-class="[{'in': hasLieferadresse()}]">
                 <div class="row form-group">
                   <div class="col-md-4">
-                    <label for="strasse" translate>Strasse / Nr.</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="strasse" ng-model="kunde.strasseLieferung" placeholder="{{'Strasse'|translate}}" maxlength="30">
-                  </div>
-                  <div class="col-md-2">
-                    <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummerLieferung" placeholder="{{'Nr'|translate}}" maxlength="10">
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-md-4">
-                    <label for="adressZusatz" translate>Zusatzinfos</label>
+                    <label for="zusatzinfo" translate>Zusatzinfos</label>
+                    <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Wird auf dem Tourenschein aufgedruckt'|translate}}"></i>
                   </div>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatzLieferung" placeholder="{{'Etage, Hinterlegung, ...'|translate}}">
+                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.zusatzinfoLieferung"
+                      placeholder="{{'Hinterlegung, Abgabe bei...'|translate}}">
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
-                    <label for="plz" translate>PLZ / Ort</label>
+                    <label for="abweichende Lieferadresse" translate>Abweichende Lieferadresse</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="checkbox" ng-model="kunde.abweichendeLieferadresse">
+                  </div>
+                </div>
+                <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
+                  <div class="col-md-4">
+                    <label for="bezeichnungLieferung" translate>Anschrift</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="bezeichnungLieferung" ng-model="kunde.bezeichnungLieferung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" required>
+                  </div>
+                </div>
+                <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
+                  <div class="col-md-4">
+                    <label for="adressZusatzLieferung" translate>Adresszusatz</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="adressZusatzLieferung" ng-model="kunde.adressZusatzLieferung" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
+                  <div class="col-md-4">
+                    <label for="strasseLieferung" translate>Strasse / Nr.</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="strasseLieferung" ng-model="kunde.strasseLieferung" placeholder="{{'Strasse'|translate}}" maxlength="30" required>
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" id="hausNummerLieferung" ng-model="kunde.hausNummerLieferung" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  </div>
+                </div>
+                <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
+                  <div class="col-md-4">
+                    <label for="plzLieferung" translate>PLZ / Ort</label>
                   </div>
                   <div class="col-md-3">
-                    <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5">
+                    <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plzLieferung" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5" required>
                   </div>
                   <div class="col-md-5">
-                    <input type="text" class="form-control" id="ort" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35">
+                    <input type="text" class="form-control" id="ortLieferung" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35" required>
                   </div>
                 </div>
               </div>
