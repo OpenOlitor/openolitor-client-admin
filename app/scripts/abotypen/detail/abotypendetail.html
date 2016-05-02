@@ -86,11 +86,18 @@
               <div class="col-md-4">
                 <label for="laufzeit" translate>Laufzeit</label>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
               </div>
-              <div class="col-md-2">
-                <input ng-if="abotyp.laufzeiteinheit !== unbeschraenkt" type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
+              <div class="col-md-2" ng-if="abotyp.laufzeiteinheit !== unbeschraenkt" >
+                <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
+              </div>
+              <div class="col-md-2" ng-if="abotyp.laufzeiteinheit === unbeschraenkt">
+                <input type="number"  step="1" class="form-control" name="vertragslaufzeit.wert" ng-model="abotyp.vertragslaufzeit.wert" placeholder="{{'Vertragslaufzeit'|translate}}" required></input>
+              </div>
+              <div class="col-md-1">
+                <input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden required />
+                <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group">
