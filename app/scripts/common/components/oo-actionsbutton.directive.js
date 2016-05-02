@@ -36,7 +36,8 @@ angular.module('openolitor').directive('ooActionsButton', ['msgBus', 'gettext',
         actions: '=',
         form: '=',
         reduced: '@?',
-        small: '@?'
+        small: '@?',
+        onCreated: '='
       },
       transclude: true,
       templateUrl: 'scripts/common/components/oo-actionsbutton.directive.html',

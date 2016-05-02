@@ -4,7 +4,36 @@
  */
 angular.module('openolitor')
   .factory('RechnungenDetailModel', function($resource, API_URL) {
-    return $resource(API_URL + 'rechnungen/:id', {
+    return $resource(API_URL + 'rechnungen/:id/:extendedPath/:aktion', {
       id: '@id'
+    }, {
+      verschicken: {
+        method: 'POST',
+        params: {
+          extendedPath: 'aktionen',
+          aktion: 'verschicken'
+        }
+      },
+      mahnungVerschicken: {
+        method: 'POST',
+        params: {
+          extendedPath: 'aktionen',
+          aktion: 'mahnungverschicken'
+        }
+      },
+      bezahlen: {
+        method: 'POST',
+        params: {
+          extendedPath: 'aktionen',
+          aktion: 'bezahlen'
+        }
+      },
+      stornieren: {
+        method: 'POST',
+        params: {
+          extendedPath: 'aktionen',
+          aktion: 'stornieren'
+        }
+      }
     });
   });
