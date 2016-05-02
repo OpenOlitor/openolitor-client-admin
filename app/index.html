@@ -38,6 +38,7 @@
         <ul class="nav navbar-nav pull-right">
           <li class="active lang-chooser" ng-hide="activeLang() === 'de'"><a role="button" ng-click="changeLang('de')" title="Deutsch"><span>DE</span></a></li>
           <li class="active lang-chooser" ng-hide="activeLang() === 'fr'"><a role="button" ng-click="changeLang('fr')" title="Français"><span>FR</span></a></li>
+          <li class="active lang-chooser" ng-hide="activeLang() === 'en'"><a role="button" ng-click="changeLang('en')" title="English"><span>EN</span></a></li>
           <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hans Muster <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -121,7 +122,7 @@
   <script src="bower_components/tinycolor/tinycolor.js"></script>
   <script src="bower_components/angular-color-picker/angularjs-color-picker.js"></script>
   <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
   <script src="bower_components/angular-moment/angular-moment.js"></script>
   <script src="bower_components/blob-polyfill/Blob.js"></script>
   <script src="bower_components/file-saver.js/FileSaver.js"></script>
@@ -133,7 +134,7 @@
   <!-- endbuild -->
 
   <!-- language specific angular file -->
-  <script src="https://code.angularjs.org/1.4.7/i18n/angular-locale_de-ch.js"></script>
+  <script src="https://code.angularjs.org/1.4.9/i18n/angular-locale_de-ch.js"></script>
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
