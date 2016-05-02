@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('OpenOlitorRootController', ['$scope', '$rootScope', 'ServerService', 'ProjektService', 'gettextCatalog', '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-  function($scope, $rootScope, ServerService, ProjektService, gettextCatalog, $location, msgBus, checkSize, $window, $timeout, BUILD_NR) {
+  .controller('OpenOlitorRootController', ['$scope', '$rootScope', 'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment', '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
+  function($scope, $rootScope, ServerService, ProjektService, gettextCatalog, amMoment, $location, msgBus, checkSize, $window, $timeout, BUILD_NR) {
     angular.element($window).bind('resize', function() {
       checkSize();
     });
@@ -21,7 +21,7 @@ angular.module('openolitor')
     $scope.$watch(ProjektService.getProjekt,
       function(projekt) {
         $scope.projekt = projekt;
-        $rootScope.projekt;
+        return $rootScope.projekt;
       });
 
     $scope.$watch(ServerService.getStaticServerInfo,
@@ -55,6 +55,7 @@ angular.module('openolitor')
     $scope.changeLang = function(lang) {
       if (!angular.isUndefined(lang)) {
         gettextCatalog.setCurrentLanguage(lang);
+        amMoment.changeLocale(lang);
         $scope.$emit('languageChanged');
       }
     };
