@@ -18,6 +18,7 @@
  *                           label: string, // either label or labelFunction has to be defined
  *                           labelFunction: function, // optional
  *                           noText: boolean, // optional
+ *                           noEntityText: boolean, // optional
  *                           onExecute: function(model), // will be executed on click
  *                           isDisabled: function(model),
  *                           isHidden: function(model) // hide this action
