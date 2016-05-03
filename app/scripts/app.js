@@ -613,6 +613,16 @@ angular
         controller: 'RechnungenDetailController',
         name: 'RechnungenDetail'
       })
+      .when('/zahlungsimports', {
+        templateUrl: 'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
+        controller: 'ZahlungsImportsOverviewController',
+        name: 'ZahlungsImportsOverview'
+      })
+      .when('/zahlungsimports/new', {
+        templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
+        controller: 'ZahlungsImportsController',
+        name: 'ZahlungsImports'
+      })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
