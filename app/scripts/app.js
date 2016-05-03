@@ -397,18 +397,16 @@ angular
       return convertDateStringsToDates(responseData);
     });
   }])
+  .run(['alertService', '$rootScope', function(alertService, $rootScope) {
+    $rootScope.$removeAlert = alertService.removeAlert();
+  }])
   .config(['$provide', function($provide) {
     $provide.decorator('$exceptionHandler', ['$log', '$injector',
-      function(
-        $log, $injector) {
+      function($log, $injector) {
         return function(exception) {
-          // using the injector to retrieve scope and timeout, otherwise circular dependency
-          var $rootScope = $injector.get('$rootScope');
+          // using the injector to retrieve services, otherwise circular dependency
           var alertService = $injector.get('alertService');
-
-          $rootScope.$removeAlert = alertService.removeAlert();
           alertService.addAlert('error', exception.message);
-
           // log error default style
           $log.error.apply($log, arguments);
         };
