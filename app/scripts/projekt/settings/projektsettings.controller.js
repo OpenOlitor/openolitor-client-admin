@@ -29,7 +29,7 @@ angular.module('openolitor')
         preiseEditierbar: false,
         emailErforderlich: true,
         waehrung: 'CHF',
-        geschaeftsjahr: new Date(new Date().getYear(), 1, 1)
+        geschaeftsjahr: new Date(new Date().getYear(), 0, 1)
       };
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);

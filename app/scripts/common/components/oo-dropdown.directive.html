@@ -9,7 +9,7 @@
       </a>
       <ul class="uib-dropdown-menu" role="menu" area-labeled-by="{{dropdownId}}">
         <li ng-repeat="item in values" role="menuitem">
-          <a href="" ng-click="select(item)">{{(property !== undefined ? item[property] : item) | translate }}</a>
+          <a href="" ng-click="select(item)">{{getDisplayedText(item)}}</a>
         </li>
       </ul>
     </li>

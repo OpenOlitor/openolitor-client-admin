@@ -66,8 +66,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       };
 
       $scope.getDisplayedText = function(item) {
-        if (!angular.isUndefined($scope.selectedProp) || !angular.isUndefined(
-            $scope.property)) {
+        if (!angular.isUndefined($scope.property)) {
           return deepFind(item, $scope.property);
         } else if (!angular.isUndefined($scope.displayFunction)) {
           return $scope.displayFunction(item);
