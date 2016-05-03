@@ -3,7 +3,7 @@
     <h3 class="panel-title"><span>#{{abo.id}} </span><span translate>Abo für</span><span> {{kunde.bezeichnung}}</span>
         <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
         <div uib-dropdown class="btn-group pull-right" role="group">
-          <oo-save-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" on-save="save" on-cancel="cancel" on-created="backToList"></oo-save-button>
+          <oo-actions-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" actions="actions" on-created="backToList">{{'Abo'|translate}}</oo-actions-button>
         </div>
     </h3>
   </div>

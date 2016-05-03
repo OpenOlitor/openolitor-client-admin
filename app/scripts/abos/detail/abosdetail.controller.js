@@ -7,12 +7,12 @@ angular.module('openolitor')
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus',
+    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q',
 
     function($scope, $filter, $routeParams, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN,
-      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus) {
+      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -110,10 +110,6 @@ angular.module('openolitor')
           .id);
       };
 
-      $scope.save = function() {
-        return $scope.abo.$save();
-      };
-
       $scope.backToList = function(id) {
         if ($routeParams.kundeId) {
           $location.path(basePath);
@@ -129,6 +125,21 @@ angular.module('openolitor')
       $scope.delete = function() {
         return $scope.abo.$delete();
       };
+
+      $scope.actions = [{
+        label: gettext('Speichern'),
+        noEntityText: true,
+        onExecute: function() {
+          return $scope.abo.$save();
+        }
+      }, {
+        label: gettext('Manuelle Rechnung erstellen'),
+        noEntityText: true,
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function() {
+          return $q.when($location.path('kunden/' + getKundeId() + '/abos/' + getAboId() + '/rechnungen/new'));
+        }
+      }];
 
       function vertriebsartLabel(vertriebsart) {
         switch (vertriebsart.typ) {

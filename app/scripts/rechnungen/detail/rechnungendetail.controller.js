@@ -6,12 +6,12 @@ angular.module('openolitor')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel', 'AbosOverviewModel',
+    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel',
     'RECHNUNGSTATUS',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, AbosOverviewModel, RECHNUNGSTATUS) {
+      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, RECHNUNGSTATUS) {
 
       var defaults = {
         model: {
@@ -41,13 +41,11 @@ angular.module('openolitor')
         });
       };
 
-      function resolveAbo(id) {
-        AbosOverviewModel.get({
-          id: id
-        }, function(abo) {
-          $scope.abo = abo;
-          $scope.rechnung.aboId = abo.id;
-        });
+      function getAboEntry(abo) {
+        return {
+          id: abo.id,
+          label: '' + abo.abotypName + ' (' + abo.id + ')'
+        };
       }
 
       $scope.loadRechnung = function() {
@@ -56,7 +54,7 @@ angular.module('openolitor')
         }, function(result) {
           $scope.rechnung = result;
           resolveKunde(result.kunde.id);
-          $scope.abo = result.abo;
+          $scope.aboId = result.abo.id;
           $scope.rechnung.aboId = result.abo.id;
         });
       };
@@ -73,7 +71,9 @@ angular.module('openolitor')
           $scope.rechnung.adressZusatz = kunde.adressZusatz;
           $scope.rechnung.plz = kunde.plz;
           $scope.rechnung.ort = kunde.ort;
-        });
+
+          $scope.abos = kunde.abos.map(getAboEntry);
+        }).$promise;
       }
 
       if (!$routeParams.id) {
@@ -86,27 +86,18 @@ angular.module('openolitor')
       if (!$routeParams.kundeId) {
         $scope.kunde = undefined;
       } else {
-        resolveKunde($routeParams.kundeId);
-      }
-
-      if (!$routeParams.aboId) {
-        $scope.abo = undefined;
-      } else {
-        resolveAbo($routeParams.aboId);
+        resolveKunde($routeParams.kundeId).then(function() {
+          if($routeParams.aboId) {
+            $scope.aboId = parseInt($routeParams.aboId);
+            $scope.rechnung.aboId = $scope.aboId;
+          }
+        });
       }
 
       $scope.selectedAbo = function(abo) {
         $scope.rechnung.aboId = abo.id;
-        $scope.abo = abo;
+        $scope.aboId = abo.id;
         return false;
-      };
-
-      $scope.aboLabel = function(abo) {
-        if (!abo) {
-          return 'nothing here';
-        }
-
-        return abo.abotypName + ', ' + abo.depotName;
       };
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {

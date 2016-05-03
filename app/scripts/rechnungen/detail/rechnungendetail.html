@@ -11,7 +11,7 @@
               </div>
               <div class="col-md-10">
                 <div class="btn-group pull-right" role="group">
-                  <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-save-button>
+                  <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-actions-button>
                   <oo-delete-button ng-if="isDeletable()" model="rechnung" entity="Rechnung" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
@@ -43,11 +43,11 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="abotyp" translate>Abo</label>
+                  <label for="abo" translate>Abo</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" name="abo" ng-model="abo" hidden required />
-                  <oo-dropdown ng-if="!isExisting()" dropdown-id="abo" display-style="uib-dropdown" values="kunde.abos" display-function="aboLabel" selected="abo" selection-required="true" selected-function="selectedAbo"></oo-dropdown>
+                  <input type="text" name="abo" ng-model="aboId" hidden required />
+                  <oo-dropdown ng-if="!isExisting()" dropdown-id="abo" display-style="uib-dropdown" property="label" selected-prop="id" values="abos" selected="aboId" selection-required="true" selected-function="selectedAbo"></oo-dropdown>
                   <input ng-if="isExisting()" type="text" class="form-control" id="aboLabel" disabled="true" value="{{rechnung.abo.abotypName + ', ' + rechnung.abo.depotName}}">
                 </div>
               </div>
