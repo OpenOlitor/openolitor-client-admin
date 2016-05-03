@@ -8,13 +8,13 @@ angular.module('openolitor')
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
-    'msgBus', 'lodash',
+    'msgBus', 'lodash', 'KundenRechnungenModel',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       KundenDetailModel, KundentypenService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
-      msgBus, lodash) {
+      msgBus, lodash, KundenRechnungenModel) {
 
       var defaults = {
         model: {
@@ -52,6 +52,10 @@ angular.module('openolitor')
               $scope.selectAbo(abo[0]);
             }
           }
+
+          $scope.rechnungen = KundenRechnungenModel.query({
+            kundeId: $scope.kunde.id
+          });
         });
       };
 
