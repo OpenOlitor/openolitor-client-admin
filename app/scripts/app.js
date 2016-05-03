@@ -66,52 +66,52 @@ angular
   .constant('API_WS_URL', '@@API_WS_URL')
   .constant('BUILD_NR', '@@BUILD_NR')
   .constant('LIEFERRHYTHMEN', {
-    WOECHENTLICH: 'Woechentlich',
-    ZWEIWOECHENTLICH: 'Zweiwoechentlich',
-    MONATLICH: 'Monatlich',
-    UNREGELMAESSIG: 'Unregelmaessig'
+    WOECHENTLICH: gettext('Woechentlich'),
+    ZWEIWOECHENTLICH: gettext('Zweiwoechentlich'),
+    MONATLICH: gettext('Monatlich'),
+    UNREGELMAESSIG: gettext('Unregelmaessig')
   })
   .constant('PREISEINHEITEN', {
     //JAHR: 'Jahr',
     //QUARTAL: 'Quartal',
     //MONAT: 'Monat',
-    LIEFERUNG: 'Lieferung'
+    LIEFERUNG: gettext('Lieferung')
       //ABO: 'Aboende'
   })
   .constant('VERTRIEBSARTEN', {
-    DEPOTLIEFERUNG: 'Depotlieferung',
-    HEIMLIEFERUNG: 'Heimlieferung',
-    POSTLIEFERUNG: 'Postlieferung'
+    DEPOTLIEFERUNG: gettext('Depotlieferung'),
+    HEIMLIEFERUNG: gettext('Heimlieferung'),
+    POSTLIEFERUNG: gettext('Postlieferung')
   })
   .constant('LAUFZEITEINHEITEN', {
-    UNBESCHRAENKT: 'Unbeschraenkt',
-    LIEFERUNGEN: 'Lieferungen',
-    MONATE: 'Monate'
+    UNBESCHRAENKT: gettext('Unbeschraenkt'),
+    LIEFERUNGEN: gettext('Lieferungen'),
+    MONATE: gettext('Monate')
   })
   .constant('FRISTEINHEITEN', {
     MONATE: 'Monate',
     WOCHEN: 'Wochen'
   })
   .constant('ANREDE', {
-    HERR: 'Herr',
-    FRAU: 'Frau'
+    HERR: gettext('Herr'),
+    FRAU: gettext('Frau')
   })
   .constant('ABOTYPEN', {
-    DEPOTLIEFERUNGABO: 'DepotlieferungAbo',
-    HEIMLIEFERUNGABO: 'HeimlieferungAbo',
-    POSTLIEFERUNGABO: 'PostlieferungAbo'
+    DEPOTLIEFERUNGABO: gettext('DepotlieferungAbo'),
+    HEIMLIEFERUNGABO: gettext('HeimlieferungAbo'),
+    POSTLIEFERUNGABO: gettext('PostlieferungAbo')
   })
   .constant('LIEFERSTATUS', {
-    OFFEN: 'Offen',
-    INBEARBEITUNG: 'InBearbeitung',
-    BEARBEITET: 'Bearbeitet'
+    OFFEN: gettext('Offen'),
+    INBEARBEITUNG: gettext('InBearbeitung'),
+    BEARBEITET: gettext('Bearbeitet')
   })
   .constant('RECHNUNGSTATUS', {
-    ERSTELLT: 'Erstellt',
-    VERSCHICKT: 'Verschickt',
-    BEZAHLT: 'Bezahlt',
-    MAHNUNG_VERSCHICKT: 'MahnungVerschickt',
-    STORNIERT: 'Storniert'
+    ERSTELLT: gettext('Erstellt'),
+    VERSCHICKT: gettext('Verschickt'),
+    BEZAHLT: gettext('Bezahlt'),
+    MAHNUNG_VERSCHICKT: gettext('MahnungVerschickt'),
+    STORNIERT: gettext('Storniert')
   })
   .constant('LIEFEREINHEIT', {
     STUECK: {
@@ -181,7 +181,7 @@ angular
         long: gettext('Kanadischer Dollar'),
         short: gettext('CAD')
       }
-    },
+    }
   })
   .constant('LIEFERZEITPUNKTE', {
     MONTAG: {
@@ -340,9 +340,9 @@ angular
     }
   })
   .constant('PENDENZSTATUS', {
-    AUSSTEHEND: 'Ausstehend',
-    ERLEDIGT: 'Erledigt',
-    NICHTERLEDIGT: 'NichtErledigt'
+    AUSSTEHEND: gettext('Ausstehend'),
+    ERLEDIGT: gettext('Erledigt'),
+    NICHTERLEDIGT: gettext('NichtErledigt')
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
@@ -413,10 +413,8 @@ angular
       }
     ]);
   }])
-  .filter('fromNow', function() {
+  .filter('fromNow', function(moment) {
     return function(input) {
-      //TODO: replace with current locale
-      moment.locale('de');
       return moment(input).fromNow();
     };
   })

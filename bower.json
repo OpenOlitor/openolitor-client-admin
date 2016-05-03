@@ -41,5 +41,12 @@
   },
   "resolutions": {
     "angular": "~1.4.9"
-  }
+  },
+  "overrides": {
+    "moment": {
+      "main": [
+        "./min/moment-with-locales.min.js"
+        ]
+      }
+    }
 }
