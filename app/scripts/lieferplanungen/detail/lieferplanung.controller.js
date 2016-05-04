@@ -154,13 +154,15 @@ angular.module('openolitor')
         return $scope.addAbotypToPlanung;
       };
 
-      $scope.addAbotypToPlanung = function(abotypenLieferung) {
-        abotypenLieferung.korbEntries = [];
-        $scope.addTableParams(abotypenLieferung);
-        abotypenLieferung.lieferplanungId = $scope.planung.id;
-        abotypenLieferung.lieferplanungNr = $scope.planung.nr;
-        abotypenLieferung.status = LIEFERSTATUS.OFFEN;
-        $scope.abotypenLieferungen.push(abotypenLieferung);
+      $scope.addAbotypToPlanung = function(abotypLieferung) {
+        abotypLieferung.korbEntries = [];
+        $scope.addTableParams(abotypLieferung);
+        abotypLieferung.lieferplanungId = $scope.planung.id;
+        $scope.abotypenLieferungen.push(abotypLieferung);
+        LieferplanungModel.addLieferung({
+          id: $routeParams.id,
+          lieferungId: abotypLieferung.id
+        }, abotypLieferung);
         return true;
       };
 
@@ -169,13 +171,10 @@ angular.module('openolitor')
         if (index > -1) {
           $scope.abotypenLieferungen.splice(index, 1);
         }
-        abotypLieferung.lieferplanungId = undefined;
-        abotypLieferung.lieferplanungNr = undefined;
-        abotypLieferung.status = LIEFERSTATUS.UNGEPLANT;
-        LieferplanungModel.updateLieferung({
+        LieferplanungModel.removeLieferung({
           id: $routeParams.id,
           lieferungId: abotypLieferung.id
-        }, abotypLieferung);
+        }, []);
       };
 
       $scope.removeProdukt = function(abotypLieferung, korbprodukt) {
@@ -408,11 +407,14 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
-        angular.forEach($scope.abotypenLieferungen, function(abotypenLieferung) {
-          LieferplanungModel.updateLieferung({
+        angular.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+          LieferplanungModel.saveLieferpositionen({
             id: $routeParams.id,
-            lieferungId: abotypenLieferung.id
-          }, abotypenLieferung);
+            lieferungId: abotypLieferung.id
+          }, {
+            lieferungId: abotypLieferung.id,
+            lieferpositionen: abotypLieferung.korbEntries
+          });
         });
         return $scope.planung.$save();
       };

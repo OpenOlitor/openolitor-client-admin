@@ -9,7 +9,9 @@ angular.module('openolitor')
     },
     {
       'getLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen'},
-      'updateLieferung': {method:'PUT', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId'},
-      'getNichtInkludierteAbotypenLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/getNichtInkludierteAbotypenLieferungen'},
+      'addLieferung': {method:'POST', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId'},
+      'removeLieferung': {method:'DELETE', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId'},
+      'saveLieferpositionen': {method:'POST', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId/lieferpositionen'},
+      'getNichtInkludierteAbotypenLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/getNichtInkludierteAbotypenLieferungen'}
     });
   });
