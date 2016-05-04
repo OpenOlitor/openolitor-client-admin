@@ -29,7 +29,8 @@ angular.module('openolitor')
         preiseEditierbar: false,
         emailErforderlich: true,
         waehrung: 'CHF',
-        geschaeftsjahr: new Date(new Date().getYear(), 1, 1)
+        geschaeftsjahrTag: 1,
+        geschaeftsjahrMonat: 1
       };
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
@@ -75,17 +76,9 @@ angular.module('openolitor')
           if (projekt) {
             $scope.projekt = projekt;
             $scope.logoUrl = $scope.generateLogoUrl();
-            if(!angular.isUndefined($scope.projekt.geschaeftsjahr)) {
-              $scope.projekt.geschaeftsjahr.tag = $scope.projekt.geschaeftsjahr.getDate();
-              $scope.projekt.geschaeftsjahr.monat = $scope.projekt.geschaeftsjahr.getMonth() + 1;
-            }
           } else {
             $scope.projekt = new ProjektModel($scope.projekt);
             $scope.logoUrl = undefined;
-          }
-          if(!angular.isUndefined($scope.projekt.geschaeftsjahr)) {
-            $scope.projekt.geschaeftsjahr.tag = $scope.projekt.geschaeftsjahr.getDate();
-            $scope.projekt.geschaeftsjahr.monat = $scope.projekt.geschaeftsjahr.getMonth() + 1;
           }
         });
 
@@ -317,11 +310,6 @@ angular.module('openolitor')
       }
 
       $scope.saveProjekt = function() {
-        var tag = $scope.projekt.geschaeftsjahr.tag;
-        var monat = $scope.projekt.geschaeftsjahr.monat - 1;
-        $scope.projekt.geschaeftsjahr = new Date();
-        $scope.projekt.geschaeftsjahr.setDate(tag);
-        $scope.projekt.geschaeftsjahr.setMonth(monat);
         return $scope.projekt.$save();
       };
 

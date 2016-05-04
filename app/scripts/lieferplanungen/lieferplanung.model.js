@@ -8,6 +8,8 @@ angular.module('openolitor')
       id: '@id'
     },
     {
-      'getLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen'}
+      'getLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen'},
+      'updateLieferung': {method:'PUT', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId'},
+      'getNichtInkludierteAbotypenLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/getNichtInkludierteAbotypenLieferungen'},
     });
   });

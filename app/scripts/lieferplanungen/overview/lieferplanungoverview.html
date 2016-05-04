@@ -22,22 +22,15 @@
             <td data-title="'#'|translate" sortable="'nr'">
               <a ng-href="#/lieferplanung/{{lieferplanung.id}}">{{lieferplanung.nr}}</a>
             </td>
-            <td data-title="'Abotypen'|translate">
-              <span ng-repeat="abotyp in lieferplanung.abotypen" class="badge">
-                {{abotyp.name}} {{abotyp.lieferdatum}}
-              </span>
-            </td>
-            <td data-title="'Depots / Touren'|translate">
-              <span ng-repeat="tour in lieferplanung.touren" class="badge">
-                {{tour.name}} {{tour.datum}}
-              </span>
-              <span ng-repeat="depot in lieferplanung.depots" class="badge">
-                {{depot.name}} {{depot.datum}}
-              </span>
+            <td data-title="'Abotypen / Depots / Touren'|translate">
+              {{lieferplanung.abotypDepotTour}}
             </td>
             <td data-title="'Status'|translate">
-              <i ng-if="lieferplanung.status === 'Abgeschlossen' || lieferplanung.status === 'Verrechnet'" class="glyphicon glyphicon-ok"></i>
-              <i ng-if="lieferplanung.aktiv  === 'InPlanung'" class="glyphicon glyphicon-remove"></i>
+              <i ng-if="lieferplanung.status === 'Offen'" class="fa fa-unlock"></i>
+              <i ng-if="lieferplanung.status === 'Abgeschlossen' || lieferplanung.status === 'Verrechnet'" class=fa fa-lock"></i>
+            </td>
+            <td data-title="'Letzte Bearbeitung'|translate">
+              {{lieferplanung.modifidat | fromNow}}
             </td>
           </tr>
         </table>

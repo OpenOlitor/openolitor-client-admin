@@ -14,7 +14,7 @@
                   <ul class="nav navbar-nav">
                     <li class="small" translate>Abotyp hinzufügen:</li>
                     <li>
-                      <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="addAbotypenL" property="name" selected-prop="id" selected="abo.abotypId" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
+                      <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="addAbotypenL" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
                     </li>
                   </ul>
                 </div>
@@ -63,10 +63,10 @@
               <div class="panel-heading clearfix">
                 <h3 class="panel-title lieferplanung-title">
                   <span class="navbar-brand">
-                    <span class="pre-info">{{abotypLieferung.anzahl}}x</span>
-                    {{abotypLieferung.name}}</span>
+                    <span class="pre-info">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
+                    {{abotypLieferung.abotypBeschrieb}}</span>
                   <span class="pull-right">
-                    <small ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.lieferdatum}}</small>
+                    <small ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
                     <span class="btn btn-default"
                       oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
                     <button type="button" role="button" ng-click="removeAbotypFromPlanung(abotypLieferung)" class="btn btn-default"><span class="fa fa-times"></span></button>
