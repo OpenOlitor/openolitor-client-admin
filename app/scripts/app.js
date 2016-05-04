@@ -32,6 +32,17 @@ function convertDateStringsToDates(input) {
   return input;
 }
 
+function addExtendedEnumValue(id, labelLong, labelShort, value) {
+  return {
+      id: id,
+      label: {
+        long: labelLong,
+        short: labelShort
+      },
+      value: value
+    };
+}
+
 /* This is a pseudo-function in order to enable gettext-extractor to find the translations that need to be done in the constants.
    As described in https://github.com/rubenv/angular-gettext/issues/67
 */
@@ -102,6 +113,7 @@ angular
     POSTLIEFERUNGABO: gettext('PostlieferungAbo')
   })
   .constant('LIEFERSTATUS', {
+    UNGEPLANT: gettext('Ungeplant'),
     OFFEN: gettext('Offen'),
     INBEARBEITUNG: gettext('InBearbeitung'),
     BEARBEITET: gettext('Bearbeitet')
@@ -114,237 +126,44 @@ angular
     STORNIERT: gettext('Storniert')
   })
   .constant('LIEFEREINHEIT', {
-    STUECK: {
-      id: 'STUECK',
-      label: {
-        long: gettext('Stück'),
-        short: gettext('St.')
-      }
-    },
-    BUND: {
-      id: 'BUND',
-      label: {
-        long: gettext('Bund'),
-        short: gettext('Bu.')
-      }
-    },
-    GRAMM: {
-      id: 'GRAMM',
-      label: {
-        long: gettext('Gramm'),
-        short: gettext('gr')
-      }
-    },
-    KILOGRAMM: {
-      id: 'KILOGRAMM',
-      label: {
-        long: gettext('Kilogramm'),
-        short: gettext('kg')
-      }
-    },
-    LITER: {
-      id: 'LITER',
-      label: {
-        long: gettext('Liter'),
-        short: gettext('l')
-      }
-    }
+    STUECK: addExtendedEnumValue('STUECK', gettext('Stück'), gettext('St.')),
+    BUND: addExtendedEnumValue('BUND', gettext('Bund'), gettext('Bu.')),
+    GRAMM: addExtendedEnumValue('GRAMM', gettext('Gramm'), gettext('gr')),
+    KILOGRAMM: addExtendedEnumValue('KILOGRAMM', gettext('Kilogramm'), gettext('kg')),
+    LITER: addExtendedEnumValue('LITER', gettext('Liter'), gettext('l'))
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
   .constant('WAEHRUNG', {
-    CHF: {
-      id: 'CHF',
-      label: {
-        long: gettext('Schweizer Franken'),
-        short: gettext('CHF')
-      }
-    },
-    EUR: {
-      id: 'EUR',
-      label: {
-        long: gettext('Euro'),
-        short: gettext('€')
-      }
-    },
-    USD: {
-      id: 'USD',
-      label: {
-        long: gettext('US Dollar'),
-        short: gettext('$')
-      }
-    },
-    GBP: {
-      id: 'GBP',
-      label: {
-        long: gettext('Britisches Pfund'),
-        short: gettext('£')
-      }
-    },
-    CAD: {
-      id: 'CAD',
-      label: {
-        long: gettext('Kanadischer Dollar'),
-        short: gettext('CAD')
-      }
-    }
+    CHF: addExtendedEnumValue('CHF', gettext('Schweizer Franken'), gettext('CHF')),
+    EUR: addExtendedEnumValue('EUR', gettext('Euro'), gettext('EUR')),
+    USD: addExtendedEnumValue('USD', gettext('US Dollar'), gettext('USD')),
+    GBP: addExtendedEnumValue('GBP', gettext('Britisches Pfund'), gettext('GBP')),
+    CAD: addExtendedEnumValue('CAD', gettext('Kanadischer Dollar'), gettext('CAD'))
   })
   .constant('LIEFERZEITPUNKTE', {
-    MONTAG: {
-      id: 'Montag',
-      label: {
-        long: gettext('Montag'),
-        short: gettext('MO')
-      },
-      value: 1
-    },
-    DIENSTAG: {
-      id: 'Dienstag',
-      label: {
-        long: gettext('Dienstag'),
-        short: gettext('DI')
-      },
-      value: 2
-    },
-    MITTWOCH: {
-      id: 'Mittwoch',
-      label: {
-        long: gettext('Mittwoch'),
-        short: gettext('MI')
-      },
-      value: 3
-    },
-    DONNERSTAG: {
-      id: 'Donnerstag',
-      label: {
-        long: gettext('Donnerstag'),
-        short: gettext('DO')
-      },
-      value: 4
-    },
-    FREITAG: {
-      id: 'Freitag',
-      label: {
-        long: gettext('Freitag'),
-        short: gettext('FR')
-      },
-      value: 5
-    },
-    SAMSTAG: {
-      id: 'Samstag',
-      label: {
-        long: gettext('Samstag'),
-        short: gettext('SA')
-      },
-      value: 6
-    },
-    SONNTAG: {
-      id: 'Sonntag',
-      label: {
-        long: gettext('Sonntag'),
-        short: gettext('SO')
-      },
-      value: 7
-    }
+    MONTAG: addExtendedEnumValue('Montag', gettext('Montag'), gettext('MO'), 1),
+    DIENSTAG: addExtendedEnumValue('Dienstag', gettext('Dienstag'), gettext('DI'), 2),
+    MITTWOCH: addExtendedEnumValue('Mittwoch', gettext('Mittwoch'), gettext('MI'), 3),
+    DONNERSTAG: addExtendedEnumValue('Donnerstag', gettext('Donnerstag'), gettext('DO'), 4),
+    FREITAG: addExtendedEnumValue('Freitag', gettext('Freitag'), gettext('FR'), 5),
+    SAMSTAG: addExtendedEnumValue('Samstag', gettext('Samstag'), gettext('SA'), 6),
+    SONNTAG: addExtendedEnumValue('Sonntag', gettext('Sonntag'), gettext('SO'), 7)
   })
   .constant('MONATE', {
-    JANUAR: {
-      id: 'Januar',
-      label: {
-        long: gettext('Januar'),
-        short: gettext('Jan')
-      },
-      value: 1
-    },
-    FEBRUAR: {
-      id: 'Februar',
-      label: {
-        long: gettext('Februar'),
-        short: gettext('Feb')
-      },
-      value: 2
-    },
-    MAERZ: {
-      id: 'Maerz',
-      label: {
-        long: gettext('März'),
-        short: gettext('Mar')
-      },
-      value: 3
-    },
-    APRIL: {
-      id: 'April',
-      label: {
-        long: gettext('April'),
-        short: gettext('Apr')
-      },
-      value: 4
-    },
-    MAI: {
-      id: 'Mai',
-      label: {
-        long: gettext('Mai'),
-        short: gettext('Mai')
-      },
-      value: 5
-    },
-    JUNI: {
-      id: 'Juni',
-      label: {
-        long: gettext('Juni'),
-        short: gettext('Jun')
-      },
-      value: 6
-    },
-    JULI: {
-      id: 'Juli',
-      label: {
-        long: gettext('Juli'),
-        short: gettext('Jul')
-      },
-      value: 7
-    },
-    AUGUST: {
-      id: 'August',
-      label: {
-        long: gettext('August'),
-        short: gettext('Aug')
-      },
-      value: 8
-    },
-    SEPTEMBER: {
-      id: 'September',
-      label: {
-        long: gettext('September'),
-        short: gettext('Sep')
-      },
-      value: 9
-    },
-    OKTOBER: {
-      id: 'Oktober',
-      label: {
-        long: gettext('Oktober'),
-        short: gettext('Okt')
-      },
-      value: 10
-    },
-    NOVEMBER: {
-      id: 'November',
-      label: {
-        long: gettext('November'),
-        short: gettext('Nov')
-      },
-      value: 11
-    },
-    DEZEMBER: {
-      id: 'Dezember',
-      label: {
-        long: gettext('Dezember'),
-        short: gettext('Dez')
-      },
-      value: 12
-    }
+    JANUAR: addExtendedEnumValue('Januar', gettext('Januar'), gettext('Jan'), 1),
+    FEBRUAR: addExtendedEnumValue('Februar', gettext('Februar'), gettext('Feb'), 2),
+    MAERZ: addExtendedEnumValue('Maerz', gettext('März'), gettext('Mar'), 3),
+    APRIL: addExtendedEnumValue('April', gettext('April'), gettext('Apr'), 4),
+    MAI: addExtendedEnumValue('Mai', gettext('Mai'), gettext('Mai'), 5),
+    JUNI: addExtendedEnumValue('Juni', gettext('Juni'), gettext('Jun'), 6),
+    JULI: addExtendedEnumValue('Juli', gettext('Juli'), gettext('Jul'), 7),
+    AUGUST: addExtendedEnumValue('August', gettext('August'), gettext('Aug'), 8),
+    SEPTEMBER: addExtendedEnumValue('September', gettext('September'), gettext('Sep'), 9),
+    OKTOBER: addExtendedEnumValue('Oktober', gettext('Oktober'), gettext('Okt'), 10),
+    NOVEMBER: addExtendedEnumValue('November', gettext('November'), gettext('Nov'), 11),
+    DEZEMBER: addExtendedEnumValue('Dezember', gettext('Dezember'), gettext('Dez'), 12)
   })
   .constant('PENDENZSTATUS', {
     AUSSTEHEND: gettext('Ausstehend'),
