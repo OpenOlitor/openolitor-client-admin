@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'LIEFEREINHEIT', 'cloneObj', 'gettext', '$location',
-    function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, LIEFEREINHEIT, cloneObj, gettext, $location) {
+  .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'cloneObj', 'gettext', '$location',
+    function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, LIEFERSTATUS, LIEFEREINHEIT, cloneObj, gettext, $location) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -157,8 +157,9 @@ angular.module('openolitor')
       $scope.addAbotypToPlanung = function(abotypenLieferung) {
         abotypenLieferung.korbEntries = [];
         $scope.addTableParams(abotypenLieferung);
-        $scope.abotypenLieferungen.lieferplanungId = $scope.planung.id;
-        $scope.abotypenLieferungen.lieferplanungNr = $scope.planung.nr;
+        abotypenLieferung.lieferplanungId = $scope.planung.id;
+        abotypenLieferung.lieferplanungNr = $scope.planung.nr;
+        abotypenLieferung.status = LIEFERSTATUS.OFFEN;
         $scope.abotypenLieferungen.push(abotypenLieferung);
         return true;
       };
@@ -168,6 +169,13 @@ angular.module('openolitor')
         if (index > -1) {
           $scope.abotypenLieferungen.splice(index, 1);
         }
+        abotypLieferung.lieferplanungId = undefined;
+        abotypLieferung.lieferplanungNr = undefined;
+        abotypLieferung.status = LIEFERSTATUS.UNGEPLANT;
+        LieferplanungModel.updateLieferung({
+          id: $routeParams.id,
+          lieferungId: abotypLieferung.id
+        }, abotypLieferung);
       };
 
       $scope.removeProdukt = function(abotypLieferung, korbprodukt) {
@@ -279,7 +287,7 @@ angular.module('openolitor')
               preisEinheit: 0.0,
               preis: 0.0,
               menge: 1,
-              einheit: LIEFEREINHEIT.KILOGRAMM,
+              einheit: LIEFEREINHEIT.KILOGRAMM.id,
               produzentenL: $scope.extractProduzentenFilter(),
               produzentId: undefined,
               produzentKurzzeichen: undefined,
@@ -400,13 +408,13 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
-        $scope.planung.$save();
         angular.forEach($scope.abotypenLieferungen, function(abotypenLieferung) {
           LieferplanungModel.updateLieferung({
             id: $routeParams.id,
             lieferungId: abotypenLieferung.id
           }, abotypenLieferung);
         });
+        return $scope.planung.$save();
       };
 
       $scope.backToList = function() {
