@@ -157,6 +157,8 @@ angular.module('openolitor')
       $scope.addAbotypToPlanung = function(abotypenLieferung) {
         abotypenLieferung.korbEntries = [];
         $scope.addTableParams(abotypenLieferung);
+        $scope.abotypenLieferungen.lieferplanungId = $scope.planung.id;
+        $scope.abotypenLieferungen.lieferplanungNr = $scope.planung.nr;
         $scope.abotypenLieferungen.push(abotypenLieferung);
         return true;
       };
@@ -398,7 +400,13 @@ angular.module('openolitor')
       };
 
       $scope.save = function() {
-        return $scope.planung.$save();
+        $scope.planung.$save();
+        angular.forEach($scope.abotypenLieferungen, function(abotypenLieferung) {
+          LieferplanungModel.updateLieferung({
+            id: $routeParams.id,
+            lieferungId: abotypenLieferung.id
+          }, abotypenLieferung);
+        });
       };
 
       $scope.backToList = function() {

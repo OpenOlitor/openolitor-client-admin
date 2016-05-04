@@ -141,6 +141,13 @@ angular
         long: gettext('Kilogramm'),
         short: gettext('kg')
       }
+    },
+    LITER: {
+      id: 'LITER',
+      label: {
+        long: gettext('Liter'),
+        short: gettext('l')
+      }
     }
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
