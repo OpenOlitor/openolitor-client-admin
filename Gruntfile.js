@@ -140,6 +140,7 @@ module.exports = function(grunt) {
         },
         files: [
           '<%= openolitor.app %>/scripts/**/*.html',
+          '<%= openolitor.app %>/index.html',
           '.tmp/styles/**/*.css',
           '<%= openolitor.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]

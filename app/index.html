@@ -60,6 +60,7 @@
       <li><a id="nav-korbplanung" class="nav-item" ng-class="[{active:currentPathContains('korbplanung')}]" href="" ng-href="#/lieferplanung"><i class="fa fa-shopping-basket"></i> <span translate>Lieferungen</span></a></li>
       <li><a id="nav-buchhaltung" class="nav-item" ng-click="menushow['buchhaltung'] = !menushow['buchhaltung']"><span><i class="fa fa-usd"></i> <span translate>Buchhaltung</span></span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
+      <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-einkauf" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkauf')}]" href="" ng-href="#/einkauf"><i class="fa fa-shopping-bag"></i> <span translate>Einkauf*</span></a></li>
       <li><a id="nav-kunden" class="nav-item" ng-click="menushow['stammdaten'] = !menushow['stammdaten']"><span><i class="fa fa-database"></i> <span translate>Stammdaten</span></span></a></li>
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-depots" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots"><i class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
@@ -220,6 +221,11 @@
   <script src="scripts/rechnungen/overview/rechnungenoverview.controller.js"></script>
   <script src="scripts/rechnungen/detail/rechnungendetail.model.js"></script>
   <script src="scripts/rechnungen/detail/rechnungendetail.controller.js"></script>
+
+  <script src="scripts/zahlungsimports/overview/zahlungsimportsoverview.model.js"></script>
+  <script src="scripts/zahlungsimports/overview/zahlungsimportsoverview.controller.js"></script>
+  <script src="scripts/zahlungsimports/import/zahlungsimports.model.js"></script>
+  <script src="scripts/zahlungsimports/import/zahlungsimports.controller.js"></script>
 
   <script src="scripts/projekt/projekt.model.js"></script>
   <script src="scripts/projekt/projekt.service.js"></script>

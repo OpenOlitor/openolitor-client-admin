@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <form name="zahlungsImportForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row form-group">
+            <h3>
+              <div class="col-md-4" translate>
+                Zahlungs-Import
+              </div>
+              <div class="col-md-8">
+                <div class="btn-group pull-right" role="group">
+                  <oo-delete-button ng-if="isDeletable()" model="zahlungsImport" entity="ZahlungsImport" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+                </div>
+              </div>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Zahlungs-Import-Datei</span></h3>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-2">
+                  <label for="zahlungsImportFile" translate>Datei</label>
+                </div>
+                <div class="col-md-10">
+                  <div class="button drop-box" ng-model="zahlungsImportFile" name="zahlungsImportFile" ngf-pattern="'*/*'" ngf-accept="'*/*'" ngf-max-size="10MB" ngf-select="uploadZahlungsImportFile($file)" ngf-drop="uploadZahlungsImportFile($file)">
+                    <span translate>Datei auswählen oder einfügen (ESR, VESR, ...)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
