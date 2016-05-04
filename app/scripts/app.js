@@ -126,11 +126,11 @@ angular
     STORNIERT: gettext('Storniert')
   })
   .constant('LIEFEREINHEIT', {
-    STUECK: addExtendedEnumValue('STUECK', gettext('Stück'), gettext('St.')),
-    BUND: addExtendedEnumValue('BUND', gettext('Bund'), gettext('Bu.')),
-    GRAMM: addExtendedEnumValue('GRAMM', gettext('Gramm'), gettext('gr')),
-    KILOGRAMM: addExtendedEnumValue('KILOGRAMM', gettext('Kilogramm'), gettext('kg')),
-    LITER: addExtendedEnumValue('LITER', gettext('Liter'), gettext('l'))
+    STUECK: addExtendedEnumValue('Stueck', gettext('Stück'), gettext('St.')),
+    BUND: addExtendedEnumValue('Bund', gettext('Bund'), gettext('Bu.')),
+    GRAMM: addExtendedEnumValue('Gramm', gettext('Gramm'), gettext('gr')),
+    KILOGRAMM: addExtendedEnumValue('Kilogramm', gettext('Kilogramm'), gettext('kg')),
+    LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l'))
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
