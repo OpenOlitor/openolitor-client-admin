@@ -18,8 +18,6 @@ angular.module('openolitor')
         $scope.planung = result;
       });
 
-      $scope.produzentenL = [];
-
       //watch for set of produkte
       $scope.$watch(ProdukteService.getProdukte,
         function(list) {
@@ -34,6 +32,16 @@ angular.module('openolitor')
             $scope.tableParams.reload();
           }
       });
+
+      $scope.getProduktById = function(id) {
+        var ret;
+        angular.forEach($scope.produkteEntries, function(produkt) {
+          if(produkt.id === id) {
+            ret = produkt;
+          }
+        });
+        return ret;
+      };
 
       $scope.extractProduzentenFilter = function(extract) {
         var produzentenRawL = [];
@@ -67,8 +75,13 @@ angular.module('openolitor')
             lieferungId: abotypenLieferung.id
           }, function(result) {
             abotypenLieferung.korbEntries = result;
+            angular.forEach(abotypenLieferung.korbEntries, function(korbEntry) {
+              var prod = $scope.getProduktById(korbEntry.produktId);
+              var produzenten = angular.isUndefined(prod) ? undefined : prod.produzenten;
+              korbEntry.produzentenL = $scope.extractProduzentenFilter(produzenten);
+            });
+            $scope.addTableParams(abotypenLieferung);
           });
-          $scope.addTableParams(abotypenLieferung);
         });
       });
 
@@ -95,8 +108,6 @@ angular.module('openolitor')
       };
 
       $scope.displayMode = 'korbinhalt';
-
-      $scope.produzentenL = [];
 
       $scope.bestellungen = {};
 
@@ -266,6 +277,12 @@ angular.module('openolitor')
       };
 
       $scope.dropProdukt = function(dragEl, dropEl, type) {
+        if(!$scope.valuesEditable()) {
+          alertService.addAlert('lighterror', gettext('Die Lieferungen dürfen nicht mehr verändert werden.'));
+          $scope.$apply();
+          return;
+        }
+
         var drop = angular.element('#' + dropEl);
         var drag = angular.element('#' + dragEl);
 
@@ -438,11 +455,11 @@ angular.module('openolitor')
           angular.forEach(abotypLieferung.korbEntries, function(korbEntry) {
             if(ret && angular.isUndefined(korbEntry.produzentId)) {
               ret = false;
-              alertService.addAlert('error', gettext('Für jedes Produkt muss ein Produzent ausgewählt sein.'));
+              alertService.addAlert('lighterror', gettext('Für jedes Produkt muss ein Produzent ausgewählt sein.'));
             }
             if(ret && angular.isUndefined(korbEntry.produktBeschrieb)) {
               ret = false;
-              alertService.addAlert('error', gettext('Jedes Produkt muss über eine Beschreibung verfügen.'));
+              alertService.addAlert('lighterror', gettext('Jedes Produkt muss über eine Beschreibung verfügen.'));
             }
           });
         });
@@ -451,6 +468,14 @@ angular.module('openolitor')
 
       $scope.backToList = function() {
         $location.path('/lieferplanung');
+      };
+
+      $scope.valuesEditable = function() {
+        if(angular.isUndefined($scope.planung)) {
+          return false;
+        } else {
+          return $scope.planung.status === LIEFERSTATUS.OFFEN;
+        }
       };
 
     }
