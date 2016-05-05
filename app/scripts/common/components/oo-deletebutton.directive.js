@@ -17,7 +17,8 @@ angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
         confirmMessage: '=?',
         reduced: '@?',
         notext: '@?',
-        small: '@?'
+        small: '@?',
+        buttonClass: '@?'
       },
       transclude: true,
       templateUrl: 'scripts/common/components/oo-deletebutton.directive.html',
@@ -54,6 +55,14 @@ angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
           }
         });
 
+        $scope.getButtonTypeClass = function() {
+          if(angular.isUndefined($scope.buttonClass)) {
+            return 'btn-danger';
+          } else {
+            return $scope.buttonClass;
+          }
+        };
+
         $scope.modalDialog = function(executeOnOK) {
           var modalInstance = $uibModal.open({
             animation: true,
@@ -81,14 +90,19 @@ angular.module('openolitor').directive('ooDeleteButton', ['msgBus', 'gettext',
 
         $scope.deleteAction = function() {
           $scope.model.actionInProgress = 'deleting';
-          $scope.onDelete($scope.model).catch(function(req) {
+          var ret = $scope.onDelete($scope.model);
+          if(!angular.isUndefined(ret.catch)) {
+            ret.catch(function(req) {
+              $scope.model.actionInProgress = undefined;
+              alertService.addAlert('error', gettext($scope.entity +
+                  ' konnte nicht gelöscht werden. Fehler: ') +
+                req.status +
+                '-' + req.statusText + ':' + req.data
+              );
+            });
+          } else {
             $scope.model.actionInProgress = undefined;
-            alertService.addAlert('error', gettext($scope.entity +
-                ' konnte nicht gelöscht werden. Fehler: ') +
-              req.status +
-              '-' + req.statusText + ':' + req.data
-            );
-          });
+          }
         };
       }
     };

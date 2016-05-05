@@ -35,7 +35,7 @@
               <div class="panel-heading clearfix">
                 <h3 class="panel-title"><span class="navbar-brand" translate>Produkte-Angebot</span></h3>
                 <span class="pull-right">
-                  <span class="btn btn-default"
+                  <span class="btn btn-default btn-sm"
                     oo-draggable="true" oo-draged-type="'newProdukt'"><span class="fa fa-life-ring"></span></span>
                 </span>
               </div>
@@ -67,9 +67,9 @@
                     {{abotypLieferung.abotypBeschrieb}}</span>
                   <span class="pull-right">
                     <small ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
-                    <span class="btn btn-default"
+                    <span class="btn btn-default btn-sm"
                       oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
-                    <button type="button" role="button" ng-click="removeAbotypFromPlanung(abotypLieferung)" class="btn btn-default"><span class="fa fa-times"></span></button>
+                    <oo-delete-button model="abotypLieferung" entity="Lieferung" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" reduced="true"></oo-delete-button>
                   </span>
                 </h3>
               </div>

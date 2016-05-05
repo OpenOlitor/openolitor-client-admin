@@ -68,14 +68,19 @@ angular.module('openolitor').directive('ooSaveButton', ['msgBus', 'gettext',
 
         $scope.save = function() {
           $scope.model.actionInProgress = 'updating';
-          $scope.onSave($scope.model).catch(function(req) {
+          var ret = $scope.onSave($scope.model);
+          if(!angular.isUndefined(ret.catch)) {
+            ret.catch(function(req) {
+              $scope.model.actionInProgress = undefined;
+              alertService.addAlert('error', gettext($scope.entity +
+                  ' konnte nicht gespeichert werden. Fehler: ') +
+                req.status +
+                '-' + req.statusText + ':' + req.data
+              );
+            });
+          } else {
             $scope.model.actionInProgress = undefined;
-            alertService.addAlert('error', gettext($scope.entity +
-                ' konnte nicht gespeichert werden. Fehler: ') +
-              req.status +
-              '-' + req.statusText + ':' + req.data
-            );
-          });
+          }
         };
 
 
