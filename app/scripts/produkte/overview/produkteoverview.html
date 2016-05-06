@@ -23,7 +23,7 @@
             <td data-title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-hide="produkt.editable">{{produkt.name}}</span>
               <span ng-show="produkt.editable">
-                <input type="text" class="form-control" name="kurzzeichen" ng-model="produkt.name" placeholder="{{'Neue Bezeichnung'|translate}}" required>
+                <input type="text" class="form-control" name="kurzzeichen" ng-model="produkt.name" maxlength="140" placeholder="{{'Neue Bezeichnung'|translate}}" required>
               </span>
             </td>
             <td data-title="'Von'|translate" sortable="'verfuegbarVon'">
