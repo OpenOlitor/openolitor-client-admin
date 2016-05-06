@@ -478,5 +478,21 @@ angular.module('openolitor')
         }
       };
 
+      $scope.planungAbschliessen = function() {
+        LieferplanungModel.abschliessen({
+          id: $routeParams.id
+        }, function(result) {
+          
+        });
+      };
+
+      $scope.planungVerrechnen = function() {
+        LieferplanungModel.verrechnen({
+          id: $routeParams.id
+        }, function(result) {
+
+        });
+      };
+
     }
   ]);

@@ -13,6 +13,8 @@ angular.module('openolitor')
       'removeLieferung': {method:'DELETE', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId'},
       'getLieferpositionen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId/lieferpositionen'},
       'saveLieferpositionen': {method:'POST', isArray: false, url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId/lieferpositionen'},
-      'getNichtInkludierteAbotypenLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/getNichtInkludierteAbotypenLieferungen'}
+      'getNichtInkludierteAbotypenLieferungen': {method:'GET', isArray: true, url: API_URL + 'lieferplanungen/:id/getNichtInkludierteAbotypenLieferungen'},
+      'abschliessen': {method:'POST', isArray: false, url: API_URL + 'lieferplanungen/:id/aktionen/abschliessen'},
+      'verrechnen': {method:'POST', isArray: false, url: API_URL + 'lieferplanungen/:id/aktionen/verrechnen'}
     });
   });
