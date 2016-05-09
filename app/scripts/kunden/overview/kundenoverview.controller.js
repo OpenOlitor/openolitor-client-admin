@@ -26,25 +26,7 @@ angular.module('openolitor')
             });
             $scope.tableParams.reload();
           }
-        });
-
-      $scope.dummyEntries = [{
-        id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
-        bezeichnung: 'Calvert Joshua',
-        strasse: 'Jupiterstrasse',
-        hausNummer: 40,
-        plz: 3020,
-        ort: 'Bern',
-        typen: ['Goenner', 'Vereinsmitglied']
-      }, {
-        id: '88827d1d-293c-405a-b0fb-aa392efe6d50',
-        bezeichnung: 'WG Bern',
-        strasse: 'Jupiterstrasse',
-        hausNummer: 23,
-        plz: 3015,
-        ort: 'Bern',
-        typen: ['Vereinsmitglied']
-      }];
+      });
 
       $scope.search = {
         query: ''
@@ -93,7 +75,6 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
 
         $scope.loading = true;
@@ -103,8 +84,6 @@ angular.module('openolitor')
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
-        //$scope.entries = $scope.dummyEntries;
 
       }
 

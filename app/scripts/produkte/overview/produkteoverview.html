@@ -19,7 +19,7 @@
       </div>
       <div ng-show="entries" id="produktTable" display-export="true" export-file-name="Produkte">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="produkt in $data | filter: search.query.$ track by produkt.id">
+          <tr ng-repeat="produkt in $data track by produkt.id">
             <td data-title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-hide="produkt.editable">{{produkt.name}}</span>
               <span ng-show="produkt.editable">
@@ -69,7 +69,7 @@
               </span>
             </td>
             <td data-title="'Produzenten'|translate" filter="{produzenten: 'select'}" filter-data="produzentenL" ng-class="[{'col-md-3': produkt.editable}]">
-              <span ng-repeat="produzent in produkt.produzenten track by produzent" class="badge">
+              <span ng-repeat="produzent in produkt.produzenten" class="badge">
                 {{produzent}}
                 <span ng-show="produkt.editable" ng-click="removeProduzent(produkt, produzent)" class="glyphicon glyphicon-remove"></span>
               </span>

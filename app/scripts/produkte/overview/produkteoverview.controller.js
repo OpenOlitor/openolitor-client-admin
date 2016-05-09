@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
-    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE) {
+    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
+    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE, lodash) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -40,7 +40,7 @@ angular.module('openolitor')
             angular.forEach(list, function(item) {
               if (item.id) {
                 $scope.kategorienL.push({
-                  'id': item.id,
+                  'id': item.beschreibung,
                   'title': item.beschreibung
                 });
               }
@@ -57,7 +57,7 @@ angular.module('openolitor')
             angular.forEach(list, function(item) {
               if (item.id) {
                 $scope.produzentenL.push({
-                  'id': item.id,
+                  'id': item.kurzzeichen,
                   'title': item.kurzzeichen
                 });
               }
@@ -193,6 +193,17 @@ angular.module('openolitor')
         };
         return addKategorie;
       };
+
+      var throttledReload = lodash.throttle(function() {
+          $scope.tableParams.reload();
+      }, 200);
+      $scope.$watch('search.query.$',
+        function(newVal, oldVal) {
+          if(newVal !== oldVal) {
+            throttledReload();
+          }
+        }
+      );
 
     }
   ]);
