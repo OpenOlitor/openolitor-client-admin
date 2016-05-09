@@ -255,7 +255,7 @@ angular.module('openolitor')
         //use default tableParams
         $scope.kundentypenTableParams = new ngTableParams({ // jshint ignore:line
           page: 1,
-          count: 10,
+          count: 1000,
           sorting: {
             name: 'asc'
           }
@@ -284,7 +284,7 @@ angular.module('openolitor')
         //use default tableParams
         $scope.produktekategorienTableParams = new ngTableParams({ // jshint ignore:line
           page: 1,
-          count: 10,
+          count: 1000,
           sorting: {
             name: 'asc'
           }

@@ -41,10 +41,10 @@ angular.module('openolitor')
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')(filteredData, params.filter());
+            orderedData = $filter('filter')(orderedData, params.filter());
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
 
         });
