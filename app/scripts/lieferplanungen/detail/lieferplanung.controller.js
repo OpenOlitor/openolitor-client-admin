@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor')
-  .controller('LieferplanungDetailController', ['$scope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'alertService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'cloneObj', 'gettext', '$location',
-    function($scope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, alertService, LIEFERSTATUS, LIEFEREINHEIT, cloneObj, gettext, $location) {
+  .controller('LieferplanungDetailController', ['$scope', '$rootScope', '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel', 'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService', 'alertService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'msgBus', 'cloneObj', 'gettext', '$location',
+    function($scope, $rootScope, $routeParams, ngTableParams, $filter, LieferplanungModel, ProduzentenService, AbotypenOverviewModel, ProdukteService, alertService, LIEFERSTATUS, LIEFEREINHEIT, msgBus, cloneObj, gettext, $location) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -491,18 +491,24 @@ angular.module('openolitor')
       $scope.planungAbschliessen = function() {
         LieferplanungModel.abschliessen({
           id: $routeParams.id
-        }, function(result) {
-
+        }, function() {
+          $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
         });
       };
 
       $scope.planungVerrechnen = function() {
         LieferplanungModel.verrechnen({
           id: $routeParams.id
-        }, function(result) {
-
+        }, function() {
+          $scope.planung.status = LIEFERSTATUS.VERRECHNET;
         });
       };
+
+      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
+        if (msg.entity === 'Lieferplanung') {
+          $rootScope.$apply();
+        }
+      });
 
     }
   ]);

@@ -115,8 +115,8 @@ angular
   .constant('LIEFERSTATUS', {
     UNGEPLANT: gettext('Ungeplant'),
     OFFEN: gettext('Offen'),
-    INBEARBEITUNG: gettext('Abgeschlossen'),
-    BEARBEITET: gettext('Verrechnet')
+    ABGESCHLOSSEN: gettext('Abgeschlossen'),
+    VERRECHNET: gettext('Verrechnet')
   })
   .constant('RECHNUNGSTATUS', {
     ERSTELLT: gettext('Erstellt'),
