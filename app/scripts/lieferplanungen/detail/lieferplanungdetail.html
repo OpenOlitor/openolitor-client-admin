@@ -42,8 +42,8 @@
               </div>
               <div class="panel-body">
                 <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-                  <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'">
-                    <td><span oo-draggable="true" oo-draged-type="'prod'">&#8942</span></td>
+                  <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'">
+                    <td><span >&#8942</span></td>
                     <td data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
                       {{produkt.name}}
                     </td>
