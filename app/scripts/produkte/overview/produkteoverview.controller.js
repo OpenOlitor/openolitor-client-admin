@@ -87,13 +87,12 @@ angular.module('openolitor')
       if (!$scope.tableParams) {
         //use default tableParams
         $scope.tableParams = new ngTableParams({ // jshint ignore:line
-          page: 1,
           count: 10,
           sorting: {
             name: 'asc'
           }
         }, {
-          filterDelay: 0,
+          filterDelay: 400,
           groupOptions: {
             isExpanded: true
           },
@@ -103,15 +102,14 @@ angular.module('openolitor')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope
-              .search.query);
-            var orderedData = params.sorting ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
+              $scope.search.query);
+            var orderedData = $filter('filter')(filteredData, params.filter());
+            orderedData = params.sorting ?
+              $filter('orderBy')(orderedData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')($scope.entries, params.filter());
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            return orderedData;
           }
 
         });

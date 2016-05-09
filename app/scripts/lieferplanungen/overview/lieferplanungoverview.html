@@ -27,7 +27,7 @@
             </td>
             <td data-title="'Status'|translate">
               <i ng-if="lieferplanung.status === 'Offen'" class="fa fa-unlock"></i>
-              <i ng-if="lieferplanung.status === 'Abgeschlossen' || lieferplanung.status === 'Verrechnet'" class=fa fa-lock"></i>
+              <i ng-if="lieferplanung.status === 'Abgeschlossen' || lieferplanung.status === 'Verrechnet'" class="fa fa-lock"></i>
             </td>
             <td data-title="'Letzte Bearbeitung'|translate">
               {{lieferplanung.modifidat | fromNow}}

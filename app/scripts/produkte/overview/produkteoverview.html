@@ -26,13 +26,13 @@
                 <input type="text" class="form-control" name="kurzzeichen" ng-model="produkt.name" placeholder="{{'Neue Bezeichnung'|translate}}" required>
               </span>
             </td>
-            <td data-title="'Von'|translate" sortable="'verfuegbarVon'">
+            <td data-title="'Von'|translate">
               <span ng-hide="produkt.editable">{{getMonthShort(produkt.verfuegbarVon)|translate}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="verfuegbarVon" display-style="uib-dropdown" values="monate" selected-prop="id" property="shortLabel" selected="produkt.verfuegbarVon" ng-required></oo-dropdown>
               </span>
             </td>
-            <td data-title="'Bis'|translate" sortable="'verfuegbarBis'">
+            <td data-title="'Bis'|translate">
               <span ng-hide="produkt.editable">{{getMonthShort(produkt.verfuegbarBis)|translate}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="verfuegbarBis" display-style="uib-dropdown" values="monate" selected-prop="id" property="shortLabel" selected="produkt.verfuegbarBis" ng-required></oo-dropdown>

@@ -107,6 +107,16 @@ angular.module('openolitor')
         return ret;
       };
 
+      $scope.getShortEinheit = function(einheitId) {
+        var ret;
+        angular.forEach($scope.liefereinheiten, function(liefereinheit) {
+          if(liefereinheit.id === einheitId) {
+            ret = liefereinheit.label.short;
+          }
+        });
+        return ret;
+      };
+
       $scope.displayMode = 'korbinhalt';
 
       $scope.bestellungen = {};
@@ -482,7 +492,7 @@ angular.module('openolitor')
         LieferplanungModel.abschliessen({
           id: $routeParams.id
         }, function(result) {
-          
+
         });
       };
 

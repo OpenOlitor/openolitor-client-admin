@@ -77,10 +77,10 @@ angular.module('openolitor')
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
               $scope.search.query);
-            var orderedData = params.sorting ?
+            var orderedData = $filter('filter')($scope.entries, params.filter());
+            orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')($scope.entries, params.filter());
 
             params.total(orderedData.length);
             $defer.resolve(orderedData);

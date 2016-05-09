@@ -23,7 +23,7 @@
                     <button type="button" role="button" ng-click="recalculateBestellungen(); displayMode = 'lieferanten'" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
                     <oo-save-button ng-show="planung.status === 'Offen'" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
                     <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span</button>
-                      <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planun verrechnen</span</button>
+                      <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span</button>
                   </div>
                 </div>
               </h3>
@@ -48,7 +48,7 @@
                       {{produkt.name}}
                     </td>
                     <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
-                      {{produkt.preis | ooCHF}} / {{produkt.einheit|translate}}
+                      {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{getShortEinheit(produkt.einheit)}}
                     </td>
                     <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter()">
                       <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
