@@ -110,7 +110,12 @@
                       </span>
                     </td>
                     <td data-title="'Prod.'|translate">
-                      <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="title" selected-prop="title" selected="korbprodukt.produzentKurzzeichen" selected-function="selectedProduzentFunc()" selected-function-scope="korbprodukt" required></oo-dropdown>
+                      <span ng-if="!valuesEditable()">
+                        {{korbprodukt.produzentKurzzeichen}}
+                      </span>
+                      <span ng-if="valuesEditable()">
+                        <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="title" selected-prop="title" selected="korbprodukt.produzentKurzzeichen" selected-function="selectedProduzentFunc()" selected-function-scope="korbprodukt" required></oo-dropdown>
+                      </span>
                     </td>
                     <td>
                       <button type="button" class="btn btn-default btn-sm" ng-show="valuesEditable()"  ng-click="removeProdukt(abotypLieferung, korbprodukt)"><span class="fa fa-times"></span></button>
