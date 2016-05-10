@@ -19,20 +19,20 @@
       </div>
       <div ng-show="entries" id="produktTable" display-export="true" export-file-name="Produkte">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="produkt in $data | filter: search.query.$">
+          <tr ng-repeat="produkt in $data track by produkt.id">
             <td data-title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
               <span ng-hide="produkt.editable">{{produkt.name}}</span>
               <span ng-show="produkt.editable">
                 <input type="text" class="form-control" name="kurzzeichen" ng-model="produkt.name" maxlength="140" placeholder="{{'Neue Bezeichnung'|translate}}" required>
               </span>
             </td>
-            <td data-title="'Von'|translate" sortable="'verfuegbarVon'">
+            <td data-title="'Von'|translate">
               <span ng-hide="produkt.editable">{{getMonthShort(produkt.verfuegbarVon)|translate}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="verfuegbarVon" display-style="uib-dropdown" values="monate" selected-prop="id" property="shortLabel" selected="produkt.verfuegbarVon" ng-required></oo-dropdown>
               </span>
             </td>
-            <td data-title="'Bis'|translate" sortable="'verfuegbarBis'">
+            <td data-title="'Bis'|translate">
               <span ng-hide="produkt.editable">{{getMonthShort(produkt.verfuegbarBis)|translate}}</span>
               <span ng-show="produkt.editable">
                 <oo-dropdown dropdown-id="verfuegbarBis" display-style="uib-dropdown" values="monate" selected-prop="id" property="shortLabel" selected="produkt.verfuegbarBis" ng-required></oo-dropdown>

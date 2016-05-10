@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title"><span>#{{abo.id}} </span><span translate>Abo für</span><span> {{kunde.bezeichnung}}</span>
+    <h3 class="panel-title"><span><span translate>Abo</span> #{{abo.id}}</span>
         <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
         <div uib-dropdown class="btn-group pull-right" role="group">
           <oo-actions-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" actions="actions" on-created="backToList">{{'Abo'|translate}}</oo-actions-button>
@@ -11,7 +11,7 @@
     <script type="text/ng-template" id="kuendigungsterminTooltipTemplate.html">
       <span translate>Die Kündigungs muss bis spätestens am <b>{{kuendigungsfrist(abo) | date: 'EEE, dd.MM.yyyy'}}</b> eingereicht werden</span>
     </script>
-    <form name="depotForm">      
+    <form name="depotForm">
       <div class="row form-group" ng-if="abo.ende === undefined">
         <div class="col-md-12">
           <div class="alert alert-info" role="alert"  ng-if="abo.abotyp.laufzeiteinheit === 'Unbeschraenkt'">
@@ -25,6 +25,12 @@
             Keine Lieferungen mehr ausstehend
           </div>
         </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-3">
+          <label translate>Kunde</label>
+        </div>
+        <div class="col-md-9">{{kunde.bezeichnung}}</div>
       </div>
       <div class="row form-group">
         <div class="col-md-3">
@@ -62,7 +68,9 @@
             </span>
           </p>
         </div>
-        <div class="col-md-4">
+      </div>
+      <div class="row form-group">
+        <div class="col-md-offset-3 col-md-4">
           <p class="input-group">
             <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" enable-time="false" min-date="abo.start" />
             <span class="input-group-btn">
@@ -75,7 +83,10 @@
         <div class="col-md-3">
           <label translate>Guthaben</label>
         </div>
-        <div class="col-md-9" tooltip-popup-close-delay="500" uib-tooltip-html="guthabenTooltip(abo)"><span ng-class="guthabenClass(abo)">{{aboGuthaben(abo)}}</span></div>
+        <div class="col-md-9">
+          <span ng-class="guthabenClass(abo)">{{aboGuthaben(abo)}}</span>
+          <span class="fa fa-info-circle" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="guthabenTooltip(abo)"></span>
+        </div>
       </div>
       <div class="row form-group">
         <div class="col-md-4">

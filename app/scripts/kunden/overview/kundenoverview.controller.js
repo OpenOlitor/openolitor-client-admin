@@ -26,25 +26,7 @@ angular.module('openolitor')
             });
             $scope.tableParams.reload();
           }
-        });
-
-      $scope.dummyEntries = [{
-        id: '614275dc-29f5-4aa9-86eb-36ee873778b8',
-        bezeichnung: 'Calvert Joshua',
-        strasse: 'Jupiterstrasse',
-        hausNummer: 40,
-        plz: 3020,
-        ort: 'Bern',
-        typen: ['Goenner', 'Vereinsmitglied']
-      }, {
-        id: '88827d1d-293c-405a-b0fb-aa392efe6d50',
-        bezeichnung: 'WG Bern',
-        strasse: 'Jupiterstrasse',
-        hausNummer: 23,
-        plz: 3015,
-        ort: 'Bern',
-        typen: ['Vereinsmitglied']
-      }];
+      });
 
       $scope.search = {
         query: ''
@@ -77,13 +59,13 @@ angular.module('openolitor')
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
               $scope.search.query);
-            var orderedData = params.sorting ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
-              filteredData;
-            orderedData = $filter('filter')($scope.entries, params.filter());
+            var orderedData = $filter('filter')(filteredData, params.filter());
+            orderedData = params.sorting ?
+              $filter('orderBy')(orderedData, params.orderBy()) :
+              orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
 
         });
@@ -93,7 +75,6 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
 
         $scope.loading = true;
@@ -103,8 +84,6 @@ angular.module('openolitor')
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
-        //$scope.entries = $scope.dummyEntries;
 
       }
 

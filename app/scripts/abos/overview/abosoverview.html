@@ -28,19 +28,19 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[abo.id]" />
               </td>
-              <td data-title="'Nr.'|translate" sortable="'abo.id'" filter="{id: 'number'}">
+              <td data-title="'Nr.'|translate" sortable="'id'" filter="{id: 'number'}">
                 <a ng-click="selectAbo(abo)">{{abo.id}}</a>
               </td>
-              <td data-title="'Abotyp'|translate" sortable="'abo.abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
+              <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
               </td>
-              <td data-title="'Abonnentin'|translate" sortable="'abo.kunde'">
+              <td data-title="'Abonnentin'|translate" sortable="'kunde'">
                 <a ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
               </td>
-              <td data-title="'Start'|translate" sortable="'abo.start'">
+              <td data-title="'Start'|translate" sortable="'start'">
                 {{abo.start | date:'dd.MM.yyyy'}}
               </td>
-              <td data-title="'Ende'|translate" sortable="'abo.ende'">
+              <td data-title="'Ende'|translate" sortable="'ende'">
                 {{abo.ende | date:'dd.MM.yyyy'}}
               </td>
               <td data-title="'Depot/Tour'|translate">
