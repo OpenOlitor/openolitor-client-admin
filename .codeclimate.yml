@@ -1,2 +1,14 @@
-exclude_paths:
-- "Gruntfile.js"
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+ratings:
+  paths:
+  - app/**
+
