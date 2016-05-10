@@ -87,7 +87,7 @@ angular.module('openolitor')
           page: 1,
           count: 10,
           sorting: {
-            kunde: 'asc'
+            id: 'asc'
           },
           filter: { abotypId: '' }
         }, {
@@ -102,13 +102,13 @@ angular.module('openolitor')
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries, $scope
               .search.query);
-            var orderedData = params.sorting ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
-              filteredData;
-            orderedData = $filter('filter')($scope.entries, params.filter());
+            var orderedData = $filter('filter')(filteredData, params.filter());
+            orderedData = params.sorting ?
+              $filter('orderBy')(orderedData, params.orderBy()) :
+              orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
 
         });

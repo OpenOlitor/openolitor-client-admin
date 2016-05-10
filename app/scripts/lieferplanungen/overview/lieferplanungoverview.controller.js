@@ -20,7 +20,7 @@ angular.module('openolitor')
           page: 1,
           count: 10,
           sorting: {
-            name: 'asc'
+            nr: 'desc'
           }
         }, {
           filterDelay: 0,
@@ -32,13 +32,12 @@ angular.module('openolitor')
               return;
             }
             // use build-in angular filter
-            var orderedData = params.sorting ?
-              $filter('orderBy')($scope.entries, params.orderBy()) :
-              $scope.entries;
-            orderedData = $filter('filter')($scope.entries, params.filter());
+            var orderedData = $filter('filter')($scope.entries, params.filter());
+            orderedData = params.sorting ?
+              $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
 
         });

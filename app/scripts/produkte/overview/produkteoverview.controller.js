@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
-    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE) {
+    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
+    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE, lodash) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -40,7 +40,7 @@ angular.module('openolitor')
             angular.forEach(list, function(item) {
               if (item.id) {
                 $scope.kategorienL.push({
-                  'id': item.id,
+                  'id': item.beschreibung,
                   'title': item.beschreibung
                 });
               }
@@ -57,7 +57,7 @@ angular.module('openolitor')
             angular.forEach(list, function(item) {
               if (item.id) {
                 $scope.produzentenL.push({
-                  'id': item.id,
+                  'id': item.kurzzeichen,
                   'title': item.kurzzeichen
                 });
               }
@@ -87,13 +87,12 @@ angular.module('openolitor')
       if (!$scope.tableParams) {
         //use default tableParams
         $scope.tableParams = new ngTableParams({ // jshint ignore:line
-          page: 1,
           count: 10,
           sorting: {
             name: 'asc'
           }
         }, {
-          filterDelay: 0,
+          filterDelay: 400,
           groupOptions: {
             isExpanded: true
           },
@@ -103,15 +102,14 @@ angular.module('openolitor')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope
-              .search.query);
-            var orderedData = params.sorting ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
+              $scope.search.query);
+            var orderedData = $filter('filter')(filteredData, params.filter());
+            orderedData = params.sorting ?
+              $filter('orderBy')(orderedData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')($scope.entries, params.filter());
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
 
         });
@@ -195,6 +193,17 @@ angular.module('openolitor')
         };
         return addKategorie;
       };
+
+      var throttledReload = lodash.throttle(function() {
+          $scope.tableParams.reload();
+      }, 200);
+      $scope.$watch('search.query.$',
+        function(newVal, oldVal) {
+          if(newVal !== oldVal) {
+            throttledReload();
+          }
+        }
+      );
 
     }
   ]);

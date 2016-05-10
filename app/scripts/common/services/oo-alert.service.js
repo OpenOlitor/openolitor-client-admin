@@ -13,7 +13,7 @@
 
     return {
       /**
-       * Add an alert to the global scope using type (error, info, warning)
+       * Add an alert to the global scope using type (error, lighterror, info, warning)
        */
       addAlert: function(type, msg) {
         var message = {
@@ -26,14 +26,15 @@
         $rootScope.alerts.push(message);
 
         // If it's an info message, automatically remove the element after 1 second.
-        if (type === 'info') {
+        if (type === 'info' || type === 'lighterror') {
+          var displayTime = (type === 'info') ? 1000 : 3000;
           $timeout(function() {
             var index = $rootScope.alerts.indexOf(message);
 
             if (index > -1) {
               $rootScope.alerts.splice(index, 1);
             }
-          }, 1000, true);
+          }, displayTime, true);
         }
       },
 
