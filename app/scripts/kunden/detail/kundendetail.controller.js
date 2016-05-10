@@ -261,10 +261,16 @@ angular.module('openolitor')
             $scope.$apply();
           }
         } else if (msg.entity === 'Pendenz') {
-          lodash.map(lodash.filter($scope.kunde.pendenzen, function(p) {
-            return p.pid === undefined;
-          }), function(p) {
+          var pendenzen = lodash.filter($scope.kunde.pendenzen, function(
+            p) {
+            return p.id === undefined &&
+              moment(p.datum).startOf('day').isSame(moment(msg.data.datum)
+                .startOf('day')) &&
+              p.bemerkung === msg.data.bemerkung;
+          });
+          lodash.map(pendenzen, function(p) {
             p.editable = false;
+            p.id = msg.data.id;
           });
           $scope.$apply();
         } else if (msg.entity === 'Person') {
