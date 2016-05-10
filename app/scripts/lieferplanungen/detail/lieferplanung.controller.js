@@ -504,6 +504,23 @@ angular.module('openolitor')
         });
       };
 
+      $scope.bestellungVersenden = function(bestellungId) {
+        LieferplanungModel.bestellungVersenden({
+          id: $routeParams.id,
+          bestellungId: bestellungId
+        }, function() {
+
+        });
+      };
+
+      $scope.bestellungenErstellen = function() {
+        LieferplanungModel.bestellungenErstellen({
+          id: $routeParams.id
+        }, function() {
+
+        });
+      };
+
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Lieferplanung') {
           $rootScope.$apply();

@@ -11,7 +11,7 @@
                   Planung #{{planung.nr}}: Korbinhalt
                 </div>
                 <div class="col-md-2">
-                  <ul class="nav navbar-nav">
+                  <ul class="nav navbar-nav" ng-show="valuesEditable()">
                     <li class="small" translate>Abotyp hinzufügen:</li>
                     <li>
                       <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="addAbotypenL" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
@@ -22,8 +22,8 @@
                   <div class="pull-right" role="group">
                     <button type="button" role="button" ng-click="recalculateBestellungen(); displayMode = 'lieferanten'" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
                     <oo-save-button ng-show="planung.status === 'Offen'" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
-                    <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span</button>
-                      <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span</button>
+                    <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
+                    <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
                   </div>
                 </div>
               </h3>
@@ -149,8 +149,9 @@
                 <div class="col-md-8">
                   <div class="pull-right" role="group">
                     <button type="button" role="button" ng-click="displayMode = 'korbinhalt'" class="btn btn-default"><span class="fa fa-step-backward"></span> <span translate>Übersicht der Körbe</span></button>
-                    <oo-save-button model="kunde" form="kundeForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
-                    <button role="button" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
+                    <oo-save-button ng-show="planung.status === 'Offen'" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
+                    <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
+                    <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
                   </div>
                 </div>
               </h3>
@@ -162,6 +163,9 @@
             <div class="panel panel-default">
               <div class="panel-heading clearfix">
                 <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzentKurzzeichen}}</span></h3>
+                <div class="pull-right" role="group">
+                  <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="bestellungVersenden(bestellung.id)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung erneut versenden</span></button>
+                </div>
               </div>
               <div class="panel-body" ng-repeat="(id, lieferung) in bestellung.lieferungen">
                 <span translate>Lieferung vom</span> {{lieferung.datum | date}}
