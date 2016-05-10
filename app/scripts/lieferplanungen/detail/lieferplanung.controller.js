@@ -443,6 +443,7 @@ angular.module('openolitor')
 
       $scope.save = function() {
         if($scope.checkAllValues()) {
+          $scope.editNachAbgeschlossen = false;
           angular.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
             LieferplanungModel.saveLieferpositionen({
               id: $routeParams.id,
@@ -480,11 +481,13 @@ angular.module('openolitor')
         $location.path('/lieferplanung');
       };
 
+      $scope.editNachAbgeschlossen = false;
+
       $scope.valuesEditable = function() {
         if(angular.isUndefined($scope.planung)) {
           return false;
         } else {
-          return $scope.planung.status === LIEFERSTATUS.OFFEN;
+          return $scope.planung.status === LIEFERSTATUS.OFFEN || $scope.editNachAbgeschlossen;
         }
       };
 

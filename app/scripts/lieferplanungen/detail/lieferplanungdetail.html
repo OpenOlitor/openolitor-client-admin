@@ -21,7 +21,8 @@
                 <div class="col-md-6">
                   <div class="pull-right" role="group">
                     <button type="button" role="button" ng-click="recalculateBestellungen(); displayMode = 'lieferanten'" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
-                    <oo-save-button ng-show="planung.status === 'Offen'" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
+                    <button role="button" ng-show="planung.status === 'Abgeschlossen' && !editNachAbgeschlossen" ng-click="editNachAbgeschlossen = true" class="btn btn-warning"><span class="fa fa-pencil-square-o"></span> <span translate>Planung editieren</span></button>
+                    <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
                     <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
                     <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
                   </div>
@@ -149,7 +150,7 @@
                 <div class="col-md-8">
                   <div class="pull-right" role="group">
                     <button type="button" role="button" ng-click="displayMode = 'korbinhalt'" class="btn btn-default"><span class="fa fa-step-backward"></span> <span translate>Übersicht der Körbe</span></button>
-                    <oo-save-button ng-show="planung.status === 'Offen'" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
+                    <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
                     <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
                     <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
                   </div>
