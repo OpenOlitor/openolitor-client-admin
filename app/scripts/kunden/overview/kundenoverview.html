@@ -36,7 +36,7 @@
               {{kunde.anzahlAbos}}
             </td>
             <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="kundentypen">
-              <span ng-repeat="typ in kunde.typen" class="badge">
+              <span ng-repeat="typ in kunde.typen" class="badge" ng-if="typ !== ''">
                 {{typ|translate}}
               </span>
             </td>

@@ -60,7 +60,7 @@
               </span>
             </td>
             <td data-title="'Kategorien'|translate" filter="{kategorien: 'select'}" filter-data="kategorienL" ng-class="[{'col-md-3': produkt.editable}]">
-              <span ng-repeat="kategorie in produkt.kategorien" class="badge">
+              <span ng-repeat="kategorie in produkt.kategorien" class="badge" ng-if="kategorie !== ''">
                 {{kategorie}}
                 <span ng-show="produkt.editable" ng-click="removeKategorie(produkt, kategorie)" class="glyphicon glyphicon-remove"></span>
               </span>
@@ -69,7 +69,7 @@
               </span>
             </td>
             <td data-title="'Produzenten'|translate" filter="{produzenten: 'select'}" filter-data="produzentenL" ng-class="[{'col-md-3': produkt.editable}]">
-              <span ng-repeat="produzent in produkt.produzenten" class="badge">
+              <span ng-repeat="produzent in produkt.produzenten" class="badge" ng-if="produzent !== ''">
                 {{produzent}}
                 <span ng-show="produkt.editable" ng-click="removeProduzent(produkt, produzent)" class="glyphicon glyphicon-remove"></span>
               </span>
