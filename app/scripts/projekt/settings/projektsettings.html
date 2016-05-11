@@ -91,7 +91,7 @@
                   <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch noop-switch-readonly="!editMode" ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
               <div class="row form-group" ng-show="projekt.preiseSichtbar">
@@ -99,7 +99,7 @@
                   <label for="preiseEditierbar" translate>Preise editierbar</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch noop-switch-readonly="!editMode" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
               <div class="row form-group">
@@ -107,7 +107,7 @@
                   <label for="emailErforderlich" translate>Kunden E-Mail erforderlich</label>
                 </div>
                 <div class="col-md-4">
-                  <input bs-switch noop-switch-readonly="!editMode" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
             </div>
@@ -146,7 +146,7 @@
             <h3 class="panel-title"><span class="navbar-brand" translate>Kundentypen</span>
               <form name="createKundentypForm" class="navbar-form pull-right">
                 <div class="form-group" ng-class="{ 'has-error' : createKundentypForm.kundentyp.$invalid && createKundentypForm.kundentyp.$touched }" >
-                  <input type="text" name="kundentyp" class="form-control" placeholder="{{'Kundentyp Name...'|translate}}" ng-model="templateKundentyp.kundentyp" required>
+                  <input type="text" name="kundentyp" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Kundentyp Name...'|translate}}" ng-model="templateKundentyp.kundentyp" required>
                   <a ng-disabled="createKundentypForm.$invalid || templateKundentyp.creating" role="button" ng-href="" ng-click="addKundentyp()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateKundentyp.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
                   <a role="button" ng-click="saveKundentypen()" ng-disabled="templateKundentyp.updating || !hasChangesKundentypen()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateKundentyp.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
                 </div>
@@ -188,9 +188,9 @@
             <h3 class="panel-title"><span class="navbar-brand" translate>Produktekategorien</span>
               <form name="createProduktekategorieForm" class="navbar-form pull-right">
                 <div class="form-group" ng-class="{ 'has-error' : createProduktekategorieForm.produktekategorie.$invalid && createProduktekategorieForm.produktekategorie.$touched }" >
-                  <input type="text" name="produktekategorie" class="form-control" placeholder="{{'Produktekategorie Name...'|translate}}" ng-model="templateProduktekategorie.produktekategorie" required>
+                  <input type="text" name="produktekategorie" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Produktekategorie Name...'|translate}}" ng-model="templateProduktekategorie.produktekategorie" required>
                   <a ng-disabled="createProduktekategorieForm.$invalid || templateProduktekategorie.creating" role="button" ng-href="" ng-click="addProduktekategorie()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateProduktekategorie.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                  <a role="button" ng-click="saveProduktekategorie()" ng-disabled="templateProduktekategorie.updating || !hasChangesProduktekategorien()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateProduktekategorie.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                  <a role="button" ng-click="saveProduktekategorie()" ng-disabled="settingsForm.$invalid || templateProduktekategorie.updating || !hasChangesProduktekategorien()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateProduktekategorie.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
                 </div>
               </form>
             </h3>
@@ -204,7 +204,7 @@
                 <table ng-table="produktekategorienTableParams" class="table table-striped">
                   <tr ng-repeat="produktekategorie in $data">
                     <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
-                      <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedProduktekategorie(produktekategorie)"></input>
+                      <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedProduktekategorie(produktekategorie)"></input>
                     </td>
                     <td>
                       <a href="" ng-click="deleteProduktekategorie(produktekategorie)" ng-hide="deletingProduktekategorie(produktekategorie)"><i class="fa fa-times"></i></a>
