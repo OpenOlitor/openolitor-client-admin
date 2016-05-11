@@ -442,6 +442,11 @@ angular
         controller: 'ZahlungsImportsController',
         name: 'ZahlungsImports'
       })
+      .when('/zahlungsimports/:id', {
+        templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
+        controller: 'ZahlungsImportsController',
+        name: 'ZahlungsImports'
+      })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',

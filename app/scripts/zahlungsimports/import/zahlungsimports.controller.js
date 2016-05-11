@@ -47,5 +47,13 @@ angular.module('openolitor')
           console.log('Error status: ' + errorResponse.status);
         });
       };
+
+      if ($routeParams.id) {
+        ZahlungsImportsModel.get({
+          id: $routeParams.id
+        }, function(result) {
+          $scope.zahlungsImport = result;
+        });
+      }
     }
   ]);
