@@ -137,9 +137,14 @@ angular.module('openolitor')
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
-          return $q.when($location.path('kunden/' + getKundeId() + '/abos/' + getAboId() + '/rechnungen/new'));
+          return $q.when($location.path('kunden/' + getKundeId() +
+            '/abos/' + getAboId() + '/rechnungen/new'));
         }
       }];
+
+      $scope.save = function() {
+        return $scope.abo.$save();
+      };
 
       function vertriebsartLabel(vertriebsart) {
         switch (vertriebsart.typ) {

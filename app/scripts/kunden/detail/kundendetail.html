@@ -279,8 +279,13 @@
                 <div class="col-md-6">
                   <input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown>
+                </div>
+                <div class="col-md-2">
+                  <div class="pull-right" ng-if="!pendenz.generiert">
+                    <a role="button" class="btn btn-sm btn-primary" ng-click="savePendenz(pendenz)"><i class="fa fa-floppy-o"></i></a>
+                  </div>
                 </div>
               </div>
 

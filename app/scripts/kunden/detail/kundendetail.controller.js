@@ -6,13 +6,15 @@ angular.module('openolitor')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
+    'PendenzDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
     'msgBus', 'lodash', 'KundenRechnungenModel',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
-      KundenDetailModel, KundentypenService, alertService, EnumUtil, DataUtil,
+      KundenDetailModel, PendenzDetailModel, KundentypenService, alertService,
+      EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel) {
 
@@ -66,28 +68,6 @@ angular.module('openolitor')
         $scope.loadKunde();
       }
 
-      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
-        if (msg.entity === 'Kunde') {
-          $scope.$apply();
-        }
-      });
-
-      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
-        if (msg.entity === 'Person') {
-          if ($scope.kunde && $scope.kunde.ansprechpersonen) {
-            angular.forEach($scope.kunde.ansprechpersonen, function(
-              person) {
-              if (person.anrede === msg.data.anrede && person.vorname ===
-                msg.data.vorname && person.name === msg.data.name) {
-                //set id that entity won't get created twice
-                person.id = msg.data.id;
-                $scope.$apply();
-                return;
-              }
-            });
-          }
-        }
-      });
 
       $scope.open = {
         pendenzdatum: false,
@@ -186,7 +166,19 @@ angular.module('openolitor')
         var index = $scope.kunde.pendenzen.indexOf(pendenz);
         if (index > -1) {
           $scope.kunde.pendenzen.splice(index, 1);
+          //remove as well from remote side
+          var p = lodash.extend({
+            kundeId: $routeParams.id
+          }, pendenz);
+          new PendenzDetailModel(p).$delete();
         }
+      };
+
+      $scope.savePendenz = function(pendenz) {
+        var p = lodash.extend({
+          kundeId: $routeParams.id
+        }, pendenz);
+        new PendenzDetailModel(p).$save();
       };
 
       $scope.isExisting = function() {
@@ -210,9 +202,6 @@ angular.module('openolitor')
         if ($scope.kunde.ansprechpersonen.length === 1) {
           $scope.kunde.bezeichnung = undefined;
         }
-        angular.forEach($scope.kunde.pendenzen, function(value) {
-          value.editable = false;
-        });
         return $scope.kunde.$save();
       };
 
@@ -271,6 +260,32 @@ angular.module('openolitor')
             alertService.addAlert('info', 'Abo wurde erstellt');
             $scope.$apply();
           }
+        } else if (msg.entity === 'Pendenz') {
+          var pendenzen = lodash.filter($scope.kunde.pendenzen, function(
+            p) {
+            return p.id === undefined &&
+              moment(p.datum).startOf('day').isSame(moment(msg.data.datum)
+                .startOf('day')) &&
+              p.bemerkung === msg.data.bemerkung;
+          });
+          lodash.map(pendenzen, function(p) {
+            p.editable = false;
+            p.id = msg.data.id;
+          });
+          $scope.$apply();
+        } else if (msg.entity === 'Person') {
+          if ($scope.kunde && $scope.kunde.ansprechpersonen) {
+            angular.forEach($scope.kunde.ansprechpersonen, function(
+              person) {
+              if (person.anrede === msg.data.anrede && person.vorname ===
+                msg.data.vorname && person.name === msg.data.name) {
+                //set id that entity won't get created twice
+                person.id = msg.data.id;
+                $scope.$apply();
+                return;
+              }
+            });
+          }
         }
       });
 
@@ -285,6 +300,15 @@ angular.module('openolitor')
               }
             });
           }
+        } else if (msg.entity === 'Pendenz') {
+          lodash.map(lodash.filter($scope.kunde.pendenzen, function(p) {
+            return p.id === msg.data.id;
+          }), function(p) {
+            p.editable = false;
+          });
+          $scope.$apply();
+        } else if (msg.entity === 'Kunde') {
+          $scope.$apply();
         }
       });
     }
