@@ -25,8 +25,7 @@ angular.module('openolitor')
           count: 10,
           sorting: {
             name: 'asc'
-          },
-          filter: { status: '' }
+          }
         }, {
           filterDelay: 0,
           groupOptions: {
