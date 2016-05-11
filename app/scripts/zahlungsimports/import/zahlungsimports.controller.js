@@ -4,20 +4,18 @@
  */
 angular.module('openolitor')
   .controller('ZahlungsImportsController', ['$scope', '$rootScope', '$filter',
-    '$routeParams', '$http',
-    '$location', '$uibModal', 'gettext', 'ZahlungsImportsModel',
-    'EnumUtil', 'API_URL', 'msgBus',
+    '$routeParams',
+    '$http',
+    '$location',
+    '$uibModal',
+    'gettext',
+    'ZahlungsImportsModel',
+    'EnumUtil',
+    'API_URL',
+    'msgBus',
+    'Upload',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
-      gettext,
-      ZahlungsImportsModel, EnumUtil, API_URL,
-      msgBus) {
-
-      var defaults = {
-        model: {
-          id: undefined,
-        }
-      };
-
+      gettext, ZahlungsImportsModel, EnumUtil, API_URL, msgBus, Upload) {
       $scope.loading = false;
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
@@ -31,7 +29,23 @@ angular.module('openolitor')
       };
 
       $scope.delete = function() {
-        return $scope.zahlungsImport.$delete();
+        return $scope.zahlungsImport.$delete;
+      };
+
+      $scope.uploadZahlungsImportFile = function(file) {
+        if (!file) {
+          return;
+        }
+        Upload.upload({
+          url: API_URL + 'zahlungsimports',
+          data: {
+            file: file
+          }
+        }).then(function(response) {
+          console.log('Success: ', response.data);
+        }, function(errorResponse) {
+          console.log('Error status: ' + errorResponse.status);
+        });
       };
     }
   ]);
