@@ -20,14 +20,11 @@
         <div ng-show="entries" id="zahlungsImportsTable" display-export="true" export-file-name="ZahlungsImports">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="zahlungsImport in $data | filter: search.query.$">
-              <td data-title="'Titel'|translate" sortable="'titel'">
-                <a ng-href="#/zahlungsimports/{{zahlungsImport.id}}">{{zahlungsImport.titel}}</a>
+              <td data-title="'Nr.'|translate" sortable="'id'">
+                <a ng-href="#/zahlungsimports/{{zahlungsImport.id}}">#{{zahlungsImport.id}}</a>
               </td>
-              <td data-title="'Betrag'|translate" sortable="'betrag'">
-                {{zahlungsImport.betrag}}
-              </td>
-              <td data-title="'Status'|translate" sortable="'status'">
-                {{zahlungsImport.status}}
+              <td data-title="'Erledigte Eingänge'|translate" sortable="'anzahlZahlungsEingaengeErledigt'">
+                {{zahlungsImport.anzahlZahlungsEingaengeErledigt}} / {{ zahlungsImport.anzahlZahlungsEingaenge }}
               </td>
             </tr>
           </table>
