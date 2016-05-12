@@ -15,8 +15,9 @@ angular.module('openolitor')
     'API_URL',
     'msgBus',
     'Upload',
+    'lodash',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
-      gettext, ZahlungsImportsModel, ZahlungsEingaengeModel, EnumUtil, API_URL, msgBus, Upload) {
+      gettext, ZahlungsImportsModel, ZahlungsEingaengeModel, EnumUtil, API_URL, msgBus, Upload, _) {
       $scope.loading = false;
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
@@ -42,9 +43,7 @@ angular.module('openolitor')
           data: {
             file: file
           }
-        }).then(function(response) {
-          console.log('Success: ', response.data);
-        }, function(errorResponse) {
+        }).then(function() {}, function(errorResponse) {
           console.log('Error status: ' + errorResponse.status);
         });
       };
@@ -62,9 +61,7 @@ angular.module('openolitor')
           zahlungsImportId: $scope.zahlungsImport.id,
           id: zahlungsEingang.id,
           bemerkung: zahlungsEingang.bemerkung
-        }, function(result) {
-          console.log('erledigt', result);
-        });
+        }, function() {});
       };
 
       $scope.automatischErledigen = function() {
@@ -75,9 +72,25 @@ angular.module('openolitor')
             zahlungsImportId: $scope.zahlungsImport.id,
           },
           entities,
-          function(result) {
-            console.log('auto erledigt', result);
-          });
+          function() {});
       };
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'ZahlungsImport') {
+          $location.path('/zahlungsimports/' + msg.data.id);
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'ZahlungsEingang') {
+          var eingang = msg.data;
+          var i = _.findIndex($scope.zahlungsImport.zahlungsEingaenge, function(e) {
+            return e.id === eingang.id;
+          });
+          $scope.zahlungsImport.zahlungsEingaenge[i] = eingang;
+          $scope.$apply();
+        }
+      });
     }
   ]);
