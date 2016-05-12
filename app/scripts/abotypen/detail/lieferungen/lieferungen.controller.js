@@ -32,7 +32,7 @@ angular.module('openolitor')
         var newModel = new LieferungenListModel({
           datum: $scope.template.datum,
           abotypId: parseInt($routeParams.id),
-          vertriebsartId: $scope.selectedVertriebsart.id
+          vertriebId: $scope.selectedVertrieb.id
         });
         newModel.$save();
         $scope.template.creating = $scope.template.creating + 1;
@@ -151,9 +151,9 @@ angular.module('openolitor')
 
       load();
 
-      msgBus.onMsg('VertriebsartSelected', $scope, function(event, msg) {
-        $scope.selectedVertriebsart = msg.vertriebsart;
-        if ($scope.selectedVertriebsart) {
+      msgBus.onMsg('VertriebSelected', $scope, function(event, msg) {
+        $scope.selectedVertrieb = msg.vertrieb;
+        if ($scope.selectedVertrieb) {
           load();
         }
       });

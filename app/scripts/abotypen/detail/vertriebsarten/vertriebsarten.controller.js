@@ -4,80 +4,122 @@
  */
 angular.module('openolitor')
   .controller('VertriebsartenListController', ['$scope', '$routeParams',
-    'EnumUtil', 'DataUtil', 'msgBus',
+    'EnumUtil', 'DataUtil', 'msgBus', 'VertriebeListModel',
     'VertriebsartenListModel', 'DepotsOverviewModel', 'TourenModel',
     'VERTRIEBSARTEN',
 
     function($scope, $routeParams, EnumUtil, DataUtil,
-      msgBus, VertriebsartenListModel, DepotsOverviewModel, TourenModel,
+      msgBus, VertriebeListModel, VertriebsartenListModel, DepotsOverviewModel, TourenModel,
       VERTRIEBSARTEN) {
 
-      $scope.updatingVertriebsart = {};
+      $scope.updatingVertrieb = {};
       $scope.status = {
         open: false
       };
 
       $scope.vertriebsartenTypen = EnumUtil.asArray(VERTRIEBSARTEN);
-      $scope.vertriebsarten = undefined;
+      $scope.vertriebe = undefined;
 
-      $scope.addVertriebsart = function(typ) {
-        var newModel = new VertriebsartenListModel({
+      $scope.addVertrieb = function(typ) {
+        var newModel = new VertriebeListModel({
           typ: typ.id,
-          abotypId: $routeParams.id
+          abotypId: $routeParams.id,
+          vertriebsarten: []
         });
 
-        $scope.vertriebsarten.push(newModel);
+        $scope.vertriebe.push(newModel);
 
         $scope.status.open = false;
       };
 
-      $scope.updatingVertriebsart = function(vertriebsart) {
-        return vertriebsart.id && $scope.updatingVertriebsart[
-          vertriebsart.id];
+      $scope.updatingVertrieb = function(vertrieb) {
+        return vertrieb.id && $scope.updatingVertrieb[
+          vertrieb.id];
       };
 
-      $scope.deleteVertriebsart = function(vertriebsart) {
-        if (vertriebsart.id) {
-          $scope.updatingVertriebsart[vertriebsart.id] = true;
-          vertriebsart.$delete();
+      $scope.deleteVertrieb = function(vertrieb) {
+        if (vertrieb.id) {
+          $scope.updatingVertrieb[vertrieb.id] = true;
+          vertrieb.$delete();
         } else {
-          var index = $scope.vertriebsarten.indexOf(vertriebsart);
+          var index = $scope.vertriebe.indexOf(vertrieb);
           if (index > -1) {
-            $scope.vertriebsarten.splice(index, 1);
+            $scope.vertriebe.splice(index, 1);
           }
         }
       };
 
-      $scope.invalidVertriebsart = function(vertriebsart) {
-        if (VERTRIEBSARTEN.DEPOTLIEFERUNG === vertriebsart.typ) {
-          return !angular.isDefined(vertriebsart.depotId && vertriebsart.liefertag);
-        } else if (VERTRIEBSARTEN.HEIMLIEFERUNG === vertriebsart.typ) {
-          return !angular.isDefined(vertriebsart.tourId && vertriebsart.liefertag);
+      $scope.deleteVertriebsart = function(vertrieb, vertriebsart) {
+        if (vertriebsart.id) {
+          $scope.updatingVertrieb[vertrieb.id] = true;
+          vertriebsart.$delete();
         } else {
-          return !angular.isDefined(vertriebsart.liefertag);
+          var index = vertrieb.vertriebsarten.indexOf(vertriebsart);
+          if (index > -1) {
+            vertrieb.vertriebsarten.splice(index, 1);
+          }
         }
       };
 
-      $scope.updateVertriebsart = function(vertriebsart) {
-        $scope.updatingVertriebsart[vertriebsart.id] = true;
-        vertriebsart.$save();
+      $scope.invalidVertrieb = function(vertrieb) {
+        if (VERTRIEBSARTEN.DEPOTLIEFERUNG === vertrieb.typ || VERTRIEBSARTEN.HEIMLIEFERUNG === vertrieb.typ) {
+          return !angular.isDefined(vertrieb.vertriebsarten.length > 0 && vertrieb.liefertag);
+        } else {
+          return !angular.isDefined(vertrieb.liefertag);
+        }
       };
 
-      $scope.selectVertriebsart = function(vertriebsart) {
-        if ($scope.selectedVertriebsart === vertriebsart) {
-          $scope.selectedVertriebsart = undefined;
+      $scope.updateVertrieb = function(vertrieb) {
+        angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
+          vertriebsart.$save();
+        });
+        $scope.updatingVertrieb[vertrieb.id] = true;
+        vertrieb.$save();
+      };
+
+      $scope.selectVertrieb = function(vertrieb) {
+        if ($scope.selectedVertrieb === vertrieb) {
+          $scope.selectedVertrieb = undefined;
         } else {
-          $scope.selectedVertriebsart = vertriebsart;
+          $scope.selectedVertrieb = vertrieb;
         }
         var msg = {
-          type: 'VertriebsartSelected',
-          vertriebsart: $scope.selectedVertriebsart
+          vertriebsart: $scope.selectedVertrieb
         };
         msgBus.emitMsg(msg);
       };
 
+      $scope.addVertriebsartFunc = function() {
+        var addVertriebsart = function(vertriebsart, vertrieb) {
+          if(vertrieb.vertriebsarten.indexOf(vertriebsart) === -1 ) {
+
+            var model = {
+              typ: vertrieb.typ,
+              abotypId: $routeParams.id,
+              vertriebId: vertrieb.id
+            };
+
+            if($scope.isDepot(vertrieb)) {
+              model.depot = {name: vertriebsart.name};
+              model.depotId = vertriebsart.id;
+            }
+
+            if($scope.isHeimlieferung(vertrieb)) {
+              model.tour = {name: vertriebsart.name};
+              model.tourId = vertriebsart.id;
+            }
+
+            var newModel = new VertriebsartenListModel(model);
+
+            vertrieb.vertriebsarten.push(newModel);
+          }
+          return true; //reset dropdown
+        };
+        return addVertriebsart;
+      };
+
       $scope.vertriebsartClass = function(vertriebsart) {
-        return ($scope.selectedVertriebsart ===
+        return ($scope.selectedVertrieb ===
           vertriebsart) ? 'active' : '';
       };
 
@@ -88,10 +130,23 @@ angular.module('openolitor')
         }
 
         $scope.loading = true;
-        $scope.vertriebsarten = VertriebsartenListModel.query({
+        $scope.vertriebe = VertriebeListModel.query({
           abotypId: $routeParams.id
-        }, function() {
-          $scope.loading = false;
+        }, function(vertriebe) {
+          angular.forEach(vertriebe, function(vertrieb) {
+            vertrieb.vertriebsarten = VertriebsartenListModel.query({
+              abotypId: $routeParams.id,
+              vertriebId: vertrieb.id
+            }, function(vertriebsarten) {
+              if(vertriebsarten.length > 0) {
+                vertrieb.typ = vertriebsarten[0].typ;
+              }
+              angular.forEach(vertriebsarten, function(vertriebsart) {
+                vertriebsart.abotypId = $routeParams.id;
+              });
+              $scope.loading = false;
+            });
+          });
         });
       }
 
@@ -99,7 +154,7 @@ angular.module('openolitor')
 
       var isEntity = function(entity) {
         return (entity === 'Depotlieferung' || entity === 'Postlieferung' ||
-          entity === 'Heimlieferung');
+          entity === 'Heimlieferung' || entity === 'Vertrieb');
       };
 
       // get data from backend
@@ -107,37 +162,38 @@ angular.module('openolitor')
 
       $scope.touren = TourenModel.query({});
 
-      $scope.isDepot = function(vertriebsart) {
-        return vertriebsart && VERTRIEBSARTEN.DEPOTLIEFERUNG ===
-          vertriebsart.typ;
+      $scope.isDepot = function(vertrieb) {
+        return vertrieb && VERTRIEBSARTEN.DEPOTLIEFERUNG ===
+          vertrieb.typ;
       };
 
-      $scope.isHeimlieferung = function(vertriebsart) {
-        return vertriebsart && VERTRIEBSARTEN.HEIMLIEFERUNG ===
-          vertriebsart.typ;
+      $scope.isHeimlieferung = function(vertrieb) {
+        return vertrieb && VERTRIEBSARTEN.HEIMLIEFERUNG ===
+          vertrieb.typ;
       };
 
-      $scope.isPreselectionComplete = function(vertriebsart) {
-        return vertriebsart && vertriebsart.typ;
+      $scope.isPreselectionComplete = function(vertrieb) {
+        return vertrieb && vertrieb.typ;
       };
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (isEntity(msg.entity)) {
-          $scope.updatingVertriebsart[msg.data.id] = undefined;
+          $scope.updatingVertrieb[msg.data.id] = undefined;
+          $scope.updatingVertrieb[msg.data.vertriebId] = undefined;
 
           //load vertriebsart from remote, we don't get full model within event
           var newVertriebsart = VertriebsartenListModel.get({
             id: msg.data.id,
             abotypId: $routeParams.id
           }, function() {
-            angular.forEach($scope.vertriebsarten, function(
-              vertriebsart) {
-              if (vertriebsart.id === msg.data.id) {
-                DataUtil.update(newVertriebsart, vertriebsart);
-              }
+            angular.forEach($scope.vertriebe, function(vertrieb) {
+              angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
+                if (vertriebsart.id === msg.data.id) {
+                  DataUtil.update(newVertriebsart, vertriebsart);
+                }
+              });
             });
           });
-
 
           $scope.$apply();
         }
@@ -145,7 +201,8 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (isEntity(msg.entity)) {
-          $scope.updatingVertriebsart[msg.data.id] = undefined;
+          $scope.updatingVertrieb[msg.data.id] = undefined;
+          $scope.updatingVertrieb[msg.data.vertriebId] = undefined;
 
           $scope.$apply();
         }
@@ -153,16 +210,26 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
         if (isEntity(msg.entity)) {
-          $scope.updatingVertriebsart[msg.data.id] = undefined;
-          angular.forEach($scope.vertriebsarten, function(
-            vertriebsart) {
-            if (vertriebsart.id === msg.data.id) {
-              var index = $scope.vertriebsarten.indexOf(
-                vertriebsart);
+          $scope.updatingVertrieb[msg.data.id] = undefined;
+          $scope.updatingVertrieb[msg.data.vertriebId] = undefined;
+          angular.forEach($scope.vertriebe, function(vertrieb) {
+            if (vertrieb.id === msg.data.id) {
+              var index = $scope.vertriebe.indexOf(
+                vertrieb);
               if (index > -1) {
-                $scope.vertriebsarten.splice(index, 1);
+                $scope.vertriebe.splice(index, 1);
               }
             }
+
+            angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
+              if (vertriebsart.id === msg.data.id) {
+                var index = vertrieb.vertriebsarten.indexOf(
+                  vertriebsart);
+                if (index > -1) {
+                  vertrieb.vertriebsarten.splice(index, 1);
+                }
+              }
+            });
           });
 
           $scope.$apply();
