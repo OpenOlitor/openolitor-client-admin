@@ -34,13 +34,13 @@ function convertDateStringsToDates(input) {
 
 function addExtendedEnumValue(id, labelLong, labelShort, value) {
   return {
-      id: id,
-      label: {
-        long: labelLong,
-        short: labelShort
-      },
-      value: value
-    };
+    id: id,
+    label: {
+      long: labelLong,
+      short: labelShort
+    },
+    value: value
+  };
 }
 
 /* This is a pseudo-function in order to enable gettext-extractor to find the translations that need to be done in the constants.
@@ -129,41 +129,59 @@ angular
     STUECK: addExtendedEnumValue('Stueck', gettext('Stück'), gettext('St.')),
     BUND: addExtendedEnumValue('Bund', gettext('Bund'), gettext('Bu.')),
     GRAMM: addExtendedEnumValue('Gramm', gettext('Gramm'), gettext('gr')),
-    KILOGRAMM: addExtendedEnumValue('Kilogramm', gettext('Kilogramm'), gettext('kg')),
+    KILOGRAMM: addExtendedEnumValue('Kilogramm', gettext('Kilogramm'),
+      gettext('kg')),
     LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l'))
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
   .constant('WAEHRUNG', {
-    CHF: addExtendedEnumValue('CHF', gettext('Schweizer Franken'), gettext('CHF')),
+    CHF: addExtendedEnumValue('CHF', gettext('Schweizer Franken'), gettext(
+      'CHF')),
     EUR: addExtendedEnumValue('EUR', gettext('Euro'), gettext('EUR')),
     USD: addExtendedEnumValue('USD', gettext('US Dollar'), gettext('USD')),
-    GBP: addExtendedEnumValue('GBP', gettext('Britisches Pfund'), gettext('GBP')),
-    CAD: addExtendedEnumValue('CAD', gettext('Kanadischer Dollar'), gettext('CAD'))
+    GBP: addExtendedEnumValue('GBP', gettext('Britisches Pfund'), gettext(
+      'GBP')),
+    CAD: addExtendedEnumValue('CAD', gettext('Kanadischer Dollar'), gettext(
+      'CAD'))
   })
   .constant('LIEFERZEITPUNKTE', {
-    MONTAG: addExtendedEnumValue('Montag', gettext('Montag'), gettext('MO'), 1),
-    DIENSTAG: addExtendedEnumValue('Dienstag', gettext('Dienstag'), gettext('DI'), 2),
-    MITTWOCH: addExtendedEnumValue('Mittwoch', gettext('Mittwoch'), gettext('MI'), 3),
-    DONNERSTAG: addExtendedEnumValue('Donnerstag', gettext('Donnerstag'), gettext('DO'), 4),
-    FREITAG: addExtendedEnumValue('Freitag', gettext('Freitag'), gettext('FR'), 5),
-    SAMSTAG: addExtendedEnumValue('Samstag', gettext('Samstag'), gettext('SA'), 6),
-    SONNTAG: addExtendedEnumValue('Sonntag', gettext('Sonntag'), gettext('SO'), 7)
+    MONTAG: addExtendedEnumValue('Montag', gettext('Montag'), gettext('MO'),
+      1),
+    DIENSTAG: addExtendedEnumValue('Dienstag', gettext('Dienstag'), gettext(
+      'DI'), 2),
+    MITTWOCH: addExtendedEnumValue('Mittwoch', gettext('Mittwoch'), gettext(
+      'MI'), 3),
+    DONNERSTAG: addExtendedEnumValue('Donnerstag', gettext('Donnerstag'),
+      gettext('DO'), 4),
+    FREITAG: addExtendedEnumValue('Freitag', gettext('Freitag'), gettext('FR'),
+      5),
+    SAMSTAG: addExtendedEnumValue('Samstag', gettext('Samstag'), gettext('SA'),
+      6),
+    SONNTAG: addExtendedEnumValue('Sonntag', gettext('Sonntag'), gettext('SO'),
+      7)
   })
   .constant('MONATE', {
-    JANUAR: addExtendedEnumValue('Januar', gettext('Januar'), gettext('Jan'), 1),
-    FEBRUAR: addExtendedEnumValue('Februar', gettext('Februar'), gettext('Feb'), 2),
+    JANUAR: addExtendedEnumValue('Januar', gettext('Januar'), gettext('Jan'),
+      1),
+    FEBRUAR: addExtendedEnumValue('Februar', gettext('Februar'), gettext(
+      'Feb'), 2),
     MAERZ: addExtendedEnumValue('Maerz', gettext('März'), gettext('Mar'), 3),
     APRIL: addExtendedEnumValue('April', gettext('April'), gettext('Apr'), 4),
     MAI: addExtendedEnumValue('Mai', gettext('Mai'), gettext('Mai'), 5),
     JUNI: addExtendedEnumValue('Juni', gettext('Juni'), gettext('Jun'), 6),
     JULI: addExtendedEnumValue('Juli', gettext('Juli'), gettext('Jul'), 7),
-    AUGUST: addExtendedEnumValue('August', gettext('August'), gettext('Aug'), 8),
-    SEPTEMBER: addExtendedEnumValue('September', gettext('September'), gettext('Sep'), 9),
-    OKTOBER: addExtendedEnumValue('Oktober', gettext('Oktober'), gettext('Okt'), 10),
-    NOVEMBER: addExtendedEnumValue('November', gettext('November'), gettext('Nov'), 11),
-    DEZEMBER: addExtendedEnumValue('Dezember', gettext('Dezember'), gettext('Dez'), 12)
+    AUGUST: addExtendedEnumValue('August', gettext('August'), gettext('Aug'),
+      8),
+    SEPTEMBER: addExtendedEnumValue('September', gettext('September'),
+      gettext('Sep'), 9),
+    OKTOBER: addExtendedEnumValue('Oktober', gettext('Oktober'), gettext(
+      'Okt'), 10),
+    NOVEMBER: addExtendedEnumValue('November', gettext('November'), gettext(
+      'Nov'), 11),
+    DEZEMBER: addExtendedEnumValue('Dezember', gettext('Dezember'), gettext(
+      'Dez'), 12)
   })
   .constant('PENDENZSTATUS', {
     AUSSTEHEND: gettext('Ausstehend'),
@@ -451,6 +469,11 @@ angular
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings'
+      })
+      .when('/login', {
+        templateUrl: 'scripts/login/login.html',
+        controller: 'LoginController',
+        name: 'Login'
       })
       .otherwise({
         templateUrl: 'scripts/not-found.html'
