@@ -154,7 +154,7 @@ angular.module('openolitor')
 
       var isEntity = function(entity) {
         return (entity === 'Depotlieferung' || entity === 'Postlieferung' ||
-          entity === 'Heimlieferung' || entity === 'Vertieb');
+          entity === 'Heimlieferung' || entity === 'Vertrieb');
       };
 
       // get data from backend
