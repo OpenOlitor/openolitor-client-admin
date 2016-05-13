@@ -23,7 +23,8 @@ angular.module('openolitor')
       $scope.addVertrieb = function(typ) {
         var newModel = new VertriebeListModel({
           typ: typ.id,
-          abotypId: $routeParams.id,
+          abotypId: parseInt($routeParams.id),
+          beschrieb: '',
           vertriebsarten: []
         });
 
@@ -52,7 +53,9 @@ angular.module('openolitor')
       $scope.deleteVertriebsart = function(vertrieb, vertriebsart) {
         if (vertriebsart.id) {
           $scope.updatingVertrieb[vertrieb.id] = true;
-          vertriebsart.$delete();
+          if(!vertriebsart.isNew) {
+            vertriebsart.$delete();
+          }
         } else {
           var index = vertrieb.vertriebsarten.indexOf(vertriebsart);
           if (index > -1) {
@@ -63,18 +66,23 @@ angular.module('openolitor')
 
       $scope.invalidVertrieb = function(vertrieb) {
         if (VERTRIEBSARTEN.DEPOTLIEFERUNG === vertrieb.typ || VERTRIEBSARTEN.HEIMLIEFERUNG === vertrieb.typ) {
-          return !angular.isDefined(vertrieb.vertriebsarten.length > 0 && vertrieb.liefertag);
+          return vertrieb.vertriebsarten.length === 0 || !angular.isDefined(vertrieb.liefertag);
         } else {
           return !angular.isDefined(vertrieb.liefertag);
         }
       };
 
       $scope.updateVertrieb = function(vertrieb) {
-        angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
-          vertriebsart.$save();
-        });
         $scope.updatingVertrieb[vertrieb.id] = true;
-        vertrieb.$save();
+        var vertriebsarten = vertrieb.vertriebsarten;
+        vertrieb.$save(function(result) {
+          vertrieb.vertriebsarten = vertriebsarten;
+          angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
+            vertriebsart.isNew = undefined;
+            vertriebsart.vertriebId = result.id;
+            vertriebsart.$save();
+          });
+        });
       };
 
       $scope.selectVertrieb = function(vertrieb) {
@@ -95,8 +103,9 @@ angular.module('openolitor')
 
             var model = {
               typ: vertrieb.typ,
-              abotypId: $routeParams.id,
-              vertriebId: vertrieb.id
+              abotypId: parseInt($routeParams.id),
+              vertriebId: vertrieb.id,
+              isNew: true
             };
 
             if($scope.isDepot(vertrieb)) {
@@ -131,18 +140,18 @@ angular.module('openolitor')
 
         $scope.loading = true;
         $scope.vertriebe = VertriebeListModel.query({
-          abotypId: $routeParams.id
+          abotypId: parseInt($routeParams.id)
         }, function(vertriebe) {
           angular.forEach(vertriebe, function(vertrieb) {
             vertrieb.vertriebsarten = VertriebsartenListModel.query({
-              abotypId: $routeParams.id,
+              abotypId: parseInt($routeParams.id),
               vertriebId: vertrieb.id
             }, function(vertriebsarten) {
               if(vertriebsarten.length > 0) {
                 vertrieb.typ = vertriebsarten[0].typ;
               }
               angular.forEach(vertriebsarten, function(vertriebsart) {
-                vertriebsart.abotypId = $routeParams.id;
+                vertriebsart.abotypId = parseInt($routeParams.id);
               });
               $scope.loading = false;
             });
@@ -182,18 +191,23 @@ angular.module('openolitor')
           $scope.updatingVertrieb[msg.data.vertriebId] = undefined;
 
           //load vertriebsart from remote, we don't get full model within event
-          var newVertriebsart = VertriebsartenListModel.get({
-            id: msg.data.id,
-            abotypId: $routeParams.id
-          }, function() {
-            angular.forEach($scope.vertriebe, function(vertrieb) {
-              angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
-                if (vertriebsart.id === msg.data.id) {
-                  DataUtil.update(newVertriebsart, vertriebsart);
-                }
+          if(!angular.isUndefined(msg.data.vertriebId)) {
+            var newVertriebsart = VertriebsartenListModel.get({
+              id: msg.data.id,
+              abotypId: parseInt($routeParams.id),
+              vertriebId: msg.data.vertriebId
+            }, function() {
+              angular.forEach($scope.vertriebe, function(vertrieb) {
+                angular.forEach(vertrieb.vertriebsarten, function(vertriebsart) {
+                  if (vertriebsart.id === msg.data.id) {
+                    DataUtil.update(newVertriebsart, vertriebsart);
+                  }
+                });
               });
             });
-          });
+          } else {
+            load();
+          }
 
           $scope.$apply();
         }

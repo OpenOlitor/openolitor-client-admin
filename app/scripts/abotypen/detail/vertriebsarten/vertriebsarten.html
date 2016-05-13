@@ -22,7 +22,7 @@
             <div class="form-group" ng-if="isDepot(vertrieb)">
               <span ng-repeat="vertriebsart in vertrieb.vertriebsarten" class="badge" ng-if="vertriebsart !== ''">
                 {{vertriebsart.depot.name}}
-                <span ng-hide="vertrieb.vertriebsarten.length < 2"ng-click="deleteVertriebsart(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
+                <span ng-hide="vertrieb.vertriebsarten.length < 2" ng-click="deleteVertriebsart(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
               </span>
               <span class="dropdown pull-right">
                 <oo-dropdown dropdown-id="depot" display-style="uib-dropdown" values="depots" property="name" selected-prop="id" selected-function="addVertriebsartFunc()" selected-function-scope="vertrieb"></oo-dropdown>
@@ -34,7 +34,7 @@
             <div class="form-group" ng-if="isHeimlieferung(vertrieb)">
               <span ng-repeat="vertriebsart in vertrieb.vertriebsarten" class="badge" ng-if="vertriebsart !== ''">
                 {{vertriebsart.tour.name}}
-                <span ng-click="deleteVertriebsart(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
+                <span ng-hide="vertrieb.vertriebsarten.length < 2" ng-click="deleteVertriebsart(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
               </span>
               <span class="dropdown pull-right">
                 <oo-dropdown dropdown-id="depot" display-style="uib-dropdown" values="touren" property="name" selected-prop="id" selected-function="addVertriebsartFunc()" selected-function-scope="vertrieb"></oo-dropdown>
