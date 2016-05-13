@@ -218,6 +218,9 @@ angular.module('openolitor')
         var total = 0;
         angular.forEach(produkteEntries, function(korbprodukt) {
           if(angular.isDefined(korbprodukt.preisEinheit) && angular.isDefined(korbprodukt.menge)) {
+            if(angular.isUndefined(korbprodukt.preis)) {
+              $scope.calculatePreis(korbprodukt);
+            }
             total += korbprodukt.preis;
           }
         });
