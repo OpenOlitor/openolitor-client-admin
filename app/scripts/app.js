@@ -5,6 +5,11 @@ var regexIso8601 =
 // Matches YYYY-MM-ddThh:mm:ss.sssZ where .sss is optional
 //var regexIso8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
 
+var userRoles = {
+    Guest: 'Guest',
+    Administrator: 'Administrator'
+};
+
 function convertDateStringsToDates(input) {
   // Ignore things that aren't objects.
   if (typeof input !== 'object') {
@@ -61,6 +66,7 @@ angular
     'ngTouch',
     'ngTable',
     'ngFileSaver',
+    'ngCookies',
     'angular.filter',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
@@ -328,154 +334,191 @@ angular
       .when('/abotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'AbotypenOverviewController',
-        name: 'AbotypenOverview'
+        name: 'AbotypenOverview',
+        access:userRoles.Administrator
       })
       .when('/abotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
-        name: 'AbotypenDetail'
+        name: 'AbotypenDetail',
+        access:userRoles.Administrator
       })
       .when('/abotypen/:id', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
-        name: 'AbotypenDetail'
+        name: 'AbotypenDetail',
+        access:userRoles.Administrator
       })
       .when('/kunden', {
         templateUrl: 'scripts/kunden/overview/kundenoverview.html',
         controller: 'KundenOverviewController',
-        name: 'KundenOverview'
+        name: 'KundenOverview',
+        access:userRoles.Administrator
       })
       .when('/kunden/new', {
         templateUrl: 'scripts/kunden/detail/kundendetail.html',
         controller: 'KundenDetailController',
-        name: 'KundeDetail'
+        name: 'KundeDetail',
+        access:userRoles.Administrator
       })
       .when('/kunden/:id', {
         templateUrl: 'scripts/kunden/detail/kundendetail.html',
         controller: 'KundenDetailController',
-        name: 'KundeDetail'
+        name: 'KundeDetail',
+        access:userRoles.Administrator
       })
       .when('/kunden/:kundeId/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
-        name: 'AbosDetail'
+        name: 'AbosDetail',
+        access:userRoles.Administrator
       })
       .when('/produzenten', {
         templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
         controller: 'ProduzentenOverviewController',
-        name: 'ProduzentenOverview'
+        name: 'ProduzentenOverview',
+        access:userRoles.Administrator
       })
       .when('/produzenten/new', {
         templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
         controller: 'ProduzentenDetailController',
-        name: 'ProduzentenDetail'
+        name: 'ProduzentenDetail',
+        access:userRoles.Administrator
       })
       .when('/produzenten/:id', {
         templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
         controller: 'ProduzentenDetailController',
-        name: 'ProduzentenDetail'
+        name: 'ProduzentenDetail',
+        access:userRoles.Administrator
       })
       .when('/produzenten/:produzentId/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
-        name: 'AbosDetail'
+        name: 'AbosDetail',
+        access:userRoles.Administrator
       })
       .when('/produkte', {
         templateUrl: 'scripts/produkte/overview/produkteoverview.html',
         controller: 'ProdukteOverviewController',
-        name: 'ProdukteOverview'
+        name: 'ProdukteOverview',
+        access:userRoles.Administrator
       })
       .when('/depots', {
         templateUrl: 'scripts/depots/overview/depotsoverview.html',
         controller: 'DepotsOverviewController',
-        name: 'DepotsOverview'
+        name: 'DepotsOverview',
+        access:userRoles.Administrator
       })
       .when('/depots/:id', {
         templateUrl: 'scripts/depots/detail/depotsdetail.html',
         controller: 'DepotsDetailController',
-        name: 'DepotsDetail'
+        name: 'DepotsDetail',
+        access:userRoles.Administrator
       })
       .when('/abos', {
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
-        name: 'AbosOverview'
+        name: 'AbosOverview',
+        access:userRoles.Administrator
       })
       .when('/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
-        name: 'AbosDetail'
+        name: 'AbosDetail',
+        access:userRoles.Administrator
       })
       .when('/touren', {
         templateUrl: 'scripts/touren/overview/tourenoverview.html',
         controller: 'TourenOverviewController',
-        name: 'TourenOverview'
+        name: 'TourenOverview',
+        access:userRoles.Administrator
       })
       .when('/pendenzen', {
         templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
         controller: 'PendenzenOverviewController',
-        name: 'PendenzenOverview'
+        name: 'PendenzenOverview',
+        access:userRoles.Administrator
       })
       .when('/lieferplanung', {
         templateUrl: 'scripts/lieferplanungen/overview/lieferplanungoverview.html',
         controller: 'LieferplanungOverviewController',
-        name: 'LieferplanungOverview'
+        name: 'LieferplanungOverview',
+        access:userRoles.Administrator
       })
       .when('/lieferplanung/:id', {
         templateUrl: 'scripts/lieferplanungen/detail/lieferplanungdetail.html',
         controller: 'LieferplanungDetailController',
-        name: 'LieferplanungDetail'
+        name: 'LieferplanungDetail',
+        access:userRoles.Administrator
       })
       .when('/rechnungen', {
         templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
         controller: 'RechnungenOverviewController',
-        name: 'RechnungenOverview'
+        name: 'RechnungenOverview',
+        access:userRoles.Administrator
       })
       .when('/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
         controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail'
+        name: 'RechnungenDetail',
+        access:userRoles.Administrator
       })
       .when('/rechnungen/:id', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
         controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail'
+        name: 'RechnungenDetail',
+        access:userRoles.Administrator
       })
       .when('/kunden/:kundeId/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
         controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail'
+        name: 'RechnungenDetail',
+        access:userRoles.Administrator
       })
       .when('/kunden/:kundeId/abos/:aboId/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
         controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail'
+        name: 'RechnungenDetail',
+        access:userRoles.Administrator
       })
       .when('/zahlungsimports', {
         templateUrl: 'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
         controller: 'ZahlungsImportsOverviewController',
-        name: 'ZahlungsImportsOverview'
+        name: 'ZahlungsImportsOverview',
+        access:userRoles.Administrator
       })
       .when('/zahlungsimports/new', {
         templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
         controller: 'ZahlungsImportsController',
-        name: 'ZahlungsImports'
+        name: 'ZahlungsImports',
+        access:userRoles.Administrator
       })
       .when('/zahlungsimports/:id', {
         templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
         controller: 'ZahlungsImportsController',
-        name: 'ZahlungsImports'
+        name: 'ZahlungsImports',
+        access:userRoles.Administrator
       })
       .when('/settings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
-        name: 'ProjektSettings'
+        name: 'ProjektSettings',
+        access:userRoles.Administrator
       })
       .when('/login', {
         templateUrl: 'scripts/login/login.html',
         controller: 'LoginController',
-        name: 'Login'
+        name: 'Login',
+        access:userRoles.Guest
+      })
+      .when('/forbidden', {
+        templateUrl: 'scripts/login/forbidden.html',
+        controller: 'LoginController',
+        name: 'Forbidden',
+        access:userRoles.Guest
       })
       .otherwise({
-        templateUrl: 'scripts/not-found.html'
+        templateUrl: 'scripts/not-found.html',
+        access:userRoles.Guest
       });
   });
