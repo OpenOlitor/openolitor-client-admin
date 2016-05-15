@@ -32,7 +32,6 @@
 
     var resolveUser = function() {
       /* If the token is assigned, check that the token is still valid on the server */
-      $log.info('resolveUser:'+token);
       var deferred = $q.defer();
       if (user) {
         deferred.resolve(user);
@@ -65,9 +64,10 @@
       loggedIn: function (token) {
         $cookies.put('XSRF-TOKEN', token);
         $log.info('logged in', token);
-        return currentUser().then(function (user) {
-          $log.info('resolved user after login', user);
-          return user;
+        return currentUser().then(function (usr) {
+          $log.info('resolved user after login', usr);
+          user = usr;
+          return usr;
         });
       },
       loggedOut: function () {
@@ -87,8 +87,8 @@
       },
       authorize: function(accessLevel) {
         return resolveUser().then(function(user) {
-          $log.debug('authorize:'+accessLevel+' => '+user.role);
-          return accessLevel === undefined || accessLevel === userRoles.Guest || accessLevel === user.role;
+          $log.debug('authorize:',accessLevel +' => ' + user.rolle);
+          return accessLevel === undefined || accessLevel === userRoles.Guest || accessLevel === user.rolle;
         });
       },
       isLoggedIn: function() {
@@ -104,7 +104,7 @@
       }
     };
   }])
-  .factory('requestSecurityInjector', ['$cookies', 'moment', function($cookies, moment) {
+  .factory('requestSecurityInjector', ['$cookies', 'moment', '$log',  function($cookies, moment, $log) {
     return {
         request: function(config) {
           var token = $cookies.get('XSRF-TOKEN');
@@ -121,5 +121,7 @@
 }])
 .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('requestSecurityInjector');
+    // enable send cookies with requests
+    $httpProvider.defaults.withCredentials = true;
 }])
 .run(checkAuth);
