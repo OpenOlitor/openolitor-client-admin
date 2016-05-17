@@ -32,6 +32,8 @@ module.exports = function(config) {
       'app/bower_components/angular-moment/angular-moment.js',
       'app/bower_components/ng-file-upload/ng-file-upload.js',
       'app/bower_components/ng-lodash/build/ng-lodash.js',
+      'app/bower_components/ng-password-strength/dist/scripts/ng-password-strength.js',
+      'app/bower_components/angular-messages/angular-messages.js',
       'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
