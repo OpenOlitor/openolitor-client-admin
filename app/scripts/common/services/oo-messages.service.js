@@ -11,7 +11,7 @@ angular.module('openolitor')
         // append type to event data
         var obj = JSON.stringify(eventData);
         var data = (obj) ? (',' + obj.substring(1)) : '';
-        var event = '{"type":"' + eventType + '"' + data;
+        var event = '{"type":"' + eventType + '"' + data + '}';
         try {
           $log.debug('sending message: ' + event);
           $rootScope.messagingSocket.send(event);

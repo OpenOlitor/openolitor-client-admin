@@ -45,6 +45,7 @@
             $log.debug('Restoring user from cookie...');
             currentUser()
               .then(function(u) {
+                user = u;
                 deferred.resolve(u);
               }, function() {
                 $log.debug('Token no longer valid, please log in.');
@@ -54,8 +55,8 @@
               });
           } else {
             user = {
-              userId: '',
-              role: 'Guest'
+              id: '',
+              rolle: 'Guest'
             };
             deferred.resolve(user);
           }
@@ -100,14 +101,14 @@
           },
           isLoggedIn: function() {
             return resolveUser().then(function(user) {
-              return user.role !== userRoles.Guest;
+              return user.rolle !== userRoles.Guest;
             });
           },
           isUserLoggedIn: function(user) {
             if (user === undefined) {
               return false;
             }
-            return user.role !== userRoles.Guest;
+            return user.rolle !== userRoles.Guest;
           }
         };
       }
