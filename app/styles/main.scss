@@ -499,3 +499,28 @@ footer, .footer {
   transition:0.5s linear all;
   opacity:0;
 }
+
+/* The starting CSS styles for the enter animation */
+.sidebar-nav.ng-enter {
+  transition:0.5s linear all;
+  width:0px;
+}
+
+/* The finishing CSS styles for the enter animation */
+.sidebar-nav.ng-enter.ng-enter-active {
+  opacity:1;
+  width:240px;
+}
+
+/* now the element will fade out before it is removed from the DOM */
+.sidebar-nav.ng-leave {
+  transition:0.5s linear all;
+  width:240px;
+}
+.sidebar-nav.ng-leave.ng-leave-active {
+  width:240px;
+}
+.sidebar-nav.ng-hide {
+  transition:0.5s linear all;
+  width:0px;
+}
