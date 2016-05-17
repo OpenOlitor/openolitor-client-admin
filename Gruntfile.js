@@ -12,42 +12,48 @@ module.exports = function(grunt) {
 
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var API_URL_CONFIG = {
-    'dev' : {
+    'dev': {
       'm1': 'http://localhost:9003/m1/',
       'm2': 'http://localhost:9003/m2/'
     },
-    'test' : {
+    'test': {
       'm1': 'http://test.openolitor.ch/m1/'
     },
-    'prod-soliterre' : {
+    'prod-soliterre': {
       'm1': 'http://prod.openolitor.ch/soliterre/'
     },
-    'prod-bioabi' : {
+    'prod-bioabi': {
       'm1': 'http://prod.openolitor.ch/bioabi/'
     }
   };
   var env = 'dev';
-  if(grunt.option('env') !== null && grunt.option('env') !== undefined) {
+  if (grunt.option('env') !== null && grunt.option('env') !== undefined) {
     env = grunt.option('env');
   }
 
   // text replace in js files used for environment specific configurations
   var config = {
     'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-    'API_WS_URL': API_URL_CONFIG[env].m1+'ws' || 'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
-    'BUILD_NR': grunt.option('buildnr') || 'dev'
+    'API_WS_URL': API_URL_CONFIG[env].m1 + 'ws' ||
+      'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
+    'BUILD_NR': grunt.option('buildnr') || 'dev',
+    'ENV': env
   };
 
   var mandantenConfig = {
     mandant1: {
       'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-      'API_WS_URL': API_URL_CONFIG[env].m1+'ws' || 'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
-      'BUILD_NR': grunt.option('buildnr') || 'dev'
+      'API_WS_URL': API_URL_CONFIG[env].m1 + 'ws' ||
+        'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
+      'BUILD_NR': grunt.option('buildnr') || 'dev',
+      'ENV': env
     },
     mandant2: {
       'API_URL': API_URL_CONFIG[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
-      'API_WS_URL': API_URL_CONFIG[env].m2+'ws' || 'http://localhost:9003/m2/ws', //replace @@API_WS_URL with value
-      'BUILD_NR': grunt.option('buildnr') || 'dev'
+      'API_WS_URL': API_URL_CONFIG[env].m2 + 'ws' ||
+        'http://localhost:9003/m2/ws', //replace @@API_WS_URL with value
+      'BUILD_NR': grunt.option('buildnr') || 'dev',
+      'ENV': env
     }
   };
 
@@ -94,7 +100,9 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['<%= openolitor.mandanten %>/mandant1/scripts/*.scripts.js'],
+          src: [
+            '<%= openolitor.mandanten %>/mandant1/scripts/*.scripts.js'
+          ],
           dest: '<%= openolitor.mandanten %>/mandant1/scripts/'
         }]
       },
@@ -107,7 +115,9 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['<%= openolitor.mandanten %>/mandant2/scripts/*.scripts.js'],
+          src: [
+            '<%= openolitor.mandanten %>/mandant2/scripts/*.scripts.js'
+          ],
           dest: '<%= openolitor.mandanten %>/mandant2/scripts/'
         }]
       }
@@ -318,7 +328,9 @@ module.exports = function(grunt) {
       html: ['<%= openolitor.dist %>/**/*.html'],
       css: ['<%= openolitor.dist %>/styles/**/*.css'],
       options: {
-        assetsDirs: ['<%= openolitor.dist %>', '<%= openolitor.dist %>/images']
+        assetsDirs: ['<%= openolitor.dist %>',
+          '<%= openolitor.dist %>/images'
+        ]
       }
     },
 
@@ -524,7 +536,10 @@ module.exports = function(grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'i18n/template.pot': ['<%= openolitor.app %>/**/*.html', '<%= openolitor.app %>/**/*.js', '!<%= openolitor.app %>/bower_components/**']
+          'i18n/template.pot': ['<%= openolitor.app %>/**/*.html',
+            '<%= openolitor.app %>/**/*.js',
+            '!<%= openolitor.app %>/bower_components/**'
+          ]
         }
       }
     },
@@ -532,7 +547,9 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          '<%= openolitor.app %>/scripts/i18n/translations.js': ['i18n/*.po']
+          '<%= openolitor.app %>/scripts/i18n/translations.js': [
+            'i18n/*.po'
+          ]
         }
       }
     },
@@ -580,7 +597,9 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('server', function(target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+    grunt.log.warn(
+      'The `server` task has been deprecated. Use `grunt serve` to start a server.'
+    );
     grunt.task.run(['serve:' + target]);
   });
 

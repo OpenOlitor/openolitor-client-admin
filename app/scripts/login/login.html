@@ -2,8 +2,21 @@
   <div oo-error-overlay></div>
   <div class="container">
   	<div class="jumbotron">
-  	  <h1 translate>Anmeldung</h1>
+  	  <h1 translate>Anmeldung
+        <small ng-if="env === 'test'">- Testumgebung</small>
+        <small ng-if="env === 'dev'" class="">- Entwicklungsumgebung</small>
+      </h1>
       <p translate>Für den Zugriff auf die Administrationsumgebung ist eine Anmeldung erforderlich</p>
+      <div class="alert alert-info" ng-if="env === 'test' || env === 'dev'" translate>
+        Sie befinden sich auf dem OpenOlitor Testsystem. Sie können sich mit den untenstehenden Anmeldeinformationen an der Administrationsumgebung anmelden:
+        <br /><br />
+        <ul>
+          <li>Email: <b>admin@openolitor.ch</b></li>
+          <li>Passwort: <b>admin</b></li>
+        </ul>
+        <br />
+        Die Daten in diesem System werden spradisch auf die Standardwerte zurückgesetzt.
+      </div>
   	  <p>
   	  	<div class="container" ng-show="status === 'login'">
           <div class="alert alert-danger" role="alert" ng-if="loginData.message">{{loginData.message}}</div>

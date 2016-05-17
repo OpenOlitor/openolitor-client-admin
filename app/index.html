@@ -84,7 +84,7 @@
   </div>
 
   <footer>
-    <a href="http://www.openolitor.ch" target="_blank">www.openolitor.ch</a> Build: UI #{{buildNr}} WS: #{{serverInfo.buildNr}}
+    <a href="http://www.openolitor.ch" target="_blank">www.openolitor.ch</a> Build: UI #{{buildNr}} WS: #{{serverInfo.buildNr}} Env: {{env}}
     <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
   </footer>
 
