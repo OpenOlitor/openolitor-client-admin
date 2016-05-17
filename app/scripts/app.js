@@ -67,6 +67,8 @@ angular
     'ngTable',
     'ngFileSaver',
     'ngCookies',
+    'ngPasswordStrength',
+    'ngMessages',
     'angular.filter',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
@@ -510,6 +512,12 @@ angular
         controller: 'LoginController',
         name: 'Login',
         access: userRoles.Guest
+      })
+      .when('/passwd', {
+        templateUrl: 'scripts/login/change_password.html',
+        controller: 'LoginController',
+        name: 'Passwortwechsel',
+        access: userRoles.Administrator
       })
       .when('/logout', {
         templateUrl: 'scripts/login/logout.html',

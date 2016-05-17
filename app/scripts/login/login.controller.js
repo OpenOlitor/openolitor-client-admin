@@ -9,6 +9,11 @@ angular.module('openolitor')
       $location, $route, ooAuthService) {
       $scope.loginData = {};
       $scope.secondFactorData = {};
+      $scope.changePwd = {
+        neu: undefined,
+        alt: undefined,
+        neuConfirmed: undefined
+      };
       $scope.status = 'login';
 
       var showWelcomeMessage = function(token, person) {
@@ -30,21 +35,36 @@ angular.module('openolitor')
         alertService.addAlert('info', gettext('Aufwiedersehen') + ' ' +
           usr.vorname + ' ' +
           usr.name);
-        $timeout(function() {
-          $scope.status = 'login';
-          $location.path('/login');
-        }, 1000);
+      };
 
-        ooAuthService.loggedOut();
+      var doLogout = function(showMessage) {
+        $http.post(API_URL + 'auth/logout').then(function() {
+          $scope.loginData.message = undefined;
+
+          ooAuthService.loggedOut();
+          if (showMessage) {
+            showGoodbyeMessage();
+          }
+
+          $timeout(function() {
+            $scope.status = 'login';
+            $location.path('/login');
+          }, 1000);
+        });
+      };
+
+      var showPasswordChangedMessage = function() {
+        //show welcome message
+        alertService.addAlert('info', gettext(
+          'Passwort wurde erfolgreich geändert, Sie werden automatisch ausgelogged.'
+        ));
+
+        doLogout(false);
       };
 
       var logout = $route.current.$$route.logout;
       if (logout) {
-        $http.post(API_URL + 'auth/logout').then(function() {
-          $scope.loginData.message = undefined;
-
-          showGoodbyeMessage();
-        });
+        doLogout(true);
       }
 
       $scope.login = function() {
@@ -75,10 +95,22 @@ angular.module('openolitor')
           $http.post(API_URL + 'auth/secondFactor', $scope.secondFactorData)
             .then(function(
               result) {
-              $scope.secondFactorForm.message = undefined;
+              $scope.secondFactorData.message = undefined;
               showWelcomeMessage(result.data.token, result.data.person);
             }, function(error) {
               $scope.secondFactorData.message = gettext(error.data);
+            });
+        }
+      };
+
+      $scope.changePassword = function() {
+        if ($scope.changePwdForm.$valid) {
+          $http.post(API_URL + 'auth/passwd', $scope.changePwd)
+            .then(function() {
+              $scope.changePwd.message = undefined;
+              showPasswordChangedMessage();
+            }, function(error) {
+              $scope.changePwd.message = gettext(error.data);
             });
         }
       };
