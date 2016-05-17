@@ -4,14 +4,14 @@
  */
 angular.module('openolitor')
   .controller('LoginController', ['$scope', '$http', 'API_URL', 'gettext',
-    'alertService', '$timeout', '$location',
+  'alertService', '$timeout', '$location', 'ooAuthService',
     function($scope, $http, API_URL, gettext, alertService, $timeout,
-      $location) {
+      $location, ooAuthService) {
       $scope.loginData = {};
       $scope.secondFactorData = {};
       $scope.status = 'login';
 
-      var showWelcomeMessage = function(person) {
+      var showWelcomeMessage = function(token, person) {
         //show welcome message
         alertService.addAlert('info', gettext('Willkommen') + ' ' +
           person.vorname + ' ' +
@@ -20,6 +20,8 @@ angular.module('openolitor')
           $location.path('/');
           $scope.status = 'login';
         }, 1000);
+
+        ooAuthService.loggedIn(token);
       };
 
       $scope.login = function() {
@@ -36,7 +38,7 @@ angular.module('openolitor')
                 $scope.person = result.data.person;
                 $scope.secondFactorData.token = result.data.token;
               } else {
-                showWelcomeMessage(result.data.person);
+                showWelcomeMessage(result.data.token, result.data.person);
               }
             },
             function(error) {
@@ -51,7 +53,7 @@ angular.module('openolitor')
             .then(function(
               result) {
               $scope.secondFactorForm.message = undefined;
-              showWelcomeMessage(result.data.person);
+              showWelcomeMessage(result.data.token, result.data.person);
             }, function(error) {
               $scope.secondFactorData.message = gettext(error.data);
             });
