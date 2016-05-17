@@ -3,9 +3,10 @@
 /**
  */
 angular.module('openolitor')
-  .controller('LoginController', ['$scope', '$http', 'API_URL', 'gettext',
+  .controller('LoginController', ['$scope', '$http', 'API_URL', 'ENV',
+    'gettext',
     'alertService', '$timeout', '$location', '$route', 'ooAuthService',
-    function($scope, $http, API_URL, gettext, alertService, $timeout,
+    function($scope, $http, API_URL, ENV, gettext, alertService, $timeout,
       $location, $route, ooAuthService) {
       $scope.loginData = {};
       $scope.secondFactorData = {};
@@ -15,6 +16,7 @@ angular.module('openolitor')
         neuConfirmed: undefined
       };
       $scope.status = 'login';
+      $scope.env = ENV;
 
       var showWelcomeMessage = function(token, person) {
         //show welcome message
