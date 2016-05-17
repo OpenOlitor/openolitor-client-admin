@@ -4,9 +4,9 @@
  */
 angular.module('openolitor')
   .controller('LoginController', ['$scope', '$http', 'API_URL', 'gettext',
-  'alertService', '$timeout', '$location', 'ooAuthService',
+    'alertService', '$timeout', '$location', '$route', 'ooAuthService',
     function($scope, $http, API_URL, gettext, alertService, $timeout,
-      $location, ooAuthService) {
+      $location, $route, ooAuthService) {
       $scope.loginData = {};
       $scope.secondFactorData = {};
       $scope.status = 'login';
@@ -23,6 +23,29 @@ angular.module('openolitor')
 
         ooAuthService.loggedIn(token);
       };
+
+      var showGoodbyeMessage = function() {
+        //show welcome message
+        var usr = ooAuthService.getUser();
+        alertService.addAlert('info', gettext('Aufwiedersehen') + ' ' +
+          usr.vorname + ' ' +
+          usr.name);
+        $timeout(function() {
+          $scope.status = 'login';
+          $location.path('/login');
+        }, 1000);
+
+        ooAuthService.loggedOut();
+      };
+
+      var logout = $route.current.$$route.logout;
+      if (logout) {
+        $http.post(API_URL + 'auth/logout').then(function() {
+          $scope.loginData.message = undefined;
+
+          showGoodbyeMessage();
+        });
+      }
 
       $scope.login = function() {
         if ($scope.loginForm.$valid) {
