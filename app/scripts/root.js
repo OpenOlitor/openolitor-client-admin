@@ -27,6 +27,7 @@ angular.module('openolitor')
         return ooAuthService.getUser();
       }, function(user) {
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
+        $scope.user = user;
       });
 
       $timeout(function() {
