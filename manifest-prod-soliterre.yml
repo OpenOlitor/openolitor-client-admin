@@ -1,0 +1,8 @@
+---
+applications:
+- name: openolitor-client-soliterre
+  memory: 64M
+  instances: 1
+  host: openolitor-client-soliterre
+  domain: scapp.io
+  path: dist/openolitor-client.zip

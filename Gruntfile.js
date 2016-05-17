@@ -10,6 +10,7 @@ module.exports = function(grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var API_URL_CONFIG = {
     'dev': {
       'm1': 'http://localhost:9003/m1/',
@@ -18,9 +19,11 @@ module.exports = function(grunt) {
     'test': {
       'm1': 'http://test.openolitor.ch/m1/'
     },
-    'prod': {
-      'm1': 'http://localhost:9003/m1/',
-      'm2': 'http://localhost:9003/m2/'
+    'prod-soliterre': {
+      'm1': 'http://prod.openolitor.ch/soliterre/'
+    },
+    'prod-bioabi': {
+      'm1': 'http://prod.openolitor.ch/bioabi/'
     }
   };
   var env = 'dev';
