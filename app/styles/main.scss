@@ -531,3 +531,7 @@ footer, .footer {
   padding-bottom: 10px;
   color: red;
 }
+
+.borderless td, .borderless th, .borderless tr {
+    border: none !important;
+}
