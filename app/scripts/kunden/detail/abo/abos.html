@@ -43,6 +43,9 @@
             <span translate>Tour:</span>
             <a ng-href="#/touren/">{{abo.tourName}}</a>
           </span>
+          <span ng-hide="abo.tourId || abo.depotId">
+            <span translate>Postlieferung</span>
+          </span>
         </td>
         <td>
           {{abo.letzteLieferung | date : 'dd.MM.yyyy'}}

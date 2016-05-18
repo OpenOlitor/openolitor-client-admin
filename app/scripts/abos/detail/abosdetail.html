@@ -3,7 +3,7 @@
     <h3 class="panel-title"><span><span translate>Abo</span> #{{abo.id}}</span>
         <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
         <div uib-dropdown class="btn-group pull-right" role="group">
-          <oo-actions-button model="abo" form="aboForm" entities="ABOTYPEN_ARRAY" actions="actions" on-created="backToList">{{'Abo'|translate}}</oo-actions-button>
+          <oo-actions-button model="abo" form="aboDetailForm" entities="ABOTYPEN_ARRAY" actions="actions" on-created="backToList">{{'Abo'|translate}}</oo-actions-button>
         </div>
     </h3>
   </div>
@@ -11,18 +11,21 @@
     <script type="text/ng-template" id="kuendigungsterminTooltipTemplate.html">
       <span translate>Die Kündigungs muss bis spätestens am <b>{{kuendigungsfrist(abo) | date: 'EEE, dd.MM.yyyy'}}</b> eingereicht werden</span>
     </script>
-    <form name="depotForm">
-      <div class="row form-group" ng-if="abo.ende === undefined">
+    <form name="aboDetailForm">
+      <div class="row form-group">
         <div class="col-md-12">
-          <div class="alert alert-info" role="alert"  ng-if="abo.abotyp.laufzeiteinheit === 'Unbeschraenkt'">
+          <div class="alert alert-info" role="alert"  ng-if="abo.ende === undefined && abo.abotyp.laufzeiteinheit === 'Unbeschraenkt'">
             {{'Nächster Kündigungstermin:'|translate}} <b>{{kuendigungstermin(abo) | date: 'dd.MM.yyyy'}}</b>
-            <i class="fa fa-info-circle" aria-hidden="true" ng-if="abo.abotyp.kuendigungsfrist" uib-tooltip-template="'kuendigungsterminTooltipTemplate.html'"></i>
+            <i class="fa fa-info-circle" aria-hidden="true" ng-if="abo.ende === undefined && abo.abotyp.kuendigungsfrist" uib-tooltip-template="'kuendigungsterminTooltipTemplate.html'"></i>
           </div>
-          <div class="alert alert-info" role="alert"  ng-if="abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich > 0">
+          <div class="alert alert-info" role="alert"  ng-if="abo.ende === undefined && abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich > 0">
             {{'Gültig für'|translate}} <b>{{abo.guthabenVertraglich}}</b> {{'Lieferungen'|translate}}
           </div>
-          <div class="alert alert-danger" role="alert" ng-if="abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich === 0" translate>
+          <div class="alert alert-danger" role="alert" ng-if="abo.ende === undefined && abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich === 0" translate>
             Keine Lieferungen mehr ausstehend
+          </div>
+          <div class="alert alert-danger" role="alert" ng-if="isAboEnde(abo)" translate>
+            Dieses Abo ist abgelaufen
           </div>
         </div>
       </div>
