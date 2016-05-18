@@ -420,6 +420,11 @@ module.exports = function(grunt) {
           ]
         }, {
           expand: true,
+          cwd: '.',
+          dest: '<%= openolitor.dist %>',
+          src: ['nginx.conf']
+        }, {
+          expand: true,
           cwd: '.tmp/images',
           dest: '<%= openolitor.dist %>/images',
           src: ['generated/*']
