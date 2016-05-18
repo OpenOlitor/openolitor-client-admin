@@ -122,7 +122,7 @@
           if (token) {
             //add enhanced token to request header
             var enhancedToken = token + '::' + moment().toISOString();
-            config.headers['OO-XSRF-TOKEN'] = enhancedToken;
+            config.headers['XSRF-TOKEN'] = enhancedToken;
           }
 
           return config;
