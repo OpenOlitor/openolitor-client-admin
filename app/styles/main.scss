@@ -535,3 +535,13 @@ footer, .footer {
 .borderless td, .borderless th, .borderless tr {
     border: none !important;
 }
+
+.connected-alert {
+  height: 50px;
+  width: 640px;
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 320px);
+  right: calc(50% - 320px);
+  z-index:2000;
+}
