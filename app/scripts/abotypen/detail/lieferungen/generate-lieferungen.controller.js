@@ -3,24 +3,30 @@
 /**
  */
 angular.module('openolitor')
-  .controller('GenerateLieferungenController', ['$scope', '$uibModalInstance','$log', 'abotyp', 'vertriebsart', 'von','moment','LIEFERZEITPUNKTE','LIEFERRHYTHMEN',
+  .controller('GenerateLieferungenController', ['$scope', '$uibModalInstance',
+    '$log', 'abotyp', 'vertrieb', 'von', 'moment', 'lieferungen',
+    'LIEFERZEITPUNKTE',
+    'LIEFERRHYTHMEN',
 
-    function($scope, $uibModalInstance, $log, abotyp, vertriebsart, von, moment, LIEFERZEITPUNKTE,LIEFERRHYTHMEN) {
+    function($scope, $uibModalInstance, $log, abotyp, vertrieb, von, moment,
+      lieferungen,
+      LIEFERZEITPUNKTE, LIEFERRHYTHMEN) {
       $scope.von = von;
       $scope.initVon = von;
       $scope.abotyp = abotyp;
       $scope.lieferdaten = [];
+      $scope.lieferungen = lieferungen;
 
       var liefertage = [];
       angular.forEach(LIEFERZEITPUNKTE, function(liefertag) {
-          liefertage[liefertag.id] = liefertag.value;
+        liefertage[liefertag.id] = liefertag.value;
       });
 
-      $scope.ok = function () {
+      $scope.ok = function() {
         $uibModalInstance.close($scope.lieferdaten);
       };
 
-      $scope.cancel = function () {
+      $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
       };
 
@@ -29,6 +35,18 @@ angular.module('openolitor')
         if (index > -1) {
           $scope.lieferdaten.splice(index, 1);
         }
+      };
+
+      var datumExistiert = function(datum) {
+        //first check if date if not yet part of the list of lieferdat. Lieferdat must be unique
+        var result = false;
+        angular.forEach($scope.lieferungen, function(lieferung) {
+          if (lieferung.datum.toDateString() === datum.toDateString()) {
+            result = true;
+            return;
+          }
+        });
+        return result;
       };
 
       var generateLieferdaten = function() {
@@ -40,16 +58,15 @@ angular.module('openolitor')
             return;
           }
 
-          //berechne ersten liefertag liefertag basierend auf der vertriebsart
+          //berechne ersten liefertag liefertag basierend auf der vertrieb
           var selectedWeekday = start.isoWeekday();
-          var startingWeekday = liefertage[vertriebsart.liefertag];
+          var startingWeekday = liefertage[vertrieb.liefertag];
           if (selectedWeekday <= startingWeekday) {
             //selektiere wochentag in derselben Woche
             start = start.isoWeekday(startingWeekday);
-          }
-          else {
+          } else {
             //selektiere Wochentag in der darauffolgenden Woche
-            start = start.isoWeekday(startingWeekday+7);
+            start = start.isoWeekday(startingWeekday + 7);
           }
 
           //iteriere abhängig vom lierferrythmus
@@ -58,23 +75,23 @@ angular.module('openolitor')
           if (abotyp.lieferrhythmus === LIEFERRHYTHMEN.WOECHENTLICH) {
             step = 1;
             stepEinheit = 'w';
-          }
-          else if (abotyp.lieferrhythmus === LIEFERRHYTHMEN.ZWEIWOECHENTLICH) {
+          } else if (abotyp.lieferrhythmus === LIEFERRHYTHMEN.ZWEIWOECHENTLICH) {
             step = 2;
             stepEinheit = 'w';
-          }
-          else if (abotyp.lieferrhythmus === LIEFERRHYTHMEN.MONATLICH) {
+          } else if (abotyp.lieferrhythmus === LIEFERRHYTHMEN.MONATLICH) {
             //wie sollen lieferdaten für monatliche Lieferungen berechnet werden? 1. Liefertag im Monat?
             return;
-          }
-          else {
+          } else {
             //lieferdaten können nicht berechnet werden
             return;
           }
 
           $scope.lieferdaten = [];
           while (!start.isAfter(end)) {
-            $scope.lieferdaten.push(new Date(start.valueOf()));
+            var date = new Date(start.valueOf());
+            if (!datumExistiert(date)) {
+              $scope.lieferdaten.push(date);
+            }
 
             start = start.add(step, stepEinheit);
           }
