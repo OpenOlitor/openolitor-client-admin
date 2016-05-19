@@ -253,6 +253,12 @@ input.ng-invalid {
   min-height: calc( 100vh - 130px);
 }
 
+// scollable table for produkteliste
+#lieferplanung .produkteliste {
+  overflow-y: scroll;
+  max-height:  calc(100vh - 200px);
+}
+
 #lieferplanung .panel-fixed-height-full {
   min-height: calc(100vh - 180px);
 }

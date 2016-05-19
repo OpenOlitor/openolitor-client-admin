@@ -37,7 +37,7 @@
               oo-draggable="true" oo-draged-type="'newProdukt'" title="{{'Sonderprodukt einfügen' | translate}}"><span class="fa fa-life-ring"></span></span>
           </span>
         </div>
-        <div class="panel-body">
+        <div class="panel-body produkteliste">
           <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'">
               <td><span >&#8942</span></td>
