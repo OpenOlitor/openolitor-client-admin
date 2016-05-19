@@ -58,7 +58,7 @@
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen">
       <div class="panel panel-default panel-lieferplanung"
         oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
-        <div class="panel-heading clearfix">
+        <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">          
           <h3 class="panel-title lieferplanung-title">
             <span class="navbar-brand">
               <span class="pre-info">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
