@@ -4,12 +4,13 @@
  */
 angular.module('openolitor')
   .controller('LieferungenListController', ['$scope', '$routeParams',
-    '$location', '$uibModal', '$log', 'gettext', 'ngTableParams', 'msgBus',
-    'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN',
+    '$location', '$uibModal', '$log', '$http', 'gettext', 'ngTableParams',
+    'msgBus',
+    'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'API_URL',
 
-    function($scope, $routeParams, $location, $uibModal, $log, gettext,
+    function($scope, $routeParams, $location, $uibModal, $log, $http, gettext,
       ngTableParams,
-      msgBus, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN) {
+      msgBus, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN, API_URL) {
 
       $scope.now = new Date();
       $scope.template = {
@@ -82,14 +83,18 @@ angular.module('openolitor')
 
 
       $scope.generateLieferungen = function(lieferdaten) {
-        angular.forEach(lieferdaten, function(lieferdat) {
-          var newModel = new LieferungenListModel({
-            datum: lieferdat,
-            abotypId: parseInt($routeParams.id),
-            vertriebId: $scope.selectedVertrieb.id
-          });
-          newModel.$save();
-          $scope.template.creating = $scope.template.creating + 1;
+        var newModel = {
+          daten: lieferdaten,
+          abotypId: parseInt($routeParams.id),
+          vertriebId: $scope.selectedVertrieb.id
+        };
+        $http.post(API_URL +
+          'abotypen/' + newModel.abotypId + '/vertriebe/' + newModel.vertriebId +
+          '/lieferungen/aktionen/generieren',
+          newModel).then(function() {
+          $scope.template.creating = $scope.template.creating +
+            lieferdaten
+            .length;
         });
       };
 
