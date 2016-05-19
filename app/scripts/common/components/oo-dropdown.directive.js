@@ -55,8 +55,8 @@ angular.module('openolitor').directive('ooDropdown', function() {
           $scope.selected = item;
         }
         $scope.selectedItem = item;
-        if(angular.isDefined($scope.selectedFunction)) {
-          if($scope.selectedFunction()($scope.selectedItem, $scope.selectedFunctionScope)) {
+        if (angular.isDefined($scope.selectedFunction)) {
+          if ($scope.selectedFunction()($scope.selectedItem, $scope.selectedFunctionScope)) {
             //if functions returns 'true', selection is reset
             $scope.selectedItem = undefined;
             $scope.selected = undefined;
@@ -76,7 +76,7 @@ angular.module('openolitor').directive('ooDropdown', function() {
       };
 
       $scope.getClass = function() {
-        if($scope.selectionRequired && angular.isUndefined($scope.selected)) {
+        if ($scope.selectionRequired && angular.isUndefined($scope.selected)) {
           return 'oo-invalid';
         } else {
           return '';

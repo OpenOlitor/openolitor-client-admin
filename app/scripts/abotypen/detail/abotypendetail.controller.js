@@ -27,7 +27,7 @@ angular.module('openolitor')
         }
       };
       $scope.unbeschraenkt = LAUFZEITEINHEITEN.UNBESCHRAENKT;
-      $scope.selectedVertriebsart = undefined;
+      $scope.selectedVertrieb = undefined;
 
       $scope.open = {
         aktivVon: false,
@@ -92,9 +92,9 @@ angular.module('openolitor')
           .abotyp.id);
       };
 
-      $scope.isVertriebsartExisting = function() {
-        return angular.isDefined($scope.selectedVertriebsart) && angular.isDefined(
-          $scope.selectedVertriebsart.id);
+      $scope.isVertriebExisting = function() {
+        return angular.isDefined($scope.selectedVertrieb) && angular.isDefined(
+          $scope.selectedVertrieb.id);
       };
 
       $scope.save = function() {
@@ -113,8 +113,8 @@ angular.module('openolitor')
         return $scope.abotyp.$delete();
       };
 
-      msgBus.onMsg('VertriebsartSelected', $scope, function(event, msg) {
-        $scope.selectedVertriebsart = msg.vertriebsart;
+      msgBus.onMsg('VertriebSelected', $scope, function(event, msg) {
+        $scope.selectedVertrieb = msg.vertrieb;
       });
     }
   ]);

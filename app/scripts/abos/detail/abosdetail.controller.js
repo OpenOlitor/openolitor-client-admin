@@ -5,14 +5,14 @@
 angular.module('openolitor')
   .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
-    'AbotypenDetailModel', 'KundenDetailModel', 'VertriebsartenListModel',
+    'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q',
+    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
 
     function($scope, $filter, $routeParams, $location, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
-      KundenDetailModel, VertriebsartenListModel, VERTRIEBSARTEN,
-      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q) {
+      KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN,
+      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -28,6 +28,10 @@ angular.module('openolitor')
 
       $scope.open = {
         start: false
+      };
+      $scope.lists = {
+        vertriebe: {},
+        vertriebsarten: {}
       };
 
       $scope.openCalendar = function(e, date) {
@@ -101,7 +105,7 @@ angular.module('openolitor')
         }
       }
 
-      $scope.abotypen = AbotypenOverviewModel.query({
+      $scope.lists.abotypen = AbotypenOverviewModel.query({
         aktiv: true
       });
 
@@ -133,6 +137,19 @@ angular.module('openolitor')
           return $scope.abo.$save();
         }
       }, {
+        label: gettext('Löschen'),
+        iconClass: 'glyphicon glyphicon-remove',
+        noEntityText: true,
+        isDisabled: function() {
+          return !$scope.abo || $scope.abo.ende || $scope.abo.guthaben >
+            0 || $scope.abo
+            .anzahlLieferungen.length > 0 ||
+            $scope.abo.anzahlAbwesenheiten.length > 0;
+        },
+        onExecute: function() {
+          return $scope.abo.$delete();
+        }
+      }, {
         label: gettext('Manuelle Rechnung erstellen'),
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
@@ -146,38 +163,56 @@ angular.module('openolitor')
         return $scope.abo.$save();
       };
 
-      function vertriebsartLabel(vertriebsart) {
-        switch (vertriebsart.typ) {
-          case VERTRIEBSARTEN.DEPOTLIEFERUNG:
-            return vertriebsart.typ + ' - ' + vertriebsart.depot.name +
-              ' - ' +
-              vertriebsart.liefertag;
-          case VERTRIEBSARTEN.HEIMLIEFERUNG:
-            return vertriebsart.typ + ' - ' + vertriebsart.tour.name +
-              ' - ' +
-              vertriebsart.liefertag;
-          default:
-            return vertriebsart.typ + ' - ' + vertriebsart.liefertag;
-        }
-      }
-
       function createPermutations(abotyp) {
-        $scope.vertriebsartPermutations = [];
-        abotyp.vertriebsarten = VertriebsartenListModel.query({
-          abotypId: $scope.abo.abotypId
-        }, function() {
-          angular.forEach(abotyp.vertriebsarten, function(
-            vertriebsart) {
-            $scope.vertriebsartPermutations.push({
-              label: vertriebsartLabel(vertriebsart),
-              vertriebsart: vertriebsart
+        VertriebeListModel.query({
+          abotypId: abotyp.id
+        }, function(vertriebe) {
+          $scope.lists.vertriebe[abotyp.id] = [];
+          lodash.forEach(vertriebe, function(
+            vertrieb) {
+
+            var v = {
+              id: vertrieb.id,
+              label: vertrieb.id + ':' + vertrieb.beschrieb + ' - ' +
+                vertrieb.liefertag,
+              vertrieb: vertrieb
+            };
+            $scope.lists.vertriebe[abotyp.id].push(v);
+            $scope.lists.vertriebsarten[v.id] = [];
+
+            lodash.forEach(vertrieb.depotlieferungen, function(
+              lieferung) {
+              lieferung.typ = VERTRIEBSARTEN.DEPOTLIEFERUNG;
+              $scope.lists.vertriebsarten[v.id].push({
+                id: lieferung.id,
+                label: VERTRIEBSARTEN.DEPOTLIEFERUNG +
+                  ' - ' +
+                  lieferung.depot.name,
+                vertriebsart: lieferung
+              });
             });
-            if ($scope.isExisting() && angular.isDefined(
-                vertriebsart
-                .depot) && vertriebsart.depot.id === $scope.abo
-              .depotId) {
-              $scope.abo.vertriebsart = vertriebsart;
-            }
+
+            lodash.forEach(vertrieb.heimlieferungen, function(
+              lieferung) {
+              lieferung.typ = VERTRIEBSARTEN.HEIMLIEFERUNG;
+              $scope.lists.vertriebsarten[v.id].push({
+                id: lieferung.id,
+                label: VERTRIEBSARTEN.HEIMLIEFERUNG +
+                  ' - ' +
+                  lieferung.tour.name,
+                vertriebsart: lieferung
+              });
+            });
+
+            lodash.forEach(vertrieb.postlieferungen, function(
+              lieferung) {
+              lieferung.typ = VERTRIEBSARTEN.POSTLIEFERUNG;
+              $scope.lists.vertriebsarten[v.id].push({
+                id: lieferung.id,
+                label: VERTRIEBSARTEN.POSTLIEFERUNG,
+                vertriebsart: lieferung
+              });
+            });
           });
         });
       }
@@ -197,16 +232,15 @@ angular.module('openolitor')
       var unwatchVetriebsartId = $scope.$watch('abo.vertriebsart', function(
         vertriebsart) {
         if (vertriebsart) {
+          $scope.abo.vertriebsartId = vertriebsart.id;
           switch (vertriebsart.typ) {
             case VERTRIEBSARTEN.DEPOTLIEFERUNG:
               $scope.abo.depotId = vertriebsart.depot.id;
               $scope.abo.depotName = vertriebsart.depot.name;
-              $scope.abo.liefertag = vertriebsart.liefertag;
               break;
             case VERTRIEBSARTEN.HEIMLIEFERUNG:
               $scope.abo.tourId = vertriebsart.tour.id;
               $scope.abo.tourName = vertriebsart.tour.name;
-              $scope.abo.liefertag = vertriebsart.liefertag;
               break;
           }
         }
@@ -236,9 +270,9 @@ angular.module('openolitor')
         if (!$scope.abo) {
           return;
         }
-        if ($scope.abo.depot) {
+        if ($scope.abo.depotId) {
           return gettext(VERTRIEBSARTEN.DEPOTLIEFERUNG);
-        } else if ($scope.abo.tour) {
+        } else if ($scope.abo.tourId) {
           return gettext(VERTRIEBSARTEN.HEIMLIEFERUNG);
         } else {
           return gettext(VERTRIEBSARTEN.POSTLIEFERUNG);
@@ -272,6 +306,10 @@ angular.module('openolitor')
           'w' : 'M';
         return moment(termin).subtract(abo.abotyp.kuendigungsfrist.wert,
           einheit).toDate();
+      };
+
+      $scope.isAboEnde = function(abo) {
+        return abo && abo.ende && moment().isAfter(abo.ende);
       };
 
       $scope.$on('destroy', function() {

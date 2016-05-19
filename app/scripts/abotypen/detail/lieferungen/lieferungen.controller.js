@@ -86,7 +86,7 @@ angular.module('openolitor')
           var newModel = new LieferungenListModel({
             datum: lieferdat,
             abotypId: parseInt($routeParams.id),
-            vertriebsartId: $scope.selectedVertriebsart.id
+            vertriebId: $scope.selectedVertrieb.id
           });
           newModel.$save();
           $scope.template.creating = $scope.template.creating + 1;
@@ -121,8 +121,8 @@ angular.module('openolitor')
             abotyp: function() {
               return $scope.abotyp;
             },
-            vertriebsart: function() {
-              return $scope.selectedVertriebsart;
+            vertrieb: function() {
+              return $scope.selectedVertrieb;
             }
           }
         });
@@ -142,7 +142,7 @@ angular.module('openolitor')
         $scope.loading = true;
         $scope.lieferungen = LieferungenListModel.query({
           abotypId: parseInt($routeParams.id),
-          vertriebsartId: $scope.selectedVertriebsart.id
+          vertriebId: $scope.selectedVertrieb.id
         }, function() {
           $scope.lieferungenTableParams.reload();
           $scope.loading = false;

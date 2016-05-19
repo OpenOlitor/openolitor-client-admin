@@ -195,7 +195,7 @@
     <div class="content content-box col-md-9">
       <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
     </div>
-    <div class="content-box col-md-3" ng-if="isVertriebsartExisting()">
-      <div ng-if="isVertriebsartExisting() && selectedVertriebsart" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    <div class="content-box col-md-3" ng-if="isVertriebExisting()">
+      <div ng-if="isVertriebExisting() && selectedVertrieb" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
     </div>
   </div>

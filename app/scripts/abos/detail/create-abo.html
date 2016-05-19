@@ -5,33 +5,55 @@
     </h3>
   </div>
   <div class="panel-body">
-   <div class="row form-group">
-     <div class="col-md-3">
-       <label for="abotyp" translate>Abotyp</label>
+    <form name="createAboForm">
+     <div class="row form-group">
+       <div class="col-md-3">
+         <label for="abotyp" translate>Abotyp</label>
+       </div>
+       <div class="col-md-8">
+         <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="lists.abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+         <input type="hidden" required ng-model="abo.abotypId">
+       </div>
      </div>
-     <div class="col-md-8">
-       <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+     <div ng-show="abotyp">
+       <div class="row form-group">
+         <div class="col-md-3">
+           <label for="abotyp" translate>Vertrieb</label>
+         </div>
+         <div class="col-md-8">
+           <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="lists.vertriebe[abo.abotypId]" property="label" selected-prop="id" selected="abo.vertriebId" required></oo-dropdown>
+           <input type="hidden" required ng-model="abo.vertriebId">
+         </div>
+       </div>
      </div>
-   </div>
-   <div ng-show="abotyp">
-     <div ng-include="'scripts/abotypen/detail/vertriebsarten/oo-vertriebsart-selection.html'"></div>
-   </div>
-   <div class="row form-group" ng-show="abo.vertriebsart">
-     <div class="col-md-3">
-       <label for="abotyp" translate>Start</label>
+     <div ng-show="abo.vertriebId">
+       <div class="row form-group">
+         <div class="col-md-3">
+           <label for="abotyp" translate>Vertriebsart</label>
+         </div>
+         <div class="col-md-8">
+           <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="lists.vertriebsarten[abo.vertriebId]" property="label" selected-prop="vertriebsart" selected="abo.vertriebsart" required></oo-dropdown>
+           <input type="hidden" required ng-model="abo.vertriebsartId">
+         </div>
+       </div>
      </div>
-     <div class="col-md-8">
-       <p class="input-group">
-         <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" />
-         <span class="input-group-btn">
-           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
-         </span>
-       </p>
+     <div class="row form-group" ng-show="abo.vertriebsartId">
+       <div class="col-md-3">
+         <label for="abotyp" translate>Start</label>
+       </div>
+       <div class="col-md-8">
+         <p class="input-group">
+           <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" />
+           <span class="input-group-btn">
+             <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+           </span>
+         </p>
+       </div>
      </div>
-   </div>
+   </form>
  </div>
   <div class="panel-footer">
-      <button class="btn btn-primary" ng-show="true" ng-click="save();onSave();" translate>Abo erstellen</button>
+      <button class="btn btn-primary" ng-disabled="createAboForm.$invalid" ng-click="save();onSave();" translate>Abo erstellen</button>
       <button class="btn btn-warning" ng-click="onCancel();" translate>Abbrechen</button>
   </div>
 </div>

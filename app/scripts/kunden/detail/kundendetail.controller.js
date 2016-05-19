@@ -311,5 +311,23 @@ angular.module('openolitor')
           $scope.$apply();
         }
       });
+
+      msgBus.onMsg('EntityDeleted', $rootScope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.kunde) {
+            angular.forEach($scope.kunde.abos, function(abo) {
+              if (abo.id === msg.data.id) {
+                var index = $scope.kunde.abos.indexOf(abo);
+                if (index > -1) {
+                  $scope.kunde.abos.splice(index, 1);
+                }
+                $scope.selectedAbo = undefined;
+                $scope.$apply();
+                return;
+              }
+            });
+          }
+        }
+      });
     }
   ]);
