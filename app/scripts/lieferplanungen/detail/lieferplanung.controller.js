@@ -386,9 +386,10 @@ angular.module('openolitor')
           produzent = 'Noch nicht definierter Produzent';
         }
 
-        if (angular.isUndefined($scope.bestellungen[produzent])) {
+        var bestellungByProduzent = $scope.bestellungen[produzent];
+        if (angular.isUndefined(bestellungByProduzent)) {
           var produzentObj = getProduzentByKurzzeichen(produzent);
-          $scope.bestellungen[produzent] = {
+          bestellungByProduzent = $scope.bestellungen[produzent] = {
             produzentId: produzentObj.id || undefined,
             produzentKurzzeichen: produzent,
             total: 0,
@@ -397,9 +398,11 @@ angular.module('openolitor')
             lieferungen: {}
           };
         }
-        if (angular.isUndefined($scope.bestellungen[produzent].lieferungen[
-            abotypLieferung.datum])) {
-          $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum] = {
+        var lieferungByProduzent = bestellungByProduzent.lieferungen[
+          abotypLieferung.datum];
+        if (angular.isUndefined(lieferungByProduzent)) {
+          lieferungByProduzent = bestellungByProduzent.lieferungen[
+            abotypLieferung.datum] = {
             datum: abotypLieferung.datum,
             positionen: {},
             total: 0,
@@ -408,14 +411,13 @@ angular.module('openolitor')
           };
         }
         var anzahl = abotypLieferung.anzahlKoerbeZuLiefern;
-        if (!angular.isUndefined($scope.bestellungen[produzent].lieferungen[
-            abotypLieferung.datum].positionen[korbprodukt.produktBeschrieb +
+        if (!angular.isUndefined(lieferungByProduzent.positionen[
+            korbprodukt.produktBeschrieb +
             korbprodukt.menge])) {
-          anzahl += $scope.bestellungen[produzent].lieferungen[
-            abotypLieferung.datum].positionen[korbprodukt.produktBeschrieb +
+          anzahl += lieferungByProduzent.positionen[korbprodukt.produktBeschrieb +
             korbprodukt.menge].anzahl;
         }
-        $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum].positionen[
+        lieferungByProduzent.positionen[
           korbprodukt.produktBeschrieb + korbprodukt.menge] = {
           anzahl: anzahl,
           produktBeschrieb: korbprodukt.produktBeschrieb,
@@ -426,33 +428,28 @@ angular.module('openolitor')
           mengeTotal: (korbprodukt.menge * anzahl),
           preis: (korbprodukt.preisEinheit * korbprodukt.menge * anzahl)
         };
-        $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum].total +=
+        lieferungByProduzent.total +=
           (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
-        $scope.bestellungen[produzent].total += (korbprodukt.preisEinheit *
+        bestellungByProduzent.total += (korbprodukt.preisEinheit *
           korbprodukt.menge * anzahl);
+
         if ($scope.produzentIstBesteuert(korbprodukt.produzentId)) {
-          $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum]
-            .steuer = ($scope.bestellungen[produzent].lieferungen[
-              abotypLieferung.datum].total / 100 * $scope.produzentSteuersatz(
+          lieferungByProduzent.steuer = (lieferungByProduzent.total / 100 *
+            $scope.produzentSteuersatz(
               korbprodukt.produzentId));
-          $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum]
-            .totalSteuer = ($scope.bestellungen[produzent].lieferungen[
-              abotypLieferung.datum].total + $scope.bestellungen[
-              produzent].lieferungen[abotypLieferung.lieferdatum].steuer);
-          $scope.bestellungen[produzent].steuer = ($scope.bestellungen[
-            produzent].total / 100 * $scope.produzentSteuersatz(
-            korbprodukt.produzentId));
-          $scope.bestellungen[produzent].totalSteuer = ($scope.bestellungen[
-            produzent].total + $scope.bestellungen[produzent].steuer);
+          lieferungByProduzent.totalSteuer = (lieferungByProduzent.total +
+            lieferungByProduzent.steuer);
+
+          bestellungByProduzent.steuer = (bestellungByProduzent.total / 100 *
+            $scope.produzentSteuersatz(
+              korbprodukt.produzentId));
+          bestellungByProduzent.totalSteuer = (bestellungByProduzent.total +
+            bestellungByProduzent.steuer);
         } else {
-          $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum]
-            .steuer = 0;
-          $scope.bestellungen[produzent].lieferungen[abotypLieferung.datum]
-            .totalSteuer = $scope.bestellungen[produzent].lieferungen[
-              abotypLieferung.datum].total;
-          $scope.bestellungen[produzent].steuer = 0;
-          $scope.bestellungen[produzent].totalSteuer = $scope.bestellungen[
-            produzent].total;
+          lieferungByProduzent.steuer = 0;
+          lieferungByProduzent.totalSteuer = lieferungByProduzent.total;
+          bestellungByProduzent.steuer = 0;
+          bestellungByProduzent.totalSteuer = bestellungByProduzent.total;
         }
       };
 
@@ -574,6 +571,5 @@ angular.module('openolitor')
           $rootScope.$apply();
         }
       });
-
     }
   ]);
