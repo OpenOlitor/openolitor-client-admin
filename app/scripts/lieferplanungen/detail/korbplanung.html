@@ -10,7 +10,7 @@
             <ul class="nav navbar-nav" ng-show="valuesEditable()">
               <li class="small" translate>Abotyp hinzufügen:</li>
               <li>
-                <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="addAbotypenL" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
+                <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
               </li>
             </ul>
           </div>
@@ -58,7 +58,7 @@
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen">
       <div class="panel panel-default panel-lieferplanung"
         oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
-        <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">          
+        <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">
           <h3 class="panel-title lieferplanung-title">
             <span class="navbar-brand">
               <span class="pre-info">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
@@ -124,8 +124,8 @@
                 <td></td>
                 <td></td>
                 <td translate>Total</td>
-                <td>{{getTotal(abotypLieferung.korbEntries)| ooCHF}}</td>
-                <td><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.korbEntries) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCHF)">&#916; {{getDiff(abotypLieferung.zielpreis, abotypLieferung.korbEntries)| ooCHF}}</span></td>
+                <td>{{getTotal(abotypLieferung.lieferpositionen)| ooCHF}}</td>
+                <td><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCHF)">&#916; {{getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen)| ooCHF}}</span></td>
                 <td></td>
               </tr>
             </tfoot>

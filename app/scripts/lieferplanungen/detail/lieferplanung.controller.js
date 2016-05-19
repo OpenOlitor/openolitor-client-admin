@@ -74,22 +74,16 @@ angular.module('openolitor')
         $scope.abotypenLieferungen = result;
         lodash.forEach($scope.abotypenLieferungen, function(
           abotypenLieferung) {
-          abotypenLieferung.korbEntries = [];
-          LieferplanungModel.getLieferpositionen({
-            id: $routeParams.id,
-            lieferungId: abotypenLieferung.id
-          }, function(result) {
-            abotypenLieferung.korbEntries = result;
-            lodash.forEach(abotypenLieferung.korbEntries,
-              function(korbEntry) {
-                var prod = $scope.getProduktById(korbEntry.produktId);
-                var produzenten = angular.isUndefined(prod) ?
-                  undefined : prod.produzenten;
-                korbEntry.produzentenL = $scope.extractProduzentenFilter(
-                  produzenten);
-              });
-            $scope.addTableParams(abotypenLieferung);
-          });
+
+          lodash.forEach(abotypenLieferung.lieferpositionen,
+            function(pos) {
+              var prod = $scope.getProduktById(pos.produktId);
+              var produzenten = angular.isUndefined(prod) ?
+                undefined : prod.produzenten;
+              pos.produzentenL = $scope.extractProduzentenFilter(
+                produzenten);
+            });
+          $scope.addTableParams(abotypenLieferung);
         });
       });
 
@@ -161,14 +155,14 @@ angular.module('openolitor')
         });
       }
 
-      $scope.fetchNichtInkludierteLieferungen = function() {
-        LieferplanungModel.getNichtInkludierteAbotypenLieferungen({
+      $scope.fetchVerfuegbareLieferungen = function() {
+        LieferplanungModel.getVerfuegbareLieferungen({
           id: $routeParams.id
         }, function(result) {
-          $scope.addAbotypenL = result;
+          $scope.verfuegbareLieferungen = result;
         });
       };
-      $scope.fetchNichtInkludierteLieferungen();
+      $scope.fetchVerfuegbareLieferungen();
 
       $scope.lieferung2add = function(addAbotyp) {
         return addAbotyp.abotypBeschrieb + ' ' + addAbotyp.vertriebsartBeschrieb +
@@ -180,9 +174,9 @@ angular.module('openolitor')
       };
 
       $scope.addAbotypToPlanung = function(abotypLieferung) {
-        $scope.addAbotypenL.pop(abotypLieferung);
+        $scope.verfuegbareLieferungen.pop(abotypLieferung);
 
-        abotypLieferung.korbEntries = [];
+        abotypLieferung.lieferpositionen = [];
         $scope.addTableParams(abotypLieferung);
         abotypLieferung.lieferplanungId = $scope.planung.id;
         $scope.abotypenLieferungen.push(abotypLieferung);
@@ -198,16 +192,21 @@ angular.module('openolitor')
         if (index > -1) {
           $scope.abotypenLieferungen.splice(index, 1);
         }
-        return LieferplanungModel.removeLieferung({
-          id: $routeParams.id,
-          lieferungId: abotypLieferung.id
-        }, []);
+
+        $scope.verfuegbareLieferungen.push(abotypLieferung);
+
+        if (abotypLieferung.id) {
+          return LieferplanungModel.removeLieferung({
+            id: $routeParams.id,
+            lieferungId: abotypLieferung.id
+          }, []);
+        }
       };
 
       $scope.removeProdukt = function(abotypLieferung, korbprodukt) {
-        var index = abotypLieferung.korbEntries.indexOf(korbprodukt);
+        var index = abotypLieferung.lieferpositionen.indexOf(korbprodukt);
         if (index > -1) {
-          abotypLieferung.korbEntries.splice(index, 1);
+          abotypLieferung.lieferpositionen.splice(index, 1);
           abotypLieferung.tableParamsKorb.reload();
         }
       };
@@ -235,12 +234,12 @@ angular.module('openolitor')
       };
 
       $scope.getDurchschnittspreis = function(abotypLieferung) {
-        if (angular.isUndefined(abotypLieferung.korbEntries) ||
-          abotypLieferung.korbEntries.length === 0) {
+        if (angular.isUndefined(abotypLieferung.lieferpositionen) ||
+          abotypLieferung.lieferpositionen.length === 0) {
           return abotypLieferung.durchschnittspreis;
         } else {
           return ((abotypLieferung.anzahlLieferungen * abotypLieferung.durchschnittspreis) +
-            $scope.getTotal(abotypLieferung.korbEntries)) / (
+            $scope.getTotal(abotypLieferung.lieferpositionen)) / (
             abotypLieferung.anzahlLieferungen + 1);
         }
       };
@@ -282,11 +281,11 @@ angular.module('openolitor')
               isExpanded: true
             },
             getData: function($defer, params) {
-              if (!abotypLieferung.korbEntries) {
+              if (!abotypLieferung.lieferpositionen) {
                 return;
               }
               // use build-in angular filter
-              var filteredData = $filter('filter')(abotypLieferung.korbEntries,
+              var filteredData = $filter('filter')(abotypLieferung.lieferpositionen,
                 $scope.search.query);
               var orderedData = params.sorting ?
                 $filter('orderBy')(filteredData, params.orderBy()) :
@@ -315,8 +314,8 @@ angular.module('openolitor')
           return;
         }
 
-        var notInKorb = function(korbEntries, prodEntry) {
-          return lodash.find(korbEntries, function(entry) {
+        var notInKorb = function(lieferpositionen, prodEntry) {
+          return lodash.find(lieferpositionen, function(entry) {
             return (prodEntry.produktBeschrieb === entry.produktBeschrieb);
           }) === undefined;
         };
@@ -337,7 +336,7 @@ angular.module('openolitor')
               produzentKurzzeichen: undefined,
               unlisted: true
             };
-            drop.scope().abotypLieferung.korbEntries.push(prodUnlistet);
+            drop.scope().abotypLieferung.lieferpositionen.push(prodUnlistet);
             break;
           case 'prod':
             var produkt = drag.scope().produkt;
@@ -359,25 +358,26 @@ angular.module('openolitor')
               produzentId: produzent.id,
               produzentKurzzeichen: produzent.kurzzeichen
             };
-            if (notInKorb(drop.scope().abotypLieferung.korbEntries,
+            if (notInKorb(drop.scope().abotypLieferung.lieferpositionen,
                 prodEntry)) {
-              drop.scope().abotypLieferung.korbEntries.push(prodEntry);
+              drop.scope().abotypLieferung.lieferpositionen.push(prodEntry);
             }
             break;
           case 'korbprod':
             var prodKorb = cloneObj(drag.scope().korbprodukt);
-            if (notInKorb(drop.scope().abotypLieferung.korbEntries,
+            if (notInKorb(drop.scope().abotypLieferung.lieferpositionen,
                 prodKorb)) {
-              drop.scope().abotypLieferung.korbEntries.push(prodKorb);
+              drop.scope().abotypLieferung.lieferpositionen.push(prodKorb);
             }
             break;
           case 'korb':
-            lodash.forEach(drag.scope().abotypLieferung.korbEntries,
+            lodash.forEach(drag.scope().abotypLieferung.lieferpositionen,
               function(produkt2add) {
                 var prodEntry = cloneObj(produkt2add);
-                if (notInKorb(drop.scope().abotypLieferung.korbEntries,
+                if (notInKorb(drop.scope().abotypLieferung.lieferpositionen,
                     prodEntry)) {
-                  drop.scope().abotypLieferung.korbEntries.push(prodEntry);
+                  drop.scope().abotypLieferung.lieferpositionen.push(
+                    prodEntry);
                 }
               });
             break;
@@ -464,7 +464,7 @@ angular.module('openolitor')
       $scope.recalculateBestellungen = function() {
         $scope.bestellungen = {};
         lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
-          lodash.forEach(abotypLieferung.korbEntries, function(
+          lodash.forEach(abotypLieferung.lieferpositionen, function(
             korbprodukt) {
             addEntryToBestellungen(abotypLieferung, korbprodukt);
           });
@@ -495,7 +495,7 @@ angular.module('openolitor')
               lieferungId: abotypLieferung.id
             }, {
               lieferungId: abotypLieferung.id,
-              lieferpositionen: abotypLieferung.korbEntries
+              lieferpositionen: abotypLieferung.lieferpositionen
             });
           });
           return $scope.planung.$save();
@@ -508,7 +508,7 @@ angular.module('openolitor')
         var ret = true;
         //check on Produzent on all Produkte
         lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
-          lodash.forEach(abotypLieferung.korbEntries, function(
+          lodash.forEach(abotypLieferung.lieferpositionen, function(
             korbEntry) {
             if (ret && angular.isUndefined(korbEntry.produzentId)) {
               ret = false;
