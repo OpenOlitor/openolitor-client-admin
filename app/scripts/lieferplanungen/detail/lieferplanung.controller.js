@@ -230,6 +230,10 @@ angular.module('openolitor')
         return aboZielpreis - $scope.getTotal(produkteEntries);
       };
 
+      $scope.setMode = function(mode) {
+        $scope.displayMode = mode;
+      };
+
       $scope.getDurchschnittspreis = function(abotypLieferung) {
         if (angular.isUndefined(abotypLieferung.korbEntries) ||
           abotypLieferung.korbEntries.length === 0) {
