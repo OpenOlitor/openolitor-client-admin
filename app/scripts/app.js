@@ -216,7 +216,7 @@ angular
     };
   }])
   .factory('cloneObj', function() {
-    var cloneObjFun = function(obj) {
+    /*var cloneObjFun = function(obj) {
       if (null === obj || 'object' !== typeof obj) {
         return obj;
       }
@@ -228,7 +228,10 @@ angular
       }
       return copy;
     };
-    return cloneObjFun;
+    return cloneObjFun;*/
+    return function(obj) {
+      return angular.copy(obj);
+    };
   })
   .factory('msgBus', ['$rootScope', function($rootScope) {
     var msgBus = {};
