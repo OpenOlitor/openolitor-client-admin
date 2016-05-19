@@ -5,12 +5,13 @@
 angular.module('openolitor')
   .controller('LieferungenListController', ['$scope', '$routeParams',
     '$location', '$uibModal', '$log', '$http', 'gettext', 'ngTableParams',
-    'msgBus',
+    'msgBus', 'lodash',
     'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'API_URL',
 
     function($scope, $routeParams, $location, $uibModal, $log, $http, gettext,
       ngTableParams,
-      msgBus, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN, API_URL) {
+      msgBus, lodash, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN,
+      API_URL) {
 
       $scope.now = new Date();
       $scope.template = {
@@ -83,8 +84,11 @@ angular.module('openolitor')
 
 
       $scope.generateLieferungen = function(lieferdaten) {
+        var uniqueLieferdaten = lodash.filter(lieferdaten, function(datum) {
+          return !$scope.datumExistiert(datum);
+        });
         var newModel = {
-          daten: lieferdaten,
+          daten: uniqueLieferdaten,
           abotypId: parseInt($routeParams.id),
           vertriebId: $scope.selectedVertrieb.id
         };
@@ -128,6 +132,9 @@ angular.module('openolitor')
             },
             vertrieb: function() {
               return $scope.selectedVertrieb;
+            },
+            lieferungen: function() {
+              return $scope.lieferungen;
             }
           }
         });
