@@ -545,3 +545,6 @@ footer, .footer {
   right: calc(50% - 320px);
   z-index:2000;
 }
+tr.error {
+  background-color: rgba(255, 0, 0, 0.11) !important;
+}

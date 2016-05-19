@@ -254,6 +254,10 @@ angular.module('openolitor')
         return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
       };
 
+      $scope.isInvalid = function(korbprodukt) {
+        return !korbprodukt.produzentId;
+      };
+
       $scope.selectedProduzentFunc = function() {
         var selectedProduzent = function(produzent, korbprodukt) {
           korbprodukt.produzentId = produzent.id;
