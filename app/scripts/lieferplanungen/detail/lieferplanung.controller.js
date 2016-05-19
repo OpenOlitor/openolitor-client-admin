@@ -254,7 +254,7 @@ angular.module('openolitor')
       };
 
       $scope.isInvalid = function(korbprodukt) {
-        return !korbprodukt.produzentId;
+        return !korbprodukt.produzentId || !korbprodukt.produktBeschrieb;
       };
 
       $scope.selectedProduzentFunc = function() {
