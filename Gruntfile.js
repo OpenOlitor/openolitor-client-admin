@@ -20,10 +20,10 @@ module.exports = function(grunt) {
       'm1': 'http://test.openolitor.ch/m1/'
     },
     'prod-soliterre': {
-      'm1': 'http://prod.openolitor.ch/soliterre/'
+      'm1': 'https://prod.openolitor.ch/soliterre/'
     },
     'prod-bioabi': {
-      'm1': 'http://prod.openolitor.ch/bioabi/'
+      'm1': 'https://prod.openolitor.ch/bioabi/'
     }
   };
   var env = 'dev';

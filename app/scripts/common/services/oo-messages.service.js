@@ -129,7 +129,8 @@ angular.module('openolitor')
         //start websocket based messaging
         start: function() {
           $log.debug('registering websocket, request websocket url');
-          var wsUrl = API_WS_URL.replace('http://', 'ws://');
+          var wsUrl = API_WS_URL.replace('http://', 'ws://').replace(
+            'https://', 'wss://');
           $log.debug('registering websocket, bind to ' + wsUrl);
           //append token to websocket url because normal http headers can't get controlled
           var securedUrl = wsUrl; //+ '?auth='+userService.getToken();
