@@ -4,15 +4,18 @@
  */
 angular.module('openolitor')
   .controller('GenerateLieferungenController', ['$scope', '$uibModalInstance',
-    '$log', 'abotyp', 'vertrieb', 'von', 'moment', 'LIEFERZEITPUNKTE',
+    '$log', 'abotyp', 'vertrieb', 'von', 'moment', 'lieferungen',
+    'LIEFERZEITPUNKTE',
     'LIEFERRHYTHMEN',
 
     function($scope, $uibModalInstance, $log, abotyp, vertrieb, von, moment,
+      lieferungen,
       LIEFERZEITPUNKTE, LIEFERRHYTHMEN) {
       $scope.von = von;
       $scope.initVon = von;
       $scope.abotyp = abotyp;
       $scope.lieferdaten = [];
+      $scope.lieferungen = lieferungen;
 
       var liefertage = [];
       angular.forEach(LIEFERZEITPUNKTE, function(liefertag) {
@@ -32,6 +35,18 @@ angular.module('openolitor')
         if (index > -1) {
           $scope.lieferdaten.splice(index, 1);
         }
+      };
+
+      var datumExistiert = function(datum) {
+        //first check if date if not yet part of the list of lieferdat. Lieferdat must be unique
+        var result = false;
+        angular.forEach($scope.lieferungen, function(lieferung) {
+          if (lieferung.datum.toDateString() === datum.toDateString()) {
+            result = true;
+            return;
+          }
+        });
+        return result;
       };
 
       var generateLieferdaten = function() {
@@ -73,7 +88,10 @@ angular.module('openolitor')
 
           $scope.lieferdaten = [];
           while (!start.isAfter(end)) {
-            $scope.lieferdaten.push(new Date(start.valueOf()));
+            var date = new Date(start.valueOf());
+            if (!datumExistiert(date)) {
+              $scope.lieferdaten.push(date);
+            }
 
             start = start.add(step, stepEinheit);
           }
