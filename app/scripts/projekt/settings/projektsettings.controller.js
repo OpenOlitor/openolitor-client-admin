@@ -335,8 +335,7 @@ angular.module('openolitor')
       };
 
       $scope.generateLogoUrl = function() {
-        return API_URL + 'projekt/' + $scope.projekt.id + '/logo?' + new Date()
-          .getTime();
+        return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
       };
       $scope.logoUrl = $scope.generateLogoUrl();
     }
