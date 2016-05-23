@@ -29,6 +29,10 @@ angular.module('openolitor')
       }, function(user) {
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
         $scope.user = user;
+
+        if($scope.loggedIn) {
+          ProjektService.loadProjekt()();
+        }
       });
 
       $timeout(function() {
