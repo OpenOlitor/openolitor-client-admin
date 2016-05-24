@@ -31,21 +31,20 @@ angular.module('openolitor')
         ooAuthService.loggedIn(token);
       };
 
-      var showGoodbyeMessage = function() {
-        //show welcome message
-        var usr = ooAuthService.getUser();
+      var showGoodbyeMessage = function(usr) {
         alertService.addAlert('info', gettext('Aufwiedersehen') + ' ' +
           usr.vorname + ' ' +
           usr.name);
       };
 
       var doLogout = function(showMessage) {
+        var usr = ooAuthService.getUser();
         $http.post(API_URL + 'auth/logout').then(function() {
           $scope.loginData.message = undefined;
 
           ooAuthService.loggedOut();
           if (showMessage) {
-            showGoodbyeMessage();
+            showGoodbyeMessage(usr);
           }
 
           $timeout(function() {
