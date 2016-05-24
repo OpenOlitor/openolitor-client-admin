@@ -24,6 +24,7 @@ angular.module('openolitor')
 
       var openWebSocket = function(url) {
         var ws = new WebSocket(url);
+        var scheduler;
 
         ws.onmessage = function(msg) {
           var data = convertDateStringsToDates(JSON.parse(msg.data));
@@ -37,6 +38,17 @@ angular.module('openolitor')
           send('HelloServer', {
             client: 'angularClient_' + BUILD_NR
           });
+
+          if (!angular.isUndefined(scheduler)) {
+            $interval.canel(scheduler);
+            scheduler = undefined;
+          }
+          scheduler = $interval(function() {
+            var t = new Date().getTime();
+            send('ClientPing', {
+              time: t
+            });
+          }, 90000);
 
           if (!angular.isUndefined(reconnectPromise)) {
             $interval.cancel(reconnectPromise);
