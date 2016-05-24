@@ -20,7 +20,7 @@
       </tr>
       <tr ng-repeat="abo in kunde.abos track by $index">
         <td>
-          <a ng-href="#/abos/{{abo.id}}">{{abo.id}}</a>
+          <a ng-click="selectAbo(abo)" >{{abo.id}}</a>
         </td>
         <td>
           <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>

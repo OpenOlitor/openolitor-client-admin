@@ -3,15 +3,17 @@
 /**
  */
 angular.module('openolitor')
-  .factory('ProjektService', ['$rootScope', 'ProjektModel', 'msgBus',
-    function($rootScope, ProjektModel, msgBus) {
+  .factory('ProjektService', ['$rootScope', 'ProjektModel', 'msgBus', 'ooAuthService',
+    function($rootScope, ProjektModel, msgBus, ooAuthService) {
 
       var projekt;
 
       var load = function() {
-        ProjektModel.query({}, function(result) {
-          projekt = result;
-        });
+        if (ooAuthService.getUser()) {
+          ProjektModel.query({}, function(result) {
+            projekt = result;
+          });
+        }
       };
       load();
 
@@ -39,6 +41,10 @@ angular.module('openolitor')
       return {
         getProjekt: function() {
           return projekt;
+        },
+
+        loadProjekt: function() {
+          return load;
         }
       };
     }
