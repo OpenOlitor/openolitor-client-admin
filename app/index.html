@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div ng-if="!connected" class="connected-alert alert alert-danger" role="alert" translate>Das Backend steht im Moment nicht zur Verfügung. Bitte besuchen Sie uns später wieder.</div>
+  <div ng-if="!connected && showConnectionErrorMessage" class="connected-alert alert alert-danger" role="alert" translate>Das Backend steht im Moment nicht zur Verfügung. Bitte besuchen Sie uns später wieder.</div>
 
   <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
     <ul class="sidebar-nav" ng-init="menushow = []">
