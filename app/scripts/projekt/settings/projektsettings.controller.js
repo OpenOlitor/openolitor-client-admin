@@ -21,20 +21,11 @@ angular.module('openolitor')
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
       ProjektService, ProjektModel, EnumUtil, MONATE, WAEHRUNG, Upload, msgBus, API_URL
     ) {
-      $scope.editMode = false;
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
 
-      var defaults = {
-        model: {
-          preiseSichtbar: true,
-          preiseEditierbar: false,
-          emailErforderlich: true,
-          waehrung: 'CHF',
-          geschaeftsjahrTag: 1,
-          geschaeftsjahrMonat: 1
-        }
-      };
+      // first fake to true to work around bs-swith bug
+      $scope.editMode = true;
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
@@ -75,19 +66,30 @@ angular.module('openolitor')
           }
         });
 
-      ProjektService.loadProjekt()();
 
-      //watch for existing projekt
+      ProjektService.resolveProjekt().then(function(projekt) {
+        if (projekt) {
+          $scope.projekt = projekt;
+          $scope.logoUrl = $scope.generateLogoUrl();
+          $scope.editMode = false;
+        } else {
+          $scope.editMode = true;
+        }
+      }, function(error) {
+        console.log('error', error);
+      });
+      /*
       $scope.$watch(ProjektService.getProjekt,
         function(projekt) {
           if (projekt) {
-            $scope.projekt = projekt;
+            $scope.projekt = angular.copy(projekt);
             $scope.logoUrl = $scope.generateLogoUrl();
           } else {
             $scope.projekt = new ProjektModel(defaults.model);
             $scope.logoUrl = undefined;
           }
         });
+        */
 
       $scope.switchToEditMode = function() {
         $scope.editMode = true;
