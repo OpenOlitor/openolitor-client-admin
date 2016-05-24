@@ -24,22 +24,27 @@ angular.module('openolitor')
       $scope.editMode = false;
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
-      $scope.projekt = {
-        preiseSichtbar: true,
-        preiseEditierbar: false,
-        emailErforderlich: true,
-        waehrung: 'CHF',
-        geschaeftsjahrTag: 1,
-        geschaeftsjahrMonat: 1
+
+      var defaults = {
+        model: {
+          preiseSichtbar: true,
+          preiseEditierbar: false,
+          emailErforderlich: true,
+          waehrung: 'CHF',
+          geschaeftsjahrTag: 1,
+          geschaeftsjahrMonat: 1
+        }
       };
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
       $scope.monate = EnumUtil.asArray(MONATE);
 
-      $scope.tage = Array();
-      for (var i=1; i<=31; i++) {
-        $scope.tage.push({id: i});
+      $scope.tage = [];
+      for (var i = 1; i <= 31; i++) {
+        $scope.tage.push({
+          id: i
+        });
       }
 
       //watch for set of kundentypen
@@ -70,6 +75,8 @@ angular.module('openolitor')
           }
         });
 
+      ProjektService.loadProjekt()();
+
       //watch for existing projekt
       $scope.$watch(ProjektService.getProjekt,
         function(projekt) {
@@ -77,7 +84,7 @@ angular.module('openolitor')
             $scope.projekt = projekt;
             $scope.logoUrl = $scope.generateLogoUrl();
           } else {
-            $scope.projekt = new ProjektModel($scope.projekt);
+            $scope.projekt = new ProjektModel(defaults.model);
             $scope.logoUrl = undefined;
           }
         });
@@ -324,9 +331,7 @@ angular.module('openolitor')
           data: {
             file: file
           }
-        }).then(function(resp) {
-          console.log('Success ' + resp.config.data.file.name +
-            'uploaded. Response: ' + resp.data);
+        }).then(function() {
           //regenerate logo url to reload image
           $scope.logoUrl = $scope.generateLogoUrl();
         }, function(resp) {
@@ -335,9 +340,7 @@ angular.module('openolitor')
       };
 
       $scope.generateLogoUrl = function() {
-        return API_URL + 'projekt/' + $scope.projekt.id + '/logo?' + new Date()
-          .getTime();
+        return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
       };
-      $scope.logoUrl = $scope.generateLogoUrl();
     }
   ]);
