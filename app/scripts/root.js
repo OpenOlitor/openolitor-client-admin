@@ -31,7 +31,10 @@ angular.module('openolitor')
         $scope.user = user;
 
         if($scope.loggedIn) {
-          ProjektService.loadProjekt()();
+          ProjektService.resolveProjekt().then(function(projekt) {
+            $scope.projekt = projekt;
+            $rootScope.projekt = projekt;
+          });
         }
       });
 
@@ -40,12 +43,6 @@ angular.module('openolitor')
           .attr(
             'activate-id')] = true;
       }, 0);
-
-      var unwatchProjekt = $scope.$watch(ProjektService.getProjekt,
-        function(projekt) {
-          $scope.projekt = projekt;
-          $rootScope.projekt = projekt;
-        });
 
       var unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
         function(info) {
@@ -92,7 +89,6 @@ angular.module('openolitor')
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();
-        unwatchProjekt();
         unwatchStaticServerInfo();
       });
 
