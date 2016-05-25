@@ -40,7 +40,7 @@
         <div class="panel-body produkteliste">
           <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'">
-              <td><span >&#8942</span></td>
+              <td><span>&#8942;</span></td>
               <td data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
                 {{produkt.name}}
               </td>
@@ -56,8 +56,7 @@
       </div>
     </div>
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen">
-      <div class="panel panel-default panel-lieferplanung"
-        oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
+      <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
         <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">
           <h3 class="panel-title lieferplanung-title">
             <span class="navbar-brand">
@@ -74,7 +73,7 @@
         <div class="panel-body">
           <table ng-table="abotypLieferung.tableParamsKorb" class="table table-striped table-small table-lieferplanung" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="korbprodukt in $data | orderBy:'produktBeschrieb'" ng-class="{error: isInvalid(korbprodukt)}">
-              <td><span oo-draggable="true" oo-draged-type="'korbprod'">&#8942</span></td>
+              <td><span oo-draggable="true" oo-draged-type="'korbprod'">&#8942;</span></td>
               <td data-title="'Produkt'|translate">
                 <span ng-hide="korbprodukt.unlisted">
                   {{korbprodukt.produktBeschrieb}}
@@ -87,13 +86,12 @@
                 <input type="number" placeholder="{{'Menge'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+(\.[0-9]{1,3})?$/" min="0" step="0.1" class="form-control" name="menge" ng-model="korbprodukt.menge" required></input>
               </td>
               <td>
-                  <span ng-if="!korbprodukt.unlisted">
+                <span ng-if="!korbprodukt.unlisted">
                     <div>{{liefereinheiten[korbprodukt.einheit.toUpperCase()].label.short}}</div>
                   </span>
-                  <span ng-if="korbprodukt.unlisted">
+                <span ng-if="korbprodukt.unlisted">
                     <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected="korbprodukt.einheit" ng-required></oo-dropdown>
                   </span>
-                </div>
               </td>
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
                 <span ng-show="korbprodukt.menge" ng-if="!projekt.preiseEditierbar && !korbprodukt.unlisted">
@@ -115,7 +113,7 @@
                 </span>
               </td>
               <td>
-                <button type="button" class="btn btn-default btn-sm" ng-show="valuesEditable()"  ng-click="removeProdukt(abotypLieferung, korbprodukt)"><span class="fa fa-times"></span></button>
+                <button type="button" class="btn btn-default btn-sm" ng-show="valuesEditable()" ng-click="removeProdukt(abotypLieferung, korbprodukt)"><span class="fa fa-times"></span></button>
               </td>
             </tr>
             <tfoot ng-show="projekt.preiseSichtbar">

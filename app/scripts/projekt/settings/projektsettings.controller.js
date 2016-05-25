@@ -21,25 +21,21 @@ angular.module('openolitor')
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
       ProjektService, ProjektModel, EnumUtil, MONATE, WAEHRUNG, Upload, msgBus, API_URL
     ) {
-      $scope.editMode = false;
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
-      $scope.projekt = {
-        preiseSichtbar: true,
-        preiseEditierbar: false,
-        emailErforderlich: true,
-        waehrung: 'CHF',
-        geschaeftsjahrTag: 1,
-        geschaeftsjahrMonat: 1
-      };
+
+      // first fake to true to work around bs-swith bug
+      $scope.editMode = true;
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
       $scope.monate = EnumUtil.asArray(MONATE);
 
-      $scope.tage = Array();
-      for (var i=1; i<=31; i++) {
-        $scope.tage.push({id: i});
+      $scope.tage = [];
+      for (var i = 1; i <= 31; i++) {
+        $scope.tage.push({
+          id: i
+        });
       }
 
       //watch for set of kundentypen
@@ -70,17 +66,30 @@ angular.module('openolitor')
           }
         });
 
-      //watch for existing projekt
+
+      ProjektService.resolveProjekt().then(function(projekt) {
+        if (projekt) {
+          $scope.projekt = projekt;
+          $scope.logoUrl = $scope.generateLogoUrl();
+          $scope.editMode = false;
+        } else {
+          $scope.editMode = true;
+        }
+      }, function(error) {
+        console.log('error', error);
+      });
+      /*
       $scope.$watch(ProjektService.getProjekt,
         function(projekt) {
           if (projekt) {
-            $scope.projekt = projekt;
+            $scope.projekt = angular.copy(projekt);
             $scope.logoUrl = $scope.generateLogoUrl();
           } else {
-            $scope.projekt = new ProjektModel($scope.projekt);
+            $scope.projekt = new ProjektModel(defaults.model);
             $scope.logoUrl = undefined;
           }
         });
+        */
 
       $scope.switchToEditMode = function() {
         $scope.editMode = true;
@@ -324,9 +333,7 @@ angular.module('openolitor')
           data: {
             file: file
           }
-        }).then(function(resp) {
-          console.log('Success ' + resp.config.data.file.name +
-            'uploaded. Response: ' + resp.data);
+        }).then(function() {
           //regenerate logo url to reload image
           $scope.logoUrl = $scope.generateLogoUrl();
         }, function(resp) {
@@ -335,9 +342,7 @@ angular.module('openolitor')
       };
 
       $scope.generateLogoUrl = function() {
-        return API_URL + 'projekt/' + $scope.projekt.id + '/logo?' + new Date()
-          .getTime();
+        return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
       };
-      $scope.logoUrl = $scope.generateLogoUrl();
     }
   ]);

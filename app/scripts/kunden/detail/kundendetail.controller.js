@@ -9,14 +9,14 @@ angular.module('openolitor')
     'PendenzDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
-    'msgBus', 'lodash', 'KundenRechnungenModel',
+    'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       KundenDetailModel, PendenzDetailModel, KundentypenService, alertService,
       EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
-      msgBus, lodash, KundenRechnungenModel) {
+      msgBus, lodash, KundenRechnungenModel, ooAuthService) {
 
       var defaults = {
         model: {
@@ -213,7 +213,18 @@ angular.module('openolitor')
         $location.path('/kunden');
       };
 
+      $scope.canDelete = function() {
+        return $scope.kunde && $scope.kunde.anzahlAbos === 0 && !lodash.find(
+          $scope.kunde.ansprechpersonen,
+          function(person) {
+            return person.id === ooAuthService.getUser().personId;
+          });
+      };
+
       $scope.delete = function() {
+        if (!$scope.canDelete()) {
+          return;
+        }
         return $scope.kunde.$delete();
       };
       $scope.isNewAbo = function() {

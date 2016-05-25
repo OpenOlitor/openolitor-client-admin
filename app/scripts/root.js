@@ -29,6 +29,13 @@ angular.module('openolitor')
       }, function(user) {
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
         $scope.user = user;
+
+        if($scope.loggedIn) {
+          ProjektService.resolveProjekt().then(function(projekt) {
+            $scope.projekt = projekt;
+            $rootScope.projekt = projekt;
+          });
+        }
       });
 
       $timeout(function() {
@@ -36,12 +43,6 @@ angular.module('openolitor')
           .attr(
             'activate-id')] = true;
       }, 0);
-
-      var unwatchProjekt = $scope.$watch(ProjektService.getProjekt,
-        function(projekt) {
-          $scope.projekt = projekt;
-          $rootScope.projekt = projekt;
-        });
 
       var unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
         function(info) {
@@ -57,11 +58,15 @@ angular.module('openolitor')
       msgBus.onMsg('WebSocketClosed', $rootScope, function(event, msg) {
         $scope.connected = false;
         $scope.messagingSocketClosedReason = msg.reason;
+        $timeout(function() {
+          $scope.showConnectionErrorMessage = true;
+        }, 10000);
         $scope.$apply();
       });
 
       msgBus.onMsg('WebSocketOpen', $rootScope, function() {
         $scope.connected = true;
+        $scope.showConnectionErrorMessage = false;
         $scope.messagingSocketClosedReason = '';
         $scope.$apply();
       });
@@ -84,7 +89,6 @@ angular.module('openolitor')
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();
-        unwatchProjekt();
         unwatchStaticServerInfo();
       });
 
