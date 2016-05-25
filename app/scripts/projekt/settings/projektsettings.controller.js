@@ -78,18 +78,6 @@ angular.module('openolitor')
       }, function(error) {
         console.log('error', error);
       });
-      /*
-      $scope.$watch(ProjektService.getProjekt,
-        function(projekt) {
-          if (projekt) {
-            $scope.projekt = angular.copy(projekt);
-            $scope.logoUrl = $scope.generateLogoUrl();
-          } else {
-            $scope.projekt = new ProjektModel(defaults.model);
-            $scope.logoUrl = undefined;
-          }
-        });
-        */
 
       $scope.switchToEditMode = function() {
         $scope.editMode = true;
