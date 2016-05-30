@@ -5,9 +5,9 @@
 angular.module('openolitor')
   .controller('LoginController', ['$scope', '$http', 'API_URL', 'ENV',
     'gettext',
-    'alertService', '$timeout', '$location', '$route', 'ooAuthService',
+    'alertService', '$timeout', '$location', '$route', '$routeParams', 'ooAuthService',
     function($scope, $http, API_URL, ENV, gettext, alertService, $timeout,
-      $location, $route, ooAuthService) {
+      $location, $route, $routeParams, ooAuthService) {
       $scope.loginData = {};
       $scope.secondFactorData = {};
       $scope.changePwd = {
@@ -37,7 +37,7 @@ angular.module('openolitor')
           usr.name);
       };
 
-      var doLogout = function(showMessage) {
+      var doLogout = function(showMessage, msg) {
         var usr = ooAuthService.getUser();
         $http.post(API_URL + 'auth/logout').then(function() {
           $scope.loginData.message = undefined;
@@ -49,7 +49,12 @@ angular.module('openolitor')
 
           $timeout(function() {
             $scope.status = 'login';
-            $location.path('/login');
+            if (msg && msg !== '') {
+              $location.path('/login').search('msg', msg);
+            }
+            else {
+              $location.path('/login');
+            }
           }, 1000);
         });
       };
@@ -60,12 +65,18 @@ angular.module('openolitor')
           'Passwort wurde erfolgreich geändert, Sie werden automatisch ausgelogged.'
         ));
 
-        doLogout(false);
+        doLogout(false, gettext(
+          'Passwort wurde erfolgreich geändert, Sie wurden automatisch ausgelogged. Bitte loggen Sie sich mit dem neuen Passwort erneut an.'
+        ));
       };
 
       var logout = $route.current.$$route.logout;
       if (logout) {
         doLogout(true);
+      }
+      var msg = $routeParams.msg;
+      if (msg && msg !== '') {
+        $scope.loginData.message = msg;
       }
 
       $scope.login = function() {
