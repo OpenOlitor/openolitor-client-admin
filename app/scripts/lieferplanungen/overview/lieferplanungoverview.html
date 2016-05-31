@@ -20,7 +20,7 @@
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="lieferplanung in $data">
             <td data-title="'#'|translate" sortable="'nr'">
-              <a ng-href="#/lieferplanung/{{lieferplanung.id}}">{{lieferplanung.nr}}</a>
+              <a ng-href="#/lieferplanung/{{lieferplanung.id}}">{{lieferplanung.id}}</a>
             </td>
             <td data-title="'Abotypen'|translate">
               {{lieferplanung.abotypDepotTour}}
