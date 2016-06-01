@@ -23,7 +23,8 @@ angular.module('openolitor')
           id: undefined,
           typen: [KundentypenService.VEREINSMITGLIED],
           ansprechpersonen: [{
-            id: undefined
+            id: undefined,
+            anrede: 'Frau'
           }],
           pendenzen: [],
           abweichendeLieferadresse: false
@@ -136,7 +137,8 @@ angular.module('openolitor')
 
       $scope.addPerson = function() {
         $scope.kunde.ansprechpersonen.push({
-          id: undefined
+          id: undefined,
+          anrede: 'Frau'
         });
       };
 
