@@ -191,10 +191,28 @@ angular.module('openolitor')
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
         }
-      }];
+      },
+      {
+          label: 'drucken',
+          iconClass: 'fa fa-print',
+          onExecute: function() {
+            $scope.showGenerateReport = true;
+            return true;
+          },
+          isDisabled: function() {
+            return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.STORNIERT;
+          }
+        }
+      ];
 
       $scope.delete = function() {
         return $scope.rechnung.$delete();
+      };
+
+      $scope.berichtErstellen = function(formData) {
+        $scope.rechnung.berichtRechnung({}, formData).$promise.then(function (res) {
+          console.log(res);
+        });
       };
     }
   ]);

@@ -34,6 +34,15 @@ angular.module('openolitor')
           extendedPath: 'aktionen',
           aktion: 'stornieren'
         }
+      },
+      berichtRechnung: {
+        method: 'POST',
+        transformRequest: angular.identity,
+        headers:  { 'Content-Type': undefined },
+        params: {
+          extendedPath: 'berichte',
+          aktion: 'rechnung'
+        }
       }
     });
   });
