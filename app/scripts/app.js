@@ -439,6 +439,12 @@ angular
         name: 'TourenOverview',
         access: userRoles.Administrator
       })
+      .when('/touren/:id', {
+        templateUrl: 'scripts/touren/detail/tourendetail.html',
+        controller: 'TourenDetailController',
+        name: 'TourenDetail',
+        access: userRoles.Administrator
+      })
       .when('/pendenzen', {
         templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
         controller: 'PendenzenOverviewController',
