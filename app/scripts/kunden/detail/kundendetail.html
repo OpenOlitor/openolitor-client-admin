@@ -338,6 +338,7 @@
               <th tanslate>Rechnungsdatum</th>
               <th tanslate>Faelligkeitsdatum</th>
               <th tanslate>Status</th>
+              <th tanslate>Eingang am</th>
               <th> </th>
             </tr>
             <tr ng-repeat="rechnung in rechnungen">
@@ -358,6 +359,9 @@
               </td>
               <td>
                 {{rechnung.status | translate}}
+              </td>
+              <td>
+                {{rechnung.eingangsDatum | translate}}
               </td>
             </tr>
           </table>
