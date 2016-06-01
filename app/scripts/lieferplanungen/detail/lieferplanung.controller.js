@@ -533,6 +533,10 @@ angular.module('openolitor')
 
       $scope.editNachAbgeschlossen = false;
 
+      $scope.setEditableNachAbgeschlossen = function() {
+        $scope.editNachAbgeschlossen = true;
+      };
+
       $scope.valuesEditable = function() {
         if (angular.isUndefined($scope.planung)) {
           return false;
