@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       'm2': 'http://localhost:9003/m2/'
     },
     'test': {
-      'm1': 'http://test.openolitor.ch/m1/'
+      'm1': 'https://test.openolitor.ch/m1/'
     },
     'prod-soliterre': {
       'm1': 'https://prod.openolitor.ch/soliterre/'
