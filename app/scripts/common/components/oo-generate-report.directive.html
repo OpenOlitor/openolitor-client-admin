@@ -7,58 +7,60 @@
   <div class="panel-body">
     <form name="berichtForm">
       <div class="row form-group">
-        <div class="col-md-7">
+        <div class="col-md-4">
           <label for="vorlage" translate>Vorlage</label>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
           <div class="btn-group" uib-dropdown>
-            <button id="split-button" type="button" class="btn btn-danger">
+            <button id="split-button" type="button" class="btn btn-primary">
               <span ng-show="form.vorlage === undefined" translate>Standardvorlage</span>
-              <span ng-show="form.vorlage" translate ng-model="form.vorlage"></span>
+              <span ng-show="form.vorlage" translate>{{form.vorlage.name}}</span>
             </button>
-            <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+            <button type="button" class="btn btn-default" uib-dropdown-toggle>
               <span class="caret"></span>
               <span class="sr-only"></span>
             </button>
             <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-              <li role="menuitem"><a ng-click="form.vorlage === undefined" translate>Standardvorlage</a></li>
+              <li role="menuitem"><a ng-click="selectStandardVorlage()" translate>Standardvorlage</a></li>
               <li class="divider"></li>
               <li role="menuitem"><a
                 ng-model="form.vorlage" name="vorlageFile" ngf-pattern="'application/vnd.oasis.opendocument.text'"
-                  ngf-accept="'application/vnd.oasis.opendocument.text '" ngf-max-size="1MB" ngf-select="form.vorlage = $file" ngf-drop="uploadLogo($file)"
+                  ngf-accept="'application/vnd.oasis.opendocument.text'" ngf-max-size="1MB" ngf-select="selectFile($file)" ngf-drop="selectFile($file)"
                   translate>Benutzerdefiniert...</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-7">
+        <div class="col-md-4">
           <label for="pdfGenerieren" translate>PDF Erstellen</label>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
             <input bs-switch ng-model="form.pdfGenerieren" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
         </div>
       </div>
-      <div class="row form-group">
-        <div class="col-md-7">
-          <label for="pdfAblegen" translate>PDF Archivieren</label>
+      <div class="row form-group" ng-show="form.pdfGenerieren === true">
+        <div class="col-md-4">
+          <label for="pdfAblegen" translate>PDF Ablegen</label>
         </div>
-        <div class="col-md-5">
-            <input bs-switch ng-disabled="!form.pdfGenerieren" ng-model="form.pdfAblegen" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+        <div class="col-md-8">
+            <input bs-switch  ng-model="form.pdfAblegen" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
         </div>
       </div>
-      <div class="row form-group">
-        <div class="col-md-7">
-          <label for="pdfDownload" translate>Resultat herunterladen</label>
+      <div class="row form-group" ng-show="form.pdfAblegen === true">
+        <div class="col-md-4">
+          <label for="pdfDownload" translate>Herunterladen</label>
         </div>
-        <div class="col-md-5">
-            <input bs-switch ng-disabled="!form.pdfAblegen" ng-model="form.pdfDownload" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+        <div class="col-md-8">
+            <input bs-switch  ng-model="form.pdfDownload" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
         </div>
       </div>
       <div class="row form-group">
         <div class="col-md-12">
-          <a href="" role="button" ng-disabled="berichtForm.$invalid" ng-click="onGenerate(form)" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
-          <a href="" role="button" ng-click="onClose()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
+          <span class="pull-right">
+            <a href="" role="button" ng-disabled="berichtForm.$invalid" ng-click="generate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
+            <a href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
+          </span>
         </div>
       </div>
     </form>
