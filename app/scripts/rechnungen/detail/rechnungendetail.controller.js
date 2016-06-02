@@ -8,13 +8,13 @@ angular.module('openolitor')
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
-    'RECHNUNGSTATUS',
+    'RECHNUNGSTATUS', 'FileUtil',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
-      RECHNUNGSTATUS) {
+      RECHNUNGSTATUS, FileUtil) {
 
       var defaults = {
         model: {
@@ -236,7 +236,8 @@ angular.module('openolitor')
             // angular.identity prevents Angular to do anything on our data (like serializing it).
             transformRequest: angular.identity,
           }).then(function(res) {
-          console.log(res);
+          //TODO: get filename, contenttype and encoding from remote
+          FileUtil.download('Rechnung.odt', res.data);
         });
       };
 
