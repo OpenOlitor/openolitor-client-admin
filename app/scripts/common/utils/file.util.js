@@ -2,11 +2,12 @@
 
 angular.module('openolitor')
   .factory('FileUtil', function($document, $timeout) {
+
     return {
-      download: function(filename, file, contentType, charset) {
-              var defCharset = charset || 'utf-8';
+      download: function(filename, arraybuffer, contentType, charset) {
+              var defCharset = charset || 'iso-8859-1';
               var defContentType = contentType || '*';
-              var blob = new Blob([file], {
+              var blob = new Blob([arraybuffer], {
                 type: defContentType+';charset='+ defCharset + ';'
               });
 

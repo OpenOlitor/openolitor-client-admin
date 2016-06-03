@@ -235,6 +235,7 @@ angular.module('openolitor')
             },
             // angular.identity prevents Angular to do anything on our data (like serializing it).
             transformRequest: angular.identity,
+            responseType: 'arraybuffer'
           }).then(function(res) {
           //TODO: get filename, contenttype and encoding from remote
           FileUtil.download('Rechnung.odt', res.data);
