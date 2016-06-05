@@ -237,8 +237,9 @@ angular.module('openolitor')
             transformRequest: angular.identity,
             responseType: 'arraybuffer'
           }).then(function(res) {
-          //TODO: get filename, contenttype and encoding from remote
-          FileUtil.download('Rechnung.odt', res.data);
+          var name = res.headers('Content-Disposition');
+          var contentType = res.headers('Content-Type');
+          FileUtil.download(name || 'Rechnung.odt', res.data, contentType);
         });
       };
 

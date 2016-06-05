@@ -14,6 +14,11 @@ angular.module('openolitor')
               if (window.navigator.msSaveOrOpenBlob) {
                 navigator.msSaveBlob(blob, filename);
               } else {
+                var regex = /filename[^;=\n]*=((['"])(.*?)\2|[^;\n]*)/;
+                var results = regex.exec(filename);
+                if (results && results.length > 3) {
+                  filename = results[3];
+                }
 
                 var downloadLink = angular.element('<a></a>');
                 downloadLink.attr('href', window.URL.createObjectURL(blob));
