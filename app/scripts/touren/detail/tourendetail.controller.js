@@ -43,6 +43,7 @@ angular.module('openolitor')
           id: $routeParams.id
         }, function(result) {
           $scope.tour = result;
+          $scope.checkUnsorted();
         });
       };
 
@@ -50,6 +51,7 @@ angular.module('openolitor')
         angular.forEach($scope.tour.tourlieferungen, function(tourlieferung, index) {
           tourlieferung.sort = index;
         });
+        $scope.checkUnsorted();
       };
 
       $scope.isExisting = function() {
@@ -68,6 +70,24 @@ angular.module('openolitor')
           return $scope.tour.$save();
         }
       }];
+
+      $scope.sortFilter = function(tourlieferung) {
+        return angular.isDefined(tourlieferung.sort);
+      };
+
+      $scope.unsortFilter = function(tourlieferung) {
+        return angular.isUndefined(tourlieferung.sort);
+      };
+
+      $scope.checkUnsorted = function() {
+        var hasUnsorted = false;
+        angular.forEach($scope.tour.tourlieferungen, function(tourlieferung) {
+          if (angular.isUndefined(tourlieferung.sort)) {
+            hasUnsorted = true;
+          }
+        });
+        $scope.hasUnsorted = hasUnsorted;
+      };
 
       if (!$routeParams.id) {
         $scope.tour = new TourenDetailModel(defaults.model);
