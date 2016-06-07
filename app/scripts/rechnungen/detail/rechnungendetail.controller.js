@@ -82,7 +82,6 @@ angular.module('openolitor')
 
       if (!$routeParams.id) {
         $scope.rechnung = new RechnungenDetailModel(defaults.model);
-        $scope.pendenzen = [];
       } else {
         $scope.loadRechnung();
       }

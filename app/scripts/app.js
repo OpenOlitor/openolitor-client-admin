@@ -79,7 +79,8 @@ angular
     'ngHamburger',
     'angularMoment',
     'ngFileUpload',
-    'ngLodash'
+    'ngLodash',
+    'angular-sortable-view'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -437,6 +438,12 @@ angular
         templateUrl: 'scripts/touren/overview/tourenoverview.html',
         controller: 'TourenOverviewController',
         name: 'TourenOverview',
+        access: userRoles.Administrator
+      })
+      .when('/touren/:id', {
+        templateUrl: 'scripts/touren/detail/tourendetail.html',
+        controller: 'TourenDetailController',
+        name: 'TourenDetail',
         access: userRoles.Administrator
       })
       .when('/pendenzen', {
