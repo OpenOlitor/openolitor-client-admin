@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title"><i class="fa fa-print" aria-hidden="true"></i> <span translate>Bericht erstellen</span>
-      <span class="pull-right" ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
+      <span class="pull-right" ng-show="generating"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
     </h3>
   </div>
   <div class="panel-body">
@@ -57,8 +57,8 @@
       <div class="row form-group">
         <div class="col-md-12">
           <span class="pull-right">
-            <a href="" role="button" ng-disabled="berichtForm.$invalid" ng-click="generate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
-            <a href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
+            <a href="" role="button" ng-disabled="berichtForm.$invalid || generating" ng-click="generate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
+            <a href="" role="button" ng-disabled="generating" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
           </span>
         </div>
       </div>

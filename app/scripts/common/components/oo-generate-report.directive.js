@@ -5,16 +5,43 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
     restrict: 'E',
     replace: true,
     scope: {
-      onGenerate: '&',
-      onClose: '&'
+      postPath: '=',
+      onGenerated: '&',
+      onClose: '&',
+      defaultFileName: '='
     },
     templateUrl: 'scripts/common/components/oo-generate-report.directive.html',
-    controller: function($scope) {
+    controller: function($scope, $http, API_URL, FileUtil) {
       $scope.form = {
         vorlage: undefined,
         pdfGenerieren: true,
         pdfAblegen: undefined,
         pdfDownloaden: undefined
+      };
+
+      var generateWithFormData = function(formData) {
+        $http.post(API_URL + $scope.postPath, formData, {
+          //IMPORTANT!!! You might think this should be set to 'multipart/form-data'
+          // but this is not true because when we are sending up files the request
+          // needs to include a 'boundary' parameter which identifies the boundary
+          // name between parts in this multi-part request and setting the Content-type
+          // manually will not set this boundary parameter. For whatever reason,
+          // setting the Content-type to 'false' will force the request to automatically
+          // populate the headers properly including the boundary parameter.
+          headers: {
+            'Content-Type': undefined
+          },
+          // angular.identity prevents Angular to do anything on our data (like serializing it).
+          transformRequest: angular.identity,
+          responseType: 'arraybuffer'
+        }).then(function(res) {
+          var name = res.headers('Content-Disposition');
+          var contentType = res.headers('Content-Type');
+          FileUtil.download(name || $scope.defaultFileName, res.data,
+            contentType);
+          $scope.generating = false;
+          $scope.onGenerated()();
+        });
       };
 
       $scope.generate = function() {
@@ -26,7 +53,8 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
             fd.append(key, $scope.form[key]);
           }
         }
-        $scope.onGenerate()(fd);
+        $scope.generating = true;
+        generateWithFormData(fd);
       };
 
       $scope.selectStandardVorlage = function() {
