@@ -24,8 +24,7 @@
               <li role="menuitem"><a ng-click="selectStandardVorlage()" translate>Standardvorlage</a></li>
               <li class="divider"></li>
               <li role="menuitem"><a
-                ng-model="form.vorlage" name="vorlageFile" ngf-pattern="'application/vnd.oasis.opendocument.text'"
-                  ngf-accept="'application/vnd.oasis.opendocument.text'" ngf-max-size="1MB" ngf-select="selectFile($file)" ngf-drop="selectFile($file)"
+                ng-model="form.vorlage" name="vorlageFile" ngf-accept="'.odt'" ngf-max-size="10MB" ngf-select="selectFile($file)" ngf-drop="selectFile($file)"
                   translate>Benutzerdefiniert...</a></li>
             </ul>
           </div>
