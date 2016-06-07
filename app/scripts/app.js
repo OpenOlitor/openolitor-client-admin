@@ -79,7 +79,8 @@ angular
     'ngHamburger',
     'angularMoment',
     'ngFileUpload',
-    'ngLodash'
+    'ngLodash',
+    'ui.sortable'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')

@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('TourenDetailController', ['$scope', '$filter',
-    'TourenService', 'TourenModel', 'ngTableParams', 'cloneObj', '$routeParams',
-    function($scope, $filter, TourenService, TourenModel, ngTableParams, cloneObj, $routeParams) {
+    'TourenService', 'TourenDetailModel', 'ngTableParams', 'cloneObj', '$routeParams',
+    function($scope, $filter, TourenService, TourenDetailModel, ngTableParams, cloneObj, $routeParams) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -15,12 +15,9 @@ angular.module('openolitor')
           id: undefined,
           name: '',
           beschreibung: undefined,
-          editable: true
+          editable: true,
+          tourlieferungen: []
         }
-      };
-
-      $scope.hasData = function() {
-        return $scope.entries !== undefined;
       };
 
       $scope.edit = function(tour) {
@@ -31,26 +28,52 @@ angular.module('openolitor')
       $scope.save = function(tour) {
         tour.editable = false;
         $scope.editing = false;
-        $scope.tour = new TourenModel(tour);
+        $scope.tour = new TourenDetailModel(tour);
         return $scope.tour.$save();
       };
 
       $scope.delete = function(tour) {
         tour.editable = false;
-        $scope.tour = new TourenModel(tour);
+        $scope.tour = new TourenDetailModel(tour);
         return $scope.tour.$delete();
       };
 
       $scope.loadTour = function() {
-        TourenModel.get({
+        TourenDetailModel.get({
           id: $routeParams.id
         }, function(result) {
           $scope.tour = result;
         });
       };
 
+      $scope.sortableOptions = {
+        stop: function() {
+          angular.forEach($scope.tour.tourlieferungen, function(tourlieferung, index) {
+            tourlieferung.sort = index;
+          });
+          $scope.$apply();
+        }
+      };
+
+      $scope.isExisting = function() {
+        return angular.isDefined($scope.tour) && angular.isDefined($scope.tour.id);
+      };
+
+      $scope.actions = [{
+        labelFunction: function() {
+          if ($scope.isExisting()) {
+            return 'speichern';
+          } else {
+            return 'erstellen';
+          }
+        },
+        onExecute: function() {
+          return $scope.tour.$save();
+        }
+      }];
+
       if (!$routeParams.id) {
-        $scope.tour = new TourenModel(defaults.model);
+        $scope.tour = new TourenDetailModel(defaults.model);
       } else {
         $scope.loadTour();
       }
