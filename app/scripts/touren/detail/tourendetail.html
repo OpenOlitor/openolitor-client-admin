@@ -68,8 +68,8 @@
                     <th tanslate>Abotyp</th>
                   </tr>
                 </thead>
-                <tbody ui-sortable="sortableOptions" ng-model="tour.tourlieferungen">
-                  <tr ng-repeat="tourlieferung in tour.tourlieferungen" style="cursor: move;">
+                <tbody sv-root sv-part="tour.tourlieferungen" sv-on-sort="onSort()">
+                  <tr ng-repeat="tourlieferung in tour.tourlieferungen" style="cursor: move;" sv-element>
                     <td>
                       <span>&#8942;</span> {{tourlieferung.sort}}
                     </td>

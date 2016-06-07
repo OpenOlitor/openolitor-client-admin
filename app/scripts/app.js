@@ -80,7 +80,7 @@ angular
     'angularMoment',
     'ngFileUpload',
     'ngLodash',
-    'ui.sortable'
+    'angular-sortable-view'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')

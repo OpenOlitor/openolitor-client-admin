@@ -46,13 +46,10 @@ angular.module('openolitor')
         });
       };
 
-      $scope.sortableOptions = {
-        stop: function() {
-          angular.forEach($scope.tour.tourlieferungen, function(tourlieferung, index) {
-            tourlieferung.sort = index;
-          });
-          $scope.$apply();
-        }
+      $scope.onSort = function() {
+        angular.forEach($scope.tour.tourlieferungen, function(tourlieferung, index) {
+          tourlieferung.sort = index;
+        });
       };
 
       $scope.isExisting = function() {

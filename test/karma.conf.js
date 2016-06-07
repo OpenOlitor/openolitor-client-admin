@@ -34,7 +34,7 @@ module.exports = function(config) {
       'app/bower_components/ng-lodash/build/ng-lodash.js',
       'app/bower_components/ng-password-strength/dist/scripts/ng-password-strength.js',
       'app/bower_components/angular-messages/angular-messages.js',
-      'app/bower_components/angular-ui-sortable/sortable.js',
+      'app/bower_components/angular-sortable-view/src/angular-sortable-view.js',
       'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
