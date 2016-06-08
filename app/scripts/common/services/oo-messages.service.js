@@ -40,7 +40,7 @@ angular.module('openolitor')
           });
 
           if (!angular.isUndefined(scheduler)) {
-            $interval.canel(scheduler);
+            $interval.cancel(scheduler);
             scheduler = undefined;
           }
           scheduler = $interval(function() {
