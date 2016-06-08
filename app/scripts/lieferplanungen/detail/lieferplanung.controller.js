@@ -165,7 +165,8 @@ angular.module('openolitor')
       $scope.fetchVerfuegbareLieferungen();
 
       $scope.lieferung2add = function(addAbotyp) {
-        return addAbotyp.abotypBeschrieb + ' ' + addAbotyp.vertriebsartBeschrieb +
+        var optionalBeschrieb = addAbotyp.vertriebsartBeschrieb || '';
+        return addAbotyp.abotypBeschrieb + ' ' + optionalBeschrieb +
           ' ' + $filter('date')(addAbotyp.datum);
       };
 
