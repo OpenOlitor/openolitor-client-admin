@@ -1,0 +1,34 @@
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <th tanslate>Position</th>
+      <th tanslate>Bezeichnung</th>
+      <th tanslate>Strasse / Nr.</th>
+      <th tanslate>Adresszusatz</th>
+      <th tanslate>PLZ / Ort</th>
+      <th tanslate>Abotyp</th>
+    </tr>
+  </thead>
+  <tbody sv-part="tour.tourlieferungen">
+    <tr ng-repeat="tourlieferung in tour.tourlieferungen | filter:itemFilter" style="cursor: move;" sv-element>
+      <td>
+        <span>&#8942;</span> {{tourlieferung.sort}}
+      </td>
+      <td>
+        {{tourlieferung.kundeBezeichnung}}
+      </td>
+      <td>
+        {{tourlieferung.strasse}} {{tourlieferung.hausNummer}}
+      </td>
+      <td>
+        {{tourlieferung.adressZusatz}}
+      </td>
+      <td>
+        {{tourlieferung.plz}} {{tourlieferung.ort}}
+      </td>
+      <td>
+        {{tourlieferung.abotypName}}
+      </td>
+    </tr>
+  </tbody>
+</table>
