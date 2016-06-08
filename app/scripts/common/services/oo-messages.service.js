@@ -21,10 +21,10 @@ angular.module('openolitor')
       };
 
       var reconnectPromise;
+      var scheduler;
 
       var openWebSocket = function(url) {
         var ws = new WebSocket(url);
-        var scheduler;
 
         ws.onmessage = function(msg) {
           var data = convertDateStringsToDates(JSON.parse(msg.data));
@@ -119,7 +119,7 @@ angular.module('openolitor')
           } else {
             reason = 'Unknown reason';
           }
-          $log.debug('WS closed with a reason:' + reason);
+          $log.debug('WS closed with a reason:' + reason, event, new Date());
           msgBus.emitMsg({
             type: 'WebSocketClosed',
             reason: reason
