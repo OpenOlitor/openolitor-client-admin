@@ -8,10 +8,11 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
       postPath: '=',
       onGenerated: '&',
       onClose: '&',
-      defaultFileName: '='
+      defaultFileName: '=',
+      ids: '=?'
     },
     templateUrl: 'scripts/common/components/oo-generate-report.directive.html',
-    controller: function($scope, $http, API_URL, FileUtil) {
+    controller: function($scope, $http, API_URL, FileUtil, gettext) {
       $scope.form = {
         vorlage: undefined,
         pdfGenerieren: true,
@@ -20,6 +21,7 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
       };
 
       var generateWithFormData = function(formData) {
+        $scope.error = undefined;
         $http.post(API_URL + $scope.postPath, formData, {
           //IMPORTANT!!! You might think this should be set to 'multipart/form-data'
           // but this is not true because when we are sending up files the request
@@ -41,6 +43,11 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
             contentType);
           $scope.generating = false;
           $scope.onGenerated()();
+        }, function(response) {
+          console.log('Failed generating report', response);
+          $scope.generating = false;
+          $scope.error = gettext(
+            'Bericht konnte nicht erzeugt werden');
         });
       };
 
@@ -52,6 +59,9 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
           if ($scope.form[key]) {
             fd.append(key, $scope.form[key]);
           }
+        }
+        if ($scope.ids && angular.isArray($scope.ids)) {
+          fd.append('ids', $scope.ids.toString());
         }
         $scope.generating = true;
         generateWithFormData(fd);
