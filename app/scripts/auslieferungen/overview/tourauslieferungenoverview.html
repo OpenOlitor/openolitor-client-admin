@@ -1,0 +1,42 @@
+<div class="row">
+<div class="content content-box col-md-9">
+  <div oo-error-overlay></div>
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3  class="panel-title"><span class="navbar-brand" translate>Tourauslieferungen</span>
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+          </div>
+        </form>
+      </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div ng-hide="entries">
+        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+      </div>
+      <div ng-show="entries">
+        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+          <tr ng-repeat="tourauslieferung in $data | filter: search.query.$">
+            <td data-title="'Tour'|translate" sortable="'tourName'">
+              {{tourauslieferung.tourName}}
+            </td>
+            <td data-title="'Datum'|translate" sortable="'datum'">
+              {{tourauslieferung.datum|date:"dd.MM.yyyy"}}
+            </td>
+            <td data-title="'Anzahl Körbe'|translate" sortable="'anzahlKoerbe'">
+              {{tourauslieferung.anzahlKoerbe}}
+            </td>
+            <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
+              {{tourauslieferung.status}}
+            </td>
+            <td data-title="'Kunde'|translate">
+              <a ng-href="#/kunden/{{tourauslieferung.kundeId}}">{{tourauslieferung.kundeBezeichnung}}</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
