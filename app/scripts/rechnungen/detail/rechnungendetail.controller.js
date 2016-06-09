@@ -6,40 +6,28 @@ angular.module('openolitor')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel',
-    'RECHNUNGSTATUS',
-    function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
+    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
+    'KundenDetailModel',
+    'RECHNUNGSTATUS', 'FileUtil',
+    function($scope, $rootScope, $filter, $routeParams, $http, $location,
+      $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, RECHNUNGSTATUS) {
+      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
+      RECHNUNGSTATUS, FileUtil) {
 
       var defaults = {
         model: {
           id: undefined,
           waehrung: 'CHF',
           rechnungsDatum: new Date(),
-          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf()),
+          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1,
+            'day').valueOf()),
           status: RECHNUNGSTATUS.ERSTELLT
         }
       };
 
       $scope.loading = false;
-
-      $scope.getKunden = function(filter) {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.loading = true;
-
-        return KundenOverviewModel.query({
-          q: filter
-        }, function() {
-          $scope.loading = false;
-        }).$promise.then(function(kunden) {
-          return kunden;
-        });
-      };
 
       function getAboEntry(abo) {
         return {
@@ -47,17 +35,6 @@ angular.module('openolitor')
           label: '' + abo.abotypName + ' (' + abo.id + ')'
         };
       }
-
-      $scope.loadRechnung = function() {
-        RechnungenDetailModel.get({
-          id: $routeParams.id
-        }, function(result) {
-          $scope.rechnung = result;
-          resolveKunde(result.kunde.id);
-          $scope.aboId = result.abo.id;
-          $scope.rechnung.aboId = result.abo.id;
-        });
-      };
 
       function resolveKunde(id) {
         return KundenDetailModel.get({
@@ -76,6 +53,33 @@ angular.module('openolitor')
         }).$promise;
       }
 
+      $scope.getKunden = function(filter) {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+
+        return KundenOverviewModel.query({
+          q: filter
+        }, function() {
+          $scope.loading = false;
+        }).$promise.then(function(kunden) {
+          return kunden;
+        });
+      };
+
+      $scope.loadRechnung = function() {
+        RechnungenDetailModel.get({
+          id: $routeParams.id
+        }, function(result) {
+          $scope.rechnung = result;
+          resolveKunde(result.kunde.id);
+          $scope.aboId = result.abo.id;
+          $scope.rechnung.aboId = result.abo.id;
+        });
+      };
+
       if (!$routeParams.id) {
         $scope.rechnung = new RechnungenDetailModel(defaults.model);
       } else {
@@ -86,7 +90,7 @@ angular.module('openolitor')
         $scope.kunde = undefined;
       } else {
         resolveKunde($routeParams.kundeId).then(function() {
-          if($routeParams.aboId) {
+          if ($routeParams.aboId) {
             $scope.aboId = parseInt($routeParams.aboId);
             $scope.rechnung.aboId = $scope.aboId;
           }
@@ -117,16 +121,19 @@ angular.module('openolitor')
       };
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.rechnung) && angular.isDefined($scope.rechnung
+        return angular.isDefined($scope.rechnung) && angular.isDefined(
+          $scope.rechnung
           .id);
       };
 
       $scope.isVerschickt = function() {
-        return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+        return $scope.isExisting() && $scope.rechnung.status ===
+          RECHNUNGSTATUS.VERSCHICKT;
       };
 
       $scope.isDeletable = function() {
-        return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
+        return $scope.isExisting() && $scope.rechnung.status ===
+          RECHNUNGSTATUS.ERSTELLT;
       };
 
       $scope.save = function() {
@@ -159,7 +166,8 @@ angular.module('openolitor')
           return $scope.rechnung.$verschicken();
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.ERSTELLT;
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.ERSTELLT;
         }
       }, {
         label: 'Mahnung verschicken',
@@ -168,7 +176,8 @@ angular.module('openolitor')
           return $scope.rechnung.$mahnungVerschicken();
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.VERSCHICKT;
         },
         noEntityText: true
       }, {
@@ -178,7 +187,9 @@ angular.module('openolitor')
           return $scope.rechnung.$bezahlen();
         },
         isDisabled: function() {
-          return $scope.isExisting() && ($scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT && $scope.rechnung.status !== RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
+          return $scope.isExisting() && ($scope.rechnung.status !==
+            RECHNUNGSTATUS.VERSCHICKT && $scope.rechnung.status !==
+            RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
         }
       }, {
         label: 'stornieren',
@@ -188,12 +199,28 @@ angular.module('openolitor')
           return $scope.rechnung.$stornieren();
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.VERSCHICKT;
+        }
+      }, {
+        label: 'drucken',
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status ===
+            RECHNUNGSTATUS.STORNIERT;
         }
       }];
 
       $scope.delete = function() {
         return $scope.rechnung.$delete();
+      };
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
       };
     }
   ]);
