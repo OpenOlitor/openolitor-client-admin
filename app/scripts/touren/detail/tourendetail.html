@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <form name="tourForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row form-group">
+            <h3>
+              <div class="col-md-2">
+                <span translate>Tour</span> <span>{{tour.name}}</span>
+              </div>
+              <div class="col-md-10">
+                <div class="btn-group pull-right" role="group">
+            <oo-actions-button model="tour" form="tourForm" entity="Tour" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Tour'|translate}}</oo-actions-button>
+            <oo-delete-button ng-if="isDeletable()" model="tour" entity="Tour" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+                </div>
+              </div>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Tourendaten</span></h3>
+            </div>
+
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="name" translate>Tour</label>
+                </div>
+                <div class="col-md-8">
+                  <input ng-disabled="!!isEditable()" type="text" class="form-control" id="name" ng-model="tour.name" required placeholder="{{'Name'|translate}}" maxlength="30">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="beschreibung" translate>Beschreibung</label>
+                </div>
+                <div class="col-md-8">
+                  <input ng-disabled="!!isEditable()" type="text" class="form-control" id="beschreibung" ng-model="tour.beschreibung" required placeholder="{{'Beschreibung'|translate}}" maxlength="30">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Tourlieferungen</span></h3>
+            </div>
+
+            <div class="panel-body" sv-root sv-on-sort="onSort()">
+              <div ng-if="hasUnsorted">
+                <h3 translate>Noch nicht sortierte Tourlieferungen</h3>
+                <oo-tourlieferungen tour="tour" item-filter="unsortFilter"></oo-tourlieferungen>
+              </div>
+              <div>
+                <h3 translate>Tourablauf</h3>
+                <oo-tourlieferungen tour="tour" item-filter="sortFilter"></oo-tourlieferungen>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

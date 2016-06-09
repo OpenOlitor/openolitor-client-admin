@@ -1,46 +1,56 @@
 <div class="row">
-<div class="content content-box col-md-9">
-  <div oo-error-overlay></div>
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <h3  class="panel-title"><span class="navbar-brand" translate>Rechnungen</span>
-        <form class="navbar-form pull-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
-            <a role="button" href="#/rechnungen/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Rechnung erstellen</span></a>
-          </div>
-        </form>
-      </span>
-      </h3>
-    </div>
-    <div class="panel-body">
-      <div ng-hide="entries">
-        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3  class="panel-title"><span class="navbar-brand" translate>Rechnungen</span>
+          <form class="navbar-form pull-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+              <oo-actions-button model="model" actions="actions">{{'Rechnung erstellen'|translate}}</oo-actions-button>              
+            </div>
+          </form>
+        </span>
+        </h3>
       </div>
-      <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen">
-        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="rechnung in $data | filter: search.query.$">
-            <td data-title="'Titel'|translate" sortable="'titel'">
-              <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
-            </td>
-            <td data-title="'Betrag'|translate" sortable="'betrag'">
-              {{rechnung.betrag}}
-            </td>
-            <td data-title="'Status'|translate" sortable="'status'">
-              {{rechnung.status}}
-            </td>
-            <td data-title="'Rechnnungsdatum'|translate" sortable="'rechnungsDatum'">
-              {{rechnung.rechnungsDatum | date}}
-            </td>
-            <td data-title="'Fälligkeit'|translate" sortable="'faelligkeitsDatum'">
-              {{rechnung.faelligkeitsDatum | date}}
-            </td>
-            <td data-title="'Eingang am'|translate" sortable="'eingangsDatum'">
-              {{rechnung.eingangsDatum | date}}
-            </td>
-          </tr>
-        </table>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen">
+          <script type="text/ng-template" id="headerCheckbox.html">
+            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+          </script>
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+            <tr ng-repeat="rechnung in $data | filter: search.query.$">
+              <td header="'headerCheckbox.html'">
+                <input type="checkbox" ng-model="checkboxes.items[rechnung.id]" />
+              </td>
+              <td data-title="'Titel'|translate" sortable="'titel'">
+                <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
+              </td>
+              <td data-title="'Betrag'|translate" sortable="'betrag'">
+                {{rechnung.betrag}}
+              </td>
+              <td data-title="'Status'|translate" sortable="'status'">
+                {{rechnung.status}}
+              </td>
+              <td data-title="'Rechnnungsdatum'|translate" sortable="'rechnungsDatum'">
+                {{rechnung.rechnungsDatum | date}}
+              </td>
+              <td data-title="'Fälligkeit'|translate" sortable="'faelligkeitsDatum'">
+                {{rechnung.faelligkeitsDatum | date}}
+              </td>
+              <td data-title="'Eingang am'|translate" sortable="'eingangsDatum'">
+                {{rechnung.eingangsDatum | date}}
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="content-box col-md-3" ng-if="showGenerateReport">
+    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnungen.zip'|translate"></oo-generate-report>
   </div>
 </div>
