@@ -32,7 +32,7 @@
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div>
-        <hamburger-toggle state="tgState" class="hamburger-toggle"  ng-show="loggedIn"></hamburger-toggle>
+        <hamburger-toggle state="tgState" class="hamburger-toggle" ng-show="loggedIn"></hamburger-toggle>
         <a class="navbar-brand" ng-href="#/abos">OpenOlitor</a>
         <p class="navbar-text"><span translate>Administrationsumgebung für</span> <span>{{projekt.bezeichnung}}</span></p>
         <ul class="nav navbar-nav pull-right">
@@ -60,12 +60,18 @@
       <li><a id="nav-kunden" class="nav-item" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
       <li><a id="nav-abos" class="nav-item" ng-class="[{active:currentPathContains('abos')}]" href="" ng-href="#/abos"><i class="fa fa-shopping-cart"></i> <span translate>Abos</span></a></li>
       <li><a id="nav-pendenzen" class="nav-item" ng-class="[{active:currentPathContains('pendenzen')}]" href="" ng-href="#/pendenzen"><i class="fa fa-sticky-note"></i> <span translate>Pendenzen</span></a></li>
-      <li><a id="nav-korbplanung" class="nav-item" ng-class="[{active:currentPathContains('korbplanung')}]" href="" ng-href="#/lieferplanung"><i class="fa fa-shopping-basket"></i> <span translate>Lieferungen</span></a></li>
+      <li><a id="nav-lieferanten" class="nav-item" ng-click="menushow['lieferanten'] = !menushow['lieferanten']"><span><i class="fa fa-truck"></i> <span translate>Lieferanten</span></span></a></li>
+      <li activate-id="lieferanten" ng-show="menushow['lieferanten']"><a id="nav-lieferplanung" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('lieferplanung')}]" href="" ng-href="#/lieferplanung"><i class="fa fa-shopping-basket"></i> <span translate>Lieferplanung</span></a></li>
+      <li activate-id="lieferanten" ng-show="menushow['lieferanten']"><a id="nav-lieferantenabrechnung" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('lieferantenabrechnung')}]" href="" ng-href="#/lieferantenabrechnung"><i class="fa fa-calculator"></i> <span translate>Abrechnung*</span></a></li>
+      <li><a id="nav-auslieferungen" class="nav-item" ng-click="menushow['auslieferungen'] = !menushow['auslieferungen']"><span><i class="fa fa-bicycle"></i> <span translate>Auslieferungen</span></span></a></li>
+      <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-depotausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depotauslieferung')}]" href="" ng-href="#/depotauslieferung"><i class="fa fa-building-o"></i> <span translate>Depotauslieferungen</span></a></li>
+      <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-tourausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('tourauslieferung')}]" href="" ng-href="#/tourauslieferung"><i class="fa fa-truck"></i> <span translate>Tourauslieferungen</span></a></li>
+      <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-postauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferung')}]" href="" ng-href="#/postauslieferung"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a></li>
       <li><a id="nav-buchhaltung" class="nav-item" ng-click="menushow['buchhaltung'] = !menushow['buchhaltung']"><span><i class="fa fa-usd"></i> <span translate>Buchhaltung</span></span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-einkauf" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkauf')}]" href="" ng-href="#/einkauf"><i class="fa fa-shopping-bag"></i> <span translate>Einkauf*</span></a></li>
-      <li><a id="nav-kunden" class="nav-item" ng-click="menushow['stammdaten'] = !menushow['stammdaten']"><span><i class="fa fa-database"></i> <span translate>Stammdaten</span></span></a></li>
+      <li><a id="nav-stammdaten" class="nav-item" ng-click="menushow['stammdaten'] = !menushow['stammdaten']"><span><i class="fa fa-database"></i> <span translate>Stammdaten</span></span></a></li>
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-depots" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots"><i class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-touren" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('touren')}]" href="" ng-href="#/touren"><i class="fa fa-map-signs"></i> <span translate>Touren</span></a></li>
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-abotypen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abotypen')}]" href="" ng-href="#/abotypen"><i class="fa fa-clone"></i> <span translate>Abotypen</span></a></li>
@@ -235,6 +241,11 @@
   <script src="scripts/lieferplanungen/overview/lieferplanungoverview.controller.js"></script>
   <script src="scripts/lieferplanungen/detail/lieferplanung.controller.js"></script>
   <script src="scripts/lieferplanungen/lieferplanung.model.js"></script>
+
+  <script src="scripts/auslieferungen/overview/auslieferungenoverview.controller.js"></script>
+  <script src="scripts/auslieferungen/depotauslieferungen.model.js"></script>
+  <script src="scripts/auslieferungen/tourauslieferungen.model.js"></script>
+  <script src="scripts/auslieferungen/postauslieferungen.model.js"></script>
 
   <script src="scripts/rechnungen/overview/rechnungenoverview.model.js"></script>
   <script src="scripts/rechnungen/overview/rechnungenoverview.controller.js"></script>

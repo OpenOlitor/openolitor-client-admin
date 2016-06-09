@@ -198,6 +198,10 @@ angular
     ERLEDIGT: gettext('Erledigt'),
     NICHTERLEDIGT: gettext('NichtErledigt')
   })
+  .constant('AUSLIEFERUNGSTATUS', {
+    ERFASST: gettext('Erfasst'),
+    AUSGELIEFERT: gettext('Ausgeliefert'),
+  })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
@@ -462,6 +466,27 @@ angular
         templateUrl: 'scripts/lieferplanungen/detail/lieferplanungdetail.html',
         controller: 'LieferplanungDetailController',
         name: 'LieferplanungDetail',
+        access: userRoles.Administrator
+      })
+      .when('/depotauslieferung', {
+        templateUrl: 'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
+        controller: 'AuslieferungenOverviewController',
+        name: 'DepotAuslieferungenOverview',
+        model: 'Depot',
+        access: userRoles.Administrator
+      })
+      .when('/tourauslieferung', {
+        templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
+        controller: 'AuslieferungenOverviewController',
+        name: 'TourAuslieferungenOverview',
+        model: 'Tour',
+        access: userRoles.Administrator
+      })
+      .when('/postauslieferung', {
+        templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
+        controller: 'AuslieferungenOverviewController',
+        name: 'PostAuslieferungenOverview',
+        model: 'Post',
         access: userRoles.Administrator
       })
       .when('/rechnungen', {

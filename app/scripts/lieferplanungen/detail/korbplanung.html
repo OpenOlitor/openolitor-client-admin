@@ -39,7 +39,7 @@
         </div>
         <div class="panel-body produkteliste">
           <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'">
+            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'" style="cursor: move;">
               <td><span>&#8942;</span></td>
               <td data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
                 {{produkt.name}}
