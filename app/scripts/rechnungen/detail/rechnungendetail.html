@@ -72,10 +72,10 @@
                   <label for="strasse" translate>Strasse / Nr.</label>
                 </div>
                 <div class="col-md-6">
-                  <input ng-disabled="isExisting()" type="text" class="form-control" id="strasse" ng-model="rechnung.strasse" ng-required="!rechnung.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
+                  <input ng-disabled="!canEdit()" type="text" class="form-control" id="strasse" ng-model="rechnung.strasse" ng-required="!rechnung.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
                 </div>
                 <div class="col-md-2">
-                  <input ng-disabled="isExisting()" type="text" class="form-control" id="hausNummer" ng-model="rechnung.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  <input ng-disabled="!canEdit()" type="text" class="form-control" id="hausNummer" ng-model="rechnung.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
                 </div>
               </div>
               <div class="row form-group">
@@ -83,7 +83,7 @@
                   <label for="adressZusatz" translate>Adresszusatz</label>
                 </div>
                 <div class="col-md-8">
-                  <input ng-disabled="isExisting()" type="text" class="form-control" name="adressZusatz" ng-model="rechnung.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  <input ng-disabled="!canEdit()" type="text" class="form-control" name="adressZusatz" ng-model="rechnung.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -91,10 +91,10 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-3">
-                  <input ng-disabled="isExisting()" type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="rechnung.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
+                  <input ng-disabled="!canEdit()" type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="rechnung.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
                 </div>
                 <div class="col-md-5">
-                  <input ng-disabled="isExisting()" type="text" class="form-control" id="ort" ng-model="rechnung.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+                  <input ng-disabled="!canEdit()" type="text" class="form-control" id="ort" ng-model="rechnung.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@
                   <label for="anzahlLieferungen" translate>Für Anzahl Lieferungen</label>
                 </div>
                 <div class="col-md-8">
-                  <input ng-disabled="isExisting()" type="number" class="form-control" id="anzahlLieferungen" ng-model="rechnung.anzahlLieferungen" required placeholder="{{'Anzahl Lieferungen'|translate}}">
+                  <input ng-disabled="!canEdit()" type="number" class="form-control" id="anzahlLieferungen" ng-model="rechnung.anzahlLieferungen" required placeholder="{{'Anzahl Lieferungen'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -138,7 +138,7 @@
                 <div class="col-md-8">
                   <div class="input-group">
                     <div class="input-group-addon">{{'CHF'|translate}}</div>
-                    <input ng-disabled="isExisting()" type="number" placeholder="{{'Betrag'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="0.01" class="form-control" name="betrag" ng-model="rechnung.betrag" required></input>
+                    <input ng-disabled="!canEdit()" type="number" placeholder="{{'Betrag'|translate}}" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="0" step="0.01" class="form-control" name="betrag" ng-model="rechnung.betrag" required></input>
                   </div>
                 </div>
               </div>
@@ -167,8 +167,8 @@
                   </span>
                   </p>
                 </div>
-              </div>
-              <div class="row form-group">
+              </div>              
+              <div class="row form-group" ng-show="isVerschickt()">
                 <div class="col-md-4">
                   <label for="einbezahlterBetrag" translate>Einbezahlter Betrag</labeln>
                 </div>
@@ -179,7 +179,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row form-group">
+              <div class="row form-group" ng-show="isVerschickt()">
                 <div class="col-md-4">
                   <label for="eingangsDatum" translate>Eingangsdatum</label>
                 </div>

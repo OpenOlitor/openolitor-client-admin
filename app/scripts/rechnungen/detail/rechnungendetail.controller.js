@@ -127,8 +127,10 @@ angular.module('openolitor')
       };
 
       $scope.isVerschickt = function() {
-        return $scope.isExisting() && $scope.rechnung.status ===
-          RECHNUNGSTATUS.VERSCHICKT;
+        return $scope.isExisting() &&
+          ($scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT ||
+            $scope.rechnung.status === RECHNUNGSTATUS.MAHNUNG_VERSCHICKT ||
+            $scope.rechnung.status === RECHNUNGSTATUS.BEZAHLT);
       };
 
       $scope.isDeletable = function() {
@@ -146,6 +148,12 @@ angular.module('openolitor')
 
       $scope.backToList = function() {
         $location.path('/rechnungen');
+      };
+
+      $scope.canEdit = function() {
+        return !$scope.isExisting() ||
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
+          $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
       };
 
       $scope.actions = [{
