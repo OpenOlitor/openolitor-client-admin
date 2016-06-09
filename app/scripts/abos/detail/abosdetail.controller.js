@@ -4,15 +4,15 @@
  */
 angular.module('openolitor')
   .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
+    '$location', '$uibModal', '$log', '$http', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
+    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash', 'API_URL', 'alertService',
 
-    function($scope, $filter, $routeParams, $location, gettext,
+    function($scope, $filter, $routeParams, $location, $uibModal, $log, $http, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN,
-      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash) {
+      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,alertService) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -130,6 +130,29 @@ angular.module('openolitor')
         return $scope.abo.$delete();
       };
 
+      var showGuthabenAnpassenDialog = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/abos/detail/abosdetail-guthaben-anpassen.html',
+          controller: 'GuthabenAnpassenController',
+          resolve: {
+            abo: function() {
+              return $scope.abo;
+            }
+          }
+        });
+
+        modalInstance.result.then(function(data) {
+          $http.post(API_URL + 'kunden/'+$scope.abo.kundeId+'/abos/'+$scope.abo.id+'/aktionen/guthabenanpassen', data).then(function() {
+            alertService.addAlert('info', gettext('Guthaben wurde erfolgreich angepasst'));
+          }, function(error) {
+            alertService.addAlert('error', gettext('Guthaben konnte nicht angepasst werden: ') + error.status + ':' + error.statusText);
+          });
+        }, function() {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
       $scope.actions = [{
         label: gettext('Speichern'),
         noEntityText: true,
@@ -148,6 +171,12 @@ angular.module('openolitor')
         },
         onExecute: function() {
           return $scope.abo.$delete();
+        }
+      }, {
+        label: gettext('Guthaben anpassen'),
+        noEntityText: true,
+        onExecute: function() {
+          return showGuthabenAnpassenDialog();
         }
       }, {
         label: gettext('Manuelle Rechnung erstellen'),
