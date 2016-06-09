@@ -6,19 +6,23 @@ angular.module('openolitor')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel', 'KundenDetailModel',
+    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
+    'KundenDetailModel',
     'RECHNUNGSTATUS',
-    function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
+    function($scope, $rootScope, $filter, $routeParams, $http, $location,
+      $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
-      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel, RECHNUNGSTATUS) {
+      msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
+      RECHNUNGSTATUS) {
 
       var defaults = {
         model: {
           id: undefined,
           waehrung: 'CHF',
           rechnungsDatum: new Date(),
-          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf()),
+          faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1,
+            'day').valueOf()),
           status: RECHNUNGSTATUS.ERSTELLT
         }
       };
@@ -87,7 +91,7 @@ angular.module('openolitor')
         $scope.kunde = undefined;
       } else {
         resolveKunde($routeParams.kundeId).then(function() {
-          if($routeParams.aboId) {
+          if ($routeParams.aboId) {
             $scope.aboId = parseInt($routeParams.aboId);
             $scope.rechnung.aboId = $scope.aboId;
           }
@@ -118,16 +122,21 @@ angular.module('openolitor')
       };
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.rechnung) && angular.isDefined($scope.rechnung
+        return angular.isDefined($scope.rechnung) && angular.isDefined(
+          $scope.rechnung
           .id);
       };
 
       $scope.isVerschickt = function() {
-        return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+        return $scope.isExisting() &&
+          ($scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT ||
+            $scope.rechnung.status === RECHNUNGSTATUS.MAHNUNG_VERSCHICKT ||
+            $scope.rechnung.status === RECHNUNGSTATUS.BEZAHLT);
       };
 
       $scope.isDeletable = function() {
-        return $scope.isExisting() && $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
+        return $scope.isExisting() && $scope.rechnung.status ===
+          RECHNUNGSTATUS.ERSTELLT;
       };
 
       $scope.save = function() {
@@ -140,6 +149,12 @@ angular.module('openolitor')
 
       $scope.backToList = function() {
         $location.path('/rechnungen');
+      };
+
+      $scope.canEdit = function() {
+        return !$scope.isExisting() ||
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
+          $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
       };
 
       $scope.actions = [{
@@ -160,7 +175,8 @@ angular.module('openolitor')
           return $scope.rechnung.$verschicken();
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.ERSTELLT;
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.ERSTELLT;
         }
       }, {
         label: 'Mahnung verschicken',
@@ -169,7 +185,8 @@ angular.module('openolitor')
           return $scope.rechnung.$mahnungVerschicken();
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.VERSCHICKT;
         },
         noEntityText: true
       }, {
@@ -179,7 +196,9 @@ angular.module('openolitor')
           return $scope.rechnung.$bezahlen();
         },
         isDisabled: function() {
-          return $scope.isExisting() && ($scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT && $scope.rechnung.status !== RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
+          return $scope.isExisting() && ($scope.rechnung.status !==
+            RECHNUNGSTATUS.VERSCHICKT && $scope.rechnung.status !==
+            RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
         }
       }, {
         label: 'stornieren',
@@ -189,7 +208,8 @@ angular.module('openolitor')
           return $scope.rechnung.$stornieren();
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status !== RECHNUNGSTATUS.VERSCHICKT;
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.VERSCHICKT;
         }
       }];
 
