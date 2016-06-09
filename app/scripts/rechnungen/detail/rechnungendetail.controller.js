@@ -128,8 +128,10 @@ angular.module('openolitor')
       };
 
       $scope.isVerschickt = function() {
-        return $scope.isExisting() && $scope.rechnung.status ===
-          RECHNUNGSTATUS.VERSCHICKT;
+        return $scope.isExisting() &&
+          ($scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT ||
+            $scope.rechnung.status === RECHNUNGSTATUS.MAHNUNG_VERSCHICKT ||
+            $scope.rechnung.status === RECHNUNGSTATUS.BEZAHLT);
       };
 
       $scope.isDeletable = function() {
