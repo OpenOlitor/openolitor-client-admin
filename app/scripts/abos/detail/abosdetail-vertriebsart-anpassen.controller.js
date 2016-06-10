@@ -10,7 +10,7 @@ angular.module('openolitor')
       $scope.abo = abo;
       $scope.vertriebsarten = vertriebsarten;
       $scope.formDaten = {
-        vertriebsartId: undefined,
+        vertriebsartIdNeu: undefined,
         bemerkung: undefined
       };
 

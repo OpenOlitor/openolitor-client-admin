@@ -4,12 +4,12 @@
  */
 angular.module('openolitor')
   .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', '$uibModal', '$log', '$http', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
+    '$location', '$route', '$uibModal', '$log', '$http', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash', 'API_URL', 'alertService',
 
-    function($scope, $filter, $routeParams, $location, $uibModal, $log, $http, gettext,
+    function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,alertService) {
@@ -112,14 +112,6 @@ angular.module('openolitor')
       $scope.isExisting = function() {
         return angular.isDefined($scope.abo) && angular.isDefined($scope.abo
           .id);
-      };
-
-      $scope.backToList = function(id) {
-        if ($routeParams.kundeId) {
-          $location.path(basePath);
-        } else {
-          $location.path(basePath + '/' + id);
-        }
       };
 
       $scope.cancel = function() {
@@ -394,6 +386,17 @@ angular.module('openolitor')
         if (isAboEntity(msg.entity)) {
           if ($scope.abo && $scope.abo.id === msg.data.id) {
             DataUtil.update(msg.data, $scope.abo);
+            $scope.$apply();
+            return;
+          }
+        }
+      });
+
+      // list to created event as well. when changing vertriebsart entity might get recreated
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.abo && $scope.abo.id === msg.data.id) {
+            $route.reload();
             $scope.$apply();
             return;
           }
