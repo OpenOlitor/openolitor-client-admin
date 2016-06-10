@@ -153,6 +153,33 @@ angular.module('openolitor')
         });
       };
 
+      var showVertriebsartAnpassenDialog = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/abos/detail/abosdetail-vertriebsart-anpassen.html',
+          controller: 'VertriebsartAnpassenController',
+          resolve: {
+            abo: function() {
+              return $scope.abo;
+            },
+            vertriebsarten: function() {
+              return $scope.lists.vertriebsarten[$scope.abo.vertriebId];
+            }
+          }
+        });
+
+        modalInstance.result.then(function(data) {
+          $http.post(API_URL + 'kunden/'+$scope.abo.kundeId+'/abos/'+$scope.abo.id+'/aktionen/vertriebsartanpassen', data).then(function() {
+            alertService.addAlert('info', gettext('Vertriebsart wurde erfolgreich angepasst'));
+          }, function(error) {
+            alertService.addAlert('error', gettext('Vertriebsart konnte nicht angepasst werden: ') + error.status + ':' + error.statusText);
+          });
+        }, function() {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
+
       $scope.actions = [{
         label: gettext('Speichern'),
         noEntityText: true,
@@ -175,8 +202,20 @@ angular.module('openolitor')
       }, {
         label: gettext('Guthaben anpassen'),
         noEntityText: true,
+        iconClass: 'fa fa-balance-scale',
         onExecute: function() {
-          return showGuthabenAnpassenDialog();
+          showGuthabenAnpassenDialog();
+        }
+      }, {
+        label: gettext('Vetriebsart anpassen'),
+        noEntityText: true,
+        iconClass: 'fa fa-truck',
+        onExecute: function() {
+          showVertriebsartAnpassenDialog();
+        },
+        isDisabled: function() {
+          return !$scope.abo || !$scope.lists.vertriebsarten[$scope.abo.vertriebId] ||
+           $scope.lists.vertriebsarten[$scope.abo.vertriebId].length < 2;
         }
       }, {
         label: gettext('Manuelle Rechnung erstellen'),
