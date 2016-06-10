@@ -38,7 +38,7 @@
                     </span>
                   </td>
                 </tr>
-                <tr ng-if="tours.lenght > 0">
+                <tr ng-if="touren.length > 0">
                   <td><label translate>Touren<label></td>
                   <td>
                     <span ng-repeat="vertriebsart in vertrieb.heimlieferungen" class="badge">
@@ -46,7 +46,7 @@
                       <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteHeimlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
                     </span>
                     <span class="dropdown pull-right">
-                      <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="tours" filter="notIn:'id':selectedTourIds(vertrieb)" property="name" selected-prop="id" selected-function="addHeimlieferung" selected-function-scope="vertrieb"></oo-dropdown>
+                      <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" filter="notIn:'id':selectedTourIds(vertrieb)" property="name" selected-prop="id" selected-function="addHeimlieferung" selected-function-scope="vertrieb"></oo-dropdown>
                     </span>
                   </td>
                 </tr>
