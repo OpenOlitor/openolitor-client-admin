@@ -32,6 +32,9 @@
                 <input type="text" class="form-control" name="beschreibung" ng-model="tour.beschreibung" placeholder="{{'Beschreibung'|translate}}">
               </span>
             </td>
+            <td data-title="'# Abos'|translate">
+              {{tour.anzahlAbonnenten}}
+            </td>
 
             <td>
               <div ng-hide="tour.editable || editing" class="pull-right">

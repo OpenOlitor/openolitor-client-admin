@@ -64,7 +64,7 @@ angular.module('openolitor')
           });
         }
       });
-      $scope.touren = TourenModel.query({}, function(touren) {
+      TourenModel.query({}, function(touren) {
         $scope.touren = touren;
         if ($scope.vertriebe) {
           lodash.forEach($scope.vertriebe, function(vertrieb) {
