@@ -3,12 +3,12 @@
 /**
  * OO Actions Button Directive
  * @namespace Directives
- * 
+ *
  * @description
  * This directive adds a split button dropdown for the given array of actions.
  *
  * @scope
- * 
+ *
  * @param {string} entity The entity that will be used to match messages.
  * @param {Array.<Object>=} entities Multiple entities that will be used to match messages.
  * @param {Object} model The related angular resource.
@@ -65,9 +65,11 @@ angular.module('openolitor').directive('ooActionsButton', ['msgBus', 'gettext',
           if (entityMatches(msg.entity) && !angular.isUndefined($scope.model) && msg.data.id === $scope.model
             .id) {
             if ($scope.model.actionInProgress !== 'updating') {
-              alertService.addAlert('info', $scope.entity + gettext(
-                ' wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu.'
-              ));
+              if ($scope.entity) {
+                alertService.addAlert('info', $scope.entity + gettext(
+                  ' wurde durch eine andere Person geändert. Bitte laden Sie die Ansicht neu.'
+                ));
+              }
             } else {
               DataUtil.update(msg.data, $scope.model);
               $scope.model.actionInProgress = undefined;
@@ -90,15 +92,20 @@ angular.module('openolitor').directive('ooActionsButton', ['msgBus', 'gettext',
 
         $scope.executeAction = function(action) {
           $scope.model.actionInProgress = 'updating';
-          action.onExecute($scope.model).catch(function(req) {
+          var result = action.onExecute($scope.model);
+          if (result && result.catch) {
+            result.catch(function(req) {
+              $scope.model.actionInProgress = undefined;
+              alertService.addAlert('error', gettext(
+                  'Aktion ' + action.label + ' für ' + $scope.entity +
+                  ' konnte nicht ausgeführt werden. Fehler: ') +
+                req.status +
+                '-' + req.statusText + ':' + req.data
+              );
+            });
+          } else {
             $scope.model.actionInProgress = undefined;
-            alertService.addAlert('error', gettext(
-                'Aktion ' + action.label + ' für ' + $scope.entity +
-                ' konnte nicht ausgeführt werden. Fehler: ') +
-              req.status +
-              '-' + req.statusText + ':' + req.data
-            );
-          });
+          }
         };
       }
     };
