@@ -3,9 +3,9 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbosOverviewController', ['$scope', '$filter',
+  .controller('AbosOverviewController', ['$scope', '$filter','$location',
     'AbosOverviewModel', 'ngTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil',
-    function($scope, $filter, AbosOverviewModel, ngTableParams, AbotypenOverviewModel, FilterQueryUtil) {
+    function($scope, $filter, $location, AbosOverviewModel, ngTableParams, AbotypenOverviewModel, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -123,15 +123,18 @@ angular.module('openolitor')
         }
         $scope.loading = true;
         $scope.entries = AbosOverviewModel.query({
-          q: $scope.search.queryQuery,
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
-      search();
+      var existingQuery = $location.search()['q'];
+      if(existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.$watch('search.query', function() {
         $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
