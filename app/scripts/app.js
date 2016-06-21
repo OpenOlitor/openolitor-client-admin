@@ -430,7 +430,8 @@ angular
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
         name: 'AbosOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',

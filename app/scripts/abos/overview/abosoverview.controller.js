@@ -3,17 +3,20 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbosOverviewController', ['$scope', '$filter',
-    'AbosOverviewModel', 'ngTableParams', 'AbotypenOverviewModel',
-    function($scope, $filter, AbosOverviewModel, ngTableParams, AbotypenOverviewModel) {
+  .controller('AbosOverviewController', ['$scope', '$filter','$location',
+    'AbosOverviewModel', 'ngTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil',
+    function($scope, $filter, $location, AbosOverviewModel, ngTableParams, AbotypenOverviewModel, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.loading = false;
       $scope.selectedAbo = undefined;
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
+
       $scope.checkboxes = {
         checked: false,
         items: {},
@@ -101,7 +104,7 @@ angular.module('openolitor')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries, $scope
-              .search.query);
+              .search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy()) :
@@ -118,19 +121,24 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
-
         $scope.loading = true;
         $scope.entries = AbosOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
-      search();
+      var existingQuery = $location.search()['q'];
+      if(existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
         search();
       }, true);
 
