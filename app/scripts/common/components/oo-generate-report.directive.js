@@ -16,8 +16,8 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
       $scope.form = {
         vorlage: undefined,
         pdfGenerieren: true,
-        pdfAblegen: undefined,
-        pdfDownloaden: undefined
+        pdfAblegen: false,
+        pdfDownloaden: true
       };
 
       var generateWithFormData = function(formData) {

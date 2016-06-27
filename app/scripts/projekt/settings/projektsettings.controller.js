@@ -24,7 +24,7 @@ angular.module('openolitor')
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
 
-      // first fake to true to work around bs-swith bug
+      // first fake to true to work around bs-switch bug
       $scope.editMode = true;
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
