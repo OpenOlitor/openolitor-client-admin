@@ -4,7 +4,7 @@
       <div class="row form-group">
         <h3>
           <div class="col-md-4" translate>
-            Planung #{{planung.nr}}: Korbinhalt
+            Planung #{{planung.id}}: Korbinhalt
           </div>
           <div class="col-md-2">
             <ul class="nav navbar-nav" ng-show="valuesEditable()">
@@ -20,6 +20,7 @@
               <button role="button" ng-show="planung.status === 'Abgeschlossen' && !editNachAbgeschlossen" ng-click="setEditableNachAbgeschlossen()" class="btn btn-warning"><span class="fa fa-pencil-square-o"></span> <span translate>Planung editieren</span></button>
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
               <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
+              <oo-delete-button ng-show="planung.status === 'Offen'" model="planung" entity="Lieferplanung" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
               <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
             </div>
           </div>
