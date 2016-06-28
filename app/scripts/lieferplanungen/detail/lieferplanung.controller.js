@@ -6,11 +6,11 @@ angular.module('openolitor')
   .controller('LieferplanungDetailController', ['$scope', '$rootScope',
     '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
-    'alertService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'msgBus', 'cloneObj',
+    'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'msgBus', 'cloneObj',
     'gettext', '$location', 'lodash',
     function($scope, $rootScope, $routeParams, ngTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
-      ProdukteService, alertService, LIEFERSTATUS, LIEFEREINHEIT, msgBus,
+      ProdukteService, alertService, dialogService, LIEFERSTATUS, LIEFEREINHEIT, msgBus,
       cloneObj, gettext, $location, lodash) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
@@ -315,11 +315,26 @@ angular.module('openolitor')
           return;
         }
 
-        var notInKorb = function(lieferpositionen, prodEntry) {
-          return lodash.find(lieferpositionen, function(entry) {
-            return (prodEntry.produktBeschrieb === entry.produktBeschrieb);
-          }) === undefined;
+        var checkOnDuplicateAndAskExec = function(newEntry) {
+          drop.scope().abotypLieferung.lieferpositionen.push(newEntry);
+          drop.scope().abotypLieferung.tableParamsKorb.reload();
         };
+
+        var checkOnDuplicateAndAsk = function(lieferpositionen, newEntry) {
+          var exists = lodash.find(lieferpositionen, function(entry) {
+            return (newEntry.produktBeschrieb === entry.produktBeschrieb);
+          });
+          if(exists) {
+            dialogService.displayDialogOkAbort(gettext('Ein solches Produkt befindet sich schon in diesem Korb. Soll es dennoch eingefügt werden?'),
+            function() {
+              checkOnDuplicateAndAskExec(newEntry);
+            });
+          } else {
+            checkOnDuplicateAndAskExec(newEntry);
+          }
+        };
+
+
 
         switch (type) {
           case 'newProdukt':
@@ -359,34 +374,25 @@ angular.module('openolitor')
               produzentId: produzent.id,
               produzentKurzzeichen: produzent.kurzzeichen
             };
-            if (notInKorb(drop.scope().abotypLieferung.lieferpositionen,
-                prodEntry)) {
-              drop.scope().abotypLieferung.lieferpositionen.push(prodEntry);
-            }
+            checkOnDuplicateAndAsk(drop.scope().abotypLieferung.lieferpositionen,
+                prodEntry);
             break;
           case 'korbprod':
             var prodKorb = cloneObj(drag.scope().korbprodukt);
-            if (notInKorb(drop.scope().abotypLieferung.lieferpositionen,
-                prodKorb)) {
-              drop.scope().abotypLieferung.lieferpositionen.push(prodKorb);
-            }
+            checkOnDuplicateAndAsk(drop.scope().abotypLieferung.lieferpositionen,
+                prodKorb);
             break;
           case 'korb':
             lodash.forEach(drag.scope().abotypLieferung.lieferpositionen,
               function(produkt2add) {
                 var prodEntry = cloneObj(produkt2add);
-                if (notInKorb(drop.scope().abotypLieferung.lieferpositionen,
-                    prodEntry)) {
-                  drop.scope().abotypLieferung.lieferpositionen.push(
+                checkOnDuplicateAndAsk(drop.scope().abotypLieferung.lieferpositionen,
                     prodEntry);
-                }
               });
             break;
           default:
             //message?
         }
-
-        drop.scope().abotypLieferung.tableParamsKorb.reload();
       };
 
       var addEntryToBestellungen = function(abotypLieferung, korbprodukt) {

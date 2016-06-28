@@ -20,6 +20,9 @@
       <div ng-show="entries">
         <table ng-table="tableParams" class="table table-striped">
           <tr ng-repeat="depot in $data | filter: search.query.$ ">
+            <td data-title="'Krzz.'|translate" sortable="'kurzzeichen'">
+              <a ng-href="#/depots/{{depot.id}}">{{depot.kurzzeichen}}</a>
+            </td>
             <td data-title="'Name'|translate" sortable="'name'">
               <a ng-href="#/depots/{{depot.id}}">{{depot.name}}</a>
             </td>
