@@ -175,7 +175,9 @@ angular.module('openolitor')
       };
 
       $scope.addAbotypToPlanung = function(abotypLieferung) {
-        $scope.verfuegbareLieferungen.pop(abotypLieferung);
+
+        var index = $scope.verfuegbareLieferungen.indexOf(abotypLieferung);
+        $scope.verfuegbareLieferungen.splice(index, 1);
 
         abotypLieferung.lieferpositionen = [];
         $scope.addTableParams(abotypLieferung);
@@ -536,6 +538,10 @@ angular.module('openolitor')
 
       $scope.backToList = function() {
         $location.path('/lieferplanung');
+      };
+
+      $scope.delete = function() {
+        return $scope.planung.$delete();
       };
 
       $scope.editNachAbgeschlossen = false;
