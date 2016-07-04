@@ -469,21 +469,21 @@ angular
         name: 'LieferplanungDetail',
         access: userRoles.Administrator
       })
-      .when('/depotauslieferung', {
+      .when('/depotauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
         name: 'DepotAuslieferungenOverview',
         model: 'Depot',
         access: userRoles.Administrator
       })
-      .when('/tourauslieferung', {
+      .when('/tourauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
         name: 'TourAuslieferungenOverview',
         model: 'Tour',
         access: userRoles.Administrator
       })
-      .when('/postauslieferung', {
+      .when('/postauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
         name: 'PostAuslieferungenOverview',

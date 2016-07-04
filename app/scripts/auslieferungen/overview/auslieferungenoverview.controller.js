@@ -102,7 +102,9 @@ angular.module('openolitor')
       }, {
         label: 'Als ausgeliefert markieren',
         iconClass: 'fa fa-bicycle',
-        onExecute: function() {},
+        onExecute: function() {
+          return overviewModel.ausliefern($scope.checkboxes.ids);
+        },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
@@ -155,7 +157,8 @@ angular.module('openolitor')
         $scope.loading = true;
         $scope.entries = overviewModel.query({
           q: $scope.query
-        }, function() {
+        }, function(result) {
+          $scope.entries = result;
           $scope.tableParams.reload();
           $scope.loading = false;
         });
