@@ -4,10 +4,11 @@
  */
 angular.module('openolitor')
   .controller('VertriebsartAnpassenController', ['$scope', '$uibModalInstance',
-    '$log', 'abo', 'vertriebsarten',
+    '$log', 'abo', 'vertriebe', 'vertriebsarten',
 
-    function($scope, $uibModalInstance, $log, abo, vertriebsarten) {
+    function($scope, $uibModalInstance, $log, abo, vertriebe, vertriebsarten) {
       $scope.abo = abo;
+      $scope.vertriebe = vertriebe;
       $scope.vertriebsarten = vertriebsarten;
       $scope.formDaten = {
         vertriebsartIdNeu: undefined,
