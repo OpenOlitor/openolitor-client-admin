@@ -492,6 +492,7 @@ angular.module('openolitor')
           }, function(bestellungen) {
             angular.forEach(bestellungen, function(bestellung) {
               $scope.bestellungen[bestellung.produzentKurzzeichen] = {
+                id: bestellung.id,
                 produzentId: bestellung.produzentId,
                 produzentKurzzeichen: bestellung.produzentKurzzeichen,
                 total: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].total : 0) + bestellung.preisTotal,
@@ -500,6 +501,7 @@ angular.module('openolitor')
                 lieferungen: {}
               };
               $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum] = {
+                id: bestellung.id,
                 datum: bestellung.datum,
                 positionen: {},
                 total: bestellung.total,
@@ -622,13 +624,11 @@ angular.module('openolitor')
         });
       };
 
-      $scope.bestellungVersenden = function(bestellungId) {
+      $scope.bestellungVersenden = function(bestellung) {
         LieferplanungModel.bestellungVersenden({
           id: $routeParams.id,
-          bestellungId: bestellungId
-        }, function() {
-
-        });
+          bestellungId: bestellung.id
+        }, bestellung);
       };
 
       $scope.bestellungenErstellen = function() {

@@ -67,8 +67,7 @@ angular.module('openolitor')
       'bestellungVersenden': {
         method: 'POST',
         isArray: false,
-        url: API_URL +
-          'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
-      }
+        url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
+      },
     });
   });
