@@ -7,7 +7,7 @@
           <form class="navbar-form pull-right" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
-              <oo-actions-button model="model" actions="actions">{{'Rechnung erstellen'|translate}}</oo-actions-button>              
+              <oo-actions-button model="model" actions="actions">{{'Rechnung erstellen'|translate}}</oo-actions-button>
             </div>
           </form>
         </span>
@@ -25,6 +25,12 @@
             <tr ng-repeat="rechnung in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[rechnung.id]" />
+              </td>
+              <td>
+                <span role="button" ng-if="rechnung.fileStoreId">
+                  <i ng-hide="rechnung.isDownloading" ng-click="downloadRechnung(rechnung)" class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  <i ng-show="rechnung.isDownloading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
               </td>
               <td data-title="'Titel'|translate" sortable="'titel'">
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
