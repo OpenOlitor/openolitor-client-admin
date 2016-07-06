@@ -33,14 +33,12 @@ angular.module('openolitor')
 
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
-        $http.get(API_URL + 'rechnungen/' + rechnung.id +
-          '/aktionen/download').then(function(res) {
-          rechnung.isDownloading = false;
-          var name = res.headers('Content-Disposition');
-          var contentType = res.headers('Content-Type');
-          FileUtil.download(name || $scope.defaultFileName, res.data,
-            contentType || 'application/pdf');
-        });
+        FileUtil.download('rechnungen/' + rechnung.id +
+          '/aktionen/download', 'Rechnung ' + rechnung.id,
+          'application/pdf',
+          function() {
+            rechnung.isDownloading = false;
+          });
       };
 
       // watch for check all checkbox

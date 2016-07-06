@@ -159,14 +159,12 @@ angular.module('openolitor')
 
       $scope.downloadRechnung = function() {
         $scope.isDownloading = true;
-        $http.get(API_URL + 'rechnungen/' + $scope.rechnung.id +
-          '/aktionen/download').then(function(res) {
-          $scope.isDownloading = false;
-          var name = res.headers('Content-Disposition');
-          var contentType = res.headers('Content-Type');
-          FileUtil.download(name || $scope.defaultFileName, res.data,
-            contentType || 'application/pdf');
-        });
+        FileUtil.download('rechnungen/' + $scope.rechnung.id +
+          '/aktionen/download', 'Rechnung ' + $scope.rechnung.id,
+          'application/pdf',
+          function() {
+            $scope.isDownloading = false;
+          });
       };
 
       $scope.actions = [{
