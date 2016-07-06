@@ -39,7 +39,7 @@ angular.module('openolitor').directive('ooGenerateReport', function() {
         }).then(function(res) {
           var name = res.headers('Content-Disposition');
           var contentType = res.headers('Content-Type');
-          FileUtil.download(name || $scope.defaultFileName, res.data,
+          FileUtil.open(name || $scope.defaultFileName, res.data,
             contentType);
           $scope.generating = false;
           $scope.onGenerated()();

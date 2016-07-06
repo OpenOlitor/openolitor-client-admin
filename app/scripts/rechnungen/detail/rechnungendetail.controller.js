@@ -8,13 +8,13 @@ angular.module('openolitor')
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
-    'RECHNUNGSTATUS', 'FileUtil',
+    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
-      RECHNUNGSTATUS, FileUtil) {
+      RECHNUNGSTATUS, FileUtil, DataUtil) {
 
       var defaults = {
         model: {
@@ -105,6 +105,7 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Rechnung') {
+          DataUtil.update(msg.data, $scope.rechnung);
           $rootScope.$apply();
         }
       });
@@ -154,6 +155,16 @@ angular.module('openolitor')
         return !$scope.isExisting() ||
           $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
           $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+      };
+
+      $scope.downloadRechnung = function() {
+        $scope.isDownloading = true;
+        FileUtil.download('rechnungen/' + $scope.rechnung.id +
+          '/aktionen/download', 'Rechnung ' + $scope.rechnung.id,
+          'application/pdf',
+          function() {
+            $scope.isDownloading = false;
+          });
       };
 
       $scope.actions = [{

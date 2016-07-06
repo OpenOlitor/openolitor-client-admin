@@ -5,9 +5,10 @@
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'ngTableParams',
+    'RechnungenOverviewModel', 'ngTableParams', '$http', 'FileUtil',
+    'API_URL',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      ngTableParams) {
+      ngTableParams, $http, FileUtil, API_URL) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -28,6 +29,16 @@ angular.module('openolitor')
         items: {},
         css: '',
         ids: []
+      };
+
+      $scope.downloadRechnung = function(rechnung) {
+        rechnung.isDownloading = true;
+        FileUtil.download('rechnungen/' + rechnung.id +
+          '/aktionen/download', 'Rechnung ' + rechnung.id,
+          'application/pdf',
+          function() {
+            rechnung.isDownloading = false;
+          });
       };
 
       // watch for check all checkbox
