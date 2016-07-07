@@ -471,62 +471,66 @@ angular.module('openolitor')
       };
 
       $scope.recalculateBestellungen = function() {
-        if($scope.valuesEditable()) {
-          LieferplanungModel.bestellungenErstellen({
-            id: $routeParams.id,
-            lieferplanungId: parseInt($routeParams.id)
-          }, function() {});
-        }
-
-        $scope.bestellungen = {};
-        if($scope.planung.status === 'Offen') {
-          lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
-            lodash.forEach(abotypLieferung.lieferpositionen, function(
-              korbprodukt) {
-              addEntryToBestellungen(abotypLieferung, korbprodukt);
+        var recalculate = function() {
+          $scope.bestellungen = {};
+          if($scope.planung.status === 'Offen') {
+            lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+              lodash.forEach(abotypLieferung.lieferpositionen, function(
+                korbprodukt) {
+                addEntryToBestellungen(abotypLieferung, korbprodukt);
+              });
             });
-          });
-        } else {
-          LieferplanungModel.getBestellungen({
-            id: $routeParams.id
-          }, function(bestellungen) {
-            angular.forEach(bestellungen, function(bestellung) {
-              $scope.bestellungen[bestellung.produzentKurzzeichen] = {
-                id: bestellung.id,
-                produzentId: bestellung.produzentId,
-                produzentKurzzeichen: bestellung.produzentKurzzeichen,
-                total: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].total : 0) + bestellung.preisTotal,
-                steuer: bestellung.steuer,
-                totalSteuer: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].totalSteuer : 0) + bestellung.totalSteuer,
-                lieferungen: {}
-              };
-              $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum] = {
-                id: bestellung.id,
-                datum: bestellung.datum,
-                positionen: {},
-                total: bestellung.total,
-                steuer: bestellung.steuer,
-                totalSteuer: bestellung.totalSteuer
-              };
-              LieferplanungModel.getBestellpositionen({
-                id: $routeParams.id,
-                bestellungId: bestellung.id
-              }, function(bestellpositionen) {
-                angular.forEach(bestellpositionen, function(bestellposition) {
-                  $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum].positionen[bestellposition.produktBeschrieb + bestellposition.menge] = {
-                    anzahl: bestellposition.anzahl,
-                    produktBeschrieb: bestellposition.produktBeschrieb,
-                    menge: bestellposition.menge,
-                    einheit: bestellposition.einheit,
-                    preisEinheit: bestellposition.preisEinheit,
-                    preisPackung: (bestellposition.preisEinheit * bestellposition.menge),
-                    mengeTotal: (bestellposition.menge * bestellposition.anzahl),
-                    preis: bestellposition.preis
-                  };
+          } else {
+            LieferplanungModel.getBestellungen({
+              id: $routeParams.id
+            }, function(bestellungen) {
+              angular.forEach(bestellungen, function(bestellung) {
+                $scope.bestellungen[bestellung.produzentKurzzeichen] = {
+                  id: bestellung.id,
+                  produzentId: bestellung.produzentId,
+                  produzentKurzzeichen: bestellung.produzentKurzzeichen,
+                  total: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].total : 0) + bestellung.preisTotal,
+                  steuer: bestellung.steuer,
+                  totalSteuer: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].totalSteuer : 0) + bestellung.totalSteuer,
+                  lieferungen: {}
+                };
+                $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum] = {
+                  id: bestellung.id,
+                  datum: bestellung.datum,
+                  positionen: {},
+                  total: bestellung.preisTotal,
+                  steuer: bestellung.steuer,
+                  totalSteuer: bestellung.totalSteuer
+                };
+                LieferplanungModel.getBestellpositionen({
+                  id: $routeParams.id,
+                  bestellungId: bestellung.id
+                }, function(bestellpositionen) {
+                  angular.forEach(bestellpositionen, function(bestellposition) {
+                    $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum].positionen[bestellposition.produktBeschrieb + bestellposition.menge] = {
+                      anzahl: bestellposition.anzahl,
+                      produktBeschrieb: bestellposition.produktBeschrieb,
+                      menge: bestellposition.menge,
+                      einheit: bestellposition.einheit,
+                      preisEinheit: bestellposition.preisEinheit,
+                      preisPackung: (bestellposition.preisEinheit * bestellposition.menge),
+                      mengeTotal: (bestellposition.menge * bestellposition.anzahl),
+                      preis: bestellposition.preis
+                    };
+                  });
                 });
               });
             });
-          });
+          }
+        };
+
+        if($scope.valuesEditable() && $scope.planung.status !== 'Offen') {
+          LieferplanungModel.bestellungenErstellen({
+            id: $routeParams.id,
+            lieferplanungId: parseInt($routeParams.id)
+          }, function() { recalculate(); });
+        } else {
+          recalculate();
         }
       };
 
