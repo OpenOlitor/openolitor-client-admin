@@ -4,11 +4,11 @@
  */
 angular.module('openolitor')
   .controller('LieferplanungDetailController', ['$scope', '$rootScope',
-    '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel',
+    '$routeParams', 'NgTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'msgBus', 'cloneObj',
     'gettext', '$location', 'lodash',
-    function($scope, $rootScope, $routeParams, ngTableParams, $filter,
+    function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS, LIEFEREINHEIT, msgBus,
       cloneObj, gettext, $location, lodash) {
@@ -113,7 +113,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10000,
           sorting: {
@@ -124,7 +124,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.produkteEntries) {
               return;
             }
@@ -149,7 +149,7 @@ angular.module('openolitor')
               produzentenRawL, 'id'), 'id');
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            return orderedData;
           }
 
         });
@@ -272,7 +272,7 @@ angular.module('openolitor')
       $scope.addTableParams = function(abotypLieferung) {
         if (!abotypLieferung.tableParamsKorb) {
           //use default tableParams
-          abotypLieferung.tableParamsKorb = new ngTableParams({ // jshint ignore:line
+          abotypLieferung.tableParamsKorb = new NgTableParams({ // jshint ignore:line
             page: 1,
             count: 10000,
             sorting: {
@@ -283,7 +283,7 @@ angular.module('openolitor')
             groupOptions: {
               isExpanded: true
             },
-            getData: function($defer, params) {
+            getData: function(params) {
               if (!abotypLieferung.lieferpositionen) {
                 return;
               }
@@ -295,7 +295,7 @@ angular.module('openolitor')
                 filteredData;
 
               params.total(orderedData.length);
-              $defer.resolve(orderedData);
+              return orderedData;
             }
           });
         }

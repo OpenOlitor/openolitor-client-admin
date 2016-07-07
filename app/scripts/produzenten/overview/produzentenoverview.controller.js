@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
-    'ProduzentenModel', 'ngTableParams',
-    function($q, $scope, $filter, ProduzentenModel, ngTableParams) {
+    'ProduzentenModel', 'NgTableParams',
+    function($q, $scope, $filter, ProduzentenModel, NgTableParams) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -21,7 +21,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -32,7 +32,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
@@ -44,7 +44,7 @@ angular.module('openolitor')
             orderedData = params.sorting ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
