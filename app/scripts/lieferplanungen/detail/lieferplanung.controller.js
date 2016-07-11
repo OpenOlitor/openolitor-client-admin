@@ -52,13 +52,13 @@ angular.module('openolitor')
         }) || {};
       };
 
-      $scope.extractProduzentenFilter = function(extract) {
+      $scope.extractProduzentenFilter = function(extract, useKz) {
         var produzentenRawL = [];
         lodash.forEach($scope.alleProduzentenL, function(produzent) {
           if (angular.isUndefined(extract) || extract.indexOf(produzent
               .kurzzeichen) > -1) {
             produzentenRawL.push({
-              'id': produzent.id,
+              'id': (useKz) ? produzent.kurzzeichen : produzent.id,
               'title': produzent.kurzzeichen
             });
           }
@@ -118,7 +118,7 @@ angular.module('openolitor')
           count: 10000,
           sorting: {
             name: 'asc'
-          }
+          },
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -134,20 +134,7 @@ angular.module('openolitor')
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')(orderedData, params.filter());
-
-            var produzentenRawL = [];
-            lodash.forEach(orderedData, function(item) {
-              lodash.forEach(item.produzenten, function(produzent) {
-                produzentenRawL.push({
-                  'id': produzent.id,
-                  'title': produzent.id
-                });
-              });
-            });
-            $scope.produzentenL = $filter('orderBy')($filter('unique')(
-              produzentenRawL, 'id'), 'id');
-
+            orderedData = $filter('filter')(orderedData, params.filter(), false);
             params.total(orderedData.length);
             return orderedData;
           }

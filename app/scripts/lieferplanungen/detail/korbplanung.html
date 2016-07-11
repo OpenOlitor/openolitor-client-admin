@@ -49,7 +49,7 @@
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
                 {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{getShortEinheit(produkt.einheit)}}
               </td>
-              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter()">
+              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
                 <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
               </td>
             </tr>
