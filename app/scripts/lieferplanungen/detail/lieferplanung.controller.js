@@ -7,11 +7,11 @@ angular.module('openolitor')
     '$routeParams', 'NgTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'msgBus', 'cloneObj',
-    'gettext', '$location', 'lodash',
+    'gettext', '$location', 'lodash', '$uibModal',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS, LIEFEREINHEIT, msgBus,
-      cloneObj, gettext, $location, lodash) {
+      cloneObj, gettext, $location, lodash, $uibModal) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -44,6 +44,12 @@ angular.module('openolitor')
         lodash.find($scope.produkteEntries, function(produkt) {
           return (produkt.id === id);
         });
+      };
+
+      $scope.getProduzentByKurzzeichen = function(kurzzeichen) {
+        return lodash.find($scope.alleProduzentenL, function(produzent) {
+          return (produzent.kurzzeichen === kurzzeichen);
+        }) || {};
       };
 
       $scope.extractProduzentenFilter = function(extract) {
@@ -90,12 +96,6 @@ angular.module('openolitor')
       var getProduzent = function(produzentId) {
         return lodash.find($scope.alleProduzentenL, function(produzent) {
           return produzent.id === produzentId;
-        }) || {};
-      };
-
-      var getProduzentByKurzzeichen = function(kurzzeichen) {
-        return lodash.find($scope.alleProduzentenL, function(produzent) {
-          return (produzent.kurzzeichen === kurzzeichen);
         }) || {};
       };
 
@@ -360,7 +360,7 @@ angular.module('openolitor')
             var produkt = drag.scope().produkt;
             var produzent = (angular.isDefined(produkt.produzenten) &&
                 produkt.produzenten.length === 1) ?
-              getProduzentByKurzzeichen(produkt.produzenten[0]) : {
+              $scope.getProduzentByKurzzeichen(produkt.produzenten[0]) : {
                 id: undefined,
                 label: undefined
               };
@@ -405,7 +405,7 @@ angular.module('openolitor')
 
         var bestellungByProduzent = $scope.bestellungen[produzent];
         if (angular.isUndefined(bestellungByProduzent)) {
-          var produzentObj = getProduzentByKurzzeichen(produzent);
+          var produzentObj = $scope.getProduzentByKurzzeichen(produzent);
           bestellungByProduzent = $scope.bestellungen[produzent] = {
             produzentId: produzentObj.id || undefined,
             produzentKurzzeichen: produzent,
@@ -641,6 +641,24 @@ angular.module('openolitor')
         }, function() {
 
         });
+      };
+
+      $scope.editBemerkungen = function() {
+        $scope.modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/lieferplanungen/detail/edit-bemerkungen.html',
+          scope: $scope
+        });
+
+        $scope.modalInstance.result.then(function() {
+          $scope.modalInstance = undefined;
+        }, function() {
+
+        });
+      };
+
+      $scope.closeEditBemerkungen = function() {
+        $scope.modalInstance.close();
       };
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
