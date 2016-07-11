@@ -3,9 +3,9 @@
     <div class="col-md-12">
       <div class="row form-group">
         <h3 class="nonboxed-title">
-          <div class="col-md-5" translate>
+          <div class="col-md-5">
             <ul class="nav navbar-nav" ng-show="valuesEditable()">
-              <li class="navbar-brand">Planung #{{planung.id}}: Korbinhalt</li>
+              <li class="navbar-brand" translate>Planung #{{planung.id}}: Korbinhalt</li>
               <li class="small" translate>Abotyp hinzufügen:</li>
               <li>
                 <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>

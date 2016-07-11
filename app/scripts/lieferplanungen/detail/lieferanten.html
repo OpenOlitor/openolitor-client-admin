@@ -2,11 +2,13 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row form-group">
-        <h3>
-          <div class="col-md-4" translate>
-            Planung #{{planung.id}}: Zusammenzug Lieferanten
+        <h3 class="nonboxed-title">
+          <div class="col-md-5">
+            <ul class="nav navbar-nav" ng-show="valuesEditable()">
+              <li class="navbar-brand" translate >Planung #{{planung.id}}: Zusammenzug Lieferanten</li>
+            </ul>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <div class="pull-right" role="group">
               <button type="button" role="button" ng-click="setMode('korbinhalt')" class="btn btn-default"><span class="fa fa-step-backward"></span> <span translate>Übersicht der Körbe</span></button>
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
