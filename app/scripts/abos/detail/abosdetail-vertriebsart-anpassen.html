@@ -3,13 +3,24 @@
 </div>'
 <div class="modal-body">
   <form name="vertriebsartAnpassenForm">
+    <!-- vertrieb -->
+    <div class="row form-group">
+      <div class="col-md-4">
+        <label for="abotyp" translate>Vertrieb</label>
+      </div>
+      <div class="col-md-8">
+        <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="vertriebe" property="label" selected-prop="id" selected="formDaten.vertriebIdNeu" selection-required="true" required></oo-dropdown>
+        <input type="hidden" required ng-model="formDaten.vertriebIdNeu">
+      </div>
+    </div>
+
     <!-- vertriebsart -->
     <div class="row form-group">
       <div class="col-md-4">
         <label for="abotyp" translate>Neue Vertriebsart</label>
       </div>
       <div class="col-md-8">
-        <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsarten" property="label" selected-prop="id" selected="formDaten.vertriebsartIdNeu" selection-required="true" required></oo-dropdown>
+        <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsarten[formDaten.vertriebIdNeu]" property="label" selected-prop="id" selected="formDaten.vertriebsartIdNeu" selection-required="true" required></oo-dropdown>
         <input type="hidden" required ng-model="formDaten.vertriebsartIdNeu">
       </div>
     </div>

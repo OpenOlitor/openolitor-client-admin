@@ -49,16 +49,25 @@ angular.module('openolitor')
         isArray: false,
         url: API_URL + 'lieferplanungen/:id/aktionen/verrechnen'
       },
+      'getBestellungen': {
+        method: 'GET',
+        isArray: true,
+        url: API_URL + 'lieferplanungen/:id/bestellungen'
+      },
       'bestellungenErstellen': {
         method: 'POST',
         isArray: false,
         url: API_URL + 'lieferplanungen/:id/bestellungen/create'
       },
+      'getBestellpositionen': {
+        method: 'GET',
+        isArray: true,
+        url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/positionen'
+      },
       'bestellungVersenden': {
         method: 'POST',
         isArray: false,
-        url: API_URL +
-          'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
-      }
+        url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
+      },
     });
   });

@@ -1,7 +1,7 @@
 <span>
   <div class="btn-group">
     <button ng-click="executeAction(actions[0])" ng-disabled="actions[0].isDisabled() || form.$invalid || model.actionInProgress" type="button" class="btn btn-primary">
-      <i class="fa fa-floppy-o"></i>
+      <i class="{{ actions[0].iconClass ? actions[0].iconClass : 'fa fa-floppy-o'}}"></i>
       <span ng-if="!notext && !actions[0].noText && !actions[0].noEntityText">{{entity | translate}}</span>
       <span ng-if="!notext && !actions[0].noText">{{actions[0].labelFunction() || actions[0].label | translate}}</span>
 <i ng-show="model.actionInProgress === 'updating'" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>

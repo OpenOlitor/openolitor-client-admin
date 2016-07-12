@@ -4,7 +4,7 @@
  */
 angular.module('openolitor')
   .controller('ProjektSettingsController', ['$scope', '$filter',
-    'ngTableParams',
+    'NgTableParams',
     'KundentypenService',
     'KundentypenModel',
     'ProduktekategorienService',
@@ -17,14 +17,14 @@ angular.module('openolitor')
     'Upload',
     'msgBus',
     'API_URL',
-    function($scope, $filter, ngTableParams, KundentypenService,
+    function($scope, $filter, NgTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
       ProjektService, ProjektModel, EnumUtil, MONATE, WAEHRUNG, Upload, msgBus, API_URL
     ) {
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
 
-      // first fake to true to work around bs-swith bug
+      // first fake to true to work around bs-switch bug
       $scope.editMode = true;
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
@@ -250,7 +250,7 @@ angular.module('openolitor')
 
       if (!$scope.kundentypenTableParams) {
         //use default tableParams
-        $scope.kundentypenTableParams = new ngTableParams({ // jshint ignore:line
+        $scope.kundentypenTableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 1000,
           sorting: {
@@ -261,7 +261,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.kundentypen) {
               return;
             }
@@ -271,7 +271,7 @@ angular.module('openolitor')
               $scope.kundentypen;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            return orderedData;
           }
 
         });
@@ -279,7 +279,7 @@ angular.module('openolitor')
 
       if (!$scope.produktekategorienTableParams) {
         //use default tableParams
-        $scope.produktekategorienTableParams = new ngTableParams({ // jshint ignore:line
+        $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 1000,
           sorting: {
@@ -290,7 +290,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.produktekategorien) {
               return;
             }
@@ -300,7 +300,7 @@ angular.module('openolitor')
               $scope.produktekategorien;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            return orderedData;
           }
 
         });

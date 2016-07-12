@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ZahlungsImportsOverviewController', ['$q', '$scope', '$filter',
-    'ZahlungsImportsOverviewModel', 'ngTableParams',
-    function($q, $scope, $filter, ZahlungsImportsOverviewModel, ngTableParams) {
+    'ZahlungsImportsOverviewModel', 'NgTableParams',
+    function($q, $scope, $filter, ZahlungsImportsOverviewModel, NgTableParams) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -20,7 +20,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -31,7 +31,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
@@ -44,7 +44,7 @@ angular.module('openolitor')
               orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });

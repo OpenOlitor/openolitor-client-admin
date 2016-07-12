@@ -10,7 +10,7 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
       },
       transclude: true,
       templateUrl: 'scripts/abos/detail/abwesenheiten/abwesenheiten.html',
-      controller: function($scope, ngTableParams, AbwesenheitenListModel,
+      controller: function($scope, NgTableParams, AbwesenheitenListModel,
         msgBus, lodash) {
         $scope.showAllAbwesenheiten = false;
         $scope.deletingAbwesenheit = {};
@@ -77,18 +77,18 @@ angular.module('openolitor').directive('ooAboAbwesenheiten', [
 
         if (!$scope.abwesenheitenTableParams) {
           //use default tableParams
-          $scope.abwesenheitenTableParams = new ngTableParams({ // jshint ignore:line
+          $scope.abwesenheitenTableParams = new NgTableParams({ // jshint ignore:line
             counts: [],
             sorting: {
               datum: 'asc'
             }
           }, {
-            getData: function($defer, params) {
+            getData: function(params) {
               if (!$scope.abwesenheiten) {
                 return;
               }
               params.total($scope.abwesenheiten.length);
-              $defer.resolve($scope.abwesenheiten);
+              return $scope.abwesenheiten;
             }
 
           });

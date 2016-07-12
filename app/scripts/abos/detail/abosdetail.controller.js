@@ -4,15 +4,19 @@
  */
 angular.module('openolitor')
   .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', '$route', '$uibModal', '$log', '$http', 'gettext', 'AbosDetailModel', 'AbotypenOverviewModel',
+    '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
+    'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN',
-    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash', 'API_URL', 'alertService',
+    'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
+    'API_URL', 'alertService',
 
-    function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
+    function($scope, $filter, $routeParams, $location, $route, $uibModal,
+      $log, $http, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN,
-      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,alertService) {
+      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
+      alertService) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -135,10 +139,15 @@ angular.module('openolitor')
         });
 
         modalInstance.result.then(function(data) {
-          $http.post(API_URL + 'kunden/'+$scope.abo.kundeId+'/abos/'+$scope.abo.id+'/aktionen/guthabenanpassen', data).then(function() {
-            alertService.addAlert('info', gettext('Guthaben wurde erfolgreich angepasst'));
+          $http.post(API_URL + 'kunden/' + $scope.abo.kundeId +
+            '/abos/' + $scope.abo.id + '/aktionen/guthabenanpassen',
+            data).then(function() {
+            alertService.addAlert('info', gettext(
+              'Guthaben wurde erfolgreich angepasst'));
           }, function(error) {
-            alertService.addAlert('error', gettext('Guthaben konnte nicht angepasst werden: ') + error.status + ':' + error.statusText);
+            alertService.addAlert('error', gettext(
+                'Guthaben konnte nicht angepasst werden: ') +
+              error.status + ':' + error.statusText);
           });
         }, function() {
           $log.info('Modal dismissed at: ' + new Date());
@@ -155,16 +164,24 @@ angular.module('openolitor')
               return $scope.abo;
             },
             vertriebsarten: function() {
-              return $scope.lists.vertriebsarten[$scope.abo.vertriebId];
+              return $scope.lists.vertriebsarten;
+            },
+            vertriebe: function() {
+              return $scope.lists.vertriebe[$scope.abo.abotypId];
             }
           }
         });
 
         modalInstance.result.then(function(data) {
-          $http.post(API_URL + 'kunden/'+$scope.abo.kundeId+'/abos/'+$scope.abo.id+'/aktionen/vertriebsartanpassen', data).then(function() {
-            alertService.addAlert('info', gettext('Vertriebsart wurde erfolgreich angepasst'));
+          $http.post(API_URL + 'kunden/' + $scope.abo.kundeId +
+            '/abos/' + $scope.abo.id +
+            '/aktionen/vertriebsartanpassen', data).then(function() {
+            alertService.addAlert('info', gettext(
+              'Vertriebsart wurde erfolgreich angepasst'));
           }, function(error) {
-            alertService.addAlert('error', gettext('Vertriebsart konnte nicht angepasst werden: ') + error.status + ':' + error.statusText);
+            alertService.addAlert('error', gettext(
+                'Vertriebsart konnte nicht angepasst werden: ') +
+              error.status + ':' + error.statusText);
           });
         }, function() {
           $log.info('Modal dismissed at: ' + new Date());
@@ -206,8 +223,11 @@ angular.module('openolitor')
           showVertriebsartAnpassenDialog();
         },
         isDisabled: function() {
-          return !$scope.abo || !$scope.lists.vertriebsarten[$scope.abo.vertriebId] ||
-           $scope.lists.vertriebsarten[$scope.abo.vertriebId].length < 2;
+          return !$scope.abo || !$scope.lists.vertriebsarten[$scope.abo
+              .vertriebId] ||
+            ($scope.lists.vertriebe[$scope.abo.abotypId].length < 2 &&
+              $scope.lists.vertriebsarten[$scope.abo.vertriebId].length <
+              2);
         }
       }, {
         label: gettext('Manuelle Rechnung erstellen'),
@@ -386,6 +406,23 @@ angular.module('openolitor')
         if (isAboEntity(msg.entity)) {
           if ($scope.abo && $scope.abo.id === msg.data.id) {
             DataUtil.update(msg.data, $scope.abo);
+
+            if (msg.data.vertriebId !== $scope.abo.vertriebId) {
+              //vertrieb id changes, reload whole abo
+              loadAboDetail();
+            }
+
+            $scope.$apply();
+            return;
+          }
+        }
+      });
+
+      // list to created event as well. when changing vertriebsart entity might get recreated
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.abo && $scope.abo.id === msg.data.id) {
+            $route.reload();
             $scope.$apply();
             return;
           }

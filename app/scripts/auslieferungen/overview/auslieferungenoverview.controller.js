@@ -3,12 +3,9 @@
 /**
  */
 angular.module('openolitor')
-  .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
-    '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
-    'API_URL',
-    function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, API_URL) {
+  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter', '$route',
+    'DepotAuslieferungenModel', 'TourAuslieferungenModel', 'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS',
+    function($q, $scope, $filter, $route, DepotAuslieferungenModel, TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams, AUSLIEFERUNGSTATUS) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -18,6 +15,29 @@ angular.module('openolitor')
       $scope.search = {
         query: ''
       };
+
+      var model = $route.current.$$route.model;
+      var overviewModel;
+
+      switch (model) {
+        case 'Depot':
+          overviewModel = DepotAuslieferungenModel;
+          break;
+        case 'Tour':
+          overviewModel = TourAuslieferungenModel;
+          break;
+        case 'Post':
+          overviewModel = PostAuslieferungenModel;
+          break;
+      }
+
+      $scope.statusL = [];
+      angular.forEach(AUSLIEFERUNGSTATUS, function(value, key) {
+        $scope.statusL.push({
+          'id': key,
+          'title': value
+        });
+      });
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -29,16 +49,6 @@ angular.module('openolitor')
         items: {},
         css: '',
         ids: []
-      };
-
-      $scope.downloadRechnung = function(rechnung) {
-        rechnung.isDownloading = true;
-        FileUtil.download('rechnungen/' + rechnung.id +
-          '/aktionen/download', 'Rechnung ' + rechnung.id,
-          'application/pdf',
-          function() {
-            rechnung.isDownloading = false;
-          });
       };
 
       // watch for check all checkbox
@@ -80,20 +90,20 @@ angular.module('openolitor')
       }, true);
 
       $scope.actions = [{
-        labelFunction: function() {
-          return 'Rechnung erstellen';
-        },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-plus',
-        onExecute: function() {
-          return $location.path('/rechnungen/new');
-        }
-      }, {
-        label: 'Rechnungen drucken',
+        label: 'Etiketten drucken',
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.showGenerateReport = true;
           return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Als ausgeliefert markieren',
+        iconClass: 'fa fa-bicycle',
+        onExecute: function() {
+          return overviewModel.ausliefern($scope.checkboxes.ids);
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
@@ -109,7 +119,7 @@ angular.module('openolitor')
             name: 'asc'
           },
           filter: {
-            status: ''
+            status: AUSLIEFERUNGSTATUS.ERFASST
           }
         }, {
           filterDelay: 0,
@@ -122,17 +132,16 @@ angular.module('openolitor')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
+              $scope
+              .search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
-              orderedData;
+              $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
             $scope.filteredEntries = filteredData;
 
             params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) *
-              params.count(), params.page() * params.count());
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
@@ -146,9 +155,10 @@ angular.module('openolitor')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = RechnungenOverviewModel.query({
+        $scope.entries = overviewModel.query({
           q: $scope.query
-        }, function() {
+        }, function(result) {
+          $scope.entries = result;
           $scope.tableParams.reload();
           $scope.loading = false;
         });
