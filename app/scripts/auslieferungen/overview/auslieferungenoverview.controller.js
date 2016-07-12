@@ -3,9 +3,13 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter', '$route',
-    'DepotAuslieferungenModel', 'TourAuslieferungenModel', 'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS',
-    function($q, $scope, $filter, $route, DepotAuslieferungenModel, TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams, AUSLIEFERUNGSTATUS) {
+  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter',
+    '$route',
+    'DepotAuslieferungenModel', 'TourAuslieferungenModel',
+    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS',
+    function($q, $scope, $filter, $route, DepotAuslieferungenModel,
+      TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
+      AUSLIEFERUNGSTATUS) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -90,7 +94,7 @@ angular.module('openolitor')
       }, true);
 
       $scope.actions = [{
-        label: 'Etiketten drucken',
+        label: 'Lieferschein drucken',
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.showGenerateReport = true;
@@ -136,12 +140,14 @@ angular.module('openolitor')
               .search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+              $filter('orderBy')(orderedData, params.orderBy()) :
+              orderedData;
 
             $scope.filteredEntries = filteredData;
 
             params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return orderedData.slice((params.page() - 1) * params.count(),
+              params.page() * params.count());
           }
 
         });
