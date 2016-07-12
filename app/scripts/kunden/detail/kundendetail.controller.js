@@ -23,7 +23,8 @@ angular.module('openolitor')
           id: undefined,
           typen: [KundentypenService.VEREINSMITGLIED],
           ansprechpersonen: [{
-            id: undefined
+            id: undefined,
+            anrede: ''
           }],
           pendenzen: [],
           abweichendeLieferadresse: false
@@ -35,7 +36,7 @@ angular.module('openolitor')
       });
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
-      $scope.anreden = EnumUtil.asArray(ANREDE);
+      $scope.anreden = ANREDE;
       $scope.updatingAbo = {};
       $scope.selectedAbo = undefined;
 
@@ -136,7 +137,8 @@ angular.module('openolitor')
 
       $scope.addPerson = function() {
         $scope.kunde.ansprechpersonen.push({
-          id: undefined
+          id: undefined,
+          anrede: ''
         });
       };
 
