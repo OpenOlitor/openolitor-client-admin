@@ -4,13 +4,14 @@
  */
 angular.module('openolitor')
   .controller('AbosOverviewController', ['$scope', '$filter','$location',
-    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil',
-    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil) {
+    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil', 'AbosOverviewService',
+    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, AbosOverviewService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.selectedAbo = undefined;
+      $scope.model = {};
 
       $scope.search = {
         query: '',
@@ -113,7 +114,8 @@ angular.module('openolitor')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          return $location.path('/rechnungen/aktionen/guthabenrechnung');
+          $scope.showCreateRechnungenDialog = true;
+          return true;
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;

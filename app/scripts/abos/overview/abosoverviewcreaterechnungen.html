@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title">
+      <span>
+        <span translate>Rechnung erstellen</span>
+    </span>
+    <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-actions-button>
+  </h3>
+  </div>
+  <div class="panel-body">
+    <form name="rechnungForm">
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="titel" translate>Titel</label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="titel" ng-model="rechnung.titel" required placeholder="{{'Titel'|translate}}" maxlength="30">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="anzahlLieferungen" translate>Für Anzahl Lieferungen</label>
+        </div>
+        <div class="col-md-8">
+          <input type="number" class="form-control" id="anzahlLieferungen" ng-model="rechnung.anzahlLieferungen" required placeholder="{{'Anzahl Lieferungen'|translate}}">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="rechnungsDatum" translate>Rechnungsdatum</label>
+        </div>
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" required/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'rechnungsDatum')"><i class="fa fa-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="faelligkeitsDatum" translate>Fälligkeitsdatum</label>
+        </div>
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnung.faelligkeitsDatum" required/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'faelligkeitsDatum')"><i class="fa fa-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
