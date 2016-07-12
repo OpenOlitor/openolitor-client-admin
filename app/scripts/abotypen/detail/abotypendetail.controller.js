@@ -4,10 +4,10 @@
  */
 angular.module('openolitor')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'ngTableParams', 'AbotypenDetailModel', 'msgBus',
+    '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',
     'EnumUtil',
-    function($scope, $filter, $routeParams, $location, gettext, ngTableParams,
+    function($scope, $filter, $routeParams, $location, gettext, NgTableParams,
       AbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {

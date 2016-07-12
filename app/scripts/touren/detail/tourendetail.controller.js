@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('TourenDetailController', ['$scope', '$filter',
-    'TourenService', 'TourenDetailModel', 'ngTableParams', 'cloneObj', '$routeParams',
-    function($scope, $filter, TourenService, TourenDetailModel, ngTableParams, cloneObj, $routeParams) {
+    'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams',
+    function($scope, $filter, TourenService, TourenDetailModel, NgTableParams, cloneObj, $routeParams) {
 
       $scope.entries = [];
       $scope.loading = false;

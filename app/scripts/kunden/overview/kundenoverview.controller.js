@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter',
-    'KundenOverviewModel', 'ngTableParams', 'KundentypenService',
-    function($q, $scope, $filter, KundenOverviewModel, ngTableParams,
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService',
+    function($q, $scope, $filter, KundenOverviewModel, NgTableParams,
       KundentypenService) {
 
       $scope.entries = [];
@@ -38,7 +38,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -52,7 +52,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
@@ -65,7 +65,7 @@ angular.module('openolitor')
               orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });

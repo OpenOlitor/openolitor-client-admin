@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
-    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'ngTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, ngTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE, lodash) {
+    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'NgTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
+    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, NgTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE, lodash) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -86,7 +86,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           count: 10,
           sorting: {
             name: 'asc'
@@ -96,7 +96,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
@@ -109,7 +109,7 @@ angular.module('openolitor')
               filteredData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });

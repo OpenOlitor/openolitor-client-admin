@@ -4,14 +4,14 @@
  */
 angular.module('openolitor')
   .controller('LieferplanungDetailController', ['$scope', '$rootScope',
-    '$routeParams', 'ngTableParams', '$filter', 'LieferplanungModel',
+    '$routeParams', 'NgTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT', 'msgBus', 'cloneObj',
-    'gettext', '$location', 'lodash',
-    function($scope, $rootScope, $routeParams, ngTableParams, $filter,
+    'gettext', '$location', 'lodash', '$uibModal',
+    function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS, LIEFEREINHEIT, msgBus,
-      cloneObj, gettext, $location, lodash) {
+      cloneObj, gettext, $location, lodash, $uibModal) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -46,13 +46,19 @@ angular.module('openolitor')
         });
       };
 
-      $scope.extractProduzentenFilter = function(extract) {
+      $scope.getProduzentByKurzzeichen = function(kurzzeichen) {
+        return lodash.find($scope.alleProduzentenL, function(produzent) {
+          return (produzent.kurzzeichen === kurzzeichen);
+        }) || {};
+      };
+
+      $scope.extractProduzentenFilter = function(extract, useKz) {
         var produzentenRawL = [];
         lodash.forEach($scope.alleProduzentenL, function(produzent) {
           if (angular.isUndefined(extract) || extract.indexOf(produzent
               .kurzzeichen) > -1) {
             produzentenRawL.push({
-              'id': produzent.id,
+              'id': (useKz) ? produzent.kurzzeichen : produzent.id,
               'title': produzent.kurzzeichen
             });
           }
@@ -93,12 +99,6 @@ angular.module('openolitor')
         }) || {};
       };
 
-      var getProduzentByKurzzeichen = function(kurzzeichen) {
-        return lodash.find($scope.alleProduzentenL, function(produzent) {
-          return (produzent.kurzzeichen === kurzzeichen);
-        }) || {};
-      };
-
       $scope.getShortEinheit = function(einheitId) {
         var liefereinheit = lodash.find($scope.liefereinheiten, function(
           liefereinheit) {
@@ -113,18 +113,18 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10000,
           sorting: {
             name: 'asc'
-          }
+          },
         }, {
           filterDelay: 0,
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.produkteEntries) {
               return;
             }
@@ -134,22 +134,9 @@ angular.module('openolitor')
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
-            orderedData = $filter('filter')(orderedData, params.filter());
-
-            var produzentenRawL = [];
-            lodash.forEach(orderedData, function(item) {
-              lodash.forEach(item.produzenten, function(produzent) {
-                produzentenRawL.push({
-                  'id': produzent.id,
-                  'title': produzent.id
-                });
-              });
-            });
-            $scope.produzentenL = $filter('orderBy')($filter('unique')(
-              produzentenRawL, 'id'), 'id');
-
+            orderedData = $filter('filter')(orderedData, params.filter(), false);
             params.total(orderedData.length);
-            $defer.resolve(orderedData);
+            return orderedData;
           }
 
         });
@@ -272,7 +259,7 @@ angular.module('openolitor')
       $scope.addTableParams = function(abotypLieferung) {
         if (!abotypLieferung.tableParamsKorb) {
           //use default tableParams
-          abotypLieferung.tableParamsKorb = new ngTableParams({ // jshint ignore:line
+          abotypLieferung.tableParamsKorb = new NgTableParams({ // jshint ignore:line
             page: 1,
             count: 10000,
             sorting: {
@@ -283,7 +270,7 @@ angular.module('openolitor')
             groupOptions: {
               isExpanded: true
             },
-            getData: function($defer, params) {
+            getData: function(params) {
               if (!abotypLieferung.lieferpositionen) {
                 return;
               }
@@ -295,7 +282,7 @@ angular.module('openolitor')
                 filteredData;
 
               params.total(orderedData.length);
-              $defer.resolve(orderedData);
+              return orderedData;
             }
           });
         }
@@ -360,7 +347,7 @@ angular.module('openolitor')
             var produkt = drag.scope().produkt;
             var produzent = (angular.isDefined(produkt.produzenten) &&
                 produkt.produzenten.length === 1) ?
-              getProduzentByKurzzeichen(produkt.produzenten[0]) : {
+              $scope.getProduzentByKurzzeichen(produkt.produzenten[0]) : {
                 id: undefined,
                 label: undefined
               };
@@ -405,7 +392,7 @@ angular.module('openolitor')
 
         var bestellungByProduzent = $scope.bestellungen[produzent];
         if (angular.isUndefined(bestellungByProduzent)) {
-          var produzentObj = getProduzentByKurzzeichen(produzent);
+          var produzentObj = $scope.getProduzentByKurzzeichen(produzent);
           bestellungByProduzent = $scope.bestellungen[produzent] = {
             produzentId: produzentObj.id || undefined,
             produzentKurzzeichen: produzent,
@@ -471,13 +458,67 @@ angular.module('openolitor')
       };
 
       $scope.recalculateBestellungen = function() {
-        $scope.bestellungen = {};
-        lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
-          lodash.forEach(abotypLieferung.lieferpositionen, function(
-            korbprodukt) {
-            addEntryToBestellungen(abotypLieferung, korbprodukt);
-          });
-        });
+        var recalculate = function() {
+          $scope.bestellungen = {};
+          if($scope.planung.status === 'Offen') {
+            lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+              lodash.forEach(abotypLieferung.lieferpositionen, function(
+                korbprodukt) {
+                addEntryToBestellungen(abotypLieferung, korbprodukt);
+              });
+            });
+          } else {
+            LieferplanungModel.getBestellungen({
+              id: $routeParams.id
+            }, function(bestellungen) {
+              angular.forEach(bestellungen, function(bestellung) {
+                $scope.bestellungen[bestellung.produzentKurzzeichen] = {
+                  id: bestellung.id,
+                  produzentId: bestellung.produzentId,
+                  produzentKurzzeichen: bestellung.produzentKurzzeichen,
+                  total: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].total : 0) + bestellung.preisTotal,
+                  steuer: bestellung.steuer,
+                  totalSteuer: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ? $scope.bestellungen[bestellung.produzentKurzzeichen].totalSteuer : 0) + bestellung.totalSteuer,
+                  lieferungen: {}
+                };
+                $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum] = {
+                  id: bestellung.id,
+                  datum: bestellung.datum,
+                  positionen: {},
+                  total: bestellung.preisTotal,
+                  steuer: bestellung.steuer,
+                  totalSteuer: bestellung.totalSteuer
+                };
+                LieferplanungModel.getBestellpositionen({
+                  id: $routeParams.id,
+                  bestellungId: bestellung.id
+                }, function(bestellpositionen) {
+                  angular.forEach(bestellpositionen, function(bestellposition) {
+                    $scope.bestellungen[bestellung.produzentKurzzeichen].lieferungen[bestellung.datum].positionen[bestellposition.produktBeschrieb + bestellposition.menge] = {
+                      anzahl: bestellposition.anzahl,
+                      produktBeschrieb: bestellposition.produktBeschrieb,
+                      menge: bestellposition.menge,
+                      einheit: bestellposition.einheit,
+                      preisEinheit: bestellposition.preisEinheit,
+                      preisPackung: (bestellposition.preisEinheit * bestellposition.menge),
+                      mengeTotal: (bestellposition.menge * bestellposition.anzahl),
+                      preis: bestellposition.preis
+                    };
+                  });
+                });
+              });
+            });
+          }
+        };
+
+        if($scope.valuesEditable() && $scope.planung.status !== 'Offen') {
+          LieferplanungModel.bestellungenErstellen({
+            id: $routeParams.id,
+            lieferplanungId: parseInt($routeParams.id)
+          }, function() { recalculate(); });
+        } else {
+          recalculate();
+        }
       };
 
       $scope.hasMultipleLieferungen = function(bestellung) {
@@ -574,13 +615,11 @@ angular.module('openolitor')
         });
       };
 
-      $scope.bestellungVersenden = function(bestellungId) {
+      $scope.bestellungVersenden = function(bestellung) {
         LieferplanungModel.bestellungVersenden({
           id: $routeParams.id,
-          bestellungId: bestellungId
-        }, function() {
-
-        });
+          bestellungId: bestellung.id
+        }, bestellung);
       };
 
       $scope.bestellungenErstellen = function() {
@@ -589,6 +628,24 @@ angular.module('openolitor')
         }, function() {
 
         });
+      };
+
+      $scope.editBemerkungen = function() {
+        $scope.modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/lieferplanungen/detail/edit-bemerkungen.html',
+          scope: $scope
+        });
+
+        $scope.modalInstance.result.then(function() {
+          $scope.modalInstance = undefined;
+        }, function() {
+
+        });
+      };
+
+      $scope.closeEditBemerkungen = function() {
+        $scope.modalInstance.close();
       };
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {

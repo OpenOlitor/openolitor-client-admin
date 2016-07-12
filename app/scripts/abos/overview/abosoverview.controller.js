@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('AbosOverviewController', ['$scope', '$filter','$location',
-    'AbosOverviewModel', 'ngTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil',
-    function($scope, $filter, $location, AbosOverviewModel, ngTableParams, AbotypenOverviewModel, FilterQueryUtil) {
+    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil',
+    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -86,7 +86,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -98,7 +98,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
@@ -111,7 +111,7 @@ angular.module('openolitor')
               orderedData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });

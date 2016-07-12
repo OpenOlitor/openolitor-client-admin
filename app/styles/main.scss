@@ -164,6 +164,10 @@ input.ng-invalid {
  min-width: 100px;
 }
 
+.dropdown {
+  margin-right: 4px;
+}
+
 .dropdown>.dropdown-form:before {
   content: '';
   display: inline-block;
@@ -232,6 +236,12 @@ input.ng-invalid {
 .openolitor .table-small > tbody > tr > td,
 .openolitor .table-small > tfoot > tr > td {
   padding: 4px;
+}
+
+.nonboxed-title .navbar-brand {
+  margin-left: 0px !important;
+  padding-top: 5px;
+  padding-bottom: 0px;
 }
 
 /* Special Lieferplanung */

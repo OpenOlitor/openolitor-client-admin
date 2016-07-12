@@ -4,8 +4,8 @@
  */
 angular.module('openolitor')
   .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter', '$route',
-    'DepotAuslieferungenModel', 'TourAuslieferungenModel', 'PostAuslieferungenModel', 'ngTableParams', 'AUSLIEFERUNGSTATUS',
-    function($q, $scope, $filter, $route, DepotAuslieferungenModel, TourAuslieferungenModel, PostAuslieferungenModel, ngTableParams, AUSLIEFERUNGSTATUS) {
+    'DepotAuslieferungenModel', 'TourAuslieferungenModel', 'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS',
+    function($q, $scope, $filter, $route, DepotAuslieferungenModel, TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams, AUSLIEFERUNGSTATUS) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -112,7 +112,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -126,7 +126,7 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
@@ -141,7 +141,7 @@ angular.module('openolitor')
             $scope.filteredEntries = filteredData;
 
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
