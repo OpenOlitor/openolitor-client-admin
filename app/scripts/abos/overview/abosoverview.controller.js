@@ -4,10 +4,11 @@
  */
 angular.module('openolitor')
   .controller('AbosOverviewController', ['$scope', '$filter','$location',
-    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil',
-    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil) {
+    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil',
+    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.selectedAbo = undefined;
 
@@ -19,8 +20,10 @@ angular.module('openolitor')
 
       $scope.checkboxes = {
         checked: false,
+        checkedAny: false,
         items: {},
-        css: ''
+        css: '',
+        ids: []
       };
 
       $scope.hasData = function() {
@@ -43,32 +46,16 @@ angular.module('openolitor')
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
       }, function(value) {
-        angular.forEach($scope.entries, function(item) {
-          $scope.checkboxes.items[item.id] = value;
-        });
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
       });
 
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;
       }, function() {
-        var checked = 0, unchecked = 0,
-            total = $scope.entries.length;
-        angular.forEach($scope.entries, function(item) {
-          checked   +=  ($scope.checkboxes.items[item.id]) || 0;
-          unchecked += (!$scope.checkboxes.items[item.id]) || 0;
-        });
-        if ((unchecked === 0) || (checked === 0)) {
-          $scope.checkboxes.checked = (checked === total);
-        }
-        // grayed checkbox
-        if ((checked !== 0 && unchecked !== 0)) {
-          $scope.checkboxes.css = 'select-all:indeterminate';
-        }
-        else {
-          $scope.checkboxes.css = 'select-all';
-        }
-      }, true);
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }
+      , true);
 
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;
@@ -110,12 +97,28 @@ angular.module('openolitor')
               $filter('orderBy')(orderedData, params.orderBy()) :
               orderedData;
 
+            $scope.filteredEntries = filteredData;
+
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
       }
+
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Für selektierte Abos Rechnungen erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          return $location.path('/rechnungen/aktionen/guthabenrechnung');
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }];
 
       function search() {
         if ($scope.loading) {

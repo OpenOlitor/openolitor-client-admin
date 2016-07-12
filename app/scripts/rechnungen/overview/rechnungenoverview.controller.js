@@ -5,10 +5,10 @@
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil', 'OverviewCheckboxUtil',
     'API_URL',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, API_URL) {
+      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -45,38 +45,14 @@ angular.module('openolitor')
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
       }, function(value) {
-        angular.forEach($scope.filteredEntries, function(item) {
-          $scope.checkboxes.items[item.id] = value;
-        });
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
       });
 
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;
       }, function() {
-        var checked = 0,
-          unchecked = 0,
-          total = $scope.filteredEntries.length;
-        $scope.checkboxes.ids = [];
-        angular.forEach($scope.filteredEntries, function(item) {
-          checked += ($scope.checkboxes.items[item.id]) || 0;
-          unchecked += (!$scope.checkboxes.items[item.id]) || 0;
-          if ($scope.checkboxes.items[item.id]) {
-            $scope.checkboxes.ids.push(item.id);
-          }
-        });
-        if ((unchecked === 0) || (checked === 0)) {
-          $scope.checkboxes.checked = (checked === total) && checked > 0;
-          $scope.checkboxes.checkedAny = (checked > 0);
-        }
-        // grayed checkbox
-        else if ((checked !== 0 && unchecked !== 0)) {
-          $scope.checkboxes.css = 'select-all:indeterminate';
-          $scope.checkboxes.checkedAny = true;
-        } else {
-          $scope.checkboxes.css = 'select-all';
-          $scope.checkboxes.checkedAny = true;
-        }
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
 
       $scope.actions = [{
