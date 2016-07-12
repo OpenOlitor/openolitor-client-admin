@@ -9,6 +9,7 @@ angular.module('openolitor')
     function($scope, $uibModalInstance, $log, abo, vertriebe, vertriebsarten) {
       $scope.abo = abo;
       $scope.vertriebe = vertriebe;
+
       $scope.vertriebsarten = vertriebsarten;
       $scope.formDaten = {
         vertriebsartIdNeu: undefined,

@@ -428,5 +428,16 @@ angular.module('openolitor')
           }
         }
       });
+
+      // list to created event as well. when changing vertriebsart entity might get recreated
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          if ($scope.abo && $scope.abo.id === msg.data.id) {
+            $route.reload();
+            $scope.$apply();
+            return;
+          }
+        }
+      });
     }
   ]);
