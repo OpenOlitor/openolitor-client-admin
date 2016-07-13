@@ -5,10 +5,10 @@
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
-    'API_URL',
+    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil', 'OverviewCheckboxUtil',
+    'API_URL', 'FilterQueryUtil',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, API_URL) {
+      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -16,7 +16,9 @@ angular.module('openolitor')
       $scope.model = {};
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
 
       $scope.hasData = function() {
@@ -45,38 +47,14 @@ angular.module('openolitor')
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
       }, function(value) {
-        angular.forEach($scope.filteredEntries, function(item) {
-          $scope.checkboxes.items[item.id] = value;
-        });
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
       });
 
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;
       }, function() {
-        var checked = 0,
-          unchecked = 0,
-          total = $scope.filteredEntries.length;
-        $scope.checkboxes.ids = [];
-        angular.forEach($scope.filteredEntries, function(item) {
-          checked += ($scope.checkboxes.items[item.id]) || 0;
-          unchecked += (!$scope.checkboxes.items[item.id]) || 0;
-          if ($scope.checkboxes.items[item.id]) {
-            $scope.checkboxes.ids.push(item.id);
-          }
-        });
-        if ((unchecked === 0) || (checked === 0)) {
-          $scope.checkboxes.checked = (checked === total) && checked > 0;
-          $scope.checkboxes.checkedAny = (checked > 0);
-        }
-        // grayed checkbox
-        else if ((checked !== 0 && unchecked !== 0)) {
-          $scope.checkboxes.css = 'select-all:indeterminate';
-          $scope.checkboxes.checkedAny = true;
-        } else {
-          $scope.checkboxes.css = 'select-all';
-          $scope.checkboxes.checkedAny = true;
-        }
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
 
       $scope.actions = [{
@@ -122,7 +100,7 @@ angular.module('openolitor')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
+              $scope.search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy()) :
@@ -147,16 +125,22 @@ angular.module('openolitor')
 
         $scope.loading = true;
         $scope.entries = RechnungenOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
-      search();
+      var existingQuery = $location.search()['q'];
+      if(existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
         search();
       }, true);
 
