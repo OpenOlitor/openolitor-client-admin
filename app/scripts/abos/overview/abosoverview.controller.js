@@ -109,7 +109,7 @@ angular.module('openolitor')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Für selektierte Abos Rechnungen erstellen';
+          return 'Rechnungen erstellen';
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
@@ -141,11 +141,14 @@ angular.module('openolitor')
         $scope.search.query = existingQuery;
       }
 
+      $scope.closeCreateRechnungenDialog = function() {
+        $scope.showCreateRechnungenDialog = false;
+      }
+
       $scope.$watch('search.query', function() {
         $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
         $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
         search();
       }, true);
-
     }
   ]);

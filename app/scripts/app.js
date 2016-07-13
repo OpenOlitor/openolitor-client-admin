@@ -494,7 +494,8 @@ angular
         templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
         controller: 'RechnungenOverviewController',
         name: 'RechnungenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',

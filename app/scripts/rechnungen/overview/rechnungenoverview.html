@@ -36,7 +36,7 @@
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
-                {{rechnung.betrag}}
+                {{rechnung.waehrung}} {{rechnung.betrag}}
               </td>
               <td data-title="'Status'|translate" sortable="'status'">
                 {{rechnung.status}}

@@ -6,9 +6,10 @@ angular.module('openolitor').directive('ooAbosOverviewCreateRechnungen', [
       restrict: 'E',
       replace: true,
       scope: {
-        aboIds: '='
+        aboIds: '=',
+        onClose: '&'
       },
-      transclude: true,
+      transclude: false,
       templateUrl: 'scripts/abos/overview/abosoverviewcreaterechnungen.html',
       controller: 'AbosOverviewCreateRechnungenController'
     };
