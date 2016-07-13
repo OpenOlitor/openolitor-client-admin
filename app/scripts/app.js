@@ -114,8 +114,9 @@ angular
     WOCHEN: 'Wochen'
   })
   .constant('ANREDE', {
-    HERR: gettext('Herr'),
-    FRAU: gettext('Frau')
+    KEINE: addExtendedEnumValue(undefined, gettext('Keine'), gettext('-')),
+    HERR: addExtendedEnumValue('Herr', gettext('Herr'), gettext('Hr.')),
+    FRAU: addExtendedEnumValue('Frau', gettext('Frau'), gettext('Fr.'))
   })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: gettext('DepotlieferungAbo'),

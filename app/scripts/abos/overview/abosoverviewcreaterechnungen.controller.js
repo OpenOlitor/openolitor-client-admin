@@ -21,9 +21,10 @@ angular.module('openolitor')
           'day').valueOf())
       };
 
-      $scope.mode = 'AnzahlLieferungen';
-
-      $scope.manuellerBetrag = false;
+      $scope.form = {
+        mode: 'AnzahlLieferungen',
+        manuellerBetrag: false
+      };
 
       $scope.batchCreated = {
         ids: []
@@ -36,7 +37,7 @@ angular.module('openolitor')
       };
 
       $scope.batchCreate = function() {
-        switch($scope.mode) {
+        switch($scope.form.mode) {
           case 'AnzahlLieferungen':
             AbosOverviewService.createAnzahlLieferungenRechnungen($scope.rechnung).then(function() {
               $scope.commandIssued = true;
