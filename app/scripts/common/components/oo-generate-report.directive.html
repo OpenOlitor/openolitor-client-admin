@@ -1,0 +1,72 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title"><i class="fa fa-print" aria-hidden="true"></i> <span translate>Bericht erstellen</span>
+      <span class="pull-right" ng-show="generating"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <form name="berichtForm">
+      <div class="row form-group" ng-show="error">
+        <div class="col-md-12">
+            <div class="alert alert-danger">{{error}}</div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="vorlage" translate>Vorlage</label>
+        </div>
+        <div class="col-md-8">
+          <div class="btn-group" uib-dropdown>
+            <button id="split-button" type="button" class="btn btn-primary">
+              <span ng-show="form.vorlage === undefined" translate>Standardvorlage</span>
+              <span ng-show="form.vorlage" translate>{{form.vorlage.name}}</span>
+            </button>
+            <button type="button" class="btn btn-default" uib-dropdown-toggle>
+              <span class="caret"></span>
+              <span class="sr-only"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+              <li role="menuitem"><a ng-click="selectStandardVorlage()" translate>Standardvorlage</a></li>
+              <li class="divider"></li>
+              <li role="menuitem"><a
+                ng-model="form.vorlage" name="vorlageFile" ngf-accept="'.odt'" ngf-max-size="10MB" ngf-select="selectFile($file)" ngf-drop="selectFile($file)"
+                  translate>Benutzerdefiniert...</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="pdfGenerieren" translate>PDF Erstellen</label>
+        </div>
+        <div class="col-md-8">
+          <input bs-switch ng-model="form.pdfGenerieren" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+        </div>
+      </div>
+      <div class="row form-group" ng-if="form.pdfGenerieren">
+        <div class="col-md-4">
+          <label for="pdfAblegen" translate>PDF Ablegen</label>
+        </div>
+        <div class="col-md-8">
+          <input bs-switch  ng-model="form.pdfAblegen" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+        </div>
+      </div>
+      <div class="row form-group" ng-if="form.pdfAblegen">
+        <div class="col-md-4">
+          <label for="pdfDownload" translate>Herunterladen</label>
+        </div>
+        <div class="col-md-8">
+            <input bs-switch  ng-model="form.pdfDownloaden" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-12">
+          <span class="pull-right">
+            <a href="" role="button" ng-disabled="berichtForm.$invalid || generating" ng-click="generate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
+            <a href="" role="button" ng-disabled="generating" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

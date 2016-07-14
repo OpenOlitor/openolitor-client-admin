@@ -8,6 +8,10 @@
             <h3>
               <div class="col-md-2" translate>
                 Rechnung
+                <span role="button" ng-if="rechnung.fileStoreId">
+                  <i ng-hide="isDownloading" ng-click="downloadRechnung()" class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  <i ng-show="isDownloading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
               </div>
               <div class="col-md-10">
                 <div class="btn-group pull-right" role="group">
@@ -167,7 +171,7 @@
                   </span>
                   </p>
                 </div>
-              </div>              
+              </div>
               <div class="row form-group" ng-show="isVerschickt()">
                 <div class="col-md-4">
                   <label for="einbezahlterBetrag" translate>Einbezahlter Betrag</labeln>
@@ -213,5 +217,8 @@
         </div>
       </div>
     </form>
+  </div>
+  <div class="content-box col-md-3" ng-if="showGenerateReport">
+    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'rechnungen/' + rechnung.id + '/berichte/rechnung'" default-file-name="'Rechnung.odt'|translate"></oo-generate-report>
   </div>
 </div>

@@ -79,7 +79,8 @@ angular
     'ngHamburger',
     'angularMoment',
     'ngFileUpload',
-    'ngLodash'
+    'ngLodash',
+    'angular-sortable-view'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -113,8 +114,9 @@ angular
     WOCHEN: 'Wochen'
   })
   .constant('ANREDE', {
-    HERR: gettext('Herr'),
-    FRAU: gettext('Frau')
+    KEINE: addExtendedEnumValue(undefined, gettext('Keine'), gettext('-')),
+    HERR: addExtendedEnumValue('Herr', gettext('Herr'), gettext('Hr.')),
+    FRAU: addExtendedEnumValue('Frau', gettext('Frau'), gettext('Fr.'))
   })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: gettext('DepotlieferungAbo'),
@@ -196,6 +198,10 @@ angular
     AUSSTEHEND: gettext('Ausstehend'),
     ERLEDIGT: gettext('Erledigt'),
     NICHTERLEDIGT: gettext('NichtErledigt')
+  })
+  .constant('AUSLIEFERUNGSTATUS', {
+    ERFASST: gettext('Erfasst'),
+    AUSGELIEFERT: gettext('Ausgeliefert'),
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
@@ -425,7 +431,8 @@ angular
         templateUrl: 'scripts/abos/overview/abosoverview.html',
         controller: 'AbosOverviewController',
         name: 'AbosOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
@@ -437,6 +444,12 @@ angular
         templateUrl: 'scripts/touren/overview/tourenoverview.html',
         controller: 'TourenOverviewController',
         name: 'TourenOverview',
+        access: userRoles.Administrator
+      })
+      .when('/touren/:id', {
+        templateUrl: 'scripts/touren/detail/tourendetail.html',
+        controller: 'TourenDetailController',
+        name: 'TourenDetail',
         access: userRoles.Administrator
       })
       .when('/pendenzen', {
@@ -457,11 +470,33 @@ angular
         name: 'LieferplanungDetail',
         access: userRoles.Administrator
       })
+      .when('/depotauslieferungen', {
+        templateUrl: 'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
+        controller: 'AuslieferungenOverviewController',
+        name: 'DepotAuslieferungenOverview',
+        model: 'Depot',
+        access: userRoles.Administrator
+      })
+      .when('/tourauslieferungen', {
+        templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
+        controller: 'AuslieferungenOverviewController',
+        name: 'TourAuslieferungenOverview',
+        model: 'Tour',
+        access: userRoles.Administrator
+      })
+      .when('/postauslieferungen', {
+        templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
+        controller: 'AuslieferungenOverviewController',
+        name: 'PostAuslieferungenOverview',
+        model: 'Post',
+        access: userRoles.Administrator
+      })
       .when('/rechnungen', {
         templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
         controller: 'RechnungenOverviewController',
         name: 'RechnungenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
