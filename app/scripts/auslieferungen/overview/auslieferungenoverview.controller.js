@@ -98,6 +98,18 @@ angular.module('openolitor')
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.showGenerateReport = true;
+          $scope.reportType = 'lieferschein';
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Lieferetiketten drucken',
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          $scope.reportType = 'lieferetiketten';
           return true;
         },
         isDisabled: function() {
