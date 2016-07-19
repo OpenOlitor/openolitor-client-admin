@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title"><span class="navbar-brand" translate>Postauslieferungen</span>
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+            <oo-actions-button model="model" actions="actions"></oo-actions-button>
+          </div>
+        </form>
+      </span>
+      </h3>
+      </div>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries">
+          <script type="text/ng-template" id="headerCheckbox.html">
+            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+          </script>
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+            <tr ng-repeat="postauslieferung in $data | filter: search.query.$">
+              <td header="'headerCheckbox.html'">
+                <input type="checkbox" ng-model="checkboxes.items[postauslieferung.id]" />
+              </td>
+              <td data-title="'Datum'|translate" sortable="'datum'">
+                {{postauslieferung.datum|date:"dd.MM.yyyy"}}
+              </td>
+              <td data-title="'Anzahl Körbe'|translate" sortable="'anzahlKoerbe'">
+                {{postauslieferung.anzahlKoerbe}}
+              </td>
+              <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
+                {{postauslieferung.status}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-box col-md-3" ng-if="showGenerateReport">
+    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
+  </div>
+</div>

@@ -4,48 +4,113 @@
  */
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
-    'RechnungenOverviewModel', 'ngTableParams',
-    function($q, $scope, $filter, RechnungenOverviewModel, ngTableParams) {
+    '$location',
+    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil', 'OverviewCheckboxUtil',
+    'API_URL', 'FilterQueryUtil',
+    function($q, $scope, $filter, $location, RechnungenOverviewModel,
+      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL, FilterQueryUtil) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.model = {};
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
 
+      $scope.checkboxes = {
+        checked: false,
+        checkedAny: false,
+        items: {},
+        css: '',
+        ids: []
+      };
+
+      $scope.downloadRechnung = function(rechnung) {
+        rechnung.isDownloading = true;
+        FileUtil.download('rechnungen/' + rechnung.id +
+          '/aktionen/download', 'Rechnung ' + rechnung.id,
+          'application/pdf',
+          function() {
+            rechnung.isDownloading = false;
+          });
+      };
+
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
+
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Rechnung erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return $location.path('/rechnungen/new');
+        }
+      }, {
+        label: 'Rechnungen drucken',
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }];
+
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
             name: 'asc'
           },
-          filter: { status: '' }
+          filter: {
+            status: ''
+          }
         }, {
           filterDelay: 0,
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
+              $scope.search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy()) :
               orderedData;
 
+            $scope.filteredEntries = filteredData;
+
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) *
+              params.count(), params.page() * params.count());
           }
 
         });
@@ -60,18 +125,27 @@ angular.module('openolitor')
 
         $scope.loading = true;
         $scope.entries = RechnungenOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
-      search();
+      var existingQuery = $location.search()['q'];
+      if(existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
         search();
       }, true);
 
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
     }
   ]);

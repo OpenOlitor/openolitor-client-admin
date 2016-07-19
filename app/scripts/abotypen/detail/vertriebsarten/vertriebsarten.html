@@ -30,7 +30,7 @@
                   <td><label translate>Depots<label></td>
                   <td>
                     <span ng-repeat="vertriebsart in vertrieb.depotlieferungen" class="badge">
-                      {{vertriebsart.depot.name}}
+                      {{vertriebsart.depot.kurzzeichen}}
                       <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteDepotlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
                     </span>
                     <span class="dropdown pull-right">

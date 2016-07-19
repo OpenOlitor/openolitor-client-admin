@@ -1,0 +1,100 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title">
+      <span>
+        <span translate>Rechnungen erstellen für</span>
+    </span>
+  </h3>
+  </div>
+  <div class="panel-body">
+    <form name="rechnungForm">
+      <div class="row form-group">
+        <div class="col-md-12">
+          <div class="btn-group">
+            <label class="btn btn-primary" ng-model="form.mode" uib-btn-radio="'AnzahlLieferungen'" translate>Anzahl Lieferungen</label>
+            <label class="btn btn-primary" ng-model="form.mode" uib-btn-radio="'BisGuthaben'" translate>Bis Guthaben</label>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group" ng-if="form.mode === 'AnzahlLieferungen'">
+        <div class="col-md-4">
+          <label for="manuellerBetrag" translate>Manueller Betrag</label>
+        </div>
+        <div class="col-md-8">
+          <input bs-switch ng-model="form.manuellerBetrag" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="titel" translate>Titel</label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="titel" ng-model="rechnung.titel" required placeholder="{{'Titel'|translate}}" maxlength="30">
+        </div>
+      </div>
+      <div class="row form-group" ng-if="form.mode === 'AnzahlLieferungen'">
+        <div class="col-md-4">
+          <label for="anzahlLieferungen" translate>Für Anzahl Lieferungen</label>
+        </div>
+        <div class="col-md-8">
+          <input type="number" min="0" class="form-control" id="anzahlLieferungen" ng-model="rechnung.anzahlLieferungen" required placeholder="{{'Anzahl Lieferungen'|translate}}">
+        </div>
+      </div>
+      <div class="row form-group" ng-if="form.mode === 'BisGuthaben'">
+        <div class="col-md-4">
+          <label for="bisGuthaben" translate>Bis Guthaben</label>
+        </div>
+        <div class="col-md-8">
+          <input type="number" min="0" class="form-control" id="bisGuthaben" ng-model="rechnung.bisGuthaben" required placeholder="{{'Bis Guthaben'|translate}}">
+        </div>
+      </div>
+      <div class="row form-group" ng-if="form.manuellerBetrag">
+        <div class="col-md-4">
+          <label for="betrag" translate>Manueller Betrag</label>
+        </div>
+        <div class="col-md-8">
+          <input type="number" min="0" class="form-control" id="betrag" ng-model="rechnung.betrag" placeholder="{{'Betrag'|translate}}">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="rechnungsDatum" translate>Rechnungsdatum</label>
+        </div>
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" required/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'rechnungsDatum')"><i class="fa fa-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <label for="faelligkeitsDatum" translate>Fälligkeitsdatum</label>
+        </div>
+        <div class="col-md-4">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnung.faelligkeitsDatum" required/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'faelligkeitsDatum')"><i class="fa fa-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-12">
+          <span class="pull-right">
+            <a ng-if="!commandIssued" href="" role="button" ng-disabled="rechnungForm.$invalid" ng-click="batchCreate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
+            <a ng-if="!commandIssued" href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
+            <a ng-if="commandIssued" href="" role="button" ng-click="jumpToRechnungen()" class="btn btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> {{batchCreated.ids.length}} <span translate>Rechnungen anzeigen</span></a>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="panel-footer" ng-if="commandIssued">
+    {{batchCreated.ids.length}} <span translate>von</span> {{rechnung.ids.length}} <span translate> Rechnungen wurden erstellt</span>
+  </div>
+</div>
+

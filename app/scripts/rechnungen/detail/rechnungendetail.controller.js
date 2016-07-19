@@ -8,13 +8,13 @@ angular.module('openolitor')
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
-    'RECHNUNGSTATUS',
+    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
-      RECHNUNGSTATUS) {
+      RECHNUNGSTATUS, FileUtil, DataUtil) {
 
       var defaults = {
         model: {
@@ -29,39 +29,12 @@ angular.module('openolitor')
 
       $scope.loading = false;
 
-      $scope.getKunden = function(filter) {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.loading = true;
-
-        return KundenOverviewModel.query({
-          q: filter
-        }, function() {
-          $scope.loading = false;
-        }).$promise.then(function(kunden) {
-          return kunden;
-        });
-      };
-
       function getAboEntry(abo) {
         return {
           id: abo.id,
           label: '' + abo.abotypName + ' (' + abo.id + ')'
         };
       }
-
-      $scope.loadRechnung = function() {
-        RechnungenDetailModel.get({
-          id: $routeParams.id
-        }, function(result) {
-          $scope.rechnung = result;
-          resolveKunde(result.kunde.id);
-          $scope.aboId = result.abo.id;
-          $scope.rechnung.aboId = result.abo.id;
-        });
-      };
 
       function resolveKunde(id) {
         return KundenDetailModel.get({
@@ -80,9 +53,35 @@ angular.module('openolitor')
         }).$promise;
       }
 
+      $scope.getKunden = function(filter) {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+
+        return KundenOverviewModel.query({
+          q: filter
+        }, function() {
+          $scope.loading = false;
+        }).$promise.then(function(kunden) {
+          return kunden;
+        });
+      };
+
+      $scope.loadRechnung = function() {
+        RechnungenDetailModel.get({
+          id: $routeParams.id
+        }, function(result) {
+          $scope.rechnung = result;
+          resolveKunde(result.kunde.id);
+          $scope.aboId = result.abo.id;
+          $scope.rechnung.aboId = result.abo.id;
+        });
+      };
+
       if (!$routeParams.id) {
         $scope.rechnung = new RechnungenDetailModel(defaults.model);
-        $scope.pendenzen = [];
       } else {
         $scope.loadRechnung();
       }
@@ -106,6 +105,7 @@ angular.module('openolitor')
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
         if (msg.entity === 'Rechnung') {
+          DataUtil.update(msg.data, $scope.rechnung);
           $rootScope.$apply();
         }
       });
@@ -155,6 +155,16 @@ angular.module('openolitor')
         return !$scope.isExisting() ||
           $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
           $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+      };
+
+      $scope.downloadRechnung = function() {
+        $scope.isDownloading = true;
+        FileUtil.download('rechnungen/' + $scope.rechnung.id +
+          '/aktionen/download', 'Rechnung ' + $scope.rechnung.id,
+          'application/pdf',
+          function() {
+            $scope.isDownloading = false;
+          });
       };
 
       $scope.actions = [{
@@ -211,10 +221,25 @@ angular.module('openolitor')
           return $scope.isExisting() && $scope.rechnung.status !==
             RECHNUNGSTATUS.VERSCHICKT;
         }
+      }, {
+        label: 'drucken',
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status ===
+            RECHNUNGSTATUS.STORNIERT;
+        }
       }];
 
       $scope.delete = function() {
         return $scope.rechnung.$delete();
+      };
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
       };
     }
   ]);

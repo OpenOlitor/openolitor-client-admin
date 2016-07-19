@@ -2,24 +2,26 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row form-group">
-        <h3>
-          <div class="col-md-4" translate>
-            Planung #{{planung.nr}}: Korbinhalt
-          </div>
-          <div class="col-md-2">
+        <h3 class="nonboxed-title">
+          <div class="col-md-5">
             <ul class="nav navbar-nav" ng-show="valuesEditable()">
+              <li class="navbar-brand" translate>Planung #{{planung.id}}: Korbinhalt</li>
               <li class="small" translate>Abotyp hinzufügen:</li>
               <li>
                 <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
               </li>
+              <li>
+                <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip-html="('Bemerkungen zu dieser Lieferung: '|translate) + (planung.bemerkungen)"><span class="fa fa-pencil-square-o"></span></button>
+              </li>
             </ul>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="pull-right" role="group">
               <button type="button" role="button" ng-click="recalculateBestellungen(); setMode('lieferanten')" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
               <button role="button" ng-show="planung.status === 'Abgeschlossen' && !editNachAbgeschlossen" ng-click="setEditableNachAbgeschlossen()" class="btn btn-warning"><span class="fa fa-pencil-square-o"></span> <span translate>Planung editieren</span></button>
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
               <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
+              <oo-delete-button ng-show="planung.status === 'Offen'" model="planung" entity="Lieferplanung" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
               <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
             </div>
           </div>
@@ -39,7 +41,7 @@
         </div>
         <div class="panel-body produkteliste">
           <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'">
+            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'" style="cursor: move;">
               <td><span>&#8942;</span></td>
               <td data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
                 {{produkt.name}}
@@ -47,7 +49,7 @@
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
                 {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{getShortEinheit(produkt.einheit)}}
               </td>
-              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter()">
+              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
                 <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
               </td>
             </tr>

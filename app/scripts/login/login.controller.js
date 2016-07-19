@@ -3,10 +3,10 @@
 /**
  */
 angular.module('openolitor')
-  .controller('LoginController', ['$scope', '$http', 'API_URL', 'ENV',
-    'gettext',
+  .controller('LoginController', ['$scope', '$rootScope', '$http',
+    'API_URL', 'ENV', 'gettext',
     'alertService', '$timeout', '$location', '$route', '$routeParams', 'ooAuthService',
-    function($scope, $http, API_URL, ENV, gettext, alertService, $timeout,
+    function($scope, $rootScope, $http, API_URL, ENV, gettext, alertService, $timeout,
       $location, $route, $routeParams, ooAuthService) {
       $scope.loginData = {};
       $scope.secondFactorData = {};
@@ -18,6 +18,9 @@ angular.module('openolitor')
       $scope.status = 'login';
       $scope.env = ENV;
 
+      $scope.originalTgState = $rootScope.tgState;
+      $rootScope.tgState = false;
+
       var showWelcomeMessage = function(token, person) {
         //show welcome message
         alertService.addAlert('info', gettext('Willkommen') + ' ' +
@@ -26,6 +29,7 @@ angular.module('openolitor')
         $timeout(function() {
           $location.path('/');
           $scope.status = 'login';
+          $rootScope.tgState = $scope.originalTgState;
         }, 1000);
 
         ooAuthService.loggedIn(token);

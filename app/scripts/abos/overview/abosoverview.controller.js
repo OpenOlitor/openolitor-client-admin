@@ -3,21 +3,28 @@
 /**
  */
 angular.module('openolitor')
-  .controller('AbosOverviewController', ['$scope', '$filter',
-    'AbosOverviewModel', 'ngTableParams', 'AbotypenOverviewModel',
-    function($scope, $filter, AbosOverviewModel, ngTableParams, AbotypenOverviewModel) {
+  .controller('AbosOverviewController', ['$scope', '$filter','$location',
+    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil', 'AbosOverviewService',
+    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, AbosOverviewService) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.selectedAbo = undefined;
+      $scope.model = {};
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
+
       $scope.checkboxes = {
         checked: false,
+        checkedAny: false,
         items: {},
-        css: ''
+        css: '',
+        ids: []
       };
 
       $scope.hasData = function() {
@@ -40,32 +47,16 @@ angular.module('openolitor')
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
       }, function(value) {
-        angular.forEach($scope.entries, function(item) {
-          $scope.checkboxes.items[item.id] = value;
-        });
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
       });
 
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;
       }, function() {
-        var checked = 0, unchecked = 0,
-            total = $scope.entries.length;
-        angular.forEach($scope.entries, function(item) {
-          checked   +=  ($scope.checkboxes.items[item.id]) || 0;
-          unchecked += (!$scope.checkboxes.items[item.id]) || 0;
-        });
-        if ((unchecked === 0) || (checked === 0)) {
-          $scope.checkboxes.checked = (checked === total);
-        }
-        // grayed checkbox
-        if ((checked !== 0 && unchecked !== 0)) {
-          $scope.checkboxes.css = 'select-all:indeterminate';
-        }
-        else {
-          $scope.checkboxes.css = 'select-all';
-        }
-      }, true);
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }
+      , true);
 
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;
@@ -83,7 +74,7 @@ angular.module('openolitor')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new ngTableParams({ // jshint ignore:line
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -95,44 +86,69 @@ angular.module('openolitor')
           groupOptions: {
             isExpanded: true
           },
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.entries) {
               return;
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries, $scope
-              .search.query);
+              .search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy()) :
               orderedData;
 
+            $scope.filteredEntries = filteredData;
+
             params.total(orderedData.length);
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
       }
 
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Rechnungen erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          $scope.showCreateRechnungenDialog = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }];
+
       function search() {
         if ($scope.loading) {
           return;
         }
-
         $scope.loading = true;
         $scope.entries = AbosOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
-      search();
+      var existingQuery = $location.search()['q'];
+      if(existingQuery) {
+        $scope.search.query = existingQuery;
+      }
+
+      $scope.closeCreateRechnungenDialog = function() {
+        $scope.showCreateRechnungenDialog = false;
+      }
 
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
         search();
       }, true);
-
     }
   ]);

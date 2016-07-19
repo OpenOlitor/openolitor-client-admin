@@ -18,8 +18,7 @@ angular.module('openolitor').directive('ooDraggable', ['$rootScope', 'uuid', fun
                 angular.element(el).attr('id', id);
             }
             el.bind('dragstart', function (e) {
-                e.originalEvent.dataTransfer.setData('text', id);
-                e.originalEvent.dataTransfer.setData('type', scope.ooDragedType);
+                e.originalEvent.dataTransfer.setData('text', '{ \"data\": \"' + id + '\", \"type\": \"' + scope.ooDragedType + '\" }');
                 $rootScope.$emit('OO-DRAG-START');
             });
 
@@ -81,8 +80,11 @@ angular.module('openolitor').directive('ooDropTarget', ['$rootScope', 'uuid', fu
                 if (e.stopPropagation) {
                     e.stopPropagation(); // Necessary. Allows us to drop.
                 }
-                var data = e.originalEvent.dataTransfer.getData('text');
-                var type = e.originalEvent.dataTransfer.getData('type');
+                var dataRaw = e.originalEvent.dataTransfer.getData('text');
+                var dataObj = JSON.parse(dataRaw);
+
+                var data = dataObj.data;
+                var type = dataObj.type;
 
                 enteredCounter = 0;
                 $rootScope.$emit('OO-DRAG-END');

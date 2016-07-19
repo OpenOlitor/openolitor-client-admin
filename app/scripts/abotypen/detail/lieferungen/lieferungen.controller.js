@@ -4,12 +4,12 @@
  */
 angular.module('openolitor')
   .controller('LieferungenListController', ['$scope', '$routeParams',
-    '$location', '$uibModal', '$log', '$http', 'gettext', 'ngTableParams',
+    '$location', '$uibModal', '$log', '$http', 'gettext', 'NgTableParams',
     'msgBus', 'lodash',
     'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'API_URL',
 
     function($scope, $routeParams, $location, $uibModal, $log, $http, gettext,
-      ngTableParams,
+      NgTableParams,
       msgBus, lodash, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN,
       API_URL) {
 
@@ -65,18 +65,18 @@ angular.module('openolitor')
 
       if (!$scope.lieferungenTableParams) {
         //use default tableParams
-        $scope.lieferungenTableParams = new ngTableParams({ // jshint ignore:line
+        $scope.lieferungenTableParams = new NgTableParams({ // jshint ignore:line
           counts: [],
           sorting: {
             datum: 'asc'
           }
         }, {
-          getData: function($defer, params) {
+          getData: function(params) {
             if (!$scope.lieferungen) {
               return;
             }
             params.total($scope.lieferungen.length);
-            $defer.resolve($scope.lieferungen);
+            return $scope.lieferungen;
           }
 
         });
