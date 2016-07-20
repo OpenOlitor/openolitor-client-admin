@@ -229,8 +229,10 @@ angular.module('openolitor')
           return true;
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status ===
-            RECHNUNGSTATUS.STORNIERT;
+          return !$scope.isExisting() ||
+            $scope.isExisting() && (
+              $scope.rechnung.status === RECHNUNGSTATUS.STORNIERT ||
+              $scope.rechnung.status === RECHNUNGSTATUS.BEZAHLT);
         }
       }];
 
