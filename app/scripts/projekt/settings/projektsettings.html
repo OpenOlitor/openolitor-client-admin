@@ -91,7 +91,7 @@
                   <label for="sprache" translate>Sprache</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" id="sprache" ng-disabled="true" ng-model="projekt.sprache">
+                  <input type="text" class="form-control" id="sprache" ng-model="projekt.sprache" ng-disabled="!editMode" placeholder="{{'Beispiel: de-CH'|translate}}" ng-pattern="localeBCP47Pattern">
                 </div>
               </div>
               <div class="row form-group">
