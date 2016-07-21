@@ -24,7 +24,7 @@ angular.module('openolitor')
           typen: [KundentypenService.VEREINSMITGLIED],
           ansprechpersonen: [{
             id: undefined,
-            anrede: ''
+            anrede: undefined
           }],
           pendenzen: [],
           abweichendeLieferadresse: false
