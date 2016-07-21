@@ -37,7 +37,7 @@ angular.module('openolitor')
 
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
-        FileUtil.download('rechnungen/' + rechnung.id +
+        FileUtil.downloadGet('rechnungen/' + rechnung.id +
           '/aktionen/download', 'Rechnung ' + rechnung.id,
           'application/pdf',
           function() {
@@ -55,6 +55,17 @@ angular.module('openolitor')
           }
         }
         return true;
+      };
+
+      var hasRechnungDocument = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (items[id].fileStoreId) {
+            return true;
+          }
+        }
+        return false;
       };
 
       // watch for check all checkbox
@@ -81,8 +92,8 @@ angular.module('openolitor')
           return $location.path('/rechnungen/new');
         }
       }, {
-        label: 'Rechnungen drucken',
-        iconClass: 'fa fa-print',
+        label: 'Dokumente erstellen',
+        iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
           return true;
@@ -93,26 +104,37 @@ angular.module('openolitor')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Rechnungen herunterladen',
+        label: 'Dokumente herunterladen',
         iconClass: 'fa fa-download',
         onExecute: function() {
-          $http.post(API_URL + 'rechnungen/aktionen/download', {
-            ids: $scope.checkboxes.ids
-          }).then(function(result) {
-
+          return FileUtil.downloadPost('rechnungen/aktionen/download', {
+            'ids': $scope.checkboxes.ids
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny ||
+            !hasRechnungDocument($scope.checkboxes.ids,
+              $scope.checkboxes.data);
+        }
+      }, {
+        label: 'Rechnungen verschickt',
+        iconClass: 'fa fa-exchange',
+        onExecute: function() {
+          return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
+            'ids': $scope.checkboxes.ids
           });
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Rechnungen verschicken',
+        label: 'Email Versand*',
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
-          return $scope.rechnung.$verschicken();
+          return false;
         },
         isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
+          return true;
         }
       }];
 
