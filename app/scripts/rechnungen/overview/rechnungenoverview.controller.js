@@ -6,11 +6,12 @@ angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'DataUtil',
     'OverviewCheckboxUtil',
-    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
+    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'msgBus', 'lodash',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS) {
+      NgTableParams, $http, FileUtil, DataUtil, OverviewCheckboxUtil, API_URL,
+      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -122,6 +123,8 @@ angular.module('openolitor')
         onExecute: function() {
           return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
             'ids': $scope.checkboxes.ids
+          }).then(function() {
+            $scope.model.actionInProgress = undefined;
           });
         },
         isDisabled: function() {
@@ -193,7 +196,7 @@ angular.module('openolitor')
         });
       }
 
-      var existingQuery = $location.search()['q'];
+      var existingQuery = $location.search().q;
       if (existingQuery) {
         $scope.search.query = existingQuery;
       }
@@ -209,5 +212,26 @@ angular.module('openolitor')
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'Rechnung') {
+          var rechnung = lodash.find($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (rechnung) {
+            DataUtil.update(msg.data, rechnung);
+
+            var filteredRechnung = lodash.find($scope.filteredEntries,
+              function(r) {
+                return r.id === msg.data.id;
+              });
+            if (filteredRechnung) {
+              DataUtil.update(msg.data, filteredRechnung);
+            }
+
+            $scope.$apply();
+          }
+        }
+      });
     }
   ]);
