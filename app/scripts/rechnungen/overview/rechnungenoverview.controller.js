@@ -5,10 +5,12 @@
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil', 'OverviewCheckboxUtil',
-    'API_URL', 'FilterQueryUtil',
+    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'OverviewCheckboxUtil',
+    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL, FilterQueryUtil) {
+      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL,
+      FilterQueryUtil, RECHNUNGSTATUS) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -76,6 +78,28 @@ angular.module('openolitor')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
+      }, {
+        label: 'Rechnungen herunterladen',
+        iconClass: 'fa fa-download',
+        onExecute: function() {
+          $http.post(API_URL + 'rechnungen/aktionen/download', {
+            ids: $scope.checkboxes.ids
+          }).then(function(result) {
+
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Rechnungen verschicken',
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function() {
+          return $scope.rechnung.$verschicken();
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
       }];
 
       if (!$scope.tableParams) {
@@ -134,13 +158,15 @@ angular.module('openolitor')
       }
 
       var existingQuery = $location.search()['q'];
-      if(existingQuery) {
+      if (existingQuery) {
         $scope.search.query = existingQuery;
       }
 
       $scope.$watch('search.query', function() {
-        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
-        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
         search();
       }, true);
 
