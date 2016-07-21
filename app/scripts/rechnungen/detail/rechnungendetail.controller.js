@@ -218,7 +218,9 @@ angular.module('openolitor')
         isDisabled: function() {
           return $scope.isExisting() && ($scope.rechnung.status !==
             RECHNUNGSTATUS.VERSCHICKT && $scope.rechnung.status !==
-            RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
+            RECHNUNGSTATUS.MAHNUNG_VERSCHICKT ||
+            angular.isUndefined($scope.rechnung.einbezahlterBetrag) ||
+            angular.isUndefined($scope.rechnung.eingangsDatum));
         }
       }, {
         label: 'storniert',
