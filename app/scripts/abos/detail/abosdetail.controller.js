@@ -375,7 +375,7 @@ angular.module('openolitor')
         var now = moment();
         var laufzeit = moment(abo.start);
         do {
-          laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert, einheit);
+          laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert - 1, einheit);
         } while (laufzeit.isBefore(now));
         return laufzeit.endOf(einheit).toDate();
       };
