@@ -5,10 +5,12 @@
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil', 'OverviewCheckboxUtil',
-    'API_URL', 'FilterQueryUtil',
+    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'OverviewCheckboxUtil',
+    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL, FilterQueryUtil) {
+      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL,
+      FilterQueryUtil, RECHNUNGSTATUS) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -43,6 +45,18 @@ angular.module('openolitor')
           });
       };
 
+      var alleRechnungenStorniertOderBezahlt = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (items[id].status !== RECHNUNGSTATUS.STORNIERT &&
+            items[id].status !== RECHNUNGSTATUS.BEZAHLT) {
+            return false;
+          }
+        }
+        return true;
+      };
+
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -74,7 +88,9 @@ angular.module('openolitor')
           return true;
         },
         isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
+          return !$scope.checkboxes.checkedAny ||
+            alleRechnungenStorniertOderBezahlt($scope.checkboxes.ids,
+              $scope.checkboxes.data);
         }
       }];
 
@@ -134,13 +150,15 @@ angular.module('openolitor')
       }
 
       var existingQuery = $location.search()['q'];
-      if(existingQuery) {
+      if (existingQuery) {
         $scope.search.query = existingQuery;
       }
 
       $scope.$watch('search.query', function() {
-        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
-        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
         search();
       }, true);
 
