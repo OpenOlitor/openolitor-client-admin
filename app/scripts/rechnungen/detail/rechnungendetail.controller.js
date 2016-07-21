@@ -159,7 +159,7 @@ angular.module('openolitor')
 
       $scope.downloadRechnung = function() {
         $scope.isDownloading = true;
-        FileUtil.download('rechnungen/' + $scope.rechnung.id +
+        FileUtil.downloadGet('rechnungen/' + $scope.rechnung.id +
           '/aktionen/download', 'Rechnung ' + $scope.rechnung.id,
           'application/pdf',
           function() {
@@ -179,8 +179,8 @@ angular.module('openolitor')
           return $scope.rechnung.$save();
         }
       }, {
-        label: 'verschicken',
-        iconClass: 'fa fa-envelope-o',
+        label: 'verschickt',
+        iconClass: 'fa fa-exchange',
         onExecute: function() {
           return $scope.rechnung.$verschicken();
         },
@@ -189,7 +189,17 @@ angular.module('openolitor')
             RECHNUNGSTATUS.ERSTELLT;
         }
       }, {
-        label: 'Mahnung verschicken',
+        label: 'Email versand*',
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function() {
+          return false;
+        },
+        isDisabled: function() {
+          return true;
+        },
+        noEntityText: true
+      }, {
+        label: 'Mahnung verschickt',
         iconClass: 'fa fa-exclamation',
         onExecute: function() {
           return $scope.rechnung.$mahnungVerschicken();
@@ -200,7 +210,7 @@ angular.module('openolitor')
         },
         noEntityText: true
       }, {
-        label: 'bezahlen',
+        label: 'bezahlt',
         iconClass: 'fa fa-usd',
         onExecute: function() {
           return $scope.rechnung.$bezahlen();
@@ -211,7 +221,7 @@ angular.module('openolitor')
             RECHNUNGSTATUS.MAHNUNG_VERSCHICKT);
         }
       }, {
-        label: 'stornieren',
+        label: 'storniert',
         iconClass: 'fa fa-times',
         onExecute: function() {
           $scope.rechnung.status = RECHNUNGSTATUS.STORNIERT;
@@ -222,16 +232,19 @@ angular.module('openolitor')
             RECHNUNGSTATUS.VERSCHICKT;
         }
       }, {
-        label: 'drucken',
-        iconClass: 'fa fa-print',
+        label: 'Dokument erstellen',
+        iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
           return true;
         },
         isDisabled: function() {
-          return $scope.isExisting() && $scope.rechnung.status ===
-            RECHNUNGSTATUS.STORNIERT;
-        }
+          return !$scope.isExisting() ||
+            $scope.isExisting() && (
+              $scope.rechnung.status === RECHNUNGSTATUS.STORNIERT ||
+              $scope.rechnung.status === RECHNUNGSTATUS.BEZAHLT);
+        },
+        noEntityText: true
       }];
 
       $scope.delete = function() {

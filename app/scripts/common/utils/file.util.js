@@ -36,25 +36,36 @@ angular.module('openolitor')
       }
     };
 
+    var download = function(method, url, data, defaultFileName,
+      defaultContentType, callback) {
+      $http({
+        method: method,
+        url: API_URL + url,
+        data: data,
+        responseType: 'arraybuffer'
+      }).then(function(res) {
+        var name = res.headers('Content-Disposition');
+        var contentType = res.headers('Content-Type');
+        openFile(name || defaultFileName, res.data,
+          contentType || defaultContentType);
+        if (callback) {
+          callback(res);
+        }
+      });
+    };
+
     return {
       open: openFile,
-      download: function(url, defaultFileName, defaultContentType, callback) {
-        $http.get(API_URL + url, {
-          headers: {
-            'Content-Type': undefined
-          },
-          // angular.identity prevents Angular to do anything on our data (like serializing it).
-          transformRequest: angular.identity,
-          responseType: 'arraybuffer'
-        }).then(function(res) {
-          var name = res.headers('Content-Disposition');
-          var contentType = res.headers('Content-Type');
-          openFile(name || defaultFileName, res.data,
-            contentType || defaultContentType);
-          if (callback) {
-            callback(res);
-          }
-        });
+      downloadGet: function(url, defaultFileName, defaultContentType,
+        callback) {
+        return download('GET', url, {}, defaultFileName,
+          defaultContentType,
+          callback);
+      },
+      downloadPost: function(url, data, defaultFileName, defaultContentType,
+        callback) {
+        return download('POST', url, data, defaultFileName,
+          defaultContentType, callback);
       }
     };
   });
