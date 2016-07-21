@@ -45,6 +45,18 @@ angular.module('openolitor')
           });
       };
 
+      var alleRechnungenStorniertOderBezahlt = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (items[id].status !== RECHNUNGSTATUS.STORNIERT &&
+            items[id].status !== RECHNUNGSTATUS.BEZAHLT) {
+            return false;
+          }
+        }
+        return true;
+      };
+
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -76,7 +88,9 @@ angular.module('openolitor')
           return true;
         },
         isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
+          return !$scope.checkboxes.checkedAny ||
+            alleRechnungenStorniertOderBezahlt($scope.checkboxes.ids,
+              $scope.checkboxes.data);
         }
       }, {
         label: 'Rechnungen herunterladen',
