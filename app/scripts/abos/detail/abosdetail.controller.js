@@ -253,7 +253,7 @@ angular.module('openolitor')
 
             var v = {
               id: vertrieb.id,
-              label: vertrieb.id + ':' + vertrieb.beschrieb + ' - ' +
+              label: vertrieb.id + ': ' + (vertrieb.beschrieb ? vertrieb.beschrieb + ' - ' : '') +
                 vertrieb.liefertag,
               vertrieb: vertrieb
             };
