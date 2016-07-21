@@ -6,17 +6,19 @@ angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
-    'DataUtil',
+    'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil',
     'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'msgBus', 'lodash',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, DataUtil, OverviewCheckboxUtil, API_URL,
+      NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
+      OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
+      $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 
       $scope.search = {
         query: '',
@@ -227,6 +229,8 @@ angular.module('openolitor')
               });
             if (filteredRechnung) {
               DataUtil.update(msg.data, filteredRechnung);
+
+              $scope.tableParams.reload();
             }
 
             $scope.$apply();
