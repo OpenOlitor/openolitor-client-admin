@@ -5,15 +5,20 @@
 angular.module('openolitor')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil', 'OverviewCheckboxUtil',
-    'API_URL', 'FilterQueryUtil',
+    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'DataUtil', 'EnumUtil',
+    'OverviewCheckboxUtil',
+    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'msgBus', 'lodash',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
-      NgTableParams, $http, FileUtil, OverviewCheckboxUtil, API_URL, FilterQueryUtil) {
+      NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
+      OverviewCheckboxUtil, API_URL,
+      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
+      $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 
       $scope.search = {
         query: '',
@@ -35,12 +40,35 @@ angular.module('openolitor')
 
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
-        FileUtil.download('rechnungen/' + rechnung.id +
+        FileUtil.downloadGet('rechnungen/' + rechnung.id +
           '/aktionen/download', 'Rechnung ' + rechnung.id,
           'application/pdf',
           function() {
             rechnung.isDownloading = false;
           });
+      };
+
+      var alleRechnungenStorniertOderBezahlt = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (items[id].status !== RECHNUNGSTATUS.STORNIERT &&
+            items[id].status !== RECHNUNGSTATUS.BEZAHLT) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      var hasRechnungDocument = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (items[id].fileStoreId) {
+            return true;
+          }
+        }
+        return false;
       };
 
       // watch for check all checkbox
@@ -67,14 +95,51 @@ angular.module('openolitor')
           return $location.path('/rechnungen/new');
         }
       }, {
-        label: 'Rechnungen drucken',
-        iconClass: 'fa fa-print',
+        label: 'Dokumente erstellen',
+        iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
           return true;
         },
         isDisabled: function() {
+          return !$scope.checkboxes.checkedAny ||
+            alleRechnungenStorniertOderBezahlt($scope.checkboxes.ids,
+              $scope.checkboxes.data);
+        }
+      }, {
+        label: 'Dokumente herunterladen',
+        iconClass: 'fa fa-download',
+        onExecute: function() {
+          return FileUtil.downloadPost('rechnungen/aktionen/download', {
+            'ids': $scope.checkboxes.ids
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny ||
+            !hasRechnungDocument($scope.checkboxes.ids,
+              $scope.checkboxes.data);
+        }
+      }, {
+        label: 'Rechnungen verschickt',
+        iconClass: 'fa fa-exchange',
+        onExecute: function() {
+          return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
+            'ids': $scope.checkboxes.ids
+          }).then(function() {
+            $scope.model.actionInProgress = undefined;
+          });
+        },
+        isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Email Versand*',
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function() {
+          return false;
+        },
+        isDisabled: function() {
+          return true;
         }
       }];
 
@@ -133,19 +198,44 @@ angular.module('openolitor')
         });
       }
 
-      var existingQuery = $location.search()['q'];
-      if(existingQuery) {
+      var existingQuery = $location.search().q;
+      if (existingQuery) {
         $scope.search.query = existingQuery;
       }
 
       $scope.$watch('search.query', function() {
-        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search.query);
-        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search.query);
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
         search();
       }, true);
 
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'Rechnung') {
+          var rechnung = lodash.find($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (rechnung) {
+            DataUtil.update(msg.data, rechnung);
+
+            var filteredRechnung = lodash.find($scope.filteredEntries,
+              function(r) {
+                return r.id === msg.data.id;
+              });
+            if (filteredRechnung) {
+              DataUtil.update(msg.data, filteredRechnung);
+
+              $scope.tableParams.reload();
+            }
+
+            $scope.$apply();
+          }
+        }
+      });
     }
   ]);

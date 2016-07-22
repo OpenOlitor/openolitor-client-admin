@@ -6,10 +6,10 @@ angular.module('openolitor')
   .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter',
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
-    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS',
+    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
     function($q, $scope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS) {
+      AUSLIEFERUNGSTATUS, msgBus) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -169,7 +169,6 @@ angular.module('openolitor')
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
 
         $scope.loading = true;
@@ -191,5 +190,16 @@ angular.module('openolitor')
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity.indexOf('Auslieferung') >= 0) {
+          $scope.entries.map(function(entry) {
+            if(entry.id === msg.data.id) {
+              angular.copy(msg.data, entry);
+            }
+          });
+          $scope.$apply();
+        }
+      });
     }
   ]);
