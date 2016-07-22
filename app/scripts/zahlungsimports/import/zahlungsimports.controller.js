@@ -16,8 +16,9 @@ angular.module('openolitor')
     'msgBus',
     'Upload',
     'lodash',
+    'alertService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
-      gettext, ZahlungsImportsModel, ZahlungsEingaengeModel, EnumUtil, API_URL, msgBus, Upload, _) {
+      gettext, ZahlungsImportsModel, ZahlungsEingaengeModel, EnumUtil, API_URL, msgBus, Upload, _, alertService) {
       $scope.loading = false;
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
@@ -44,7 +45,8 @@ angular.module('openolitor')
             file: file
           }
         }).then(function() {}, function(errorResponse) {
-          console.log('Error status: ' + errorResponse.status);
+          alertService.addAlert('lighterror', gettext(
+            'Fehler beim importieren der ESR Datei'));
         });
       };
 

@@ -38,7 +38,7 @@
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{rechnung.waehrung}} {{rechnung.betrag}}
               </td>
-              <td data-title="'Status'|translate" sortable="'status'">
+              <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungStati">
                 {{rechnung.status}}
               </td>
               <td data-title="'Rechnnungsdatum'|translate" sortable="'rechnungsDatum'">

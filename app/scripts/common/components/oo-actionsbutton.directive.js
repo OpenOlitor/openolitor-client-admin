@@ -97,12 +97,21 @@ angular.module('openolitor').directive('ooActionsButton', ['msgBus', 'gettext',
           if (result && result.catch) {
             result.catch(function(req) {
               $scope.model.actionInProgress = undefined;
-              alertService.addAlert('error', gettext(
-                  'Aktion ' + action.label + ' für ' + $scope.entity +
-                  ' konnte nicht ausgeführt werden. Fehler: ') +
-                req.status +
-                '-' + req.statusText + ':' + req.data
-              );
+              if ($scope.entity) {
+                alertService.addAlert('error', gettext(
+                    'Aktion ' + action.label + ' für ' + $scope.entity +
+                    ' konnte nicht ausgeführt werden. Fehler: ') +
+                  req.status +
+                  '-' + req.statusText + ':' + req.data
+                );
+              } else {
+                alertService.addAlert('error', gettext(
+                    'Aktion ' + action.label +
+                    ' konnte nicht ausgeführt werden. Fehler: ') +
+                  req.status +
+                  '-' + req.statusText + ':' + req.data
+                );
+              }
             });
           } else {
             $scope.model.actionInProgress = undefined;

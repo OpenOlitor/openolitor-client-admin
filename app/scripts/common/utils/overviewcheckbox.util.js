@@ -13,12 +13,16 @@ angular.module('openolitor')
         unchecked = 0,
         total = $scope.filteredEntries.length;
       $scope.checkboxes.ids = [];
+      if (!$scope.checkboxes.data) {
+        $scope.checkboxes.data = {};
+      }
       angular.forEach($scope.filteredEntries, function(item) {
         checked += ($scope.checkboxes.items[item.id]) || 0;
         unchecked += (!$scope.checkboxes.items[item.id]) || 0;
         if ($scope.checkboxes.items[item.id]) {
           $scope.checkboxes.ids.push(item.id);
         }
+        $scope.checkboxes.data[item.id] = item;
       });
       if ((unchecked === 0) || (checked === 0)) {
         $scope.checkboxes.checked = (checked === total) && checked > 0;

@@ -14,7 +14,8 @@
             <th translate>Nr.</th>
             <th translate>Bezeichnung</th>
             <th translate>Liefertag</th>
-            <th translate>Depot/Touren</th>
+            <th ng-if="depots.length > 0" translate>Depots</th>
+            <th ng-if="touren.length > 0" translate>Touren</th>
             <th translate>Postlieferung</th>
         </tr>
         <tr ng-repeat="vertrieb in vertriebe" ng-class="vertriebClass(vertrieb)" ng-click="selectVertrieb(vertrieb)" >
@@ -23,35 +24,23 @@
           <td>
             <oo-liefertage liefertag="vertrieb.liefertag" required></oo-liefertage>
           </td>
-          <td>
-            <table class="table borderless">
-              <tbody>
-                <tr ng-if="depots.length > 0">
-                  <td><label translate>Depots<label></td>
-                  <td>
-                    <span ng-repeat="vertriebsart in vertrieb.depotlieferungen" class="badge">
-                      {{vertriebsart.depot.kurzzeichen}}
-                      <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteDepotlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
-                    </span>
-                    <span class="dropdown pull-right">
-                      <oo-dropdown dropdown-id="depot" display-style="uib-dropdown" values="depotByVertrieb[vertrieb.id]" filter="notIn:'id':selectedDepotIds(vertrieb)" property="name" selected-prop="id" selected-function="addDepotlieferung" selected-function-scope="vertrieb"></oo-dropdown>
-                    </span>
-                  </td>
-                </tr>
-                <tr ng-if="touren.length > 0">
-                  <td><label translate>Touren<label></td>
-                  <td>
-                    <span ng-repeat="vertriebsart in vertrieb.heimlieferungen" class="badge">
-                      {{vertriebsart.tour.name}}
-                      <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteHeimlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
-                    </span>
-                    <span class="dropdown pull-right">
-                      <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" filter="notIn:'id':selectedTourIds(vertrieb)" property="name" selected-prop="id" selected-function="addHeimlieferung" selected-function-scope="vertrieb"></oo-dropdown>
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <td ng-if="depots.length > 0">
+            <span ng-repeat="vertriebsart in vertrieb.depotlieferungen" class="badge">
+              {{vertriebsart.depot.kurzzeichen}}
+              <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteDepotlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
+            </span>
+            <span class="dropdown pull-right">
+              <oo-dropdown dropdown-id="depot" display-style="uib-dropdown" values="depotByVertrieb[vertrieb.id]" filter="notIn:'id':selectedDepotIds(vertrieb)" property="name" selected-prop="id" selected-function="addDepotlieferung" selected-function-scope="vertrieb"></oo-dropdown>
+            </span>
+          </td>
+          <td ng-if="touren.length > 0">
+            <span ng-repeat="vertriebsart in vertrieb.heimlieferungen" class="badge">
+              {{vertriebsart.tour.name}}
+              <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteHeimlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
+            </span>
+            <span class="dropdown pull-right">
+              <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" filter="notIn:'id':selectedTourIds(vertrieb)" property="name" selected-prop="id" selected-function="addHeimlieferung" selected-function-scope="vertrieb"></oo-dropdown>
+            </span>
           </td>
           <td>
             <input type="checkbox" ng-model="vertrieb.hasPostlieferung" ng-checked="vertrieb.postlieferungen.length > 0" ng-disabled="vertrieb.postlieferungen[0] && vertrieb.postlieferungen[0].anzahlAbos > 0" ng-click="addOrRemovePostlieferung(vertrieb)">
