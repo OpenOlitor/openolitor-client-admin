@@ -19,8 +19,8 @@
           <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
         </script>
         <script type="text/ng-template" id="headerShowAll.html">
-          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" ng-click="toggleShowAll()" tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
-          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" ng-click="toggleShowAll()" tooltip="{{'Wichtigste Spalten einblenden' | translate}}"></i>
+          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Standardansicht' | translate}}"></i>
         </script>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
@@ -47,16 +47,16 @@
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
                 <a ng-href="#/tours/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
               </td>
-              <td ng-if="showAll"  data-title="'Letzte Lieferung'|translate" sortable="'abo.letzteLieferung'">
+              <td ng-if="showAll"  data-title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
                 {{abo.letzteLieferung | date:'EEE, dd.MM.yyyy'}}
               </td>
-              <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'abo.guthaben'"  filter="{guthaben: 'number'}">
+              <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'guthaben'"  filter="{guthaben: 'number'}">
                 {{abo.guthaben}}
               </td>
-              <td ng-if="showAll"  data-title="'Guthaben in Rechnung'|translate" sortable="'abo.guthabenInRechnung'" filter="{guthabenInRechnung: 'number'}">
+              <td ng-if="showAll"  data-title="'Guthaben in Rechnung'|translate" sortable="'guthabenInRechnung'" filter="{guthabenInRechnung: 'number'}">
                 {{abo.guthabenInRechnung}}
               </td>
-              <td ng-if="showAll"  data-title="'Guthaben vertraglich'|translate" sortable="'abo.guthabenVertraglich'"  filter="{guthabenVertraglich: 'number'}">
+              <td ng-if="showAll"  data-title="'Guthaben vertraglich'|translate" sortable="'guthabenVertraglich'"  filter="{guthabenVertraglich: 'number'}">
                 {{abo.guthabenVertraglich}}
               </td>
               <td  header="'headerShowAll.html'">
