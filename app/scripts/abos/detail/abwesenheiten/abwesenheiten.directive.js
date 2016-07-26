@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openolitor').directive('ooAboAbwesenheiten', [
+angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
   function() {
     return {
       restrict: 'E',

@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('VertriebsartenListController', ['$scope', '$routeParams',
     'EnumUtil', 'DataUtil', 'msgBus', 'VertriebeListModel',
     'VertriebsartenListModel', 'DepotsOverviewModel', 'TourenModel',

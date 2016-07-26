@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',

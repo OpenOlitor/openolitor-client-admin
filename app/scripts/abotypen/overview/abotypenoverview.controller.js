@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('AbotypenOverviewController', ['$scope', '$filter',
     'AbotypenOverviewModel', 'NgTableParams',
     function($scope, $filter, AbotypenOverviewModel, NgTableParams) {

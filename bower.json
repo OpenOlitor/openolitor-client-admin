@@ -1,5 +1,5 @@
 {
-  "name": "openolitor",
+  "name": "openolitor-admin",
   "version": "1.0.0",
   "private": false,
   "dependencies": {
@@ -36,7 +36,8 @@
     "angular-filter": "^0.5.8",
     "ng-password-strength": "~0.2.1",
     "angular-messages": "~1.4.9",
-    "angular-sortable-view": "~0.0.15"
+    "angular-sortable-view": "~0.0.15",
+    "openolitor-core": "1.0.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.9",

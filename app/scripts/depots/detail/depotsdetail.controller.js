@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('DepotsDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'DepotsDetailModel',
     function($scope, $filter, $routeParams, $location, gettext,

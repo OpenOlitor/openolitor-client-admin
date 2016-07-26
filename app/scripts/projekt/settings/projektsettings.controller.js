@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('ProjektSettingsController', ['$scope', '$filter',
     'NgTableParams',
     'KundentypenService',

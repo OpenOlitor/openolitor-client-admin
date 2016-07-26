@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
     'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'NgTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
     function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, NgTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE, lodash) {

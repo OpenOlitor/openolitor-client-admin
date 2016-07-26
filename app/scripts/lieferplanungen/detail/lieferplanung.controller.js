@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('LieferplanungDetailController', ['$scope', '$rootScope',
     '$routeParams', 'NgTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',

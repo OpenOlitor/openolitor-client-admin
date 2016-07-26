@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openolitor').directive('ooAbosOverviewCreateRechnungen', [
+angular.module('openolitor-admin').directive('ooAbosOverviewCreateRechnungen', [
   function() {
     return {
       restrict: 'E',

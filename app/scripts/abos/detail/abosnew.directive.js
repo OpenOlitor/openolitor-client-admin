@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openolitor').directive('ooAbosNew', [
+angular.module('openolitor-admin').directive('ooAbosNew', [
   function() {
     return {
       restrict: 'E',

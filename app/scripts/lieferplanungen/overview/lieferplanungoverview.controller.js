@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
     'LieferplanungModel', 'NgTableParams', 'msgBus', '$location',
     function($q, $scope, $filter, LieferplanungModel, NgTableParams, msgBus, $location) {

@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter','$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil', 'AbosOverviewService',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, AbosOverviewService) {

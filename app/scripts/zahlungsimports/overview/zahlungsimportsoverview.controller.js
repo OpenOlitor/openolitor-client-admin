@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('ZahlungsImportsOverviewController', ['$q', '$scope', '$filter',
     'ZahlungsImportsOverviewModel', 'NgTableParams',
     function($q, $scope, $filter, ZahlungsImportsOverviewModel, NgTableParams) {

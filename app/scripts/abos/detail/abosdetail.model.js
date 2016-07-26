@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('AbosDetailModel', function($resource, API_URL) {
     return $resource(API_URL + 'kunden/:kundeId/abos/:id/:extendedPath/:aktion', {
       id: '@id',
