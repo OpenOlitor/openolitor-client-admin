@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('GenerateLieferungenController', ['$scope', '$uibModalInstance',
     '$log', 'abotyp', 'vertrieb', 'von', 'moment', 'lieferungen',
     'LIEFERZEITPUNKTE',

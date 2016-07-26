@@ -58,7 +58,7 @@ function gettext(string) {
 /**
  */
 angular
-  .module('openolitor', [
+  .module('openolitor-admin', [
     'ngAnimate',
     'ngResource',
     'ngRoute',
@@ -80,7 +80,8 @@ angular
     'angularMoment',
     'ngFileUpload',
     'ngLodash',
-    'angular-sortable-view'
+    'angular-sortable-view',
+    'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -545,34 +546,5 @@ angular
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings',
         access: userRoles.Administrator
-      })
-      .when('/login', {
-        templateUrl: 'scripts/login/login.html',
-        controller: 'LoginController',
-        name: 'Login',
-        access: userRoles.Guest
-      })
-      .when('/passwd', {
-        templateUrl: 'scripts/login/change_password.html',
-        controller: 'LoginController',
-        name: 'Passwortwechsel',
-        access: userRoles.Administrator
-      })
-      .when('/logout', {
-        templateUrl: 'scripts/login/logout.html',
-        controller: 'LoginController',
-        logout: true,
-        name: 'Logout',
-        access: userRoles.Administrator
-      })
-      .when('/forbidden', {
-        templateUrl: 'scripts/login/forbidden.html',
-        controller: 'LoginController',
-        name: 'Forbidden',
-        access: userRoles.Guest
-      })
-      .otherwise({
-        templateUrl: 'scripts/not-found.html',
-        access: userRoles.Guest
       });
   });

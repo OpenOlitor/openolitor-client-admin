@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('AbosOverviewCreateRechnungenController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',

@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',

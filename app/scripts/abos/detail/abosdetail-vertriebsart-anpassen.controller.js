@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('VertriebsartAnpassenController', ['$scope', '$uibModalInstance',
     '$log', 'abo', 'vertriebe', 'vertriebsarten',
 

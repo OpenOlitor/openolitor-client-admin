@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
     '$location',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',

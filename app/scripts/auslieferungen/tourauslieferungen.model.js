@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('TourAuslieferungenModel', function($resource, API_URL) {
     return $resource(API_URL + 'tourauslieferungen/:id', {
       id: '@id'

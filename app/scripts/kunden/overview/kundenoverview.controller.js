@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter',
     'KundenOverviewModel', 'NgTableParams', 'KundentypenService',
     function($q, $scope, $filter, KundenOverviewModel, NgTableParams,
