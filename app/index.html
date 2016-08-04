@@ -41,7 +41,7 @@
           <li class="active lang-chooser" ng-hide="activeLang() === 'en'"><a role="button" ng-click="changeLang('en')" title="English"><span>EN</span></a></li>
           <li class="dropdown" ng-show="loggedIn">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.vorname}} {{user.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li><a href="#" translate>Einstellungen</a></li>
               <li role="separator" class="divider"></li>
               <li ng-if="env !== 'test'"><a href="#/passwd" translate>Passwort wechseln</a></li>
@@ -139,7 +139,7 @@
   <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
   <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
-  <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+  <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/ng-password-strength/dist/scripts/ng-password-strength.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
