@@ -26,6 +26,9 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[depotauslieferung.id]" />
               </td>
+              <td data-title="'Nr. '|translate" sortable="'id'" >
+                <a ng-href="#/depotauslieferungen/{{depotauslieferung.id}}">{{depotauslieferung.id}}</a>
+              </td>
               <td data-title="'Depot'|translate" sortable="'depotName'">
                 {{depotauslieferung.depotName}}
               </td>

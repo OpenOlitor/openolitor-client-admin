@@ -478,6 +478,13 @@ angular
         model: 'Depot',
         access: userRoles.Administrator
       })
+      .when('/depotauslieferungen/:id', {
+        templateUrl: 'scripts/auslieferungen/detail/depotauslieferungdetail.html',
+        controller: 'AuslieferungDetailController',
+        name: 'DepotAuslieferungDetail',
+        model: 'Depot',
+        access: userRoles.Administrator
+      })
       .when('/tourauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
@@ -485,10 +492,24 @@ angular
         model: 'Tour',
         access: userRoles.Administrator
       })
+      .when('/tourauslieferungen/:id', {
+        templateUrl: 'scripts/auslieferungen/detail/tourauslieferungdetail.html',
+        controller: 'AuslieferungDetailController',
+        name: 'TourAuslieferungDetail',
+        model: 'Tour',
+        access: userRoles.Administrator
+      })
       .when('/postauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
         name: 'PostAuslieferungenOverview',
+        model: 'Post',
+        access: userRoles.Administrator
+      })
+      .when('/postauslieferungen/:id', {
+        templateUrl: 'scripts/auslieferungen/detail/postauslieferungdetail.html',
+        controller: 'AuslieferungDetailController',
+        name: 'PostAuslieferungDetail',
         model: 'Post',
         access: userRoles.Administrator
       })
