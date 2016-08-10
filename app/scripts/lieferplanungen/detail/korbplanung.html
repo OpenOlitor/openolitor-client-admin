@@ -63,7 +63,7 @@
           <h3 class="panel-title lieferplanung-title">
             <span class="navbar-brand">
               <span class="pre-info">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
-              {{abotypLieferung.abotypBeschrieb}}</span>
+              {{abotypLieferung.abotypBeschrieb}} <small ng-if="abotypLieferung.vertriebBeschrieb">{{abotypLieferung.vertriebBeschrieb}}</small></span>
             <span class="pull-right">
               <small ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
               <span class="btn btn-default btn-sm"
