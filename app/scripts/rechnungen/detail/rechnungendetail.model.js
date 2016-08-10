@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('RechnungenDetailModel', function($resource, API_URL) {
     return $resource(API_URL + 'rechnungen/:id/:extendedPath/:aktion', {
       id: '@id'

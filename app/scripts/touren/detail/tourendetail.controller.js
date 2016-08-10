@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('TourenDetailController', ['$scope', '$filter',
     'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams',
     function($scope, $filter, TourenService, TourenDetailModel, NgTableParams, cloneObj, $routeParams) {

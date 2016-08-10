@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter',
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',

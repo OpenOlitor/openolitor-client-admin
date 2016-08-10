@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('ProjektService', ['$rootScope', 'ProjektModel', 'msgBus', 'ooAuthService', '$q',
     function($rootScope, ProjektModel, msgBus, ooAuthService, $q) {
 

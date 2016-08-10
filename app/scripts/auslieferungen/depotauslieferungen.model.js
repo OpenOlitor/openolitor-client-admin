@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('DepotAuslieferungenModel', function($resource, API_URL) {
     return $resource(API_URL + 'depotauslieferungen/:id/:extendedPath/:aktion', {
       id: '@id'

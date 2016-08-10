@@ -4,7 +4,8 @@ describe('Controller: AbotypenOverviewController', function() {
 
   // load the controller's module
   beforeEach(module('ui.bootstrap'));
-  beforeEach(module('openolitor'));
+  beforeEach(module('openolitor-core'));
+  beforeEach(module('openolitor-admin'));
 
   var controller, $scope, $q;
 

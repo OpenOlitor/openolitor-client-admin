@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('ProduktekategorienService', ['$rootScope', 'ProduktekategorienModel', 'msgBus',
     function($rootScope, ProduktekategorienModel, msgBus) {
 

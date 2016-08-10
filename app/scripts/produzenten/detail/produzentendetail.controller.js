@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('ProduzentenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', '$uibModal', 'gettext', 'ProduzentDetailModel', '$log',
     function($scope, $filter, $routeParams, $location, $uibModal, gettext,
