@@ -347,7 +347,8 @@ angular.module('openolitor-admin')
               produzentKurzzeichen: undefined,
               unlisted: true
             };
-            drop.scope().abotypLieferung.lieferpositionen.push(prodUnlistet);
+            checkOnDuplicateAndAsk(drop.scope().abotypLieferung.lieferpositionen,
+              prodUnlistet);
             break;
           case 'prod':
             var produkt = drag.scope().produkt;
