@@ -6,13 +6,11 @@ angular.module('openolitor-admin')
   .controller('AuslieferungDetailController', ['$q', '$scope', '$filter',
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
-    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil', 
+    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
       AUSLIEFERUNGSTATUS, msgBus, DataUtil) {
 
-      $scope.entries = [];
-      $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
       $scope.selectedAbo = undefined;
@@ -72,7 +70,7 @@ angular.module('openolitor-admin')
         label: 'Als ausgeliefert markieren',
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
-          return detailModel.ausliefern([$routeParams.id]);
+          return detailModel.ausliefern({id: $routeParams.id});
         }
       }];
 
@@ -90,7 +88,7 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           getData: function(params) {
-            if (!$scope.entries) {
+            if (!$scope.model || !$scope.model.koerbe) {
               return;
             }
             // use build-in angular filter
@@ -101,8 +99,6 @@ angular.module('openolitor-admin')
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy()) :
               orderedData;
-
-            $scope.filteredEntries = filteredData;
 
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(),
@@ -127,7 +123,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = detailModel.get({
+        detailModel.get({
           id: $routeParams.id
         }, function(result) {
           $scope.model = result;
