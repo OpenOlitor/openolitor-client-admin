@@ -251,8 +251,8 @@ input.ng-invalid {
 }
 
 #lieferplanung .lieferplanung-title .navbar-brand .pre-info {
-  color: #ADADAD;
   font-size: 85%;
+  color: #555;
 }
 
 #lieferplanung .panel-lieferplanung {
@@ -261,6 +261,10 @@ input.ng-invalid {
 
 #lieferplanung .lieferplanung-produkte {
   min-height: calc( 100vh - 130px);
+}
+
+small.lieferplanung {
+  color: #555;
 }
 
 // scollable table for produkteliste
