@@ -6,7 +6,9 @@
       <h3  class="panel-title"><span class="navbar-brand" translate>Lieferplanungen</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <button role="button" ng-click="createNewLieferplanung()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Lieferplanung generieren</span></button>
+            <button ng-disabled="loading" role="button" ng-click="createNewLieferplanung()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Lieferplanung generieren</span>
+              <i ng-show="loading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+            </button>
           </div>
         </form>
       </span>

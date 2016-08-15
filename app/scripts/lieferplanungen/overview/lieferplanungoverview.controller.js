@@ -5,7 +5,8 @@
 angular.module('openolitor-admin')
   .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
     'LieferplanungModel', 'NgTableParams', 'msgBus', '$location',
-    function($q, $scope, $filter, LieferplanungModel, NgTableParams, msgBus, $location) {
+    function($q, $scope, $filter, LieferplanungModel, NgTableParams, msgBus,
+      $location) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -34,10 +35,12 @@ angular.module('openolitor-admin')
             // use build-in angular filter
             var orderedData = $filter('filter')($scope.entries, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+              $filter('orderBy')(orderedData, params.orderBy()) :
+              orderedData;
 
             params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return orderedData.slice((params.page() - 1) * params.count(),
+              params.page() * params.count());
           }
 
         });
@@ -50,7 +53,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = LieferplanungModel.query({ }, function() {
+        $scope.entries = LieferplanungModel.query({}, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
@@ -60,13 +63,26 @@ angular.module('openolitor-admin')
       search();
 
       $scope.createNewLieferplanung = function() {
-        $scope.newLieferplanung = new LieferplanungModel({bemerkungen: '', status: 'Offen'});
-        return $scope.newLieferplanung.$save();
+        $scope.newLieferplanung = new LieferplanungModel({
+          bemerkungen: '',
+          status: 'Offen'
+        });
+        $scope.loading = true;
+        $scope.newLieferplanung.$save();
       };
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === 'Lieferplanung') {
+          //wait till updated on lieferplanung are finished as well
+          $scope.createdId = msg.data.id;
+          $scope.$apply();
+        }
+      });
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if ($scope.createdId && msg.entity === 'Lieferplanung' && $scope.createdId ===
+          msg.data.id) {
           $location.url('/lieferplanung/' + msg.data.id);
+          $scope.loading = false;
           $scope.$apply();
         }
       });

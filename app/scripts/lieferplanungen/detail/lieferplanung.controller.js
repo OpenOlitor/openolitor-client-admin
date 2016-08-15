@@ -21,11 +21,13 @@ angular.module('openolitor-admin')
         query: ''
       };
 
-      LieferplanungModel.get({
-        id: $routeParams.id
-      }, function(result) {
-        $scope.planung = result;
-      });
+      var load = function() {
+        LieferplanungModel.get({
+          id: $routeParams.id
+        }, function(result) {
+          $scope.planung = result;
+        });
+      };
 
       //watch for set of produkte
       $scope.$watch(ProdukteService.getProdukte,
@@ -481,7 +483,7 @@ angular.module('openolitor-admin')
             LieferplanungModel.getBestellungen({
               id: $routeParams.id
             }, function(bestellungen) {
-              angular.forEach(bestellungen, function(bestellung) {
+              lodash.forEach(bestellungen, function(bestellung) {
                 $scope.bestellungen[bestellung.produzentKurzzeichen] = {
                   id: bestellung.id,
                   produzentId: bestellung.produzentId,
@@ -509,7 +511,7 @@ angular.module('openolitor-admin')
                   id: $routeParams.id,
                   bestellungId: bestellung.id
                 }, function(bestellpositionen) {
-                  angular.forEach(bestellpositionen, function(
+                  lodash.forEach(bestellpositionen, function(
                     bestellposition) {
                     $scope.bestellungen[bestellung.produzentKurzzeichen]
                       .lieferungen[bestellung.datum].positionen[
@@ -673,10 +675,13 @@ angular.module('openolitor-admin')
         $scope.modalInstance.close();
       };
 
-      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
-        if (msg.entity === 'Lieferplanung') {
-          $rootScope.$apply();
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferplanung' && msg.entity
+          .id === $routeParams.id) {
+          $scope.$apply();
         }
       });
+
+      load();
     }
   ]);
