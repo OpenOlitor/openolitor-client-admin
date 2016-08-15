@@ -26,6 +26,9 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[postauslieferung.id]" />
               </td>
+              <td data-title="'Nr. '|translate" sortable="'id'" >
+                <a ng-href="#/postauslieferungen/{{postauslieferung.id}}">{{postauslieferung.id}}</a>
+              </td>
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{postauslieferung.datum|date:"dd.MM.yyyy"}}
               </td>
