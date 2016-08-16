@@ -130,6 +130,10 @@ angular
     ABGESCHLOSSEN: gettext('Abgeschlossen'),
     VERRECHNET: gettext('Verrechnet')
   })
+  .constant('BESTELLSTATUS', {
+    ABGESCHLOSSEN: gettext('Abgeschlossen'),
+    VERRECHNET: gettext('Verrechnet')
+  })
   .constant('RECHNUNGSTATUS', {
     ERSTELLT: gettext('Erstellt'),
     VERSCHICKT: gettext('Verschickt'),

@@ -5,16 +5,16 @@
 angular.module('openolitor-admin')
   .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
     '$location',
-    'LieferantenAbrechnungenOverviewModel', 'NgTableParams',
-    'FilterQueryUtil', 'OverviewCheckboxUtil',
+    'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel', 'NgTableParams',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
     function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
-      NgTableParams, FilterQueryUtil, OverviewCheckboxUtil) {
+      ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil, BESTELLSTATUS, EnumUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
-      $scope.selectedAbo = undefined;
       $scope.model = {};
+      $scope.bestellstatusL = EnumUtil.asArray(BESTELLSTATUS);
 
       $scope.search = {
         query: '',
@@ -34,6 +34,26 @@ angular.module('openolitor-admin')
         return $scope.entries !== undefined;
       };
 
+      $scope.produzentL = [];
+      ProduzentenModel.query({
+        q: ''
+      }, function(list) {
+        angular.forEach(list, function(produzent) {
+          $scope.produzentL.push({
+            'id': produzent.id,
+            'title': produzent.kurzzeichen
+          });
+        });
+      });
+
+      $scope.selectBestellung = function(bestellung) {        
+        if ($scope.selectedBestellung === bestellung) {
+          $scope.selectedBestellung = undefined;
+        } else {
+          $scope.selectedBestellung = bestellung;
+        }
+      };
+
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -48,11 +68,6 @@ angular.module('openolitor-admin')
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
 
-      $scope.toggleShowAll = function() {
-        $scope.showAll = !$scope.showAll;
-        $scope.tableParams.reload();
-      };
-
       if (!$scope.tableParams) {
         //use default tableParams
         $scope.tableParams = new NgTableParams({ // jshint ignore:line
@@ -60,9 +75,6 @@ angular.module('openolitor-admin')
           count: 10,
           sorting: {
             id: 'asc'
-          },
-          filter: {
-            bestellungId: ''
           }
         }, {
           filterDelay: 0,
