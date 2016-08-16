@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title"><span class="navbar-brand" translate>Lieferanten-Abrechnungen</span>
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+            <oo-actions-button model="model" actions="actions"></oo-actions-button>
+          </div>
+        </form></h3>
+      </div>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <script type="text/ng-template" id="headerCheckbox.html">
+          <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+        </script>
+        <script type="text/ng-template" id="headerShowAll.html">
+          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Standardansicht' | translate}}"></i>
+        </script>
+        <div ng-show="entries" id="abrechnungenTable" display-export="true" export-file-name="LieferantenAbrechnungen">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+            <tr ng-repeat="bestellung in $data | filter: search.query.$">
+              <td header="'headerCheckbox.html'">
+                <input type="checkbox" ng-model="checkboxes.items[bestellung.id]" />
+              </td>
+              <td data-title="'Nr.'|translate" sortable="'id'" filter="{id: 'number'}">
+                <a ng-click="selectBestellung(bestellung)">{{bestellung.id}}</a>
+              </td>
+              <td data-title="'Datum'|translate" sortable="'datum'">
+                {{bestellung.datum}}
+              </td>
+              <td data-title="'Produzent'|translate" sortable="'produzentKurzzeichen'" filter="{produzentId: 'select'}" filter-data="produzentL">>
+                {{bestellung.produzentKurzzeichen}}
+              </td>
+              <td data-title="'Datum Versenet'|translate" sortable="'datumAbrechnung'">
+                {{bestellung.datumVersendet}}
+              </td>
+              <td data-title="'Datum Abrechnung'|translate" sortable="'datumAbrechnung'">
+                {{bestellung.datumAbrechnung}}
+              </td>
+              <td data-title="'Total'|translate" sortable="'preisTotal'">
+                {{bestellung.preisTotal}}
+              </td>
+              <td  header="'headerShowAll.html'">
+                <div class="pull-right">
+                  <div class="btn-group">
+                    <button uib-btn-checkbox ng-model="selectedBestellung" role="button" ng-href="" ng-show="abo.id" ng-click="selectBestellung(bestellung)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="context content-box col-md-3" ng-if="selectedBestellung">
+    <!-- TODO -->
+  </div>
+  <div class="context content-box col-md-3" ng-if="showAbrechnungDialog">
+    <!-- TODO -->
+  </div>
+</div>

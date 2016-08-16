@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbosOverviewController', ['$scope', '$filter', '$location',
-    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
+  .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
+    '$location',
+    'LieferantenAbrechnungenOverviewModel', 'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil',
-    function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil) {
+    function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
+      NgTableParams, FilterQueryUtil, OverviewCheckboxUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -33,18 +34,6 @@ angular.module('openolitor-admin')
         return $scope.entries !== undefined;
       };
 
-      $scope.abotypL = [];
-      AbotypenOverviewModel.query({
-        q: ''
-      }, function(list) {
-        angular.forEach(list, function(abotyp) {
-          $scope.abotypL.push({
-            'id': abotyp.id,
-            'title': abotyp.name
-          });
-        });
-      });
-
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -64,14 +53,6 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
       };
 
-      $scope.selectAbo = function(abo) {
-        if ($scope.selectedAbo === abo) {
-          $scope.selectedAbo = undefined;
-        } else {
-          $scope.selectedAbo = abo;
-        }
-      };
-
       if (!$scope.tableParams) {
         //use default tableParams
         $scope.tableParams = new NgTableParams({ // jshint ignore:line
@@ -81,7 +62,7 @@ angular.module('openolitor-admin')
             id: 'asc'
           },
           filter: {
-            abotypId: ''
+            bestellungId: ''
           }
         }, {
           filterDelay: 0,
@@ -112,12 +93,11 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Rechnungen erstellen';
+          return 'abrechnen';
         },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-envelope',
+        iconClass: 'fa fa-calculator',
         onExecute: function() {
-          $scope.showCreateRechnungenDialog = true;
+          $scope.showCreateAbrechnungDialog = true;
           return true;
         },
         isDisabled: function() {
@@ -130,7 +110,7 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
-        $scope.entries = AbosOverviewModel.query({
+        $scope.entries = LieferantenAbrechnungenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
@@ -144,8 +124,8 @@ angular.module('openolitor-admin')
         $scope.search.query = existingQuery;
       }
 
-      $scope.closeCreateRechnungenDialog = function() {
-        $scope.showCreateRechnungenDialog = false;
+      $scope.closeAbrechnungDialog = function() {
+        $scope.showCreateAbrechnungDialog = false;
       };
 
       $scope.$watch('search.query', function() {

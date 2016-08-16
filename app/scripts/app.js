@@ -410,6 +410,12 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
+      .when('/lieferantenabrechnungen', {
+        templateUrl: 'scripts/lieferantenabrechnungen/overview/lieferantenabrechnungenoverview.html',
+        controller: 'LieferantenAbrechnungenOverviewController',
+        name: 'LieferantenAbrechnungenOverview',
+        access: userRoles.Administrator
+      })
       .when('/produkte', {
         templateUrl: 'scripts/produkte/overview/produkteoverview.html',
         controller: 'ProdukteOverviewController',
