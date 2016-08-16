@@ -81,7 +81,7 @@
               <tr ng-if="produzentIstBesteuert(bestellung.produzentId)">
                 <td colspan="4"></td>
                 <td colspan="2">
-                  <span translate>MWST</span> {{produzentSteuersatz(bestellung.produzentId)}}%
+                  <span translate>MWST</span> {{lieferung.steuerSatz}}%
                 </td>
                 <td>
                   {{lieferung.steuer | ooCHF}}
