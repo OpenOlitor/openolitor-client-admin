@@ -14,7 +14,7 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
   <link rel="stylesheet" href="bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" />
-  <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
+  <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.css" />
   <link rel="stylesheet" href="bower_components/angular-color-picker/angularjs-color-picker.css" />
   <link rel="stylesheet" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.css" />
   <!-- endbower -->
@@ -27,7 +27,7 @@
   <!-- endbuild -->
 </head>
 
-<body class="white openolitor" ng-app="openolitor" ng-controller="OpenOlitorRootController">
+<body class="white openolitor" ng-app="openolitor-admin" ng-controller="OpenOlitorRootController">
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -41,7 +41,7 @@
           <li class="active lang-chooser" ng-hide="activeLang() === 'en'"><a role="button" ng-click="changeLang('en')" title="English"><span>EN</span></a></li>
           <li class="dropdown" ng-show="loggedIn">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.vorname}} {{user.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li><a href="#" translate>Einstellungen</a></li>
               <li role="separator" class="divider"></li>
               <li ng-if="env !== 'test'"><a href="#/passwd" translate>Passwort wechseln</a></li>
@@ -125,7 +125,7 @@
   <script src="bower_components/angular-touch/angular-touch.js"></script>
   <script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
   <script src="bower_components/json3/lib/json3.js"></script>
-  <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+  <script src="bower_components/ng-table/dist/ng-table.js"></script>
   <script src="bower_components/ng-table-export/ng-table-export.js"></script>
   <script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
   <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
@@ -139,11 +139,12 @@
   <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
   <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
-  <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+  <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/ng-password-strength/dist/scripts/ng-password-strength.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
+  <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -153,35 +154,6 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/root.js"></script>
-  <script src="scripts/common/filters/oo-preisproeinheit.filter.js"></script>
-  <script src="scripts/common/filters/oo-chf.filter.js"></script>
-  <script src="scripts/common/components/oo-erroroverlay.directive.js"></script>
-  <script src="scripts/common/components/oo-dropdown.directive.js"></script>
-  <script src="scripts/common/components/oo-liefertage.directive.js"></script>
-  <script src="scripts/common/components/oo-datepicker.directive.js"></script>
-  <script src="scripts/common/components/oo-kundentypen.directive.js"></script>
-  <script src="scripts/common/components/oo-savebutton.directive.js"></script>
-  <script src="scripts/common/components/oo-actionsbutton.directive.js"></script>
-  <script src="scripts/common/components/oo-deletebutton.directive.js"></script>
-  <script src="scripts/common/components/oo-dialogokabort.directive.js"></script>
-  <script src="scripts/common/components/oo-stop-event.directive.js"></script>
-  <script src="scripts/common/components/oo-generate-report.directive.js"></script>
-  <script src="scripts/common/components/oo-uuid.js"></script>
-  <script src="scripts/common/components/oo-dragdrop.js"></script>
-  <script src="scripts/common/utils/enum.util.js"></script>
-  <script src="scripts/common/utils/data.util.js"></script>
-  <script src="scripts/common/utils/file.util.js"></script>
-  <script src="scripts/common/utils/filterquery.util.js"></script>
-  <script src="scripts/common/utils/overviewcheckbox.util.js"></script>
-  <script src="scripts/common/services/oo-messages.service.js"></script>
-  <script src="scripts/common/services/oo-alert.service.js"></script>
-  <script src="scripts/common/services/oo-auth.service.js"></script>
-  <script src="scripts/common/services/oo-dialog.service.js"></script>
-  <script src="scripts/common/ngtable/oo-ngtable-export.controller.js"></script>
-  <script src="scripts/common/ng/auto-focus.directive.js"></script>
-  <script src="scripts/common/ng/http-src.directive.js"></script>
-
-  <script src="scripts/login/login.controller.js"></script>
 
   <script src="scripts/abotypen/overview/abotypenoverview.model.js"></script>
   <script src="scripts/abotypen/overview/abotypenoverview.controller.js"></script>
@@ -252,6 +224,7 @@
   <script src="scripts/lieferplanungen/lieferplanung.model.js"></script>
 
   <script src="scripts/auslieferungen/overview/auslieferungenoverview.controller.js"></script>
+  <script src="scripts/auslieferungen/detail/auslieferungdetail.controller.js"></script>
   <script src="scripts/auslieferungen/depotauslieferungen.model.js"></script>
   <script src="scripts/auslieferungen/tourauslieferungen.model.js"></script>
   <script src="scripts/auslieferungen/postauslieferungen.model.js"></script>
@@ -270,9 +243,6 @@
   <script src="scripts/projekt/projekt.model.js"></script>
   <script src="scripts/projekt/projekt.service.js"></script>
   <script src="scripts/projekt/settings/projektsettings.controller.js"></script>
-
-  <script src="scripts/server/server.model.js"></script>
-  <script src="scripts/server/server.service.js"></script>
 
   <script src="scripts/i18n/translations.js"></script>
   <!-- endbuild -->

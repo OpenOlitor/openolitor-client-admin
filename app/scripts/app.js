@@ -58,7 +58,7 @@ function gettext(string) {
 /**
  */
 angular
-  .module('openolitor', [
+  .module('openolitor-admin', [
     'ngAnimate',
     'ngResource',
     'ngRoute',
@@ -80,7 +80,8 @@ angular
     'angularMoment',
     'ngFileUpload',
     'ngLodash',
-    'angular-sortable-view'
+    'angular-sortable-view',
+    'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -477,6 +478,13 @@ angular
         model: 'Depot',
         access: userRoles.Administrator
       })
+      .when('/depotauslieferungen/:id', {
+        templateUrl: 'scripts/auslieferungen/detail/depotauslieferungdetail.html',
+        controller: 'AuslieferungDetailController',
+        name: 'DepotAuslieferungDetail',
+        model: 'Depot',
+        access: userRoles.Administrator
+      })
       .when('/tourauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
@@ -484,10 +492,24 @@ angular
         model: 'Tour',
         access: userRoles.Administrator
       })
+      .when('/tourauslieferungen/:id', {
+        templateUrl: 'scripts/auslieferungen/detail/tourauslieferungdetail.html',
+        controller: 'AuslieferungDetailController',
+        name: 'TourAuslieferungDetail',
+        model: 'Tour',
+        access: userRoles.Administrator
+      })
       .when('/postauslieferungen', {
         templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
         controller: 'AuslieferungenOverviewController',
         name: 'PostAuslieferungenOverview',
+        model: 'Post',
+        access: userRoles.Administrator
+      })
+      .when('/postauslieferungen/:id', {
+        templateUrl: 'scripts/auslieferungen/detail/postauslieferungdetail.html',
+        controller: 'AuslieferungDetailController',
+        name: 'PostAuslieferungDetail',
         model: 'Post',
         access: userRoles.Administrator
       })
@@ -545,34 +567,5 @@ angular
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings',
         access: userRoles.Administrator
-      })
-      .when('/login', {
-        templateUrl: 'scripts/login/login.html',
-        controller: 'LoginController',
-        name: 'Login',
-        access: userRoles.Guest
-      })
-      .when('/passwd', {
-        templateUrl: 'scripts/login/change_password.html',
-        controller: 'LoginController',
-        name: 'Passwortwechsel',
-        access: userRoles.Administrator
-      })
-      .when('/logout', {
-        templateUrl: 'scripts/login/logout.html',
-        controller: 'LoginController',
-        logout: true,
-        name: 'Logout',
-        access: userRoles.Administrator
-      })
-      .when('/forbidden', {
-        templateUrl: 'scripts/login/forbidden.html',
-        controller: 'LoginController',
-        name: 'Forbidden',
-        access: userRoles.Guest
-      })
-      .otherwise({
-        templateUrl: 'scripts/not-found.html',
-        access: userRoles.Guest
       });
   });

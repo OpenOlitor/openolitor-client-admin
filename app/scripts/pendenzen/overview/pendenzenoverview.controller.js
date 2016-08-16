@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$filter',
     'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS',
     function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS) {

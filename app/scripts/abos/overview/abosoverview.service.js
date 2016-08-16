@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('AbosOverviewService', ['$http', 'API_URL',
     function($http, API_URL) {
       var service = {

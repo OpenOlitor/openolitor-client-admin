@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('LieferungenListController', ['$scope', '$routeParams',
     '$location', '$uibModal', '$log', '$http', 'gettext', 'NgTableParams',
     'msgBus', 'lodash',

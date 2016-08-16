@@ -35,6 +35,7 @@ module.exports = function(config) {
       'app/bower_components/ng-password-strength/dist/scripts/ng-password-strength.js',
       'app/bower_components/angular-messages/angular-messages.js',
       'app/bower_components/angular-sortable-view/src/angular-sortable-view.js',
+      'app/bower_components/openolitor-core/dist/scripts/openolitor-core.js',
       'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('DepotsOverviewController', ['$scope', '$filter',
     'DepotsOverviewModel', 'NgTableParams',
     function($scope, $filter, DepotsOverviewModel, NgTableParams) {

@@ -2,10 +2,10 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter','$location',
-    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil', 'AbosOverviewService',
-    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, AbosOverviewService) {
+    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel', 'FilterQueryUtil', 'OverviewCheckboxUtil',
+    function($scope, $filter, $location, AbosOverviewModel, NgTableParams, AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -55,8 +55,7 @@ angular.module('openolitor')
         return $scope.checkboxes.items;
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
-      }
-      , true);
+      }, true);
 
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;

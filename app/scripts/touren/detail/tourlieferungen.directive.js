@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openolitor').directive('ooTourlieferungen', [
+angular.module('openolitor-admin').directive('ooTourlieferungen', [
   function() {
     return {
       restrict: 'E',

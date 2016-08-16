@@ -130,7 +130,7 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= openolitor.app %>/scripts/**/*.js'],
+        files: ['<%= openolitor.app %>/scripts/**/*.js', '<%= openolitor.app %>/bower_components/openolitor-core/scripts/**/*.js'],
         tasks: ['newer:jshint:all', 'replace:dev'],
         options: {
           livereload: '<%= connect.options.livereload %>'

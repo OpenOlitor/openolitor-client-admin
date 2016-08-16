@@ -2,7 +2,7 @@
 
 /**
  */
-angular.module('openolitor')
+angular.module('openolitor-admin')
   .factory('ProjektModel', function($resource, API_URL) {
     return $resource(API_URL + 'projekt/:id', {
       id: '@id'
