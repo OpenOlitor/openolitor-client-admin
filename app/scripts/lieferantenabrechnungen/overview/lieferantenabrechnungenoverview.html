@@ -62,7 +62,7 @@
   <div class="context content-box col-md-3" ng-if="selectedBestellung">
     <oo-bestellung-detail bestellung-id="selectedBestellung.id" projekt="projekt"></oo-bestellung-detail>
   </div>
-  <div class="context content-box col-md-3" ng-if="showAbrechnungDialog">
-    <!-- TODO -->
+  <div class="context content-box col-md-3" ng-if="showCreateAbrechnungDialog">
+    <oo-bestellungen-abrechnen bestellung-ids="checkboxes.selectedAbgeschlosseneBestellungen" on-close="closeAbrechnungDialog"></oo-bestellungen-abrechnen>
   </div>
 </div>

@@ -5,10 +5,13 @@
 angular.module('openolitor-admin')
   .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
     '$location',
-    'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel', 'NgTableParams',
+    'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
+    'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
+    'msgBus', 'lodash',
     function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
-      ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil, BESTELLSTATUS, EnumUtil) {
+      ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
+      BESTELLSTATUS, EnumUtil, msgBus, lodash) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -46,12 +49,13 @@ angular.module('openolitor-admin')
         });
       });
 
-      $scope.selectBestellung = function(bestellung) {        
+      $scope.selectBestellung = function(bestellung) {
         if ($scope.selectedBestellung === bestellung) {
           $scope.selectedBestellung = undefined;
         } else {
           $scope.selectedBestellung = bestellung;
         }
+        $scope.showCreateAbrechnungDialog = false;
       };
 
       // watch for check all checkbox
@@ -66,6 +70,7 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.items;
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+        $scope.checkSelectedAbgeschlosseneBestellungen();
       }, true);
 
       if (!$scope.tableParams) {
@@ -103,19 +108,35 @@ angular.module('openolitor-admin')
         });
       }
 
+
+      $scope.checkSelectedAbgeschlosseneBestellungen = function() {
+        var length = $scope.checkboxes.ids.length;
+        var result = [];
+        for (var i = 0; i < length; ++i) {
+          var id = $scope.checkboxes.ids[i];
+          if ($scope.checkboxes.data[id].status === BESTELLSTATUS.ABGESCHLOSSEN) {
+            result.push(id);
+          }
+        }
+        $scope.checkboxes.selectedAbgeschlosseneBestellungen = result;
+      };
+
       $scope.actions = [{
         labelFunction: function() {
           return 'abrechnen';
         },
         iconClass: 'fa fa-calculator',
         onExecute: function() {
+          $scope.selectedBestellung = undefined;
           $scope.showCreateAbrechnungDialog = true;
           return true;
         },
         isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
+          return !$scope.checkboxes.checkedAny || $scope.checkboxes.selectedAbgeschlosseneBestellungen
+            .length === 0;
         }
       }];
+
 
       function search() {
         if ($scope.loading) {
@@ -147,5 +168,16 @@ angular.module('openolitor-admin')
           .query);
         search();
       }, true);
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'Bestellung') {
+          $scope.entries.map(function(entry) {
+            if (entry.id === msg.data.id) {
+              angular.copy(msg.data, entry);
+            }
+          });
+          $scope.$apply();
+        }
+      });
     }
   ]);
