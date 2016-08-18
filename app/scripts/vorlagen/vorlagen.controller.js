@@ -5,10 +5,10 @@
 angular.module('openolitor-admin')
   .controller('VorlagenController', ['$scope', 'VorlagenModel', 'msgBus',
     'DataUtil', 'lodash', 'NgTableParams', 'gettext', 'Upload', 'API_URL',
-    'FileUtil',
+    'FileUtil', 'VorlagenService',
 
     function($scope, VorlagenModel, msgBus, DataUtil, lodash, NgTableParams,
-      gettext, Upload, API_URL, FileUtil) {
+      gettext, Upload, API_URL, FileUtil, VorlagenService) {
       $scope.template = {
         typ: $scope.typ
       };
@@ -38,7 +38,9 @@ angular.module('openolitor-admin')
         vorlage.$delete();
       };
 
-      var unwatch = $scope.$watch('vorlagen', function() {
+      var unwatch = $scope.$watch(function() {
+        return VorlagenService.getVorlagen($scope.typ);
+      }, function() {
         if ($scope.tableParams) {
           $scope.tableParams.reload();
         }
@@ -67,8 +69,9 @@ angular.module('openolitor-admin')
               default: true
             }];
 
-            var allValues = ($scope.vorlagen) ? lodash.concat(values,
-              $scope.vorlagen) : values;
+            var vorlagen = VorlagenService.getVorlagen($scope.typ);
+
+            var allValues = (vorlagen) ? lodash.concat(values, vorlagen) : values;
 
             params.total(allValues.length);
             return allValues;
@@ -103,55 +106,33 @@ angular.module('openolitor-admin')
             file: file
           }
         }).then(function() {
-          vorlage.uploading = false;
+        vorlage.uploading = false;
         }, function(resp) {
           console.log('Error status: ' + resp.status);
           vorlage.uploading = false;
         });
       };
 
-      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
-        if (msg.entity === 'ProjektVorlage' && $scope.typ === msg.data
-          .typ) {
-          var newModel = new VorlagenModel(msg.data);
-          if (!$scope.vorlagen) {
-            $scope.vorlagen = [];
-          }
-          $scope.template.name = undefined;
-          $scope.vorlagen.push(newModel);
+      msgBus.onMsg('ProjektVorlageCreated', $scope, function(event, msg) {
+        if ($scope.typ === msg.vorlage.typ) {
           $scope.template.creating = false;
           $scope.tableParams.reload();
           $scope.$apply();
         }
       });
 
-      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-        if (msg.entity === 'ProjektVorlage' && $scope.typ === msg.data
-          .typ) {
-          var vorlage = lodash.find($scope.vorlagen, function(r) {
-            return r.id === msg.data.id;
-          });
-          if (vorlage) {
-            DataUtil.update(msg.data, vorlage);
-            vorlage.editing = false;
-            vorlage.updateing = false;
-            $scope.tableParams.reload();
-            $scope.$apply();
-          }
+      msgBus.onMsg('ProjektVorlageModified', $scope, function(event, msg) {
+        if ($scope.typ === msg.vorlage.typ) {
+          msg.vorlage.editing = false;
+          msg.vorlage.updateing = false;
+          $scope.tableParams.reload();          
         }
       });
 
-      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
-        if (msg.entity === 'ProjektVorlage' && $scope.typ === msg.data
-          .typ) {
-          var index = lodash.findIndex($scope.vorlagen, function(vorlage) {
-            return vorlage.id === msg.data.id;
-          });
-          if (index >= 0) {
-            $scope.vorlagen.splice(index, 1);
-            $scope.tableParams.reload();
-            $scope.$apply();
-          }
+      msgBus.onMsg('ProjektVorlageDeleted', $scope, function(event, msg) {
+        if ($scope.typ === msg.vorlage.typ) {
+          $scope.tableParams.reload();
+          $scope.$apply();
         }
       });
     }

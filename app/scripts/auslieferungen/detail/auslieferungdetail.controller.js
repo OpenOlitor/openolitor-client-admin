@@ -7,9 +7,10 @@ angular.module('openolitor-admin')
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
+    'VorlagenService',
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil) {
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService) {
 
       $scope.loading = false;
       $scope.model = {};
@@ -33,6 +34,10 @@ angular.module('openolitor-admin')
           break;
       }
 
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('Vorlage'+$scope.modelType+$scope.vorlageTyp);
+      };
+
       $scope.statusL = [];
       angular.forEach(AUSLIEFERUNGSTATUS, function(value, key) {
         $scope.statusL.push({
@@ -54,16 +59,18 @@ angular.module('openolitor-admin')
         label: 'Lieferschein drucken',
         iconClass: 'fa fa-print',
         onExecute: function() {
-          $scope.showGenerateReport = true;
           $scope.reportType = 'lieferschein';
+          $scope.vorlageTyp = 'Lieferschein';
+          $scope.showGenerateReport = true;
           return true;
         }
       }, {
         label: 'Lieferetiketten drucken',
         iconClass: 'fa fa-print',
         onExecute: function() {
-          $scope.showGenerateReport = true;
           $scope.reportType = 'lieferetiketten';
+          $scope.vorlageTyp = 'Lieferetikette';
+          $scope.showGenerateReport = true;
           return true;
         }
       }, {
