@@ -567,5 +567,11 @@ angular
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings',
         access: userRoles.Administrator
+      })
+      .when('/vorlagen', {
+        templateUrl: 'scripts/vorlagen/vorlagenoverview.html',
+        controller: 'VorlagenOverviewController',
+        name: 'VorlagenOverview',
+        access: userRoles.Administrator
       });
   });
