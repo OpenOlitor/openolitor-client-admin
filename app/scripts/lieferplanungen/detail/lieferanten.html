@@ -44,7 +44,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="position in lieferung.positionen | orderBy:'produkteBezeichnung'">
+              <tr ng-repeat="position in lieferung.positionen | orderBy:'produkteBezeichnung'" ng-if="position.anzahl > 0">
                 <td>
                   {{position.anzahl}}x
                 </td>
