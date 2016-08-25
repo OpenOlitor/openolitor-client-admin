@@ -25,6 +25,13 @@ angular.module('openolitor-admin')
         });
       }
 
+      $scope.delete = function() {
+        if ($scope.depot.anzahlAbonnenten > 0) {
+          return;
+        }
+        return $scope.depot.$delete();
+      };
+
       $scope.isExisting = function() {
         return angular.isDefined($scope.depot) && angular.isDefined($scope.depot
           .id);
