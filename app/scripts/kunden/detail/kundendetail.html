@@ -260,6 +260,14 @@
                       <a role="button" class="btn btn-success" ng-click="enableLogin(person)"><span translate>Aktivieren</span></a>
                     </div>
                   </div>
+                  <div class="row form-group">
+                    <div class="col-md-4">
+                      <label for="sendEinladung" translate>Weblogin Einladung</label>
+                    </div>
+                    <div class="col-md-8">
+                      <a role="button" ng-enabled="person.email" class="btn btn-default" ng-click="sendEinladung(person)"><span translate>Einladung schicken</span></a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="panel-footer">

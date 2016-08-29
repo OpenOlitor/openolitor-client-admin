@@ -8,7 +8,8 @@ angular.module('openolitor-admin')
       var service = {
         deletePerson: deletePerson,
         disableLogin: disableLogin,
-        enableLogin: enableLogin
+        enableLogin: enableLogin,
+        sendEinladung: sendEinladung
       };
 
       return service;
@@ -23,6 +24,10 @@ angular.module('openolitor-admin')
 
       function enableLogin(kundeId, personId) {
         return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/loginaktivieren');
+      };
+
+      function sendEinladung(kundeId, personId) {
+        return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/einladungsenden');
       };
     }
   ]);

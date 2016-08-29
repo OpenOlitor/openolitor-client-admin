@@ -158,6 +158,10 @@ angular.module('openolitor-admin')
         KundenDetailService.enableLogin($routeParams.id, person.id);
       };
 
+      $scope.sendEinladung = function(person) {
+        KundenDetailService.sendEinladung($routeParams.id, person.id);
+      };
+
       $scope.addPendenz = function() {
         $scope.kunde.pendenzen.push({
           id: undefined,
