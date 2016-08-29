@@ -251,8 +251,8 @@ input.ng-invalid {
 }
 
 #lieferplanung .lieferplanung-title .navbar-brand .pre-info {
-  color: #ADADAD;
   font-size: 85%;
+  color: #555;
 }
 
 #lieferplanung .panel-lieferplanung {
@@ -261,6 +261,10 @@ input.ng-invalid {
 
 #lieferplanung .lieferplanung-produkte {
   min-height: calc( 100vh - 130px);
+}
+
+small.lieferplanung {
+  color: #555;
 }
 
 // scollable table for produkteliste
@@ -489,6 +493,15 @@ footer, .footer {
     width: 170px;
     text-align: center;
     padding: 50px 10px;
+    margin-left: 10px;
+}
+
+.drop-box-small {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 50px;
+    text-align: center;
+    padding: 10px 10px;
     margin-left: 10px;
 }
 

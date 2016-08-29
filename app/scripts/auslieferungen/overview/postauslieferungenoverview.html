@@ -26,6 +26,9 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[postauslieferung.id]" />
               </td>
+              <td data-title="'Nr. '|translate" sortable="'id'" >
+                <a ng-href="#/postauslieferungen/{{postauslieferung.id}}">{{postauslieferung.id}}</a>
+              </td>
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{postauslieferung.datum|date:"dd.MM.yyyy"}}
               </td>
@@ -42,6 +45,6 @@
     </div>
   </div>
   <div class="content-box col-md-3" ng-if="showGenerateReport">
-    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
   </div>
 </div>
