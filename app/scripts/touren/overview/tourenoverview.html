@@ -42,7 +42,7 @@
             <td>
               <div ng-hide="tour.editable || editing" class="pull-right">
                 <a role="button" class="btn btn-sm btn-primary" ng-click="edit(tour)"><span class="glyphicon glyphicon-edit"></span></a>
-                <oo-delete-button model="tour" entity="Tour" on-delete="delete" reduced="true" confirm="true"></oo-delete-button>
+                <oo-delete-button model="tour" ng-disabled="tour.anzahlAbonnenten > 0" entity="Tour" on-delete="delete" reduced="true" confirm="true"></oo-delete-button>
               </div>
               <div ng-show="tour.editable" class="pull-right">
                 <oo-save-button model="tour" form="tourForm" entity="Tour" on-save="save" reduced="true"></oo-save-button>
