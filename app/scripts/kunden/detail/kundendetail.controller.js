@@ -4,13 +4,13 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
-    '$routeParams', '$http',
+    '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel',
     'PendenzDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService',
-    function($scope, $rootScope, $filter, $routeParams, $http, $location,
+    function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal,
       gettext,
       KundenDetailModel, PendenzDetailModel, KundentypenService, alertService,
@@ -146,9 +146,20 @@ angular.module('openolitor-admin')
         var person = $scope.kunde.ansprechpersonen.splice(index, 1);
         //remove as well from remote side
         if ($routeParams.id && person[0].id) {
-          $http.delete(API_URL + 'kunden/' + $routeParams.id + '/personen/' +
-            person[0].id);
+          KundenDetailService.deletePerson($routeParams.id, person[0].id);
         }
+      };
+
+      $scope.disableLogin = function(person) {
+        KundenDetailService.disableLogin($routeParams.id, person.id);
+      };
+
+      $scope.enableLogin = function(person) {
+        KundenDetailService.enableLogin($routeParams.id, person.id);
+      };
+
+      $scope.sendEinladung = function(person) {
+        KundenDetailService.sendEinladung($routeParams.id, person.id);
       };
 
       $scope.addPendenz = function() {
@@ -321,6 +332,8 @@ angular.module('openolitor-admin')
           });
           $scope.$apply();
         } else if (msg.entity === 'Kunde') {
+          $scope.$apply();
+        } else if (msg.entity === 'PersonDetail') {
           $scope.$apply();
         }
       });
