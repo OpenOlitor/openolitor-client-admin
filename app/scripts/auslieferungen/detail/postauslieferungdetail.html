@@ -49,7 +49,7 @@
     </div>
   </div>
   <div class="content-box col-md-3" ng-if="showGenerateReport">
-    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'depotauslieferungen/berichte/'+reportType" ids="[model.id]" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'depotauslieferungen/berichte/'+reportType" ids="[model.id]" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
   </div>
   <div class="context content-box col-md-3" ng-if="selectedAbo">
     <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>

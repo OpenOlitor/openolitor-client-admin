@@ -3,13 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('KundenOverviewController', ['$q', '$scope', '$filter',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService',
-    function($q, $scope, $filter, KundenOverviewModel, NgTableParams,
-      KundentypenService) {
+  .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService',
+    function($q, $scope, $filter,$location,  KundenOverviewModel, NgTableParams,
+      KundentypenService, OverviewCheckboxUtil, VorlagenService) {
 
       $scope.entries = [];
       $scope.loading = false;
+      $scope.model = {};
 
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
@@ -35,6 +36,58 @@ angular.module('openolitor-admin')
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
+
+      $scope.checkboxes = {
+        checked: false,
+        checkedAny: false,
+        items: {},
+        css: '',
+        ids: []
+      };
+
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageKundenbrief');
+      };
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
+
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Kunde erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return $location.path('/kunden/new');
+        }
+      }, {
+        label: 'Kundenbrief',
+        noEntityText: true,
+        iconClass: 'fa fa-file',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -63,6 +116,8 @@ angular.module('openolitor-admin')
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy()) :
               orderedData;
+
+            $scope.filteredEntries = filteredData;
 
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());

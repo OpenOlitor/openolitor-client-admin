@@ -71,21 +71,12 @@ angular.module('openolitor-admin')
         $scope.newLieferplanung.$save();
       };
 
-      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
-        if (msg.entity === 'Lieferplanung') {
-          //wait till updated on lieferplanung are finished as well
-          $scope.createdId = msg.data.id;
-          $scope.$apply();
-        }
-      });
-      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-        if ($scope.createdId && msg.entity === 'Lieferplanung' && $scope.createdId ===
-          msg.data.id) {
+      msgBus.onMsg('DataEvent', $scope, function(event, msg) {
+        if (msg.entity === 'LieferplanungCreated') {
           $location.url('/lieferplanung/' + msg.data.id);
           $scope.loading = false;
           $scope.$apply();
         }
       });
-
     }
   ]);

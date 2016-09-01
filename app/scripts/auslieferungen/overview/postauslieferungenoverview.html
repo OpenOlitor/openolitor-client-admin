@@ -45,6 +45,6 @@
     </div>
   </div>
   <div class="content-box col-md-3" ng-if="showGenerateReport">
-    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
   </div>
 </div>
