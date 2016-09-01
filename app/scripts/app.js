@@ -130,6 +130,10 @@ angular
     ABGESCHLOSSEN: gettext('Abgeschlossen'),
     VERRECHNET: gettext('Verrechnet')
   })
+  .constant('BESTELLSTATUS', {
+    ABGESCHLOSSEN: gettext('Abgeschlossen'),
+    VERRECHNET: gettext('Verrechnet')
+  })
   .constant('RECHNUNGSTATUS', {
     ERSTELLT: gettext('Erstellt'),
     VERSCHICKT: gettext('Verschickt'),
@@ -410,6 +414,12 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
+      .when('/lieferantenabrechnungen', {
+        templateUrl: 'scripts/lieferantenabrechnungen/overview/lieferantenabrechnungenoverview.html',
+        controller: 'LieferantenAbrechnungenOverviewController',
+        name: 'LieferantenAbrechnungenOverview',
+        access: userRoles.Administrator
+      })
       .when('/produkte', {
         templateUrl: 'scripts/produkte/overview/produkteoverview.html',
         controller: 'ProdukteOverviewController',
@@ -566,6 +576,12 @@ angular
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
+      .when('/vorlagen', {
+        templateUrl: 'scripts/vorlagen/vorlagenoverview.html',
+        controller: 'VorlagenOverviewController',
+        name: 'VorlagenOverview',
         access: userRoles.Administrator
       });
   });

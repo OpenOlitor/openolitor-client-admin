@@ -7,7 +7,7 @@
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
-            <a role="button" href="#/depots/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Depot erstellen</span></a>
+            <oo-actions-button model="model" actions="actions">{{'Depot erstellen'|translate}}</oo-actions-button>
           </div>
         </form>
       </span>
@@ -18,8 +18,14 @@
         <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
       <div ng-show="entries">
+        <script type="text/ng-template" id="headerCheckbox.html">
+          <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+        </script>
         <table ng-table="tableParams" class="table table-striped">
           <tr ng-repeat="depot in $data | filter: search.query.$ ">
+            <td header="'headerCheckbox.html'">
+              <input type="checkbox" ng-model="checkboxes.items[depot.id]" />
+            </td>
             <td data-title="'Krzz.'|translate" sortable="'kurzzeichen'">
               <a ng-href="#/depots/{{depot.id}}">{{depot.kurzzeichen}}</a>
             </td>
@@ -50,4 +56,8 @@
       </div>
     </div>
   </div>
+</div>
+<div class="content-box col-md-3" ng-if="showGenerateReport">
+  <oo-generate-report on-close="closeBericht" on-generated="closeBericht" projekt-vorlagen="projektVorlagen()" post-path="'depots/berichte/depotbrief'" ids="checkboxes.ids" default-file-name="'Depotbrief.ods'"></oo-generate-report>
+</div>
 </div>

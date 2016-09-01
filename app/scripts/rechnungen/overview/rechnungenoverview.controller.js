@@ -8,11 +8,11 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil',
-    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'msgBus', 'lodash',
+    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'msgBus', 'lodash', 'VorlagenService',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash) {
+      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -77,6 +77,10 @@ angular.module('openolitor-admin')
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
       });
+
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageRechnung');
+      };
 
       // watch for data checkboxes
       $scope.$watch(function() {

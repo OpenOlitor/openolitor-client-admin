@@ -4,19 +4,75 @@
  */
 angular.module('openolitor-admin')
   .controller('DepotsOverviewController', ['$scope', '$filter',
-    'DepotsOverviewModel', 'NgTableParams',
-    function($scope, $filter, DepotsOverviewModel, NgTableParams) {
+    'DepotsOverviewModel', 'NgTableParams', 'OverviewCheckboxUtil',
+    'VorlagenService', '$location',
+    function($scope, $filter, DepotsOverviewModel, NgTableParams,
+      OverviewCheckboxUtil, VorlagenService, $location) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.model = {};
+      $scope.showGenerateReport = false;
 
       $scope.search = {
         query: ''
       };
 
+      $scope.checkboxes = {
+        checked: false,
+        checkedAny: false,
+        items: {},
+        css: '',
+        ids: []
+      };
+
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
+
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageDepotbrief');
+      };
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
+
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Depot erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return $location.path('/depots/new');
+        }
+      }, {
+        label: 'Depotbrief erstellen',
+        iconClass: 'fa fa-file',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -43,8 +99,11 @@ angular.module('openolitor-admin')
               filteredData;
             orderedData = $filter('filter')(orderedData, params.filter());
 
+            $scope.filteredEntries = filteredData;
+
             params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return orderedData.slice((params.page() - 1) * params.count(),
+              params.page() * params.count());
           }
 
         });

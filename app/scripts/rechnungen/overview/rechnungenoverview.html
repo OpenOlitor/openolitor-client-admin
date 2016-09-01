@@ -57,6 +57,6 @@
     </div>
   </div>
   <div class="content-box col-md-3" ng-if="showGenerateReport">
-    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnungen.zip'|translate"></oo-generate-report>
+    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
   </div>
 </div>
