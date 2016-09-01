@@ -7,6 +7,7 @@
           <h3 for="vorname">{{fullName() || 'Depot'|translate}}
             <div class="btn-group pull-right" role="group">
               <oo-save-button model="depot" form="depotForm" entity="Depot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Depot'|translate}}</oo-save-button>
+              <oo-delete-button ng-if="depot.anzahlAbonnenten == 0" model="depot" entity="Depot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
             </div>
           </h3>
         </div>
