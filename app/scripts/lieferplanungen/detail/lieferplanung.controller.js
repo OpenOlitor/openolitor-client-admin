@@ -447,15 +447,17 @@ angular.module('openolitor-admin')
           korbprodukt.menge * anzahl);
 
         if ($scope.produzentIstBesteuert(korbprodukt.produzentId)) {
+          lieferungByProduzent.steuerSatz = $scope.produzentSteuersatz(
+            korbprodukt.produzentId);
           lieferungByProduzent.steuer = (lieferungByProduzent.total / 100 *
-            $scope.produzentSteuersatz(
-              korbprodukt.produzentId));
+            lieferungByProduzent.steuerSatz);
           lieferungByProduzent.totalSteuer = (lieferungByProduzent.total +
             lieferungByProduzent.steuer);
 
+          bestellungByProduzent.steuerSatz = $scope.produzentSteuersatz(
+            korbprodukt.produzentId);
           bestellungByProduzent.steuer = (bestellungByProduzent.total / 100 *
-            $scope.produzentSteuersatz(
-              korbprodukt.produzentId));
+            bestellungByProduzent.steuerSatz);
           bestellungByProduzent.totalSteuer = (bestellungByProduzent.total +
             bestellungByProduzent.steuer);
         } else {
@@ -505,6 +507,7 @@ angular.module('openolitor-admin')
                     positionen: {},
                     total: bestellung.preisTotal,
                     steuer: bestellung.steuer,
+                    steuerSatz: bestellung.steuerSatz,
                     totalSteuer: bestellung.totalSteuer
                   };
                 LieferplanungModel.getBestellpositionen({

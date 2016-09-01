@@ -33,6 +33,7 @@
               <tbody sv-part="model.koerbe">
                 <tr ng-repeat="korb in model.koerbe | filter:itemFilter" style="cursor: move;" sv-element>
                   <td>
+                    <div ng-if="model.status === 'Ausgeliefert'" sv-handle style="display: none"></div>
                     <span>&#8942;</span> {{korb.sort}}
                   </td>
                   <td>
