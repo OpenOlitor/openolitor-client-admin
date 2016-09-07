@@ -6,10 +6,10 @@
         <div class="col-md-12">
           <div class="row form-group">
             <h3>
-              <div class="col-md-2">
+              <div class="col-md-8">
                 <span translate>Tour</span> <span>{{tour.name}}</span>
               </div>
-              <div class="col-md-10">
+              <div class="col-md-4">
                 <div class="btn-group pull-right" role="group">
             <oo-actions-button model="tour" form="tourForm" entity="Tour" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Tour'|translate}}</oo-actions-button>
             <oo-delete-button ng-if="isDeletable()" model="tour" entity="Tour" on-delete="delete" on-deleted="backToList"></oo-delete-button>
@@ -56,14 +56,14 @@
               <h3 class="panel-title"><span class="navbar-brand" translate>Tourlieferungen</span></h3>
             </div>
 
-            <div class="panel-body" sv-root sv-on-sort="onSort()">
+            <div class="panel-body" sv-root sv-on-sort="onSort($item, $partFrom, $partTo)">
               <div ng-if="hasUnsorted">
                 <h3 translate>Noch nicht sortierte Tourlieferungen</h3>
-                <oo-tourlieferungen tour="tour" item-filter="unsortFilter"></oo-tourlieferungen>
+                <oo-tourlieferungen tourlieferungen="unsortedTourlieferungen"></oo-tourlieferungen>
               </div>
               <div>
                 <h3 translate>Tourablauf</h3>
-                <oo-tourlieferungen tour="tour" item-filter="sortFilter"></oo-tourlieferungen>
+                <oo-tourlieferungen tourlieferungen="sortedTourlieferungen"></oo-tourlieferungen>
               </div>
             </div>
           </div>

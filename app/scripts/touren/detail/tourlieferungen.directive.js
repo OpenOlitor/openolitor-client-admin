@@ -7,7 +7,7 @@ angular.module('openolitor-admin').directive('ooTourlieferungen', [
       replace: true,
       scope: {
         itemFilter: '=',
-        tour: '='
+        tourlieferungen: '='
       },
       transclude: true,
       templateUrl: 'scripts/touren/detail/tourlieferungen.html'
