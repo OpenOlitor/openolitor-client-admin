@@ -103,14 +103,6 @@ angular.module('openolitor-admin')
         }) || {};
       };
 
-      $scope.getShortEinheit = function(einheitId) {
-        var liefereinheit = lodash.find($scope.liefereinheiten, function(
-          liefereinheit) {
-          return (liefereinheit.id === einheitId);
-        });
-        return !liefereinheit || liefereinheit.label.short;
-      };
-
       $scope.displayMode = 'korbinhalt';
 
       $scope.bestellungen = {};

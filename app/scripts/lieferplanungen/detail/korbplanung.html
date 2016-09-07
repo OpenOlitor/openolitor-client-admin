@@ -47,7 +47,7 @@
                 {{produkt.name}}
               </td>
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
-                {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{getShortEinheit(produkt.einheit)}}
+                {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
               </td>
               <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
                 <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
@@ -93,7 +93,7 @@
               </td>
               <td>
                 <span ng-if="!korbprodukt.unlisted">
-                    <div>{{liefereinheiten[korbprodukt.einheit.toUpperCase()].label.short}}</div>
+                    <div>{{liefereinheiten[korbprodukt.einheit.toUpperCase()].label.short|translate}}</div>
                   </span>
                 <span ng-if="korbprodukt.unlisted">
                     <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected="korbprodukt.einheit" ng-required></oo-dropdown>
