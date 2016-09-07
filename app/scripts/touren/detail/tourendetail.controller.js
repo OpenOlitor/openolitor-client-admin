@@ -7,7 +7,8 @@ angular.module('openolitor-admin')
     'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams',
     function($scope, $filter, TourenService, TourenDetailModel, NgTableParams, cloneObj, $routeParams) {
 
-      $scope.entries = [];
+      $scope.unsortedTourlieferungen = [];
+      $scope.sortedTourlieferungen = [];
       $scope.loading = false;
 
       var defaults = {
@@ -47,10 +48,18 @@ angular.module('openolitor-admin')
         });
       };
 
-      $scope.onSort = function() {
-        angular.forEach($scope.tour.tourlieferungen, function(tourlieferung, index) {
-          tourlieferung.sort = index;
-        });
+      $scope.onSort = function(movedTourlieferung, partFrom, partTo) {
+        // update the index of each sorted tourlieferung entry
+        if (partTo == $scope.sortedTourlieferungen) {
+          angular.forEach($scope.sortedTourlieferungen, function(tourlieferung, index) {
+            tourlieferung.sort = index;
+          });
+        }
+
+        // disable dropping back to unsorted
+        if (partTo == $scope.unsortedTourlieferungen && angular.isDefined(movedTourlieferung.sort)) {
+          $scope.unsortedTourlieferungen.splice(movedTourlieferung);
+        }
         $scope.checkUnsorted();
       };
 
@@ -71,19 +80,18 @@ angular.module('openolitor-admin')
         }
       }];
 
-      $scope.sortFilter = function(tourlieferung) {
-        return angular.isDefined(tourlieferung.sort);
-      };
-
-      $scope.unsortFilter = function(tourlieferung) {
-        return angular.isUndefined(tourlieferung.sort);
-      };
-
       $scope.checkUnsorted = function() {
         var hasUnsorted = false;
         angular.forEach($scope.tour.tourlieferungen, function(tourlieferung) {
           if (angular.isUndefined(tourlieferung.sort)) {
             hasUnsorted = true;
+            if ($scope.unsortedTourlieferungen.indexOf(tourlieferung) === -1) {
+              $scope.unsortedTourlieferungen.push(tourlieferung);
+            }
+          } else {
+            if ($scope.sortedTourlieferungen.indexOf(tourlieferung) === -1) {
+              $scope.sortedTourlieferungen.push(tourlieferung);
+            }
           }
         });
         $scope.hasUnsorted = hasUnsorted;
