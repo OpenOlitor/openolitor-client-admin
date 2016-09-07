@@ -15,7 +15,7 @@
               <div class="col-md-8">
                 <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
                 <div class="btn-group pull-right" role="group">
-                  <oo-save-button model="kunde" form="kundeForm" entity="Kunde" on-save="save" on-cancel="backToList" on-created="created">{{kundeBezeichnung() || 'Kunde'|translate}}</oo-save-button>
+                  <oo-save-button model="kunde" form="kundeForm" entity="Kunde" on-save="save" on-cancel="backToList" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-save-button>
                   <oo-delete-button ng-if="canDelete()" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
@@ -242,30 +242,36 @@
                     <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}"></textarea>
                   </div>
                 </div>
-                <div class="row panel panel-danger">
-                  <div class="panel-heading" translate>Gefahrenbereich</div>
-                  <div class="row form-group" ng-if="person.loginAktiv">
-                    <div class="col-md-4">
-                      <label for="disableLogin" translate>Weblogin deaktivieren</label>
-                    </div>
-                    <div class="col-md-8">
-                      <a role="button" class="btn btn-danger" ng-click="disableLogin(person)"><span translate>Deaktivieren</span></a>
-                    </div>
-                  </div>
-                  <div class="row form-group" ng-if="!person.loginAktiv">
-                    <div class="col-md-4">
-                      <label for="enableLogin" translate>Weblogin aktivieren</label>
-                    </div>
-                    <div class="col-md-8">
-                      <a role="button" class="btn btn-success" ng-click="enableLogin(person)"><span translate>Aktivieren</span></a>
-                    </div>
-                  </div>
-                  <div class="row form-group">
-                    <div class="col-md-4">
-                      <label for="sendEinladung" translate>Weblogin Einladung</label>
-                    </div>
-                    <div class="col-md-8">
-                      <a role="button" ng-enabled="person.email" class="btn btn-default" ng-click="sendEinladung(person)"><span translate>Einladung schicken</span></a>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel panel-danger">
+                      <div class="panel-heading" translate>Bitte mit Vorsicht!</div>
+                      <div class="panel-body">
+                        <div class="row form-group" ng-if="person.loginAktiv">
+                          <div class="col-md-4">
+                            <label for="disableLogin" translate>Weblogin deaktivieren</label>
+                          </div>
+                          <div class="col-md-8">
+                            <a role="button" class="btn btn-danger" ng-click="disableLogin(person)"><span translate>Deaktivieren</span></a>
+                          </div>
+                        </div>
+                        <div class="row form-group" ng-if="!person.loginAktiv">
+                          <div class="col-md-4">
+                            <label for="enableLogin" translate>Weblogin aktivieren</label>
+                          </div>
+                          <div class="col-md-8">
+                            <a role="button" class="btn btn-success" ng-click="enableLogin(person)"><span translate>Aktivieren</span></a>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-md-4">
+                            <label for="sendEinladung" translate>Weblogin Einladung</label>
+                          </div>
+                          <div class="col-md-8">
+                            <a role="button" ng-enabled="person.email" class="btn btn-default" ng-click="sendEinladung(person)"><span translate>Einladung schicken</span></a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
