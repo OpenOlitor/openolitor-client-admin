@@ -14,7 +14,7 @@ angular.module('openolitor-admin')
       },
       'addLieferung': {
         method: 'POST',
-        isArray: true,
+        isArray: false,
         url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId'
       },
       'removeLieferung': {
