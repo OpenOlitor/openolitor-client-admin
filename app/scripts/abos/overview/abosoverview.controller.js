@@ -64,12 +64,20 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
       };
 
-      $scope.selectAbo = function(abo) {
+      $scope.selectAbo = function(abo, itemId) {
+        var firstRow = angular.element('#abosTable table tbody tr').first();
+        var allButtons = angular.element('#abosTable table tbody button');
+        allButtons.removeClass('btn-warning');
+        var button = angular.element('#' + itemId);
+        button.addClass('btn-warning');
+        var offset = button.offset().top - firstRow.offset().top + 154;
+        angular.element('#selectedAboDetail').css('margin-top', offset);
         if ($scope.selectedAbo === abo) {
           $scope.selectedAbo = undefined;
         } else {
           $scope.selectedAbo = abo;
         }
+
       };
 
       if (!$scope.tableParams) {
