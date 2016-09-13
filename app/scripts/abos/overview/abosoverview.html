@@ -22,7 +22,7 @@
           <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
           <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Standardansicht' | translate}}"></i>
         </script>
-        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
+        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
