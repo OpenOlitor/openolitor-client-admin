@@ -219,27 +219,34 @@ angular
     };
   }])
   .factory('exportTable', ['FileSaver', function(FileSaver) {
-    return function(elementId, fileName) {
-      var blob = new Blob([angular.element(elementId).html()], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
+    return function(tableController, fileName) {
+      tableController.exportODS(function(file) {
+        FileSaver.saveAs(file.response, fileName);
       });
-      FileSaver.saveAs(blob, fileName);
     };
   }])
+  .factory('exportODSModuleFunction', function() {
+      return {
+          params: {
+            exportType: '.ods',
+          },
+          method: 'GET',
+          responseType: 'arraybuffer',
+          cache: true,
+          transformResponse: function (data) {
+              var file;
+              if (data) {
+                  file = new Blob([data], {
+                      type: 'application/vnd.oasis.opendocument.spreadsheet'
+                  });
+              }
+              return {
+                  response: file
+              };
+          }
+        };
+  })
   .factory('cloneObj', function() {
-    /*var cloneObjFun = function(obj) {
-      if (null === obj || 'object' !== typeof obj) {
-        return obj;
-      }
-      var copy = obj.constructor();
-      for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) {
-          copy[attr] = cloneObjFun(obj[attr]);
-        }
-      }
-      return copy;
-    };
-    return cloneObjFun;*/
     return function(obj) {
       return angular.copy(obj);
     };
