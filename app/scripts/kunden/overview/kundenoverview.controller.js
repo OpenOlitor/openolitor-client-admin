@@ -105,6 +105,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: KundenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;

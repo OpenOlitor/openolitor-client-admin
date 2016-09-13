@@ -28,6 +28,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: LieferplanungModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -57,7 +58,6 @@ angular.module('openolitor-admin')
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
       }
 
       search();

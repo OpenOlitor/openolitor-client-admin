@@ -18,7 +18,7 @@
       <div ng-hide="entries">
         <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-      <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
+      <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Lieferplanungen">
         <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="lieferplanung in $data">
             <td data-title="'#'|translate" sortable="'nr'">

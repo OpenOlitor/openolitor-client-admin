@@ -32,6 +32,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: ProduzentenModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;

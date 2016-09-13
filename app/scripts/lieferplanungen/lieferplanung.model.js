@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('LieferplanungModel', function($resource, API_URL) {
-    return $resource(API_URL + 'lieferplanungen/:id', {
+  .factory('LieferplanungModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
+    return $resource(API_URL + 'lieferplanungen/:id:exportType', {
       id: '@id'
     }, {
+      'exportODS': exportODSModuleFunction,
       'getLieferungen': {
         method: 'GET',
         isArray: true,
@@ -70,4 +71,4 @@ angular.module('openolitor-admin')
         url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
       },
     });
-  });
+  }]);

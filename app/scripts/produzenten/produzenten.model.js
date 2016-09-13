@@ -3,8 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ProduzentenModel', function($resource, API_URL) {
-    return $resource(API_URL + 'produzenten/:id', {
+  .factory('ProduzentenModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
+    return $resource(API_URL + 'produzenten/:id:exportType', {
       id: '@id'
+    }, {
+      'exportODS': exportODSModuleFunction
     });
-  });
+  }]);

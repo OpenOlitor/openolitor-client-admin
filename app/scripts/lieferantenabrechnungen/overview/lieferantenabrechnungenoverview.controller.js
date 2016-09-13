@@ -86,6 +86,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: LieferantenAbrechnungenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -107,7 +108,6 @@ angular.module('openolitor-admin')
 
         });
       }
-
 
       $scope.checkSelectedAbgeschlosseneBestellungen = function() {
         var length = $scope.checkboxes.ids.length;

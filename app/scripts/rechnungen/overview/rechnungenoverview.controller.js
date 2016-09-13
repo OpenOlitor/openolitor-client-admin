@@ -163,6 +163,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: RechnungenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
