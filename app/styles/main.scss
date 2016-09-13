@@ -206,6 +206,10 @@ input.ng-invalid {
   color: white;
 }
 
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
 .ng-table-export {
   float: right;
   margin-right: 10px;
