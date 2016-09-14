@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
-    'LieferplanungModel', 'NgTableParams', 'msgBus', '$location',
+    'LieferplanungModel', 'NgTableParams', 'msgBus', '$location', 'localeSensitiveComparator',
     function($q, $scope, $filter, LieferplanungModel, NgTableParams, msgBus,
-      $location) {
+      $location, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -36,7 +36,7 @@ angular.module('openolitor-admin')
             // use build-in angular filter
             var orderedData = $filter('filter')($scope.entries, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
               orderedData;
 
             params.total(orderedData.length);

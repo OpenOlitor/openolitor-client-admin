@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$filter',
-    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS',
-    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS) {
+    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator',
+    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -50,7 +50,7 @@ angular.module('openolitor-admin')
               .search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) : orderedData;
 
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
