@@ -17,7 +17,7 @@
         <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
       <div ng-show="entries">
-        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
           <tr ng-repeat="pendenz in $data | filter: search.query.$">
             <td data-title="'Datum'|translate" sortable="'datum'">
               {{pendenz.datum|date:"dd.MM.yyyy"}}
