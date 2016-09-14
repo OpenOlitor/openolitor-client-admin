@@ -225,6 +225,33 @@ angular
       });
     };
   }])
+  .factory('localeSensitiveComparator', function() {
+    return function(v1, v2) {
+
+      var isString = function (value) {
+        return (typeof value.value === 'string');
+      };
+
+      var isNumber = function (value) {
+        return (typeof value.value === 'number');
+      };
+
+      var isBoolean = function (value) {
+        return (typeof value.value === 'boolean');
+      };
+
+      if (isString(v1)) {
+        return v1.value.localeCompare(v2.value);
+      }
+
+      if (isNumber(v1) || isBoolean(v1)) {
+        return v1.value - v2.value;
+      }
+
+      // If we don't get strings, numbers or booleans, just compare by index
+      return (v1.index < v2.index) ? -1 : 1;
+    };
+  })
   .factory('exportODSModuleFunction', function() {
       return {
           params: {

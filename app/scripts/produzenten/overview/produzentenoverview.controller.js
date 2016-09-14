@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
-    'ProduzentenModel', 'NgTableParams',
-    function($q, $scope, $filter, ProduzentenModel, NgTableParams) {
+    'ProduzentenModel', 'NgTableParams', 'localeSensitiveComparator',
+    function($q, $scope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -42,7 +42,7 @@ angular.module('openolitor-admin')
               $scope
               .search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+            orderedData = params.sorting ? $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) : orderedData;
 
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());

@@ -4,8 +4,12 @@
  */
 angular.module('openolitor-admin')
   .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
-    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService', 'NgTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService, ProduktekategorienService, NgTableParams, EnumUtil, cloneObj, LIEFEREINHEIT, MONATE, lodash) {
+    'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService',
+    'NgTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
+    'localeSensitiveComparator',
+    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService,
+      ProduktekategorienService, NgTableParams, EnumUtil, cloneObj, LIEFEREINHEIT,
+      MONATE, lodash, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -106,7 +110,7 @@ angular.module('openolitor-admin')
               $scope.search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
               filteredData;
 
             params.total(orderedData.length);

@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -106,7 +106,7 @@ angular.module('openolitor-admin')
               .search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
               orderedData;
 
             $scope.filteredEntries = filteredData;

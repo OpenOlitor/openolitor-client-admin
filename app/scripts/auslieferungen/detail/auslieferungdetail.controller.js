@@ -7,10 +7,10 @@ angular.module('openolitor-admin')
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'VorlagenService',
+    'VorlagenService', 'localeSensitiveComparator',
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService) {
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator) {
 
       $scope.loading = false;
       $scope.model = {};
@@ -104,7 +104,7 @@ angular.module('openolitor-admin')
               .search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
               orderedData;
 
             params.total(orderedData.length);
