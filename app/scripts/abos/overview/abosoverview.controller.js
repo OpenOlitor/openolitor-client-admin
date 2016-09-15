@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -64,12 +64,20 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
       };
 
-      $scope.selectAbo = function(abo) {
+      $scope.selectAbo = function(abo, itemId) {
+        var firstRow = angular.element('#abosTable table tbody tr').first();
+        var allButtons = angular.element('#abosTable table tbody button');
+        allButtons.removeClass('btn-warning');
+        var button = angular.element('#' + itemId);
+        button.addClass('btn-warning');
+        var offset = button.offset().top - firstRow.offset().top + 154;
+        angular.element('#selectedAboDetail').css('margin-top', offset);
         if ($scope.selectedAbo === abo) {
           $scope.selectedAbo = undefined;
         } else {
           $scope.selectedAbo = abo;
         }
+
       };
 
       if (!$scope.tableParams) {
@@ -88,6 +96,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: AbosOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -97,7 +106,7 @@ angular.module('openolitor-admin')
               .search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
               orderedData;
 
             $scope.filteredEntries = filteredData;

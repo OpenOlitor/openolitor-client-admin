@@ -206,6 +206,15 @@ input.ng-invalid {
   color: white;
 }
 
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+.ng-table-export {
+  float: right;
+  margin-right: 10px;
+}
+
 .openolitor .ng-table th {
   text-align: left;
 }
@@ -256,11 +265,11 @@ input.ng-invalid {
 }
 
 #lieferplanung .panel-lieferplanung {
-  min-height: 30vh;
+
 }
 
 #lieferplanung .lieferplanung-produkte {
-  min-height: calc( 100vh - 130px);
+  min-height: 300vh;
 }
 
 small.lieferplanung {
@@ -387,9 +396,10 @@ footer, .footer {
   text-align: right;
   background-color: rgba(255, 255, 255, 0.3);
   color: white;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-right: 20px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 10px;
+  z-index: 0;
 }
 
 .openolitor>footer a:link, .openolitor>footer a:active, .openolitor>footer a:visited{

@@ -4,8 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('ZahlungsImportsOverviewController', ['$q', '$scope', '$filter',
-    'ZahlungsImportsOverviewModel', 'NgTableParams',
-    function($q, $scope, $filter, ZahlungsImportsOverviewModel, NgTableParams) {
+    'ZahlungsImportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator',
+    function($q, $scope, $filter, ZahlungsImportsOverviewModel, NgTableParams,
+      localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -40,7 +41,7 @@ angular.module('openolitor-admin')
               $scope.search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
               orderedData;
 
             params.total(orderedData.length);

@@ -219,27 +219,61 @@ angular
     };
   }])
   .factory('exportTable', ['FileSaver', function(FileSaver) {
-    return function(elementId, fileName) {
-      var blob = new Blob([angular.element(elementId).html()], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
+    return function(tableController, fileName) {
+      tableController.exportODS(function(file) {
+        FileSaver.saveAs(file.response, fileName);
       });
-      FileSaver.saveAs(blob, fileName);
     };
   }])
-  .factory('cloneObj', function() {
-    /*var cloneObjFun = function(obj) {
-      if (null === obj || 'object' !== typeof obj) {
-        return obj;
+  .factory('localeSensitiveComparator', function() {
+    return function(v1, v2) {
+
+      var isString = function (value) {
+        return (typeof value.value === 'string');
+      };
+
+      var isNumber = function (value) {
+        return (typeof value.value === 'number');
+      };
+
+      var isBoolean = function (value) {
+        return (typeof value.value === 'boolean');
+      };
+
+      if (isString(v1)) {
+        return v1.value.localeCompare(v2.value);
       }
-      var copy = obj.constructor();
-      for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) {
-          copy[attr] = cloneObjFun(obj[attr]);
-        }
+
+      if (isNumber(v1) || isBoolean(v1)) {
+        return v1.value - v2.value;
       }
-      return copy;
+
+      // If we don't get strings, numbers or booleans, just compare by index
+      return (v1.index < v2.index) ? -1 : 1;
     };
-    return cloneObjFun;*/
+  })
+  .factory('exportODSModuleFunction', function() {
+      return {
+          params: {
+            exportType: '.ods',
+          },
+          method: 'GET',
+          responseType: 'arraybuffer',
+          cache: true,
+          transformResponse: function (data) {
+              var file;
+              if (data) {
+                  file = new Blob([data], {
+                      type: 'application/vnd.oasis.opendocument.spreadsheet'
+                  });
+              }
+              return {
+                  response: file
+              };
+          }
+        };
+  })
+  .factory('cloneObj', function() {
     return function(obj) {
       return angular.copy(obj);
     };

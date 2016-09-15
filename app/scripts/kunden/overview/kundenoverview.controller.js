@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService',
-    function($q, $scope, $filter,$location,  KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService) {
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator',
+    function($q, $scope, $filter, $location,  KundenOverviewModel, NgTableParams,
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -95,7 +95,7 @@ angular.module('openolitor-admin')
           page: 1,
           count: 10,
           sorting: {
-            name: 'asc'
+            bezeichnung: 'asc'
           },
           filter: {
             typen: ''
@@ -105,6 +105,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: KundenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -114,7 +115,7 @@ angular.module('openolitor-admin')
               $scope.search.query);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
               orderedData;
 
             $scope.filteredEntries = filteredData;

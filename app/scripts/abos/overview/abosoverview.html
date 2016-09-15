@@ -19,17 +19,17 @@
           <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
         </script>
         <script type="text/ng-template" id="headerShowAll.html">
-          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
-          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" uib-tooltip="{{'Standardansicht' | translate}}"></i>
+          <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Standardansicht' | translate}}"></i>
         </script>
-        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos">
+        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[abo.id]" />
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'" filter="{id: 'number'}">
-                <a ng-click="selectAbo(abo)">{{abo.id}}</a>
+                <a ng-click="selectAbo(abo, 'detailButton_{{abo.id}}')">{{abo.id}}</a>
               </td>
               <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
@@ -65,7 +65,7 @@
               <td  header="'headerShowAll.html'">
                 <div class="pull-right">
                   <div class="btn-group" ng-hide="updatingAbo(abo)">
-                    <button uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                    <button id="detailButton_{{abo.id}}" uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo, 'detailButton_{{abo.id}}')" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
                   </div>
                   <i ng-show="updatingAbo(abo)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </div>
@@ -76,8 +76,8 @@
       </div>
     </div>
   </div>
-  <div class="context content-box col-md-3" ng-if="selectedAbo">
-    <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>
+  <div id="selectedAboDetail" class="context content-box col-md-3" ng-show="selectedAbo">
+    <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id" ng-if="selectedAbo"></oo-abos-detail>
   </div>
   <div class="context content-box col-md-3" ng-if="showCreateRechnungenDialog">
     <oo-abos-overview-create-rechnungen on-close="closeCreateRechnungenDialog" abo-ids="checkboxes.ids"></oo-abos-overview-create-rechnungen>

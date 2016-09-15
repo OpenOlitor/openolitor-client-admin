@@ -8,10 +8,10 @@ angular.module('openolitor-admin')
     'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
-    'msgBus', 'lodash',
+    'msgBus', 'lodash', 'localeSensitiveComparator',
     function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
-      BESTELLSTATUS, EnumUtil, msgBus, lodash) {
+      BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -86,6 +86,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: LieferantenAbrechnungenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -95,7 +96,7 @@ angular.module('openolitor-admin')
               .search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
               orderedData;
 
             $scope.filteredEntries = filteredData;
@@ -107,7 +108,6 @@ angular.module('openolitor-admin')
 
         });
       }
-
 
       $scope.checkSelectedAbgeschlosseneBestellungen = function() {
         var length = $scope.checkboxes.ids.length;

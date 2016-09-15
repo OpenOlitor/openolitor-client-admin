@@ -7,12 +7,13 @@ angular.module('openolitor-admin')
     '$location',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil',
-    'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'msgBus', 'lodash', 'VorlagenService',
+    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
+    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService) {
+      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
+      localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -163,6 +164,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
+          exportODSModel: RechnungenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -172,7 +174,7 @@ angular.module('openolitor-admin')
               $scope.search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy()) :
+              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
               orderedData;
 
             $scope.filteredEntries = filteredData;
