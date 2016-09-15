@@ -31,6 +31,10 @@
                   <i ng-hide="rechnung.isDownloading" ng-click="downloadRechnung(rechnung)" class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   <i ng-show="rechnung.isDownloading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </span>
+                <span ng-repeat="fileId in rechnung.mahnungFileStoreIds" role="button" ng-if="rechnung.mahnungFileStoreIds && fileId !== ''">
+                  <i ng-hide="rechnung.isDownloadingMahnung" ng-click="downloadMahnung(rechnung, fileId)" class="fa fa-file-pdf-o" aria-hidden="true" style="color:darkred"></i>
+                  <i ng-show="rechnung.isDownloadingMahnung" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
               </td>
               <td data-title="'Titel'|translate" sortable="'titel'">
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
@@ -56,7 +60,10 @@
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
-    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
+  <div class="content-box col-md-3" ng-if="showGenerateRechnungReport">
+    <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
+  </div>
+  <div class="content-box col-md-3" ng-if="showGenerateMahnungReport">
+    <oo-generate-report on-close="closeMahnungBericht" on-generated="closeMahnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/mahnungen'" ids="checkboxes.ids" default-file-name="'Mahnung.ods'"></oo-generate-report>
   </div>
 </div>

@@ -42,10 +42,20 @@ angular.module('openolitor-admin')
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
         FileUtil.downloadGet('rechnungen/' + rechnung.id +
-          '/aktionen/download', 'Rechnung ' + rechnung.id,
+          '/aktionen/downloadrechnung', 'Rechnung ' + rechnung.id,
           'application/pdf',
           function() {
             rechnung.isDownloading = false;
+          });
+      };
+
+      $scope.downloadMahnung = function(rechnung, fileId) {
+        rechnung.isDownloadingMahnung = true;
+        FileUtil.downloadGet('rechnungen/' + rechnung.id +
+          '/aktionen/download/' + fileId, 'Rechnung ' + rechnung.id + ' Mahnung',
+          'application/pdf',
+          function() {
+            rechnung.isDownloadingMahnung = false;
           });
       };
 
@@ -100,10 +110,10 @@ angular.module('openolitor-admin')
           return $location.path('/rechnungen/new');
         }
       }, {
-        label: 'Dokumente erstellen',
+        label: 'Rechnungsdokumente erstellen',
         iconClass: 'fa fa-file',
         onExecute: function() {
-          $scope.showGenerateReport = true;
+          $scope.showGenerateRechnungReport = true;
           return true;
         },
         isDisabled: function() {
@@ -112,10 +122,35 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Dokumente herunterladen',
+        label: 'Mahnungsdokumente erstellen',
+        iconClass: 'fa fa-file',
+        onExecute: function() {
+          $scope.showGenerateMahnungReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny ||
+            alleRechnungenStorniertOderBezahlt($scope.checkboxes.ids,
+              $scope.checkboxes.data);
+        }
+      }, {
+        label: 'Rechnungsdokumente herunterladen',
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return FileUtil.downloadPost('rechnungen/aktionen/download', {
+          return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
+            'ids': $scope.checkboxes.ids
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny ||
+            !hasRechnungDocument($scope.checkboxes.ids,
+              $scope.checkboxes.data);
+        }
+      }, {
+        label: 'Mahnungsdokumente herunterladen',
+        iconClass: 'fa fa-download',
+        onExecute: function() {
+          return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
             'ids': $scope.checkboxes.ids
           });
         },
@@ -217,8 +252,12 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
-      $scope.closeBericht = function() {
-        $scope.showGenerateReport = false;
+      $scope.closeRechnungBericht = function() {
+        $scope.showGenerateRechnungReport = false;
+      };
+
+      $scope.closeMahnungBericht = function() {
+        $scope.showGenerateMahnungReport = false;
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
