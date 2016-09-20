@@ -8,7 +8,7 @@ angular.module('openolitor-admin')
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
-  'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'VorlagenService',
+    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'VorlagenService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
@@ -171,6 +171,16 @@ angular.module('openolitor-admin')
           });
       };
 
+      $scope.downloadMahnung = function(fileId) {
+        $scope.isDownloadingMahnung = true;
+        FileUtil.downloadGet('rechnungen/' + $scope.rechnung.id +
+          '/aktionen/download/' + fileId, 'Rechnung ' + $scope.rechnung.id + ' Mahnung',
+          'application/pdf',
+          function() {
+            $scope.isDownloadingMahnung = false;
+          });
+      };
+
       $scope.actions = [{
         labelFunction: function() {
           if ($scope.isExisting()) {
@@ -238,10 +248,24 @@ angular.module('openolitor-admin')
             RECHNUNGSTATUS.VERSCHICKT;
         }
       }, {
-        label: 'Dokument erstellen',
+        label: 'Rechnungsdokument erstellen',
         iconClass: 'fa fa-file',
         onExecute: function() {
-          $scope.showGenerateReport = true;
+          $scope.showGenerateRechnungReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.isExisting() ||
+            $scope.isExisting() && (
+              $scope.rechnung.status === RECHNUNGSTATUS.STORNIERT ||
+              $scope.rechnung.status === RECHNUNGSTATUS.BEZAHLT);
+        },
+        noEntityText: true
+      }, {
+        label: 'Mahnungsdokument erstellen',
+        iconClass: 'fa fa-file',
+        onExecute: function() {
+          $scope.showGenerateMahnungReport = true;
           return true;
         },
         isDisabled: function() {
@@ -257,8 +281,12 @@ angular.module('openolitor-admin')
         return $scope.rechnung.$delete();
       };
 
-      $scope.closeBericht = function() {
-        $scope.showGenerateReport = false;
+      $scope.closeRechnungBericht = function() {
+        $scope.showGenerateRechnungReport = false;
+      };
+
+      $scope.closeMahnungBericht = function() {
+        $scope.showGenerateMahnungReport = false;
       };
     }
   ]);

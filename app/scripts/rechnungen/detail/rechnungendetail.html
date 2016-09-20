@@ -6,14 +6,18 @@
         <div class="col-md-12">
           <div class="row form-group">
             <h3>
-              <div class="col-md-2" translate>
+              <div class="col-md-4" translate>
                 Rechnung
                 <span role="button" ng-if="rechnung.fileStoreId">
                   <i ng-hide="isDownloading" ng-click="downloadRechnung()" class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   <i ng-show="isDownloading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </span>
+                <span ng-repeat="fileId in rechnung.mahnungFileStoreIds" role="button" ng-if="rechnung.mahnungFileStoreIds && fileId !== ''">
+                  <i ng-hide="isDownloadingMahnung" ng-click="downloadMahnung(fileId)" class="fa fa-file-pdf-o" aria-hidden="true" style="color:darkred"></i>
+                  <i ng-show="isDownloadingMahnung" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
               </div>
-              <div class="col-md-10">
+              <div class="col-md-8">
                 <div class="btn-group pull-right" role="group">
                   <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-actions-button>
                   <oo-delete-button ng-if="isDeletable()" model="rechnung" entity="Rechnung" on-delete="delete" on-deleted="backToList"></oo-delete-button>
@@ -218,7 +222,10 @@
       </div>
     </form>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
-    <oo-generate-report on-close="closeBericht" on-generated="closeBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/' + rechnung.id + '/berichte/rechnung'" default-file-name="'Rechnung.odt'|translate"></oo-generate-report>
+  <div class="content-box col-md-3" ng-if="showGenerateRechnungReport">
+    <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/' + rechnung.id + '/berichte/rechnung'" default-file-name="'Rechnung.odt'|translate"></oo-generate-report>
+  </div>
+  <div class="content-box col-md-3" ng-if="showGenerateMahnungReport">
+    <oo-generate-report on-close="closeMahnungBericht" on-generated="closeMahnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/' + rechnung.id + '/berichte/mahnung'" default-file-name="'Mahnung.odt'|translate"></oo-generate-report>
   </div>
 </div>
