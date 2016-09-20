@@ -124,13 +124,10 @@
             </tr>
             <tfoot ng-show="projekt.preiseSichtbar">
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="3"></td>
                 <td translate>Total</td>
                 <td>{{getTotal(abotypLieferung.lieferpositionen)| ooCHF}}</td>
-                <td><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCHF)">&#916; {{getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen)| ooCHF}}</span></td>
-                <td></td>
+                <td colspan="2"><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCHF)">&#916;&nbsp;{{getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen)| ooCHF}}</span></td>
               </tr>
             </tfoot>
           </table>
