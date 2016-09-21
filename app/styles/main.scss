@@ -228,6 +228,10 @@ input.ng-invalid {
   border-radius: 3px;
 }
 
+.openolitor .table-small {
+  margin-bottom: 0px;
+}
+
 .openolitor .table-small select,
 .openolitor .table-small input,
 .openolitor .table-small .btn,
@@ -244,7 +248,10 @@ input.ng-invalid {
 .openolitor .table-small > thead > tr > td,
 .openolitor .table-small > tbody > tr > td,
 .openolitor .table-small > tfoot > tr > td {
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 .nonboxed-title .navbar-brand {
