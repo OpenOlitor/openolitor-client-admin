@@ -6,11 +6,11 @@ angular.module('openolitor-admin')
   .controller('OpenOlitorRootController', ['$scope', '$rootScope',
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-    'ENV',
+    'ENV', 'cssInjector', 'API_URL',
     'ooAuthService',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
-      $timeout, BUILD_NR, ENV, ooAuthService) {
+      $timeout, BUILD_NR, ENV, cssInjector, API_URL, ooAuthService) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
@@ -92,5 +92,6 @@ angular.module('openolitor-admin')
         unwatchStaticServerInfo();
       });
 
+      cssInjector.add(API_URL + 'ressource/style/admin');
     }
   ]);

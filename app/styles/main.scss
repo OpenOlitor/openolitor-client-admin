@@ -22,6 +22,10 @@ h3 .small {
   margin-right: 5px;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 //ng validator
 .oo-invalid,
 input.ng-invalid {
@@ -509,8 +513,9 @@ footer, .footer {
     border: 5px dashed #DDD;
     width: 170px;
     text-align: center;
-    padding: 50px 10px;
+    padding: 30px 10px;
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .drop-box-small {
