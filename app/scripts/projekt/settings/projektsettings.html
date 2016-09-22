@@ -144,6 +144,34 @@
                   <span ng-if="logoUrl" translate>Ein neues Logo auswählen oder einfügen</span>
                 </div>
               </div>
+
+              <div class="col-md-5">
+                <label for="logo" translate>Style (Admin-Seite)</label>
+              </div>
+              <div class="col-md-2" ng-if="logoUrl">
+                <a href="" ng-click="downloadStyle('admin')" translate>Download</a>
+              </div>
+              <div class="col-md-5">
+                <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
+                  ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-admin')"
+                  ngf-drop="uploadStyle($file, 'style-admin')">
+                  CSS-Datei auswählen oder einfügen
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <label for="logo" translate>Style (Kundenportal)</label>
+              </div>
+              <div class="col-md-2" ng-if="logoUrl">
+                <a href="" ng-click="downloadStyle('kundenportal')" translate>Download</a>
+              </div>
+              <div class="col-md-5">
+                <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
+                  ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-kundenportal')"
+                  ngf-drop="uploadStyle($file, 'style-kundenportal')">
+                  CSS-Datei auswählen oder einfügen
+                </div>
+              </div>
             </div>
           </div>
         </div>

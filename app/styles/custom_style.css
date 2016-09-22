@@ -1,0 +1,14 @@
+/* Upload your custom CSS file here and style your application the way you want */
+
+/* Use the .admin - class in order to access everything on the administrative backend */
+
+
+body.admin {
+  /*font-weight: bold;*/
+}
+
+/* Use the .portal - class in order to access everything on the customer frontend */
+
+body.portal {
+  /*font-weight: bold;*/
+}

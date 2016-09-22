@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="openolitor-admin">
 
 <head>
   <meta charset="utf-8">
@@ -34,7 +34,7 @@
   <!-- endbuild -->
 </head>
 
-<body class="white openolitor" ng-app="openolitor-admin" ng-controller="OpenOlitorRootController">
+<body class="white openolitor" ng-controller="OpenOlitorRootController">
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -43,9 +43,14 @@
         <a class="navbar-brand" ng-href="#/abos">OpenOlitor</a>
         <p class="navbar-text"><span translate>Administrationsumgebung für</span> <span>{{projekt.bezeichnung}}</span></p>
         <ul class="nav navbar-nav pull-right">
-          <li class="active lang-chooser" ng-hide="activeLang() === 'de'"><a role="button" ng-click="changeLang('de')" title="Deutsch"><span>DE</span></a></li>
-          <li class="active lang-chooser" ng-hide="activeLang() === 'fr'"><a role="button" ng-click="changeLang('fr')" title="Français"><span>FR</span></a></li>
-          <li class="active lang-chooser" ng-hide="activeLang() === 'en'"><a role="button" ng-click="changeLang('en')" title="English"><span>EN</span></a></li>
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{activeLang()}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li ng-hide="activeLang() === 'de'"><a role="button" ng-click="changeLang('de')" title="Deutsch"><span>Deutsch</span></a></li>
+              <li ng-hide="activeLang() === 'fr'"><a role="button" ng-click="changeLang('fr')" title="Français"><span>Français</span></a></li>
+              <li ng-hide="activeLang() === 'en'"><a role="button" ng-click="changeLang('en')" title="English"><span>English</span></a></li>
+            </ul>
+          </li>
           <li class="dropdown" ng-show="loggedIn">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.vorname}} {{user.name}} <span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right">
@@ -151,6 +156,7 @@
   <script src="bower_components/ng-password-strength/dist/scripts/ng-password-strength.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
+  <script src="bower_components/angular-css-injector/angular-css-injector.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <!-- endbower -->
   <!-- endbuild -->

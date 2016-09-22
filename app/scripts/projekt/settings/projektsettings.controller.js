@@ -12,6 +12,7 @@ angular.module('openolitor-admin')
     'ProjektService',
     'ProjektModel',
     'EnumUtil',
+    'FileSaver',
     'MONATE',
     'WAEHRUNG',
     'Upload',
@@ -19,7 +20,8 @@ angular.module('openolitor-admin')
     'API_URL',
     function($scope, $filter, NgTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-      ProjektService, ProjektModel, EnumUtil, MONATE, WAEHRUNG, Upload, msgBus, API_URL
+      ProjektService, ProjektModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
+      Upload, msgBus, API_URL
     ) {
       $scope.templateKundentyp = {};
       $scope.templateProduktekategorie = {};
@@ -331,6 +333,31 @@ angular.module('openolitor-admin')
 
       $scope.generateLogoUrl = function() {
         return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
+      };
+
+      $scope.downloadStyle = function(style) {
+        ProjektModel.fetchStyle({
+          style: style
+        }, function(file) {
+          FileSaver.saveAs(file.response, style + '.css');
+        });
+      };
+
+      $scope.uploadStyle = function(file, style) {
+        if (!file) {
+          return;
+        }
+        Upload.upload({
+          url: API_URL + 'projekt/' + $scope.projekt.id + '/' + style,
+          data: {
+            file: file
+          }
+        }).then(function() {
+          //regenerate logo url to reload image
+          $scope.logoUrl = $scope.generateLogoUrl();
+        }, function(resp) {
+          console.log('Error status: ' + resp.status);
+        });
       };
 
       $scope.localeBCP47Pattern = /^(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)|((en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang)))$/;
