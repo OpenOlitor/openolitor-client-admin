@@ -35,8 +35,6 @@
             <tr ng-repeat="abw in $data | filter:(showAllAbwesenheiten || '') && {abw: {lieferung : {status: 'Offen'}}} | orderBy:'datum'">
               <td data-title="'Datum'|translate">
                 {{abw.datum|date:"EEE, dd.MM.yyyy"}}
-              </td>
-              <td data-title="'Bemerkung'|translate">
                 <i ng-if="abw.bemerkung"  class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{abw.bemerkung}}" tooltip-popup-close-delay="500"></i>
               </td>
               <td header="'headerSwitch.html'">

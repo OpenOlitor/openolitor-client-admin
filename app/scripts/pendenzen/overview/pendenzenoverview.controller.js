@@ -81,5 +81,14 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
+      $scope.isUnresolved = function(pendenz) {
+        return !angular.isUndefined(pendenz.status) && pendenz.status === PENDENZSTATUS.AUSSTEHEND;
+      };
+
+      $scope.markErledigt = function(pendenz) {
+        pendenz.status = PENDENZSTATUS.ERLEDIGT;
+        new PendenzenOverviewModel(pendenz).$save();
+      };
+
     }
   ]);
