@@ -5,7 +5,7 @@
 angular.module('openolitor-admin')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', 'KundenDetailService',
-    '$location', '$uibModal', 'gettext', 'KundenDetailModel',
+    '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
     'PendenzDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
@@ -13,7 +13,7 @@ angular.module('openolitor-admin')
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal,
       gettext,
-      KundenDetailModel, PendenzDetailModel, KundentypenService, alertService,
+      KundenDetailModel, ROLLE, PendenzDetailModel, KundentypenService, alertService,
       EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel, ooAuthService) {
@@ -36,6 +36,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
+      $scope.rollen = EnumUtil.asArray(ROLLE);
       $scope.anreden = ANREDE;
       $scope.updatingAbo = {};
       $scope.selectedAbo = undefined;
@@ -160,6 +161,10 @@ angular.module('openolitor-admin')
 
       $scope.sendEinladung = function(person) {
         KundenDetailService.sendEinladung($routeParams.id, person.id);
+      };
+
+      $scope.changeRolle = function(person) {
+        KundenDetailService.changeRolle($routeParams.id, person.id, person.rolle);
       };
 
       $scope.addPendenz = function() {
@@ -305,6 +310,7 @@ angular.module('openolitor-admin')
                 msg.data.vorname && person.name === msg.data.name) {
                 //set id that entity won't get created twice
                 person.id = msg.data.id;
+                person.rolle = msg.data.rolle;
                 $scope.$apply();
                 return;
               }
@@ -334,7 +340,15 @@ angular.module('openolitor-admin')
         } else if (msg.entity === 'Kunde') {
           $scope.$apply();
         } else if (msg.entity === 'PersonDetail') {
-          $scope.$apply();
+          if ($scope.kunde) {
+            angular.forEach($scope.kunde.ansprechpersonen, function(person) {
+              if (person.id === msg.data.id) {
+                DataUtil.update(msg.data, person);
+                $scope.$apply();
+                return;
+              }
+            });
+          }
         }
       });
 

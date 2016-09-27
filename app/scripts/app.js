@@ -209,6 +209,10 @@ angular
     ERFASST: gettext('Erfasst'),
     AUSGELIEFERT: gettext('Ausgeliefert'),
   })
+  .constant('ROLLE', {
+    KUNDE: gettext('Kunde'),
+    ADMINISTRATOR: gettext('Administrator'),
+  })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
