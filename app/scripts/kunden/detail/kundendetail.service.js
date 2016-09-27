@@ -9,7 +9,8 @@ angular.module('openolitor-admin')
         deletePerson: deletePerson,
         disableLogin: disableLogin,
         enableLogin: enableLogin,
-        sendEinladung: sendEinladung
+        sendEinladung: sendEinladung,
+        changeRolle: changeRolle
       };
 
       return service;
@@ -28,6 +29,10 @@ angular.module('openolitor-admin')
 
       function sendEinladung(kundeId, personId) {
         return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/einladungsenden');
+      };
+
+      function changeRolle(kundeId, personId, rolle) {
+        return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/rollewechseln', '"' + rolle + '"');
       };
     }
   ]);
