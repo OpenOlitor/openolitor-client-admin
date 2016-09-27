@@ -29,7 +29,7 @@
                 <input type="checkbox" ng-model="checkboxes.items[abo.id]" />
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'" filter="{id: 'number'}">
-                <a ng-click="selectAbo(abo, 'detailButton_{{abo.id}}')">{{abo.id}}</a>
+                <a ng-click="selectAbo(abo, 'detailButton_' + abo.id)">{{abo.id}}</a>
               </td>
               <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
@@ -65,7 +65,7 @@
               <td  header="'headerShowAll.html'">
                 <div class="pull-right">
                   <div class="btn-group" ng-hide="updatingAbo(abo)">
-                    <button id="detailButton_{{abo.id}}" uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo, 'detailButton_{{abo.id}}')" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                    <button id="detailButton_{{abo.id}}" uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo, 'detailButton_' + abo.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
                   </div>
                   <i ng-show="updatingAbo(abo)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </div>
