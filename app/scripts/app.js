@@ -142,6 +142,13 @@ angular
     MAHNUNG_VERSCHICKT: gettext('MahnungVerschickt'),
     STORNIERT: gettext('Storniert')
   })
+  .constant('KORBSTATUS', {
+    WIRDGELIEFERT: gettext('WirdGeliefert'),
+    GELIEFERT: gettext('Geliefert'),
+    FAELLTAUSABWESEND: gettext('FaelltAusAbwesend'),
+    FAELLTAUSSALDOZUTIEF: gettext('FaelltAusSaldoZuTief'),
+    FAELLTAUSGEKUENDIGT: gettext('FaelltAusGekuendigt')
+  })
   .constant('LIEFEREINHEIT', {
     STUECK: addExtendedEnumValue('Stueck', gettext('Stück'), gettext('St.')),
     BUND: addExtendedEnumValue('Bund', gettext('Bund'), gettext('Bu.')),

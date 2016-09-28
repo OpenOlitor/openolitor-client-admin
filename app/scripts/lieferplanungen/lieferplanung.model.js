@@ -70,5 +70,10 @@ angular.module('openolitor-admin')
         isArray: false,
         url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
       },
+      'getAboIdsByKorbStatus': {
+        method: 'GET',
+        isArray: true,
+        url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId/:korbStatus/aboIds'
+      },
     });
   }]);
