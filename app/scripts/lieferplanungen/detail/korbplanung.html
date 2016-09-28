@@ -59,9 +59,9 @@
     </div>
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen">
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
-        <span translate>Anzahl Körbe zu liefern: <b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></span><br />
-        <span translate>Anzahl Abwesenheiten: <b>{{abotypLieferung.anzahlAbwesenheiten}}</b></span><br />
-        <span translate>Anzahl Saldo zu tief: <b>{{abotypLieferung.anzahlSaldoZuTief}}</b></span>
+        <span translate>Anzahl Körbe zu liefern: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a></span><br />
+        <span translate>Anzahl Abwesenheiten: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a></span><br />
+        <span translate>Anzahl <i>Saldo zu tief</i>: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a></span>
       </script>
       <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
         <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">

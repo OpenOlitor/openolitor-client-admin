@@ -7,12 +7,12 @@ angular.module('openolitor-admin')
     '$routeParams', 'NgTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT',
-    'msgBus', 'cloneObj',
+    'KORBSTATUS', 'msgBus', 'cloneObj',
     'gettext', '$location', 'lodash', '$uibModal',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
-      LIEFEREINHEIT, msgBus,
+      LIEFEREINHEIT, KORBSTATUS, msgBus,
       cloneObj, gettext, $location, lodash, $uibModal) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
@@ -322,8 +322,6 @@ angular.module('openolitor-admin')
             checkOnDuplicateAndAskExec(newEntry);
           }
         };
-
-
 
         switch (type) {
           case 'newProdukt':
@@ -668,6 +666,18 @@ angular.module('openolitor-admin')
 
       $scope.closeEditBemerkungen = function() {
         $scope.modalInstance.close();
+      };
+
+      $scope.KORBSTATUS = KORBSTATUS;
+
+      $scope.displayAbos = function(lieferungId, korbStatus) {
+        LieferplanungModel.getAboIdsByKorbStatus({
+          id: $routeParams.id,
+          lieferungId: lieferungId,
+          korbStatus: korbStatus
+        }, function(result) {
+          $location.path('/abos').search('q', 'id=' + result.join());
+        });
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
