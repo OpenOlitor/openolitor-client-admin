@@ -10,8 +10,11 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
       },
       transclude: true,
       templateUrl: 'scripts/abos/detail/abwesenheiten/abwesenheiten.html',
-      controller: function($scope, NgTableParams, AbwesenheitenListModel,
-        msgBus, lodash) {
+      controller: function($scope, $rootScope, NgTableParams, AbwesenheitenListModel,
+        msgBus, lodash, GeschaeftsjahrUtil) {
+
+        $scope.projekt = $rootScope.projekt;
+        $scope.getCurrentlyMatchingGJItem = undefined;
         $scope.showAllAbwesenheiten = false;
         $scope.deletingAbwesenheit = {};
         $scope.template = {
@@ -58,6 +61,8 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
                 abw.kundeId = $scope.abo.kundeId;
                 return new AbwesenheitenListModel(abw);
               });
+            $scope.getCurrentlyMatchingGJItem = GeschaeftsjahrUtil.getMatchingGJItem($scope.abo.anzahlAbwesenheiten, $scope.projekt);
+            $scope.isInCurrentOrLaterGJ = GeschaeftsjahrUtil.isInCurrentOrLaterGJ;
             if ($scope.abwesenheitenTableParams) {
               $scope.abwesenheitenTableParams.reload();
             }
@@ -66,14 +71,6 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
         $scope.$on('destroy', function() {
           unwatch();
         });
-
-        $scope.isLieferungOpen = function(abw) {
-          var lieferung = lodash.filter($scope.abo.lieferdaten,
-            function(l) {
-              return l.id === abw.lieferungId;
-            });
-          return lieferung && lieferung.length === 1 && !lieferung[0].lieferplaningId;
-        };
 
         if (!$scope.abwesenheitenTableParams) {
           //use default tableParams
