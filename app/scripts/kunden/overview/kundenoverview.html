@@ -21,6 +21,10 @@
             <script type="text/ng-template" id="headerCheckbox.html">
               <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
             </script>
+            <script type="text/ng-template" id="headerShowAll.html">
+              <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
+              <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Standardansicht' | translate}}"></i>
+            </script>
             <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
               <tr ng-repeat="kunde in $data | filter: search.query.$">
                 <td header="'headerCheckbox.html'">
@@ -31,6 +35,9 @@
                 </td>
                 <td data-title="'Bezeichnung'|translate" sortable="'bezeichnung'">
                   {{kunde.bezeichnung}}
+                </td>
+                <td ng-if="showAll" data-title="'Ansprechpartner'|translate">
+                  <span ng-repeat="ansprechperson in kunde.ansprechpersonen">{{ansprechperson.vorname}} {{ansprechperson.name}}</span>
                 </td>
                 <td data-title="'Strasse'|translate" sortable="'strasse+hausNummer'">
                   {{kunde.strasse}} {{kunde.hausNummer}}
@@ -46,6 +53,7 @@
                     {{typ|translate}}
                   </span>
                 </td>
+                <td header="'headerShowAll.html'"></td>
               </tr>
             </table>
           </div>

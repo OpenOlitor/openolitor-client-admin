@@ -74,7 +74,7 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: 'Als ausgeliefert markieren',
+        label: 'als ausgeliefert markieren',
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
           return detailModel.ausliefern({id: $routeParams.id});

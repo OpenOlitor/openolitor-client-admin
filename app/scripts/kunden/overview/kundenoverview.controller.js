@@ -145,6 +145,11 @@ angular.module('openolitor-admin')
 
       search();
 
+      $scope.toggleShowAll = function() {
+        $scope.showAll = !$scope.showAll;
+        $scope.tableParams.reload();
+      };
+
       $scope.$watch('search.query', function() {
         search();
       }, true);

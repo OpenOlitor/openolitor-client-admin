@@ -139,7 +139,7 @@ angular.module('openolitor-admin')
           page: 1,
           count: 10,
           sorting: {
-            name: 'asc'
+            datum: 'asc'
           },
           filter: {
             status: AUSLIEFERUNGSTATUS.ERFASST
