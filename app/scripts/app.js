@@ -389,6 +389,16 @@ angular
       return filtered;
     };
   })
+  .filter('toArray', function(lodash) {
+    return function(obj) {
+      if (!(obj instanceof Object)) {
+        return obj;
+      }
+      return lodash.map(obj, function(val, key) {
+        return Object.defineProperty(val, '$key', {__proto__: null, value: key});
+      });
+    };
+  })
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {

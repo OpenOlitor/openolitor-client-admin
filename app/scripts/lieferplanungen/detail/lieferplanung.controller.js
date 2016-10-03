@@ -431,6 +431,15 @@ angular.module('openolitor-admin')
           mengeTotal: (korbprodukt.menge * anzahl),
           preis: (korbprodukt.preisEinheit * korbprodukt.menge * anzahl)
         };
+      };
+
+      var calculateTotalsOfBestellungen = function(abotypLieferung, korbprodukt) {
+        var produzent = korbprodukt.produzentKurzzeichen;
+        var bestellungByProduzent = $scope.bestellungen[produzent];
+        var lieferungByProduzent = bestellungByProduzent.lieferungen[
+          abotypLieferung.datum];
+        var anzahl = abotypLieferung.anzahlKoerbeZuLiefern;
+
         lieferungByProduzent.total +=
           (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
         bestellungByProduzent.total += (korbprodukt.preisEinheit *
@@ -465,9 +474,16 @@ angular.module('openolitor-admin')
             lodash.forEach($scope.abotypenLieferungen, function(
               abotypLieferung) {
               lodash.forEach(abotypLieferung.lieferpositionen,
-                function(
-                  korbprodukt) {
+                function(korbprodukt) {
                   addEntryToBestellungen(abotypLieferung,
+                    korbprodukt);
+                });
+            });
+            lodash.forEach($scope.abotypenLieferungen, function(
+              abotypLieferung) {
+              lodash.forEach(abotypLieferung.lieferpositionen,
+                function(korbprodukt) {
+                  calculateTotalsOfBestellungen(abotypLieferung,
                     korbprodukt);
                 });
             });
