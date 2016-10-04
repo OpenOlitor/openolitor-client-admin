@@ -45,8 +45,8 @@
                 <td data-title="'PLZ Ort'|translate" sortable="'plz'">
                   {{kunde.plz}} {{kunde.ort}}
                 </td>
-                <td data-title="'#&nbsp;Abos'|translate" sortable="'anzahlAbos'">
-                  {{kunde.anzahlAbos}}
+                <td data-title="'#&nbsp;Abos'|translate" sortable="'anzahlAbosAktiv'">
+                  {{kunde.anzahlAbosAktiv}}
                 </td>
                 <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="kundentypen">
                   <span ng-repeat="typ in kunde.typen" class="badge" ng-if="typ !== ''">
