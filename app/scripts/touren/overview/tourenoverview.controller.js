@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('TourenOverviewController', ['$scope', '$filter',
-    'TourenService', 'TourenModel', 'NgTableParams', 'cloneObj',
-    function($scope, $filter, TourenService, TourenModel, NgTableParams, cloneObj) {
+    'TourenService', 'TourenModel', 'NgTableParams', '$location',
+    function($scope, $filter, TourenService, TourenModel, NgTableParams, $location) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -14,14 +14,7 @@ angular.module('openolitor-admin')
         query: ''
       };
 
-      var defaults = {
-        model: {
-          id: undefined,
-          name: '',
-          beschreibung: undefined,
-          editable: true
-        }
-      };
+      $scope.model = {};
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -84,32 +77,15 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
-      $scope.tourErstellen = function() {
-        if(angular.isUndefined($scope.entries)) {
-          $scope.entries = [];
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Tour erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return $location.path('/touren/new');
         }
-        $scope.editing = true;
-        $scope.entries.push(cloneObj(defaults.model));
-        $scope.tableParams.reload();
-      };
-
-      $scope.edit = function(tour) {
-        tour.editable = true;
-        $scope.editing = true;
-      };
-
-      $scope.save = function(tour) {
-        tour.editable = false;
-        $scope.editing = false;
-        $scope.tour = new TourenModel(tour);
-        return $scope.tour.$save();
-      };
-
-      $scope.delete = function(tour) {
-        tour.editable = false;
-        $scope.tour = new TourenModel(tour);
-        return $scope.tour.$delete();
-      };
-
+      }];
     }
   ]);

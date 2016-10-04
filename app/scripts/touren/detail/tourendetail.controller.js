@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('TourenDetailController', ['$scope', '$filter',
-    'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams',
-    function($scope, $filter, TourenService, TourenDetailModel, NgTableParams, cloneObj, $routeParams) {
+    'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location',
+    function($scope, $filter, TourenService, TourenDetailModel, NgTableParams, cloneObj, $routeParams, $location) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -30,6 +30,10 @@ angular.module('openolitor-admin')
         $scope.editing = false;
         $scope.tour = new TourenDetailModel(tour);
         return $scope.tour.$save();
+      };
+
+      $scope.created = function(id) {
+        $location.path('/touren/' + id);
       };
 
       $scope.delete = function(tour) {
@@ -89,7 +93,7 @@ angular.module('openolitor-admin')
         $scope.hasUnsorted = hasUnsorted;
       };
 
-      if (!$routeParams.id) {
+      if (!$routeParams.id || $routeParams.id === 'new') {
         $scope.tour = new TourenDetailModel(defaults.model);
       } else {
         $scope.loadTour();
