@@ -48,19 +48,6 @@ angular.module('openolitor-admin')
 
       $scope.fristeinheiten = EnumUtil.asArray(FRISTEINHEITEN);
 
-      // dummy entry
-      $scope.dummyEntry = {
-        id: 'c8926129-045d-4f78-9c79-0ee873aed785',
-        name: 'abo1',
-        anzahlAbonnenten: 12,
-        letzteLieferung: '2015-10-30T18:21Z',
-        lieferrhythmus: 'Zweiwoechentlich',
-        preis: 20,
-        preiseinheit: 'Lieferung',
-        waehrung: 'CHF',
-        aktiv: true
-      };
-
       $scope.abotypStyle = {};
 
       if (!$routeParams.id) {
