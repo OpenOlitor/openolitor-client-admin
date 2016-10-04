@@ -388,10 +388,6 @@ angular.module('openolitor-admin')
           einheit).toDate();
       };
 
-      $scope.isAboEnde = function(abo) {
-        return abo && abo.ende && moment().isAfter(abo.ende);
-      };
-
       $scope.$on('destroy', function() {
         unwatchAboId();
         unwatchAbotypId();

@@ -46,23 +46,27 @@
               <td data-title="'Ende'|translate" sortable="'ende'">
                 {{abo.ende | date:'dd.MM.yyyy'}}
               </td>
+              <td data-title="'Aktiv'|translate" sortable="'aktiv'">
+                <i ng-if="abo.aktiv" class="glyphicon glyphicon-ok"></i>
+                <i ng-if="!abo.aktiv" class="glyphicon glyphicon-remove"></i>
+              </td>
               <td data-title="'Depot/Tour'|translate">
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
                 <a ng-href="#/touren/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
               </td>
-              <td ng-if="showAll"  data-title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
+              <td ng-if="showAll" data-title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
                 {{abo.letzteLieferung | date:'EEE, dd.MM.yyyy'}}
               </td>
-              <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'guthaben'"  filter="{guthaben: 'number'}">
+              <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'guthaben'" filter="{guthaben: 'number'}">
                 {{abo.guthaben}}
               </td>
-              <td ng-if="showAll"  data-title="'Guthaben in Rechnung'|translate" sortable="'guthabenInRechnung'" filter="{guthabenInRechnung: 'number'}">
+              <td ng-if="showAll" data-title="'Guthaben in Rechnung'|translate" sortable="'guthabenInRechnung'" filter="{guthabenInRechnung: 'number'}">
                 {{abo.guthabenInRechnung}}
               </td>
-              <td ng-if="showAll"  data-title="'Guthaben vertraglich'|translate" sortable="'guthabenVertraglich'"  filter="{guthabenVertraglich: 'number'}">
+              <td ng-if="showAll" data-title="'Guthaben vertraglich'|translate" sortable="'guthabenVertraglich'" filter="{guthabenVertraglich: 'number'}">
                 {{abo.guthabenVertraglich}}
               </td>
-              <td  header="'headerShowAll.html'">
+              <td header="'headerShowAll.html'">
                 <div class="pull-right">
                   <div class="btn-group" ng-hide="updatingAbo(abo)">
                     <button id="detailButton_{{abo.id}}" uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo, 'detailButton_' + abo.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>

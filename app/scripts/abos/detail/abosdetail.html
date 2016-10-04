@@ -24,8 +24,8 @@
           <div class="alert alert-danger" role="alert" ng-if="abo.ende === undefined && abo.abotyp.laufzeiteinheit === 'Lieferungen' && abo.guthabenVertraglich === 0" translate>
             Keine Lieferungen mehr ausstehend
           </div>
-          <div class="alert alert-danger" role="alert" ng-if="isAboEnde(abo)" translate>
-            Dieses Abo ist abgelaufen
+          <div class="alert alert-danger" role="alert" ng-if="!abo.aktiv" translate>
+            Dieses Abo ist inaktiv
           </div>
         </div>
       </div>

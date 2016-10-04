@@ -1,9 +1,9 @@
 <div class="row">
-<div class="content content-box col-md-9">
-  <div oo-error-overlay></div>
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <h3 class="panel-title"><span class="navbar-brand" translate>Abotypen</span>
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title"><span class="navbar-brand" translate>Abotypen</span>
         <span class="pull-right">
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
@@ -13,40 +13,40 @@
         </form>
       </span>
       </h3>
-    </div>
-    <div class="panel-body">
-      <div ng-hide="entries">
-        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
       </div>
-      <div ng-show="entries">
-        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-          <tr ng-repeat="abotyp in $data | filter: search.query.$">
-            <td>
-              <span class="color-box" ng-style="style(abotyp)"></span>
-            </td>
-            <td data-title="'Name'|translate" sortable="'name'">
-              <a ng-href="#/abotypen/{{abotyp.id}}">{{abotyp.name}}</a>
-            </td>
-            <td data-title="'# Abonnenten'|translate" sortable="'anzahlAbonnentenAktiv'">
-              {{abotyp.anzahlAbonnentenAktiv}}
-            </td>
-            <td data-title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
-              {{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}
-            </td>
-            <td data-title="'Lieferrhythmus'|translate" sortable="'lieferrhythmus'">
-              {{abotyp.lieferrhythmus|translate}}
-            </td>
-            <td data-title="'Preis'|translate" sortable="'preis'">
-              <span ng-bind="abotyp|ooPreisProEinheit" />
-            </td>
-            <td data-title="'Aktiv'|translate" sortable="'aktiv'">
-              <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
-              <i ng-if="!abotyp.aktiv" class="glyphicon glyphicon-remove"></i>
-            </td>
-          </tr>
-        </table>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
+            <tr ng-repeat="abotyp in $data | filter: search.query.$">
+              <td>
+                <span class="color-box" ng-style="style(abotyp)"></span>
+              </td>
+              <td data-title="'Name'|translate" sortable="'name'">
+                <a ng-href="#/abotypen/{{abotyp.id}}">{{abotyp.name}}</a>
+              </td>
+              <td data-title="'# Abonnenten'|translate" sortable="'anzahlAbonnentenAktiv'">
+                {{abotyp.anzahlAbonnentenAktiv}}
+              </td>
+              <td data-title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
+                {{abotyp.letzteLieferung|date:"dd.MM.yyyy @ hh:mm"}}
+              </td>
+              <td data-title="'Lieferrhythmus'|translate" sortable="'lieferrhythmus'">
+                {{abotyp.lieferrhythmus|translate}}
+              </td>
+              <td data-title="'Preis'|translate" sortable="'preis'">
+                <span ng-bind="abotyp|ooPreisProEinheit" />
+              </td>
+              <td data-title="'Aktiv'|translate" sortable="'aktiv'">
+                <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
+                <i ng-if="!abotyp.aktiv" class="glyphicon glyphicon-remove"></i>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
