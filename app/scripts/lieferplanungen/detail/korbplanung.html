@@ -77,7 +77,7 @@
               <small class="lieferplanung" ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
               <span class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
-              <oo-delete-button model="abotypLieferung" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" reduced="true"></oo-delete-button>
+              <oo-delete-button model="abotypLieferung" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
             </span>
           </h3>
         </div>
