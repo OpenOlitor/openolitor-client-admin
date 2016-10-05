@@ -4,16 +4,36 @@
  */
 angular.module('openolitor-admin')
   .controller('VertriebsartAnpassenController', ['$scope', '$uibModalInstance',
-    '$log', 'abo', 'vertriebe', 'vertriebsarten',
+    '$log', 'abo', 'vertriebe', 'vertriebsarten', 'lodash',
 
-    function($scope, $uibModalInstance, $log, abo, vertriebe, vertriebsarten) {
+    function($scope, $uibModalInstance, $log, abo, vertriebe, vertriebsarten,
+      lodash) {
       $scope.abo = abo;
       $scope.vertriebe = vertriebe;
 
+      var findWithId = function(array, id) {
+        var found;
+        lodash.forEach(array, function(elem) {
+          if(angular.isDefined(elem.id) && elem.id === id) {
+            found = elem.id;
+          }
+        });
+        return found;
+      };
+
       $scope.vertriebsarten = vertriebsarten;
       $scope.formDaten = {
-        vertriebsartIdNeu: undefined,
+        vertriebIdNeu: findWithId(vertriebe, abo.vertriebId),
+        vertriebsartIdNeu: findWithId(vertriebsarten[abo.vertriebId], abo.vertriebsartId),
         bemerkung: undefined
+      };
+
+      $scope.vertriebChanged = function() {
+        $scope.formDaten.vertriebsartIdNeu = undefined;
+      };
+
+      $scope.vertriebChangedFunc = function() {
+        return $scope.vertriebChanged;
       };
 
       $scope.ok = function() {
