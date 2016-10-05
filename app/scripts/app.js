@@ -70,6 +70,7 @@ angular
     'ngPasswordStrength',
     'ngMessages',
     'angular.filter',
+    'angular-toArrayFilter',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'color.picker',
@@ -389,17 +390,7 @@ angular
       return filtered;
     };
   })
-  .filter('toArray', function(lodash) {
-    return function(obj) {
-      if (!(obj instanceof Object)) {
-        return obj;
-      }
-      return lodash.map(obj, function(val, key) {
-        return Object.defineProperty(val, '$key', {__proto__: null, value: key});
-      });
-    };
-  })
-  .config(function($routeProvider) {
+  .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
         redirectTo: '/abos'
@@ -640,4 +631,4 @@ angular
         name: 'VorlagenOverview',
         access: userRoles.Administrator
       });
-  });
+  }]);
