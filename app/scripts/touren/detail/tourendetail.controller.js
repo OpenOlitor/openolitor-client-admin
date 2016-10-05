@@ -16,20 +16,11 @@ angular.module('openolitor-admin')
           id: undefined,
           name: '',
           beschreibung: undefined,
-          editable: true,
           tourlieferungen: []
         }
       };
 
-      $scope.edit = function(tour) {
-        tour.editable = true;
-        $scope.editing = true;
-      };
-
       $scope.save = function(tour) {
-        tour.editable = false;
-        $scope.editing = false;
-        $scope.tour = new TourenDetailModel(tour);
         return $scope.tour.$save();
       };
 
@@ -37,10 +28,21 @@ angular.module('openolitor-admin')
         $location.path('/touren/' + id);
       };
 
-      $scope.delete = function(tour) {
-        tour.editable = false;
-        $scope.tour = new TourenDetailModel(tour);
+      $scope.delete = function() {
+        if (!$scope.isDeletable()) {
+          return;
+        }
         return $scope.tour.$delete();
+      };
+
+      $scope.isDeletable = function() {
+        if ($scope.tour) {
+          return $scope.tour.anzahlAbonnenten === 0;
+        }
+      };
+
+      $scope.backToList = function() {
+        $location.path('/touren');
       };
 
       $scope.loadTour = function() {
@@ -71,18 +73,12 @@ angular.module('openolitor-admin')
         return angular.isDefined($scope.tour) && angular.isDefined($scope.tour.id);
       };
 
-      $scope.actions = [{
-        labelFunction: function() {
-          if ($scope.isExisting()) {
-            return 'speichern';
-          } else {
-            return 'erstellen';
-          }
-        },
-        onExecute: function() {
-          return $scope.tour.$save();
+      $scope.fullName = function() {
+        if ($scope.tour && $scope.tour.name) {
+          return 'Tour: ' + $scope.tour.name;
         }
-      }];
+        return undefined;
+      };
 
       $scope.checkUnsorted = function() {
         var hasUnsorted = false;

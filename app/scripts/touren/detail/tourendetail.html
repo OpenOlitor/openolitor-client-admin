@@ -11,7 +11,7 @@
               </div>
               <div class="col-md-4">
                 <div class="btn-group pull-right" role="group">
-            <oo-actions-button model="tour" form="tourForm" entity="Tour" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Tour'|translate}}</oo-actions-button>
+              <oo-save-button model="tour" form="tourForm" entity="Tour" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Tour'|translate}}</oo-save-button>
             <oo-delete-button ng-if="isDeletable()" model="tour" entity="Tour" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
