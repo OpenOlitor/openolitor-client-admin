@@ -3,9 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('TourenDetailController', ['$scope', '$filter',
+  .controller('TourenDetailController', ['$scope', '$filter', 'localeSensitiveComparator',
     'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location',
-    function($scope, $filter, TourenService, TourenDetailModel, NgTableParams, cloneObj, $routeParams, $location) {
+    function($scope, $filter, localeSensitiveComparator,TourenService, TourenDetailModel,
+      NgTableParams, cloneObj, $routeParams, $location) {
 
       $scope.unsortedTourlieferungen = [];
       $scope.sortedTourlieferungen = [];
@@ -20,7 +21,7 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.save = function(tour) {
+      $scope.save = function() {
         return $scope.tour.$save();
       };
 
@@ -55,15 +56,32 @@ angular.module('openolitor-admin')
       };
 
       $scope.onSort = function(movedTourlieferung, partFrom, partTo) {
+        //check if there is other entries from same customer
+        if (partFrom === $scope.unsortedTourlieferungen && partTo === $scope.sortedTourlieferungen) {
+          angular.forEach($scope.unsortedTourlieferungen, function(tourlieferung) {
+            if(movedTourlieferung.kundeId === tourlieferung.kundeId) {
+              $scope.unsortedTourlieferungen.splice($scope.unsortedTourlieferungen.indexOf(movedTourlieferung));
+              $scope.sortedTourlieferungen.splice($scope.sortedTourlieferungen.indexOf(movedTourlieferung), 0, tourlieferung);
+            }
+          });
+        }
+        if (partFrom === $scope.sortedTourlieferungen && partTo === $scope.sortedTourlieferungen) {
+          angular.forEach($scope.sortedTourlieferungen, function(tourlieferung) {
+            if(movedTourlieferung.kundeId === tourlieferung.kundeId) {
+              $scope.sortedTourlieferungen.splice($scope.sortedTourlieferungen.indexOf(movedTourlieferung), 0,
+                $scope.sortedTourlieferungen.splice($scope.sortedTourlieferungen.indexOf(tourlieferung), 1)[0]);
+            }
+          });
+        }
         // update the index of each sorted tourlieferung entry
-        if (partTo == $scope.sortedTourlieferungen) {
+        if (partTo === $scope.sortedTourlieferungen) {
           angular.forEach($scope.sortedTourlieferungen, function(tourlieferung, index) {
             tourlieferung.sort = index;
           });
         }
 
         // disable dropping back to unsorted
-        if (partTo == $scope.unsortedTourlieferungen && angular.isDefined(movedTourlieferung.sort)) {
+        if (partTo === $scope.unsortedTourlieferungen && angular.isDefined(movedTourlieferung.sort)) {
           $scope.unsortedTourlieferungen.splice(movedTourlieferung);
         }
         $scope.checkUnsorted();
@@ -94,6 +112,9 @@ angular.module('openolitor-admin')
             }
           }
         });
+        if(hasUnsorted) {
+          $scope.unsortedTourlieferungen = $filter('orderBy')($scope.unsortedTourlieferungen, 'kundeBezeichnung', true, localeSensitiveComparator);
+        }
         $scope.hasUnsorted = hasUnsorted;
       };
 

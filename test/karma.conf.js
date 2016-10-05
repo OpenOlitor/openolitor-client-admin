@@ -25,6 +25,7 @@ module.exports = function(config) {
       'app/bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
       'app/bower_components/angular-gettext/dist/angular-gettext.js',
       'app/bower_components/angular-filter/dist/angular-filter.js',
+      'app/bower_components/angular-toArrayFilter/toArrayFilter.js',
       'app/bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
       'app/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js',
       'app/bower_components/angular-color-picker/angularjs-color-picker.js',

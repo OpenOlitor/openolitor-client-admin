@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
           page: 1,
           count: 10,
           sorting: {
-            nr: 'desc'
+            nr: 'asc'
           }
         }, {
           filterDelay: 0,

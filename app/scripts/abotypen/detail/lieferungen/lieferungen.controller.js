@@ -5,13 +5,12 @@
 angular.module('openolitor-admin')
   .controller('LieferungenListController', ['$scope', '$routeParams',
     '$location', '$uibModal', '$log', '$http', 'gettext', 'NgTableParams',
-    'msgBus', 'lodash',
+    'msgBus', 'lodash', '$filter',
     'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'API_URL',
 
     function($scope, $routeParams, $location, $uibModal, $log, $http, gettext,
-      NgTableParams,
-      msgBus, lodash, LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN,
-      API_URL) {
+      NgTableParams, msgBus, lodash, $filter,
+      LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN, API_URL) {
 
       $scope.now = new Date();
       $scope.template = {
@@ -31,6 +30,8 @@ angular.module('openolitor-admin')
         if ($scope.datumExistiert($scope.template.datum)) {
           return;
         }
+        $scope.template.datum.setHours(12, 0, 0, 0);
+
         var newModel = new LieferungenListModel({
           datum: $scope.template.datum,
           abotypId: parseInt($routeParams.id),
@@ -75,8 +76,12 @@ angular.module('openolitor-admin')
             if (!$scope.lieferungen) {
               return;
             }
+            var orderedData = params.sorting ?
+              $filter('orderBy')($scope.lieferungen, params.orderBy()) :
+              $scope.lieferungen;
+
             params.total($scope.lieferungen.length);
-            return $scope.lieferungen;
+            return orderedData;
           }
 
         });

@@ -89,6 +89,7 @@ angular.module('openolitor-admin')
           $scope.lieferdaten = [];
           while (!start.isAfter(end)) {
             var date = new Date(start.valueOf());
+            date.setHours(12, 0, 0, 0);
             if (!datumExistiert(date)) {
               $scope.lieferdaten.push(date);
             }
