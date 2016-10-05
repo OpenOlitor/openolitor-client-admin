@@ -1,7 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title"><span translate>Lieferungen</span>
-      <button role="button" href="" ng-if="canGenerateLieferungen()" ng-click="showGenerateLieferungenDialog()" class="btn btn-default pull-right"><i class="fa fa-calculator"></i> </button>
       <span class="pull-right" ng-show="showLoading()"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
     </h3>
   </div>
@@ -15,25 +14,28 @@
       </div>
     </div>
     <div class="row form-group">
-      <div class="col-md-10">
+      <div class="col-md-8">
         <label for="lieferungen" translate>Geplante Lieferdaten</label>
       </div>
-      <div class="col-md-2 dropdown" ng-if="!showLoading()">
-        <div uib-dropdown class="pull-right" is-open="status.open">
-          <a role="button" href="" class="btn btn-default" uib-dropdown-toggle><span class="glyphicon glyphicon-plus"></span> </a>
-          <div uib-dropdown-menu class="dropdown-form">
-            <form class="form" name="formCreateLieferung">
-              <div class="form-group">
-                  <p class="input-group">
-                      <input type="text" name="datum" class="form-control input-date" date-disabled="datumExistiert(date)" datetime-picker="dd.MM.yyyy" placeholder="{{'Lieferdatum'|translate}}" ng-model="template.datum" is-open="open.lieferdat" enable-time="false" min-date="now" required/>
-                      <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'lieferdat')"><i class="fa fa-calendar"></i></button>
-                      </span>
-                  </p>
-              </div>
-              <a href="" role="button" ng-disabled="formCreateLieferung.$invalid" ng-click="addLieferung()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Erstellen</span></a>
-            </form>
+      <div class="col-md-4" ng-if="!showLoading()">
+        <div class="pull-right">
+          <div uib-dropdown class="dropdown inline" is-open="status.open">
+            <a role="button" href="" class="btn btn-sm btn-default" uib-dropdown-toggle><span class="glyphicon glyphicon-plus"></span> </a>
+            <div uib-dropdown-menu class="dropdown-form dropdown-menu-right">
+              <form class="form" name="formCreateLieferung">
+                <div class="form-group">
+                    <p class="input-group">
+                        <input type="text" name="datum" class="form-control input-date" date-disabled="datumExistiert(date)" datetime-picker="dd.MM.yyyy" placeholder="{{'Lieferdatum'|translate}}" ng-model="template.datum" is-open="open.lieferdat" enable-time="false" min-date="now" required/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'lieferdat')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <a href="" role="button" ng-disabled="formCreateLieferung.$invalid" ng-click="addLieferung()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Erstellen</span></a>
+              </form>
+            </div>
           </div>
+          <button role="button" href="" ng-if="canGenerateLieferungen()" ng-click="showGenerateLieferungenDialog()" class="btn btn-sm btn-default"><i class="fa fa-calculator"></i> </button>
         </div>
       </div>
     </div>

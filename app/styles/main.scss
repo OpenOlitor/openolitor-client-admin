@@ -176,6 +176,11 @@ input.ng-invalid {
   margin-right: 4px;
 }
 
+.dropdown.inline {
+  margin-right: 0px;
+  display: inline-block;;
+}
+
 .dropdown>.dropdown-form:before {
   content: '';
   display: inline-block;

@@ -522,22 +522,25 @@ angular.module('openolitor-admin')
                 }, function(bestellpositionen) {
                   lodash.forEach(bestellpositionen, function(
                     bestellposition) {
-                    $scope.bestellungen[bestellung.produzentKurzzeichen]
-                      .lieferungen[bestellung.datum].positionen[
-                        bestellposition.produktBeschrieb +
-                        bestellposition.menge] = {
-                        anzahl: bestellposition.anzahl,
-                        produktBeschrieb: bestellposition
-                          .produktBeschrieb,
-                        menge: bestellposition.menge,
-                        einheit: bestellposition.einheit,
-                        preisEinheit: bestellposition.preisEinheit,
-                        preisPackung: (bestellposition.preisEinheit *
-                          bestellposition.menge),
-                        mengeTotal: (bestellposition.menge *
-                          bestellposition.anzahl),
-                        preis: bestellposition.preis
-                      };
+                    if(angular.isDefined($scope.bestellungen[bestellung.produzentKurzzeichen]
+                      .lieferungen[bestellung.datum])) {
+                      $scope.bestellungen[bestellung.produzentKurzzeichen]
+                        .lieferungen[bestellung.datum].positionen[
+                          bestellposition.produktBeschrieb +
+                          bestellposition.menge] = {
+                          anzahl: bestellposition.anzahl,
+                          produktBeschrieb: bestellposition
+                            .produktBeschrieb,
+                          menge: bestellposition.menge,
+                          einheit: bestellposition.einheit,
+                          preisEinheit: bestellposition.preisEinheit,
+                          preisPackung: (bestellposition.preisEinheit *
+                            bestellposition.menge),
+                          mengeTotal: (bestellposition.menge *
+                            bestellposition.anzahl),
+                          preis: bestellposition.preis
+                        };
+                      }
                   });
                 });
               });
