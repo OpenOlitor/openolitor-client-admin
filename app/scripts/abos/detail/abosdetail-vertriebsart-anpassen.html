@@ -9,7 +9,7 @@
         <label for="abotyp" translate>Vertrieb</label>
       </div>
       <div class="col-md-8">
-        <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="vertriebe" property="label" selected-prop="id" selected="formDaten.vertriebIdNeu" selection-required="true" required></oo-dropdown>
+        <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="vertriebe" property="label" selected-prop="id" selected="formDaten.vertriebIdNeu" selection-required="true" selected-function="vertriebChangedFunc()" required></oo-dropdown>
         <input type="hidden" required ng-model="formDaten.vertriebIdNeu">
       </div>
     </div>
