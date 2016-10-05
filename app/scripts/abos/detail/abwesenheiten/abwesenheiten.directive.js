@@ -11,7 +11,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
       transclude: true,
       templateUrl: 'scripts/abos/detail/abwesenheiten/abwesenheiten.html',
       controller: function($scope, $rootScope, NgTableParams, AbwesenheitenListModel,
-        msgBus, lodash, GeschaeftsjahrUtil) {
+        msgBus, lodash, GeschaeftsjahrUtil, DataUtil) {
 
         $scope.projekt = $rootScope.projekt;
         $scope.getCurrentlyMatchingGJItem = undefined;
@@ -54,6 +54,11 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
           return $scope.loading || $scope.template.creating > 0;
         };
 
+        function updateGJValues() {
+          $scope.getCurrentlyMatchingGJItem = GeschaeftsjahrUtil.getMatchingGJItem($scope.abo.anzahlAbwesenheiten, $scope.projekt);
+          $scope.isInCurrentOrLaterGJ = GeschaeftsjahrUtil.isInCurrentOrLaterGJ;
+        }
+
         var unwatch = $scope.$watch('abo', function(abo) {
           if (abo) {
             $scope.abwesenheiten = $scope.abo.abwesenheiten.map(
@@ -61,15 +66,22 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
                 abw.kundeId = $scope.abo.kundeId;
                 return new AbwesenheitenListModel(abw);
               });
-            $scope.getCurrentlyMatchingGJItem = GeschaeftsjahrUtil.getMatchingGJItem($scope.abo.anzahlAbwesenheiten, $scope.projekt);
-            $scope.isInCurrentOrLaterGJ = GeschaeftsjahrUtil.isInCurrentOrLaterGJ;
+            updateGJValues();
             if ($scope.abwesenheitenTableParams) {
               $scope.abwesenheitenTableParams.reload();
             }
           }
         });
+
+        var unwatchCollection = $scope.$watchCollection('abo.anzahlAbwesenheiten', function(newAbwesenheiten) {
+          if (newAbwesenheiten) {
+            updateGJValues();
+          }
+        });
+
         $scope.$on('destroy', function() {
           unwatch();
+          unwatchCollection();
         });
 
         if (!$scope.abwesenheitenTableParams) {
