@@ -49,7 +49,7 @@ angular.module('openolitor-admin')
           page: 1,
           count: 10,
           sorting: {
-            name: 'asc'
+            kurzzeichen: 'asc'
           }
         }, {
           filterDelay: 0,
