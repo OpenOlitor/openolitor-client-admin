@@ -97,6 +97,11 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           exportODSModel: AbosOverviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
+          },
           getData: function(params) {
             if (!$scope.entries) {
               return;
