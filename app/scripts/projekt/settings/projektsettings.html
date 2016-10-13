@@ -98,7 +98,7 @@
                 <div class="col-md-8">
                   <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-if="projectResolved">
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
@@ -106,7 +106,7 @@
                 <div class="col-md-8">
                   <label for="preiseEditierbar" translate>Preise editierbar</label>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-if="projectResolved">
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
@@ -114,7 +114,7 @@
                 <div class="col-md-8">
                   <label for="emailErforderlich" translate>Kunden E-Mail erforderlich</label>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-if="projectResolved">
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
