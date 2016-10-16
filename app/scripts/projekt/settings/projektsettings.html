@@ -272,5 +272,41 @@
         </div>
       </div>
 
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title"><span class="navbar-brand" translate>Arbeitskategorien</span>
+              <form name="createArbeitskategorieForm" class="navbar-form pull-right">
+                <div class="form-group" ng-class="{ 'has-error' : createArbeitskategorieForm.arbeitskategorie.$invalid && createArbeitskategorieForm.arbeitskategorie.$touched }" >
+                  <input type="text" name="arbeitskategorie" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Arbeitskategorie Name...'|translate}}" ng-model="templateArbeitskategorie.arbeitskategorie" required>
+                  <a ng-disabled="createArbeitskategorieForm.$invalid || templateArbeitskategorie.creating" role="button" ng-href="" ng-click="addArbeitskategorie()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateArbeitskategorie.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                  <a role="button" ng-click="saveArbeitskategorie()" ng-disabled="settingsForm.$invalid || templateArbeitskategorie.updating || !hasChangesArbeitskategorien()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateArbeitskategorie.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                </div>
+              </form>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <form name="settingsForm">
+              <div ng-hide="arbeitskategorien">
+                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+              </div>
+              <div ng-show="arbeitskategorien">
+                <table ng-table="arbeitskategorienTableParams" class="table table-striped">
+                  <tr ng-repeat="arbeitskategorie in $data">
+                    <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
+                      <input type="text" class="form-control" name="beschreibung" ng-model="arbeitskategorie.beschreibung" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedArbeitskategorie(arbeitskategorie)"></input>
+                    </td>
+                    <td>
+                      <a href="" ng-click="deleteArbeitskategorie(arbeitskategorie)" ng-hide="deletingArbeitskategorie(arbeitskategorie)"><i class="fa fa-times"></i></a>
+                       <i ng-show="deletingProduktekategorie(arbeitskategorie)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
   </div>
 </div>
