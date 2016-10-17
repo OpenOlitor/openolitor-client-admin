@@ -118,6 +118,42 @@
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Vom System generierte E-Mail versenden</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.generierteMailsSenden" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Arbeitseinsastz: Personenliste übrigen Teilnehmern anzeigen</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.einsatzShowListeKunde" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Arbeitseinsastz: Absage möglich</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.einsatzAbsageVorlaufTage" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="1" ng-false-value="">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Arbeitseinsastz: Absage bis Anzahl Tage vor Einsatz</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input type="text" class="form-control" id="einsatzAbsageVorlaufTage" ng-model="projekt.einsatzAbsageVorlaufTage" ng-disabled="!editMode" placeholder="{{'Anzahl Tage'|translate}}">
+                </div>
+              </div>
             </div>
             <div class="panel-heading clearfix">
               <h3 class="panel-title">
