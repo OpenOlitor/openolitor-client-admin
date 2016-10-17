@@ -39,7 +39,7 @@
               </td>
               <td header="'headerSwitch.html'">
                 <span  class="pull-right">
-                  <a href="" ng-hide="deletingAbwesenheit(abw)" ng-click="deleteAbwesenheit(abw)" ng-if="isLieferungOpen(abw)"><i class="glyphicon glyphicon-remove"></i></a>
+                  <a href="" ng-if="isLieferungOpen(abw)" ng-hide="deletingAbwesenheit(abw)" ng-click="deleteAbwesenheit(abw)"><i class="glyphicon glyphicon-remove"></i></a>
                   <i ng-show="deletingAbwesenheit(abw)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </span>
               </td>
