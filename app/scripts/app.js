@@ -638,5 +638,11 @@ angular
         controller: 'VorlagenOverviewController',
         name: 'VorlagenOverview',
         access: userRoles.Administrator
+      })
+      .when('/arbeitseinsaetze', {
+        templateUrl: 'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
+        controller: 'ArbeitseinsaetzeOverviewController',
+        name: 'ArbeitseinsaetzeOverview',
+        access: userRoles.Administrator
       });
   }]);

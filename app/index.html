@@ -80,6 +80,7 @@
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-depotausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depotauslieferungen')}]" href="" ng-href="#/depotauslieferungen"><i class="fa fa-building-o"></i> <span translate>Depotauslieferungen</span></a></li>
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-tourausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('tourauslieferungen')}]" href="" ng-href="#/tourauslieferungen"><i class="fa fa-truck"></i> <span translate>Tourauslieferungen</span></a></li>
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-postauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferungen')}]" href="" ng-href="#/postauslieferungen"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a></li>
+      <li><a id="nav-arbeitseinsatz" ng-click="menushow['arbeitseinsatz'] = !menushow['arbeitseinsatz']" class="nav-item" ng-class="[{active:currentPathContains('arbeitseinsatz')}]" href="" ng-href="#/arbeitseinsaetze"><i class="fa fa-paw"></i> <span translate>Arbeitseinsätze</span></a></li>
       <li><a id="nav-buchhaltung" class="nav-item" ng-click="menushow['buchhaltung'] = !menushow['buchhaltung']"><span><i class="fa fa-usd"></i> <span translate>Buchhaltung</span></span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
@@ -187,8 +188,8 @@
   <script src="scripts/produktekategorie/produktekategorienlist.model.js"></script>
   <script src="scripts/produktekategorie/produktekategorienlist.service.js"></script>
 
-  <script src="scripts/arbeitskategorie/arbeitskategorienlist.model.js"></script>
-  <script src="scripts/arbeitskategorie/arbeitskategorienlist.service.js"></script>
+  <script src="scripts/arbeitskategorien/arbeitskategorienlist.model.js"></script>
+  <script src="scripts/arbeitskategorien/arbeitskategorienlist.service.js"></script>
 
   <script src="scripts/kunden/overview/kundenoverview.model.js"></script>
   <script src="scripts/kunden/overview/kundenoverview.controller.js"></script>
@@ -280,6 +281,12 @@
   <script src="scripts/vorlagen/vorlagen.controller.js"></script>
   <script src="scripts/vorlagen/vorlagen.directive.js"></script>
   <script src="scripts/vorlagen/vorlagenoverview.controller.js"></script>
+
+  <script src="scripts/arbeitseinsaetze/arbeitseinsaetze.model.js"></script>
+  <script src="scripts/arbeitseinsaetze/arbeitseinsaetze.service.js"></script>
+  <script src="scripts/arbeitseinsaetze/arbeitsangebote.model.js"></script>
+  <script src="scripts/arbeitseinsaetze/arbeitsangebote.service.js"></script>
+  <script src="scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js"></script>
 
   <script src="scripts/i18n/translations.js"></script>
   <!-- endbuild -->
