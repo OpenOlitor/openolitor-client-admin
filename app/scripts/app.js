@@ -438,6 +438,13 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
+      .when('/personen', {
+        templateUrl: 'scripts/personen/overview/personenoverview.html',
+        controller: 'PersonenOverviewController',
+        name: 'PersonenOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
       .when('/produzenten', {
         templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
         controller: 'ProduzentenOverviewController',
