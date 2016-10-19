@@ -41,12 +41,13 @@ angular.module('openolitor-admin')
             });
 
             $scope.tableParams.reload();
+            $scope.recalculateProduzentListen();
           }
         });
 
       $scope.getProduktById = function(id) {
-        lodash.find($scope.produkteEntries, function(produkt) {
-          return (produkt.id === id);
+        return lodash.find($scope.produkteEntries, function(produkt) {
+          return produkt.id === id;
         });
       };
 
@@ -82,6 +83,10 @@ angular.module('openolitor-admin')
         id: $routeParams.id
       }, function(result) {
         $scope.abotypenLieferungen = result;
+        $scope.recalculateProduzentListen(true);
+      });
+
+      $scope.recalculateProduzentListen = function(addTableParams) {
         lodash.forEach($scope.abotypenLieferungen, function(
           abotypenLieferung) {
 
@@ -93,9 +98,11 @@ angular.module('openolitor-admin')
               pos.produzentenL = $scope.extractProduzentenFilter(
                 produzenten);
             });
-          $scope.addTableParams(abotypenLieferung);
+          if(!angular.isUndefined(addTableParams) && addTableParams) {
+            $scope.addTableParams(abotypenLieferung);
+          }
         });
-      });
+      };
 
       var getProduzent = function(produzentId) {
         return lodash.find($scope.alleProduzentenL, function(produzent) {

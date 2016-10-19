@@ -32,8 +32,8 @@ do
       VERSION="$2"
       shift
       ;;
-    -n|--no-commit)
-      NO_COMMIT=true
+    -c|--commit)
+      COMMIT=true
       shift
       ;;
     *)
@@ -54,7 +54,7 @@ IFS=. read V1 V2 V3 <<< $CURRENT_VERSION
 NEXT_VERSION="$V1.$V2."$(($V3 + 1))
 
 VERSION=${VERSION:-$NEXT_VERSION}
-NO_COMMIT=${NO_COMMIT:-false}
+COMMIT=${COMMIT:-false}
 
 PACKAGE_JSON=$(cat package.json | perl -pe 's/'$VERSION_REGEX'/'$VERSION'/g')
 BOWER_JSON=$(cat bower.json | perl -pe 's/'$VERSION_REGEX'/'$VERSION'/g')
@@ -69,11 +69,13 @@ MESSAGE="bumped version to $VERSION"
 
 echo $MESSAGE
 
-if [[ $NO_COMMIT == false ]]
+if [[ $COMMIT == true ]]
 then
   ( git commit -am "$MESSAGE" && git tag -a $VERSION -m "$MESSAGE" )
   echo "You may now do 'git push && git push origin $VERSION'"
 else
-    echo "The changes have been made"
+  echo "The changes have been made"
+  echo "Commit your changes 'git commit -a -m \"$MESSAGE\" && git tag -a $VERSION -m \"$MESSAGE\"'"
+  echo "After that use 'git push && git push origin $VERSION' to push everything to origin"
 fi
 
