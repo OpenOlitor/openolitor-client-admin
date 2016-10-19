@@ -69,7 +69,8 @@
 
   <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
     <ul class="sidebar-nav" ng-init="menushow = []">
-      <li><a id="nav-kunden" class="nav-item" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
+      <li><a id="nav-kunden" ng-click="menushow['kunden'] = !menushow['kunden']" class="nav-item" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
+      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-personen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('personen')}]" href="" ng-href="#/personen"><i class="fa fa-users"></i> <span translate>Personen</span></a></li>
       <li><a id="nav-abos" class="nav-item" ng-class="[{active:currentPathContains('abos')}]" href="" ng-href="#/abos"><i class="fa fa-shopping-cart"></i> <span translate>Abos</span></a></li>
       <li><a id="nav-pendenzen" class="nav-item" ng-class="[{active:currentPathContains('pendenzen')}]" href="" ng-href="#/pendenzen"><i class="fa fa-sticky-note"></i> <span translate>Pendenzen</span></a></li>
       <li><a id="nav-lieferanten" class="nav-item" ng-click="menushow['lieferanten'] = !menushow['lieferanten']"><span><i class="fa fa-truck"></i> <span translate>Lieferanten</span></span></a></li>
@@ -193,6 +194,9 @@
   <script src="scripts/kunden/detail/pendenzdetail.model.js"></script>
   <script src="scripts/kunden/detail/kundendetail.controller.js"></script>
   <script src="scripts/kunden/detail/rechnungen/kundenrechnungen.model.js"></script>
+
+  <script src="scripts/personen/overview/personenoverview.model.js"></script>
+  <script src="scripts/personen/overview/personenoverview.controller.js"></script>
 
   <script src="scripts/produzenten/produzenten.model.js"></script>
   <script src="scripts/produzenten/produzentenlist.service.js"></script>
