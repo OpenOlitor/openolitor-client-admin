@@ -131,7 +131,7 @@
               <tr>
                 <td colspan="2"></td>
                 <td colspan="2" translate>Total</td>
-                <td>{{getTotal(abotypLieferung.lieferpositionen)| ooCHF}}</td>
+                <td>{{getTotal(abotypLieferung.lieferpositionen, abotypLieferung)| ooCHF}}</td>
                 <td colspan="2"><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCHF)">&#916;&nbsp;{{getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen)| ooCHF}}</span></td>
               </tr>
             </tfoot>
