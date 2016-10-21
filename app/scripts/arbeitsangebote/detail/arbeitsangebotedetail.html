@@ -1,0 +1,122 @@
+<div class="row">
+  <div class="content content-box col-md-12">
+    <div oo-error-overlay></div>
+    <form name="arbeitsangebotForm">
+      <div class="row form-group">
+        <div class="col-md-12">
+          <h3>
+            <div class="col-md-2" translate>
+              Arbeitsangebot
+            </div>
+            <div class="col-md-2">
+               <small><label for="typen" translate>Arbeitskategorien</label></small>
+            </div>
+            <div class="col-md-8">
+              <oo-arbeitskategorien kundentypen-list="kunde.arbeitskategorien"></oo-arbeitskategorien>
+              <div class="btn-group pull-right" role="group">
+                <oo-save-button model="arbeitsangebot" form="arbeitsangebotForm" entity="Arbeitsangebot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Arbeitsangebot'|translate}}</oo-save-button>
+                <oo-delete-button ng-if="arbeitsangebot.anzahlTeilnehmer == 0" model="arbeitsangebot" entity="Arbeitsangebot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+              </div>
+            </div>
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Basisdaten</span></h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="titel" translate>Titel</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="titel" ng-model="arbeitsangebot.titel" placeholder="{{'Aktivität, Kurzbeschrieb, ...'|translate}}" auto-focus required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="bezeichnung" translate>Bezeichnung</label>
+                  </div>
+                  <div class="col-md-8">
+                    <textarea class="form-control" name="bezeichnung" ng-model="arbeitsangebot.bezeichnung" placeholder="{{'Genauerer Beschrieb'|translate}}..."></textarea>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="ort" translate>Ort</label>
+                  </div>
+                  <div class="col-md-8">
+                    <textarea class="form-control" name="ort" ng-model="arbeitsangebot.ort" placeholder="{{'Angaben zum Ort, zur Anfahrt, etc.'|translate}}..."></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title" translate>Zeitpunkt</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="start" translate>Start</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="start" is-open="open.start" enable-time="true" max-date="ende" min-date="initStart" timepicker-options="tpOptions" />
+                  </div>
+                  <div class="col-md-2">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+                    </span>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="ende" translate>Ende</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="ende" is-open="open.ende" enable-time="true" min-date="start" timepicker-options="tpOptions" />
+                  </div>
+                  <div class="col-md-2">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
+                    </span>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="einsatzzeit" translate>Einsatzzeit</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control" name="einsatzzeit" ng-model="arbeitsangebot.einsatzzeit" placeholder="{{'Zeit in Stunden'|translate}}">
+                  </div>
+                </div>
+              </div>
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title" translate>Anzahl Personen</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="anzahlPersonen" translate>Benötigte Anzahl Personen</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control" name="anzahlPersonen" ng-model="arbeitsangebot.anzahlPersonen" placeholder="{{'Anzahl'|translate}}">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="mehrPersonenOk" translate>Zusätzliche Personen möglich</label>
+                  </div>
+                  <div class="col-md-4">
+                    <input bs-switch ng-model="arbeitsangebot.mehrPersonenOk" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

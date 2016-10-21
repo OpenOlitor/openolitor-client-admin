@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ArbeitseinsaetzeOverviewController', ['$q', '$scope', '$filter',
+  .controller('ArbeitsangeboteOverviewController', ['$q', '$scope', '$filter',
     'ArbeitseinsaetzeModel', 'ArbeitsangeboteModel', 'NgTableParams', 'localeSensitiveComparator',
     'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService',
     function($q, $scope, $filter, ArbeitseinsaetzeModel, ArbeitsangeboteModel, NgTableParams, localeSensitiveComparator,
@@ -123,12 +123,12 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Produzent erstellen';
+          return 'Arbeitsangebot erstellen';
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
         onExecute: function() {
-          return $location.path('/arbeitseinsaetze/new');
+          return $location.path('/arbeitsangebote/new');
         }
       }, {
         label: 'Arbeitseinsaetzebrief',

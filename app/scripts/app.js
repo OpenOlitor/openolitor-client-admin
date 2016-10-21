@@ -222,6 +222,53 @@ angular
     KUNDE: gettext('Kunde'),
     ADMINISTRATOR: gettext('Administrator'),
   })
+  .constant('uiDatetimePickerConfig', {
+        dateFormat: 'dd.MM.yyyy HH:mm',
+        defaultTime: '08:00:00',
+        html5Types: {
+            date: 'dd.MM.yyyy',
+            'datetime-local': 'yyyy-MM-ddTHH:mm:ss.sss',
+            'month': 'MMM yyyy'
+        },
+        initialPicker: 'date',
+        reOpenDefault: false,
+        enableDate: true,
+        enableTime: true,
+        buttonBar: {
+            show: true,
+            now: {
+                show: false,
+                text: gettext('Jetzt')
+            },
+            today: {
+                show: false,
+                text: gettext('Heute')
+            },
+            clear: {
+                show: true,
+                text: gettext('Löschen')
+            },
+            date: {
+                show: true,
+                text: gettext('Datum')
+            },
+            time: {
+                show: true,
+                text: gettext('Zeit')
+            },
+            close: {
+                show: true,
+                text: gettext('Schliessen')
+            }
+        },
+        closeOnDateSelection: true,
+        closeOnTimeNow: true,
+        appendToBody: false,
+        altInputFormats: [],
+        ngModelOptions: { },
+        saveAs: false,
+        readAs: false,
+    })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
@@ -639,10 +686,22 @@ angular
         name: 'VorlagenOverview',
         access: userRoles.Administrator
       })
-      .when('/arbeitseinsaetze', {
-        templateUrl: 'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
-        controller: 'ArbeitseinsaetzeOverviewController',
-        name: 'ArbeitseinsaetzeOverview',
+      .when('/arbeitsangebote', {
+        templateUrl: 'scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html',
+        controller: 'ArbeitsangeboteOverviewController',
+        name: 'ArbeitsangeboteOverview',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitsangebote/new', {
+        templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+        controller: 'ArbeitsangeboteDetailController',
+        name: 'ArbeitsangeboteDetail',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitsangebote/:id', {
+        templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+        controller: 'ArbeitsangeboteDetailController',
+        name: 'ArbeitsangeboteDetail',
         access: userRoles.Administrator
       });
   }]);

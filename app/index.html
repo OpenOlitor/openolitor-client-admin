@@ -80,7 +80,7 @@
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-depotausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depotauslieferungen')}]" href="" ng-href="#/depotauslieferungen"><i class="fa fa-building-o"></i> <span translate>Depotauslieferungen</span></a></li>
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-tourausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('tourauslieferungen')}]" href="" ng-href="#/tourauslieferungen"><i class="fa fa-truck"></i> <span translate>Tourauslieferungen</span></a></li>
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-postauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferungen')}]" href="" ng-href="#/postauslieferungen"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a></li>
-      <li><a id="nav-arbeitseinsatz" ng-click="menushow['arbeitseinsatz'] = !menushow['arbeitseinsatz']" class="nav-item" ng-class="[{active:currentPathContains('arbeitseinsatz')}]" href="" ng-href="#/arbeitseinsaetze"><i class="fa fa-paw"></i> <span translate>Arbeitseinsätze</span></a></li>
+      <li><a id="nav-arbeitseinsatz" ng-click="menushow['arbeitseinsatz'] = !menushow['arbeitseinsatz']" class="nav-item" ng-class="[{active:currentPathContains('arbeitseinsatz')}]" href="" ng-href="#/arbeitsangebote"><i class="fa fa-paw"></i> <span translate>Arbeitseinsätze</span></a></li>
       <li><a id="nav-buchhaltung" class="nav-item" ng-click="menushow['buchhaltung'] = !menushow['buchhaltung']"><span><i class="fa fa-usd"></i> <span translate>Buchhaltung</span></span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
@@ -143,7 +143,7 @@
   <script src="bower_components/ng-table-export/ng-table-export.js"></script>
   <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
   <script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
-  <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
+  <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
   <script src="bower_components/tinycolor/tinycolor.js"></script>
   <script src="bower_components/angular-color-picker/angularjs-color-picker.js"></script>
   <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
@@ -154,7 +154,7 @@
   <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
   <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
-  <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+  <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/ng-password-strength/dist/scripts/ng-password-strength.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
@@ -282,11 +282,13 @@
   <script src="scripts/vorlagen/vorlagen.directive.js"></script>
   <script src="scripts/vorlagen/vorlagenoverview.controller.js"></script>
 
-  <script src="scripts/arbeitseinsaetze/arbeitseinsaetze.model.js"></script>
-  <script src="scripts/arbeitseinsaetze/arbeitseinsaetze.service.js"></script>
-  <script src="scripts/arbeitseinsaetze/arbeitsangebote.model.js"></script>
-  <script src="scripts/arbeitseinsaetze/arbeitsangebote.service.js"></script>
-  <script src="scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js"></script>
+  <script src="scripts/arbeitsangebote/arbeitseinsaetze.model.js"></script>
+  <script src="scripts/arbeitsangebote/arbeitseinsaetze.service.js"></script>
+  <script src="scripts/arbeitsangebote/arbeitsangebote.model.js"></script>
+  <script src="scripts/arbeitsangebote/arbeitsangebote.service.js"></script>
+  <script src="scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js"></script>
+  <script src="scripts/arbeitsangebote/detail/arbeitsangebotedetail.model.js"></script>
+  <script src="scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js"></script>
 
   <script src="scripts/i18n/translations.js"></script>
   <!-- endbuild -->
