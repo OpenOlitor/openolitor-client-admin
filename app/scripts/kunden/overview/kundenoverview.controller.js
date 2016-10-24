@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator',
-    function($q, $scope, $filter, $location,  KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator) {
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash',
+    function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -27,7 +27,7 @@ angular.module('openolitor-admin')
             });
             $scope.tableParams.reload();
           }
-      });
+        });
 
       $scope.search = {
         query: ''
@@ -82,6 +82,24 @@ angular.module('openolitor-admin')
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Email versenden',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          var emailAddresses = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .flatMap('ansprechpersonen')
+            .map('email')
+            .value();
+
+          EmailUtil.toMailToLink(emailAddresses);
           return true;
         },
         isDisabled: function() {
