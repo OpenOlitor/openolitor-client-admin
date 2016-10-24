@@ -4,13 +4,14 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil',
+    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash',
     function($q, $scope, $filter, $location, PersonenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil) {
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.model = {};
 
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
@@ -74,7 +75,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
-          $scope.showGenerateReport = true;
+          EmailUtil.toMailToLink($scope.filteredEntries, $scope.checkboxes.ids);
           return true;
         },
         isDisabled: function() {

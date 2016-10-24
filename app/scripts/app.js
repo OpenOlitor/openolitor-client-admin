@@ -92,6 +92,7 @@ angular
   .constant('VERSION', '@@VERSION')
   .constant('AIRBREAK_API_KEY', '@@AIRBREAK_API_KEY')
   .constant('AIRBREAK_URL', '@@AIRBREAK_URL')
+  .constant('EMAIL_TO_ADDRESS', '@@EMAIL_TO_ADDRESS')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: gettext('Woechentlich'),
     ZWEIWOECHENTLICH: gettext('Zweiwoechentlich'),
