@@ -286,7 +286,7 @@ angular.module('openolitor-admin')
             } else {
               $scope.kunde.abos = [msg.data];
             }
-            alertService.addAlert('info', 'Abo wurde erstellt');
+            alertService.addAlert('info', gettext('Abo wurde erstellt'));
             $scope.$apply();
           }
         } else if (msg.entity === 'Pendenz') {

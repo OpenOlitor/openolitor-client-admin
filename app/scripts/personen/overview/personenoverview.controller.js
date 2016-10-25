@@ -4,13 +4,14 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil',
+    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash',
     function($q, $scope, $filter, $location, PersonenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil) {
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.model = {};
 
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
@@ -72,9 +73,15 @@ angular.module('openolitor-admin')
       $scope.actions = [{
         label: 'Email versenden',
         noEntityText: true,
-        iconClass: 'fa fa-file',
+        iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          $scope.showGenerateReport = true;
+          var emailAddresses = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .map('email')
+            .value();
+
+          EmailUtil.toMailToLink(emailAddresses);
           return true;
         },
         isDisabled: function() {
@@ -99,13 +106,18 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           exportODSModel: PersonenOverviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
+          },
           getData: function(params) {
             if (!$scope.entries) {
               return;
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
+              $scope.search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :

@@ -4,11 +4,12 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator',
-    function($q, $scope, $filter, $location,  KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator) {
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil',
+    function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
 
@@ -27,10 +28,12 @@ angular.module('openolitor-admin')
             });
             $scope.tableParams.reload();
           }
-      });
+        });
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
 
       $scope.hasData = function() {
@@ -87,6 +90,24 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
+      }, {
+        label: 'Email versenden',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          var emailAddresses = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .flatMap('ansprechpersonen')
+            .map('email')
+            .value();
+
+          EmailUtil.toMailToLink(emailAddresses);
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
       }];
 
       if (!$scope.tableParams) {
@@ -106,13 +127,18 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           exportODSModel: KundenOverviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
+          },
           getData: function(params) {
             if (!$scope.entries) {
               return;
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
+              $scope.search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
@@ -135,22 +161,30 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = KundenOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
 
       }
-
-      search();
 
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;
         $scope.tableParams.reload();
       };
 
+      var existingQuery = $location.search().q;
+      if (existingQuery) {
+        $scope.search.query = existingQuery;
+      }
+
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
         search();
       }, true);
 
