@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('DepotsOverviewController', ['$scope', '$filter',
     'DepotsOverviewModel', 'NgTableParams', 'OverviewCheckboxUtil',
-    'VorlagenService', '$location',
+    'VorlagenService', '$location', 'lodash', 'EmailUtil',
     function($scope, $filter, DepotsOverviewModel, NgTableParams,
-      OverviewCheckboxUtil, VorlagenService, $location) {
+      OverviewCheckboxUtil, VorlagenService, $location, _, EmailUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -67,6 +67,21 @@ angular.module('openolitor-admin')
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Email an Kunden versenden',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          DepotsOverviewModel.personen({f: 'id=' + $scope.checkboxes.ids + ';'}, function(personen) {
+            var emailAddresses = _.map(personen, 'email');
+            EmailUtil.toMailToLink(emailAddresses);
+          });
+
           return true;
         },
         isDisabled: function() {

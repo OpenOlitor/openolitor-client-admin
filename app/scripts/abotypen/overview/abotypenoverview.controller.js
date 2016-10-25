@@ -4,19 +4,43 @@
  */
 angular.module('openolitor-admin')
   .controller('AbotypenOverviewController', ['$scope', '$filter',
-    'AbotypenOverviewModel', 'NgTableParams',
-    function($scope, $filter, AbotypenOverviewModel, NgTableParams) {
+    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location',
+    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location) {
 
-      $scope.entries = undefined;
+      $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.model = {};
 
       $scope.search = {
         query: ''
       };
 
+      $scope.checkboxes = {
+        checked: false,
+        checkedAny: false,
+        items: {},
+        css: '',
+        ids: []
+      };
+
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
+
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -42,12 +66,42 @@ angular.module('openolitor-admin')
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
 
+            $scope.filteredEntries = filteredData;
+
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
       }
+
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Abotyp erstellen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return $location.path('/abotypen/new');
+        }
+      }, {
+        label: 'Email an Kunden versenden',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          AbotypenOverviewModel.personen({
+            f: 'id=' + $scope.checkboxes.ids + ';'
+          }, function(personen) {
+            var emailAddresses = _.map(personen, 'email');
+            EmailUtil.toMailToLink(emailAddresses);
+          });
+
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }];
 
       function search() {
         if ($scope.loading) {

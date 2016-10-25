@@ -4,35 +4,45 @@
  */
 angular.module('openolitor-admin')
   .controller('TourenOverviewController', ['$scope', '$filter',
-    'TourenService', 'TourenModel', 'NgTableParams', '$location',
-    function($scope, $filter, TourenService, TourenModel, NgTableParams, $location) {
+    'TourenService', 'TourenModel', 'NgTableParams', '$location', 'lodash', 'EmailUtil',
+    'OverviewCheckboxUtil',
+    function($scope, $filter, TourenService, TourenModel, NgTableParams, $location, _, EmailUtil, OverviewCheckboxUtil) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
 
       $scope.search = {
         query: ''
       };
 
-      $scope.model = {};
+      $scope.model = {}
+
+      $scope.checkboxes = {
+        checked: false,
+        checkedAny: false,
+        items: {},
+        css: '',
+        ids: []
+      };
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
 
-      //watch for set of produkte
-      $scope.$watch(TourenService.getTouren,
-        function(list) {
-          if (list) {
-            $scope.entries = [];
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.entries.push(item);
-              }
-            });
-            $scope.tableParams.reload();
-          }
-        });
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -59,6 +69,8 @@ angular.module('openolitor-admin')
               filteredData;
             orderedData = $filter('filter')(orderedData, params.filter());
 
+            $scope.filteredEntries = filteredData;
+
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
@@ -73,9 +85,25 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
       }
 
+      function load() {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+        $scope.entries = TourenModel.query({
+          q: $scope.query
+        }, function() {
+          $scope.tableParams.reload();
+          $scope.loading = false;
+        });
+      }
+
       $scope.$watch('search.query', function() {
         search();
       }, true);
+
+      load();
 
       $scope.actions = [{
         labelFunction: function() {
@@ -85,6 +113,23 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-plus',
         onExecute: function() {
           return $location.path('/touren/new');
+        }
+      }, {
+        label: 'Email an Kunden versenden',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          TourenModel.personen({
+            f: 'id=' + $scope.checkboxes.ids + ';'
+          }, function(personen) {
+            var emailAddresses = _.map(personen, 'email');
+            EmailUtil.toMailToLink(emailAddresses);
+          });
+
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
         }
       }];
     }
