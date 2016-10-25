@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('AbotypenOverviewController', ['$scope', '$filter',
-    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location',
-    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location) {
+    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil',
+    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -13,8 +13,11 @@ angular.module('openolitor-admin')
       $scope.model = {};
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
+
 
       $scope.checkboxes = {
         checked: false,
@@ -61,7 +64,7 @@ angular.module('openolitor-admin')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries, $scope
-              .search.query);
+              .search.queryQuery);
             var orderedData = params.sorting ?
               $filter('orderBy')(filteredData, params.orderBy()) :
               filteredData;
@@ -107,20 +110,13 @@ angular.module('openolitor-admin')
         if ($scope.loading) {
           return;
         }
-        $scope.tableParams.reload();
-      }
-
-      function load() {
-        if ($scope.loading) {
-          return;
-        }
-
         $scope.loading = true;
         $scope.entries = AbotypenOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
@@ -132,9 +128,16 @@ angular.module('openolitor-admin')
         }
       };
 
-      load();
+      var existingQuery = $location.search().q;
+      if (existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
         search();
       }, true);
 
