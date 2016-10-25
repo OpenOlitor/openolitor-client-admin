@@ -106,6 +106,11 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           exportODSModel: PersonenOverviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
+          },
           getData: function(params) {
             if (!$scope.entries) {
               return;

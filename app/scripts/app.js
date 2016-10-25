@@ -429,7 +429,8 @@ angular
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'AbotypenOverviewController',
         name: 'AbotypenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
@@ -447,7 +448,8 @@ angular
         templateUrl: 'scripts/kunden/overview/kundenoverview.html',
         controller: 'KundenOverviewController',
         name: 'KundenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/kunden/new', {
         templateUrl: 'scripts/kunden/detail/kundendetail.html',
