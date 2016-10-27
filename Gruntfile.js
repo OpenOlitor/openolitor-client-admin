@@ -29,6 +29,15 @@ module.exports = function(grunt) {
       'int3': {
         'm1': 'https://int.openolitor.ch/int3/'
       },
+      'int4': {
+        'm1': 'https://int.openolitor.ch/int4/'
+      },
+      'int5': {
+        'm1': 'https://int.openolitor.ch/int5/'
+      },
+      'int6': {
+        'm1': 'https://int.openolitor.ch/int6/'
+      },
       'prod-soliterre': {
         'm1': 'https://prod.openolitor.ch/soliterre/'
       },
