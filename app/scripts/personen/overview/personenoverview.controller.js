@@ -3,10 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil',
-    function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil) {
+  .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
+    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash',
+    function($q, $scope, $filter, $location, PersonenOverviewModel, NgTableParams,
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -18,7 +18,7 @@ angular.module('openolitor-admin')
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {
-              //check if system or custom kundentyp, use only id
+              //check if system or custom personentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
               $scope.kundentypen.push({
@@ -56,14 +56,14 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageKundenbrief');
+        return VorlagenService.getVorlagen('VorlagePersonenbrief');
       };
 
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;
-      }, function() {
-        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, function(value) {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope, value);
       }, true);
 
       $scope.closeBericht = function() {
@@ -71,26 +71,6 @@ angular.module('openolitor-admin')
       };
 
       $scope.actions = [{
-        labelFunction: function() {
-          return 'Kunde erstellen';
-        },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-plus',
-        onExecute: function() {
-          return $location.path('/kunden/new');
-        }
-      }, {
-        label: 'Kundenbrief',
-        noEntityText: true,
-        iconClass: 'fa fa-file',
-        onExecute: function() {
-          $scope.showGenerateReport = true;
-          return true;
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
-        }
-      }, {
         label: 'Email versenden',
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
@@ -98,7 +78,6 @@ angular.module('openolitor-admin')
           var emailAddresses = _($scope.filteredEntries)
             .keyBy('id')
             .at($scope.checkboxes.ids)
-            .flatMap('ansprechpersonen')
             .map('email')
             .value();
 
@@ -116,17 +95,17 @@ angular.module('openolitor-admin')
           page: 1,
           count: 10,
           sorting: {
-            bezeichnung: 'asc'
+            name: 'asc'
           },
           filter: {
-            typen: ''
+            kundentypen: ''
           }
         }, {
           filterDelay: 0,
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: KundenOverviewModel,
+          exportODSModel: PersonenOverviewModel,
           exportODSFilter: function() {
             return {
               f: $scope.search.filterQuery
@@ -160,7 +139,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = KundenOverviewModel.query({
+        $scope.entries = PersonenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
@@ -170,15 +149,15 @@ angular.module('openolitor-admin')
 
       }
 
-      $scope.toggleShowAll = function() {
-        $scope.showAll = !$scope.showAll;
-        $scope.tableParams.reload();
-      };
-
       var existingQuery = $location.search().q;
       if (existingQuery) {
         $scope.search.query = existingQuery;
       }
+
+      $scope.toggleShowAll = function() {
+        $scope.showAll = !$scope.showAll;
+        $scope.tableParams.reload();
+      };
 
       $scope.$watch('search.query', function() {
         $scope.search.filterQuery = FilterQueryUtil.transform($scope.search

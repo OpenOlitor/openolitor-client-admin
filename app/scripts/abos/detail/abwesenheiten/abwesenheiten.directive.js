@@ -50,6 +50,14 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
           $scope.template.creating = $scope.template.creating + 1;
         };
 
+        $scope.isLieferungOpen = function(abw) {
+          var lieferung = lodash.filter($scope.abo.lieferdaten,
+            function(l) {
+              return l.id === abw.lieferungId;
+            });
+          return lieferung && lieferung.length === 1 && !lieferung[0].lieferplaningId;
+        };
+
         $scope.showLoading = function() {
           return $scope.loading || $scope.template.creating > 0;
         };

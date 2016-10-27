@@ -41,12 +41,13 @@ angular.module('openolitor-admin')
             });
 
             $scope.tableParams.reload();
+            $scope.recalculateProduzentListen();
           }
         });
 
       $scope.getProduktById = function(id) {
-        lodash.find($scope.produkteEntries, function(produkt) {
-          return (produkt.id === id);
+        return lodash.find($scope.produkteEntries, function(produkt) {
+          return produkt.id === id;
         });
       };
 
@@ -82,6 +83,10 @@ angular.module('openolitor-admin')
         id: $routeParams.id
       }, function(result) {
         $scope.abotypenLieferungen = result;
+        $scope.recalculateProduzentListen(true);
+      });
+
+      $scope.recalculateProduzentListen = function(addTableParams) {
         lodash.forEach($scope.abotypenLieferungen, function(
           abotypenLieferung) {
 
@@ -93,9 +98,11 @@ angular.module('openolitor-admin')
               pos.produzentenL = $scope.extractProduzentenFilter(
                 produzenten);
             });
-          $scope.addTableParams(abotypenLieferung);
+          if(!angular.isUndefined(addTableParams) && addTableParams) {
+            $scope.addTableParams(abotypenLieferung);
+          }
         });
-      });
+      };
 
       var getProduzent = function(produzentId) {
         return lodash.find($scope.alleProduzentenL, function(produzent) {
@@ -199,7 +206,7 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.getTotal = function(produkteEntries) {
+      $scope.getTotal = function(produkteEntries, abotypLieferung) {
         var total = 0;
         lodash.forEach(produkteEntries, function(korbprodukt) {
           if (angular.isDefined(korbprodukt.preisEinheit) && angular.isDefined(
@@ -210,6 +217,9 @@ angular.module('openolitor-admin')
             total += korbprodukt.preis;
           }
         });
+        if(!angular.isUndefined(abotypLieferung)) {
+          abotypLieferung.preisTotal = total;
+        }
         return total;
       };
 
@@ -226,9 +236,9 @@ angular.module('openolitor-admin')
           abotypLieferung.lieferpositionen.length === 0) {
           return abotypLieferung.durchschnittspreis;
         } else {
-          return ((abotypLieferung.anzahlLieferungen * abotypLieferung.durchschnittspreis) +
+          return (((abotypLieferung.anzahlLieferungen - 1) * abotypLieferung.durchschnittspreis) +
             $scope.getTotal(abotypLieferung.lieferpositionen)) / (
-            abotypLieferung.anzahlLieferungen + 1);
+            abotypLieferung.anzahlLieferungen);
         }
       };
 
@@ -584,6 +594,7 @@ angular.module('openolitor-admin')
               lieferungId: abotypLieferung.id
             }, {
               lieferungId: abotypLieferung.id,
+              preisTotal: abotypLieferung.preisTotal,
               lieferpositionen: abotypLieferung.lieferpositionen
             });
           });

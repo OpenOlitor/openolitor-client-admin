@@ -9,14 +9,14 @@ angular.module('openolitor-admin')
     'PendenzDetailModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
-    'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService',
+    'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal,
       gettext,
       KundenDetailModel, ROLLE, PendenzDetailModel, KundentypenService, alertService,
       EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
-      msgBus, lodash, KundenRechnungenModel, ooAuthService) {
+      msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
 
       var defaults = {
         model: {
@@ -40,6 +40,35 @@ angular.module('openolitor-admin')
       $scope.anreden = ANREDE;
       $scope.updatingAbo = {};
       $scope.selectedAbo = undefined;
+
+      $scope.actions = [{
+        noEntityText: true,
+        labelFunction: function() {
+          if ($scope.isExisting()) {
+            return $scope.kundeBezeichnung() + ' ' + gettext('speichern');
+          } else {
+            return ($scope.kundeBezeichnung() || gettext('Kunde')) + ' ' + gettext('erstellen');
+          }
+        },
+        onExecute: function() {
+          return $scope.kunde.$save();
+        }
+      }, {
+        label: 'E-Mail an alle Ansprechpersonen',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          var emailAddresses = _($scope.kunde.ansprechpersonen)
+            .map('email')
+            .value();
+
+          EmailUtil.toMailToLink(emailAddresses);
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.isExisting();
+        }
+      }];
 
       $scope.loadKunde = function() {
         KundenDetailModel.get({
@@ -286,7 +315,7 @@ angular.module('openolitor-admin')
             } else {
               $scope.kunde.abos = [msg.data];
             }
-            alertService.addAlert('info', 'Abo wurde erstellt');
+            alertService.addAlert('info', gettext('Abo wurde erstellt'));
             $scope.$apply();
           }
         } else if (msg.entity === 'Pendenz') {

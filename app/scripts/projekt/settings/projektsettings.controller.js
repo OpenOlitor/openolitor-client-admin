@@ -27,6 +27,7 @@ angular.module('openolitor-admin')
       $scope.templateProduktekategorie = {};
 
       // first fake to true to work around bs-switch bug
+      $scope.projectResolved = false;
       $scope.editMode = true;
 
       $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
@@ -77,6 +78,7 @@ angular.module('openolitor-admin')
         } else {
           $scope.editMode = true;
         }
+        $scope.projectResolved = true;
       }, function(error) {
         console.log('error', error);
       });

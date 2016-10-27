@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -133,6 +133,31 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.showCreateRechnungenDialog = true;
           return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: 'Email versenden',
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          var kundeIds = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .map('kundeId')
+            .value();
+
+          PersonenOverviewModel.query({
+            f: 'kundeId=' + kundeIds + ';'
+          }, function(personen) {
+            var emailAddresses = _(personen)
+              .map('email')
+              .value();
+
+            EmailUtil.toMailToBccLink(emailAddresses);
+            return true;
+          });
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;

@@ -90,6 +90,9 @@ angular
   .constant('BUILD_NR', '@@BUILD_NR')
   .constant('ENV', '@@ENV')
   .constant('VERSION', '@@VERSION')
+  .constant('AIRBREAK_API_KEY', '@@AIRBREAK_API_KEY')
+  .constant('AIRBREAK_URL', '@@AIRBREAK_URL')
+  .constant('EMAIL_TO_ADDRESS', '@@EMAIL_TO_ADDRESS')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: gettext('Woechentlich'),
     ZWEIWOECHENTLICH: gettext('Zweiwoechentlich'),
@@ -328,6 +331,32 @@ angular
       }
     ]);
   }])
+  .factory('errbitErrorInterceptor', function($q, ENV, VERSION, AIRBREAK_API_KEY, AIRBREAK_URL) {
+    return {
+      responseError: function (rejection) {
+        /*jshint -W117 */
+        var airbrake = new airbrakeJs.Client({
+          projectId: 1,
+          host: AIRBREAK_URL,
+          projectKey: AIRBREAK_API_KEY});
+        /*jshint +W117 */
+        airbrake.addFilter(function (notice) {
+          notice.context.environment = ENV;
+          notice.context.version = VERSION;
+          return notice;
+        });
+        var message = 'Error: ';
+        if(!angular.isUndefined(rejection.config) && !angular.isUndefined(rejection.config.url)) {
+          message += rejection.config.url;
+        }
+        airbrake.notify(message);
+        return $q.reject(rejection);
+      }
+    };
+  })
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('errbitErrorInterceptor');
+  }])
   .filter('fromNow', function(moment) {
     return function(input) {
       return moment(input).fromNow();
@@ -400,7 +429,8 @@ angular
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'AbotypenOverviewController',
         name: 'AbotypenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
@@ -418,7 +448,8 @@ angular
         templateUrl: 'scripts/kunden/overview/kundenoverview.html',
         controller: 'KundenOverviewController',
         name: 'KundenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/kunden/new', {
         templateUrl: 'scripts/kunden/detail/kundendetail.html',
@@ -437,6 +468,13 @@ angular
         controller: 'AbosDetailController',
         name: 'AbosDetail',
         access: userRoles.Administrator
+      })
+      .when('/personen', {
+        templateUrl: 'scripts/personen/overview/personenoverview.html',
+        controller: 'PersonenOverviewController',
+        name: 'PersonenOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/produzenten', {
         templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
