@@ -155,7 +155,7 @@ angular.module('openolitor-admin')
               .map('email')
               .value();
 
-            EmailUtil.toMailToLink(emailAddresses);
+            EmailUtil.toMailToBccLink(emailAddresses);
             return true;
           });
         },

@@ -79,7 +79,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           DepotsOverviewModel.personen({f: 'id=' + $scope.checkboxes.ids + ';'}, function(personen) {
             var emailAddresses = _.map(personen, 'email');
-            EmailUtil.toMailToLink(emailAddresses);
+            EmailUtil.toMailToBccLink(emailAddresses);
           });
 
           return true;
