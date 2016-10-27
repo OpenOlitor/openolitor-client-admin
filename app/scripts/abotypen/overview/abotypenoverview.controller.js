@@ -96,7 +96,7 @@ angular.module('openolitor-admin')
             f: 'id=' + $scope.checkboxes.ids + ';'
           }, function(personen) {
             var emailAddresses = _.map(personen, 'email');
-            EmailUtil.toMailToLink(emailAddresses);
+            EmailUtil.toMailToBccLink(emailAddresses);
           });
 
           return true;
