@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var CONFIG = {
-    'API_URL': {
+    API_URL: {
       'dev': {
         'm1': 'http://localhost:9003/m1/',
         'm2': 'http://localhost:9003/m2/'
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
         'm1': 'https://prod.openolitor.ch/bioabi/'
       }
     },
-    'EMAIL_TO_ADDRESS': {
+    EMAIL_TO_ADDRESS: {
       'prod-soliterre': 'openolitor@soliterre.ch',
       'prod-bioabi': 'info@bioabi.ch'
     }
@@ -48,8 +48,8 @@ module.exports = function(grunt) {
 
   // text replace in js files used for environment specific configurations
   var config = {
-    'API_URL': CONFIG['API_URL'][env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-    'API_WS_URL': CONFIG['API_URL'][env].m1 + 'ws' ||
+    'API_URL': CONFIG.API_URL[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
+    'API_WS_URL': CONFIG.API_URL[env].m1 + 'ws' ||
       'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
     'BUILD_NR': grunt.option('buildnr') || 'dev',
     'ENV': env,
@@ -58,21 +58,21 @@ module.exports = function(grunt) {
     'AIRBREAK_API_KEY': '48f4d0be704fafd7ed7b4fdf2d2119d9',
     'AIRBREAK_URL': 'https://errbit.tegonal.com/',
 
-    'EMAIL_TO_ADDRESS': CONFIG['EMAIL_TO_ADDRESS'][env] || 'info@openolitor.ch'
+    'EMAIL_TO_ADDRESS': CONFIG.EMAIL_TO_ADDRESS[env] || 'info@openolitor.ch'
   };
 
   var mandantenConfig = {
     mandant1: {
-      'API_URL': CONFIG['API_URL'][env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-      'API_WS_URL': CONFIG['API_URL'][env].m1 + 'ws' ||
+      'API_URL': CONFIG.API_URL[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
+      'API_WS_URL': CONFIG.API_URL[env].m1 + 'ws' ||
         'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
       'BUILD_NR': grunt.option('buildnr') || 'dev',
       'ENV': env,
       'VERSION': grunt.file.readJSON('package.json').version
     },
     mandant2: {
-      'API_URL': CONFIG['API_URL'][env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
-      'API_WS_URL': CONFIG['API_URL'][env].m2 + 'ws' ||
+      'API_URL': CONFIG.API_URL[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
+      'API_WS_URL': CONFIG.API_URL[env].m2 + 'ws' ||
         'http://localhost:9003/m2/ws', //replace @@API_WS_URL with value
       'BUILD_NR': grunt.option('buildnr') || 'dev',
       'ENV': env,
