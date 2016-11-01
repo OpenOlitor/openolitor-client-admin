@@ -51,7 +51,7 @@ angular.module('openolitor-admin')
           }
         },
         onExecute: function() {
-          return $scope.kunde.$save();
+          return $scope.save();
         }
       }, {
         label: 'E-Mail an alle Ansprechpersonen',
