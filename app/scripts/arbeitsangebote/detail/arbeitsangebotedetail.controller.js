@@ -15,7 +15,11 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.tpOptions = {
+      $scope.tpOptionsVon = {
+        showMeridian: false
+      };
+
+      $scope.tpOptionsBis = {
         showMeridian: false
       };
 
@@ -74,19 +78,19 @@ angular.module('openolitor-admin')
           return [$scope.arbeitsangebot.zeitVon, $scope.arbeitsangebot.zeitBis];
       }, function() {
           // min max dates
-          //that.picker4.datepickerOptions.maxDate = that.picker5.date;
-          //that.picker5.datepickerOptions.minDate = that.picker4.date;
+          $scope.tpOptionsVon.maxDate = $scope.arbeitsangebot.zeitBis;
+          $scope.tpOptionsBis.minDate = $scope.arbeitsangebot.zeitVon;
 
           if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
               var diff = $scope.arbeitsangebot.zeitVon.getTime() - $scope.arbeitsangebot.zeitBis.getTime();
-              $scope.arbeitsangebot.einsatzZeit = Math.round(Math.abs(diff/(1000*60*60*24)));
+              $scope.arbeitsangebot.einsatzZeit = Math.abs(diff/(1000*60*60));
           } else {
               $scope.arbeitsangebot.einsatzZeit = '';
           }
 
           // min max times
-          //that.picker10.timepickerOptions.max = that.picker11.date;
-          //that.picker11.timepickerOptions.min = that.picker10.date;
+          $scope.tpOptionsVon.max = $scope.arbeitsangebot.zeitBis;
+          $scope.tpOptionsBis.min = $scope.arbeitsangebot.zeitVon;
       }, true);
 
 
