@@ -243,26 +243,33 @@ angular
     };
   }])
   .factory('localeSensitiveComparator', function() {
+    var isString = function (value) {
+      return (typeof value.value === 'string');
+    };
+
+    var isNumber = function (value) {
+      return (typeof value.value === 'number');
+    };
+
+    var isBoolean = function (value) {
+      return (typeof value.value === 'boolean');
+    };
+
     return function(v1, v2) {
-
-      var isString = function (value) {
-        return (typeof value.value === 'string');
-      };
-
-      var isNumber = function (value) {
-        return (typeof value.value === 'number');
-      };
-
-      var isBoolean = function (value) {
-        return (typeof value.value === 'boolean');
-      };
-
-      if (isString(v1)) {
+      if (isString(v1) && isString(v2)) {
         return v1.value.localeCompare(v2.value);
       }
 
-      if (isNumber(v1) || isBoolean(v1)) {
+      if ((isNumber(v1) && isNumber(v2)) || (isBoolean(v1) && isBoolean(v2))) {
         return v1.value - v2.value;
+      }
+
+      if(angular.isUndefined(v1.value) && !angular.isUndefined(v2.value)) {
+        return -1;
+      }
+
+      if(angular.isUndefined(v2.value) && !angular.isUndefined(v1.value)) {
+        return 1;
       }
 
       // If we don't get strings, numbers or booleans, just compare by index
