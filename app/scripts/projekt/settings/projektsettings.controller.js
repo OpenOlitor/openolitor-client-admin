@@ -75,8 +75,8 @@ angular.module('openolitor-admin')
         //watch for set of arbeitskategorien
         $scope.$watch(ArbeitskategorienService.getArbeitskategorien,
           function(list) {
+            $scope.arbeitskategorien = [];
             if (list) {
-              $scope.arbeitskategorien = [];
               angular.forEach(list, function(item) {
                 if (item.id) {
                   $scope.arbeitskategorien.push(item);

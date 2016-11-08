@@ -37,7 +37,7 @@ angular.module('openolitor-admin')
       });
 
       return {
-        getProduktekategorien: function() {
+        getArbeitskategorien: function() {
           return arbeitskategorien;
         }
       };

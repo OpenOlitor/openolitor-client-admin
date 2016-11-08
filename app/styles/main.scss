@@ -6,10 +6,6 @@ body {
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-attachment: fixed;
-  -ms-background-size: cover;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
   background-size: cover;
 }
 
@@ -99,9 +95,6 @@ input.ng-invalid {
   position: absolute;
   top: 80px;
   left: 210px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   width: 40px;
   z-index:2000;
