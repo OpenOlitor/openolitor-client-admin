@@ -15,7 +15,7 @@
               <div class="col-md-8">
                 <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
                 <div class="btn-group pull-right" role="group">
-                  <oo-save-button model="kunde" form="kundeForm" entity="Kunde" on-save="save" on-cancel="backToList" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-save-button>
+                  <oo-actions-button model="kunde" form="kundeForm" entity="Kunde" actions="actions" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-actions-button>
                   <oo-delete-button ng-if="canDelete()" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>

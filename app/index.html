@@ -106,7 +106,16 @@
   </div>
 
   <footer>
-    <a href="http://www.openolitor.ch" target="_blank">www.openolitor.ch</a> Build: UI v{{version}} #{{buildNr}} WS: {{serverInfo.version}} #{{serverInfo.buildNr}} Env: {{env}}
+    <script type="text/ng-template" id="versionInfo.html">
+      <span><b translate>Version:</b></span><br />
+      <span><b>UI</b> v{{version}} | #{{buildNr}}</span><br />
+      <span><b>WS</b> {{serverInfo.version}} | #{{serverInfo.buildNr}} </span><br />
+      <span><b>ENV</b> {{env}}</span>
+    </script>
+    <a href="http://www.openolitor.org" target="_blank">www.openolitor.org</a>
+    <span class="pre-info">
+      <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top"></span>
+    </span>
     <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
   </footer>
 
@@ -160,6 +169,7 @@
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
   <script src="bower_components/angular-css-injector/angular-css-injector.js"></script>
+  <script src="bower_components/airbrake-js/dist/client.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
@@ -199,6 +209,7 @@
   <script src="scripts/kunden/detail/kundendetail.controller.js"></script>
   <script src="scripts/kunden/detail/rechnungen/kundenrechnungen.model.js"></script>
 
+  <script src="scripts/personen/util/emailutil.js"></script>
   <script src="scripts/personen/overview/personenoverview.model.js"></script>
   <script src="scripts/personen/overview/personenoverview.controller.js"></script>
 

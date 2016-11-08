@@ -90,6 +90,9 @@ angular
   .constant('BUILD_NR', '@@BUILD_NR')
   .constant('ENV', '@@ENV')
   .constant('VERSION', '@@VERSION')
+  .constant('AIRBREAK_API_KEY', '@@AIRBREAK_API_KEY')
+  .constant('AIRBREAK_URL', '@@AIRBREAK_URL')
+  .constant('EMAIL_TO_ADDRESS', '@@EMAIL_TO_ADDRESS')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: gettext('Woechentlich'),
     ZWEIWOECHENTLICH: gettext('Zweiwoechentlich'),
@@ -287,26 +290,33 @@ angular
     };
   }])
   .factory('localeSensitiveComparator', function() {
+    var isString = function (value) {
+      return (typeof value.value === 'string');
+    };
+
+    var isNumber = function (value) {
+      return (typeof value.value === 'number');
+    };
+
+    var isBoolean = function (value) {
+      return (typeof value.value === 'boolean');
+    };
+
     return function(v1, v2) {
-
-      var isString = function (value) {
-        return (typeof value.value === 'string');
-      };
-
-      var isNumber = function (value) {
-        return (typeof value.value === 'number');
-      };
-
-      var isBoolean = function (value) {
-        return (typeof value.value === 'boolean');
-      };
-
-      if (isString(v1)) {
+      if (isString(v1) && isString(v2)) {
         return v1.value.localeCompare(v2.value);
       }
 
-      if (isNumber(v1) || isBoolean(v1)) {
+      if ((isNumber(v1) && isNumber(v2)) || (isBoolean(v1) && isBoolean(v2))) {
         return v1.value - v2.value;
+      }
+
+      if(angular.isUndefined(v1.value) && !angular.isUndefined(v2.value)) {
+        return -1;
+      }
+
+      if(angular.isUndefined(v2.value) && !angular.isUndefined(v1.value)) {
+        return 1;
       }
 
       // If we don't get strings, numbers or booleans, just compare by index
@@ -374,6 +384,32 @@ angular
         };
       }
     ]);
+  }])
+  .factory('errbitErrorInterceptor', function($q, ENV, VERSION, AIRBREAK_API_KEY, AIRBREAK_URL) {
+    return {
+      responseError: function (rejection) {
+        /*jshint -W117 */
+        var airbrake = new airbrakeJs.Client({
+          projectId: 1,
+          host: AIRBREAK_URL,
+          projectKey: AIRBREAK_API_KEY});
+        /*jshint +W117 */
+        airbrake.addFilter(function (notice) {
+          notice.context.environment = ENV;
+          notice.context.version = VERSION;
+          return notice;
+        });
+        var message = 'Error: ';
+        if(!angular.isUndefined(rejection.config) && !angular.isUndefined(rejection.config.url)) {
+          message += rejection.config.url;
+        }
+        airbrake.notify(message);
+        return $q.reject(rejection);
+      }
+    };
+  })
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('errbitErrorInterceptor');
   }])
   .filter('fromNow', function(moment) {
     return function(input) {
@@ -447,7 +483,8 @@ angular
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'AbotypenOverviewController',
         name: 'AbotypenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
@@ -465,7 +502,8 @@ angular
         templateUrl: 'scripts/kunden/overview/kundenoverview.html',
         controller: 'KundenOverviewController',
         name: 'KundenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/kunden/new', {
         templateUrl: 'scripts/kunden/detail/kundendetail.html',

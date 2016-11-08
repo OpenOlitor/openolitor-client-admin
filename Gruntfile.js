@@ -11,28 +11,43 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
-  var API_URL_CONFIG = {
-    'dev': {
-      'm1': 'http://localhost:9003/m1/',
-      'm2': 'http://localhost:9003/m2/'
+  var CONFIG = {
+    API_URL: {
+      'dev': {
+        'm1': 'http://localhost:9003/m1/',
+        'm2': 'http://localhost:9003/m2/'
+      },
+      'test': {
+        'm1': 'https://test.openolitor.ch/m1/'
+      },
+      'int1': {
+        'm1': 'https://int.openolitor.ch/int1/'
+      },
+      'int2': {
+        'm1': 'https://int.openolitor.ch/int2/'
+      },
+      'int3': {
+        'm1': 'https://int.openolitor.ch/int3/'
+      },
+      'int4': {
+        'm1': 'https://int.openolitor.ch/int4/'
+      },
+      'int5': {
+        'm1': 'https://int.openolitor.ch/int5/'
+      },
+      'int6': {
+        'm1': 'https://int.openolitor.ch/int6/'
+      },
+      'prod-soliterre': {
+        'm1': 'https://prod.openolitor.ch/soliterre/'
+      },
+      'prod-bioabi': {
+        'm1': 'https://prod.openolitor.ch/bioabi/'
+      }
     },
-    'test': {
-      'm1': 'https://test.openolitor.ch/m1/'
-    },
-    'int1': {
-      'm1': 'https://int.openolitor.ch/int1/'
-    },
-    'int2': {
-      'm1': 'https://int.openolitor.ch/int2/'
-    },
-    'int3': {
-      'm1': 'https://int.openolitor.ch/int3/'
-    },
-    'prod-soliterre': {
-      'm1': 'https://prod.openolitor.ch/soliterre/'
-    },
-    'prod-bioabi': {
-      'm1': 'https://prod.openolitor.ch/bioabi/'
+    EMAIL_TO_ADDRESS: {
+      'prod-soliterre': 'openolitor@soliterre.ch',
+      'prod-bioabi': 'info@bioabi.ch'
     }
   };
   var env = 'dev';
@@ -42,26 +57,31 @@ module.exports = function(grunt) {
 
   // text replace in js files used for environment specific configurations
   var config = {
-    'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-    'API_WS_URL': API_URL_CONFIG[env].m1 + 'ws' ||
+    'API_URL': CONFIG.API_URL[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
+    'API_WS_URL': CONFIG.API_URL[env].m1 + 'ws' ||
       'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
     'BUILD_NR': grunt.option('buildnr') || 'dev',
     'ENV': env,
-    'VERSION': grunt.file.readJSON('package.json').version
+    'VERSION': grunt.file.readJSON('package.json').version,
+
+    'AIRBREAK_API_KEY': '48f4d0be704fafd7ed7b4fdf2d2119d9',
+    'AIRBREAK_URL': 'https://errbit.tegonal.com/',
+
+    'EMAIL_TO_ADDRESS': CONFIG.EMAIL_TO_ADDRESS[env] || 'info@openolitor.ch'
   };
 
   var mandantenConfig = {
     mandant1: {
-      'API_URL': API_URL_CONFIG[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-      'API_WS_URL': API_URL_CONFIG[env].m1 + 'ws' ||
+      'API_URL': CONFIG.API_URL[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
+      'API_WS_URL': CONFIG.API_URL[env].m1 + 'ws' ||
         'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
       'BUILD_NR': grunt.option('buildnr') || 'dev',
       'ENV': env,
       'VERSION': grunt.file.readJSON('package.json').version
     },
     mandant2: {
-      'API_URL': API_URL_CONFIG[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
-      'API_WS_URL': API_URL_CONFIG[env].m2 + 'ws' ||
+      'API_URL': CONFIG.API_URL[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
+      'API_WS_URL': CONFIG.API_URL[env].m2 + 'ws' ||
         'http://localhost:9003/m2/ws', //replace @@API_WS_URL with value
       'BUILD_NR': grunt.option('buildnr') || 'dev',
       'ENV': env,
