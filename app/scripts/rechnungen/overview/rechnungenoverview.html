@@ -42,6 +42,9 @@
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{rechnung.waehrung}} {{rechnung.betrag}}
               </td>
+              <td data-title="'Einbezahlter Betrag'|translate" sortable="'einbezahlterBetrag'">
+                <span ng-if="rechnung.einbezahlterBetrag">{{rechnung.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
+              </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungStati">
                 {{rechnung.status}}
               </td>
