@@ -273,6 +273,10 @@ input.ng-invalid {
   padding-bottom: 0px;
 }
 
+.logo-maxsize {
+  max-height: 140px;
+}
+
 /* Special Lieferplanung */
 #lieferplanung .lieferplanung-title .navbar-brand {
   margin-left: 0px !important;
@@ -449,6 +453,14 @@ footer, .footer {
     width: 100% !important;
     text-align: center;
   }
+}
+
+.version-tooltip {
+  font-size: 70%;
+  width: 130px;
+  right: 0px;
+  margin: 5px;
+  left: auto !important;
 }
 
 .sidebar-nav .fa {

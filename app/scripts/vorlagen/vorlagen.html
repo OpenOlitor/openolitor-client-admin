@@ -1,6 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title"><span>{{title}}</span>
+    <h3 class="panel-title">
+      <div class="navbar-brand">
+        <span>{{title}}</span>
+      </div>
       <form name="createVorlageForm" class="navbar-form pull-right">
         <div class="form-group" ng-class="{ 'has-error' : createVorlageForm.name.$invalid && createVorlageForm.name.$touched }" >
           <input type="text" name="name" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Vorlagen Name...'|translate}}" ng-model="template.name" required>
