@@ -69,8 +69,16 @@ angular.module('openolitor-admin')
         }, function() {
           $scope.loading = false;
         }).$promise.then(function(kunden) {
-          return kunden;
+          var filtered = $filter('filter')(kunden, filter);
+          console.log('Filtered: ', filtered, ' with filter ', filter);
+          return filtered;
         });
+      };
+
+      $scope.loadKunde = function(selected) {
+        if(selected && selected.id) {
+          resolveKunde(selected.id);
+        }
       };
 
       $scope.loadRechnung = function() {
