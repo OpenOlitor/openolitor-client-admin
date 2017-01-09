@@ -369,6 +369,36 @@ angular
       return moment(input).fromNow();
     };
   })
+  .filter('dateRange', function(moment) {
+    function isMidnight(mom) {
+      // The moment at midnight
+      var mmtMidnight = mom.clone().startOf('day');
+
+      // Difference in minutes == 0 => midnight
+      return mom.diff(mmtMidnight, 'minutes') === 0;
+    }
+
+    return function(items, from, to, attribute) {
+      if(!angular.isUndefined(items) && items.length > 0) {
+        var toPlusOne = to;
+        var momTo = moment(to);
+        if(isMidnight(momTo)) {
+          toPlusOne = momTo.add(1, 'days');
+        }
+        var result = [];
+        for (var i=0; i<items.length; i++){
+          var itemDate = items[i][attribute];
+          if(!angular.isUndefined(attribute)) {
+            itemDate = items[i][attribute];
+          }
+            if (itemDate >= from && itemDate <= toPlusOne)  {
+                result.push(items[i]);
+            }
+        }
+        return result;
+      }
+    };
+  })
   .filter('lastElement', function() {
     return function(input, property) {
       if (!input) {
