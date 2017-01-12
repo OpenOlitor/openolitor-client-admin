@@ -391,9 +391,15 @@ angular
           if(!angular.isUndefined(attribute)) {
             itemDate = items[i][attribute];
           }
-            if (itemDate >= from && itemDate <= toPlusOne)  {
-                result.push(items[i]);
-            }
+          if(angular.isUndefined(to) && angular.isUndefined(from)) {
+            result.push(items[i]);
+          } else if(angular.isUndefined(to) && itemDate >= from) {
+            result.push(items[i]);
+          } else if(angular.isUndefined(from) && itemDate <= toPlusOne) {
+            result.push(items[i]);
+          } else if (itemDate >= from && itemDate <= toPlusOne)  {
+            result.push(items[i]);
+          }
         }
         return result;
       }
