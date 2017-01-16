@@ -95,7 +95,33 @@
         <div class="col-md-4">
           <label translate>Letzte Lieferung</label>
         </div>
-        <div class="col-md-8">{{abo.letzteLieferung | date: 'dd.MM.yyyy'}}</div>
+        <div class="col-md-4">{{abo.letzteLieferung | date: 'dd.MM.yyyy'}}</div>
+        <div class="col-md-4">
+          <span class="pull-right">
+            <a data-toggle="collapse" data-target="#abolieferungen_{{abo.id}}" class="btn btn-default">
+              <span translate>Alle</span>&nbsp;<i class="fa fa-angle-down"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+      <div id="abolieferungen_{{abo.id}}" class="row form-group panel-collapse collapse">
+        <div class="col-md-12">
+          <label translate>Lieferungen</label>
+        </div>
+        <div class="col-md-12">
+          <table ng-table="koerbeTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+            <tr ng-repeat="korb in $data | orderBy:'-korb.lieferung.datum'">
+              <td data-title="'Datum'|translate">
+                {{korb.lieferung.datum|date:"EEE, dd.MM.yyyy"}}
+              </td>
+              <td data-title="'Lieferstatus'|translate">
+                <i class="glyphicon fa-battery-empty" ng-show="korb.status === 'FaelltAusSaldoZuTief'" title="{{'Saldo zu tief'|translate}}"></i>
+                <i class="glyphicon glyphicon-globe" ng-show="korb.status === 'FaelltAusAbwesend'" title="{{'Abwesend'|translate}}"></i>
+                <i class="glyphicon glyphicon-check" ng-show="korb.status === 'Geliefert'" title="{{'Geliefert'|translate}}"></i>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>
     </form>
