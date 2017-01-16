@@ -1,17 +1,19 @@
 <div class="row form-group">
   <div class="col-md-12">
     <div class="row form-group">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label translate>Abwesenheiten</label>
       </div>
-      <div class="col-md-8 dropdown">
-        <span>{{getCurrentlyMatchingGJItem.value}}<span ng-if="abo.abotyp.anzahlAbwesenheiten > 0"> / {{abo.abotyp.anzahlAbwesenheiten}}</span></span>
-        <span class="fa fa-info-circle" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="getAbwesenheitenTooltip(abo)"></span>
-        <div uib-dropdown class="btn-group pull-right" role="group" ng-show="abo.lieferdaten.length > 0">
-          <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> </a>
-          <ul uib-dropdown-menu role="menu" class="dropdown-form">
-            <li role="menuitem" ng-repeat="lieferdat in abo.lieferdaten | notIn:'id':abwesenheitsDaten() | dateRange:abo.start:abo.ende:'datum'"><a href="" ng-click="addAbwesenheit(lieferdat)">{{lieferdat.datum | date: 'EEE, dd.MM.yyyy'}}</a></li>
-          </ul>
+      <div class="col-md-6">
+        <div class="dropdown">
+          <span>{{getCurrentlyMatchingGJItem.value}}<span ng-if="abo.abotyp.anzahlAbwesenheiten > 0"> / {{abo.abotyp.anzahlAbwesenheiten}}</span></span>
+          <span class="fa fa-info-circle" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="getAbwesenheitenTooltip(abo)"></span>
+          <div uib-dropdown class="btn-group pull-right" role="group" ng-show="abo.lieferdaten.length > 0">
+            <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> </a>
+            <ul uib-dropdown-menu role="menu" class="dropdown-form">
+              <li role="menuitem" ng-repeat="lieferdat in abo.lieferdaten | notIn:'id':abwesenheitsDaten() | dateRange:abo.start:abo.ende:'datum'"><a href="" ng-click="addAbwesenheit(lieferdat)">{{lieferdat.datum | date: 'EEE, dd.MM.yyyy'}}</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

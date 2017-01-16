@@ -277,6 +277,17 @@ input.ng-invalid {
   max-height: 140px;
 }
 
+.navbar-brand.noLeftSpace {
+  margin-left: 0px !important;
+  padding-left: 0px;
+  font-size: inherit;
+}
+
+.navbar-form.noRightSpace {
+  margin-right: 0px !important;
+  padding-right: 0px;
+}
+
 /* Special Lieferplanung */
 #lieferplanung .lieferplanung-title .navbar-brand {
   margin-left: 0px !important;

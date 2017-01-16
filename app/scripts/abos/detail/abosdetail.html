@@ -1,8 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title"><span><span translate>Abo</span> #{{abo.id}}</span>
+    <h3 class="panel-title"><span class="navbar-brand noLeftSpace"><span translate>Abo</span> #{{abo.id}}</span>
         <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
-        <div uib-dropdown class="btn-group pull-right" role="group">
+        <div uib-dropdown class="navbar-form noRightSpace btn-group pull-right" role="group">
           <oo-actions-button model="abo" form="aboDetailForm" entities="ABOTYPEN_ARRAY" actions="actions">{{'Abo'|translate}}</oo-actions-button>
         </div>
     </h3>
@@ -30,37 +30,37 @@
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Kunde</label>
         </div>
-        <div class="col-md-9">{{kunde.bezeichnung}}</div>
+        <div class="col-md-8">{{kunde.bezeichnung}}</div>
       </div>
       <div class="row form-group">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Abotyp</label>
         </div>
-        <div class="col-md-9">{{abo.abotypName}}</div>
+        <div class="col-md-8">{{abo.abotypName}}</div>
       </div>
       <div class="row form-group">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Vertriebsart</label>
         </div>
-        <div class="col-md-9">{{vertriebsart()}} - {{abo.vertrieb.liefertag}}</div>
+        <div class="col-md-8">{{vertriebsart()}} - {{abo.vertrieb.liefertag}}</div>
       </div>
       <div class="row form-group" ng-if="abo.depotName">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Depot</label>
         </div>
-        <div class="col-md-9">{{abo.depotName}}</div>
+        <div class="col-md-8">{{abo.depotName}}</div>
       </div>
       <div class="row form-group" ng-if="abo.tourName">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Tour</label>
         </div>
-        <div class="col-md-9">{{abo.tourName}}</div>
+        <div class="col-md-8">{{abo.tourName}}</div>
       </div>
       <div class="row form-group">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Laufzeit</label>
         </div>
         <div class="col-md-4">
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-offset-3 col-md-4">
+        <div class="col-md-offset-4 col-md-4">
           <p class="input-group">
             <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" enable-time="false" min-date="abo.start" />
             <span class="input-group-btn">
@@ -83,10 +83,10 @@
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label translate>Guthaben</label>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <span ng-class="guthabenClass(abo)">{{aboGuthaben(abo)}}</span>
           <span class="fa fa-info-circle" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="guthabenTooltip(abo)"></span>
         </div>
