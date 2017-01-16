@@ -5,7 +5,7 @@
         <label translate>Abwesenheiten</label>
       </div>
       <div class="col-md-8 dropdown">
-        <span>{{getCurrentlyMatchingGJItem.value}}<span nf-if="abo.abotyp.anzahlAbwesenheiten > 0"> / {{abo.abotyp.anzahlAbwesenheiten}}</span></span>
+        <span>{{getCurrentlyMatchingGJItem.value}}<span ng-if="abo.abotyp.anzahlAbwesenheiten > 0"> / {{abo.abotyp.anzahlAbwesenheiten}}</span></span>
         <span class="fa fa-info-circle" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="getAbwesenheitenTooltip(abo)"></span>
         <div uib-dropdown class="btn-group pull-right" role="group" ng-show="abo.lieferdaten.length > 0">
           <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> </a>
