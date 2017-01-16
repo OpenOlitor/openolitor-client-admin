@@ -1,5 +1,4 @@
-<div class="row form-group">
-  <div class="col-md-12">
+<div>
     <div class="row form-group">
       <div class="col-md-6">
         <label translate>Abwesenheiten</label>
@@ -35,7 +34,7 @@
             </span>
           </script>
           {{$data}}
-        <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+          <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
             <tr ng-repeat="abw in $data | filter:(showAllAbwesenheiten || '') && {abw: {lieferung : {status: 'Offen'}}} | orderBy:'datum'">
               <td data-title="'Datum'|translate">
                 {{abw.datum|date:"EEE, dd.MM.yyyy"}}
@@ -52,5 +51,4 @@
           <span class="pull-right" ng-show="showLoading()"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
         </div>
       </div>
-  </div>
 </div>
