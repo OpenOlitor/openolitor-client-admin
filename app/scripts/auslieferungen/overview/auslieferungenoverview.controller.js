@@ -142,7 +142,7 @@ angular.module('openolitor-admin')
             datum: 'asc'
           },
           filter: {
-            status: AUSLIEFERUNGSTATUS.ERFASST
+            status: undefined
           }
         }, {
           filterDelay: 0,

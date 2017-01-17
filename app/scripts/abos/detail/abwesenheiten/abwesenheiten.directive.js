@@ -11,7 +11,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
       transclude: true,
       templateUrl: 'scripts/abos/detail/abwesenheiten/abwesenheiten.html',
       controller: function($scope, $rootScope, NgTableParams, AbwesenheitenListModel,
-        msgBus, lodash, GeschaeftsjahrUtil, DataUtil) {
+        msgBus, lodash, GeschaeftsjahrUtil, DataUtil, gettext) {
 
         $scope.projekt = $rootScope.projekt;
         $scope.getCurrentlyMatchingGJItem = undefined;
@@ -110,6 +110,15 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
 
           });
         }
+
+        $scope.getAbwesenheitenTooltip = function(abo) {
+          var ret = '';
+          angular.forEach(abo.anzahlAbwesenheiten, function(gj) {
+            ret += gj.key + ': ' + gj.value + '<br />';
+          });
+
+          return ret;
+        };
 
         msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
           if (msg.entity === 'Abwesenheit') {
