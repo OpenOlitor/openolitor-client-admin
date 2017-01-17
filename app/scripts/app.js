@@ -361,7 +361,21 @@ angular
       }
     };
   })
+  .factory('loggedOutInterceptor', function($q, alertService) {
+    return {
+      responseError: function (rejection) {
+        var status = rejection.status;
+        if (status === 401) {
+            alertService.removeAllAlerts();
+            window.location = '#/logout';
+            return;
+        }
+        return $q.reject(rejection);
+      }
+    };
+  })
   .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('loggedOutInterceptor');
     $httpProvider.interceptors.push('errbitErrorInterceptor');
   }])
   .filter('fromNow', function(moment) {
