@@ -4,14 +4,14 @@
  */
 angular.module('openolitor-admin')
   .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
-    '$location',
-    'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
+    '$location', 'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
-    'msgBus', 'lodash', 'localeSensitiveComparator',
+    'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService',
     function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
-      BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator) {
+      BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
+      VorlagenService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -135,8 +135,23 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny || $scope.checkboxes.selectedAbgeschlosseneBestellungen
             .length === 0;
         }
+      },
+      {
+        label: 'Lieferantenabrechnung',
+        noEntityText: true,
+        iconClass: 'fa fa-file',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
       }];
 
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
 
       function search() {
         if ($scope.loading) {
@@ -159,6 +174,10 @@ angular.module('openolitor-admin')
 
       $scope.closeAbrechnungDialog = function() {
         $scope.showCreateAbrechnungDialog = false;
+      };
+
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageLieferantenabrechnung');
       };
 
       $scope.$watch('search.query', function() {
