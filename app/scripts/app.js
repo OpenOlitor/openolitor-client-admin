@@ -361,7 +361,21 @@ angular
       }
     };
   })
+  .factory('loggedOutInterceptor', function($q, alertService) {
+    return {
+      responseError: function (rejection) {
+        var status = rejection.status;
+        if (status === 401) {
+            alertService.removeAllAlerts();
+            window.location = '#/logout';
+            return;
+        }
+        return $q.reject(rejection);
+      }
+    };
+  })
   .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('loggedOutInterceptor');
     $httpProvider.interceptors.push('errbitErrorInterceptor');
   }])
   .filter('fromNow', function(moment) {
@@ -391,9 +405,15 @@ angular
           if(!angular.isUndefined(attribute)) {
             itemDate = items[i][attribute];
           }
-            if (itemDate >= from && itemDate <= toPlusOne)  {
-                result.push(items[i]);
-            }
+          if(angular.isUndefined(to) && angular.isUndefined(from)) {
+            result.push(items[i]);
+          } else if(angular.isUndefined(to) && itemDate >= from) {
+            result.push(items[i]);
+          } else if(angular.isUndefined(from) && itemDate <= toPlusOne) {
+            result.push(items[i]);
+          } else if (itemDate >= from && itemDate <= toPlusOne)  {
+            result.push(items[i]);
+          }
         }
         return result;
       }

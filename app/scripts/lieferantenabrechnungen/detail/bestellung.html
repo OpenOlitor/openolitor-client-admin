@@ -1,6 +1,6 @@
 <div class="panel panel-default" id="bestellungdetails">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzent.name}} {{bestellung.produzent.vorname}} - {{bestellung.produzentKurzzeichen}}</span></h3>
+    <h3 class="panel-title"><span class="navbar-brand noLeftSpace">{{bestellung.produzent.name}} {{bestellung.produzent.vorname}} - {{bestellung.produzentKurzzeichen}}</span></h3>
   </div>
   <div class="panel-body">
     <span translate>Lieferung vom</span> {{bestellung.datum | date}}
@@ -15,7 +15,7 @@
       <tbody>
         <tr ng-repeat="position in bestellung.positionen | orderBy:'produkteBezeichnung'">
           <td>
-            {{(position.menge * position.anzahl)}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}
+            {{(position.menge * position.anzahl)  | number:2}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}
           </td>
           <td>
             {{position.produktBeschrieb}}
