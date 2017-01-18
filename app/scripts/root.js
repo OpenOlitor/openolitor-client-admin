@@ -75,12 +75,19 @@ angular.module('openolitor-admin')
 
       $scope.changeLang = function(lang) {
         if (!angular.isUndefined(lang)) {
-          gettextCatalog.setCurrentLanguage(lang);
-          amMoment.changeLocale(lang);
+
+          msgBus.emitMsg({
+            type: 'ChangeLang',
+            reason: lang
+          });
           $scope.storeActiveLang(lang);
           $scope.$emit('languageChanged');
         }
       };
+
+      msgBus.onMsg('ChangeLang', $rootScope, function(event, msg) {
+        gettextCatalog.setCurrentLanguage(msg.reason);
+      });
 
       $scope.activeLang = function() {
         return gettextCatalog.getCurrentLanguage();
