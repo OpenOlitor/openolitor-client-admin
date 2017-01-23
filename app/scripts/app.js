@@ -83,6 +83,7 @@ angular
     'ngLodash',
     'angular-sortable-view',
     'angular.css.injector',
+    'angular-toArrayFilter',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
