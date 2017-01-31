@@ -248,7 +248,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.getDurchschnittspreisInfo = function(abotypLieferung) {
-        return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
+        return gettext('# Lieferungen bisher: ') + (abotypLieferung.anzahlLieferungen - 1);
       };
 
       $scope.isInvalid = function(korbprodukt) {
@@ -699,6 +699,14 @@ angular.module('openolitor-admin')
       };
 
       $scope.KORBSTATUS = KORBSTATUS;
+
+      $scope.isUnlisted = function(korbprodukt) {
+        if(!angular.isUndefined(korbprodukt.unlisted)) {
+          return korbprodukt.unlisted;
+        } else {
+          return angular.isUndefined(korbprodukt.produktId) || korbprodukt.produktId === null;
+        }
+      };
 
       $scope.displayAbos = function(lieferungId, korbStatus) {
         LieferplanungModel.getAboIdsByKorbStatus({
