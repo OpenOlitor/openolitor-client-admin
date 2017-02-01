@@ -3,10 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ArbeitsangeboteOverviewController', ['$q', '$scope', '$filter',
-    'ArbeitseinsaetzeModel', 'ArbeitsangeboteModel', 'NgTableParams', 'localeSensitiveComparator',
+  .controller('ArbeitseinsaetzeOverviewController', ['$q', '$scope', '$filter',
+    'ArbeitseinsaetzeModel', 'NgTableParams', 'localeSensitiveComparator',
     'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService',
-    function($q, $scope, $filter, ArbeitseinsaetzeModel, ArbeitsangeboteModel, NgTableParams, localeSensitiveComparator,
+    function($q, $scope, $filter, ArbeitseinsaetzeModel, NgTableParams, localeSensitiveComparator,
       OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService) {
 
       $scope.entries = [];
@@ -46,10 +46,6 @@ angular.module('openolitor-admin')
         ids: []
       };
 
-      $scope.sameDay = function(d1, d2) {
-        return d1.toDateString() === d2.toDateString();
-      };
-
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -77,7 +73,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: ArbeitsangeboteModel,
+          exportODSModel: ArbeitseinsaetzeModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -107,7 +103,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = ArbeitsangeboteModel.query({
+        $scope.entries = ArbeitseinsaetzeModel.query({
           q: $scope.query
         }, function() {
           $scope.tableParams.reload();
@@ -116,36 +112,5 @@ angular.module('openolitor-admin')
       }
 
       search();
-
-      $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageArbeitseinsaetzebrief');
-      };
-
-      $scope.closeBericht = function() {
-        $scope.showGenerateReport = false;
-      };
-
-      $scope.actions = [{
-        labelFunction: function() {
-          return 'Arbeitsangebot erstellen';
-        },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-plus',
-        onExecute: function() {
-          return $location.path('/arbeitsangebote/new');
-        }
-      }, {
-        label: 'Arbeitseinsaetzebrief',
-        noEntityText: true,
-        iconClass: 'fa fa-file',
-        onExecute: function() {
-          $scope.showGenerateReport = true;
-          return true;
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
-        }
-      }];
-
     }
   ]);

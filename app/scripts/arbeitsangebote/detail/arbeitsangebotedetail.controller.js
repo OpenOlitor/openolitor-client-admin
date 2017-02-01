@@ -4,14 +4,16 @@
  */
 angular.module('openolitor-admin')
   .controller('ArbeitsangeboteDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'ArbeitsangeboteDetailModel',
+    '$location', 'gettext', 'ArbeitsangeboteDetailModel', 'ARBEITSEINSATZSTATUS',
     function($scope, $filter, $routeParams, $location, gettext,
-      ArbeitsangeboteDetailModel) {
+      ArbeitsangeboteDetailModel, ARBEITSEINSATZSTATUS) {
 
       var defaults = {
         model: {
           id: undefined,
-          mehrPersonenOk: true
+          arbeitskategorien: [],
+          mehrPersonenOk: true,
+          status: ARBEITSEINSATZSTATUS.INVORBEREITUNG
         }
       };
 
@@ -75,24 +77,39 @@ angular.module('openolitor-admin')
 
       // watch min and max dates to calculate difference
       var unwatchMinMaxValues = $scope.$watch(function() {
-          return [$scope.arbeitsangebot.zeitVon, $scope.arbeitsangebot.zeitBis];
+        var von = !angular.isUndefined($scope.arbeitsangebot) ? $scope.arbeitsangebot.zeitVon : undefined;
+        var bis = !angular.isUndefined($scope.arbeitsangebot) ? $scope.arbeitsangebot.zeitBis : undefined;
+        return [von, bis];
       }, function() {
-          // min max dates
-          $scope.tpOptionsVon.maxDate = $scope.arbeitsangebot.zeitBis;
-          $scope.tpOptionsBis.minDate = $scope.arbeitsangebot.zeitVon;
+        if(angular.isUndefined($scope.arbeitsangebot)) {
+          return;
+        }
+        // min max dates
+        $scope.tpOptionsVon.maxDate = $scope.arbeitsangebot.zeitBis;
+        $scope.tpOptionsBis.minDate = $scope.arbeitsangebot.zeitVon;
 
-          if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
-              var diff = $scope.arbeitsangebot.zeitVon.getTime() - $scope.arbeitsangebot.zeitBis.getTime();
-              $scope.arbeitsangebot.einsatzZeit = Math.abs(diff/(1000*60*60));
-          } else {
-              $scope.arbeitsangebot.einsatzZeit = '';
-          }
+        if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
+            var diff = $scope.arbeitsangebot.zeitVon.getTime() - $scope.arbeitsangebot.zeitBis.getTime();
+            $scope.arbeitsangebot.einsatzZeit = Math.abs(diff/(1000*60*60));
+        } else {
+            $scope.arbeitsangebot.einsatzZeit = '';
+        }
 
-          // min max times
-          $scope.tpOptionsVon.max = $scope.arbeitsangebot.zeitBis;
-          $scope.tpOptionsBis.min = $scope.arbeitsangebot.zeitVon;
+        // min max times
+        $scope.tpOptionsVon.max = $scope.arbeitsangebot.zeitBis;
+        $scope.tpOptionsBis.min = $scope.arbeitsangebot.zeitVon;
       }, true);
 
+      $scope.actions = [{
+        labelFunction: function() {
+          return 'Person hinzufügen';
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return undefined;
+        }
+      }];
 
       // destroy watcher
       $scope.$on('$destroy', function() {

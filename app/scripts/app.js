@@ -162,6 +162,12 @@ angular
       gettext('kg')),
     LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l'))
   })
+  .constant('ARBEITSEINSATZSTATUS', {
+    INVORBEREITUNG: gettext('InVorbereitung'),
+    OFFEN: gettext('Offen'),
+    ABGESAGT: gettext('Abgesagt'),
+    ARCHIVIERT: gettext('Archiviert')
+  })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
