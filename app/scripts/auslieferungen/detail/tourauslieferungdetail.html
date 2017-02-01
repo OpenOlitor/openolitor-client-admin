@@ -31,10 +31,12 @@
                 </tr>
               </thead>
               <tbody sv-part="model.koerbe">
-                <tr ng-repeat="korb in model.koerbe | filter:itemFilter" style="cursor: move;" sv-element>
+                <tr ng-repeat="korb in model.koerbe | filter:itemFilter track by $index" style="cursor: move;" sv-element>
                   <td>
-                    <div ng-if="model.status === 'Ausgeliefert'" sv-handle style="display: none"></div>
-                    <span>&#8942;</span> {{korb.sort}}
+                    <span sv-handle>
+                      <div ng-if="model.status === 'Ausgeliefert'"  style="display: none"></div>
+                      <span>&#8942;</span> <span ng-class="{red: (korb.sort !== $index)}">{{korb.sort}}</span>
+                  </span>
                   </td>
                   <td>
                     <a ng-href="#/kunden/{{korb.kunde.kundeId}}">{{korb.kunde.bezeichnung}}</a>
