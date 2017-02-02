@@ -5,7 +5,12 @@
         <h3 class="nonboxed-title">
           <div class="col-md-5">
             <ul class="nav navbar-nav">
-              <li class="navbar-brand" translate>Planung #{{planung.id}}: Korbinhalt</li>
+              <script type="text/ng-template" id="anzahlOverallTooltipTemplate.html">
+                <span translate>Total Anzahl Körbe zu liefern: <a href="" ng-click="displayAbosTotal(KORBSTATUS.WIRDGELIEFERT)"><b>{{anzahlKoerbeZuLiefern}}</b></a></span><br />
+                <span translate>Total Anzahl Abwesenheiten: <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a></span><br />
+                <span translate>Total Anzahl <i>Saldo zu tief</i>: <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a></span>
+              </script>
+              <li class="navbar-brand"><span translate>Planung</span> <span uib-tooltip-template="'anzahlOverallTooltipTemplate.html'" tooltip-popup-close-delay="3000">#{{planung.id}}</span>: <span translate>Korbinhalt</span></li>
               <li class="small" ng-show="valuesEditable()" translate>Abotyp hinzufügen:</li>
               <li ng-show="valuesEditable()">
                 <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
