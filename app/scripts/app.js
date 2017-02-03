@@ -83,6 +83,7 @@ angular
     'ngLodash',
     'angular-sortable-view',
     'angular.css.injector',
+    'angular-toArrayFilter',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
@@ -361,13 +362,13 @@ angular
       }
     };
   })
-  .factory('loggedOutInterceptor', function($q, alertService) {
+  .factory('loggedOutInterceptor', function($q, alertService, $window) {
     return {
       responseError: function (rejection) {
         var status = rejection.status;
         if (status === 401) {
             alertService.removeAllAlerts();
-            window.location = '#/logout';
+            $window.location = '#/logout';
             return;
         }
         return $q.reject(rejection);

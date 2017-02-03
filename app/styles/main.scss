@@ -26,6 +26,7 @@ h3 .small {
   text-transform: uppercase;
 }
 
+span.red,
 i.red {
   color: red;
 }
@@ -51,7 +52,10 @@ input.ng-invalid {
 }
 
 .nav-item.sublevel-1 {
-  padding: 5px 35px;
+  padding-left: 35px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .master-content {
@@ -255,6 +259,16 @@ input.ng-invalid {
   border-radius: 3px;
 }
 
+.openolitor .table-small .input-group > .input-group-addon:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.openolitor .table-small .input-group > .input-group-addon:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .openolitor .table-small > thead > tr > th,
 .openolitor .table-small > tbody > tr > th,
 .openolitor .table-small > tfoot > tr > th,
@@ -322,7 +336,7 @@ small.lieferplanung {
 }
 
 #lieferplanung .table-lieferplanung input{
-  width: 5em;
+  width: 4.5em;
 }
 
 #lieferplanung .table-lieferplanung input.large {
@@ -472,6 +486,11 @@ footer, .footer {
   right: 0px;
   margin: 5px;
   left: auto !important;
+}
+
+.preis-tooltip {
+  font-size: 80%;
+  width: 210px;
 }
 
 .sidebar-nav .fa {
