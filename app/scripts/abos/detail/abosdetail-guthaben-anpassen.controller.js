@@ -9,6 +9,7 @@ angular.module('openolitor-admin')
     function($scope, $uibModalInstance, $log, abo) {
       $scope.abo = abo;
       $scope.formDaten = {
+        guthabenAlt: abo.guthaben,
         guthabenNeu: abo.guthaben,
         bemerkung: undefined
       };
