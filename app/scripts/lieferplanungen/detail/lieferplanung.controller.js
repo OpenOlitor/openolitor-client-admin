@@ -17,6 +17,10 @@ angular.module('openolitor-admin')
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
+      $scope.anzahlKoerbeZuLiefern = '...';
+      $scope.anzahlAbwesenheiten = '...';
+      $scope.anzahlSaldoZuTief = '...';
+
       $scope.search = {
         query: ''
       };
@@ -84,7 +88,20 @@ angular.module('openolitor-admin')
       }, function(result) {
         $scope.abotypenLieferungen = result;
         $scope.recalculateProduzentListen(true);
+        $scope.recalculateTotalAnzahl();
       });
+
+      $scope.recalculateTotalAnzahl = function() {
+        $scope.anzahlKoerbeZuLiefern = 0;
+        $scope.anzahlAbwesenheiten = 0;
+        $scope.anzahlSaldoZuTief = 0;
+        lodash.forEach($scope.abotypenLieferungen,
+          function(lieferung) {
+            $scope.anzahlKoerbeZuLiefern += lieferung.anzahlKoerbeZuLiefern;
+            $scope.anzahlAbwesenheiten += lieferung.anzahlAbwesenheiten;
+            $scope.anzahlSaldoZuTief += lieferung.anzahlSaldoZuTief;
+          });
+      };
 
       $scope.recalculateProduzentListen = function(addTableParams) {
         lodash.forEach($scope.abotypenLieferungen, function(
@@ -248,7 +265,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.getDurchschnittspreisInfo = function(abotypLieferung) {
-        return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
+        return gettext('# Lieferungen bisher: ') + (abotypLieferung.anzahlLieferungen - 1);
       };
 
       $scope.isInvalid = function(korbprodukt) {
@@ -699,6 +716,23 @@ angular.module('openolitor-admin')
       };
 
       $scope.KORBSTATUS = KORBSTATUS;
+
+      $scope.isUnlisted = function(korbprodukt) {
+        if(!angular.isUndefined(korbprodukt.unlisted)) {
+          return korbprodukt.unlisted;
+        } else {
+          return angular.isUndefined(korbprodukt.produktId) || korbprodukt.produktId === null;
+        }
+      };
+
+      $scope.displayAbosTotal = function(korbStatus) {
+        LieferplanungModel.getAllAboIdsByKorbStatus({
+          id: $routeParams.id,
+          korbStatus: korbStatus
+        }, function(result) {
+          $location.path('/abos').search('q', 'id=' + result.join());
+        });
+      };
 
       $scope.displayAbos = function(lieferungId, korbStatus) {
         LieferplanungModel.getAboIdsByKorbStatus({

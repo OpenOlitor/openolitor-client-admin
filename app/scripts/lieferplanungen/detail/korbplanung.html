@@ -5,7 +5,12 @@
         <h3 class="nonboxed-title">
           <div class="col-md-5">
             <ul class="nav navbar-nav">
-              <li class="navbar-brand" translate>Planung #{{planung.id}}: Korbinhalt</li>
+              <script type="text/ng-template" id="anzahlOverallTooltipTemplate.html">
+                <span translate>Total Anzahl Körbe zu liefern: <a href="" ng-click="displayAbosTotal(KORBSTATUS.WIRDGELIEFERT)"><b>{{anzahlKoerbeZuLiefern}}</b></a></span><br />
+                <span translate>Total Anzahl Abwesenheiten: <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a></span><br />
+                <span translate>Total Anzahl <i>Saldo zu tief</i>: <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a></span>
+              </script>
+              <li class="navbar-brand"><span translate>Planung</span> <span uib-tooltip-template="'anzahlOverallTooltipTemplate.html'" tooltip-popup-close-delay="3000">#{{planung.id}}</span>: <span translate>Korbinhalt</span></li>
               <li class="small" ng-show="valuesEditable()" translate>Abotyp hinzufügen:</li>
               <li ng-show="valuesEditable()">
                 <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
@@ -57,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen">
+    <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen | orderBy: 'abotypBeschrieb'">
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
         <span translate>Anzahl Körbe zu liefern: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a></span><br />
         <span translate>Anzahl Abwesenheiten: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a></span><br />
@@ -69,9 +74,11 @@
             <span class="navbar-brand" data-toggle="collapse" data-target="#abotypLieferung_{{abotypLieferung.id}}" aria-expanded="true">
               <span class="pre-info" uib-tooltip-template="'anzahlTooltipTemplate.html'" tooltip-popup-close-delay="3000">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
               {{abotypLieferung.abotypBeschrieb}}
-              <small class="lieferplanung" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb">
-                {{abotypLieferung.vertriebBeschrieb}}
-              </small>
+              <script type="text/ng-template" id="vertriebTooltipTemplate.html">
+                <span translate>Vertrieb: <b>{{abotypLieferung.vertriebBeschrieb}}</b></span>
+              </script>
+              <span class="lieferplanung pre-info fa fa-info-circle" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb" uib-tooltip-template="'vertriebTooltipTemplate.html'" tooltip-popup-close-delay="500">
+              </span>
             </span>
             <span class="pull-right">
               <small class="lieferplanung" ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
@@ -81,15 +88,24 @@
             </span>
           </h3>
         </div>
+        <script type="text/ng-template" id="unlistedKorbproduktPreisTooltipTemplate.html">
+          <span translate>Eingabe: Preis pro Einheit <br />Anzeige: Preis für gewählte Menge</span>
+        </script>
+        <script type="text/ng-template" id="unlistedKorbproduktBezTooltipTemplate.html">
+          <span translate>Dieses Produkt wurde frei hinzugefügt. Es befindet sich nicht in den Stammdaten.</span>
+        </script>
         <div class="panel-body collapse in" id="abotypLieferung_{{abotypLieferung.id}}">
           <table ng-table="abotypLieferung.tableParamsKorb" class="table table-striped table-small table-lieferplanung" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="korbprodukt in $data | orderBy:'produktBeschrieb'" ng-class="{error: isInvalid(korbprodukt)}">
               <td><span oo-draggable="true" oo-draged-type="'korbprod'">&#8942;</span></td>
               <td data-title="'Produkt'|translate">
-                <span ng-hide="korbprodukt.unlisted">
+                <span ng-hide="valuesEditable() && isUnlisted(korbprodukt)">
                   {{korbprodukt.produktBeschrieb}}
+                  <span ng-if="isUnlisted(korbprodukt)" uib-tooltip-template="'unlistedKorbproduktBezTooltipTemplate.html'" tooltip-popup-close-delay="500" tooltip-class="small-tooltip">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
                 </span>
-                <span ng-show="korbprodukt.unlisted">
+                <span ng-show="valuesEditable() && isUnlisted(korbprodukt)">
                   <input type="text" class="form-control large" name="korbprodukt.name" ng-disabled="!valuesEditable()" ng-model="korbprodukt.produktBeschrieb" placeholder="{{'Produktbez.'|translate}}" required>
                 </span>
               </td>
@@ -97,19 +113,24 @@
                 <input type="number" placeholder="{{'Menge'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" min="0" step="0.1" class="form-control" name="menge" ng-model="korbprodukt.menge" required></input>
               </td>
               <td>
-                <span ng-if="!korbprodukt.unlisted">
+                <span ng-if="!valuesEditable() || !isUnlisted(korbprodukt)">
                   <div>{{liefereinheiten[korbprodukt.einheit.toUpperCase()].label.short|translate}}</div>
                 </span>
-                <span ng-if="korbprodukt.unlisted">
+                <span ng-if="valuesEditable() && isUnlisted(korbprodukt)">
                   <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected="korbprodukt.einheit" ng-required></oo-dropdown>
                 </span>
               </td>
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
-                <span ng-show="korbprodukt.menge" ng-if="!projekt.preiseEditierbar && !korbprodukt.unlisted">
+                <span ng-show="korbprodukt.menge" ng-if="!valuesEditable() || (!projekt.preiseEditierbar && !isUnlisted(korbprodukt))">
                   {{calculatePreis(korbprodukt)| ooCHF}}
                 </span>
-                <span ng-show="korbprodukt.menge" ng-if="projekt.preiseEditierbar || korbprodukt.unlisted">
-                  <input type="number" placeholder="{{'Preis'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,2})?$/" min="0" step="0.05" class="form-control" name="preis" ng-model="korbprodukt.preisEinheit" ng-change="calculatePreis(korbprodukt)" required></input>
+                <span ng-show="korbprodukt.menge" ng-if="valuesEditable() && (projekt.preiseEditierbar || isUnlisted(korbprodukt))">
+                  <p class="input-group">
+                    <input type="number" placeholder="{{'Preis'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,2})?$/" min="0" step="0.05" class="form-control" name="preis" ng-model="korbprodukt.preisEinheit" ng-change="calculatePreis(korbprodukt)" required></input>
+                    <span class="input-group-addon" uib-tooltip-template="'unlistedKorbproduktPreisTooltipTemplate.html'" tooltip-popup-close-delay="500" tooltip-class="preis-tooltip">
+                      {{calculatePreis(korbprodukt)| ooCHF}} <i class="fa fa-info-circle"></i>
+                    </span>
+                  </p>
                 </span>
                 <span ng-hide="korbprodukt.menge" class="base-preis">
                   {{korbprodukt.preisEinheit | ooCHF}}
