@@ -42,10 +42,10 @@
     <div class="row form-group">
       <div class="col-md-12">
         <div class="panel">
-          <script type="text/ng-template" id="removePagerRow.html">
+          <script type="text/ng-template" id="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <!-- nothing -->
           </script>
-        <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+        <table ng-table="lieferungenTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="lieferung in $data">
               <td data-title="'Datum'|translate">
                 {{lieferung.datum|date:"EEE, dd.MM.yyyy"}}

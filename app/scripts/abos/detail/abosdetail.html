@@ -109,7 +109,7 @@
           <label translate>Lieferungen</label>
         </div>
         <div class="col-md-12">
-          <table ng-table="koerbeTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+          <table ng-table="koerbeTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="korb in $data | orderBy:'-korb.lieferung.datum'">
               <td data-title="'Datum'|translate">
                 {{korb.lieferung.datum|date:"EEE, dd.MM.yyyy"}}
