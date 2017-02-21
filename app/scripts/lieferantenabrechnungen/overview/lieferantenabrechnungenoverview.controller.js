@@ -189,7 +189,7 @@ angular.module('openolitor-admin')
       }, true);
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-        if (msg.entity === 'Bestellung') {
+        if (msg.entity === 'Sammelbestellung') {
           $scope.entries.map(function(entry) {
             if (entry.id === msg.data.id) {
               angular.copy(msg.data, entry);

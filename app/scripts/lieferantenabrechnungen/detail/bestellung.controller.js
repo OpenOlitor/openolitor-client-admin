@@ -21,8 +21,8 @@ angular.module('openolitor-admin')
       var loadDetail = function() {
           LieferantenAbrechnungenOverviewModel.get({
           id: $scope.bestellungId
-        }, function(bestellung) {
-          $scope.bestellung = bestellung;
+        }, function(sammelbestellung) {
+          $scope.sammelbestellung = sammelbestellung;
         });
       };
 
