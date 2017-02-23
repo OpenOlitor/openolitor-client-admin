@@ -432,6 +432,7 @@ angular.module('openolitor-admin')
         var bestellungByAdminanteil = sammelbestellungByProduzent.bestellungen[abotypLieferung.abotyp.adminProzente];
         if (angular.isUndefined(bestellungByAdminanteil)) {
           bestellungByAdminanteil = $scope.sammelbestellungen[produzent].bestellungen[abotypLieferung.abotyp.adminProzente] = {
+            produzentKurzzeichen: sammelbestellungByProduzent.produzentKurzzeichen,
             total: 0,
             steuer: 0,
             totalSteuer: 0,
@@ -483,26 +484,22 @@ angular.module('openolitor-admin')
           (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
         bestellungByAdminanteil.total += (korbprodukt.preisEinheit *
           korbprodukt.menge * anzahl);
+        bestellungByAdminanteil.adminProzenteAbzug = ((bestellungByAdminanteil.adminProzente / 100) *
+          bestellungByAdminanteil.total);
+        bestellungByAdminanteil.totalNachAbzugAdminProzente = (bestellungByAdminanteil.total -
+          bestellungByAdminanteil.adminProzenteAbzug);
+
 
         if ($scope.produzentIstBesteuert(korbprodukt.produzentId)) {
-          lieferungByProduzent.steuerSatz = $scope.produzentSteuersatz(
-            korbprodukt.produzentId);
-          lieferungByProduzent.steuer = (lieferungByProduzent.total / 100 *
-            lieferungByProduzent.steuerSatz);
-          lieferungByProduzent.totalSteuer = (lieferungByProduzent.total +
-            lieferungByProduzent.steuer);
-
           bestellungByAdminanteil.steuerSatz = $scope.produzentSteuersatz(
             korbprodukt.produzentId);
-          bestellungByAdminanteil.steuer = (bestellungByAdminanteil.total / 100 *
+          bestellungByAdminanteil.steuer = (bestellungByAdminanteil.totalNachAbzugAdminProzente / 100 *
             bestellungByAdminanteil.steuerSatz);
-          bestellungByAdminanteil.totalSteuer = (bestellungByAdminanteil.total +
+          bestellungByAdminanteil.totalSteuer = (bestellungByAdminanteil.totalNachAbzugAdminProzente +
             bestellungByAdminanteil.steuer);
         } else {
-          lieferungByProduzent.steuer = 0;
-          lieferungByProduzent.totalSteuer = lieferungByProduzent.total;
           bestellungByAdminanteil.steuer = 0;
-          bestellungByAdminanteil.totalSteuer = bestellungByAdminanteil.total;
+          bestellungByAdminanteil.totalSteuer = bestellungByAdminanteil.totalNachAbzugAdminProzente;
         }
       };
 

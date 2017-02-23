@@ -95,7 +95,7 @@
                       <span translate>MWST</span> {{lieferung.steuerSatz}}%
                     </td>
                     <td>
-                      {{lieferung.steuer | ooCHF}}
+                      {{bestellung.steuer | ooCHF}}
                     </td>
                   </tr>
                   <tr>
@@ -104,7 +104,7 @@
                         Total (abz. Adminanteil<span ng-if="produzentIstBesteuert(sammelbestellung.produzentId)" translate>, inkl. MWST</span>)
                     </td>
                     <td>
-                      {{lieferung.totalSteuer | ooCHF}}
+                      {{bestellung.totalSteuer | ooCHF}}
                     </td>
                   </tr>
                 </tfoot>
