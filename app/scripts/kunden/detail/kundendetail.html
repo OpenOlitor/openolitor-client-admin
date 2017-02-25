@@ -271,7 +271,9 @@
                             <label for="enableLogin" translate>Weblogin aktivieren</label>
                           </div>
                           <div class="col-md-8">
-                            <a role="button" class="btn btn-success" ng-click="enableLogin(person)"><span translate>Aktivieren</span></a>
+                            <a role="button" class="btn btn-success" ng-click="enableLogin(person)">
+                              <span translate>Aktivieren</span>
+                            </a>
                           </div>
                         </div>
                         <div class="row form-group">
@@ -279,7 +281,11 @@
                             <label for="sendEinladung" translate>Weblogin Einladung</label>
                           </div>
                           <div class="col-md-8">
-                            <a role="button" ng-enabled="person.email" class="btn btn-default" ng-click="sendEinladung(person)"><span translate>Einladung schicken</span></a>
+                            <a role="button" ng-enabled="person.email" class="btn btn-default" ng-click="sendEinladung(person)">
+                              <span translate>Einladung schicken</span>
+                              <span ng-show="einladungSend[person.email]" class="glyphicon glyphicon-check"></span>
+                              <span ng-show="einladungSendFailed[person.email]" class="glyphicon glyphicon-remove"></span>
+                            </a>
                           </div>
                         </div>
                       </div>

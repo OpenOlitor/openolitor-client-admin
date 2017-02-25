@@ -31,6 +31,9 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.einladungSend = {};
+      $scope.einladungSendFailed = {};
+
       $scope.abotypenArray = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
         return typ.id;
       });
@@ -189,7 +192,14 @@ angular.module('openolitor-admin')
       };
 
       $scope.sendEinladung = function(person) {
-        KundenDetailService.sendEinladung($routeParams.id, person.id);
+          $scope.einladungSend[person.email] = false;
+          $scope.einladungSendFailed[person.email] = false;
+        KundenDetailService.sendEinladung($routeParams.id, person.id)
+          .then(function successCallback(response) {
+            $scope.einladungSend[person.email] = true;
+          }, function errorCallback(response) {
+            $scope.einladungSendFailed[person.email] = true;
+          });
       };
 
       $scope.changeRolle = function(person) {
