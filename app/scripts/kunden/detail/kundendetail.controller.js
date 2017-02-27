@@ -183,17 +183,21 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.disableLogin = function(person) {
-        KundenDetailService.disableLogin($routeParams.id, person.id);
-      };
-
-      $scope.enableLogin = function(person) {
-        KundenDetailService.enableLogin($routeParams.id, person.id);
+      $scope.switchLogin = function(person) {
+        //this is already the new, requested value
+        if(person.loginAktiv) {
+          KundenDetailService.enableLogin($routeParams.id, person.id);
+        } else {
+          KundenDetailService.disableLogin($routeParams.id, person.id);
+        }
       };
 
       $scope.sendEinladung = function(person) {
-          $scope.einladungSend[person.email] = false;
-          $scope.einladungSendFailed[person.email] = false;
+        if(angular.isUndefined(person.email) || person.email === '') {
+          return;
+        }
+        $scope.einladungSend[person.email] = false;
+        $scope.einladungSendFailed[person.email] = false;
         KundenDetailService.sendEinladung($routeParams.id, person.id)
           .then(function successCallback(response) {
             $scope.einladungSend[person.email] = true;
