@@ -125,6 +125,14 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="titel" translate>Nr.</label>
+                </div>
+                <div class="col-md-8">
+                  <input ng-disabled="isExisting()" type="text" class="form-control" id="nr" ng-model="rechnung.id" required placeholder="{{'Nr.'|translate}}" maxlength="30">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="titel" translate>Titel</label>
                 </div>
                 <div class="col-md-8">
