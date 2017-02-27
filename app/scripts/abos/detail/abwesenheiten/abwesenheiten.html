@@ -18,7 +18,7 @@
     </div>
     <div class="row form-group">
       <div class="col-md-12">
-          <script type="text/ng-template" id="removePagerRow.html">
+          <script type="text/ng-template" id="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <!-- nothing -->
           </script>
           <script type="text/ng-template" id="headerSwitch.html">
@@ -34,7 +34,7 @@
             </span>
           </script>
           {{$data}}
-          <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="removePagerRow.html">
+          <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="abw in $data | filter:(showAllAbwesenheiten || '') && {abw: {lieferung : {status: 'Offen'}}} | orderBy:'datum'">
               <td data-title="'Datum'|translate">
                 {{abw.datum|date:"EEE, dd.MM.yyyy"}}

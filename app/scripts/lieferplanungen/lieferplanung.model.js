@@ -50,25 +50,25 @@ angular.module('openolitor-admin')
         isArray: false,
         url: API_URL + 'lieferplanungen/:id/aktionen/verrechnen'
       },
-      'getBestellungen': {
+      'getSammelbestellungen': {
         method: 'GET',
         isArray: true,
-        url: API_URL + 'lieferplanungen/:id/bestellungen'
+        url: API_URL + 'lieferplanungen/:id/sammelbestellungen'
       },
-      'bestellungenErstellen': {
+      'sammelbestellungenErstellen': {
         method: 'POST',
         isArray: false,
-        url: API_URL + 'lieferplanungen/:id/bestellungen/create'
+        url: API_URL + 'lieferplanungen/:id/sammelbestellungen/create'
       },
       'getBestellpositionen': {
         method: 'GET',
         isArray: true,
-        url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/positionen'
+        url: API_URL + 'lieferplanungen/:id/sammelbestellungen/:sammelbestellungId/bestellung/:bestellungId/positionen'
       },
-      'bestellungVersenden': {
+      'sammelbestellungVersenden': {
         method: 'POST',
         isArray: false,
-        url: API_URL + 'lieferplanungen/:id/bestellungen/:bestellungId/aktionen/erneutBestellen'
+        url: API_URL + 'lieferplanungen/:id/sammelbestellungen/:bestellungId/aktionen/erneutBestellen'
       },
       'getAboIdsByKorbStatus': {
         method: 'GET',

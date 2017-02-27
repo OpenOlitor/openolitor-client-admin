@@ -8,7 +8,7 @@ angular.module('openolitor-admin')
 
       function alsAbgerechnetMarkieren(data) {
         return $http.post(API_URL +
-          'lieferanten/bestellungen/aktionen/abgerechnet',
+          'lieferanten/sammelbestellungen/aktionen/abgerechnet',
           data);
       }
 

@@ -36,6 +36,12 @@
                   <i ng-show="rechnung.isDownloadingMahnung" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </span>
               </td>
+              <td data-title="'Nr.'|translate" sortable="'id'">
+                <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.id}}</a>
+              </td>
+              <td data-title="'Kunde'|translate" sortable="'kundeId'">
+                <a ng-href="#/kunden/{{rechnung.kundeId}}">{{rechnung.kundeId}}</a>
+              </td>
               <td data-title="'Titel'|translate" sortable="'titel'">
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
               </td>
