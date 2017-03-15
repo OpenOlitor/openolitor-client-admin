@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3  class="panel-title"><span class="navbar-brand" translate>Journal</span>
+          <form class="navbar-form pull-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+            </div>
+          </form>
+        </span>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries" id="journalTable" display-export="true" export-file-name="Journal">
+          <script type="text/ng-template" id="headerCheckbox.html">
+            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+          </script>
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+            <tr ng-repeat="journalEntry in $data">
+              <td data-title="'Sequence-Nr'|translate">
+                {{journalEntry.sequenceNr}}
+              </td>
+              <td data-title="'Persistance Id'|translate">
+                {{journalEntry.message.persistenceId}}
+              </td>
+              <td data-title="'User'|translate">
+                <a ng-href="#/personen?q=id={{journalEntry.message.payload.sammelbestellungVersendenEvent.meta.originator}}">
+                  {{getFirstEntry(journalEntry.message.payload).meta.originator}}
+                </a>
+              </td>
+              <td data-title="'Entity/Action'|translate">
+                  {{getFirstEntry(journalEntry.message.payload).entity.key}}
+              </td>
+              <td data-title="'Payload'|translate">
+                <pre><code>{{prettyPrintJson(getFirstEntry(journalEntry.message.payload))}}</code></pre>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
