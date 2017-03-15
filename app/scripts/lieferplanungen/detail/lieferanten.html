@@ -4,8 +4,11 @@
       <div class="row form-group">
         <h3 class="nonboxed-title">
           <div class="col-md-5">
-            <ul class="nav navbar-nav" ng-show="valuesEditable()">
+            <ul class="nav navbar-nav">
               <li class="navbar-brand" translate >Planung #{{planung.id}}: Zusammenzug Lieferanten</li>
+              <li ng-show="valuesEditable()">
+                <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip-html="('Bemerkungen zu dieser Lieferung: '|translate) + (planung.bemerkungen)"><span class="fa fa-pencil-square-o"></span></button>
+              </li>
             </ul>
           </div>
           <div class="col-md-7">
@@ -28,7 +31,7 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzentKurzzeichen}} - {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).vorname}} {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).name}}</span></h3>
               <div class="pull-right" role="group">
-                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(bestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung erneut versenden</span></button>
+                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung erneut versenden</span></button>
               </div>
             </div>
             <div class="panel-body" ng-repeat="lieferung in bestellung.lieferungen | toArray | orderBy: 'produktBeschrieb'">
