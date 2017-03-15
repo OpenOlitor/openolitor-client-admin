@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -28,6 +28,9 @@
               <td data-title="'Persistance Id'|translate">
                 {{journalEntry.message.persistenceId}}
               </td>
+              <td data-title="'Datum'|translate">
+                  {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy hh:mm'}}
+              </td>
               <td data-title="'User'|translate">
                 <a ng-href="#/personen?q=id={{journalEntry.message.payload.sammelbestellungVersendenEvent.meta.originator}}">
                   {{getFirstEntry(journalEntry.message.payload).meta.originator}}
@@ -35,6 +38,9 @@
               </td>
               <td data-title="'Entity/Action'|translate">
                   {{getFirstEntry(journalEntry.message.payload).entity.key}}
+              </td>
+              <td data-title="'Event'|translate">
+                  {{getFirstKey(journalEntry.message.payload)}}
               </td>
               <td data-title="'Payload'|translate">
                 <pre><code>{{prettyPrintJson(getFirstEntry(journalEntry.message.payload))}}</code></pre>

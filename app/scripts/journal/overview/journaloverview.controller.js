@@ -93,6 +93,16 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.getFirstKey = function(array) {
+        if(!angular.isUndefined(array)) {
+          for (var key in array) {
+            if (array.hasOwnProperty(key)) {
+              return key;
+            }
+          }
+        }
+      };
+
       $scope.prettyPrintJson = function(json) {
         return JSON.stringify(json, null, 2);
       };
