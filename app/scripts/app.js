@@ -727,5 +727,11 @@ angular
         controller: 'VorlagenOverviewController',
         name: 'VorlagenOverview',
         access: userRoles.Administrator
+      })
+      .when('/journal', {
+        templateUrl: 'scripts/journal/overview/journaloverview.html',
+        controller: 'JournalOverviewController',
+        name: 'JournalOverview',
+        access: userRoles.Administrator
       });
   }]);
