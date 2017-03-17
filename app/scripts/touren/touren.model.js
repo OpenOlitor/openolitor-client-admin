@@ -4,7 +4,7 @@
  */
 angular.module('openolitor-admin')
   .factory('TourenModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'touren/:id/:extendedPath', {
+    return $resource(API_URL + 'touren/:id/:extendedPath/:extendedPathPlus', {
       id: '@id'
     }, {
       'exportODS': exportODSModuleFunction,
@@ -12,7 +12,8 @@ angular.module('openolitor-admin')
         method: 'GET',
         isArray: true,
         params: {
-          extendedPath: 'personen/aktiv'
+          extendedPath: 'personen',
+          extendedPathPlus: 'aktiv',
         }
       }
     });
