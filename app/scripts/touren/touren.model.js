@@ -12,7 +12,7 @@ angular.module('openolitor-admin')
         method: 'GET',
         isArray: true,
         params: {
-          extendedPath: 'personen'
+          extendedPath: 'personen/aktiv'
         }
       }
     });
