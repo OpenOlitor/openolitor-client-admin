@@ -161,7 +161,8 @@ angular
     GRAMM: addExtendedEnumValue('Gramm', gettext('Gramm'), gettext('gr')),
     KILOGRAMM: addExtendedEnumValue('Kilogramm', gettext('Kilogramm'),
       gettext('kg')),
-    LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l'))
+    LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l')),
+    PORTION: addExtendedEnumValue('Portion', gettext('Portion'), gettext('Por.'))
   })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
