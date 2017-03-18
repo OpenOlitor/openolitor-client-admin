@@ -699,6 +699,10 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function() {
           $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
+        }, function(error) {
+          alertService.addAlert('error', gettext(
+              'Lieferplanung kan nicht abgeschlossen werden: ') +
+            error.status + ':' + error.statusText);
         });
       };
 
@@ -707,6 +711,10 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function() {
           $scope.planung.status = LIEFERSTATUS.VERRECHNET;
+        }, function(error) {
+          alertService.addAlert('error', gettext(
+              'Lieferplanung kan nicht verrechnet werden: ') +
+            error.status + ':' + error.statusText);
         });
       };
 
@@ -771,6 +779,37 @@ angular.module('openolitor-admin')
           $location.path('/abos').search('q', 'id=' + result.join());
         });
       };
+
+      $scope.abschliessenAction = [{
+        label: gettext('Lieferplanung abschliessen'),
+        confirmMessage: gettext('Soll die Lieferplanung abgeschlossen werden?'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        onExecute: function() {
+          return $scope.planungAbschliessen();
+        }
+      },{
+        label: gettext('Lieferplanung löschen'),
+        iconClass: 'fa fa-times',
+        confirmMessage: gettext('Soll die Lieferplanung gelöscht werden?'),
+        noEntityText: true,
+        onExecute: function() {
+          return $scope.delete();
+        }
+      }
+      ];
+
+      $scope.verrechnenAction = [{
+        labelFunction: function() {
+          return gettext('Lieferplanung verrechnen');
+        },
+        confirmMessage: gettext('Soll die Lieferplanung verrechnet werden?'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        onExecute: function() {
+          return $scope.planungVerrechnen();
+        }
+      }];
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === 'Lieferplanung' && msg.entity

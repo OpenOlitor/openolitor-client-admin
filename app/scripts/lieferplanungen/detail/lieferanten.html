@@ -15,8 +15,8 @@
             <div class="pull-right" role="group">
               <button type="button" role="button" ng-click="setMode('korbinhalt')" class="btn btn-default"><span class="fa fa-step-backward"></span> <span translate>Übersicht der Körbe</span></button>
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
-              <button role="button" ng-show="planung.status === 'Offen'" ng-click="planungAbschliessen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung abschliessen</span></button>
-              <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="planungVerrechnen()" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Planung verrechnen</span></button>
+              <span ng-show="planung.status === 'Offen'"><oo-actions-button model="planung" actions="abschliessenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-show="planung.status === 'Abgeschlossen'"><oo-actions-button model="planung" actions="verrechnenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
             </div>
           </div>
         </h3>
