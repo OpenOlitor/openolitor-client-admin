@@ -24,6 +24,7 @@ angular.module('openolitor-admin')
       checkSize();
 
       $scope.connected = false;
+      $scope.showConnectionErrorMessage = false;
 
       var unwatchLoggedIn = $scope.$watch(function() {
         return ooAuthService.getUser();
@@ -60,15 +61,21 @@ angular.module('openolitor-admin')
       msgBus.onMsg('WebSocketClosed', $rootScope, function(event, msg) {
         $scope.connected = false;
         $scope.messagingSocketClosedReason = msg.reason;
-        $timeout(function() {
-          $scope.showConnectionErrorMessage = true;
-        }, 30000);
+        if(angular.isUndefined($scope.messagingSocketClosedSetter)) {
+          $scope.messagingSocketClosedSetter = $timeout(function() {
+            $scope.showConnectionErrorMessage = true;
+            $scope.messagingSocketClosedSetter = undefined;
+          }, 30000);
+        }
         $scope.$apply();
       });
 
       msgBus.onMsg('WebSocketOpen', $rootScope, function() {
         $scope.connected = true;
         $scope.showConnectionErrorMessage = false;
+        if(angular.isUndefined($scope.messagingSocketClosedSetter)) {
+          $scope.messagingSocketClosedSetter.close();
+        }
         $scope.messagingSocketClosedReason = '';
         $scope.$apply();
       });
