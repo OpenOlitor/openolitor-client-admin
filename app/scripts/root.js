@@ -73,7 +73,7 @@ angular.module('openolitor-admin')
       msgBus.onMsg('WebSocketOpen', $rootScope, function() {
         $scope.connected = true;
         $scope.showConnectionErrorMessage = false;
-        if(angular.isUndefined($scope.messagingSocketClosedSetter)) {
+        if(!angular.isUndefined($scope.messagingSocketClosedSetter)) {
           $scope.messagingSocketClosedSetter.close();
         }
         $scope.messagingSocketClosedReason = '';
