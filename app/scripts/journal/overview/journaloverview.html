@@ -32,7 +32,7 @@
                   {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy hh:mm'}}
               </td>
               <td data-title="'User'|translate">
-                <a ng-href="#/personen?q=id={{journalEntry.message.payload.sammelbestellungVersendenEvent.meta.originator}}">
+                <a ng-href="#/personen?q=id={{getFirstEntry(journalEntry.message.payload).meta.originator}}">
                   {{getFirstEntry(journalEntry.message.payload).meta.originator}}
                 </a>
               </td>
