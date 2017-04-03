@@ -29,11 +29,11 @@ angular.module('openolitor-admin')
         url: API_URL +
           'lieferplanungen/:id/lieferungen/:lieferungId/lieferpositionen'
       },
-      'saveLieferpositionen': {
+      'modifyLieferplanungData': {
         method: 'POST',
         isArray: false,
         url: API_URL +
-          'lieferplanungen/:id/lieferungen/:lieferungId/lieferpositionen'
+          'lieferplanungen/:id/aktionen/modifizieren'
       },
       'getVerfuegbareLieferungen': {
         method: 'GET',

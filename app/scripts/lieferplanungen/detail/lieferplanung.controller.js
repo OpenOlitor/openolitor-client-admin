@@ -632,17 +632,23 @@ angular.module('openolitor-admin')
       $scope.save = function() {
         if ($scope.checkAllValues()) {
           $scope.editNachAbgeschlossen = false;
-          lodash.forEach($scope.abotypenLieferungen, function(
-            abotypLieferung) {
-            LieferplanungModel.saveLieferpositionen({
-              id: $routeParams.id,
-              lieferungId: abotypLieferung.id
-            }, {
-              lieferungId: abotypLieferung.id,
-              preisTotal: abotypLieferung.preisTotal,
-              lieferpositionen: abotypLieferung.lieferpositionen
-            });
+          var lieferungenModifyList = lodash.map($scope.abotypenLieferungen, function(abotypLieferung) {
+            return {
+                id: abotypLieferung.id,
+                lieferpositionen: {
+                  preisTotal: abotypLieferung.preisTotal,
+                  lieferpositionen: abotypLieferung.lieferpositionen
+                }
+              }
           });
+
+          LieferplanungModel.modifyLieferplanungData({
+            id: $routeParams.id
+          }, {
+            id: parseInt($routeParams.id),
+            lieferungen: lieferungenModifyList
+          });
+
           return $scope.planung.$save();
         } else {
           return 'Noop';
