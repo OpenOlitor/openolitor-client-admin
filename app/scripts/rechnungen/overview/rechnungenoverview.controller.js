@@ -173,6 +173,19 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
+        label: 'Kundenliste anzeigen',
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'kundeId');
+          $location.path('/kunden').search('q', 'id=' + result.join());
+        }
+      }, {
         label: 'Email Versand*',
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
