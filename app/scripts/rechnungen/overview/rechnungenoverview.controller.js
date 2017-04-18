@@ -225,7 +225,7 @@ angular.module('openolitor-admin')
               $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
               orderedData;
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = orderedData;
 
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) *
