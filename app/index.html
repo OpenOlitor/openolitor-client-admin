@@ -35,7 +35,7 @@
   <!-- endbuild -->
 </head>
 
-<body class="white openolitor" ng-controller="OpenOlitorRootController">
+<body class="white openolitor adminportal" ng-controller="OpenOlitorRootController">
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -48,7 +48,8 @@
             <a href="" class="dropdown-toggle uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{activeLang()}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li ng-hide="activeLang() === 'de'"><a role="button" ng-click="changeLang('de')" title="Deutsch"><span>Deutsch</span></a></li>
-              <li ng-hide="activeLang() === 'fr'"><a role="button" ng-click="changeLang('fr')" title="Français"><span>Français</span></a></li>
+              <li ng-hide="activeLang() === 'fr_CH'"><a role="button" ng-click="changeLang('fr_CH')" title="Français"><span>Français (Suisse)</span></a></li>
+              <li ng-hide="activeLang() === 'fr_BE'"><a role="button" ng-click="changeLang('fr_BE')" title="Français"><span>Français (Belgique)</span></a></li>
               <li ng-hide="activeLang() === 'en'"><a role="button" ng-click="changeLang('en')" title="English"><span>English</span></a></li>
             </ul>
           </li>
@@ -66,7 +67,7 @@
     </div>
   </div>
 
-  <div ng-if="!connected && showConnectionErrorMessage" class="connected-alert alert alert-danger" role="alert" translate>Das Backend steht im Moment nicht zur Verfügung. Bitte besuchen Sie uns später wieder.</div>
+  <!--div ng-show="!connected && showConnectionErrorMessage" class="connected-alert alert alert-danger" role="alert" translate>Das Backend steht im Moment nicht zur Verfügung. Bitte gedulden Sie sich einen Moment.</div-->
 
   <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
     <ul class="sidebar-nav" ng-init="menushow = []">
@@ -96,6 +97,8 @@
       <li><a id="nav-einstellungen" class="nav-item" ng-click="menushow['einstellungen'] = !menushow['einstellungen']"><span><i class="fa fa-cogs"></i> <span translate>Einstellungen</span></span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('settings')}]" href="" ng-href="#/settings"><i class="fa fa-sitemap"></i> <span translate>Projekt</span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-templates" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('templates')}]" href="" ng-href="#/vorlagen"><i class="fa fa-file-text-o"></i> <span translate>Vorlagen</span></a></li>
+      <li><a id="nav-sysadmin" class="nav-item" ng-click="menushow['sysadmin'] = !menushow['sysadmin']"><span><i class="fa fa-server"></i> <span translate>Sysadmin</span></span></a></li>
+      <li activate-id="sysadmin" ng-show="menushow['sysadmin']"><a id="nav-journal" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('journal')}]" href="" ng-href="#/journal"><i class="fa fa-list-ul"></i> <span translate>Journal</span></a></li>
     </ul>
   </div>
 
@@ -115,7 +118,7 @@
     </script>
     <a href="http://www.openolitor.org" target="_blank">www.openolitor.org</a>
     <span class="pre-info">
-      <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top"></span>
+      <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top" tooltip-class="version-tooltip"></span>
     </span>
     <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
   </footer>
@@ -131,7 +134,7 @@
   <!-- build:js(app) scripts/vendor.js -->
   <!-- bower:js -->
   <script src="bower_components/es5-shim/es5-shim.js"></script>
-  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-base64/angular-base64.js"></script>
@@ -251,6 +254,7 @@
   <script src="scripts/abos/overview/abosoverviewcreaterechnungen.controller.js"></script>
   <script src="scripts/abos/overview/abosoverviewcreaterechnungen.directive.js"></script>
   <script src="scripts/abos/detail/abosdetail.model.js"></script>
+  <script src="scripts/abos/detail/abokoerbe.model.js"></script>
   <script src="scripts/abos/detail/abosdetail.controller.js"></script>
   <script src="scripts/abos/detail/abosdetail.directive.js"></script>
   <script src="scripts/abos/detail/abosdetail-guthaben-anpassen.controller.js"></script>
@@ -304,6 +308,9 @@
   <script src="scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js"></script>
   <script src="scripts/arbeitsangebote/detail/arbeitsangebotedetail.model.js"></script>
   <script src="scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js"></script>
+
+  <script src="scripts/journal/overview/journaloverview.controller.js"></script>
+  <script src="scripts/journal/journallist.model.js"></script>
 
   <script src="scripts/i18n/translations.js"></script>
   <!-- endbuild -->

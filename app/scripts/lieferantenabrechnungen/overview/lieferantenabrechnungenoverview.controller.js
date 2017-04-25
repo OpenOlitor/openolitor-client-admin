@@ -4,14 +4,14 @@
  */
 angular.module('openolitor-admin')
   .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
-    '$location',
-    'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
+    '$location', 'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
-    'msgBus', 'lodash', 'localeSensitiveComparator',
+    'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService',
     function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
-      BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator) {
+      BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
+      VorlagenService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -49,7 +49,14 @@ angular.module('openolitor-admin')
         });
       });
 
-      $scope.selectBestellung = function(bestellung) {
+      $scope.selectBestellung = function(bestellung, itemId) {
+        var firstRow = angular.element('#abrechnungenTable table tbody tr').first();
+        var allButtons = angular.element('#abrechnungenTable table tbody button');
+        allButtons.removeClass('btn-warning');
+        var button = angular.element('#' + itemId);
+        button.addClass('btn-warning');
+        var offset = button.offset().top - firstRow.offset().top + 154;
+        angular.element('#selectedAbrechnungDetail').css('margin-top', offset);
         if ($scope.selectedBestellung === bestellung) {
           $scope.selectedBestellung = undefined;
         } else {
@@ -135,8 +142,23 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny || $scope.checkboxes.selectedAbgeschlosseneBestellungen
             .length === 0;
         }
+      },
+      {
+        label: 'Lieferantenabrechnung',
+        noEntityText: true,
+        iconClass: 'fa fa-file',
+        onExecute: function() {
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
       }];
 
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
 
       function search() {
         if ($scope.loading) {
@@ -161,6 +183,10 @@ angular.module('openolitor-admin')
         $scope.showCreateAbrechnungDialog = false;
       };
 
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageLieferantenabrechnung');
+      };
+
       $scope.$watch('search.query', function() {
         $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
           .query);
@@ -170,7 +196,7 @@ angular.module('openolitor-admin')
       }, true);
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-        if (msg.entity === 'Bestellung') {
+        if (msg.entity === 'Sammelbestellung') {
           $scope.entries.map(function(entry) {
             if (entry.id === msg.data.id) {
               angular.copy(msg.data, entry);

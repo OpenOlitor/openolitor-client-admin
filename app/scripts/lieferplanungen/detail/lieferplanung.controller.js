@@ -17,6 +17,10 @@ angular.module('openolitor-admin')
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
+      $scope.anzahlKoerbeZuLiefern = '...';
+      $scope.anzahlAbwesenheiten = '...';
+      $scope.anzahlSaldoZuTief = '...';
+
       $scope.search = {
         query: ''
       };
@@ -84,7 +88,20 @@ angular.module('openolitor-admin')
       }, function(result) {
         $scope.abotypenLieferungen = result;
         $scope.recalculateProduzentListen(true);
+        $scope.recalculateTotalAnzahl();
       });
+
+      $scope.recalculateTotalAnzahl = function() {
+        $scope.anzahlKoerbeZuLiefern = 0;
+        $scope.anzahlAbwesenheiten = 0;
+        $scope.anzahlSaldoZuTief = 0;
+        lodash.forEach($scope.abotypenLieferungen,
+          function(lieferung) {
+            $scope.anzahlKoerbeZuLiefern += lieferung.anzahlKoerbeZuLiefern;
+            $scope.anzahlAbwesenheiten += lieferung.anzahlAbwesenheiten;
+            $scope.anzahlSaldoZuTief += lieferung.anzahlSaldoZuTief;
+          });
+      };
 
       $scope.recalculateProduzentListen = function(addTableParams) {
         lodash.forEach($scope.abotypenLieferungen, function(
@@ -112,7 +129,7 @@ angular.module('openolitor-admin')
 
       $scope.displayMode = 'korbinhalt';
 
-      $scope.bestellungen = {};
+      $scope.sammelbestellungen = {};
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -248,7 +265,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.getDurchschnittspreisInfo = function(abotypLieferung) {
-        return gettext('# Lieferungen bisher: ') + abotypLieferung.anzahlLieferungen;
+        return gettext('# Lieferungen bisher: ') + (abotypLieferung.anzahlLieferungen - 1);
       };
 
       $scope.isInvalid = function(korbprodukt) {
@@ -399,23 +416,35 @@ angular.module('openolitor-admin')
           produzent = 'Noch nicht definierter Produzent';
         }
 
-        var bestellungByProduzent = $scope.bestellungen[produzent];
-        if (angular.isUndefined(bestellungByProduzent)) {
+        var sammelbestellungByProduzent = $scope.sammelbestellungen[produzent];
+        if (angular.isUndefined(sammelbestellungByProduzent)) {
           var produzentObj = $scope.getProduzentByKurzzeichen(produzent);
-          bestellungByProduzent = $scope.bestellungen[produzent] = {
+          sammelbestellungByProduzent = $scope.sammelbestellungen[produzent] = {
             produzentId: produzentObj.id || undefined,
             produzentKurzzeichen: produzent,
             total: 0,
             steuer: 0,
             totalSteuer: 0,
+            bestellungen: {}
+          };
+        }
+
+        var bestellungByAdminanteil = sammelbestellungByProduzent.bestellungen[abotypLieferung.abotyp.adminProzente];
+        if (angular.isUndefined(bestellungByAdminanteil)) {
+          bestellungByAdminanteil = $scope.sammelbestellungen[produzent].bestellungen[abotypLieferung.abotyp.adminProzente] = {
+            produzentKurzzeichen: sammelbestellungByProduzent.produzentKurzzeichen,
+            total: 0,
+            steuer: 0,
+            totalSteuer: 0,
+            adminProzente: abotypLieferung.abotyp.adminProzente,
+            adminProzenteAbzug: 0,
+            totalNachAbzugAdminProzente: 0,
             lieferungen: {}
           };
         }
-        var lieferungByProduzent = bestellungByProduzent.lieferungen[
-          abotypLieferung.datum];
+        var lieferungByProduzent = bestellungByAdminanteil.lieferungen[abotypLieferung.datum];
         if (angular.isUndefined(lieferungByProduzent)) {
-          lieferungByProduzent = bestellungByProduzent.lieferungen[
-            abotypLieferung.datum] = {
+          lieferungByProduzent = bestellungByAdminanteil.lieferungen[abotypLieferung.datum] = {
             datum: abotypLieferung.datum,
             positionen: {},
             total: 0,
@@ -445,41 +474,38 @@ angular.module('openolitor-admin')
 
       var calculateTotalsOfBestellungen = function(abotypLieferung, korbprodukt) {
         var produzent = korbprodukt.produzentKurzzeichen;
-        var bestellungByProduzent = $scope.bestellungen[produzent];
-        var lieferungByProduzent = bestellungByProduzent.lieferungen[
+        var sammelbestellungByProduzent = $scope.sammelbestellungen[produzent];
+        var bestellungByAdminanteil = sammelbestellungByProduzent.bestellungen[abotypLieferung.abotyp.adminProzente];
+        var lieferungByProduzent = bestellungByAdminanteil.lieferungen[
           abotypLieferung.datum];
         var anzahl = abotypLieferung.anzahlKoerbeZuLiefern;
 
         lieferungByProduzent.total +=
           (korbprodukt.preisEinheit * korbprodukt.menge * anzahl);
-        bestellungByProduzent.total += (korbprodukt.preisEinheit *
+        bestellungByAdminanteil.total += (korbprodukt.preisEinheit *
           korbprodukt.menge * anzahl);
+        bestellungByAdminanteil.adminProzenteAbzug = ((bestellungByAdminanteil.adminProzente / 100) *
+          bestellungByAdminanteil.total);
+        bestellungByAdminanteil.totalNachAbzugAdminProzente = (bestellungByAdminanteil.total -
+          bestellungByAdminanteil.adminProzenteAbzug);
+
 
         if ($scope.produzentIstBesteuert(korbprodukt.produzentId)) {
-          lieferungByProduzent.steuerSatz = $scope.produzentSteuersatz(
+          bestellungByAdminanteil.steuerSatz = $scope.produzentSteuersatz(
             korbprodukt.produzentId);
-          lieferungByProduzent.steuer = (lieferungByProduzent.total / 100 *
-            lieferungByProduzent.steuerSatz);
-          lieferungByProduzent.totalSteuer = (lieferungByProduzent.total +
-            lieferungByProduzent.steuer);
-
-          bestellungByProduzent.steuerSatz = $scope.produzentSteuersatz(
-            korbprodukt.produzentId);
-          bestellungByProduzent.steuer = (bestellungByProduzent.total / 100 *
-            bestellungByProduzent.steuerSatz);
-          bestellungByProduzent.totalSteuer = (bestellungByProduzent.total +
-            bestellungByProduzent.steuer);
+          bestellungByAdminanteil.steuer = (bestellungByAdminanteil.totalNachAbzugAdminProzente / 100 *
+            bestellungByAdminanteil.steuerSatz);
+          bestellungByAdminanteil.totalSteuer = (bestellungByAdminanteil.totalNachAbzugAdminProzente +
+            bestellungByAdminanteil.steuer);
         } else {
-          lieferungByProduzent.steuer = 0;
-          lieferungByProduzent.totalSteuer = lieferungByProduzent.total;
-          bestellungByProduzent.steuer = 0;
-          bestellungByProduzent.totalSteuer = bestellungByProduzent.total;
+          bestellungByAdminanteil.steuer = 0;
+          bestellungByAdminanteil.totalSteuer = bestellungByAdminanteil.totalNachAbzugAdminProzente;
         }
       };
 
       $scope.recalculateBestellungen = function() {
         var recalculate = function() {
-          $scope.bestellungen = {};
+          $scope.sammelbestellungen = {};
           if ($scope.planung.status === 'Offen') {
             lodash.forEach($scope.abotypenLieferungen, function(
               abotypLieferung) {
@@ -498,60 +524,79 @@ angular.module('openolitor-admin')
                 });
             });
           } else {
-            LieferplanungModel.getBestellungen({
+            LieferplanungModel.getSammelbestellungen({
               id: $routeParams.id
-            }, function(bestellungen) {
-              lodash.forEach(bestellungen, function(bestellung) {
-                $scope.bestellungen[bestellung.produzentKurzzeichen] = {
-                  id: bestellung.id,
-                  produzentId: bestellung.produzentId,
-                  produzentKurzzeichen: bestellung.produzentKurzzeichen,
-                  total: (($scope.bestellungen[bestellung.produzentKurzzeichen]) ?
-                    $scope.bestellungen[bestellung.produzentKurzzeichen]
-                    .total : 0) + bestellung.preisTotal,
-                  steuer: bestellung.steuer,
-                  totalSteuer: (($scope.bestellungen[bestellung
-                      .produzentKurzzeichen]) ? $scope.bestellungen[
-                      bestellung.produzentKurzzeichen].totalSteuer :
-                    0) + bestellung.totalSteuer,
-                  lieferungen: {}
+            }, function(sammelbestellungen) {
+              lodash.forEach(sammelbestellungen, function(sammelbestellung) {
+                $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen] = {
+                  id: sammelbestellung.id,
+                  produzentId: sammelbestellung.produzentId,
+                  produzentKurzzeichen: sammelbestellung.produzentKurzzeichen,
+                  total: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen]) ?
+                    $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].total : 0) + sammelbestellung.preisTotal,
+                  steuer: sammelbestellung.steuer,
+                  totalSteuer: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen]) ?
+                    $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].totalSteuer : 0) + sammelbestellung.totalSteuer,
+                  bestellungen: {}
                 };
-                $scope.bestellungen[bestellung.produzentKurzzeichen]
-                  .lieferungen[bestellung.datum] = {
+
+                lodash.forEach(sammelbestellung.bestellungen, function(bestellung) {
+
+                  $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente] = {
                     id: bestellung.id,
-                    datum: bestellung.datum,
-                    positionen: {},
-                    total: bestellung.preisTotal,
+                    produzentId: bestellung.produzentId,
+                    produzentKurzzeichen: sammelbestellung.produzentKurzzeichen,
+                    total: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente].total : 0) + bestellung.preisTotal,
                     steuer: bestellung.steuer,
-                    steuerSatz: bestellung.steuerSatz,
-                    totalSteuer: bestellung.totalSteuer
+                    totalSteuer: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente].totalSteuer :
+                      0) + bestellung.totalSteuer,
+                    adminProzente: bestellung.adminProzente,
+                    adminProzenteAbzug: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente].adminProzenteAbzug :
+                      0) + bestellung.adminProzenteAbzug,
+                    totalNachAbzugAdminProzente: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente].totalNachAbzugAdminProzente :
+                      0) + bestellung.totalNachAbzugAdminProzente,
+                    lieferungen: {}
                   };
-                LieferplanungModel.getBestellpositionen({
-                  id: $routeParams.id,
-                  bestellungId: bestellung.id
-                }, function(bestellpositionen) {
-                  lodash.forEach(bestellpositionen, function(
-                    bestellposition) {
-                    if(angular.isDefined($scope.bestellungen[bestellung.produzentKurzzeichen]
-                      .lieferungen[bestellung.datum])) {
-                      $scope.bestellungen[bestellung.produzentKurzzeichen]
-                        .lieferungen[bestellung.datum].positionen[
-                          bestellposition.produktBeschrieb +
-                          bestellposition.menge] = {
-                          anzahl: bestellposition.anzahl,
-                          produktBeschrieb: bestellposition
-                            .produktBeschrieb,
-                          menge: bestellposition.menge,
-                          einheit: bestellposition.einheit,
-                          preisEinheit: bestellposition.preisEinheit,
-                          preisPackung: (bestellposition.preisEinheit *
-                            bestellposition.menge),
-                          mengeTotal: (bestellposition.menge *
-                            bestellposition.anzahl),
-                          preis: bestellposition.preis
-                        };
-                      }
-                  });
+                  $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen].bestellungen[bestellung.adminProzente]
+                    .lieferungen[sammelbestellung.datum] = {
+                      id: bestellung.id,
+                      datum: sammelbestellung.datum,
+                      positionen: {},
+                      total: bestellung.preisTotal,
+                      steuer: bestellung.steuer,
+                      steuerSatz: bestellung.steuerSatz,
+                      totalSteuer: bestellung.totalSteuer,
+                      adminProzente: bestellung.adminProzente,
+                      adminProzenteAbzug: bestellung.adminProzenteAbzug,
+                      totalNachAbzugAdminProzente: bestellung.totalNachAbzugAdminProzente
+                    };
+                    lodash.forEach(bestellung.positionen, function(bestellposition) {
+                      if(angular.isDefined($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen]
+                        .bestellungen[bestellung.adminProzente]
+                        .lieferungen[sammelbestellung.datum])) {
+                        $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen]
+                          .bestellungen[bestellung.adminProzente]
+                          .lieferungen[sammelbestellung.datum].positionen[
+                            bestellposition.produktBeschrieb +
+                            bestellposition.menge] = {
+                            anzahl: bestellposition.anzahl,
+                            produktBeschrieb: bestellposition
+                              .produktBeschrieb,
+                            menge: bestellposition.menge,
+                            einheit: bestellposition.einheit,
+                            preisEinheit: bestellposition.preisEinheit,
+                            preisPackung: (bestellposition.preisEinheit *
+                              bestellposition.menge),
+                            mengeTotal: (bestellposition.menge *
+                              bestellposition.anzahl),
+                            preis: bestellposition.preis
+                          };
+                        }
+                    });
                 });
               });
             });
@@ -559,7 +604,7 @@ angular.module('openolitor-admin')
         };
 
         if ($scope.valuesEditable() && $scope.planung.status !== 'Offen') {
-          LieferplanungModel.bestellungenErstellen({
+          LieferplanungModel.sammelbestellungenErstellen({
             id: $routeParams.id,
             lieferplanungId: parseInt($routeParams.id)
           }, function() {
@@ -587,17 +632,23 @@ angular.module('openolitor-admin')
       $scope.save = function() {
         if ($scope.checkAllValues()) {
           $scope.editNachAbgeschlossen = false;
-          lodash.forEach($scope.abotypenLieferungen, function(
-            abotypLieferung) {
-            LieferplanungModel.saveLieferpositionen({
-              id: $routeParams.id,
-              lieferungId: abotypLieferung.id
-            }, {
-              lieferungId: abotypLieferung.id,
-              preisTotal: abotypLieferung.preisTotal,
-              lieferpositionen: abotypLieferung.lieferpositionen
-            });
+          var lieferungenModifyList = lodash.map($scope.abotypenLieferungen, function(abotypLieferung) {
+            return {
+                id: abotypLieferung.id,
+                lieferpositionen: {
+                  preisTotal: abotypLieferung.preisTotal,
+                  lieferpositionen: abotypLieferung.lieferpositionen
+                }
+              }
           });
+
+          LieferplanungModel.modifyLieferplanungData({
+            id: $routeParams.id
+          }, {
+            id: parseInt($routeParams.id),
+            lieferungen: lieferungenModifyList
+          });
+
           return $scope.planung.$save();
         } else {
           return 'Noop';
@@ -654,6 +705,10 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function() {
           $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
+        }, function(error) {
+          alertService.addAlert('error', gettext(
+              'Lieferplanung kan nicht abgeschlossen werden: ') +
+            error.status + ':' + error.statusText);
         });
       };
 
@@ -662,18 +717,22 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function() {
           $scope.planung.status = LIEFERSTATUS.VERRECHNET;
+        }, function(error) {
+          alertService.addAlert('error', gettext(
+              'Lieferplanung kan nicht verrechnet werden: ') +
+            error.status + ':' + error.statusText);
         });
       };
 
-      $scope.bestellungVersenden = function(bestellung) {
-        LieferplanungModel.bestellungVersenden({
+      $scope.sammelbestellungVersenden = function(bestellung) {
+        LieferplanungModel.sammelbestellungVersenden({
           id: $routeParams.id,
           bestellungId: bestellung.id
         }, bestellung);
       };
 
-      $scope.bestellungenErstellen = function() {
-        LieferplanungModel.bestellungenErstellen({
+      $scope.sammelbestellungenErstellen = function() {
+        LieferplanungModel.sammelbestellungenErstellen({
           id: $routeParams.id
         }, function() {
 
@@ -700,6 +759,23 @@ angular.module('openolitor-admin')
 
       $scope.KORBSTATUS = KORBSTATUS;
 
+      $scope.isUnlisted = function(korbprodukt) {
+        if(!angular.isUndefined(korbprodukt.unlisted)) {
+          return korbprodukt.unlisted;
+        } else {
+          return angular.isUndefined(korbprodukt.produktId) || korbprodukt.produktId === null;
+        }
+      };
+
+      $scope.displayAbosTotal = function(korbStatus) {
+        LieferplanungModel.getAllAboIdsByKorbStatus({
+          id: $routeParams.id,
+          korbStatus: korbStatus
+        }, function(result) {
+          $location.path('/abos').search('q', 'id=' + result.join());
+        });
+      };
+
       $scope.displayAbos = function(lieferungId, korbStatus) {
         LieferplanungModel.getAboIdsByKorbStatus({
           id: $routeParams.id,
@@ -709,6 +785,88 @@ angular.module('openolitor-admin')
           $location.path('/abos').search('q', 'id=' + result.join());
         });
       };
+
+      $scope.abschliessenAction = [{
+        label: gettext('Lieferplanung abschliessen'),
+        confirmMessage: gettext('Soll die Lieferplanung abgeschlossen werden?'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        onExecute: function() {
+          return $scope.planungAbschliessen();
+        }
+      },{
+        label: gettext('Lieferplanung löschen'),
+        iconClass: 'fa fa-times',
+        confirmMessage: gettext('Soll die Lieferplanung gelöscht werden?'),
+        noEntityText: true,
+        onExecute: function() {
+          return $scope.delete();
+        }
+      }
+      ];
+
+      $scope.getPostAbschliessenAktionen = function() {
+        return [{
+          label: gettext('Abrechnungen anzeigen'),
+          iconClass: 'fa fa-calculator',
+          confirm: false,
+          noEntityText: true,
+          onExecute: function() {
+            var result = lodash.map($scope.sammelbestellungen, 'id');
+            $location.path('/lieferantenabrechnungen').search('q', 'id=' + result.join());
+          }
+        },{
+          label: gettext('Depotauslieferungen anzeigen') + '*',
+          iconClass: 'fa fa-building-o',
+          confirm: false,
+          noEntityText: true,
+          isDisabled: function() { return true; },
+          onExecute: function() {
+            var result = 1;
+            $location.path('/depotauslieferungen').search('q', 'id=' + result.join());
+          }
+        },{
+          label: gettext('Tourauslieferungen anzeigen') + '*',
+          iconClass: 'fa fa-truck',
+          noEntityText: true,
+          confirm: false,
+          isDisabled: function() { return true; },
+          onExecute: function() {
+            var result = 1;
+            $location.path('/tourauslieferungen').search('q', 'id=' + result.join());
+          }
+        },{
+          label: gettext('Postauslieferungen anzeigen') + '*',
+          iconClass: 'fa fa-envelope',
+          noEntityText: true,
+          confirm: false,
+          isDisabled: function() { return true; },
+          onExecute: function() {
+            var result = 1;
+             $location.path('/postauslieferungen').search('q', 'id=' + result.join());
+          }
+        }];
+      };
+
+      $scope.verrechnenAction = [{
+        labelFunction: function() {
+          return gettext('Lieferplanung verrechnen');
+        },
+        confirmMessage: gettext('Soll die Lieferplanung verrechnet werden?'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        onExecute: function() {
+          return $scope.planungVerrechnen();
+        }
+      } ].concat($scope.getPostAbschliessenAktionen());
+
+      $scope.verrechnetAction = [{
+        label: gettext('Lieferplanung verrechnet'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        isDisabled: function() { return true; },
+        onExecute: function() { }
+      } ].concat($scope.getPostAbschliessenAktionen());
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === 'Lieferplanung' && msg.entity

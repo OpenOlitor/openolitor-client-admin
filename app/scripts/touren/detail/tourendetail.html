@@ -61,6 +61,9 @@
                 <h3 translate>Noch nicht sortierte Tourlieferungen</h3>
                 <oo-tourlieferungen tourlieferungen="unsortedTourlieferungen"></oo-tourlieferungen>
               </div>
+              <div ng-if="!hasUnsorted">
+                <span translate>Alle Lieferungen wurden einsortiert</span>
+              </div>
               <div>
                 <h3 translate>Tourablauf</h3>
                 <oo-tourlieferungen tourlieferungen="sortedTourlieferungen"></oo-tourlieferungen>

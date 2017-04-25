@@ -7,16 +7,16 @@ angular.module('openolitor-admin')
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'AbosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
-    'VERTRIEBSARTEN',
+    'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService',
+    'API_URL', 'alertService', 'NgTableParams',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
-      KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN,
+      KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
-      alertService) {
+      alertService, NgTableParams) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -79,6 +79,13 @@ angular.module('openolitor-admin')
               $scope.kunde = kunde;
             });
           }
+
+          $scope.lieferungen = AboKoerbeModel.query({
+            kundeId: $scope.abo.kundeId,
+            id: $scope.abo.id
+          }, function() {
+            $scope.koerbeTableParams.reload();
+          });
         });
       };
 
@@ -188,6 +195,21 @@ angular.module('openolitor-admin')
         });
       };
 
+      if (!$scope.koerbeTableParams) {
+        //use default tableParams
+        $scope.koerbeTableParams = new NgTableParams({ // jshint ignore:line
+          counts: []
+        }, {
+          getData: function(params) {
+            if (!$scope.lieferungen) {
+              return;
+            }
+            params.total($scope.lieferungen.length);
+            return $scope.lieferungen;
+          }
+
+        });
+      }
 
       $scope.actions = [{
         label: gettext('Speichern'),

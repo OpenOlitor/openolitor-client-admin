@@ -111,7 +111,7 @@
                     <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Wird auf dem Tourenschein aufgedruckt'|translate}}"></i>
                   </div>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.zusatzinfoLieferung" placeholder="{{'Hinterlegung, Abgabe bei...'|translate}}">
+                    <textarea class="form-control" name="adressZusatz" ng-model="kunde.zusatzinfoLieferung" placeholder="{{'Hinterlegung, Abgabe bei...'|translate}}"></textarea>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -251,27 +251,19 @@
                           <div class="col-md-4">
                             <label for="anrede" translate>Rolle</label>
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-4">
                             <oo-dropdown dropdown-id="rolle" display-style="uib-dropdown" selected-prop="id" property="label" values="rollen" selected="person.rolle"></oo-dropdown>
                           </div>
                           <div class="col-md-4">
-                            <a role="button" class="btn btn-danger" ng-click="changeRolle(person)"><span translate>Rolle wechseln</span></a>
+                            <a role="button" class="btn btn-danger" ng-click="changeRolle(person)"><span translate>Rolle speichern</span></a>
                           </div>
                         </div>
-                        <div class="row form-group" ng-if="person.loginAktiv">
+                        <div class="row form-group">
                           <div class="col-md-4">
-                            <label for="disableLogin" translate>Weblogin deaktivieren</label>
+                            <label for="enableLogin" translate>Weblogin</label>
                           </div>
-                          <div class="col-md-8">
-                            <a role="button" class="btn btn-danger" ng-click="disableLogin(person)"><span translate>Deaktivieren</span></a>
-                          </div>
-                        </div>
-                        <div class="row form-group" ng-if="!person.loginAktiv">
                           <div class="col-md-4">
-                            <label for="enableLogin" translate>Weblogin aktivieren</label>
-                          </div>
-                          <div class="col-md-8">
-                            <a role="button" class="btn btn-success" ng-click="enableLogin(person)"><span translate>Aktivieren</span></a>
+                            <input bs-switch ng-model="person.loginAktiv" ng-change="switchLogin(person)" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Aktiv'|translate}}" switch-off-text="{{'Inaktiv'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                           </div>
                         </div>
                         <div class="row form-group">
@@ -279,7 +271,11 @@
                             <label for="sendEinladung" translate>Weblogin Einladung</label>
                           </div>
                           <div class="col-md-8">
-                            <a role="button" ng-enabled="person.email" class="btn btn-default" ng-click="sendEinladung(person)"><span translate>Einladung schicken</span></a>
+                            <a role="button" ng-disabled="!person.email" class="btn btn-default" ng-click="sendEinladung(person)">
+                              <span translate>Einladung schicken</span>
+                              <span ng-show="einladungSend[person.email]" class="glyphicon glyphicon-check"></span>
+                              <span ng-show="einladungSendFailed[person.email]" class="glyphicon glyphicon-remove"></span>
+                            </a>
                           </div>
                         </div>
                       </div>

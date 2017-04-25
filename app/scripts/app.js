@@ -83,6 +83,7 @@ angular
     'ngLodash',
     'angular-sortable-view',
     'angular.css.injector',
+    'angular-toArrayFilter',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
@@ -160,7 +161,8 @@ angular
     GRAMM: addExtendedEnumValue('Gramm', gettext('Gramm'), gettext('gr')),
     KILOGRAMM: addExtendedEnumValue('Kilogramm', gettext('Kilogramm'),
       gettext('kg')),
-    LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l'))
+    LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l')),
+    PORTION: addExtendedEnumValue('Portion', gettext('Portion'), gettext('Por.'))
   })
   .constant('ARBEITSEINSATZSTATUS', {
     INVORBEREITUNG: gettext('InVorbereitung'),
@@ -414,12 +416,62 @@ angular
       }
     };
   })
+  .factory('loggedOutInterceptor', function($q, alertService, $window) {
+    return {
+      responseError: function (rejection) {
+        var status = rejection.status;
+        if (status === 401) {
+            alertService.removeAllAlerts();
+            $window.location = '#/logout';
+            return;
+        }
+        return $q.reject(rejection);
+      }
+    };
+  })
   .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('loggedOutInterceptor');
     $httpProvider.interceptors.push('errbitErrorInterceptor');
   }])
   .filter('fromNow', function(moment) {
     return function(input) {
       return moment(input).fromNow();
+    };
+  })
+  .filter('dateRange', function(moment) {
+    function isMidnight(mom) {
+      // The moment at midnight
+      var mmtMidnight = mom.clone().startOf('day');
+
+      // Difference in minutes == 0 => midnight
+      return mom.diff(mmtMidnight, 'minutes') === 0;
+    }
+
+    return function(items, from, to, attribute) {
+      if(!angular.isUndefined(items) && items.length > 0) {
+        var toPlusOne = to;
+        var momTo = moment(to);
+        if(isMidnight(momTo)) {
+          toPlusOne = momTo.add(1, 'days');
+        }
+        var result = [];
+        for (var i=0; i<items.length; i++){
+          var itemDate = items[i][attribute];
+          if(!angular.isUndefined(attribute)) {
+            itemDate = items[i][attribute];
+          }
+          if(angular.isUndefined(to) && angular.isUndefined(from)) {
+            result.push(items[i]);
+          } else if(angular.isUndefined(to) && itemDate >= from) {
+            result.push(items[i]);
+          } else if(angular.isUndefined(from) && itemDate <= toPlusOne) {
+            result.push(items[i]);
+          } else if (itemDate >= from && itemDate <= toPlusOne)  {
+            result.push(items[i]);
+          }
+        }
+        return result;
+      }
     };
   })
   .filter('lastElement', function() {
@@ -746,6 +798,12 @@ angular
         templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
         controller: 'ArbeitsangeboteDetailController',
         name: 'ArbeitsangeboteDetail',
+        access: userRoles.Administrator
+      })
+      .when('/journal', {
+        templateUrl: 'scripts/journal/overview/journaloverview.html',
+        controller: 'JournalOverviewController',
+        name: 'JournalOverview',
         access: userRoles.Administrator
       });
   }]);

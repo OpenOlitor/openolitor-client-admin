@@ -7,10 +7,11 @@ angular.module('openolitor-admin')
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
     'ENV', 'VERSION', 'cssInjector', 'API_URL',
-    'ooAuthService',
+    'ooAuthService', '$cookies',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
-      $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL, ooAuthService) {
+      $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL,
+      ooAuthService, $cookies) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
@@ -23,6 +24,7 @@ angular.module('openolitor-admin')
       checkSize();
 
       $scope.connected = false;
+      $scope.showConnectionErrorMessage = false;
 
       var unwatchLoggedIn = $scope.$watch(function() {
         return ooAuthService.getUser();
@@ -59,33 +61,68 @@ angular.module('openolitor-admin')
       msgBus.onMsg('WebSocketClosed', $rootScope, function(event, msg) {
         $scope.connected = false;
         $scope.messagingSocketClosedReason = msg.reason;
-        $timeout(function() {
-          $scope.showConnectionErrorMessage = true;
-        }, 10000);
+        if(angular.isUndefined($scope.messagingSocketClosedSetter)) {
+          $scope.messagingSocketClosedSetter = $timeout(function() {
+            $scope.showConnectionErrorMessage = true;
+            $scope.messagingSocketClosedSetter = undefined;
+          }, 30000);
+        }
         $scope.$apply();
       });
 
       msgBus.onMsg('WebSocketOpen', $rootScope, function() {
         $scope.connected = true;
         $scope.showConnectionErrorMessage = false;
+        if(!angular.isUndefined($scope.messagingSocketClosedSetter) &&
+          !angular.isUndefined($scope.messagingSocketClosedSetter.close)) {
+          $scope.messagingSocketClosedSetter.close();
+          $scope.messagingSocketClosedSetter = undefined;
+        }
         $scope.messagingSocketClosedReason = '';
         $scope.$apply();
       });
 
       $scope.changeLang = function(lang) {
         if (!angular.isUndefined(lang)) {
-          gettextCatalog.setCurrentLanguage(lang);
-          amMoment.changeLocale(lang);
+
+          msgBus.emitMsg({
+            type: 'ChangeLang',
+            reason: lang
+          });
+          $scope.storeActiveLang(lang);
           $scope.$emit('languageChanged');
         }
       };
+
+      msgBus.onMsg('ChangeLang', $rootScope, function(event, msg) {
+        gettextCatalog.setCurrentLanguage(msg.reason);
+      });
 
       $scope.activeLang = function() {
         return gettextCatalog.getCurrentLanguage();
       };
 
-      if ($scope.activeLang() !== 'de' || $scope.activeLang() !== 'fr') {
-        $scope.changeLang('de');
+      $scope.storedActiveLang = function() {
+        return $cookies.get('activeLang');
+      };
+
+      $scope.storeActiveLang = function(lang) {
+        $cookies.put('activeLang', lang);
+      };
+
+      if (angular.isUndefined($scope.storedActiveLang())) {
+        var lang = $window.navigator.language || $window.navigator.userLanguage;
+        if(lang.indexOf('de-') > 0) {
+          $scope.changeLang('de');
+        } else if(lang.indexOf('fr-') > 0) {
+          $scope.changeLang('fr');
+        } else if(lang.indexOf('en-') > 0) {
+          $scope.changeLang('en');
+        } else {
+          $scope.changeLang('de');
+        }
+      } else {
+        $scope.changeLang($scope.storedActiveLang());
       }
 
       $scope.$on('destroy', function() {

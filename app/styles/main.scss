@@ -22,6 +22,7 @@ h3 .small {
   text-transform: uppercase;
 }
 
+span.red,
 i.red {
   color: red;
 }
@@ -47,7 +48,10 @@ input.ng-invalid {
 }
 
 .nav-item.sublevel-1 {
-  padding: 5px 35px;
+  padding-left: 35px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .master-content {
@@ -248,6 +252,16 @@ input.ng-invalid {
   border-radius: 3px;
 }
 
+.openolitor .table-small .input-group > .input-group-addon:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.openolitor .table-small .input-group > .input-group-addon:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .openolitor .table-small > thead > tr > th,
 .openolitor .table-small > tbody > tr > th,
 .openolitor .table-small > tfoot > tr > th,
@@ -264,6 +278,21 @@ input.ng-invalid {
   margin-left: 0px !important;
   padding-top: 5px;
   padding-bottom: 0px;
+}
+
+.logo-maxsize {
+  max-height: 140px;
+}
+
+.navbar-brand.noLeftSpace {
+  margin-left: 0px !important;
+  padding-left: 0px;
+  font-size: inherit;
+}
+
+.navbar-form.noRightSpace {
+  margin-right: 0px !important;
+  padding-right: 0px;
 }
 
 /* Special Lieferplanung */
@@ -300,7 +329,7 @@ small.lieferplanung {
 }
 
 #lieferplanung .table-lieferplanung input{
-  width: 5em;
+  width: 4.5em;
 }
 
 #lieferplanung .table-lieferplanung input.large {
@@ -442,6 +471,19 @@ footer, .footer {
     width: 100% !important;
     text-align: center;
   }
+}
+
+.version-tooltip {
+  font-size: 70%;
+  width: 130px;
+  right: 0px;
+  margin: 5px;
+  left: auto !important;
+}
+
+.preis-tooltip {
+  font-size: 80%;
+  width: 210px;
 }
 
 .sidebar-nav .fa {

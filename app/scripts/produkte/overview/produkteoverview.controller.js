@@ -93,7 +93,7 @@ angular.module('openolitor-admin')
         $scope.tableParams = new NgTableParams({ // jshint ignore:line
           count: 10,
           sorting: {
-            name: 'asc'
+            name: 'desc'
           }
         }, {
           filterDelay: 400,
@@ -121,14 +121,16 @@ angular.module('openolitor-admin')
       }
 
       $scope.produktErstellen = function() {
-        if(angular.isUndefined($scope.entries)) {
-          $scope.entries = [];
+        if(!$scope.editing) {
+          if(angular.isUndefined($scope.entries)) {
+            $scope.entries = [];
+          }
+          $scope.editing = true;
+          var newProdukt = cloneObj(defaults.model);
+          $scope.editingProdukt = newProdukt;
+          $scope.entries.push(newProdukt);
+          $scope.tableParams.reload();
         }
-        $scope.editing = true;
-        var newProdukt = cloneObj(defaults.model);
-        $scope.editingProdukt = newProdukt;
-        $scope.entries.push(newProdukt);
-        $scope.tableParams.reload();
       };
 
       $scope.edit = function(produkt) {

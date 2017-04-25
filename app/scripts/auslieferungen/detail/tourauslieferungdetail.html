@@ -23,33 +23,35 @@
               <thead>
                 <tr>
                   <th tanslate>Position</th>
-                  <th tanslate>Abo Nr.</th>
-                  <th tanslate>Abotyp</th>
-                  <th tanslate>Kunde</th>
+                  <th tanslate>Bezeichnung</th>
+                  <th tanslate>Strasse / Nr.</th>
+                  <th tanslate>Adresszusatz</th>
                   <th tanslate>PLZ / Ort</th>
-                  <th tanslate></th>
+                  <th tanslate>Abotyp</th>
                 </tr>
               </thead>
               <tbody sv-part="model.koerbe">
-                <tr ng-repeat="korb in model.koerbe | filter:itemFilter" style="cursor: move;" sv-element>
+                <tr ng-repeat="korb in model.koerbe | filter:itemFilter track by $index" style="cursor: move;" sv-element>
                   <td>
-                    <div ng-if="model.status === 'Ausgeliefert'" sv-handle style="display: none"></div>
-                    <span>&#8942;</span> {{korb.sort}}
+                    <span sv-handle>
+                      <div ng-if="model.status === 'Ausgeliefert'"  style="display: none"></div>
+                      <span>&#8942;</span> <span ng-class="{red: (korb.sort !== $index)}">{{korb.sort}}</span>
+                  </span>
                   </td>
                   <td>
-                    {{korb.abo.id}}
+                    <a ng-href="#/kunden/{{korb.kunde.kundeId}}">{{korb.kunde.bezeichnung}}</a>
                   </td>
                   <td>
-                    <span class="color-box" ng-style="style(korb.abotyp)"></span>
+                    {{korb.kunde.strasse}} {{korb.kunde.hausNummer}}
                   </td>
                   <td>
-                    {{korb.abotyp.name}}
-                  </td>
-                  <td>
-                    {{korb.kunde.bezeichnung|date:"dd.MM.yyyy"}}
+                    {{korb.adressZusatz}}
                   </td>
                   <td>
                     {{korb.kunde.plz}} {{korb.kunde.ort}}
+                  </td>
+                  <td>
+                    <span class="color-box" ng-style="style(korb.abotyp)"></span> {{korb.abotyp.name}}
                   </td>
                   <td>
                     <div class="pull-right">

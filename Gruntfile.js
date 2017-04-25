@@ -38,6 +38,15 @@ module.exports = function(grunt) {
       'int6': {
         'm1': 'https://int.openolitor.ch/int6/'
       },
+      'int7': {
+        'm1': 'https://int.openolitor.ch/int7/'
+      },
+      'int8': {
+        'm1': 'https://int.openolitor.ch/int8/'
+      },
+      'int9': {
+        'm1': 'https://int.openolitor.ch/int9/'
+      },
       'prod-soliterre': {
         'm1': 'https://prod.openolitor.ch/soliterre/'
       },
@@ -172,9 +181,9 @@ module.exports = function(grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      compass: {
+      sass: {
         files: ['<%= openolitor.app %>/styles/**/*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer']
+        tasks: ['sass:server', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -294,32 +303,30 @@ module.exports = function(grunt) {
     },
 
     // Compiles Sass to CSS and generates necessary files if requested
-    compass: {
-      options: {
-        sassDir: '<%= openolitor.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= openolitor.app %>/images',
-        javascriptsDir: '<%= openolitor.app %>/scripts',
-        fontsDir: '<%= openolitor.app %>/fonts',
-        importPath: '<%= openolitor.app %>/bower_components',
-        httpImagesPath: '/images',
-        httpGeneratedImagesPath: '/images/generated',
-        httpFontsPath: '/fonts',
-        relativeAssets: false,
-        assetCacheBuster: false,
-        raw: 'Sass::Script::Number.precision = 10\n'
-      },
-      dist: {
+    sass: {
         options: {
-          generatedImagesDir: '<%= openolitor.dist %>/images/generated'
+            includePaths: [
+                'app/bower_components'
+            ]
+        },
+        dist: {
+            files: [{
+                expand: true,
+                cwd: '<%= openolitor.app %>/styles',
+                src: ['*.scss'],
+                dest: '.tmp/styles',
+                ext: '.css'
+            }]
+        },
+        server: {
+            files: [{
+                expand: true,
+                cwd: '<%= openolitor.app %>/styles',
+                src: ['*.scss'],
+                dest: '.tmp/styles',
+                ext: '.css'
+            }]
         }
-      },
-      server: {
-        options: {
-          debugInfo: true
-        }
-      }
     },
 
     // Renames files for browser caching purposes
@@ -499,13 +506,15 @@ module.exports = function(grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'compass:server'
+        'sass:server',
+        'copy:styles'
       ],
       test: [
-        'compass'
+        'copy:styles'
       ],
       dist: [
-        'compass:dist',
+        'sass',
+        'copy:styles',
         'imagemin',
         'svgmin'
       ]
