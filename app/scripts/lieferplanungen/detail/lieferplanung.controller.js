@@ -811,7 +811,7 @@ angular.module('openolitor-admin')
           confirmMessage: gettext('Sollen wirklich Mail an alle Lieferanten verschickt werden?'),
           iconClass: 'fa fa-check',
           noEntityText: true,
-          isDisabled: function() { return $scope.planung.status !== 'Abgeschlossen'; },
+          isDisabled: function() { return angular.isUndefined($scope.planung) || $scope.planung.status !== 'Abgeschlossen'; },
           onExecute: function() {
             lodash.forEach($scope.sammelbestellungen, function(sammelbestellung) {
               $scope.sammelbestellungVersenden(sammelbestellung);
