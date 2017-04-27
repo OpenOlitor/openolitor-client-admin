@@ -639,7 +639,7 @@ angular.module('openolitor-admin')
                   preisTotal: abotypLieferung.preisTotal,
                   lieferpositionen: abotypLieferung.lieferpositionen
                 }
-              }
+              };
           });
 
           LieferplanungModel.modifyLieferplanungData({
@@ -807,6 +807,17 @@ angular.module('openolitor-admin')
 
       $scope.getPostAbschliessenAktionen = function() {
         return [{
+          label: gettext('Bestellung an alle Lieferanten versenden'),
+          confirmMessage: gettext('Sollen wirklich Mail an alle Lieferanten verschickt werden?'),
+          iconClass: 'fa fa-check',
+          noEntityText: true,
+          isDisabled: function() { return $scope.planung.status !== 'Abgeschlossen'; },
+          onExecute: function() {
+            lodash.forEach($scope.sammelbestellungen, function(sammelbestellung) {
+              $scope.sammelbestellungVersenden(sammelbestellung);
+            });
+          }
+        },{
           label: gettext('Abrechnungen anzeigen'),
           iconClass: 'fa fa-calculator',
           confirm: false,

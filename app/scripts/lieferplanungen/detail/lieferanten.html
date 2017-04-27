@@ -32,7 +32,7 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzentKurzzeichen}} - {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).vorname}} {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).name}}</span></h3>
               <div class="pull-right" role="group">
-                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung erneut versenden</span></button>
+                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung versenden</span></button>
               </div>
             </div>
             <div class="panel-body" ng-repeat="lieferung in bestellung.lieferungen | toArray | orderBy: 'produktBeschrieb'">
