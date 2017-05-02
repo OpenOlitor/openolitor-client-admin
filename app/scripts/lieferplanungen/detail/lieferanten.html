@@ -17,6 +17,7 @@
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
               <span ng-show="planung.status === 'Offen'"><oo-actions-button model="planung" actions="abschliessenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
               <span ng-show="planung.status === 'Abgeschlossen'"><oo-actions-button model="planung" actions="verrechnenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-show="planung.status === 'Verrechnet'"><oo-actions-button model="planung" actions="verrechnetAction" btn-style="btn-success"></oo-actions-button></span>
             </div>
           </div>
         </h3>
@@ -31,7 +32,7 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzentKurzzeichen}} - {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).vorname}} {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).name}}</span></h3>
               <div class="pull-right" role="group">
-                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung erneut versenden</span></button>
+                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung versenden</span></button>
               </div>
             </div>
             <div class="panel-body" ng-repeat="lieferung in bestellung.lieferungen | toArray | orderBy: 'produktBeschrieb'">

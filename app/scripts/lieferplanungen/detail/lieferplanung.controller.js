@@ -639,7 +639,7 @@ angular.module('openolitor-admin')
                   preisTotal: abotypLieferung.preisTotal,
                   lieferpositionen: abotypLieferung.lieferpositionen
                 }
-              }
+              };
           });
 
           LieferplanungModel.modifyLieferplanungData({
@@ -805,6 +805,60 @@ angular.module('openolitor-admin')
       }
       ];
 
+      $scope.getPostAbschliessenAktionen = function() {
+        return [{
+          label: gettext('Bestellung an alle Lieferanten versenden'),
+          confirmMessage: gettext('Sollen wirklich Mail an alle Lieferanten verschickt werden?'),
+          iconClass: 'fa fa-check',
+          noEntityText: true,
+          isDisabled: function() { return angular.isUndefined($scope.planung) || $scope.planung.status !== 'Abgeschlossen'; },
+          onExecute: function() {
+            lodash.forEach($scope.sammelbestellungen, function(sammelbestellung) {
+              $scope.sammelbestellungVersenden(sammelbestellung);
+            });
+          }
+        },{
+          label: gettext('Abrechnungen anzeigen'),
+          iconClass: 'fa fa-calculator',
+          confirm: false,
+          noEntityText: true,
+          onExecute: function() {
+            var result = lodash.map($scope.sammelbestellungen, 'id');
+            $location.path('/lieferantenabrechnungen').search('q', 'id=' + result.join());
+          }
+        },{
+          label: gettext('Depotauslieferungen anzeigen') + '*',
+          iconClass: 'fa fa-building-o',
+          confirm: false,
+          noEntityText: true,
+          isDisabled: function() { return true; },
+          onExecute: function() {
+            var result = 1;
+            $location.path('/depotauslieferungen').search('q', 'id=' + result.join());
+          }
+        },{
+          label: gettext('Tourauslieferungen anzeigen') + '*',
+          iconClass: 'fa fa-truck',
+          noEntityText: true,
+          confirm: false,
+          isDisabled: function() { return true; },
+          onExecute: function() {
+            var result = 1;
+            $location.path('/tourauslieferungen').search('q', 'id=' + result.join());
+          }
+        },{
+          label: gettext('Postauslieferungen anzeigen') + '*',
+          iconClass: 'fa fa-envelope',
+          noEntityText: true,
+          confirm: false,
+          isDisabled: function() { return true; },
+          onExecute: function() {
+            var result = 1;
+             $location.path('/postauslieferungen').search('q', 'id=' + result.join());
+          }
+        }];
+      };
+
       $scope.verrechnenAction = [{
         labelFunction: function() {
           return gettext('Lieferplanung verrechnen');
@@ -815,7 +869,15 @@ angular.module('openolitor-admin')
         onExecute: function() {
           return $scope.planungVerrechnen();
         }
-      }];
+      } ].concat($scope.getPostAbschliessenAktionen());
+
+      $scope.verrechnetAction = [{
+        label: gettext('Lieferplanung verrechnet'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        isDisabled: function() { return true; },
+        onExecute: function() { }
+      } ].concat($scope.getPostAbschliessenAktionen());
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === 'Lieferplanung' && msg.entity
