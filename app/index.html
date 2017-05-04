@@ -44,6 +44,7 @@
         <a class="navbar-brand" ng-href="#/abos">OpenOlitor</a>
         <p class="navbar-text"><span translate>Administrationsumgebung <span ng-if="projekt">für</span></span> <span>{{projekt.bezeichnung}}</span></p>
         <ul class="nav navbar-nav pull-right">
+          <li><oo-jobqueue></oo-jobqueue></li>
           <li class="dropdown">
             <a href="" class="dropdown-toggle uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{activeLang()}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -66,9 +67,6 @@
       </div>
     </div>
   </div>
-
-  <div ng-if="!connected && showConnectionErrorMessage" class="connected-alert alert alert-danger" role="alert" translate>Das Backend steht im Moment nicht zur Verfügung. Bitte besuchen Sie uns später wieder.</div>
-
   <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
     <ul class="sidebar-nav" ng-init="menushow = []">
       <li><a id="nav-kunden" ng-click="menushow['kunden'] = !menushow['kunden']" class="nav-item" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
@@ -295,9 +293,13 @@
   <script src="scripts/vorlagen/vorlagen.directive.js"></script>
   <script src="scripts/vorlagen/vorlagenoverview.controller.js"></script>
 
-  <script src="scripts/journal/overview/journaloverview.model.js"></script>
   <script src="scripts/journal/overview/journaloverview.controller.js"></script>
   <script src="scripts/journal/journallist.model.js"></script>
+
+  <script src="scripts/jobqueue/jobqueue.service.js"></script>
+  <script src="scripts/jobqueue/jobqueue.controller.js"></script>
+  <script src="scripts/jobqueue/jobqueue.directive.js"></script>
+  <script src="scripts/jobqueue/result/result.controller.js"></script>
 
   <script src="scripts/i18n/translations.js"></script>
   <!-- endbuild -->
