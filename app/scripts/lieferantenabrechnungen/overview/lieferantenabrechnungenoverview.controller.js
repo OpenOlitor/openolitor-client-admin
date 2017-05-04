@@ -49,7 +49,14 @@ angular.module('openolitor-admin')
         });
       });
 
-      $scope.selectBestellung = function(bestellung) {
+      $scope.selectBestellung = function(bestellung, itemId) {
+        var firstRow = angular.element('#abrechnungenTable table tbody tr').first();
+        var allButtons = angular.element('#abrechnungenTable table tbody button');
+        allButtons.removeClass('btn-warning');
+        var button = angular.element('#' + itemId);
+        button.addClass('btn-warning');
+        var offset = button.offset().top - firstRow.offset().top + 154;
+        angular.element('#selectedAbrechnungDetail').css('margin-top', offset);
         if ($scope.selectedBestellung === bestellung) {
           $scope.selectedBestellung = undefined;
         } else {
@@ -137,7 +144,7 @@ angular.module('openolitor-admin')
         }
       },
       {
-        label: 'Lieferantenabrechnung',
+        label: 'Lieferantenbericht',
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
