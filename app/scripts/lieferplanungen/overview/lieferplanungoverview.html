@@ -7,9 +7,7 @@
           <form class="navbar-form pull-right" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
-              <button ng-disabled="loading" role="button" ng-click="createNewLieferplanung()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Neue Lieferplanung generieren</span>
-              <i ng-show="loading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-            </button>
+              <oo-actions-button model="model" actions="actions"></oo-actions-button>
             </div>
           </form>
           </span>
@@ -26,7 +24,7 @@
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="lieferplanung in $data">
               <td header="'headerCheckbox.html'">
-                <input type="checkbox" ng-model="checkboxes.items[lieferplanung.id]" />
+                <input ng-if="lieferplanung.status !== 'Offen'" type="checkbox" ng-model="checkboxes.items[lieferplanung.id]" />
               </td>
               <td data-title="'#'|translate" sortable="'nr'">
                 <a ng-href="#/lieferplanung/{{lieferplanung.id}}">{{lieferplanung.id}}</a>
@@ -46,5 +44,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="content-box col-md-3" ng-if="showGenerateReport">
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'lieferplanungen/berichte/lieferplanung'" ids="checkboxes.ids" default-file-name="'Lieferplanungen.odt'"></oo-generate-report>
   </div>
 </div>

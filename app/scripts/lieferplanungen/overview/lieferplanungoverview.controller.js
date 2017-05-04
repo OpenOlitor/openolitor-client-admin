@@ -14,6 +14,7 @@ angular.module('openolitor-admin')
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.model = {};
 
       $scope.search = {
         query: '',
@@ -93,6 +94,33 @@ angular.module('openolitor-admin')
         });
       }
 
+      $scope.actions = [{
+          labelFunction: function() {
+            return 'Neue Lieferplanung generieren';
+          },
+          iconClass: 'glyphicon glyphicon-plus',
+          onExecute: function() {
+            return $scope.createNewLieferplanung();
+          }
+        },
+        {
+          label: 'Lieferplanungsbericht',
+          noEntityText: true,
+          iconClass: 'fa fa-file',
+          onExecute: function() {
+            $scope.showGenerateReport = true;
+            return true;
+          },
+          isDisabled: function() {
+            return !$scope.checkboxes.checkedAny;
+          }
+        }
+      ];
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
+
       function search() {
         if ($scope.loading) {
           return;
@@ -127,7 +155,7 @@ angular.module('openolitor-admin')
           status: 'Offen'
         });
         $scope.loading = true;
-        $scope.newLieferplanung.$save();
+        return $scope.newLieferplanung.$save();
       };
 
       msgBus.onMsg('DataEvent', $scope, function(event, msg) {
