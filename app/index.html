@@ -35,7 +35,7 @@
   <!-- endbuild -->
 </head>
 
-<body class="white openolitor" ng-controller="OpenOlitorRootController">
+<body class="white openolitor adminportal" ng-controller="OpenOlitorRootController">
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -67,6 +67,7 @@
       </div>
     </div>
   </div>
+
   <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
     <ul class="sidebar-nav" ng-init="menushow = []">
       <li><a id="nav-kunden" ng-click="menushow['kunden'] = !menushow['kunden']" class="nav-item" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
