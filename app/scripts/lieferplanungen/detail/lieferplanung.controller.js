@@ -813,9 +813,15 @@ angular.module('openolitor-admin')
           noEntityText: true,
           isDisabled: function() { return angular.isUndefined($scope.planung) || $scope.planung.status !== 'Abgeschlossen'; },
           onExecute: function() {
-            lodash.forEach($scope.sammelbestellungen, function(sammelbestellung) {
-              $scope.sammelbestellungVersenden(sammelbestellung);
+            var unbindMe=$scope.$watch('sammelbestellungen',function(sammelbestellungen){
+                if(!angular.isUndefined(sammelbestellungen) && sammelbestellungen.size > 0){
+                  lodash.forEach(sammelbestellungen, function(sammelbestellung) {
+                    $scope.sammelbestellungVersenden(sammelbestellung);
+                  });
+                  unbindMe();
+                }
             });
+            $scope.recalculateBestellungen();
           }
         },{
           label: gettext('Abrechnungen anzeigen'),
