@@ -563,19 +563,22 @@ angular
         templateUrl: 'scripts/lieferantenabrechnungen/overview/lieferantenabrechnungenoverview.html',
         controller: 'LieferantenAbrechnungenOverviewController',
         name: 'LieferantenAbrechnungenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/produkte', {
         templateUrl: 'scripts/produkte/overview/produkteoverview.html',
         controller: 'ProdukteOverviewController',
         name: 'ProdukteOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/depots', {
         templateUrl: 'scripts/depots/overview/depotsoverview.html',
         controller: 'DepotsOverviewController',
         name: 'DepotsOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/depots/:id', {
         templateUrl: 'scripts/depots/detail/depotsdetail.html',
@@ -600,7 +603,8 @@ angular
         templateUrl: 'scripts/touren/overview/tourenoverview.html',
         controller: 'TourenOverviewController',
         name: 'TourenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/touren/:id', {
         templateUrl: 'scripts/touren/detail/tourendetail.html',
@@ -612,13 +616,15 @@ angular
         templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
         controller: 'PendenzenOverviewController',
         name: 'PendenzenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/lieferplanung', {
         templateUrl: 'scripts/lieferplanungen/overview/lieferplanungoverview.html',
         controller: 'LieferplanungOverviewController',
         name: 'LieferplanungOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/lieferplanung/:id', {
         templateUrl: 'scripts/lieferplanungen/detail/lieferplanungdetail.html',
@@ -631,7 +637,8 @@ angular
         controller: 'AuslieferungenOverviewController',
         name: 'DepotAuslieferungenOverview',
         model: 'Depot',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/depotauslieferungen/:id', {
         templateUrl: 'scripts/auslieferungen/detail/depotauslieferungdetail.html',
@@ -645,7 +652,8 @@ angular
         controller: 'AuslieferungenOverviewController',
         name: 'TourAuslieferungenOverview',
         model: 'Tour',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/tourauslieferungen/:id', {
         templateUrl: 'scripts/auslieferungen/detail/tourauslieferungdetail.html',
@@ -659,7 +667,8 @@ angular
         controller: 'AuslieferungenOverviewController',
         name: 'PostAuslieferungenOverview',
         model: 'Post',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/postauslieferungen/:id', {
         templateUrl: 'scripts/auslieferungen/detail/postauslieferungdetail.html',
@@ -703,7 +712,8 @@ angular
         templateUrl: 'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
         controller: 'ZahlungsImportsOverviewController',
         name: 'ZahlungsImportsOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/zahlungsimports/new', {
         templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
@@ -727,12 +737,14 @@ angular
         templateUrl: 'scripts/vorlagen/vorlagenoverview.html',
         controller: 'VorlagenOverviewController',
         name: 'VorlagenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/journal', {
         templateUrl: 'scripts/journal/overview/journaloverview.html',
         controller: 'JournalOverviewController',
         name: 'JournalOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       });
   }]);
