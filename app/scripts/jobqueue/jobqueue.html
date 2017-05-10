@@ -1,0 +1,9 @@
+<div class="oo-jobqueue">
+  <uib-progress max="total" ng-show="total > 0">
+    <uib-bar value="success" type="success"><span>{{ success }}</span></uib-bar>
+    <uib-bar value="failures" type="danger"><span ng-hide="failures < 1">{{ failures }}</span></uib-bar>
+  </uib-progress>
+  <span ng-show="results.length > 0" ng-click="showResultDialog()">
+    <i class="fa fa-lg fa-cloud-download icon-grey"><span class="badge badge-green">{{ results.length }}</span></i>
+  <span>
+</div>

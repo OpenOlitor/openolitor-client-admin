@@ -651,3 +651,23 @@ footer, .footer {
 tr.error {
   background-color: rgba(255, 0, 0, 0.11) !important;
 }
+
+.oo-jobqueue {
+  margin: 15px;
+}
+
+.oo-jobqueue > .progress {
+  width: 200px;
+  float: left;
+  margin-right: 10px;
+}
+
+.badge-green {
+  background-color:#a8c052;
+}
+
+.progress-bar-success {
+  background-color:#a8c052;
+}
+
+*.icon-grey {color: grey}
