@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('TourAuslieferungenModel', function($resource, API_URL) {
+  .factory('TourAuslieferungenModel', function($resource, API_URL, exportODSModuleFunction) {
     return $resource(API_URL + 'tourauslieferungen/:id/:extendedPath/:aktion', {
       id: '@id'
     }, {
@@ -13,6 +13,7 @@ angular.module('openolitor-admin')
           extendedPath: 'aktionen',
           aktion: 'ausliefern'
         }
-      }
+      },
+      'exportODS': exportODSModuleFunction
     });
   });
