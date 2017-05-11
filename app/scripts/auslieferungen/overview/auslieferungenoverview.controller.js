@@ -7,10 +7,11 @@ angular.module('openolitor-admin')
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
-    'VorlagenService', 'localeSensitiveComparator',
+    'VorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil',
     function($q, $scope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, VorlagenService, localeSensitiveComparator) {
+      AUSLIEFERUNGSTATUS, msgBus, VorlagenService, localeSensitiveComparator,
+      $location, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -141,6 +142,12 @@ angular.module('openolitor-admin')
           sorting: {
             datum: 'asc'
           },
+          exportODSModel: overviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
+          },
           filter: {
             status: undefined
           }
@@ -155,8 +162,7 @@ angular.module('openolitor-admin')
             }
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
-              $scope
-              .search.query);
+              $scope.search.queryQuery);
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
@@ -180,23 +186,31 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = overviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function(result) {
           $scope.entries = result;
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
-      search();
-
-      $scope.$watch('search.query', function() {
-        search();
-      }, true);
+      var existingQuery = $location.search().q;
+      if (existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
+
+      $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
+        search();
+      }, true);
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity.indexOf('Auslieferung') >= 0) {

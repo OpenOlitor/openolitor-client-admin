@@ -503,8 +503,8 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.recalculateBestellungen = function() {
-        var recalculate = function() {
+      $scope.recalculateBestellungen = function(callbackFunc) {
+        var recalculate = function(callbackFunc) {
           $scope.sammelbestellungen = {};
           if ($scope.planung.status === 'Offen') {
             lodash.forEach($scope.abotypenLieferungen, function(
@@ -523,6 +523,9 @@ angular.module('openolitor-admin')
                     korbprodukt);
                 });
             });
+            if(!angular.isUndefined(callbackFunc)) {
+              callbackFunc();
+            }
           } else {
             LieferplanungModel.getSammelbestellungen({
               id: $routeParams.id
@@ -599,6 +602,9 @@ angular.module('openolitor-admin')
                     });
                 });
               });
+              if(!angular.isUndefined(callbackFunc)) {
+                callbackFunc();
+              }
             });
           }
         };
@@ -608,10 +614,10 @@ angular.module('openolitor-admin')
             id: $routeParams.id,
             lieferplanungId: parseInt($routeParams.id)
           }, function() {
-            recalculate();
+            recalculate(callbackFunc);
           });
         } else {
-          recalculate();
+          recalculate(callbackFunc);
         }
       };
 
@@ -813,15 +819,11 @@ angular.module('openolitor-admin')
           noEntityText: true,
           isDisabled: function() { return angular.isUndefined($scope.planung) || $scope.planung.status !== 'Abgeschlossen'; },
           onExecute: function() {
-            var unbindMe=$scope.$watch('sammelbestellungen',function(sammelbestellungen){
-                if(!angular.isUndefined(sammelbestellungen) && sammelbestellungen.size > 0){
-                  lodash.forEach(sammelbestellungen, function(sammelbestellung) {
-                    $scope.sammelbestellungVersenden(sammelbestellung);
-                  });
-                  unbindMe();
-                }
+            $scope.recalculateBestellungen(function() {
+              lodash.forEach($scope.sammelbestellungen, function(sammelbestellung) {
+                $scope.sammelbestellungVersenden(sammelbestellung);
+              });
             });
-            $scope.recalculateBestellungen();
           }
         },{
           label: gettext('Abrechnungen anzeigen'),
@@ -829,38 +831,49 @@ angular.module('openolitor-admin')
           confirm: false,
           noEntityText: true,
           onExecute: function() {
-            var result = lodash.map($scope.sammelbestellungen, 'id');
-            $location.path('/lieferantenabrechnungen').search('q', 'id=' + result.join());
+            $scope.recalculateBestellungen(function() {
+              var result = lodash.map($scope.sammelbestellungen, 'id');
+              $location.path('/lieferantenabrechnungen').search('q', 'id=' + result.join());
+            });
           }
         },{
           label: gettext('Depotauslieferungen anzeigen') + '*',
           iconClass: 'fa fa-building-o',
           confirm: false,
           noEntityText: true,
-          isDisabled: function() { return true; },
           onExecute: function() {
-            var result = 1;
-            $location.path('/depotauslieferungen').search('q', 'id=' + result.join());
+            LieferplanungModel.getAllAuslieferungenByLieferplanungId({
+              id: $routeParams.id
+            }, function(result) {
+              var res = lodash.map(result, 'id');
+              $location.path('/depotauslieferungen').search('q', 'id=' + res.join());
+            });
           }
         },{
           label: gettext('Tourauslieferungen anzeigen') + '*',
           iconClass: 'fa fa-truck',
           noEntityText: true,
           confirm: false,
-          isDisabled: function() { return true; },
           onExecute: function() {
-            var result = 1;
-            $location.path('/tourauslieferungen').search('q', 'id=' + result.join());
+            LieferplanungModel.getAllAuslieferungenByLieferplanungId({
+              id: $routeParams.id
+            }, function(result) {
+              var res = lodash.map(result, 'id');
+              $location.path('/tourauslieferungen').search('q', 'id=' + res.join());
+            });
           }
         },{
           label: gettext('Postauslieferungen anzeigen') + '*',
           iconClass: 'fa fa-envelope',
           noEntityText: true,
           confirm: false,
-          isDisabled: function() { return true; },
           onExecute: function() {
-            var result = 1;
-             $location.path('/postauslieferungen').search('q', 'id=' + result.join());
+            LieferplanungModel.getAllAuslieferungenByLieferplanungId({
+              id: $routeParams.id
+            }, function(result) {
+              var res = lodash.map(result, 'id');
+              $location.path('/postauslieferungen').search('q', 'id=' + res.join());
+            });
           }
         }];
       };
