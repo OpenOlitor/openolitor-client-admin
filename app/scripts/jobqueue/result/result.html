@@ -4,9 +4,9 @@
 <div class="modal-body">
   Folgende Dokumente stehen zum Download bereit:
   <ul class="fa-ul">
-    <li ng-repeat="result in results">
+    <li ng-repeat="result in results | orderBy: 'jobId.startTime'">
       <i class="fa-li fa fa-check-square"></i>
-      <a href="" ng-click="downloadResult(result)">{{ result.numberOfSuccess }} {{result.jobId.name}} ({{result.jobId.startTime | date:'dd.MM.yyyy hh:mm'}})</a>
+      <a href="" ng-click="downloadResult(result)">{{ result.numberOfSuccess }} {{result.jobId.name}} ({{result.jobId.startTime | date:'dd.MM.yyyy HH:mm'}})</a>
       <span class="messages" ng-show="result.numberOfFailures > 0">
         ({{ result.numberOfFailures }} <span translate>fehlerhaft</span>)
       </span>
