@@ -29,7 +29,7 @@
                 {{journalEntry.message.persistenceId}}
               </td>
               <td data-title="'Datum'|translate">
-                  {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy hh:mm'}}
+                  {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy HH:mm'}}
               </td>
               <td data-title="'User'|translate">
                 <a ng-href="#/personen?q=id={{getFirstEntry(journalEntry.message.payload).meta.originator}}">
