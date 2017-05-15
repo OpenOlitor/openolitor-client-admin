@@ -169,9 +169,10 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
-        $scope.entries = AbosOverviewModel.query({
+        AbosOverviewModel.query({
           f: $scope.search.filterQuery
-        }, function() {
+        }, function(entries) {
+          $scope.entries = entries;
           $scope.tableParams.reload();
           $scope.loading = false;
           $location.search('q', $scope.search.query);

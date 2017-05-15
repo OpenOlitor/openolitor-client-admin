@@ -144,7 +144,7 @@ angular.module('openolitor-admin')
         }
       },
       {
-        label: 'Lieferantenabrechnung',
+        label: 'Lieferantenbericht',
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
