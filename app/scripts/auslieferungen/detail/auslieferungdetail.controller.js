@@ -74,6 +74,15 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
+        label: 'Korbübersicht drucken',
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.reportType = 'korbuebersicht';
+          $scope.vorlageTyp = 'Korbuebersicht';
+          $scope.showGenerateReport = true;
+          return true;
+        }
+      }, {
         label: 'als ausgeliefert markieren',
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
