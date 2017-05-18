@@ -5,16 +5,19 @@
 angular.module('openolitor-admin')
   .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
     'ProduzentenModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService',
+    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'FilterQueryUtil',
     function($q, $scope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService) {
+      OverviewCheckboxUtil, $location, VorlagenService, FilterQueryUtil) {
 
       $scope.entries = [];
+      $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
 
       $scope.search = {
-        query: ''
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
       };
 
       $scope.hasData = function() {
@@ -62,17 +65,17 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
-              orderedData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), false, localeSensitiveComparator) :
+              dataSet;
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            params.total(dataSet.length);
+            return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
@@ -82,15 +85,15 @@ angular.module('openolitor-admin')
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
 
         $scope.loading = true;
         $scope.entries = ProduzentenModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
+          $location.search('q', $scope.search.query);
         });
       }
 
@@ -126,5 +129,17 @@ angular.module('openolitor-admin')
         }
       }];
 
+      var existingQuery = $location.search().q;
+      if (existingQuery) {
+        $scope.search.query = existingQuery;
+      }
+
+      $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
+        search();
+      }, true);
     }
   ]);
