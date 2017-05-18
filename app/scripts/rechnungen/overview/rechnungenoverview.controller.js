@@ -194,6 +194,20 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return true;
         }
+      }, {
+        label: 'Rechnungen löschen',
+        iconClass: 'fa fa-times',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          angular.forEach(result, function(r) {
+            r.$delete();
+          });
+        }
       }];
 
       if (!$scope.tableParams) {
@@ -218,8 +232,9 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.queryQuery);
+            var filteredData = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            filteredData = $filter('filter')(filteredData, params.filter());
             var orderedData = $filter('filter')(filteredData, params.filter());
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
@@ -290,6 +305,19 @@ angular.module('openolitor-admin')
 
               $scope.tableParams.reload();
             }
+
+            $scope.$apply();
+          }
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Rechnung') {
+          var removed = lodash.remove($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (removed !== []) {
+            $scope.tableParams.reload();
 
             $scope.$apply();
           }
