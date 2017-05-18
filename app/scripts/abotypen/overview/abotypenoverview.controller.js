@@ -63,16 +63,17 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries, $scope
-              .search.queryQuery);
-            var orderedData = params.sorting ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
-              filteredData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy()) :
+              dataSet;
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            params.total(dataSet.length);
+            return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
