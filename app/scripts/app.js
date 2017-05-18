@@ -539,7 +539,8 @@ angular
         templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
         controller: 'ProduzentenOverviewController',
         name: 'ProduzentenOverview',
-        access: userRoles.Administrator
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/produzenten/new', {
         templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
