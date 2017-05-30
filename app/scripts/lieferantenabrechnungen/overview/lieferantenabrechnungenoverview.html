@@ -26,7 +26,7 @@
                 <input type="checkbox" ng-model="checkboxes.items[bestellung.id]" />
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'">
-                <a ng-click="selectBestellung(bestellung)">{{bestellung.id}}</a>
+                <a ng-click="selectBestellung(bestellung, 'detailButton_' + bestellung.id)">{{bestellung.id}}</a>
               </td>
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{bestellung.datum|date:'dd.MM.yyyy'}}
