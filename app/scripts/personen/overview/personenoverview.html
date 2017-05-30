@@ -30,8 +30,8 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[person.id]" />
               </td>
-              <td data-title="'Kunden/Pers. Nr.'|translate" sortable="'kundeId'">
-                <a ng-href="#/kunden/{{person.kundeId}}">{{person.kundeId}}/{{person.id}}</a>
+              <td data-title="'Kdn / Pers'|translate" sortable="'kundeId'">
+                <a ng-href="#/kunden/{{person.kundeId}}">{{person.kundeId}} / {{person.id}}</a>
               </td>
               <td data-title="'Vorname'|translate" sortable="'vorname'">
                 {{person.vorname}}
@@ -57,7 +57,7 @@
               <td data-title="'Kundentyp'|translate" sortable="'kundentypen'" filter="{kundentypen: 'select'}" filter-data="kundentypen">
                 <span ng-repeat="kundentyp in person.kundentypen" class="badge" ng-if="kundentyp !== ''">
                     {{kundentyp|translate}}
-                  </span>
+                </span>
               </td>
               <td ng-if="showAll" data-title="'Bemerkungen'|translate" sortable="'bemerkungen'">
                 {{person.bemerkungen}}
