@@ -837,7 +837,7 @@ angular.module('openolitor-admin')
             });
           }
         },{
-          label: gettext('Depotauslieferungen anzeigen') + '*',
+          label: gettext('Depotauslieferungen anzeigen'),
           iconClass: 'fa fa-building-o',
           confirm: false,
           noEntityText: true,
@@ -850,7 +850,7 @@ angular.module('openolitor-admin')
             });
           }
         },{
-          label: gettext('Tourauslieferungen anzeigen') + '*',
+          label: gettext('Tourauslieferungen anzeigen'),
           iconClass: 'fa fa-truck',
           noEntityText: true,
           confirm: false,
@@ -863,7 +863,7 @@ angular.module('openolitor-admin')
             });
           }
         },{
-          label: gettext('Postauslieferungen anzeigen') + '*',
+          label: gettext('Postauslieferungen anzeigen'),
           iconClass: 'fa fa-envelope',
           noEntityText: true,
           confirm: false,

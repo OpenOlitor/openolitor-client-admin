@@ -116,7 +116,7 @@ angular.module('openolitor-admin')
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferetiketten';
-          $scope.vorlageTyp = 'Lieferetikette';
+          $scope.vorlageTyp = 'Lieferetiketten';
           $scope.showGenerateReport = true;
           return true;
         },
