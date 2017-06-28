@@ -222,8 +222,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function() {
-          return !$scope.abo || $scope.abo.ende || $scope.abo.guthaben >
-            0 || $scope.abo
+          return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
             .anzahlLieferungen.length > 0 ||
             $scope.abo.anzahlAbwesenheiten.length > 0;
         },
