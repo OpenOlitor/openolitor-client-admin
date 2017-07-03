@@ -128,12 +128,35 @@ angular.module('openolitor-admin')
           $scope.editing = true;
           var newProdukt = cloneObj(defaults.model);
           $scope.editingProdukt = newProdukt;
+          $scope.editingProdukt.isNew = true;
           $scope.entries.push(newProdukt);
           $scope.tableParams.reload();
         }
       };
 
+      $scope.cancel = function(produkt) {
+        if(produkt.isNew) {
+          var produktIndex = $scope.entries.indexOf(produkt);
+          $scope.entries.splice(produktIndex, 1);
+        }
+        if($scope.originalProdukt) {
+          var isProduktById = function (element) {
+            return produkt.id === element.id;
+          };
+          var originalProduktIndex = $scope.entries.findIndex(isProduktById);
+          if(originalProduktIndex >= 0) {
+            $scope.entries[originalProduktIndex] = $scope.originalProdukt;
+          }
+          $scope.originalProdukt = undefined;
+        }
+        produkt.editable = false;
+        $scope.editing = false;
+        $scope.editingProdukt = undefined;
+        $scope.tableParams.reload();
+      };
+
       $scope.edit = function(produkt) {
+        $scope.originalProdukt = cloneObj(produkt);
         produkt.editable = true;
         $scope.editingProdukt = produkt;
         $scope.editing = true;
