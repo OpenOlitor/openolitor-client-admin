@@ -200,16 +200,17 @@ angular.module('openolitor-admin')
       $scope.actions = [{
         labelFunction: function() {
           if ($scope.isExisting()) {
-            return 'speichern';
+            return gettext('Rechnung speichern');
           } else {
-            return 'erstellen';
+            return gettext('Rechnung erstellen');
           }
         },
         onExecute: function() {
           return $scope.rechnung.$save();
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'verschickt',
+        label: gettext('Rechnung verschickt'),
         iconClass: 'fa fa-exchange',
         onExecute: function() {
           return $scope.rechnung.$verschicken();
@@ -217,9 +218,10 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !==
             RECHNUNGSTATUS.ERSTELLT;
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'Email versand*',
+        label: gettext('Email versand*'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
           return false;
@@ -229,7 +231,7 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: 'Mahnung verschickt',
+        label: gettext('Mahnung verschickt'),
         iconClass: 'fa fa-exclamation',
         onExecute: function() {
           return $scope.rechnung.$mahnungVerschicken();
@@ -240,7 +242,7 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: 'bezahlt',
+        label: gettext('Rechnung bezahlt'),
         iconClass: 'fa fa-usd',
         onExecute: function() {
           return $scope.rechnung.$bezahlen();
@@ -251,9 +253,10 @@ angular.module('openolitor-admin')
             RECHNUNGSTATUS.MAHNUNG_VERSCHICKT ||
             angular.isUndefined($scope.rechnung.einbezahlterBetrag) ||
             angular.isUndefined($scope.rechnung.eingangsDatum));
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'storniert',
+        label: gettext('Rechnung storniert'),
         iconClass: 'fa fa-times',
         onExecute: function() {
           $scope.rechnung.status = RECHNUNGSTATUS.STORNIERT;
@@ -262,9 +265,10 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !==
             RECHNUNGSTATUS.VERSCHICKT;
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'Rechnungsdokument erstellen',
+        label: gettext('Rechnungsdokument erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateRechnungReport = true;
@@ -278,7 +282,7 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: 'Mahnungsdokument erstellen',
+        label: gettext('Mahnungsdokument erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateMahnungReport = true;
