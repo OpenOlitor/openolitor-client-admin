@@ -16,7 +16,7 @@ angular.module('openolitor-admin')
         query: ''
       };
 
-      $scope.model = {}
+      $scope.model = {};
 
       $scope.checkboxes = {
         checked: false,

@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -126,7 +126,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Rechnungen erstellen';
+          return gettext('Rechnungen erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
@@ -138,7 +138,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Email versenden',
+        label: gettext('Email versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {

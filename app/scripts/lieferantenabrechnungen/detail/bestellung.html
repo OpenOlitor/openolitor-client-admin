@@ -56,8 +56,9 @@
           </tr>
           <tr>
             <td></td>
-            <td translate>
-              Total (abz. Adminanteil<span ng-if="produzentIstBesteuert(sammelbestellung.produzentId)" translate>, inkl. MWST</span>)
+            <td>
+              <span ng-if="produzentIstBesteuert(sammelbestellung.produzentId)" translate>Total (abz. Adminanteil, inkl. MWST)</span>
+              <span ng-if="!produzentIstBesteuert(sammelbestellung.produzentId)" translate>Total (abz. Adminanteil)</span>
             </td>
             <td>
               {{bestellung.totalSteuer | ooCHF}}
