@@ -60,7 +60,7 @@ module.exports = function(grunt) {
     EMAIL_TO_ADDRESS: {
       'prod-soliterre': 'openolitor@soliterre.ch',
       'prod-bioabi': 'info@bioabi.ch',
-      'prod-bioabi': 'info@gmüeschorb-luzern.ch',
+      'prod-gmuesluzern': 'info@gmüeschorb-luzern.ch',
     }
   };
   var env = 'dev';
