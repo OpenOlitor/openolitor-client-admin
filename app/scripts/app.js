@@ -324,6 +324,12 @@ angular
       return convertDateStringsToDates(responseData);
     });
   }])
+  .config(['$locationProvider', function($locationProvider) {
+    $locationProvider.hashPrefix('');
+  }])
+  .config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+  }])
   .run(['alertService', '$rootScope', function(alertService, $rootScope) {
     $rootScope.$removeAlert = alertService.removeAlert();
   }])
