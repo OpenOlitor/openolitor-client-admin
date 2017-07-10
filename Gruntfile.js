@@ -52,11 +52,15 @@ module.exports = function(grunt) {
       },
       'prod-bioabi': {
         'm1': 'https://prod.openolitor.ch/bioabi/'
+      },
+      'prod-gmuesluzern': {
+        'm1': 'https://prod.openolitor.ch/gmuesluzern/'
       }
     },
     EMAIL_TO_ADDRESS: {
       'prod-soliterre': 'openolitor@soliterre.ch',
-      'prod-bioabi': 'info@bioabi.ch'
+      'prod-bioabi': 'info@bioabi.ch',
+      'prod-gmuesluzern': 'info@gmüeschorb-luzern.ch',
     }
   };
   var env = 'dev';

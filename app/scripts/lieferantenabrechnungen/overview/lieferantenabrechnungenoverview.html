@@ -26,7 +26,7 @@
                 <input type="checkbox" ng-model="checkboxes.items[bestellung.id]" />
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'">
-                <a ng-click="selectBestellung(bestellung)">{{bestellung.id}}</a>
+                <a ng-click="selectBestellung(bestellung, 'detailButton_' + bestellung.id)">{{bestellung.id}}</a>
               </td>
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{bestellung.datum|date:'dd.MM.yyyy'}}
@@ -49,7 +49,7 @@
               <td>
                 <div class="pull-right">
                   <div class="btn-group">
-                    <button id="detailButton_{{abo.id}}" uib-btn-checkbox ng-model="selectedBestellung" role="button" ng-href="" ng-click="selectBestellung(bestellung, 'detailButton_' + abo.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                    <button id="detailButton_{{bestellung.id}}" uib-btn-checkbox ng-model="selectedBestellung" role="button" ng-href="" ng-click="selectBestellung(bestellung, 'detailButton_' + bestellung.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
                   </div>
                 </div>
               </td>
@@ -59,7 +59,7 @@
       </div>
     </div>
   </div>
-  <div  id="selectedAbrechnungDetail" class="context content-box col-md-3" ng-if="selectedBestellung">
+  <div id="selectedAbrechnungDetail" class="context content-box col-md-3" ng-show="selectedBestellung">
     <oo-bestellung-detail bestellung-id="selectedBestellung.id" projekt="projekt"></oo-bestellung-detail>
   </div>
   <div class="context content-box col-md-3" ng-if="showCreateAbrechnungDialog">
