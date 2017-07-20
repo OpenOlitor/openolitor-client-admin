@@ -134,6 +134,38 @@
                 </div>
               </div>
             </div>
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">
+                <span class="navbar-brand" translate>Kontodaten</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>IBAN</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.iban" placeholder="{{'IBAN'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Teilnehmernummer</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" pattern="[0-9]{0,9}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.teilnehmerNummer" placeholder="{{'Teilnehmernummer'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Referenznummer Präfix</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" pattern="[0-9]{0,27}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.referenzNummerPrefix" placeholder="{{'Referenznummer Präfix'|translate}}">
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </form>
