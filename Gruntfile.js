@@ -55,6 +55,15 @@ module.exports = function(grunt) {
       },
       'prod-gmuesluzern': {
         'm1': 'https://prod.openolitor.ch/gmuesluzern/'
+      },
+      'test-prod-soliterre': {
+        'm1': 'https://testprod.openolitor.ch/soliterre/'
+      },
+      'test-prod-bioabi': {
+        'm1': 'https://testprod.openolitor.ch/bioabi/'
+      },
+      'test-prod-gmuesluzern': {
+        'm1': 'https://testprod.openolitor.ch/gmuesluzern/'
       }
     },
     EMAIL_TO_ADDRESS: {
