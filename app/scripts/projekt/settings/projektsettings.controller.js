@@ -103,7 +103,7 @@ angular.module('openolitor-admin')
       $scope.deletingProduktekategorien = {};
       $scope.modelChangedKundentyp = function(kundentyp) {
         if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
-          $scope.changedKundentypen[kundentyp.kundentyp] = kundentyp;
+          $scope.changedKundentypen[kundentyp.id] = kundentyp;
         }
       };
       $scope.hasChangesKundentypen = function() {

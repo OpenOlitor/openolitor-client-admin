@@ -248,7 +248,7 @@
                 <table ng-table="kundentypenTableParams" class="table table-striped">
                   <tr ng-repeat="kundentyp in $data">
                     <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">
-                      {{kundentyp.kundentyp}}
+                      <input type="text" class="form-control" name="beschreibung" ng-model="kundentyp.kundentyp" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Kundentyp'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></input>
                     </td>
                     <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
                       <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></textarea>
