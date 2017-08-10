@@ -3,13 +3,13 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
+  .controller('RechnungsPositionenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'RechnungsPositionenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
     'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
-    function($q, $scope, $filter, $location, RechnungenOverviewModel,
+    function($q, $scope, $filter, $location, RechnungsPositionenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
@@ -226,7 +226,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: RechnungenOverviewModel,
+          exportODSModel: RechnungsPositionenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -257,7 +257,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = RechnungenOverviewModel.query({
+        $scope.entries = RechnungsPositionenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();

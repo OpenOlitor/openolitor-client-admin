@@ -39,29 +39,23 @@
               <td data-title="'Nr.'|translate" sortable="'id'">
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.id}}</a>
               </td>
-              <td data-title="'Kunde'|translate" sortable="'kundeId'">
-                <a ng-href="#/kunden/{{rechnung.kundeId}}">{{rechnung.kundeId}}</a>
+              <td data-title="'Abo'|translate" sortable="'aboId'">
+                <a ng-href="#/abos/{{rechnung.aboId}}">{{rechnung.aboId}}</a>
               </td>
               <td data-title="'Titel'|translate" sortable="'titel'">
-                <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
+                <a ng-href="#/rechnungen/{{rechnung.titel}}">{{rechnung.titel}}</a>
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{rechnung.waehrung}} {{rechnung.betrag}}
               </td>
-              <td data-title="'Einbezahlter Betrag'|translate" sortable="'einbezahlterBetrag'">
-                <span ng-if="rechnung.einbezahlterBetrag">{{rechnung.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
-              </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungStati">
                 {{rechnung.status}}
               </td>
-              <td data-title="'Rechnnungsdatum'|translate" sortable="'rechnungsDatum'">
-                {{rechnung.rechnungsDatum | date}}
+              <td data-title="'Rechnungstyp'|translate" sortable="'typ'">
+                {{rechnung.typ}}
               </td>
-              <td data-title="'Fälligkeit'|translate" sortable="'faelligkeitsDatum'">
-                {{rechnung.faelligkeitsDatum | date}}
-              </td>
-              <td data-title="'Eingang am'|translate" sortable="'eingangsDatum'">
-                {{rechnung.eingangsDatum | date}}
+              <td data-title="'Anzahl Lieferungen'|translate" sortable="'anzahlLieferungen'">
+                {{rechnung.anzahlLieferungen}}
               </td>
             </tr>
           </table>

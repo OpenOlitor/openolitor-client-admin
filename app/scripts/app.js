@@ -705,8 +705,8 @@ angular
       })
       .when('/rechnungspositionen', {
         templateUrl: 'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
-        controller: 'RechnungenOverviewController',
-        name: 'RechnungenOverview',
+        controller: 'RechnungsPositionenOverviewController',
+        name: 'RechnungsPositionenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
