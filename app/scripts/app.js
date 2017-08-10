@@ -703,6 +703,13 @@ angular
         name: 'RechnungenDetail',
         access: userRoles.Administrator
       })
+      .when('/rechnungspositionen', {
+        templateUrl: 'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
+        controller: 'RechnungenOverviewController',
+        name: 'RechnungenOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
       .when('/kunden/:kundeId/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
         controller: 'RechnungenDetailController',
