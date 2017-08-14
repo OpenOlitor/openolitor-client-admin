@@ -5,21 +5,21 @@
 angular.module('openolitor-admin')
   .controller('RechnungsPositionenOverviewController', ['$q', '$scope', '$filter',
     '$location',
-    'RechnungsPositionenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
+    'RechnungsPositionenModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
+    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
     'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
-    function($q, $scope, $filter, $location, RechnungsPositionenOverviewModel,
+    function($q, $scope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
+      FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, VorlagenService,
       localeSensitiveComparator) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
-      $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
+      $scope.rechnungsPositionenStatus = EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS);
 
       $scope.search = {
         query: '',
@@ -38,6 +38,15 @@ angular.module('openolitor-admin')
         css: '',
         ids: []
       };
+        
+      $scope.selectRechnungsPosition = function(rechnungsPosition) {
+        if ($scope.selectedRechnungsPosition === rechnungsPosition) {
+          $scope.selectedRechnungsPosition = undefined;
+        } else {
+          $scope.selectedRechnungsPosition = rechnungsPosition;
+        }
+      };
+ 
 
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
@@ -59,28 +68,6 @@ angular.module('openolitor-admin')
           });
       };
 
-      var alleRechnungenStorniertOderBezahlt = function(selectedItems, items) {
-        var length = selectedItems.length;
-        for (var i = 0; i < length; ++i) {
-          var id = selectedItems[i];
-          if (items[id].status !== RECHNUNGSTATUS.STORNIERT &&
-            items[id].status !== RECHNUNGSTATUS.BEZAHLT) {
-            return false;
-          }
-        }
-        return true;
-      };
-
-      var hasRechnungDocument = function(selectedItems, items) {
-        var length = selectedItems.length;
-        for (var i = 0; i < length; ++i) {
-          var id = selectedItems[i];
-          if (items[id].fileStoreId) {
-            return true;
-          }
-        }
-        return false;
-      };
 
       // watch for check all checkbox
       $scope.$watch(function() {
@@ -226,7 +213,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: RechnungsPositionenOverviewModel,
+          exportODSModel: RechnungsPositionenModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -257,7 +244,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = RechnungsPositionenOverviewModel.query({
+        $scope.entries = RechnungsPositionenModel.query({
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();

@@ -148,6 +148,10 @@ angular
     MAHNUNG_VERSCHICKT: gettext('MahnungVerschickt'),
     STORNIERT: gettext('Storniert')
   })
+  .constant('RECHNUNGSPOSITIONSSTATUS', {
+    OFFEN: gettext('Offen'),
+    BEZAHLT: gettext('Bezahlt'),
+  })
   .constant('KORBSTATUS', {
     WIRDGELIEFERT: gettext('WirdGeliefert'),
     GELIEFERT: gettext('Geliefert'),
