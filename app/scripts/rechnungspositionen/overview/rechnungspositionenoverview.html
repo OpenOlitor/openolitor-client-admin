@@ -21,7 +21,7 @@
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
-          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html" id="rechnungsPositionenTable">
             <tr ng-repeat="rechnungsPosition in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[rechnungsPosition.id]" />
@@ -37,7 +37,7 @@
                 </span>
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'">
-                <a ng-click="selectRechnungsPosition(rechnungsPosition)">{{rechnungsPosition.id}}</a>
+                <a ng-click="selectRechnungsPosition(rechnungsPosition, 'detailButton_' + rechnungsPosition.id)">{{rechnungsPosition.id}}</a>
               </td>
               <td data-title="'Abo'|translate" sortable="'aboId'">
                 <a ng-href="#/abos?q=id%3D{{rechnungsPosition.aboId}}">{{rechnungsPosition.aboId}}</a>
@@ -56,6 +56,13 @@
               </td>
               <td data-title="'Anzahl Lieferungen'|translate" sortable="'anzahlLieferungen'">
                 {{rechnungsPosition.anzahlLieferungen}}
+              </td>
+              <td>
+                <div class="pull-right">
+                  <div class="btn-group" >
+                    <button id="detailButton_{{rechnungsPosition.id}}" uib-btn-checkbox ng-model="selectedRechnungsPosition" role="button" ng-href="" ng-show="rechnungsPosition.id" ng-click="selectRechnungsPosition(rechnungsPosition, 'detailButton_' + rechnungsPosition.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
+                  </div>
+                </div>
               </td>
             </tr>
           </table>

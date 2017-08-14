@@ -39,150 +39,28 @@ angular.module('openolitor-admin')
         ids: []
       };
         
-      $scope.selectRechnungsPosition = function(rechnungsPosition) {
+      $scope.selectRechnungsPosition = function(rechnungsPosition, itemId) {
+        var firstRow = angular.element('#rechnungsPositionenTable tbody tr').first();
+        var allButtons = angular.element('#rechnungsPositionenTable button');
+        allButtons.removeClass('btn-warning');
+        allButtons.removeClass('active');
+
         if ($scope.selectedRechnungsPosition === rechnungsPosition) {
           $scope.selectedRechnungsPosition = undefined;
         } else {
           $scope.selectedRechnungsPosition = rechnungsPosition;
+            
+          var button = angular.element('#' + itemId);
+          console.log("button: ", button);
+          button.addClass('btn-warning');
+          button.addClass('active');
+          var offset = button.offset().top - firstRow.offset().top + 154;
+          angular.element('#selectedRechnungsPositionDetail').css('margin-top', offset);
         }
       };
  
-
-      $scope.downloadRechnung = function(rechnung) {
-        rechnung.isDownloading = true;
-        FileUtil.downloadGet('rechnungen/' + rechnung.id +
-          '/aktionen/downloadrechnung', 'Rechnung ' + rechnung.id,
-          'application/pdf',
-          function() {
-            rechnung.isDownloading = false;
-          });
-      };
-
-      $scope.downloadMahnung = function(rechnung, fileId) {
-        rechnung.isDownloadingMahnung = true;
-        FileUtil.downloadGet('rechnungen/' + rechnung.id +
-          '/aktionen/download/' + fileId, 'Rechnung ' + rechnung.id + ' Mahnung',
-          'application/pdf',
-          function() {
-            rechnung.isDownloadingMahnung = false;
-          });
-      };
-
-
-      // watch for check all checkbox
-      $scope.$watch(function() {
-        return $scope.checkboxes.checked;
-      }, function(value) {
-        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
-      });
-
-      $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageRechnung');
-      };
-
-      // watch for data checkboxes
-      $scope.$watch(function() {
-        return $scope.checkboxes.items;
-      }, function() {
-        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
-      }, true);
-
       $scope.actions = [{
-        labelFunction: function() {
-          return 'Rechnung erstellen';
-        },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-plus',
-        onExecute: function() {
-          return $location.path('/rechnungen/new');
-        }
-      }, {
-        label: 'Rechnungsdokumente erstellen',
-        iconClass: 'fa fa-file',
-        onExecute: function() {
-          $scope.showGenerateRechnungReport = true;
-          return true;
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny ||
-            alleRechnungenStorniertOderBezahlt($scope.checkboxes.ids,
-              $scope.checkboxes.data);
-        }
-      }, {
-        label: 'Mahnungsdokumente erstellen',
-        iconClass: 'fa fa-file',
-        onExecute: function() {
-          $scope.showGenerateMahnungReport = true;
-          return true;
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny ||
-            alleRechnungenStorniertOderBezahlt($scope.checkboxes.ids,
-              $scope.checkboxes.data);
-        }
-      }, {
-        label: 'Rechnungsdokumente herunterladen',
-        iconClass: 'fa fa-download',
-        onExecute: function() {
-          return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
-            'ids': $scope.checkboxes.ids
-          });
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny ||
-            !hasRechnungDocument($scope.checkboxes.ids,
-              $scope.checkboxes.data);
-        }
-      }, {
-        label: 'Mahnungsdokumente herunterladen',
-        iconClass: 'fa fa-download',
-        onExecute: function() {
-          return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
-            'ids': $scope.checkboxes.ids
-          });
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny ||
-            !hasRechnungDocument($scope.checkboxes.ids,
-              $scope.checkboxes.data);
-        }
-      }, {
-        label: 'Rechnungen verschickt',
-        iconClass: 'fa fa-exchange',
-        onExecute: function() {
-          return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
-            'ids': $scope.checkboxes.ids
-          }).then(function() {
-            $scope.model.actionInProgress = undefined;
-          });
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
-        }
-      }, {
-        label: 'Kundenliste anzeigen',
-        iconClass: 'fa fa-user',
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
-        },
-        onExecute: function() {
-          var result = lodash.filter($scope.checkboxes.data, function(d) {
-            return lodash.includes($scope.checkboxes.ids, d.id);
-          });
-          result = lodash.map(result, 'kundeId');
-          $location.path('/kunden').search('q', 'id=' + result.join());
-        }
-      }, {
-        label: 'Email Versand*',
-        iconClass: 'fa fa-envelope-o',
-        onExecute: function() {
-          return false;
-        },
-        isDisabled: function() {
-          return true;
-        }
-      }, {
-        label: 'Rechnungen löschen',
+        label: 'Rechnungsposition löschen',
         iconClass: 'fa fa-times',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
@@ -266,48 +144,6 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
-      $scope.closeRechnungBericht = function() {
-        $scope.showGenerateRechnungReport = false;
-      };
 
-      $scope.closeMahnungBericht = function() {
-        $scope.showGenerateMahnungReport = false;
-      };
-
-      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-        if (msg.entity === 'Rechnung') {
-          var rechnung = lodash.find($scope.entries, function(r) {
-            return r.id === msg.data.id;
-          });
-          if (rechnung) {
-            DataUtil.update(msg.data, rechnung);
-
-            var filteredRechnung = lodash.find($scope.filteredEntries,
-              function(r) {
-                return r.id === msg.data.id;
-              });
-            if (filteredRechnung) {
-              DataUtil.update(msg.data, filteredRechnung);
-
-              $scope.tableParams.reload();
-            }
-
-            $scope.$apply();
-          }
-        }
-      });
-
-      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
-        if (msg.entity === 'Rechnung') {
-          var removed = lodash.remove($scope.entries, function(r) {
-            return r.id === msg.data.id;
-          });
-          if (removed !== []) {
-            $scope.tableParams.reload();
-
-            $scope.$apply();
-          }
-        }
-      });
     }
   ]);

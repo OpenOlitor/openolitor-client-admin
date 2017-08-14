@@ -45,7 +45,7 @@ angular.module('openolitor-admin')
         label: gettext('Speichern'),
         noEntityText: true,
         onExecute: function() {
-          return $scope.abo.$save();
+          return $scope.rechnungsPosition.$save();
         }
       }, {
         label: gettext('Löschen'),
