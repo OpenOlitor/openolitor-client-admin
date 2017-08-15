@@ -18,15 +18,6 @@ angular.module('openolitor-admin')
 
       $scope.rechnungsPositionenStatus = EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS);
 
-      $scope.cancel = function() {
-        $location.path(basePath);
-      };
-
-      $scope.delete = function() {
-        return $scope.abo.$delete();
-      };
-
-
       function resolveKunde(id) {
         return KundenDetailModel.get({
           id: id
@@ -47,21 +38,6 @@ angular.module('openolitor-admin')
         onExecute: function() {
           return $scope.rechnungsPosition.$save();
         }
-      }, {
-        label: gettext('Löschen'),
-        iconClass: 'glyphicon glyphicon-remove',
-        noEntityText: true,
-        isDisabled: function() {
-          return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
-            .anzahlLieferungen.length > 0 ||
-            $scope.abo.anzahlAbwesenheiten.length > 0;
-        },
-        onExecute: function() {
-          return $scope.abo.$delete();
-        }
       }];
-
-
-
     }
   ]);
