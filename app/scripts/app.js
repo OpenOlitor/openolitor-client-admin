@@ -148,6 +148,10 @@ angular
     MAHNUNG_VERSCHICKT: gettext('MahnungVerschickt'),
     STORNIERT: gettext('Storniert')
   })
+  .constant('RECHNUNGSPOSITIONSSTATUS', {
+    OFFEN: gettext('Offen'),
+    BEZAHLT: gettext('Bezahlt'),
+  })
   .constant('KORBSTATUS', {
     WIRDGELIEFERT: gettext('WirdGeliefert'),
     GELIEFERT: gettext('Geliefert'),
@@ -702,6 +706,13 @@ angular
         controller: 'RechnungenDetailController',
         name: 'RechnungenDetail',
         access: userRoles.Administrator
+      })
+      .when('/rechnungspositionen', {
+        templateUrl: 'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
+        controller: 'RechnungsPositionenOverviewController',
+        name: 'RechnungsPositionenOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/kunden/:kundeId/rechnungen/new', {
         templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
