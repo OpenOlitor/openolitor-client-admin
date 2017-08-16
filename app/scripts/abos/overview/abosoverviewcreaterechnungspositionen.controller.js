@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbosOverviewCreateRechnungenController', ['$scope', '$filter', '$routeParams',
+  .controller('AbosOverviewCreateRechnungsPositionenController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
     'API_URL', 'alertService', 'AbosOverviewService',
@@ -13,12 +13,9 @@ angular.module('openolitor-admin')
       moment, EnumUtil, DataUtil, msgBus, $q, _, API_URL,
       alertService, AbosOverviewService) {
 
-      $scope.rechnung = {
+      $scope.rechnungsPositionen = {
         ids: $scope.aboIds,
-        waehrung: 'CHF',
-        rechnungsDatum: new Date(),
-        faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1,
-          'day').valueOf())
+        waehrung: 'CHF'
       };
 
       $scope.form = {
@@ -39,12 +36,12 @@ angular.module('openolitor-admin')
       $scope.batchCreate = function() {
         switch($scope.form.mode) {
           case 'AnzahlLieferungen':
-            AbosOverviewService.createAnzahlLieferungenRechnungen($scope.rechnung).then(function() {
+            AbosOverviewService.createAnzahlLieferungenRechnungsPositionen($scope.rechnungsPositionen).then(function() {
               $scope.commandIssued = true;
             });
             break;
           case 'BisGuthaben':
-             AbosOverviewService.createBisGuthabenRechnungen($scope.rechnung).then(function() {
+             AbosOverviewService.createBisGuthabenRechnungsPositionen($scope.rechnungsPositionen).then(function() {
               $scope.commandIssued = true;
             });
             break;
@@ -58,13 +55,13 @@ angular.module('openolitor-admin')
         $scope.open[date] = true;
       };
 
-      $scope.jumpToRechnungen = function() {
-        $location.path('/rechnungen').search('q', 'id=' + $scope.batchCreated.ids.join());
+      $scope.jumpToRechnungspositionen = function() {
+        $location.path('/rechnungspositionen').search('q', 'id=' + $scope.batchCreated.ids.join());
       };
       
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
-        if (msg.entity === 'Rechnung') {
-          if(_.includes($scope.rechnung.ids, msg.data.aboId)) {
+        if (msg.entity === 'RechnungsPosition') {
+          if(_.includes($scope.rechnungsPositionen.ids, msg.data.aboId)) {
             $scope.batchCreated.ids.push(msg.data.id);
             $scope.$apply();
           }

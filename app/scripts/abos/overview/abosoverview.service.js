@@ -6,22 +6,23 @@ angular.module('openolitor-admin')
   .factory('AbosOverviewService', ['$http', 'API_URL',
     function($http, API_URL) {
 
-      function createAnzahlLieferungenRechnungen(rechnungCreate) {
+      function createAnzahlLieferungenRechnungsPositionen(rechnungsPositionCreate) {
         return $http.post(API_URL +
-          'abos/aktionen/anzahllieferungenrechnungen',
-          rechnungCreate);
+          'abos/aktionen/anzahllieferungenrechnungspositionen',
+          rechnungsPositionCreate);
       }
 
-      function createBisGuthabenRechnungen(rechnungCreate) {
-        return $http.post(API_URL + 'abos/aktionen/bisguthabenrechnungen',
-          rechnungCreate);
+      function createBisGuthabenRechnungsPositionen(rechnungsPositionCreate) {
+        return $http.post(API_URL + 'abos/aktionen/bisguthabenrechnungspositionen',
+          rechnungsPositionCreate);
       }
 
       var service = {
-        createAnzahlLieferungenRechnungen: createAnzahlLieferungenRechnungen,
-        createBisGuthabenRechnungen: createBisGuthabenRechnungen
+        createAnzahlLieferungenRechnungsPositionen: createAnzahlLieferungenRechnungsPositionen,
+        createBisGuthabenRechnungsPositionen: createBisGuthabenRechnungsPositionen
       };
 
       return service;
     }
   ]);
+

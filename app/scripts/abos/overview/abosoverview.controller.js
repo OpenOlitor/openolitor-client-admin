@@ -126,7 +126,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Rechnungen erstellen';
+          return 'Rechnungspositionen erstellen';
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
