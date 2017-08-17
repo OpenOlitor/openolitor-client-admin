@@ -38,7 +38,25 @@ angular.module('openolitor-admin')
         css: '',
         ids: []
       };
+       
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
 
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageRechnung');
+      };
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
+ 
       $scope.selectRechnungsPosition = function(rechnungsPosition, itemId) {
         var firstRow = angular.element('#rechnungsPositionenTable tbody tr').first();
         var allButtons = angular.element('#rechnungsPositionenTable button');
@@ -143,6 +161,18 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'RechnungsPosition') {
+          var removed = lodash.remove($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (removed !== []) {
+            $scope.tableParams.reload();
+
+            $scope.$apply();
+          }
+        }
+      });
 
     }
   ]);
