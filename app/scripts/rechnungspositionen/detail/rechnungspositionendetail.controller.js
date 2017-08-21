@@ -6,14 +6,12 @@ angular.module('openolitor-admin')
   .controller('RechnungsPositionDetailController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'RechnungsPositionenModel', 'KundenDetailModel', 'RECHNUNGSPOSITIONSSTATUS',
-    'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'NgTableParams',
+    'moment', 'EnumUtil',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       RechnungsPositionenModel, KundenDetailModel, RECHNUNGSPOSITIONSSTATUS,
-      moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
-      alertService, NgTableParams) {
+      moment, EnumUtil) {
 
 
       $scope.rechnungsPositionenStatus = EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS);
@@ -26,8 +24,8 @@ angular.module('openolitor-admin')
         }).$promise;
       }
 
-      var unwatchRechnungsPositionsId = $scope.$watch('rechnungsPosition.id', function(id) {
-          resolveKunde($scope.rechnungsPosition.kundeId);
+      $scope.$watch('rechnungsPosition', function(pos) {
+          resolveKunde(pos.kundeId);
       });
 
       $scope.loading = false;
@@ -35,6 +33,9 @@ angular.module('openolitor-admin')
       $scope.actions = [{
         label: gettext('Speichern'),
         noEntityText: true,
+        isDisabled: function() {
+          return $scope.rechnungsPosition.status != 'Offen';
+        },
         onExecute: function() {
           return $scope.rechnungsPosition.$save();
         }

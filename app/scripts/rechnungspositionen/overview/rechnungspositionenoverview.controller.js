@@ -38,7 +38,7 @@ angular.module('openolitor-admin')
         css: '',
         ids: []
       };
-        
+
       $scope.selectRechnungsPosition = function(rechnungsPosition, itemId) {
         var firstRow = angular.element('#rechnungsPositionenTable tbody tr').first();
         var allButtons = angular.element('#rechnungsPositionenTable button');
@@ -49,16 +49,15 @@ angular.module('openolitor-admin')
           $scope.selectedRechnungsPosition = undefined;
         } else {
           $scope.selectedRechnungsPosition = rechnungsPosition;
-            
+
           var button = angular.element('#' + itemId);
-          console.log("button: ", button);
           button.addClass('btn-warning');
           button.addClass('active');
           var offset = button.offset().top - firstRow.offset().top + 154;
           angular.element('#selectedRechnungsPositionDetail').css('margin-top', offset);
         }
       };
- 
+
       $scope.actions = [{
         label: 'Rechnungsposition löschen',
         iconClass: 'fa fa-times',

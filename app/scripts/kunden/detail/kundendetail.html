@@ -4,22 +4,26 @@
       <div class="content content-box col-md-9">
         <div oo-error-overlay></div>
         <div class="col-md-12">
-          <div class="row form-group">
-            <h3>
-              <div class="col-md-2" translate>
+          <div class="row">
+            <h3 class="row">
+              <div class="col-md-4" translate>
                 Kunde
               </div>
-              <div class="col-md-2">
-                 <small><label for="typen" translate>Kundentyp</label></small>
-              </div>
               <div class="col-md-8">
-                <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
                 <div class="btn-group pull-right" role="group">
                   <oo-actions-button model="kunde" form="kundeForm" entity="Kunde" actions="actions" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-actions-button>
                   <oo-delete-button ng-if="canDelete()" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
             </h3>
+            <div class="row">
+              <div class="col-md-2">
+                 <small><label for="typen" translate>Kundentypen</label></small>
+              </div>
+              <div class="col-md-10">
+                <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -150,6 +150,7 @@ angular
   })
   .constant('RECHNUNGSPOSITIONSSTATUS', {
     OFFEN: gettext('Offen'),
+    ZUGEWIESEN: gettext('Zugewiesen'),
     BEZAHLT: gettext('Bezahlt'),
   })
   .constant('KORBSTATUS', {
