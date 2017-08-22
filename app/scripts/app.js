@@ -513,6 +513,25 @@ angular
         name: 'AbotypenDetail',
         access: userRoles.Administrator
       })
+      .when('/zusatzabotypen', {
+        templateUrl: 'scripts/abotypen/overview/zusatzabotypenoverview.html',
+        controller: 'ZusatzabotypenOverviewController',
+        name: 'SusatzabotypenOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/zusatzabotypen/new', {
+        templateUrl: 'scripts/abotypen/detail/zusatzabotypendetail.html',
+        controller: 'ZusatzabotypenDetailController',
+        name: 'ZusatzabotypenDetail',
+        access: userRoles.Administrator
+      })
+      .when('/zusatzabotypen/:id', {
+        templateUrl: 'scripts/abotypen/detail/zusatzabotypendetail.html',
+        controller: 'ZusatzabotypenDetailController',
+        name: 'ZusatzabotypenDetail',
+        access: userRoles.Administrator
+      })
       .when('/kunden', {
         templateUrl: 'scripts/kunden/overview/kundenoverview.html',
         controller: 'KundenOverviewController',
