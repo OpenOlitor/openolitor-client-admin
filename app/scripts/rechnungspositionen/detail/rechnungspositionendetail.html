@@ -10,11 +10,11 @@
     <form name="rechnungsPositionDetailForm">
       <div class="row form-group">
         <div class="col-md-12">
-          <label translate>Titel</label>
+          <label translate>Beschrieb</label>
         </div>
         <div class="col-md-12">
-          <input ng-show="rechnungsPosition.status == 'Offen'" type="text" class="form-control" name="titel" ng-model="rechnungsPosition.titel" placeholder="{{'titel'|translate}}" required>
-          <span ng-show="rechnungsPosition.status != 'Offen'">{{rechnungsPosition.titel}}</span>
+          <input ng-show="rechnungsPosition.status == 'Offen'" type="text" class="form-control" name="beschrieb" ng-model="rechnungsPosition.beschrieb" placeholder="{{'Beschrieb'|translate}}" required>
+          <span ng-show="rechnungsPosition.status != 'Offen'">{{rechnungsPosition.beschrieb}}</span>
         </div>
       </div>
       <div class="row form-group">
