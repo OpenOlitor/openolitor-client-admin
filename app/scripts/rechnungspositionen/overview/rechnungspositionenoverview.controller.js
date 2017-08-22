@@ -35,6 +35,7 @@ angular.module('openolitor-admin')
         checked: false,
         checkedAny: false,
         items: {},
+        checkedItems: [],
         css: '',
         ids: []
       };
@@ -75,8 +76,22 @@ angular.module('openolitor-admin')
           angular.element('#selectedRechnungsPositionDetail').css('margin-top', offset);
         }
       };
+ 
+      $scope.closeCreateRechnungenDialog = function() {
+        $scope.showCreateRechnungenDialog = false;
+      };
 
       $scope.actions = [{
+        label: 'Rechnungen erstellen',
+        iconClass: 'glyphicon glyphicon-plus',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          $scope.showCreateRechnungenDialog = true;
+          return true;
+        }
+      }, {
         label: 'Rechnungsposition löschen',
         iconClass: 'fa fa-times',
         isDisabled: function() {
@@ -174,5 +189,16 @@ angular.module('openolitor-admin')
         }
       });
 
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity == 'RechnungsPosition') {
+          $scope.entries.map(function(entry) {
+            if(entry.id === msg.data.id) {
+              angular.copy(msg.data, entry);
+            }
+          });
+          $scope.$apply();
+        }
+      });
+      
     }
   ]);
