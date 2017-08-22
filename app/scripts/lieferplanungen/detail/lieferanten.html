@@ -52,7 +52,7 @@
                 <tbody>
                   <tr ng-repeat="position in lieferung.positionen | toArray | orderBy:'produktBeschrieb'" ng-if="position.anzahl > 0">
                     <td>
-                      {{position.anzahl}} ×
+                      {{position.anzahl}}&nbsp;×
                     </td>
                     <td>
                       {{position.menge | number:2}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}

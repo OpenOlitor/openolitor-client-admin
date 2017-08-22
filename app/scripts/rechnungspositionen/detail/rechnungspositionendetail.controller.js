@@ -34,7 +34,7 @@ angular.module('openolitor-admin')
         label: gettext('Speichern'),
         noEntityText: true,
         isDisabled: function() {
-          return $scope.rechnungsPosition.status != 'Offen';
+          return $scope.rechnungsPosition.status !== 'Offen';
         },
         onExecute: function() {
           return $scope.rechnungsPosition.$save();
