@@ -79,7 +79,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-            return 'Abotyp erstellen';
+          return 'Abotyp erstellen';
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -119,13 +119,26 @@ angular.module('openolitor-admin')
         });
       }
 
-      $scope.style = function(abotyp) {
-        if (abotyp.farbCode) {
-          return {
-            'background-color': abotyp.farbCode
+      if ($scope.mode==='abotypen'){
+          $scope.style = function(abotyp) {
+              console.log('Mikel scope mode   -------->' + $scope.mode)
+              if (abotyp.farbCode) {
+                  return {
+                      'background-color': abotyp.farbCode
+                  };
+              }
           };
-        }
-      };
+      }
+      else {
+          $scope.style = function(abotyp) {
+              console.log('Mikel scope mode   -------->' + $scope.mode)
+              if (abotyp.farbCode) {
+                  return {
+                      'background-color': abotyp.farbCode
+                  };
+              }
+          };
+      }
 
       var existingQuery = $location.search().q;
       if (existingQuery) {

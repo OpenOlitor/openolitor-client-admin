@@ -514,21 +514,21 @@ angular
         access: userRoles.Administrator
       })
       .when('/zusatzabotypen', {
-        templateUrl: 'scripts/abotypen/overview/zusatzabotypenoverview.html',
+        templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'ZusatzabotypenOverviewController',
-        name: 'SusatzabotypenOverview',
+        name: 'ZusatzabotypenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
       .when('/zusatzabotypen/new', {
-        templateUrl: 'scripts/abotypen/detail/zusatzabotypendetail.html',
-        controller: 'ZusatzabotypenDetailController',
+        templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
+        controller: 'AbotypenDetailController',
         name: 'ZusatzabotypenDetail',
         access: userRoles.Administrator
       })
       .when('/zusatzabotypen/:id', {
-        templateUrl: 'scripts/abotypen/detail/zusatzabotypendetail.html',
-        controller: 'ZusatzabotypenDetailController',
+        templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
+        controller: 'AbotypenDetailController',
         name: 'ZusatzabotypenDetail',
         access: userRoles.Administrator
       })

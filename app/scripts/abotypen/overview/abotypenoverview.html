@@ -1,9 +1,9 @@
-<div class="row" ng-controller=AbotypenOverviewController>
+<div class="row" ng-controller = AbotypenOverviewController>
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h3 class="panel-title"><span class="navbar-brand" translate>Abotypen</span>
+          <h3 class="panel-title"><span class="navbar-brand" translate>Abotypen</span>
         <span class="pull-right">
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
@@ -56,12 +56,12 @@
   </div>
 </div>
 
-<div class="row" ng-controller=ZusatzabotypenOverviewController>
+<div class="row" ng-controller = ZusatzabotypenOverviewController>
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h3 class="panel-title"><span class="navbar-brand" translate>Zusatzabotypen</span>
+          <h3 class="panel-title"><span class="navbar-brand" translate>Zusatzabotypen {{mode}}</span>
         <span class="pull-right">
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
@@ -86,7 +86,7 @@
                 <input type="checkbox" ng-model="checkboxes.items[zusatzabotyp.id]" />
               </td>
               <td>
-                <span class="color-box" ng-style="style(abotyp)"></span>
+                <span class="color-box" ng-style="style(zusatzabotyp)"></span>
               </td>
               <td data-title="'Name'|translate" sortable="'name'">
                 <a ng-href="#/zusatzabotypen/{{zusatzabotyp.id}}">{{zusatzabotyp.name}}</a>
