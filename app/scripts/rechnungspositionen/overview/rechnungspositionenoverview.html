@@ -73,10 +73,7 @@
   <div id="selectedRechnungsPositionDetail" class="context content-box col-md-3" ng-show="selectedRechnungsPosition">
     <oo-rechnungs-position-detail rechnungs-position="selectedRechnungsPosition" ng-if="selectedRechnungsPosition"></oo-rechnungs-position-detail>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateRechnungReport">
-    <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
-  </div>
-  <div class="content-box col-md-3" ng-if="showGenerateMahnungReport">
-    <oo-generate-report on-close="closeMahnungBericht" on-generated="closeMahnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/mahnungen'" ids="checkboxes.ids" default-file-name="'Mahnung.ods'"></oo-generate-report>
+  <div class="context content-box col-md-3" ng-if="showCreateRechnungenDialog">
+    <oo-rechnungs-positionen-overview-create-rechnungen on-close="closeCreateRechnungenDialog" rechnungs-positionen="checkboxes.checkedItems"></oo-rechnungs-positionen-overview-create-rechnungen>
   </div>
 </div>
