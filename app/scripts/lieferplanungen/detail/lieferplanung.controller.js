@@ -905,6 +905,12 @@ angular.module('openolitor-admin')
         }
       });
 
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferplanung' && msg.data.id === $scope.planung.id) {
+          $location.url('/lieferplanung');
+         }
+      });
+
       load();
     }
   ]);
