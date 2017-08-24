@@ -219,19 +219,19 @@
                 <tr>
                   <th>#</th>
                   <th tanslate>Nr.</th>
-                  <th tanslate>Titel</th>
+                  <th tanslate>Beschrieb</th>
                   <th tanslate>Betrag</th>
                   <th tanslate>Typ</th>
                 </tr>
-                <tr ng-repeat="position in rechnung.rechnungsPositionen | orderBy: 'sorting'">
+                <tr ng-repeat="position in rechnung.rechnungsPositionen | orderBy: 'sort'">
                   <td>
-                    {{position.sorting}}
+                    {{position.sort}}
                   </td>
                   <td>
                     <a ng-href="#/rechnungspositionen?q=id%3D{{position.id}}">{{position.id}}</a>
                   </td>
                   <td>
-                    {{position.titel}}
+                    {{position.beschrieb}}
                   </td>
                   <td>
                     {{position.betrag || ooCHF}}
