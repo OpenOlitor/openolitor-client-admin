@@ -152,6 +152,7 @@ angular
     OFFEN: gettext('Offen'),
     ZUGEWIESEN: gettext('Zugewiesen'),
     BEZAHLT: gettext('Bezahlt'),
+    STORNIERT: gettext('Storniert'),
   })
   .constant('KORBSTATUS', {
     WIRDGELIEFERT: gettext('WirdGeliefert'),
