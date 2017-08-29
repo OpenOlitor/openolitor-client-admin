@@ -7,7 +7,8 @@ angular.module('openolitor-admin').directive('ooAbosOverviewCreateRechnungsPosit
       replace: true,
       scope: {
         aboIds: '=',
-        onClose: '&'
+        onClose: '&',
+        filterQuery: '='
       },
       transclude: false,
       templateUrl: 'scripts/abos/overview/abosoverviewcreaterechnungspositionen.html',
