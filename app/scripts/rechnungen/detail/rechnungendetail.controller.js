@@ -40,22 +40,25 @@ angular.module('openolitor-admin')
         };
       }
 
-      function resolveKunde(id) {
+      function resolveKunde(id, fillRechnungsAdresse) {
         return KundenDetailModel.get({
           id: id
         }, function(kunde) {
           $scope.kunde = kunde;
           $scope.rechnung.kundeId = kunde.id;
           $scope.rechnung.bezeichnung = kunde.bezeichnung;
-          $scope.rechnung.strasse = kunde.strasse;
-          $scope.rechnung.hausNummer = kunde.hausNummer;
-          $scope.rechnung.adressZusatz = kunde.adressZusatz;
-          $scope.rechnung.plz = kunde.plz;
-          $scope.rechnung.ort = kunde.ort;
+          if(fillRechnungsAdresse) {
+            $scope.rechnung.strasse = kunde.strasse;
+            $scope.rechnung.hausNummer = kunde.hausNummer;
+            $scope.rechnung.adressZusatz = kunde.adressZusatz;
+            $scope.rechnung.plz = kunde.plz;
+            $scope.rechnung.ort = kunde.ort;
+          }
 
           $scope.abos = kunde.abos.map(getAboEntry);
         }).$promise;
       }
+
 
       $scope.getKunden = function(filter) {
         if ($scope.loading) {
@@ -77,7 +80,7 @@ angular.module('openolitor-admin')
 
       $scope.loadKunde = function(selected) {
         if(selected && selected.id) {
-          resolveKunde(selected.id);
+          resolveKunde(selected.id, true);
         }
       };
 
@@ -86,7 +89,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.rechnung = result;
-          resolveKunde(result.kunde.id);
+          resolveKunde(result.kunde.id, false);
           $scope.aboId = result.abo.id;
           $scope.rechnung.aboId = result.abo.id;
         });
@@ -101,7 +104,7 @@ angular.module('openolitor-admin')
       if (!$routeParams.kundeId) {
         $scope.kunde = undefined;
       } else {
-        resolveKunde($routeParams.kundeId).then(function() {
+        resolveKunde($routeParams.kundeId,true).then(function() {
           if ($routeParams.aboId) {
             $scope.aboId = parseInt($routeParams.aboId);
             $scope.rechnung.aboId = $scope.aboId;
@@ -116,7 +119,7 @@ angular.module('openolitor-admin')
       };
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
-        if (msg.entity === 'Rechnung') {
+        if (msg.entity === 'Rechnung' && msg.data.id === $scope.rechnung.id) {
           DataUtil.update(msg.data, $scope.rechnung);
           $rootScope.$apply();
         }
@@ -165,8 +168,13 @@ angular.module('openolitor-admin')
 
       $scope.canEdit = function() {
         return !$scope.isExisting() ||
-          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
-          $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
+      };
+
+      $scope.canEditBetrag = function() {
+        return !$scope.isExisting() ||
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT &&
+          $scope.rechnung.rechnungsPositionen === 0;
       };
 
       $scope.downloadRechnung = function() {
