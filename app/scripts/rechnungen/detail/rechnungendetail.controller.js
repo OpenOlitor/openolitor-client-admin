@@ -168,8 +168,13 @@ angular.module('openolitor-admin')
 
       $scope.canEdit = function() {
         return !$scope.isExisting() ||
-          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
-          $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
+      };
+
+      $scope.canEditBetrag = function() {
+        return !$scope.isExisting() ||
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT &&
+          $scope.rechnung.rechnungsPositionen === 0;
       };
 
       $scope.downloadRechnung = function() {
