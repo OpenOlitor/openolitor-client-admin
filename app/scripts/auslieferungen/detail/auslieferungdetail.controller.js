@@ -7,10 +7,10 @@ angular.module('openolitor-admin')
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'VorlagenService', 'localeSensitiveComparator',
+    'VorlagenService', 'localeSensitiveComparator', 'gettext',
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator) {
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext) {
 
       $scope.loading = false;
       $scope.model = {};
@@ -47,7 +47,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.actions = [{
-        label: 'speichern',
+        label: gettext('speichern'),
         iconClass: 'fa fa-disc',
         onExecute: function() {
           return $scope.model.$save();
@@ -56,7 +56,7 @@ angular.module('openolitor-admin')
           return detailModel !== TourAuslieferungenModel;
         }
       }, {
-        label: 'Lieferschein drucken',
+        label: gettext('Lieferschein drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferschein';
@@ -65,7 +65,7 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: 'Lieferetiketten drucken',
+        label: gettext('Lieferetiketten drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferetiketten';
@@ -74,7 +74,7 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: 'Korbübersicht drucken',
+        label: gettext('Korbübersicht drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'korbuebersicht';
@@ -83,7 +83,7 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: 'als ausgeliefert markieren',
+        label: gettext('als ausgeliefert markieren'),
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
           return detailModel.ausliefern({id: $routeParams.id});

@@ -5,7 +5,7 @@
     <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
       <div class="panel panel-default">
         <div class="panel-heading clearfix abotypHeader" ng-style="abotypStyle" >
-          <h3 class="panel-title"><span class=" navbar-brand">{{'Abotyp ' + abotyp.name || 'Abotyp'|translate}}</span>
+          <h3 class="panel-title"><span class=" navbar-brand">{{('Abotyp' |translate) + ' ' + abotyp.name || ('Abotyp'|translate)}}</span>
             <div class="btn-group pull-right" role="group">
               <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
               <oo-delete-button ng-if="abotyp.anzahlAbonnenten === 0" model="abotyp" entity="Abotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>

@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
     'ProduzentenModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'FilterQueryUtil',
+    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'FilterQueryUtil', 'gettext',
     function($q, $scope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, FilterQueryUtil) {
+      OverviewCheckboxUtil, $location, VorlagenService, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -109,7 +109,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Produzent erstellen';
+          return gettext('Produzent erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -117,7 +117,7 @@ angular.module('openolitor-admin')
           return $location.path('/produzenten/new');
         }
       }, {
-        label: 'Produzentenbrief',
+        label: gettext('Produzentenbrief'),
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {

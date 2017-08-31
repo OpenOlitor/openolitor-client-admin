@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
     'ENV', 'VERSION', 'cssInjector', 'API_URL',
-    'ooAuthService', '$cookies',
+    'ooAuthService', '$cookies', 'moment',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
       $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL,
-      ooAuthService, $cookies) {
+      ooAuthService, $cookies, moment) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
@@ -91,6 +91,7 @@ angular.module('openolitor-admin')
           });
           $scope.storeActiveLang(lang);
           $scope.$emit('languageChanged');
+          moment.locale(lang);
         }
       };
 

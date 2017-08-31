@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('DepotsDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'DepotsDetailModel',
+    '$location', 'gettext', 'DepotsDetailModel', 'gettextCatalog',
     function($scope, $filter, $routeParams, $location, gettext,
-      DepotsDetailModel) {
+      DepotsDetailModel, gettextCatalog) {
 
       var defaults = {
         model: {
@@ -39,7 +39,7 @@ angular.module('openolitor-admin')
 
       $scope.fullName = function() {
         if ($scope.depot && $scope.depot.name) {
-          return 'Depot: ' + $scope.depot.name;
+          return gettextCatalog.getString('Depot:') + ' ' + $scope.depot.name;
         }
         return undefined;
       };

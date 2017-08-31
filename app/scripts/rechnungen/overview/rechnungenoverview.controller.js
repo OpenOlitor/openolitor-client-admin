@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
+    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
-      localeSensitiveComparator) {
+      localeSensitiveComparator, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -102,7 +102,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Rechnung erstellen';
+          return gettext('Rechnung erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -110,7 +110,7 @@ angular.module('openolitor-admin')
           return $location.path('/rechnungen/new');
         }
       }, {
-        label: 'Rechnungsdokumente erstellen',
+        label: gettext('Rechnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateRechnungReport = true;
@@ -122,7 +122,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Mahnungsdokumente erstellen',
+        label: gettext('Mahnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateMahnungReport = true;
@@ -134,7 +134,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Rechnungsdokumente herunterladen',
+        label: gettext('Rechnungsdokumente herunterladen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
@@ -147,7 +147,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Mahnungsdokumente herunterladen',
+        label: gettext('Mahnungsdokumente herunterladen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
@@ -160,7 +160,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Rechnungen verschickt',
+        label: gettext('Rechnungen verschickt'),
         iconClass: 'fa fa-exchange',
         onExecute: function() {
           return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
@@ -173,7 +173,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Kundenliste anzeigen',
+        label: gettext('Kundenliste anzeigen'),
         iconClass: 'fa fa-user',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
@@ -186,7 +186,7 @@ angular.module('openolitor-admin')
           $location.path('/kunden').search('q', 'id=' + result.join());
         }
       }, {
-        label: 'Email Versand*',
+        label: gettext('Email Versand*'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
           return false;
@@ -195,7 +195,7 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: 'Rechnungen löschen',
+        label: gettext('Rechnungen löschen'),
         iconClass: 'fa fa-times',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;

@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
-    'VorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil',
+    'VorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
     function($q, $scope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
       AUSLIEFERUNGSTATUS, msgBus, VorlagenService, localeSensitiveComparator,
-      $location, FilterQueryUtil) {
+      $location, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -100,7 +100,7 @@ angular.module('openolitor-admin')
       }, true);
 
       $scope.actions = [{
-        label: 'Lieferschein drucken',
+        label: gettext('Lieferschein drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferschein';
@@ -112,7 +112,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Lieferetiketten drucken',
+        label: gettext('Lieferetiketten drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferetiketten';
@@ -124,7 +124,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Korbübersicht drucken',
+        label: gettext('Korbübersicht drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'korbuebersicht';
@@ -136,7 +136,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Als ausgeliefert markieren',
+        label: gettext('Als ausgeliefert markieren'),
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
           return overviewModel.ausliefern($scope.checkboxes.ids);

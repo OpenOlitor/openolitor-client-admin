@@ -118,8 +118,8 @@ angular
     MONATE: gettext('Monate')
   })
   .constant('FRISTEINHEITEN', {
-    MONATE: 'Monate',
-    WOCHEN: 'Wochen'
+    MONATE: gettext('Monate'),
+    WOCHEN: gettext('Wochen')
   })
   .constant('ANREDE', {
     KEINE: addExtendedEnumValue(undefined, gettext('Keine'), gettext('-')),
