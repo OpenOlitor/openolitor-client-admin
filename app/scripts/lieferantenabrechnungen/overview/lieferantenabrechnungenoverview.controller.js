@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     '$location', 'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
-    'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService',
+    'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService', 'gettext',
     function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
-      VorlagenService) {
+      VorlagenService, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -130,7 +130,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'abrechnen';
+          return gettext('abrechnen');
         },
         iconClass: 'fa fa-calculator',
         onExecute: function() {
@@ -144,7 +144,7 @@ angular.module('openolitor-admin')
         }
       },
       {
-        label: 'Lieferantenbericht',
+        label: gettext('Lieferantenbericht'),
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {

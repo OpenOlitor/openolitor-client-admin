@@ -6,8 +6,8 @@
         <div class="col-md-12">
           <div class="row form-group">
             <h3>
-              <div class="col-md-4" translate>
-                Rechnung
+              <div class="col-md-4">
+                {{'Rechnung'|translate}}
                 <span role="button" ng-if="rechnung.fileStoreId">
                   <i ng-hide="isDownloading" ng-click="downloadRechnung()" class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   <i ng-show="isDownloading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
@@ -19,7 +19,7 @@
               </div>
               <div class="col-md-8">
                 <div class="btn-group pull-right" role="group">
-                  <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions" on-created="created">{{rechnungBezeichnung() || 'Rechnung'|translate}}</oo-actions-button>
+                  <oo-actions-button model="rechnung" form="rechnungForm" entity="Rechnung" actions="actions" on-created="created">{{('Rechnung'|translate)}}</oo-actions-button>
                   <oo-delete-button ng-if="isDeletable()" model="rechnung" entity="Rechnung" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>

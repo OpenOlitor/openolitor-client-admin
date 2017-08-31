@@ -9,14 +9,14 @@ angular.module('openolitor-admin')
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'NgTableParams',
+    'API_URL', 'alertService', 'NgTableParams', 'gettextCatalog',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
-      alertService, NgTableParams) {
+      alertService, NgTableParams, gettextCatalog) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {

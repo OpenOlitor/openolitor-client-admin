@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('DepotsOverviewController', ['$scope', '$filter',
     'DepotsOverviewModel', 'NgTableParams', 'OverviewCheckboxUtil',
-    'VorlagenService', '$location', 'lodash', 'EmailUtil',
+    'VorlagenService', '$location', 'lodash', 'EmailUtil', 'gettext',
     function($scope, $filter, DepotsOverviewModel, NgTableParams,
-      OverviewCheckboxUtil, VorlagenService, $location, _, EmailUtil) {
+      OverviewCheckboxUtil, VorlagenService, $location, _, EmailUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -55,7 +55,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Depot erstellen';
+          return gettext('Depot erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -63,7 +63,7 @@ angular.module('openolitor-admin')
           return $location.path('/depots/new');
         }
       }, {
-        label: 'Depotbrief erstellen',
+        label: gettext('Depotbrief erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
@@ -73,7 +73,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Email an Kunden versenden',
+        label: gettext('Email an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {

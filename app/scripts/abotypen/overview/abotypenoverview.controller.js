@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('AbotypenOverviewController', ['$scope', '$filter',
-    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil',
-    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil) {
+    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil', 'gettext',
+    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -81,7 +81,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Abotyp erstellen';
+          return gettext('Abotyp erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -89,7 +89,7 @@ angular.module('openolitor-admin')
           return $location.path('/abotypen/new');
         }
       }, {
-        label: 'Email an Kunden versenden',
+        label: gettext('Email an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
