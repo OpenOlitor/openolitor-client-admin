@@ -119,26 +119,13 @@ angular.module('openolitor-admin')
         });
       }
 
-      if ($scope.mode==='abotypen'){
-          $scope.style = function(abotyp) {
-              console.log('Mikel scope mode   -------->' + $scope.mode)
-              if (abotyp.farbCode) {
-                  return {
-                      'background-color': abotyp.farbCode
-                  };
-              }
-          };
-      }
-      else {
-          $scope.style = function(abotyp) {
-              console.log('Mikel scope mode   -------->' + $scope.mode)
-              if (abotyp.farbCode) {
-                  return {
-                      'background-color': abotyp.farbCode
-                  };
-              }
-          };
-      }
+        $scope.style = function(abotyp) {
+            if (abotyp.farbCode) {
+                return {
+                    'background-color': abotyp.farbCode
+                };
+            }
+        };
 
       var existingQuery = $location.search().q;
       if (existingQuery) {

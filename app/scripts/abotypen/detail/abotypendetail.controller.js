@@ -57,15 +57,12 @@ angular.module('openolitor-admin')
 
       if (!$routeParams.id) {
         if ($scope.getModel()=== 'abotypen'){
-            console.log('Mikel  --------> ' + $location.path() + 'with getModel= ' + $scope.getModel() +'----------> abotypen')
             $scope.abotyp = new AbotypenDetailModel(defaults.model);
         }else{
-            console.log('Mikel  --------> ' + $location.path()  + 'with getModel= ' + $scope.getModel() + '----------> zusatzabotypen')
-            $scope.abotyp = new ZusatzabotypenDetailModel(defaults.model);
+            $scope.zusatzabotyp = new ZusatzabotypenDetailModel(defaults.model);
         }
       } else {
         if ($scope.getModel() === 'abotypen'){
-            console.log('Mikel  --------> ' + $location.path()  + 'with getModel= ' + $scope.getModel()+ '----------> routeParams.id defined for abotypen')
             AbotypenDetailModel.get({
                 id: $routeParams.id
             }, function(result) {
@@ -78,17 +75,16 @@ angular.module('openolitor-admin')
                 msgBus.emitMsg(msg);
             });
         }else{
-            console.log('Mikel  --------> ' + $location.path()  + 'with getModel= ' + $scope.getModel()+ '----------> routeParams.id defined for abotypen')
-            AbotypenDetailModel.get(+ '----------> routeParams.id defined for zusatzabotypen')
             ZusatzabotypenDetailModel.get({
                 id: $routeParams.id
             }, function(result) {
-                $scope.abotyp = result;
+                $scope.zusatzabotyp = result;
 
                 var msg = {
                     type: 'ZusatzabotypLoaded',
-                    abotyp: $scope.abotyp
+                    zusatzabotyp: $scope.zusatzabotyp
                 };
+                msgBus.emitMsg(msg);
             }
             );
         }
@@ -96,15 +92,18 @@ angular.module('openolitor-admin')
 
       $scope.$watch('abotyp.farbCode', function(newValue) {
         if (newValue) {
-          $scope.abotypStyle = {
-            'background-color': $scope.abotyp.farbCode
-          };
+            $scope.abotypStyle = {
+                'background-color': $scope.abotyp.farbCode
+            };
         }
       });
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.abotyp) && angular.isDefined($scope
-          .abotyp.id);
+        if ($scope.getModel() === 'abotypen'){
+            return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id);
+        } else {
+            return angular.isDefined($scope.zusatzabotyp) && angular.isDefined($scope.zusatzabotyp.id);
+        }
       };
 
       $scope.isVertriebExisting = function() {
@@ -113,7 +112,11 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.abotyp.$save();
+        if ($scope.getModel() === 'abotypen'){
+            return $scope.abotyp.$save();
+        }else{
+            return $scope.zusatzabotyp.$save();
+        }
       };
 
       $scope.backToList = function() {
@@ -127,13 +130,19 @@ angular.module('openolitor-admin')
       $scope.created = function(id) {
         if ($scope.getModel() === 'abotypen'){
             $location.path('/abotypen/' + id);
+            console.log("Mikel --------------> abotypen");
         }else{
             $location.path('/zusatzabotypen/' + id);
-      }
+            console.log("Mikel --------------> zusatzabotypen");
+        }
       };
 
       $scope.delete = function() {
-        return $scope.abotyp.$delete();
+        if ($scope.getModel() === 'abotypen'){
+            return $scope.abotyp.$delete();
+        }else{
+            return $scope.zusatzabotyp.$delete();
+        }
       };
 
       msgBus.onMsg('VertriebSelected', $scope, function(event, msg) {
