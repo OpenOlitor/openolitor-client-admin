@@ -4,11 +4,11 @@
  */
 angular.module('openolitor-admin')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel', 'msgBus',
+    '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel','ZusatzabotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',
     'EnumUtil',
     function($scope, $filter, $routeParams, $location, gettext, NgTableParams,
-      AbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
+      AbotypenDetailModel, ZusatzabotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {
 
@@ -26,6 +26,11 @@ angular.module('openolitor-admin')
           aktiv: 1
         }
       };
+
+      $scope.getModel  = function(){
+        return $location.path().split('/')[1]
+      }
+
       $scope.unbeschraenkt = LAUFZEITEINHEITEN.UNBESCHRAENKT;
       $scope.selectedVertrieb = undefined;
 
@@ -51,32 +56,54 @@ angular.module('openolitor-admin')
       $scope.abotypStyle = {};
 
       if (!$routeParams.id) {
-        $scope.abotyp = new AbotypenDetailModel(defaults.model);
+        if ($scope.getModel()=== 'abotypen'){
+            $scope.abotyp = new AbotypenDetailModel(defaults.model);
+        }else{
+            $scope.zusatzabotyp = new ZusatzabotypenDetailModel(defaults.model);
+        }
       } else {
-        AbotypenDetailModel.get({
-          id: $routeParams.id
-        }, function(result) {
-          $scope.abotyp = result;
+        if ($scope.getModel() === 'abotypen'){
+            AbotypenDetailModel.get({
+                id: $routeParams.id
+            }, function(result) {
+                $scope.abotyp = result;
 
-          var msg = {
-            type: 'AbotypLoaded',
-            abotyp: $scope.abotyp
-          };
-          msgBus.emitMsg(msg);
-        });
+                var msg = {
+                    type: 'AbotypLoaded',
+                    abotyp: $scope.abotyp
+                };
+                msgBus.emitMsg(msg);
+            });
+        }else{
+            ZusatzabotypenDetailModel.get({
+                id: $routeParams.id
+            }, function(result) {
+                $scope.zusatzabotyp = result;
+
+                var msg = {
+                    type: 'ZusatzabotypLoaded',
+                    zusatzabotyp: $scope.zusatzabotyp
+                };
+                msgBus.emitMsg(msg);
+            }
+            );
+        }
       }
 
       $scope.$watch('abotyp.farbCode', function(newValue) {
         if (newValue) {
-          $scope.abotypStyle = {
-            'background-color': $scope.abotyp.farbCode
-          };
+            $scope.abotypStyle = {
+                'background-color': $scope.abotyp.farbCode
+            };
         }
       });
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.abotyp) && angular.isDefined($scope
-          .abotyp.id);
+        if ($scope.getModel() === 'abotypen'){
+            return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id);
+        } else {
+            return angular.isDefined($scope.zusatzabotyp) && angular.isDefined($scope.zusatzabotyp.id);
+        }
       };
 
       $scope.isVertriebExisting = function() {
@@ -85,19 +112,35 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.abotyp.$save();
+        if ($scope.getModel() === 'abotypen'){
+            return $scope.abotyp.$save();
+        }else{
+            return $scope.zusatzabotyp.$save();
+        }
       };
 
       $scope.backToList = function() {
-        $location.path('/abotypen');
+        if ($scope.getModel() === 'abotypen'){
+            $location.path('/abotypen');
+        }else{
+            $location.path('/zusatzabotypen');
+        }
       };
 
       $scope.created = function(id) {
-        $location.path('/abotypen/' + id);
+        if ($scope.getModel() === 'abotypen'){
+            $location.path('/abotypen/' + id);
+        }else{
+            $location.path('/zusatzabotypen/' + id);
+        }
       };
 
       $scope.delete = function() {
-        return $scope.abotyp.$delete();
+        if ($scope.getModel() === 'abotypen'){
+            return $scope.abotyp.$delete();
+        }else{
+            return $scope.zusatzabotyp.$delete();
+        }
       };
 
       msgBus.onMsg('VertriebSelected', $scope, function(event, msg) {
