@@ -118,8 +118,8 @@ angular
     MONATE: gettext('Monate')
   })
   .constant('FRISTEINHEITEN', {
-    MONATE: 'Monate',
-    WOCHEN: 'Wochen'
+    MONATE: gettext('Monate'),
+    WOCHEN: gettext('Wochen')
   })
   .constant('ANREDE', {
     KEINE: addExtendedEnumValue(undefined, gettext('Keine'), gettext('-')),
@@ -150,7 +150,9 @@ angular
   })
   .constant('RECHNUNGSPOSITIONSSTATUS', {
     OFFEN: gettext('Offen'),
+    ZUGEWIESEN: gettext('Zugewiesen'),
     BEZAHLT: gettext('Bezahlt'),
+    STORNIERT: gettext('Storniert'),
   })
   .constant('KORBSTATUS', {
     WIRDGELIEFERT: gettext('WirdGeliefert'),

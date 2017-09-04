@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$filter',
-    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator',
-    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator) {
+    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog',
+    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -18,7 +18,7 @@ angular.module('openolitor-admin')
       angular.forEach(PENDENZSTATUS, function(value, key) {
         $scope.statusL.push({
           'id': key,
-          'title': value
+          'title': gettextCatalog.getString(value)
         });
       });
 

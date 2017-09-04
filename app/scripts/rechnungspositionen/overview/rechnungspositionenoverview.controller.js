@@ -35,10 +35,29 @@ angular.module('openolitor-admin')
         checked: false,
         checkedAny: false,
         items: {},
+        checkedItems: [],
         css: '',
         ids: []
       };
-        
+       
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageRechnung');
+      };
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
+ 
       $scope.selectRechnungsPosition = function(rechnungsPosition, itemId) {
         var firstRow = angular.element('#rechnungsPositionenTable tbody tr').first();
         var allButtons = angular.element('#rechnungsPositionenTable button');
@@ -49,9 +68,8 @@ angular.module('openolitor-admin')
           $scope.selectedRechnungsPosition = undefined;
         } else {
           $scope.selectedRechnungsPosition = rechnungsPosition;
-            
+
           var button = angular.element('#' + itemId);
-          console.log("button: ", button);
           button.addClass('btn-warning');
           button.addClass('active');
           var offset = button.offset().top - firstRow.offset().top + 154;
@@ -59,7 +77,21 @@ angular.module('openolitor-admin')
         }
       };
  
+      $scope.closeCreateRechnungenDialog = function() {
+        $scope.showCreateRechnungenDialog = false;
+      };
+
       $scope.actions = [{
+        label: 'Rechnungen erstellen',
+        iconClass: 'glyphicon glyphicon-plus',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          $scope.showCreateRechnungenDialog = true;
+          return true;
+        }
+      }, {
         label: 'Rechnungsposition löschen',
         iconClass: 'fa fa-times',
         isDisabled: function() {
@@ -144,6 +176,29 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'RechnungsPosition') {
+          var removed = lodash.remove($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (removed !== []) {
+            $scope.tableParams.reload();
 
+            $scope.$apply();
+          }
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity == 'RechnungsPosition') {
+          $scope.entries.map(function(entry) {
+            if(entry.id === msg.data.id) {
+              angular.copy(msg.data, entry);
+            }
+          });
+          $scope.$apply();
+        }
+      });
+      
     }
   ]);

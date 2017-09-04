@@ -52,7 +52,7 @@
                 <span ng-if="rechnung.einbezahlterBetrag">{{rechnung.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
               </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungStati">
-                {{rechnung.status}}
+                {{rechnung.status|translate}}
               </td>
               <td data-title="'Rechnungsdatum'|translate" sortable="'rechnungsDatum'">
                 {{rechnung.rechnungsDatum | date}}

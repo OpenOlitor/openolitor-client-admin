@@ -4,22 +4,26 @@
       <div class="content content-box col-md-9">
         <div oo-error-overlay></div>
         <div class="col-md-12">
-          <div class="row form-group">
-            <h3>
-              <div class="col-md-2" translate>
+          <div class="row">
+            <h3 class="row">
+              <div class="col-md-4" translate>
                 Kunde
               </div>
-              <div class="col-md-2">
-                 <small><label for="typen" translate>Kundentyp</label></small>
-              </div>
               <div class="col-md-8">
-                <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
                 <div class="btn-group pull-right" role="group">
                   <oo-actions-button model="kunde" form="kundeForm" entity="Kunde" actions="actions" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-actions-button>
                   <oo-delete-button ng-if="canDelete()" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
             </h3>
+            <div class="row">
+              <div class="col-md-2">
+                 <small><label for="typen" translate>Kundentypen</label></small>
+              </div>
+              <div class="col-md-10">
+                <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -89,7 +93,7 @@
                 </div>
               </div>
               <div class="panel-footer">
-                {{'Erstellt: '|translate}}{{kunde.erstelldat | fromNow}} / {{'Bearbeitet: '|translate}}{{kunde.modifidat | fromNow}}
+                {{'Erstellt:'|translate}} {{kunde.erstelldat | fromNow}} / {{'Bearbeitet:'|translate}} {{kunde.modifidat | fromNow}}
               </div>
             </div>
 
@@ -284,7 +288,7 @@
                 </div>
               </div>
               <div class="panel-footer">
-                {{'Erstellt: '|translate}}{{person.erstelldat | fromNow}}
+                {{'Erstellt:'|translate}} {{person.erstelldat | fromNow}}
               </div>
             </div>
             <div class="pull-right">
@@ -372,13 +376,13 @@
         <div class="panel-body">
           <table class="table table-striped table-condensed">
             <tr>
-              <th tanslate>Nr.</th>
-              <th tanslate>Titel</th>
-              <th tanslate>Betrag</th>
-              <th tanslate>Rechnungsdatum</th>
-              <th tanslate>Faelligkeitsdatum</th>
-              <th tanslate>Status</th>
-              <th tanslate>Eingang am</th>
+              <th translate>Nr.</th>
+              <th translate>Titel</th>
+              <th translate>Betrag</th>
+              <th translate>Rechnungsdatum</th>
+              <th translate>Faelligkeitsdatum</th>
+              <th translate>Status</th>
+              <th translate>Eingang am</th>
               <th> </th>
             </tr>
             <tr ng-repeat="rechnung in rechnungen">

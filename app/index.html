@@ -84,7 +84,7 @@
       <li activate-id="auslieferungen" ng-show="menushow['auslieferungen']"><a id="nav-postauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferungen')}]" href="" ng-href="#/postauslieferungen"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a></li>
       <li><a id="nav-buchhaltung" class="nav-item" ng-click="menushow['buchhaltung'] = !menushow['buchhaltung']"><span><i class="fa fa-usd"></i> <span translate>Buchhaltung</span></span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
-      <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungspositionen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungspositionen')}]" href="" ng-href="#/rechnungspositionen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungspositionen</span></a></li>
+      <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-rechnungspositionen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungspositionen')}]" href="" ng-href="#/rechnungspositionen"><i class="fa fa-list"></i> <span translate>Rechnungspositionen</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
       <li activate-id="buchhaltung" ng-show="menushow['buchhaltung']"><a id="nav-einkauf" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkauf')}]" href="" ng-href="#/einkauf"><i class="fa fa-shopping-bag"></i> <span translate>Einkauf*</span></a></li>
       <li><a id="nav-stammdaten" class="nav-item" ng-click="menushow['stammdaten'] = !menushow['stammdaten']"><span><i class="fa fa-database"></i> <span translate>Stammdaten</span></span></a></li>
@@ -180,7 +180,7 @@
   <!-- endbuild -->
 
   <!-- language specific angular file -->
-  <script src="https://code.angularjs.org/1.4.9/i18n/angular-locale_de-ch.js"></script>
+  <script src="/bower_components/angular-i18n/angular-locale_de-ch.js"></script>
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
@@ -284,6 +284,9 @@
 
   <script src="scripts/rechnungspositionen/overview/rechnungspositionenoverview.model.js"></script>
   <script src="scripts/rechnungspositionen/overview/rechnungspositionenoverview.controller.js"></script>
+  <script src="scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.controller.js"></script>
+  <script src="scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.directive.js"></script>
+
   <script src="scripts/rechnungspositionen/detail/rechnungspositionendetail.directive.js"></script>
   <script src="scripts/rechnungspositionen/detail/rechnungspositionendetail.controller.js"></script>
 

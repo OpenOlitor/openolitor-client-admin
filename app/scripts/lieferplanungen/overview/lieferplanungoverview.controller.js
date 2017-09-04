@@ -6,10 +6,10 @@ angular.module('openolitor-admin')
   .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
     'LieferplanungModel', 'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil',
-    'msgBus', '$location', 'localeSensitiveComparator',
+    'msgBus', '$location', 'localeSensitiveComparator', 'gettext',
     function($q, $scope, $filter, LieferplanungModel, NgTableParams,
       FilterQueryUtil, OverviewCheckboxUtil,
-      msgBus, $location, localeSensitiveComparator) {
+      msgBus, $location, localeSensitiveComparator, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -96,7 +96,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
           labelFunction: function() {
-            return 'Neue Lieferplanung generieren';
+            return gettext('Neue Lieferplanung generieren');
           },
           iconClass: 'glyphicon glyphicon-plus',
           onExecute: function() {

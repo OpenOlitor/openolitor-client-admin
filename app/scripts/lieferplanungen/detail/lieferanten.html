@@ -52,7 +52,7 @@
                 <tbody>
                   <tr ng-repeat="position in lieferung.positionen | toArray | orderBy:'produktBeschrieb'" ng-if="position.anzahl > 0">
                     <td>
-                      {{position.anzahl}} ×
+                      {{position.anzahl}}&nbsp;×
                     </td>
                     <td>
                       {{position.menge | number:2}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}
@@ -104,8 +104,10 @@
                   </tr>
                   <tr>
                     <td colspan="4"></td>
-                    <td colspan="2" translate>
-                        Total (abz. Adminanteil<span ng-if="produzentIstBesteuert(sammelbestellung.produzentId)" translate>, inkl. MWST</span>)
+                    <td colspan="2">
+                        <span translate>Total</span>
+                        <span ng-if="produzentIstBesteuert(sammelbestellung.produzentId)" translate> (abz. Adminanteil, inkl. MWST)</span>
+                        <span ng-if="!produzentIstBesteuert(sammelbestellung.produzentId)" translate> (abz. Adminanteil)</span>
                     </td>
                     <td>
                       {{bestellung.totalSteuer | ooCHF}}
