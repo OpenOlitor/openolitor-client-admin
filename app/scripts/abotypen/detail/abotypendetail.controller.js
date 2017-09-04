@@ -130,10 +130,8 @@ angular.module('openolitor-admin')
       $scope.created = function(id) {
         if ($scope.getModel() === 'abotypen'){
             $location.path('/abotypen/' + id);
-            console.log("Mikel --------------> abotypen");
         }else{
             $location.path('/zusatzabotypen/' + id);
-            console.log("Mikel --------------> zusatzabotypen");
         }
       };
 
