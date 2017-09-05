@@ -208,6 +208,10 @@ angular.module('openolitor-admin')
         onExecute: function() {
           return $scope.rechnung.$save();
         },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.ERSTELLT;
+        },
         noEntityText: true
       }, {
         label: gettext('Rechnung verschickt'),
