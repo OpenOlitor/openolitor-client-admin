@@ -43,7 +43,7 @@
                 <a ng-href="#/abos?q=id%3D{{rechnungsPosition.aboId}}">{{rechnungsPosition.aboId}}</a>
               </td>
               <td data-title="'Beschrieb'|translate" sortable="'titel'">
-                <a ng-href="#/rechnungen/{{rechnungsPosition.beschrieb}}">{{rechnungsPosition.beschrieb}}</a>
+                {{rechnungsPosition.beschrieb}}
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{rechnungsPosition.waehrung}} {{rechnungsPosition.betrag}}
