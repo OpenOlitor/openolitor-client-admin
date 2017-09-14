@@ -29,6 +29,11 @@
               <td data-title="'Abotyp'|translate" sortable="'abotyp.name'">
                 {{korb.abotyp.name}}
               </td>
+              <td data-title="'Zusatzkorb'|translate" >
+                <span ng-repeat="zusatzkorb in korb.zusatzKoerbe" class="badge" ng-if="zusatzkorb.abo.vertriebBeschrieb !== ''">
+                  {{zusatzkorb.abo.vertriebBeschrieb}}
+                </span>
+              </td>
               <td data-title="'Kunde'|translate" sortable="'kunde.bezeichnung'">
                 {{korb.kunde.bezeichnung|date:"dd.MM.yyyy"}}
               </td>
