@@ -77,7 +77,6 @@ angular.module('openolitor-admin')
         } else {
           $scope.selectedAbo = abo;
         }
-
       };
 
       if (!$scope.tableParams) {

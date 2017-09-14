@@ -123,7 +123,19 @@
           </table>
         </div>
       </div>
+
+      <div class="row form-group">
+        <div class="col-md-8">
+          <label translate>Available zusatzabo</label>
+        </div>
+        <div class="col-md-4">
+          <span class="pull-right">
+                <oo-dropdown dropdown-id="zusatzaboTypDropdown" style="uib-dropdown" values="zusatzaboTyp" property="name" ng-required></oo-dropdown>
+          </span>
+        </div>
+      </div>
       <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>
     </form>
+              
   </div>
 </div>

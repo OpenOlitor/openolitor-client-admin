@@ -5,15 +5,14 @@
 angular.module('openolitor-admin')
   .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
-    'AbosDetailModel', 'AbotypenOverviewModel',
+    'AbosDetailModel','ZusatzabosDetailModel', 'AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
     'API_URL', 'alertService', 'NgTableParams', 'gettextCatalog',
 
-    function($scope, $filter, $routeParams, $location, $route, $uibModal,
-      $log, $http, gettext,
-      AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
+    function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
+      AbosDetailModel, ZusatzabosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
       alertService, NgTableParams, gettextCatalog) {
@@ -27,6 +26,13 @@ angular.module('openolitor-admin')
         model: {
           id: undefined,
           abotypId: undefined
+        }
+      };
+
+      var zusatzaboTypDefaults = {
+        model: {
+          id: undefined,
+          name: undefined
         }
       };
 
@@ -88,6 +94,13 @@ angular.module('openolitor-admin')
           });
         });
       };
+    
+      var loadZusatzaboDetail = function() {
+        ZusatzabosDetailModel.query({},
+            function(result){
+               $scope.zusatzaboTyp = result;
+        });
+      };
 
       var unwatchAboId = $scope.$watch('aboId', function(id) {
         if (id && (!$scope.abo || $scope.abo.id !== id)) {
@@ -109,10 +122,12 @@ angular.module('openolitor-admin')
           $scope.abo.kundeId = $scope.kunde.id;
           $scope.abo.kunde = $scope.kunde.bezeichnung;
           $scope.abo.start = moment().startOf('day').toDate();
+          $scope.zusatzaboTyp = new ZusatzabosDetailModel(zusatzaboTypDefaults.model);
         });
       } else {
         if (!$scope.abo) {
           loadAboDetail();
+          loadZusatzaboDetail();
         }
       }
 
@@ -427,6 +442,7 @@ angular.module('openolitor-admin')
             if (msg.data.vertriebId !== $scope.abo.vertriebId) {
               //vertrieb id changes, reload whole abo
               loadAboDetail();
+              loadZusatzaboDetail();
             }
 
             $scope.$apply();
