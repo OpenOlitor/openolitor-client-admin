@@ -18,6 +18,19 @@ angular.module('openolitor-admin')
           guthabenNeu: undefined,
           bemerkung: undefined
         }
+    },
+      zusatzabos: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          extendedPath: 'zusatzabos'
+        }
+      },
+      newZusatzabo: {
+        method: 'GET',
+        params: {
+          extendedPath: 'zusatzabos'
+        }
       }
     });
   });

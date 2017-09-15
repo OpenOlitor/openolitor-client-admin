@@ -130,12 +130,37 @@
         </div>
         <div class="col-md-4">
           <span class="pull-right">
-                <oo-dropdown dropdown-id="zusatzaboTypDropdown" style="uib-dropdown" values="zusatzaboTyp" property="name" ng-required></oo-dropdown>
+                <oo-dropdown dropdown-id="zusatzaboTypDropdown" display-style="uib-dropdown" values="zusatzaboTyp" selected-prop="id" property="name" selected-function="newZusatzabo()" required></oo-dropdown>
           </span>
         </div>
+        <div class="col-md-12">
+          <table ng-table="zusatzaboTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
+            <tr ng-repeat="zusatzabo in zusatzabos">
+              <td data-title="'Zusatzabo type name'|translate">
+                {{zusatzabo.abotypName}}
+              </td>
+              <td data-title="'Start Date'|translate">
+                {{zusatzabo.start|date:"EEE, dd.MM.yyyy"}}
+              </td>
+              <td><div class="pull-right">
+                  <a role="button" class="btn btn-sm btn-primary" ng-click="edit(zusatzabo)"><span class="glyphicon glyphicon-edit"></span></a>
+                </div>
+              </td>
+              <td><div class="pull-right">
+                  <oo-delete-button model="zusatzabo" entity="zusatzabo" on-delete="deleteZusatzabo" condensed="true" confirm="true"></oo-delete-button>
+                </div>
+              </td>
+              <td><div class="pull-right btn-group">
+                  <oo-save-button model="zusatzabo" form="zusatzaboForm" entity="zusatzabo" on-save="save" condensed="true"></oo-save-button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
       </div>
       <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>
     </form>
-              
+
   </div>
 </div>

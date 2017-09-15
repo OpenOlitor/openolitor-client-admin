@@ -559,6 +559,12 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
+      .when('/kunden/:kundeId/abos/:id/zusatzabos', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail',
+        access: userRoles.Administrator
+      })
       .when('/personen', {
         templateUrl: 'scripts/personen/overview/personenoverview.html',
         controller: 'PersonenOverviewController',
