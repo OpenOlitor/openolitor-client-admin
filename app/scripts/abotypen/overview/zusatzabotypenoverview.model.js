@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-.factory('ZusatzabotypenOverviewModel', function($resource, API_URL) {
+.factory('ZusatzAbotypenOverviewModel', function($resource, API_URL) {
     var now = new Date();
     return $resource(API_URL + 'zusatzAbotypen/:id/:extendedPath/:extendedPathPlus', {
       id: '@id'

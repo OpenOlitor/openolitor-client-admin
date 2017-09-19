@@ -3,9 +3,9 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ZusatzabotypenOverviewController', ['$scope', '$filter',
-    'ZusatzabotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil',
-    function($scope, $filter, ZusatzabotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil) {
+  .controller('ZusatzAbotypenOverviewController', ['$scope', '$filter',
+    'ZusatzAbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil',
+    function($scope, $filter, ZusatzAbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -44,9 +44,9 @@ angular.module('openolitor-admin')
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
 
-      if (!$scope.zusatzabosTableParams) {
-        //use default zusatzabosTableParams
-        $scope.zusatzabosTableParams= new NgTableParams({ // jshint ignore:line
+      if (!$scope.zusatzAbosTableParams) {
+        //use default zusatzAbosTableParams
+        $scope.zusatzAbosTableParams= new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -79,19 +79,19 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-            return 'zusatzabotyp erstellen';
+            return 'zusatzAbotyp erstellen';
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
         onExecute: function() {
-          return $location.path('/zusatzabotypen/new');
+          return $location.path('/zusatzAbotypen/new');
         }
       }, {
         label: 'Email an Kunden versenden',
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          ZusatzabotypenOverviewModel.personen({
+          ZusatzAbotypenOverviewModel.personen({
             f: 'id=' + $scope.checkboxes.ids + ';'
           }, function(personen) {
             var emailAddresses = _.map(personen, 'email');
@@ -110,19 +110,19 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
-        $scope.entries = ZusatzabotypenOverviewModel.query({
+        $scope.entries = ZusatzAbotypenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
-          $scope.zusatzabosTableParams.reload();
+          $scope.zusatzAbosTableParams.reload();
           $scope.loading = false;
           $location.search('q', $scope.search.query);
         });
       }
 
-      $scope.style = function(zusatzabotyp) {
-        if (zusatzabotyp.farbCode) {
+      $scope.style = function(zusatzAbotyp) {
+        if (zusatzAbotyp.farbCode) {
           return {
-            'background-color': zusatzabotyp.farbCode
+            'background-color': zusatzAbotyp.farbCode
           };
         }
       };
