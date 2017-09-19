@@ -130,33 +130,40 @@
         </div>
         <div class="col-md-4">
           <span class="pull-right">
-                <oo-dropdown dropdown-id="zusatzaboTypDropdown" display-style="uib-dropdown" values="zusatzaboTyp" selected-prop="id" property="name" selected-function="newZusatzabo()" required></oo-dropdown>
+                <oo-dropdown dropdown-id="zusatzAboTypDropdown" display-style="uib-dropdown" values="zusatzAboTyp" selected-prop="id" property="name" selected-function="newZusatzAbo" required></oo-dropdown>
           </span>
         </div>
         <div class="col-md-12">
-          <table ng-table="zusatzaboTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="zusatzabo in zusatzabos">
-              <td data-title="'Zusatzabo type name'|translate">
-                {{zusatzabo.abotypName}}
-              </td>
-              <td data-title="'Start Date'|translate">
-                {{zusatzabo.start|date:"EEE, dd.MM.yyyy"}}
-              </td>
-              <td><div class="pull-right">
-                  <a role="button" class="btn btn-sm btn-primary" ng-click="edit(zusatzabo)"><span class="glyphicon glyphicon-edit"></span></a>
-                </div>
-              </td>
-              <td><div class="pull-right">
-                  <oo-delete-button model="zusatzabo" entity="zusatzabo" on-delete="deleteZusatzabo" condensed="true" confirm="true"></oo-delete-button>
-                </div>
-              </td>
-              <td><div class="pull-right btn-group">
-                  <oo-save-button model="zusatzabo" form="zusatzaboForm" entity="zusatzabo" on-save="save" condensed="true"></oo-save-button>
-                </div>
-              </td>
-            </tr>
-          </table>
+          <div  ng-repeat="zusatzAbo in zusatzAbos">
+          <hr>
+          <div class="col-md-3"> {{zusatzAbo.abotypName}} </div>
+          <div class="col-md-5">
+              <p class="input-group">
+                <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.start" is-open="openZusatzAbo.start[zusatzAbo.id]" enable-time="false" max-date="abo.ende" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+          </div>
+          <div class="col-md-4">
+            <div class="pull-right btn-group">
+<oo-delete-button model="zusatzAbo" entity="ZusatzAbo" on-delete="deleteZusatzAbo" condensed="true" confirm="true"></oo-delete-button>
+            </div>
+            <div class="pull-right btn-group">
+              <oo-save-button model="zusatzAbo" form="zusatzAboForm" entity="ZusatzAbo" on-save="saveZusatzAbo" condensed="true"></oo-save-button>
+            </div>
+          </div>
+          <div class="col-md-5 col-md-offset-3">
+              <p class="input-group">
+                <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.ende" is-open="openZusatzAbo.ende[zusatzAbo.id]" enable-time="false" max-date="abo.ende" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id ,'ende')"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+          </div>
+          <div class="clearfix"> </div>
         </div>
+        <hr>
 
       </div>
       <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>

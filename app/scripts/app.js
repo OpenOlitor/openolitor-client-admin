@@ -515,20 +515,20 @@ angular
         name: 'AbotypenDetail',
         access: userRoles.Administrator
       })
-      .when('/zusatzabotypen', {
+      .when('/zusatzAbotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'ZusatzabotypenOverviewController',
         name: 'ZusatzabotypenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
-      .when('/zusatzabotypen/new', {
+      .when('/zusatzAbotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
         name: 'ZusatzabotypenDetail',
         access: userRoles.Administrator
       })
-      .when('/zusatzabotypen/:id', {
+      .when('/zusatzAbotypen/:id', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
         name: 'ZusatzabotypenDetail',
@@ -559,7 +559,13 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
-      .when('/kunden/:kundeId/abos/:id/zusatzabos', {
+      .when('/kunden/:kundeId/abos/:id/zusatzAbos', {
+        templateUrl: 'scripts/abos/detail/abosdetail.html',
+        controller: 'AbosDetailController',
+        name: 'AbosDetail',
+        access: userRoles.Administrator
+      })
+      .when('/kunden/:kundeId/abos/:aboId/zusatzAbos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail',
