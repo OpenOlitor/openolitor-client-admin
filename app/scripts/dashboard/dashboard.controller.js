@@ -60,7 +60,8 @@ angular.module('openolitor-admin')
               $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) : dataSet;
 
             params.total(dataSet.length);
-            return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return dataSet.slice((params.page() - 1) * params.count(),
+              params.page() * params.count());
           }
 
         });
@@ -82,6 +83,11 @@ angular.module('openolitor-admin')
       }
 
       pendenzenSearch();
+
+      $scope.markErledigt = function(pendenz) {
+        pendenz.status = PENDENZSTATUS.ERLEDIGT;
+        new PendenzenOverviewModel(pendenz).$save();
+      };
 
       $scope.$watch('pendenzen.search.query', function() {
         pendenzenSearch();
@@ -155,16 +161,14 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           getData: function(params) {
-            if (!$scope.rechnungenLoading) {
+            if (!$scope.rechnungEntries) {
               return;
             }
             // also filter by ngtable filters
             var dataSet = $filter('filter')($scope.rechnungEntries, params.filter());
-            dataSet = params.sorting ?
-              $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) :
-              dataSet;
-
             dataSet = $filter('filter')(dataSet, $scope.todayOrEarlier('faelligkeitsDatum'));
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) : dataSet;
 
             params.total(dataSet.length);
             return dataSet.slice((params.page() - 1) *

@@ -17,8 +17,8 @@
           <p ng-show="pendenzenLoading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
         <div ng-show="pendenzenEntries">
-          <table ng-table="pendenzenTableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/dashboard/oo-ngtable-nopagination.html">
-            <tr ng-repeat="pendenz in $data | filter: pendenzen.search.query.$">
+          <table ng-table="pendenzenTableParams" class="table table-striped" template-pagination="scripts/dashboard/oo-ngtable-nopagination.html">
+            <tr ng-repeat="pendenz in $data">
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{pendenz.datum|date:"dd.MM.yyyy"}}
               </td>
@@ -49,7 +49,7 @@
           <p ng-show="lieferplanungLoading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
         <div ng-show="lieferplanungEntries" id="kundeTable">
-          <table ng-table="lieferplanungenTableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/dashboard/oo-ngtable-nopagination.html">
+          <table ng-table="lieferplanungenTableParams" class="table table-striped" template-pagination="scripts/dashboard/oo-ngtable-nopagination.html">
             <tr ng-repeat="lieferplanung in $data">
               <td data-title="'#'|translate" sortable="'nr'">
                 <a ng-href="#/lieferplanung/{{lieferplanung.id}}">{{lieferplanung.id}}</a>
@@ -80,7 +80,7 @@
           <p ng-show="rechnungenLoading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
         <div ng-show="rechnungEntries" id="rechnungenTable">
-          <table ng-table="rechnungenTableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/dashboard/oo-ngtable-nopagination.html">
+          <table ng-table="rechnungenTableParams" class="table table-striped" template-pagination="scripts/dashboard/oo-ngtable-nopagination.html">
             <tr ng-repeat="rechnung in $data">
               <td data-title="'Nr.'|translate" sortable="'id'">
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.id}}</a>
