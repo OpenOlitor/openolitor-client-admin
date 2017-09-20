@@ -133,10 +133,10 @@
                 <oo-dropdown dropdown-id="zusatzAboTypDropdown" display-style="uib-dropdown" values="zusatzAboTyp" selected-prop="id" property="name" selected-function="newZusatzAbo" required></oo-dropdown>
           </span>
         </div>
-        <div class="col-md-12" ng-if="zusatzAbos.length === 0" > This abo does not have any zusatzabo </div>
+        <div class="col-md-12" ng-if="zusatzAbos.length === 0" translate>Kein Zusatzabo vorhanden.</div>
 
         <div class="col-md-12">
-          <div  ng-repeat="zusatzAbo in zusatzAbos">
+          <div ng-repeat="zusatzAbo in zusatzAbos">
           <hr>
           <div class="col-md-3"> {{zusatzAbo.abotypName}} </div>
           <div class="col-md-5">
