@@ -34,9 +34,7 @@ function convertDateStringsToDates(input) {
       input[key] = convertDateStringsToDates(value);
     }
   }
-  return input;
-}
-
+  return input; } 
 function addExtendedEnumValue(id, labelLong, labelShort, value) {
   return {
     id: id,
@@ -554,18 +552,6 @@ angular
         access: userRoles.Administrator
       })
       .when('/kunden/:kundeId/abos/:id', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail',
-        access: userRoles.Administrator
-      })
-      .when('/kunden/:kundeId/abos/:id/zusatzAbos', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail',
-        access: userRoles.Administrator
-      })
-      .when('/kunden/:kundeId/abos/:aboId/zusatzAbos/:id', {
         templateUrl: 'scripts/abos/detail/abosdetail.html',
         controller: 'AbosDetailController',
         name: 'AbosDetail',
