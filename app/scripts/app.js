@@ -34,9 +34,7 @@ function convertDateStringsToDates(input) {
       input[key] = convertDateStringsToDates(value);
     }
   }
-  return input;
-}
-
+  return input; } 
 function addExtendedEnumValue(id, labelLong, labelShort, value) {
   return {
     id: id,
@@ -515,20 +513,20 @@ angular
         name: 'AbotypenDetail',
         access: userRoles.Administrator
       })
-      .when('/zusatzabotypen', {
+      .when('/zusatzAbotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
         controller: 'ZusatzabotypenOverviewController',
         name: 'ZusatzabotypenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
-      .when('/zusatzabotypen/new', {
+      .when('/zusatzAbotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
         name: 'ZusatzabotypenDetail',
         access: userRoles.Administrator
       })
-      .when('/zusatzabotypen/:id', {
+      .when('/zusatzAbotypen/:id', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
         controller: 'AbotypenDetailController',
         name: 'ZusatzabotypenDetail',

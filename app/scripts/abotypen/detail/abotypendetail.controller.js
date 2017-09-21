@@ -4,11 +4,11 @@
  */
 angular.module('openolitor-admin')
   .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel','ZusatzabotypenDetailModel', 'msgBus',
+    '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel','ZusatzAbotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',
     'EnumUtil',
     function($scope, $filter, $routeParams, $location, gettext, NgTableParams,
-      AbotypenDetailModel, ZusatzabotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
+      AbotypenDetailModel, ZusatzAbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {
 
@@ -59,7 +59,7 @@ angular.module('openolitor-admin')
         if ($scope.getModel()=== 'abotypen'){
             $scope.abotyp = new AbotypenDetailModel(defaults.model);
         }else{
-            $scope.zusatzabotyp = new ZusatzabotypenDetailModel(defaults.model);
+            $scope.zusatzAbotyp = new ZusatzAbotypenDetailModel(defaults.model);
         }
       } else {
         if ($scope.getModel() === 'abotypen'){
@@ -75,14 +75,14 @@ angular.module('openolitor-admin')
                 msgBus.emitMsg(msg);
             });
         }else{
-            ZusatzabotypenDetailModel.get({
+            ZusatzAbotypenDetailModel.get({
                 id: $routeParams.id
             }, function(result) {
-                $scope.zusatzabotyp = result;
+                $scope.zusatzAbotyp = result;
 
                 var msg = {
-                    type: 'ZusatzabotypLoaded',
-                    zusatzabotyp: $scope.zusatzabotyp
+                    type: 'ZusatzAbotypLoaded',
+                    zusatzAbotyp: $scope.zusatzAbotyp
                 };
                 msgBus.emitMsg(msg);
             }
@@ -102,7 +102,7 @@ angular.module('openolitor-admin')
         if ($scope.getModel() === 'abotypen'){
             return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id);
         } else {
-            return angular.isDefined($scope.zusatzabotyp) && angular.isDefined($scope.zusatzabotyp.id);
+            return angular.isDefined($scope.zusatzAbotyp) && angular.isDefined($scope.zusatzAbotyp.id);
         }
       };
 
@@ -115,7 +115,7 @@ angular.module('openolitor-admin')
         if ($scope.getModel() === 'abotypen'){
             return $scope.abotyp.$save();
         }else{
-            return $scope.zusatzabotyp.$save();
+            return $scope.zusatzAbotyp.$save();
         }
       };
 
@@ -123,7 +123,7 @@ angular.module('openolitor-admin')
         if ($scope.getModel() === 'abotypen'){
             $location.path('/abotypen');
         }else{
-            $location.path('/zusatzabotypen');
+            $location.path('/zusatzAbotypen');
         }
       };
 
@@ -131,7 +131,7 @@ angular.module('openolitor-admin')
         if ($scope.getModel() === 'abotypen'){
             $location.path('/abotypen/' + id);
         }else{
-            $location.path('/zusatzabotypen/' + id);
+            $location.path('/zusatzAbotypen/' + id);
         }
       };
 
@@ -139,7 +139,7 @@ angular.module('openolitor-admin')
         if ($scope.getModel() === 'abotypen'){
             return $scope.abotyp.$delete();
         }else{
-            return $scope.zusatzabotyp.$delete();
+            return $scope.zusatzAbotyp.$delete();
         }
       };
 
