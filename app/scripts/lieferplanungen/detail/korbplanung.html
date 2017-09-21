@@ -85,6 +85,7 @@
               <span class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
+              <div ng-if="!abotypLieferung.abotyp.anzahlAbwesenheiten" > Zusatzabo</div>
             </span>
           </h3>
         </div>
