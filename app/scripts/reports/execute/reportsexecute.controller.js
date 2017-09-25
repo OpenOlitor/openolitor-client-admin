@@ -16,8 +16,14 @@ angular.module('openolitor-admin')
       });
 
 
-      $scope.execute = function() {
-        return 'TODO';
+      $scope.executeReport = function() {
+        ReportsModel.executeReport({id: $scope.report.id, query: $scope.report.query}, function(data) {
+          alert('DDD' + data);
+        });
+      };
+
+      $scope.editReport = function(report) {
+        $location.path('/reports/' + report.id);
       };
 
 

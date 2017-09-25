@@ -6,12 +6,13 @@
         <div class="col-md-12">
           <div class="row form-group">
             <h3>
-              <div class="col-md-2">
+              <div class="col-md-7">
                 <span translate>Auswertung</span>: {{report.name}}
               </div>
-              <div class="col-md-10">
-                <div class="btn-group pull-right" role="group">
-                  <button type="button" class="btn btn-xs btn-success" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span> Ausführen</button>
+              <div class="col-md-5">
+                <div class="pull-right" role="group">
+                  <button type="button" class="btn btn-md btn-default" ng-click="editReport(report)" title="{{'Auswertung editieren'|translate}}"><span class="glyphicon glyphicon-edit"></span> Editieren</button>
+                  <button type="button" class="btn btn-md btn-success" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span> Ausführen</button>
                 </div>
               </div>
             </h3>

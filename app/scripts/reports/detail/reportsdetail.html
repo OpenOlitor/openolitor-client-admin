@@ -6,13 +6,14 @@
         <div class="col-md-12">
           <div class="row form-group">
             <h3>
-              <div class="col-md-2" translate>
+              <div class="col-md-7" translate>
                 Auswertung
               </div>
-              <div class="col-md-10">
-                <div class="btn-group pull-right" role="group">
+              <div class="col-md-5">
+                <div class="pull-right" role="group">
                   <oo-save-button model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created">Auswertung</oo-save-button>
-                  <oo-delete-button ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Produzent" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+                  <oo-delete-button ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Report" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+                  <button type="button" class="btn btn-md btn-success" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span> </button>
                 </div>
               </div>
             </h3>
@@ -56,7 +57,7 @@
             <div class="panel-body" >
               <div class="row form-group">
                 <div class="col-md-12">
-                  <textarea class="form-control" name="query" ng-model="report.query" placeholder="select * from Entity where ..." rows="10"></textarea>
+                  <textarea class="form-control" name="query" ng-model="report.query" placeholder="select * from Entity where ..." rows="10" required></textarea>
                 </div>
               </div>
             </div>

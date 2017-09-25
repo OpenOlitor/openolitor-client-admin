@@ -7,6 +7,12 @@ angular.module('openolitor-admin')
     return $resource(API_URL + 'reports/:id:exportType', {
       id: '@id'
     }, {
+      'executeReport': {
+        method: 'POST',
+        isArray: true,
+        url: API_URL + 'reports/:id/execute'
+      }
+    }, {
       'exportODS': exportODSModuleFunction
     });
   }]);

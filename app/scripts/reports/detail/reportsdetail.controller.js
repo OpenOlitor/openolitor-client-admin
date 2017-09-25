@@ -44,5 +44,9 @@ angular.module('openolitor-admin')
         return $scope.report.$delete();
       };
 
+      $scope.executeReport = function(report) {
+        $location.path('/reports/' + report.id + '/execute');
+      };
+
     }
   ]);
