@@ -21,7 +21,7 @@
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="report in $data | filter: search.query.$">
               <td data-title="'Name'|translate" sortable="'name'">
-                <a ng-href="#/report/{{report.id}}">{{report.name}}</a>
+                <a ng-href="#/reports/{{report.id}}">{{report.name}}</a>
               </td>
               <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
                 {{report.beschreibung}}

@@ -11,7 +11,7 @@
               </div>
               <div class="col-md-10">
                 <div class="btn-group pull-right" role="group">
-                  <oo-save-button model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created" translate>Auswertung</oo-save-button>
+                  <oo-save-button model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created">Auswertung</oo-save-button>
                   <oo-delete-button ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Produzent" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
                 </div>
               </div>

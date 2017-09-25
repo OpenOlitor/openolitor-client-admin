@@ -5,8 +5,7 @@
 angular.module('openolitor-admin')
   .controller('ReportsDetailController', ['$scope', '$filter', '$routeParams',
     '$location', '$uibModal', 'gettext', 'ReportsModel', '$log',
-    function($scope, $filter, $routeParams, $location, $uibModal, gettext,
-      ReportsModel, $log) {
+    function($scope, $filter, $routeParams, $location, $uibModal, gettext, ReportsModel, $log) {
 
       var defaults = {
         model: {
@@ -15,7 +14,7 @@ angular.module('openolitor-admin')
       };
 
 
-      if (!$routeParams.id) {
+      if (!$routeParams.id || $routeParams.id === 'new') {
         $scope.report = new ReportsModel(defaults.model);
       } else {
         ReportsModel.get({
@@ -26,8 +25,7 @@ angular.module('openolitor-admin')
       }
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.report) && angular.isDefined($scope.report
-          .id);
+        return angular.isDefined($scope.report) && angular.isDefined($scope.report.id);
       };
 
       $scope.save = function() {
