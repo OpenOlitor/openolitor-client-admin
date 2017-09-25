@@ -93,11 +93,11 @@
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-abotypen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abotypen')}]" href="" ng-href="#/abotypen"><i class="fa fa-clone"></i> <span translate>Abotypen</span></a></li>
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-produzenten" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produzenten')}]" href="" ng-href="#/produzenten"><i class="fa fa-leaf"></i> <span translate>Produzenten</span></a></li>
       <li activate-id="stammdaten" ng-show="menushow['stammdaten']"><a id="nav-produkte" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produkte')}]" href="" ng-href="#/produkte"><i class="fa fa-pagelines"></i> <span translate>Produkte</span></a></li>
-      <li><a id="nav-reports" class="nav-item" ng-click="menushow['reports'] = !menushow['reports']" href="" ng-href="#/reports"><span><i class="fa fa-bar-chart"></i> <span translate>Reports*</span></span></a></li>
       <li><a id="nav-einstellungen" class="nav-item" ng-click="menushow['einstellungen'] = !menushow['einstellungen']"><span><i class="fa fa-cogs"></i> <span translate>Einstellungen</span></span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('settings')}]" href="" ng-href="#/settings"><i class="fa fa-sitemap"></i> <span translate>Projekt</span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-templates" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('templates')}]" href="" ng-href="#/vorlagen"><i class="fa fa-file-text-o"></i> <span translate>Vorlagen</span></a></li>
       <li><a id="nav-sysadmin" class="nav-item" ng-click="menushow['sysadmin'] = !menushow['sysadmin']"><span><i class="fa fa-server"></i> <span translate>Sysadmin</span></span></a></li>
+      <li activate-id="sysadmin" ng-show="menushow['sysadmin']"><a id="nav-reports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reports')}]" href="" ng-href="#/reports"><i class="fa fa-bar-chart"></i> <span translate>Auswertungen</span></a></li>
       <li activate-id="sysadmin" ng-show="menushow['sysadmin']"><a id="nav-journal" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('journal')}]" href="" ng-href="#/journal"><i class="fa fa-list-ul"></i> <span translate>Journal</span></a></li>
     </ul>
   </div>
@@ -308,6 +308,12 @@
 
   <script src="scripts/journal/overview/journaloverview.controller.js"></script>
   <script src="scripts/journal/journallist.model.js"></script>
+
+  <script src="scripts/reports/reports.model.js"></script>
+  <script src="scripts/reports/reports.service.js"></script>
+  <script src="scripts/reports/overview/reportsoverview.controller.js"></script>
+  <script src="scripts/reports/detail/reportsdetail.controller.js"></script>
+  <script src="scripts/reports/execute/reportsexecute.controller.js"></script>
 
   <script src="scripts/jobqueue/jobqueue.service.js"></script>
   <script src="scripts/jobqueue/jobqueue.controller.js"></script>

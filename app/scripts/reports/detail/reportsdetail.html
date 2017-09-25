@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <form name="reportForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row form-group">
+            <h3>
+              <div class="col-md-2" translate>
+                Auswertung
+              </div>
+              <div class="col-md-10">
+                <div class="btn-group pull-right" role="group">
+                  <oo-save-button model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created" translate>Auswertung</oo-save-button>
+                  <oo-delete-button ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Produzent" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+                </div>
+              </div>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Basisdaten</span></h3>
+            </div>
+            <div class="panel-body" >
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="name" translate>Name</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="name" ng-model="report.name" placeholder="{{'Name'|translate}}" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="vorname" translate>Beschreibung</label>
+                </div>
+                <div class="col-md-8">
+                  <textarea class="form-control" name="beschreibung" ng-model="report.beschreibung" placeholder="{{'Beschreibung'|translate}}" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Query</span></h3>
+            </div>
+            <div class="panel-body" >
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <textarea class="form-control" name="query" ng-model="report.query" placeholder="select * from Entity where ..." rows="10"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
