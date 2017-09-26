@@ -760,6 +760,38 @@ angular
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
+      .when('/reports', {
+        templateUrl: 'scripts/reports/overview/reportsoverview.html',
+        controller: 'ReportsOverviewController',
+        name: 'ReportsOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/reports', {
+        templateUrl: 'scripts/reports/overview/reportsoverview.html',
+        controller: 'ReportsOverviewController',
+        name: 'ReportsOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/reports/:id/execute', {
+        templateUrl: 'scripts/reports/execute/reportsexecute.html',
+        controller: 'ReportsExecuteController',
+        name: 'ReportsExecute',
+        access: userRoles.Administrator
+      })
+      .when('/reports/:id', {
+        templateUrl: 'scripts/reports/detail/reportsdetail.html',
+        controller: 'ReportsDetailController',
+        name: 'ReportsDetail',
+        access: userRoles.Administrator
+      })
+      .when('/reports/new', {
+        templateUrl: 'scripts/reports/detail/reportsdetail.html',
+        controller: 'ReportsDetailController',
+        name: 'ReportsDetail',
+        access: userRoles.Administrator
+      })
       .when('/journal', {
         templateUrl: 'scripts/journal/overview/journaloverview.html',
         controller: 'JournalOverviewController',
