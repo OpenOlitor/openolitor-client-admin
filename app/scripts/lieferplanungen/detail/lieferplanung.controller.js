@@ -792,6 +792,16 @@ angular.module('openolitor-admin')
         });
       };
 
+      $scope.displayZusatzabos = function(lieferungId, korbStatus) {
+        LieferplanungModel.getZusatzaboIdsByKorbStatus({
+          id: $routeParams.id,
+          lieferungId: lieferungId,
+          korbStatus: korbStatus
+        }, function(result) {
+          $location.path('/abos').search('q', 'id=' + result.join());
+        });
+      };
+
       $scope.abschliessenAction = [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),
         confirmMessage: gettextCatalog.getString('Soll die Lieferplanung abgeschlossen werden?'),

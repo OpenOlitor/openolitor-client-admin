@@ -63,10 +63,17 @@
       </div>
     </div>
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen | orderBy: 'abotypBeschrieb'">
-      <script type="text/ng-template" id="anzahlTooltipTemplate.html">
-        <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
-        <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
-        <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+      <script type="text/ng-template" ng-if="abotypLieferung.abotyp.anzahlAbwesenheiten === undefined" id="anzahlTooltipTemplate.html">
+        <div  ng-if="abotypLieferung.abotyp.anzahlAbwesenheiten === undefined" >
+          <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+          <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
+          <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+        </div>
+        <div  ng-if="abotypLieferung.abotyp.anzahlAbwesenheiten !== undefined" >
+          <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+          <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
+          <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+        </div>
       </script>
       <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
         <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">
@@ -85,6 +92,7 @@
               <span class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
+              <div ng-if="abotypLieferung.abotyp.anzahlAbwesenheiten === undefined" > Zusatzabo</div>
             </span>
           </h3>
         </div>
