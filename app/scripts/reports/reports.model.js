@@ -11,8 +11,13 @@ angular.module('openolitor-admin')
         method: 'POST',
         isArray: true,
         url: API_URL + 'reports/:id/execute'
-      }
-    }, {
-      'exportODS': exportODSModuleFunction
-    });
+      },
+      'exportODS': {
+          url: API_URL + 'reports/:id/execute.ods',
+          method: 'POST',
+          responseType: 'arraybuffer',
+          cache: false,
+          transformResponse: exportODSModuleFunction.transformResponse
+        }
+      });
   }]);

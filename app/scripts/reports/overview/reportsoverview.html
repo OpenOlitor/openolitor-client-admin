@@ -17,7 +17,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="auswertungTable" display-export="true" export-file-name="Auswertungen">
+        <div ng-show="entries" id="auswertungTable">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="report in $data | filter: search.query.$">
               <td data-title="'Name'|translate" sortable="'name'">

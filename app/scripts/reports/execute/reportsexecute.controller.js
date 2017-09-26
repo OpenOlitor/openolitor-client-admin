@@ -26,7 +26,6 @@ angular.module('openolitor-admin')
 
       $scope.executeReport = function() {
         $scope.resulat = {};
-        //$scope.resulat.entries = [{name: 'test', age: 12, money: 'yes'}, {name: 'test2', age: 12, money: 'yes'}];
         ReportsModel.executeReport({id: $scope.report.id, query: $scope.report.query}, function(data) {
           if(data && data[0]) {
             $scope.cols = [];
@@ -56,6 +55,12 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           exportODSModel: ReportsModel,
+          exportODSFilter: function() {
+            return {
+              id: $scope.report.id,
+              query: $scope.report.query
+            };
+          },
           getData: function(params) {
             if (!$scope.resulat || !$scope.resulat.entries) {
               return;
