@@ -78,7 +78,7 @@ angular.module('openolitor-admin')
       'getZusatzaboIdsByKorbStatus': {
         method: 'GET',
         isArray: true,
-        url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId/:korbStatus/zusatzaboIds'
+        url: API_URL + 'lieferplanungen/:id/lieferungen/:lieferungId/:korbStatus/hauptaboIds'
       },
       'getAllAboIdsByKorbStatus': {
         method: 'GET',
