@@ -1,41 +1,41 @@
 <div class="row">
-<div class="content content-box col-md-9">
-  <div oo-error-overlay></div>
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <h3  class="panel-title"><span class="navbar-brand" translate>Pendenzen</span>
-        <form class="navbar-form pull-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
-          </div>
-        </form>
-      </span>
-      </h3>
-    </div>
-    <div class="panel-body">
-      <div ng-hide="entries">
-        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+  <div class="content content-box col-md-9">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3  class="panel-title"><span class="navbar-brand" translate>Pendenzen</span>
+          <form class="navbar-form pull-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+            </div>
+          </form>
+        </h3>
       </div>
-      <div ng-show="entries">
-        <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-          <tr ng-repeat="pendenz in $data | filter: search.query.$">
-            <td data-title="'Datum'|translate" sortable="'datum'">
-              {{pendenz.datum|date:"dd.MM.yyyy"}}
-            </td>
-            <td data-title="'Bemerkung'|translate" sortable="'bemerkung'">
-              {{pendenz.bemerkung}}
-            </td>
-            <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
-              {{pendenz.status|translate}}
-            </td>
-            <td data-title="'Kunde'|translate">
-              <a ng-href="#/kunden/{{pendenz.kundeId}}">{{pendenz.kundeBezeichnung}}</a>
-            </td>
-            <td>
-              <button ng-if="isUnresolved(pendenz)" type="button" class="btn btn-xs btn-success" ng-click="markErledigt(pendenz)" title="{{'Pendenz als erledigt markieren'|translate}}"><span class="glyphicon glyphicon-ok"></span> </button>
-            </td>
-          </tr>
-        </table>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+            <tr ng-repeat="pendenz in $data | filter: search.query.$">
+              <td data-title="'Datum'|translate" sortable="'datum'">
+                {{pendenz.datum|date:"dd.MM.yyyy"}}
+              </td>
+              <td data-title="'Bemerkung'|translate" sortable="'bemerkung'">
+                {{pendenz.bemerkung}}
+              </td>
+              <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
+                {{pendenz.status|translate}}
+              </td>
+              <td data-title="'Kunde'|translate">
+                <a ng-href="#/kunden/{{pendenz.kundeId}}">{{pendenz.kundeBezeichnung}}</a>
+              </td>
+              <td>
+                <button ng-if="isUnresolved(pendenz)" type="button" class="btn btn-xs btn-success" ng-click="markErledigt(pendenz)" title="{{'Pendenz als erledigt markieren'|translate}}"><span class="glyphicon glyphicon-ok"></span> </button>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
