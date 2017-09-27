@@ -494,7 +494,14 @@ angular
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        redirectTo: '/abos'
+        redirectTo: '/dashboard'
+      })
+      .when('/dashboard', {
+        templateUrl: 'scripts/dashboard/dashboard.html',
+        controller: 'DashboardController',
+        name: 'Dashboard',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',

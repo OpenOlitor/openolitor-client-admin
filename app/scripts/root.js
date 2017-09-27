@@ -31,11 +31,16 @@ angular.module('openolitor-admin')
       }, function(user) {
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
         $scope.user = user;
-
-        if($scope.loggedIn) {
-          ProjektService.resolveProjekt().then(function(projekt) {
+        if($scope.loggedIn){
+            ProjektService.resolveProjekt(false).then(function(projekt) {
             $scope.projekt = projekt;
             $rootScope.projekt = projekt;
+            $scope.checkWelcomeMessage();
+          });
+        }else{
+          ProjektService.resolveProjekt(true).then(function(projekt) {
+          $scope.projekt = projekt;
+          $rootScope.projekt = projekt;
           });
         }
       });
@@ -125,6 +130,12 @@ angular.module('openolitor-admin')
       } else {
         $scope.changeLang($scope.storedActiveLang());
       }
+
+      $scope.checkWelcomeMessage = function(){
+          if ($scope.projekt.welcomeMessage2){
+              $('#welcomeMessageModal').modal('show');
+          }
+      };
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();

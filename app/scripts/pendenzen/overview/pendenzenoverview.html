@@ -11,10 +11,10 @@
           </form>
         </h3>
       </div>
-      <div class="panel-body">
-        <div ng-hide="entries">
-          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-        </div>
+    <div class="panel-body">
+      <div ng-hide="entries">
+        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+      </div>
         <div ng-show="entries">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="pendenz in $data | filter: search.query.$">
