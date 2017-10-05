@@ -495,7 +495,7 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if ((msg.entity) === 'ZusatzAbo') {
-            $scope.zusatzAbos.push(msg.data)
+            $scope.zusatzAbos.push(new ZusatzAboModel(msg.data))
             $scope.$apply();
         }
       });
