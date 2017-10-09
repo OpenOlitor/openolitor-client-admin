@@ -350,6 +350,7 @@ angular.module('openolitor-admin')
           }
         };
 
+        $scope.checkFreeProduct() ;
         switch (type) {
           case 'newProdukt':
             var prodUnlistet = {
@@ -368,6 +369,7 @@ angular.module('openolitor-admin')
             };
             checkOnDuplicateAndAsk(drop.scope().abotypLieferung.lieferpositionen,
               prodUnlistet);
+
             break;
           case 'prod':
             var produkt = drag.scope().produkt;
@@ -661,6 +663,20 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.checkFreeProduct = function() {
+        var ret = true;
+        //check on Produzent on all Produkte
+        lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+          lodash.forEach(abotypLieferung.lieferpositionen, function(
+            korbEntry) {
+            if (ret && angular.isUndefined(korbEntry.produzentId)) {
+              ret = false;
+            }
+          });
+        });
+        return ret;
+      };
+
       $scope.checkAllValues = function() {
         var ret = true;
         //check on Produzent on all Produkte
@@ -707,15 +723,17 @@ angular.module('openolitor-admin')
       };
 
       $scope.planungAbschliessen = function() {
-        LieferplanungModel.abschliessen({
-          id: $routeParams.id
-        }, function() {
-          $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
-        }, function(error) {
-          alertService.addAlert('error', gettextCatalog.getString(
-              'Lieferplanung kan nicht abgeschlossen werden: ') +
-            error.status + ':' + error.statusText);
-        });
+        if ($scope.checkAllValues()) {
+            LieferplanungModel.abschliessen({
+              id: $routeParams.id
+            }, function() {
+              $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
+            }, function(error) {
+              alertService.addAlert('error', gettextCatalog.getString(
+                  'Lieferplanung kan nicht abgeschlossen werden: ') +
+                error.status + ':' + error.statusText);
+            });
+        }
       };
 
       $scope.planungVerrechnen = function() {
@@ -791,6 +809,15 @@ angular.module('openolitor-admin')
           $location.path('/abos').search('q', 'id=' + result.join());
         });
       };
+
+      $scope.abschliessenActionDisabled= [{
+        label: gettextCatalog.getString('Lieferplanung abschliessen'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        isDisabled: function() { return true; },
+        onExecute: function() { }
+      }];
+      
 
       $scope.abschliessenAction = [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),
