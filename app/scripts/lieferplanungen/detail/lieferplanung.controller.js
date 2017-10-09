@@ -314,6 +314,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.dropProdukt = function(dragEl, dropEl, type) {
+        $scope.korbForm.$setDirty();
         if (!$scope.valuesEditable()) {
           alertService.addAlert('lighterror', gettextCatalog.getString(
             'Die Lieferungen dürfen nicht mehr verändert werden.'));
@@ -638,6 +639,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
+        $scope.korbForm.$setPristine();
         if ($scope.checkAllValues()) {
           $scope.editNachAbgeschlossen = false;
           var lieferungenModifyList = lodash.map($scope.abotypenLieferungen, function(abotypLieferung) {
