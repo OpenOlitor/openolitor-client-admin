@@ -307,6 +307,11 @@ input.ng-invalid {
   padding-right: 0px;
 }
 
+.panel-default > .panel-heading.panel-heading-person {
+  background-color: #f5f2e1;
+  margin-top: 15px;
+}
+
 /* Special Lieferplanung */
 #lieferplanung .lieferplanung-title .navbar-brand {
   margin-left: 0px !important;
