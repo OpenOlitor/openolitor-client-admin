@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('LieferantenAbrechnungenOverviewService', ['$http', 'API_URL',
+  .factory('EinkaufsrechnungenOverviewService', ['$http', 'API_URL',
     function($http, API_URL) {
 
       function alsAbgerechnetMarkieren(data) {
