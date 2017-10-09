@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
       <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
 
@@ -258,84 +258,5 @@
           </div>
         </div>
       </div>
-
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title"><span class="navbar-brand" translate>Kundentypen</span>
-              <form name="createKundentypForm" class="navbar-form pull-right">
-                <div class="form-group" ng-class="{ 'has-error' : createKundentypForm.kundentyp.$invalid && createKundentypForm.kundentyp.$touched }" >
-                  <input type="text" name="kundentyp" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Kundentyp Name...'|translate}}" ng-model="templateKundentyp.kundentyp" required>
-                  <a ng-disabled="createKundentypForm.$invalid || templateKundentyp.creating" role="button" ng-href="" ng-click="addKundentyp()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateKundentyp.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                  <a role="button" ng-click="saveKundentypen()" ng-disabled="templateKundentyp.updating || !hasChangesKundentypen()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateKundentyp.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                </div>
-              </form>
-            </h3>
-          </div>
-          <div class="panel-body">
-            <form name="settingsForm">
-              <div ng-hide="kundentypen">
-                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-              </div>
-              <div ng-show="kundentypen">
-                <table ng-table="kundentypenTableParams" class="table table-striped">
-                  <tr ng-repeat="kundentyp in $data">
-                    <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">
-                      <input type="text" class="form-control" name="beschreibung" ng-model="kundentyp.kundentyp" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Kundentyp'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></input>
-                    </td>
-                    <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
-                      <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></textarea>
-                    </td>
-                    <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
-                      {{kundentyp.anzahlVerknuepfungen}}
-                    </td>
-                    <td>
-                      <a href="" ng-click="deleteKundentyp(kundentyp)" ng-hide="deletingKundentyp(kundentyp)"><i class="fa fa-times"></i></a>
-                       <i ng-show="deletingKundentyp(kundentyp)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title"><span class="navbar-brand" translate>Produktekategorien</span>
-              <form name="createProduktekategorieForm" class="navbar-form pull-right">
-                <div class="form-group" ng-class="{ 'has-error' : createProduktekategorieForm.produktekategorie.$invalid && createProduktekategorieForm.produktekategorie.$touched }" >
-                  <input type="text" name="produktekategorie" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Produktekategorie Name...'|translate}}" ng-model="templateProduktekategorie.produktekategorie" required>
-                  <a ng-disabled="createProduktekategorieForm.$invalid || templateProduktekategorie.creating" role="button" ng-href="" ng-click="addProduktekategorie()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateProduktekategorie.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                  <a role="button" ng-click="saveProduktekategorie()" ng-disabled="settingsForm.$invalid || templateProduktekategorie.updating || !hasChangesProduktekategorien()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateProduktekategorie.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                </div>
-              </form>
-            </h3>
-          </div>
-          <div class="panel-body">
-            <form name="settingsForm">
-              <div ng-hide="produktekategorien">
-                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-              </div>
-              <div ng-show="produktekategorien">
-                <table ng-table="produktekategorienTableParams" class="table table-striped">
-                  <tr ng-repeat="produktekategorie in $data">
-                    <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
-                      <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedProduktekategorie(produktekategorie)"></input>
-                    </td>
-                    <td>
-                      <a href="" ng-click="deleteProduktekategorie(produktekategorie)" ng-hide="deletingProduktekategorie(produktekategorie)"><i class="fa fa-times"></i></a>
-                       <i ng-show="deletingProduktekategorie(produktekategorie)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
   </div>
 </div>

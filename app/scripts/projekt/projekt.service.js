@@ -5,8 +5,6 @@ angular.module('openolitor-admin')
   .factory('ProjektService', ['$rootScope', 'OpenProjektModel','ProjektModel', 'msgBus', 'ooAuthService', '$q',
     function($rootScope, OpenProjektModel, ProjektModel, msgBus, ooAuthService, $q) {
 
-      console.log('------------------------------------------------------------------------------');
-      console.log('Mikel fuera');
       var projekt;
 
       var loadProjekt = function(openProjekt) {

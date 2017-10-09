@@ -11,7 +11,7 @@ angular.module('openolitor-admin').directive('ooBestellungDetail', [
         onClose: '&'
       },
       transclude: false,
-      templateUrl: 'scripts/lieferantenabrechnungen/detail/bestellung.html',
+      templateUrl: 'scripts/einkaufsrechnungen/detail/bestellung.html',
       controller: 'BestellungDetailController'
     };
   }

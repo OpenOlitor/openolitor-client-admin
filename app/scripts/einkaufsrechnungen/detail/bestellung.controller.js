@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('BestellungDetailController', ['$scope', 'lodash',
-    'LieferantenAbrechnungenOverviewModel', 'ProduzentenService', 'LIEFEREINHEIT',
+    'EinkaufsrechnungenOverviewModel', 'ProduzentenService', 'LIEFEREINHEIT',
 
-    function($scope, lodash, LieferantenAbrechnungenOverviewModel, ProduzentenService,
+    function($scope, lodash, EinkaufsrechnungenOverviewModel, ProduzentenService,
       LIEFEREINHEIT) {
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -19,7 +19,7 @@ angular.module('openolitor-admin')
       );
 
       var loadDetail = function() {
-          LieferantenAbrechnungenOverviewModel.get({
+          EinkaufsrechnungenOverviewModel.get({
           id: $scope.bestellungId
         }, function(sammelbestellung) {
           $scope.sammelbestellung = sammelbestellung;

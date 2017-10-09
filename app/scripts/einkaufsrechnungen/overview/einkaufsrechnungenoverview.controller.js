@@ -3,12 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
-    '$location', 'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
+  .controller('EinkaufsrechnungenOverviewController', ['$scope', '$filter',
+    '$location', 'EinkaufsrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
     'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService', 'gettext',
-    function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
+    function($scope, $filter, $location, EinkaufsrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
       VorlagenService, gettext) {
@@ -93,7 +93,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: LieferantenAbrechnungenOverviewModel,
+          exportODSModel: EinkaufsrechnungenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -165,7 +165,7 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
-        $scope.entries = LieferantenAbrechnungenOverviewModel.query({
+        $scope.entries = EinkaufsrechnungenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();

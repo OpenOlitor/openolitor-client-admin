@@ -17,7 +17,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.currentPathContains = function(pathJunk) {
-        return $location.url().indexOf(pathJunk) !== -1;
+        return $location.url().indexOf('/' + pathJunk) !== -1;
       };
 
       //initial launch
