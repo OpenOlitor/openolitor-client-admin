@@ -121,26 +121,6 @@
     <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
   </footer>
 
-
-<div class="modal fade" id="welcomeMessageModal">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-                  <h4 class="modal-title" translate>Mitteilung</h4>
-              </div>
-              <div class="modal-body">
-                  <div>{{projekt.welcomeMessage2}}</div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" translate>Schliessen</button>
-              </div>
-          </div>
-          <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-  </div>
-
   <!-- build:js(.) scripts/oldieshim.js -->
   <!--[if lt IE 9]>
     <script src="vendor/es5-shim/es5-shim.js"></script>
