@@ -19,7 +19,7 @@
               <div ng-hide="kundentypen">
                 <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
               </div>
-              <div ng-show="kundentypen">
+              <div ng-show="kundentypen" class="horizontal-scroll">
                 <table ng-table="kundentypenTableParams" class="table table-striped">
                   <tr ng-repeat="kundentyp in $data">
                     <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">

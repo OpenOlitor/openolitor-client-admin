@@ -17,7 +17,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen">
+        <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
