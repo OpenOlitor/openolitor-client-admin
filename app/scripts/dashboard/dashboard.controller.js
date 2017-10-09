@@ -42,7 +42,7 @@ angular.module('openolitor-admin')
           sorting: {
             datum: 'asc'
           },
-          filter: { status: 'AUSSTEHEND' }
+          filter: { }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -73,9 +73,10 @@ angular.module('openolitor-admin')
         }
         $scope.pendenzenTableParams.reload();
 
+        var query = 'status=Ausstehend';
         $scope.pendenzenLoading = true;
         $scope.pendenzenEntries = PendenzenOverviewModel.query({
-          q: $scope.query
+          q: query
         }, function() {
           $scope.pendenzenTableParams.reload();
           $scope.pendenzenLoading = false;
@@ -134,8 +135,9 @@ angular.module('openolitor-admin')
         }
 
         $scope.lieferplanungLoading = true;
+        var query = '';
         $scope.lieferplanungEntries = LieferplanungModel.query({
-           q: $scope.query
+           q: query
         }, function() {
           $scope.lieferplanungenTableParams.reload();
           $scope.lieferplanungLoading = false;
@@ -185,8 +187,9 @@ angular.module('openolitor-admin')
         $scope.rechnungenTableParams.reload();
 
         $scope.rechnungenLoading = true;
+        var query = 'Status=Verschickt';
         $scope.rechnungEntries = RechnungenOverviewModel.query({
-          f: $scope.query
+          f: query
         }, function() {
           $scope.rechnungenTableParams.reload();
           $scope.rechnungenLoading = false;
