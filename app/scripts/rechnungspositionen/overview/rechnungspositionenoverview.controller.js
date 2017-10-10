@@ -39,7 +39,7 @@ angular.module('openolitor-admin')
         css: '',
         ids: []
       };
-       
+
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -57,7 +57,7 @@ angular.module('openolitor-admin')
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
- 
+
       $scope.selectRechnungsPosition = function(rechnungsPosition, itemId) {
         var firstRow = angular.element('#rechnungsPositionenTable tbody tr').first();
         var allButtons = angular.element('#rechnungsPositionenTable button');
@@ -76,7 +76,7 @@ angular.module('openolitor-admin')
           angular.element('#selectedRechnungsPositionDetail').css('margin-top', offset);
         }
       };
- 
+
       $scope.closeCreateRechnungenDialog = function() {
         $scope.showCreateRechnungenDialog = false;
       };
@@ -139,11 +139,19 @@ angular.module('openolitor-admin')
             $scope.filteredEntries = dataSet;
 
             params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
             return dataSet.slice((params.page() - 1) *
               params.count(), params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       function search() {
@@ -159,7 +167,6 @@ angular.module('openolitor-admin')
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 
@@ -199,6 +206,6 @@ angular.module('openolitor-admin')
           $scope.$apply();
         }
       });
-      
+
     }
   ]);
