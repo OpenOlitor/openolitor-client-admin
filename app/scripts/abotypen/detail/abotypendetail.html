@@ -1,201 +1,201 @@
-    <div class="row">
-      <div oo-error-overlay></div>
-    <form name="abotypForm">
-  <div class="content content-box col-md-9">
-    <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix abotypHeader" ng-style="abotypStyle" >
-          <h3 class="panel-title"><span class=" navbar-brand">{{('Abotyp' |translate) + ' ' + abotyp.name || ('Abotyp'|translate)}}</span>
-            <div class="btn-group pull-right" role="group">
-              <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
-              <oo-delete-button ng-if="abotyp.anzahlAbonnenten === 0" model="abotyp" entity="Abotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
-            </div>
-          </h3>
-        </div>
-        <div class="panel-body">
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="name" translate>Name</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="beschreibung" translate>Beschreibung</label>
-              </div>
-              <div class="col-md-8">
-                <textarea class="form-control" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="aktiv_von" translate>Aktiv</label>
-              </div>
-              <div class="col-md-8 row">
-                <div class="col-md-4">
-                  <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="abotyp.aktivBis" />
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivVon')"><i class="fa fa-calendar"></i></button>
-                    </span>
-                  </p>
-                </div>
-                <div class="col-md-2" style="line-height:30px">
-                  <label for="aktiv_bis" translate>bis</label>
-                </div>
-                <div class="col-md-4">
-                  <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivBis')"><i class="fa fa-calendar"></i></button>
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="lieferrhythmus" translate>Lieferrhythmus</label>
-              </div>
-              <div class="col-md-4">
-                <oo-dropdown dropdown-id="lieferrhythmus" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="preis" translate>Preis</label>
-              </div>
-              <div class="col-md-8 row">
-                <div class="col-md-5">
-                  <div class="input-group">
-                    <div class="input-group-addon">{{abotyp.waehrung}}</div>
-                    <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
-                  </div>
-                </div>
-                <div class="col-md-2" style="line-height:30px">
-                  <span translate>pro</span>
-                </div>
-                <div class="col-md-3">
-                  <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="laufzeit" translate>Laufzeit</label>
-              </div>
-              <div class="col-md-3">
-                <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
-              </div>
-              <div class="col-md-2" ng-if="abotyp.laufzeiteinheit !== unbeschraenkt" >
-                <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
-              </div>
-              <div class="col-md-2" ng-if="abotyp.laufzeiteinheit === unbeschraenkt">
-                <input type="number"  step="1" class="form-control" name="vertragslaufzeit.wert" ng-model="abotyp.vertragslaufzeit.wert" placeholder="{{'Vertragslaufzeit'|translate}}" required></input>
-              </div>
-              <div class="col-md-1">
-                <input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden required />
-                <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="kuendigungsfrist" translate>Kündigungsfrist</label>
-              </div>
-              <div class="col-md-2">
-                <input type="number" step="1" class="form-control" name="kuendigungsfrist.wert" ng-model="abotyp.kuendigungsfrist.wert" placeholder="{{'Frist'|translate}}" ng-required="abotyp.laufzeiteinheit === unbeschraenkt"></input>
-              </div>
-              <div class="col-md-1">
-                <input type="text" name="kuendigungsfristeinheit" ng-model="abotyp.kuendigungsfrist.einheit" hidden required />
-                <oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="lieferrhythmus" translate>Guthaben Mindestbestand</label>
-              </div>
-              <div class="col-md-2">
-                <input type="number" step="1" class="form-control" name="guthabenMindestbestand" ng-model="abotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
-              </div>
-            </div>
-        </div>
-        <div class="panel-heading clearfix">
-          <h3 class="panel-title" translate>Zusatzdaten</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row form-group">
-            <div class="col-md-4">
-              <label for="wirdGeplant" translate>Wird standartmässig geplant</label>
-            </div>
-            <div class="col-md-2">
-              <input bs-switch ng-model="abotyp.wirdGeplant" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-            </div>
-          </div>
-          <div class="row form-group">
-            <div class="col-md-4">
-              <label for="anzahlAbwesenheiten" translate>Anzahl Soll-Abwesenheiten</label>
-            </div>
-            <div class="col-md-2">
-              <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
-            </div>
-          </div>
-          <div class="row form-group">
-            <div class="col-md-4">
-              <label for="farbCode" translate>Farbe-Code</label>
-            </div>
-            <div class="col-md-3">
-              <color-picker ng-model="abotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
-            </div>
-          </div>
-          <div class="row form-group">
-            <div class="col-md-4">
-              <label for="zielpreis" translate>Zielpreis</label>
-            </div>
-            <div class="col-md-6 row">
-              <div class="col-md-7">
-                <div class="input-group">
-                  <div class="input-group-addon">{{abotyp.waehrung}}</div>
-                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="abotyp.zielpreis"></input>
-                </div>
-              </div>
-              <div class="col-md-5" style="line-height:30px">
-                <span translate>pro Lieferung</span>
-              </div>
-            </div>
-          </div>
-          <div class="row form-group">
-            <div class="col-md-4">
-              <label for="adminProzente" translate>Administrations-Anteil</label>
-            </div>
-            <div class="col-md-6 row">
-              <div class="col-md-7">
-                <div class="input-group">
-                  <input type="number" placeholder="{{'Satz'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="adminProzente" ng-model="abotyp.adminProzente" required></input>
-                  <div class="input-group-addon" translate>%</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row form-group"  ng-if="isExisting()">
-            <div class="col-md-4">
-              <label for="farbCode" translate>Anzahl aktive Abonnemente</label>
-            </div>
-            <div class="col-md-2">
-              {{abotyp.anzahlAbonnentenAktiv}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </form>
-  </div>
-  <div class="row">
-    <div class="content content-box col-md-9">
-      <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
-    </div>
-    <div class="content-box col-md-3" ng-if="isVertriebExisting()">
-      <div ng-if="isVertriebExisting() && selectedVertrieb" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
-    </div>
-  </div>
+		<div class="row">
+			<div oo-error-overlay></div>
+		<form name="abotypForm" oo-confirm-on-dirty>
+	<div class="content content-box col-md-9">
+		<div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix abotypHeader" ng-style="abotypStyle" >
+					<h3 class="panel-title"><span class=" navbar-brand">{{('Abotyp' |translate) + ' ' + abotyp.name || ('Abotyp'|translate)}}</span>
+						<div class="btn-group pull-right" role="group">
+							<oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
+							<oo-delete-button ng-if="abotyp.anzahlAbonnenten === 0" form="abotypForm" model="abotyp" entity="Abotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+						</div>
+					</h3>
+				</div>
+				<div class="panel-body">
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="name" translate>Name</label>
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="beschreibung" translate>Beschreibung</label>
+							</div>
+							<div class="col-md-8">
+								<textarea class="form-control" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="aktiv_von" translate>Aktiv</label>
+							</div>
+							<div class="col-md-8 row">
+								<div class="col-md-4">
+									<p class="input-group">
+										<input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="abotyp.aktivBis" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivVon')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</p>
+								</div>
+								<div class="col-md-2" style="line-height:30px">
+									<label for="aktiv_bis" translate>bis</label>
+								</div>
+								<div class="col-md-4">
+									<p class="input-group">
+										<input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivBis')"><i class="fa fa-calendar"></i></button>
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="lieferrhythmus" translate>Lieferrhythmus</label>
+							</div>
+							<div class="col-md-4">
+								<oo-dropdown dropdown-id="lieferrhythmus" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="preis" translate>Preis</label>
+							</div>
+							<div class="col-md-8 row">
+								<div class="col-md-5">
+									<div class="input-group">
+										<div class="input-group-addon">{{abotyp.waehrung}}</div>
+										<input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
+									</div>
+								</div>
+								<div class="col-md-2" style="line-height:30px">
+									<span translate>pro</span>
+								</div>
+								<div class="col-md-3">
+									<oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="laufzeit" translate>Laufzeit</label>
+							</div>
+							<div class="col-md-3">
+								<oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
+							</div>
+							<div class="col-md-2" ng-if="abotyp.laufzeiteinheit !== unbeschraenkt" >
+								<input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
+							</div>
+							<div class="col-md-2" ng-if="abotyp.laufzeiteinheit === unbeschraenkt">
+								<input type="number"  step="1" class="form-control" name="vertragslaufzeit.wert" ng-model="abotyp.vertragslaufzeit.wert" placeholder="{{'Vertragslaufzeit'|translate}}" required></input>
+							</div>
+							<div class="col-md-1">
+								<input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden required />
+								<oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="kuendigungsfrist" translate>Kündigungsfrist</label>
+							</div>
+							<div class="col-md-2">
+								<input type="number" step="1" class="form-control" name="kuendigungsfrist.wert" ng-model="abotyp.kuendigungsfrist.wert" placeholder="{{'Frist'|translate}}" ng-required="abotyp.laufzeiteinheit === unbeschraenkt"></input>
+							</div>
+							<div class="col-md-1">
+								<input type="text" name="kuendigungsfristeinheit" ng-model="abotyp.kuendigungsfrist.einheit" hidden required />
+								<oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-4">
+								<label for="lieferrhythmus" translate>Guthaben Mindestbestand</label>
+							</div>
+							<div class="col-md-2">
+								<input type="number" step="1" class="form-control" name="guthabenMindestbestand" ng-model="abotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
+							</div>
+						</div>
+				</div>
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title" translate>Zusatzdaten</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row form-group">
+						<div class="col-md-4">
+							<label for="wirdGeplant" translate>Wird standartmässig geplant</label>
+						</div>
+						<div class="col-md-2">
+							<input bs-switch ng-model="abotyp.wirdGeplant" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-4">
+							<label for="anzahlAbwesenheiten" translate>Anzahl Soll-Abwesenheiten</label>
+						</div>
+						<div class="col-md-2">
+							<input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-4">
+							<label for="farbCode" translate>Farbe-Code</label>
+						</div>
+						<div class="col-md-3">
+							<color-picker ng-model="abotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-4">
+							<label for="zielpreis" translate>Zielpreis</label>
+						</div>
+						<div class="col-md-6 row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-addon">{{abotyp.waehrung}}</div>
+									<input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="abotyp.zielpreis"></input>
+								</div>
+							</div>
+							<div class="col-md-5" style="line-height:30px">
+								<span translate>pro Lieferung</span>
+							</div>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-4">
+							<label for="adminProzente" translate>Administrations-Anteil</label>
+						</div>
+						<div class="col-md-6 row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<input type="number" placeholder="{{'Satz'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="adminProzente" ng-model="abotyp.adminProzente" required></input>
+									<div class="input-group-addon" translate>%</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row form-group"  ng-if="isExisting()">
+						<div class="col-md-4">
+							<label for="farbCode" translate>Anzahl aktive Abonnemente</label>
+						</div>
+						<div class="col-md-2">
+							{{abotyp.anzahlAbonnentenAktiv}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="content content-box col-md-9">
+			<div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
+		</div>
+		<div class="content-box col-md-3" ng-if="isVertriebExisting()">
+			<div ng-if="isVertriebExisting() && selectedVertrieb" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+		</div>
+	</div>

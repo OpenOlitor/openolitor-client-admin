@@ -1,13 +1,13 @@
 <div class="row">
   <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
-    <form name="depotForm">
+    <form name="depotForm" oo-confirm-on-dirty>
       <div class="row form-group">
         <div class="col-md-12">
           <h3 for="vorname">{{fullName() || 'Depot'|translate}}
             <div class="btn-group pull-right" role="group">
               <oo-save-button model="depot" form="depotForm" entity="Depot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Depot'|translate}}</oo-save-button>
-              <oo-delete-button ng-if="depot.anzahlAbonnenten == 0" model="depot" entity="Depot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+              <oo-delete-button ng-if="depot.anzahlAbonnenten == 0" form="depotForm" model="depot" entity="Depot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
             </div>
           </h3>
         </div>

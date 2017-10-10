@@ -57,6 +57,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.abotyp = result;
+          $scope.abotypForm.$setPristine();
 
           var msg = {
             type: 'AbotypLoaded',
@@ -85,7 +86,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.abotyp.$save();
+        return $scope.abotyp.$save(function() {
+          $scope.abotypForm.$setPristine();
+        });
       };
 
       $scope.backToList = function() {
