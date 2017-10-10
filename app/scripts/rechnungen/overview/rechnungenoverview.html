@@ -37,7 +37,7 @@
                 </span>
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'">
-                <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.id}}</a>
+                <a ng-href="#/rechnungen/{{rechnung.id}}" ng-click="navigateToDetail(rechnung.id)">{{rechnung.id}}</a>
               </td>
               <td data-title="'Kunde'|translate" sortable="'kundeId'">
                 <a ng-href="#/kunden/{{rechnung.kundeId}}">{{rechnung.kundeId}}</a>
