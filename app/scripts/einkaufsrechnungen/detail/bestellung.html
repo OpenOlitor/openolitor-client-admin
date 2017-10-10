@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
     <span translate>Lieferung vom</span> {{sammelbestellung.datum | date}}
-    <div ng-repeat="bestellung in sammelbestellung.bestellungen | orderBy:'adminProzente'">
+    <div ng-repeat="bestellung in sammelbestellung.bestellungen | orderBy:'adminProzente'" class="horizontal-scroll">
       <table class="table table-striped table-lieferplanung">
         <thead>
           <tr>

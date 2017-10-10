@@ -19,7 +19,7 @@
               <div ng-hide="produktekategorien">
                 <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
               </div>
-              <div ng-show="produktekategorien">
+              <div ng-show="produktekategorien" class="horizontal-scroll">
                 <table ng-table="produktekategorienTableParams" class="table table-striped">
                   <tr ng-repeat="produktekategorie in $data">
                     <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
