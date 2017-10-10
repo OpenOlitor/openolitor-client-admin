@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
       var defaults = {
         model: {
           id: undefined,
-          typen: [KundentypenService.VEREINSMITGLIED],
+          typen: [],
           ansprechpersonen: [{
             id: undefined,
             anrede: undefined
@@ -61,7 +61,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var emailAddresses = _($scope.kunde.ansprechpersonen)
+          var emailAddresses = lodash($scope.kunde.ansprechpersonen)
             .map('email')
             .value();
 
@@ -146,8 +146,8 @@ angular.module('openolitor-admin')
       };
 
       $scope.personClass = function(index) {
-        if ($scope.kunde.ansprechpersonen[index].id === undefined || $scope
-          .kunde.ansprechpersonen.length === 1) {
+        if (!angular.isUndefined($scope.kunde) && !angular.isUndefined($scope.kunde.ansprechpersonen) &&
+          $scope.kunde.ansprechpersonen[index].id === undefined) {
           return 'in';
         }
       };
@@ -243,8 +243,8 @@ angular.module('openolitor-admin')
       };
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.kunde) && angular.isDefined($scope.kunde
-          .id);
+        return angular.isDefined($scope.kunde) &&
+          angular.isDefined($scope.kunde.id);
       };
 
       $scope.hasLieferadresse = function() {
