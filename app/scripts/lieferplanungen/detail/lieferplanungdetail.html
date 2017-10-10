@@ -1,7 +1,7 @@
 <div id="lieferplanung" class="row">
   <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
-    <form name="korbForm" novalidate oo-confirm-on-dirty="somefunction" oo-confirm-on-dirty>
+    <form name="korbForm" novalidate oo-confirm-on-dirty>
       <div class="show-hide" ng-show="displayMode === 'korbinhalt'" ng-include="'scripts/lieferplanungen/detail/korbplanung.html'"></div>
       <div class="show-hide" ng-show="displayMode === 'lieferanten'" ng-include="'scripts/lieferplanungen/detail/lieferanten.html'"></div>
     </form>
