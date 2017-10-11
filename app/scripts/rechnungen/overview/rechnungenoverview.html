@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -17,7 +17,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen">
+        <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
@@ -37,7 +37,7 @@
                 </span>
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'">
-                <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.id}}</a>
+                <a ng-href="#/rechnungen/{{rechnung.id}}" ng-click="navigateToDetail(rechnung.id)">{{rechnung.id}}</a>
               </td>
               <td data-title="'Kunde'|translate" sortable="'kundeId'">
                 <a ng-href="#/kunden/{{rechnung.kundeId}}">{{rechnung.kundeId}}</a>
@@ -69,10 +69,11 @@
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateRechnungReport">
+  <oo-sliding-detail slide-in="showGenerateRechnungReport" slide-out-function="closeRechnungBerichtFunct()">
     <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
-  </div>
-  <div class="content-box col-md-3" ng-if="showGenerateMahnungReport">
+  </oo-sliding-detail>
+
+  <oo-sliding-detail slide-in="showGenerateMahnungReport" slide-out-function="closeMahnungBerichtFunct()">
     <oo-generate-report on-close="closeMahnungBericht" on-generated="closeMahnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/mahnungen'" ids="checkboxes.ids" default-file-name="'Mahnung.ods'"></oo-generate-report>
-  </div>
+  </oo-sliding-detail>
 </div>

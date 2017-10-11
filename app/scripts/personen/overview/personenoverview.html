@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -17,7 +17,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="personTable" display-export="true" export-file-name="Personen">
+        <div ng-show="entries" id="personTable" display-export="true" export-file-name="Personen" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>

@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('BestellungenAbrechnenController', ['$scope',
-    'LieferantenAbrechnungenOverviewService', 'msgBus', 'lodash',
+    'EinkaufsrechnungenOverviewService', 'msgBus', 'lodash',
 
-    function($scope, LieferantenAbrechnungenOverviewService, msgBus, lodash) {
+    function($scope, EinkaufsrechnungenOverviewService, msgBus, lodash) {
 
       $scope.bestellungenAbrechnen = {
         ids: $scope.bestellungIds,
@@ -36,7 +36,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.batchModify = function() {
-        LieferantenAbrechnungenOverviewService.alsAbgerechnetMarkieren(
+        EinkaufsrechnungenOverviewService.alsAbgerechnetMarkieren(
           $scope.bestellungenAbrechnen).then(function() {
           $scope.commandIssued = true;
         });

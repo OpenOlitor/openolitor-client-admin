@@ -6,22 +6,20 @@ angular.module('openolitor-admin')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
-    'PendenzDetailModel',
+    'PendenzDetailModel', 'KundenOverviewModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
-      $uibModal,
-      gettext,
-      KundenDetailModel, ROLLE, PendenzDetailModel, KundentypenService, alertService,
-      EnumUtil, DataUtil,
+      $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
+      KundenOverviewModel, KundentypenService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
 
       var defaults = {
         model: {
           id: undefined,
-          typen: [KundentypenService.VEREINSMITGLIED],
+          typen: [],
           ansprechpersonen: [{
             id: undefined,
             anrede: undefined
@@ -61,7 +59,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var emailAddresses = _($scope.kunde.ansprechpersonen)
+          var emailAddresses = lodash($scope.kunde.ansprechpersonen)
             .map('email')
             .value();
 
@@ -101,6 +99,28 @@ angular.module('openolitor-admin')
       } else {
         $scope.loadKunde();
       }
+
+      $scope.navigateToKunde = function(item) {
+        $location.path('/kunden/'+item.id);
+      };
+
+      $scope.getKunden = function(filter) {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+
+        return KundenOverviewModel.query({
+          q: filter
+        }, function() {
+          $scope.loading = false;
+        }).$promise.then(function(kunden) {
+          var filtered = $filter('filter')(kunden, filter);
+          console.log('Filtered: ', filtered, ' with filter ', filter);
+          return filtered;
+        });
+      };
 
 
       $scope.open = {
@@ -146,8 +166,8 @@ angular.module('openolitor-admin')
       };
 
       $scope.personClass = function(index) {
-        if ($scope.kunde.ansprechpersonen[index].id === undefined || $scope
-          .kunde.ansprechpersonen.length === 1) {
+        if (!angular.isUndefined($scope.kunde) && !angular.isUndefined($scope.kunde.ansprechpersonen) &&
+          $scope.kunde.ansprechpersonen[index].id === undefined) {
           return 'in';
         }
       };
@@ -243,8 +263,8 @@ angular.module('openolitor-admin')
       };
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.kunde) && angular.isDefined($scope.kunde
-          .id);
+        return angular.isDefined($scope.kunde) &&
+          angular.isDefined($scope.kunde.id);
       };
 
       $scope.hasLieferadresse = function() {
@@ -263,7 +283,9 @@ angular.module('openolitor-admin')
         if ($scope.kunde.ansprechpersonen.length === 1) {
           $scope.kunde.bezeichnung = undefined;
         }
-        return $scope.kunde.$save();
+        return $scope.kunde.$save(function(){
+          $scope.kundeForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {
@@ -309,12 +331,27 @@ angular.module('openolitor-admin')
           abo.id];
       };
 
-      $scope.selectAbo = function(abo) {
+      $scope.selectAbo = function(abo, itemId) {
+        var allRows = angular.element('#abosTable table tbody tr');
+        allRows.removeClass('row-selected');
+
         if ($scope.selectedAbo === abo) {
           $scope.selectedAbo = undefined;
         } else {
           $scope.selectedAbo = abo;
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
         }
+      };
+
+      $scope.unselectAbo = function() {
+        $scope.selectedAbo = undefined;
+        var allRows = angular.element('#abosTable table tbody tr');
+        allRows.removeClass('row-selected');
+      };
+
+      $scope.unselectAboFunct = function() {
+        return $scope.unselectAbo;
       };
 
       var isAboEntity = function(entity) {

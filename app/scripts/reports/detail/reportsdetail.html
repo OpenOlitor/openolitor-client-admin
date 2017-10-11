@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
-    <form name="reportForm">
+    <form name="reportForm" oo-confirm-on-dirty>
       <div class="row">
         <div class="col-md-12">
           <div class="row form-group">
@@ -12,7 +12,7 @@
               <div class="col-md-5">
                 <div class="pull-right" role="group">
                   <oo-save-button model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created">Auswertung</oo-save-button>
-                  <oo-delete-button ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Report" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+                  <oo-delete-button form="reportForm" ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Report" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
                   <button type="button" class="btn btn-md btn-success" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span> </button>
                 </div>
               </div>

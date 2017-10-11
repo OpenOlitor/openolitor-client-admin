@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -17,7 +17,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="auswertungTable">
+        <div ng-show="entries" id="auswertungTable" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="report in $data | filter: search.query.$">
               <td data-title="'Name'|translate" sortable="'name'">

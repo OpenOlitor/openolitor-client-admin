@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -17,7 +17,7 @@
           <div ng-hide="entries">
             <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
           </div>
-          <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden">
+          <div ng-show="entries" id="kundeTable" display-export="true" export-file-name="Kunden" class="horizontal-scroll">
             <script type="text/ng-template" id="headerCheckbox.html">
               <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
             </script>
@@ -31,7 +31,7 @@
                   <input type="checkbox" ng-model="checkboxes.items[kunde.id]" />
                 </td>
                 <td data-title="'Nr.'|translate" sortable="'id'">
-                  <a ng-href="#/kunden/{{kunde.id}}">{{kunde.id}}</a>
+                  <a ng-href="#/kunden/{{kunde.id}}" ng-click="navigateToDetail(kunde.id)">{{kunde.id}}</a>
                 </td>
                 <td data-title="'Bezeichnung'|translate" sortable="'bezeichnung'">
                   {{kunde.bezeichnung}}
@@ -58,10 +58,10 @@
             </table>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="content-box col-md-3" ng-if="showGenerateReport">
-      <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'kunden/berichte/kundenbrief'" ids="checkboxes.ids" default-file-name="'Kundenbrief.odt'|translate"></oo-generate-report>
+        </div>
     </div>
   </div>
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'kunden/berichte/kundenbrief'" ids="checkboxes.ids" default-file-name="'Kundenbrief.odt'|translate"></oo-generate-report>
+  </oo-sliding-detail>
 </div>

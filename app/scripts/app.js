@@ -579,10 +579,10 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
-      .when('/lieferantenabrechnungen', {
-        templateUrl: 'scripts/lieferantenabrechnungen/overview/lieferantenabrechnungenoverview.html',
-        controller: 'LieferantenAbrechnungenOverviewController',
-        name: 'LieferantenAbrechnungenOverview',
+      .when('/einkaufsrechnungen', {
+        templateUrl: 'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
+        controller: 'EinkaufsrechnungenOverviewController',
+        name: 'EinkaufsrechnungenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
@@ -754,7 +754,19 @@ angular
         name: 'ZahlungsImports',
         access: userRoles.Administrator
       })
-      .when('/settings', {
+      .when('/kundentypen', {
+        templateUrl: 'scripts/projekt/settings/kundentypen.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
+      .when('/produktkategorien', {
+        templateUrl: 'scripts/projekt/settings/produktkategorien.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
+      .when('/projektsettings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings',
