@@ -1,7 +1,7 @@
 <div class="row">
   <div class="content content-box col-md-9">
     <div oo-error-overlay></div>
-    <form name="produzentForm">
+    <form name="produzentForm" oo-confirm-on-dirty>
       <div class="row">
         <div class="col-md-12">
           <div class="row form-group">
@@ -12,7 +12,7 @@
               <div class="col-md-10">
                 <div class="btn-group pull-right" role="group">
                   <oo-save-button model="produzent" form="produzentForm" entity="Produzent" on-save="save" on-cancel="backToList" on-created="created">{{produzentBezeichnung() || 'Produzent'|translate}}</oo-save-button>
-                  <oo-delete-button ng-if="!angular.isUndefined(produzent) && !angular.isUndefined(produzent.id)" model="produzent" entity="Produzent" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+                  <oo-delete-button form="produzentForm" ng-if="!angular.isUndefined(produzent) && !angular.isUndefined(produzent.id)" model="produzent" entity="Produzent" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
                 </div>
               </div>
             </h3>

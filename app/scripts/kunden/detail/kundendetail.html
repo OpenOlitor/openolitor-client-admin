@@ -1,5 +1,5 @@
 <div>
-  <form name="kundeForm">
+  <form name="kundeForm" oo-confirm-on-dirty>
     <div class="row">
       <div class="content content-box col-md-12">
         <div oo-error-overlay></div>
@@ -12,7 +12,7 @@
               <div class="col-md-9">
                 <div class="btn-group pull-right" role="group">
                   <oo-actions-button model="kunde" form="kundeForm" entity="Kunde" actions="actions" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-actions-button>
-                  <oo-delete-button ng-if="canDelete()" model="kunde" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+                  <oo-delete-button ng-if="canDelete()" model="kunde" form="kundeForm" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
                 </div>
               </div>
             </h3>
