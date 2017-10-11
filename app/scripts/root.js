@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
         if(currentUrl.indexOf('?') !== -1) {
           return currentUrl.indexOf('/' + pathJunk + '?') !== -1;
         } else {
-          return currentUrl === ('/' + pathJunk);
+          return currentUrl === ('/' + pathJunk) || currentUrl.indexOf('/' + pathJunk + '/') !== -1;
         }
       };
 

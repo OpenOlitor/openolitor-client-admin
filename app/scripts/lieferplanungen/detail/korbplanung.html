@@ -11,13 +11,6 @@
                 <span translate>Total Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a>
               </script>
               <li class="navbar-brand"><span translate>Planung</span> <span uib-tooltip-template="'anzahlOverallTooltipTemplate.html'" tooltip-popup-close-delay="3000">#{{planung.id}}</span>: <span translate>Korbinhalt</span></li>
-              <li class="small" ng-show="valuesEditable()" translate>Abotyp hinzufügen:</li>
-              <li ng-show="valuesEditable()">
-                <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
-              </li>
-              <li ng-show="valuesEditable()">
-                <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip-html="('Bemerkungen zu dieser Lieferung: '|translate) + (planung.bemerkungen)"><span class="fa fa-pencil-square-o"></span></button>
-              </li>
             </ul>
           </div>
           <div class="col-md-7">
@@ -34,6 +27,17 @@
           </div>
         </h3>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2" ng-show="valuesEditable()">
+      <label for="addAbotyp" translate>Abotyp hinzufügen:</label>
+    </div>
+    <div class="col-md-1" ng-show="valuesEditable()">
+      <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
+    </div>
+    <div class="col-md-1" ng-show="valuesEditable()">
+      <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip-html="('Bemerkungen zu dieser Lieferung: '|translate) + (planung.bemerkungen)"><span class="fa fa-pencil-square-o"></span></button>
     </div>
   </div>
   <div class="row">
