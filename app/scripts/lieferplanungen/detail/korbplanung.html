@@ -74,11 +74,9 @@
             <span class="navbar-brand" data-toggle="collapse" data-target="#abotypLieferung_{{abotypLieferung.id}}" aria-expanded="true">
               <span class="pre-info" uib-tooltip-template="'anzahlTooltipTemplate.html'" tooltip-popup-close-delay="3000">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
               {{abotypLieferung.abotypBeschrieb}}
-              <script type="text/ng-template" id="vertriebTooltipTemplate.html">
-                <span translate>Vertrieb: </span><b>{{abotypLieferung.vertriebBeschrieb}}</b>
-              </script>
-              <span class="lieferplanung pre-info fa fa-info-circle" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb" uib-tooltip-template="'vertriebTooltipTemplate.html'" tooltip-popup-close-delay="500">
-              </span>
+              <div class="vertrieb-info" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb">
+                <span translate>Vertrieb: </span><span> {{abotypLieferung.vertriebBeschrieb}}</span>
+              </div>
             </span>
             <span class="pull-right">
               <small class="lieferplanung" ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
