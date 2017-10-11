@@ -263,7 +263,9 @@ angular.module('openolitor-admin')
         if ($scope.kunde.ansprechpersonen.length === 1) {
           $scope.kunde.bezeichnung = undefined;
         }
-        return $scope.kunde.$save();
+        return $scope.kunde.$save(function(){
+          $scope.kundeForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {

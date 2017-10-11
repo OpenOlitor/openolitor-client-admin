@@ -22,7 +22,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.tour.$save();
+        return $scope.tour.$save(function() {
+          $scope.tourForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {

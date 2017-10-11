@@ -321,7 +321,9 @@ angular.module('openolitor-admin')
       }
 
       $scope.saveProjekt = function() {
-        return $scope.kontodaten.$save().then($scope.projekt.$save());
+        return $scope.kontodaten.$save().then($scope.projekt.$save(function(){
+          $scope.projektForm.$setPristine();
+        }));
       };
 
       $scope.logoFile = undefined;

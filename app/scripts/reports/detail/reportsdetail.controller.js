@@ -29,7 +29,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.report.$save();
+        return $scope.report.$save(function(){
+          $scope.reportForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {

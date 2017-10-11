@@ -22,6 +22,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.depot = result;
+          $scope.depotForm.$setPristine();
         });
       }
 
@@ -45,7 +46,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.depot.$save();
+        return $scope.depot.$save(function() {
+          $scope.depotForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {
