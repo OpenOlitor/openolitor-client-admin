@@ -6,15 +6,13 @@ angular.module('openolitor-admin')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
-    'PendenzDetailModel',
+    'PendenzDetailModel', 'KundenOverviewModel',
     'KundentypenService', 'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
-      $uibModal,
-      gettext,
-      KundenDetailModel, ROLLE, PendenzDetailModel, KundentypenService, alertService,
-      EnumUtil, DataUtil,
+      $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
+      KundenOverviewModel, KundentypenService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
 
@@ -101,6 +99,28 @@ angular.module('openolitor-admin')
       } else {
         $scope.loadKunde();
       }
+
+      $scope.navigateToKunde = function(item) {
+        $location.path('/kunden/'+item.id);
+      };
+
+      $scope.getKunden = function(filter) {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+
+        return KundenOverviewModel.query({
+          q: filter
+        }, function() {
+          $scope.loading = false;
+        }).$promise.then(function(kunden) {
+          var filtered = $filter('filter')(kunden, filter);
+          console.log('Filtered: ', filtered, ' with filter ', filter);
+          return filtered;
+        });
+      };
 
 
       $scope.open = {
