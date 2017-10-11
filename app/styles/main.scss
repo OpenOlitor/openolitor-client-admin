@@ -286,6 +286,10 @@ input.ng-invalid {
   padding-right: 1px;
 }
 
+.openolitor table a {
+  cursor: pointer;
+}
+
 .nonboxed-title .navbar-brand {
   margin-left: 0px !important;
   padding-top: 5px;
@@ -308,8 +312,12 @@ input.ng-invalid {
 }
 
 .panel-default > .panel-heading.panel-heading-person {
-  background-color: #f5f2e1;
+  background-color: #fff3dc;
   margin-top: 15px;
+}
+
+.panel-default > .panel-heading.panel-heading-detail {
+  background-color: #fff3dc;
 }
 
 /* Special Lieferplanung */
@@ -387,6 +395,11 @@ small.lieferplanung {
   border-width: 1px;
   border-color: black;
   box-shadow: 4px 4px 10px grey;
+}
+
+.table-striped > tbody > tr.row-selected,
+.row-selected {
+  background-color: #fff3dc;
 }
 
 //navbar styles
@@ -681,3 +694,28 @@ tr.error {
 }
 
 *.icon-grey {color: grey}
+
+/* The navigation menu links */
+.sliding-detail {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 80; /* Stay on top */
+    top: 0;
+    right: -20px;
+    background-color: rgba(218, 217, 217, 0.9);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.2s; /* 0.5 second transition effect to slide in the sidenav */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sliding-detail .panel-default {
+  margin-top: 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+   .sliding-detail {padding-top: 15px;}
+}

@@ -121,6 +121,10 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       function search() {
         if ($scope.loading) {
           return;

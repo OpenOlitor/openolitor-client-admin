@@ -1,10 +1,13 @@
 <div class="panel panel-default">
-  <div class="panel-heading clearfix">
-    <h3 class="panel-title"><span class="navbar-brand noLeftSpace"><span translate>Abo</span> #{{abo.id}}</span>
-        <span class="pull-right" ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></span>
-        <div uib-dropdown class="navbar-form noRightSpace btn-group pull-right" role="group">
+  <div class="panel-heading panel-heading-detail clearfix">
+    <h3 class="panel-title">
+      <span class="navbar-brand noLeftSpace"><span translate>Abo</span> #{{abo.id}}</span>
+      <span class="pull-right">
+        <span ng-show="loading || template.updating"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+        <div uib-dropdown class="navbar-form noRightSpace btn-group" role="group">
           <oo-actions-button model="abo" form="aboDetailForm" entities="ABOTYPEN_ARRAY" actions="actions">{{'Abo'|translate}}</oo-actions-button>
         </div>
+      </span>
     </h3>
   </div>
   <div class="panel-body">

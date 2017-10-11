@@ -1,7 +1,7 @@
     <div class="row">
       <div oo-error-overlay></div>
     <form name="abotypForm">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
       <div class="panel panel-default">
         <div class="panel-heading clearfix abotypHeader" ng-style="abotypStyle" >
@@ -192,7 +192,7 @@
     </form>
   </div>
   <div class="row">
-    <div class="content content-box col-md-9">
+    <div class="content content-box col-md-12">
       <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
     </div>
     <div class="content-box col-md-3" ng-if="isVertriebExisting()">

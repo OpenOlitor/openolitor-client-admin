@@ -48,7 +48,6 @@
         <div class="col-md-12">
           <span class="pull-right">
             <a ng-if="!commandIssued" href="" role="button" ng-disabled="rechnungForm.$invalid" ng-click="batchCreate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
-            <a ng-if="!commandIssued" href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
             <a ng-if="commandIssued" href="" role="button" ng-click="jumpToRechnungen()" class="btn btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> {{batchCreated.rechnungsIds.length}} <span translate>Rechnungen anzeigen</span></a>
             <a ng-if="commandIssued" href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Schliessen</span></a>
           </span>
@@ -63,4 +62,3 @@
     {{batchCreated.ids.length}} <span translate>von</span> {{rechnungen.ids.length}} <span translate> Rechnungspositionen wurden verarbeitet</span>
   </div>
 </div>
-
