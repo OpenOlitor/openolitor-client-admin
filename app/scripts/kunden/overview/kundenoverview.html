@@ -31,7 +31,7 @@
                   <input type="checkbox" ng-model="checkboxes.items[kunde.id]" />
                 </td>
                 <td data-title="'Nr.'|translate" sortable="'id'">
-                  <a ng-href="#/kunden/{{kunde.id}}">{{kunde.id}}</a>
+                  <a ng-href="#/kunden/{{kunde.id}}" ng-click="navigateToDetail(kunde.id)">{{kunde.id}}</a>
                 </td>
                 <td data-title="'Bezeichnung'|translate" sortable="'bezeichnung'">
                   {{kunde.bezeichnung}}

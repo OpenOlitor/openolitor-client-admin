@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext',
+    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
-      localeSensitiveComparator, gettext) {
+      localeSensitiveComparator, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -57,6 +57,10 @@ angular.module('openolitor-admin')
           function() {
             rechnung.isDownloadingMahnung = false;
           });
+      };
+
+      $scope.navigateToDetail = function(id) {
+        DetailNavigationService.detailFromOverview(id, $scope, 'rechnungen', $location.url());
       };
 
       var alleRechnungenStorniertOderBezahlt = function(selectedItems, items) {

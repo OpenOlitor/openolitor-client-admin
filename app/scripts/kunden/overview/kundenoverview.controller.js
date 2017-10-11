@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext',
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext) {
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -46,6 +46,10 @@ angular.module('openolitor-admin')
         items: {},
         css: '',
         ids: []
+      };
+
+      $scope.navigateToDetail = function(id) {
+        DetailNavigationService.detailFromOverview(id, $scope, 'kunden', $location.url());
       };
 
       // watch for check all checkbox
