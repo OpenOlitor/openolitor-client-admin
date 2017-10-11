@@ -223,6 +223,10 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       $scope.$watch('search.query', function() {
         $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
           .query);

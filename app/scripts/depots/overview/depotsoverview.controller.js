@@ -46,6 +46,10 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;

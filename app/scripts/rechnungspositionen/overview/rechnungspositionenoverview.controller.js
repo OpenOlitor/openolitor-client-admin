@@ -59,26 +59,34 @@ angular.module('openolitor-admin')
       }, true);
 
       $scope.selectRechnungsPosition = function(rechnungsPosition, itemId) {
-        var firstRow = angular.element('#rechnungsPositionenTable tbody tr').first();
-        var allButtons = angular.element('#rechnungsPositionenTable button');
-        allButtons.removeClass('btn-warning');
-        allButtons.removeClass('active');
+        var allRows = angular.element('#rechnungsPositionTable table tbody tr');
+        allRows.removeClass('row-selected');
 
         if ($scope.selectedRechnungsPosition === rechnungsPosition) {
           $scope.selectedRechnungsPosition = undefined;
         } else {
           $scope.selectedRechnungsPosition = rechnungsPosition;
-
-          var button = angular.element('#' + itemId);
-          button.addClass('btn-warning');
-          button.addClass('active');
-          var offset = button.offset().top - firstRow.offset().top + 154;
-          angular.element('#selectedRechnungsPositionDetail').css('margin-top', offset);
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
         }
+      };
+
+      $scope.unselectRechnungsPosition = function() {
+        var allRows = angular.element('#rechnungsPositionTable table tbody tr');
+        allRows.removeClass('row-selected');
+        $scope.selectedRechnungsPosition = undefined;
+      };
+
+      $scope.unselectRechnungsPositionFunct = function() {
+        return $scope.unselectRechnungsPosition;
       };
 
       $scope.closeCreateRechnungenDialog = function() {
         $scope.showCreateRechnungenDialog = false;
+      };
+
+      $scope.closeCreateRechnungenDialogFunct = function() {
+        return $scope.closeCreateRechnungenDialog;
       };
 
       $scope.actions = [{

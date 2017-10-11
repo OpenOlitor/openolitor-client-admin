@@ -60,7 +60,6 @@
         <div class="col-md-12">
           <span class="pull-right">
             <a ng-if="!commandIssued" href="" role="button" ng-disabled="rechnungForm.$invalid" ng-click="batchCreate()" class="btn btn-primary"><i class="fa fa-share-square-o" aria-hidden="true"></i> <span translate>Erstellen</span></a>
-            <a ng-if="!commandIssued" href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
             <a ng-if="createHasWorked && commandIssued" href="" role="button" ng-click="jumpToRechnungspositionen()" class="btn btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> {{batchCreated.ids.length}} <span translate>Rechnungspositionen anzeigen</span></a>
       <a ng-if="createHasWorked && commandIssued && (batchCreated.openAboIds.length > 0)" href="" role="button" ng-click="jumpToAbosWhereCreateHasFailed()()" class="btn btn-default"><i class="fa fa-times"></i> <span translate>{{batchCreated.openAboIds.length}} Rechnungspositionen mit Fehlern</span></a>
             <a ng-if="commandIssued" href="" role="button" ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Schliessen</span></a>
@@ -76,4 +75,3 @@
       <span translate>Rechnungspositionen konnten nicht erstellt werden.<span/>
   </div>
 </div>
-

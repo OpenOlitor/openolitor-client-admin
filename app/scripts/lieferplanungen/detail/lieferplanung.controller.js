@@ -862,7 +862,7 @@ angular.module('openolitor-admin')
           onExecute: function() {
             $scope.recalculateBestellungen(function() {
               var result = lodash.map($scope.sammelbestellungen, 'id');
-              $location.path('/lieferantenabrechnungen').search('q', 'id=' + result.join());
+              $location.path('/einkaufsrechnungen').search('q', 'id=' + result.join());
             });
           }
         },{

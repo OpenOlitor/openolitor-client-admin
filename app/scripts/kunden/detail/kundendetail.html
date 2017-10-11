@@ -382,12 +382,13 @@
     <div class="content content-box col-md-12">
       <div ng-if="isExisting()" ng-include="'scripts/kunden/detail/abo/abos.html'"></div>
     </div>
-    <div class="content-box col-md-3" ng-if="isNewAbo()">
+
+    <oo-sliding-detail slide-in="isNewAbo()" slide-out-function="closeBerichtFunct()">
       <oo-abos-new kunde-id="kunde.id" on-save="onAboCreated()" on-cancel="onAboCreateCanceled()"></oo-abos-new>
-    </div>
-    <div class="content-box col-md-3" ng-if="selectedAbo">
+    </oo-sliding-detail>
+    <oo-sliding-detail slide-in="selectedAbo" slide-out-function="unselectAboFunct()">
       <oo-abos-detail kunde-id="kunde.id" abo-id="selectedAbo.id"></oo-abos-detail>
-    </div>
+    </oo-sliding-detail>
   </div>
   <div class="row">
     <div class="content content-box col-md-12">

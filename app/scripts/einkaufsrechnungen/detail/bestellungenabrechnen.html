@@ -12,10 +12,10 @@
     <div class="alert alert-danger" ng-show="bestellungIds.length === 0" translate>Keine abgeschlossenen Bestellungen ausgewählt</div>
     <form name="abrechnenForm" ng-show="bestellungIds.length > 0">
       <div class="row form-group">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label for="rechnungsDatum" translate>Abrechnungsdatum</label>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <p class="input-group">
             <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="bestellungenAbrechnen.datum" is-open="open.abrechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" required/>
             <span class="input-group-btn">
