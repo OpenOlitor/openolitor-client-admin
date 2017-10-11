@@ -91,7 +91,9 @@
                   <span translate>pro</span>
                 </div>
                 <div class="col-md-3">
-                  <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
+                        
+                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'zusatzAbotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="zusatzAbotyp.preiseinheit" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>

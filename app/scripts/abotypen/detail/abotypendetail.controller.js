@@ -98,6 +98,14 @@ angular.module('openolitor-admin')
         }
       });
 
+     $scope.$watch('zusatzAbotyp.farbCode', function(newValue) {
+        if (newValue) {
+            $scope.abotypStyle = {
+                'background-color': $scope.zusatzAbotyp.farbCode
+            };
+        }
+      });
+
       $scope.isExisting = function() {
         if ($scope.getModel() === 'abotypen'){
             return angular.isDefined($scope.abotyp) && angular.isDefined($scope.abotyp.id);

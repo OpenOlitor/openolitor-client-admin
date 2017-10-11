@@ -494,14 +494,16 @@ angular.module('openolitor-admin')
       });
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
-        if ((msg.entity) === 'zusatzAbo') {
-            $scope.zusatzAbos.push(msg.data)
+        if ((msg.entity) === 'ZusatzAbo') {
+            $scope.zusatzAbos.push(new ZusatzAboModel(msg.data))
+            $scope.$apply();
         }
       });
 
       msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
-        if ((msg.entity) === 'zusatzAbo') {
+        if ((msg.entity) === 'ZusatzAbo') {
             $scope.zusatzAbos.splice($scope.zusatzAbos.indexOf(event.data),1)
+            $scope.$apply();
         }
       });
 

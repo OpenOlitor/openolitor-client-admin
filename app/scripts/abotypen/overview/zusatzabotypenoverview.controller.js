@@ -79,7 +79,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-            return 'zusatzAbotyp erstellen';
+            return 'Zusatzabotyp erstellen';
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
