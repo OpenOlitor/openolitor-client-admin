@@ -294,8 +294,16 @@ angular.module('openolitor-admin')
         $scope.showGenerateRechnungReport = false;
       };
 
+      $scope.closeRechnungBerichtFunct = function() {
+        return $scope.closeRechnungBericht;
+      };
+
       $scope.closeMahnungBericht = function() {
         $scope.showGenerateMahnungReport = false;
+      };
+
+      $scope.closeMahnungBerichtFunct = function() {
+        return $scope.closeMahnungBericht;
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
