@@ -6,10 +6,13 @@
         <div class="col-md-12">
           <div class="row">
             <h3 class="row">
-              <div class="col-md-3" translate>
-                Kunde
+              <div class="col-md-3">
+                <span translate>Kunde</span> #{{kunde.id}}
               </div>
-              <div class="col-md-9">
+              <div class="col-md-3">
+                <input type="text" ng-model="selectedKunde" placeholder="Kunde suchen..." uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="navigateToKunde($item)" ignore-dirty>
+              </div>
+              <div class="col-md-6">
                 <div class="btn-group pull-right" role="group">
                   <oo-actions-button model="kunde" form="kundeForm" entity="Kunde" actions="actions" on-created="created">{{(kundeBezeichnung() | limitTo: 32) || 'Kunde'|translate}}</oo-actions-button>
                   <oo-delete-button ng-if="canDelete()" model="kunde" form="kundeForm" entity="Kunde" on-delete="delete" on-deleted="backToList"></oo-delete-button>
@@ -17,13 +20,13 @@
               </div>
             </h3>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-lg-3 col-md-3">
                  <small><label for="typen" translate>Kundentypen</label></small>
               </div>
-              <div class="col-md-8">
+              <div class="col-lg-7 col-md-5">
                 <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
               </div>
-              <div class="col-md-2">
+              <div class="col-lg-2 col-md-4">
                 <oo-detail-navigation class="pull-right"></oo-detail-navigation>
               </div>
             </div>
