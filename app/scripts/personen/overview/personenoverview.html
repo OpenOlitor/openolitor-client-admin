@@ -81,8 +81,12 @@
         </div>
       </div>
     </div>
-    <div class="content-box col-md-3" ng-if="showGenerateReport">
+    <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+      <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="personIdsMailing"></oo-email-dialog>
+    </oo-sliding-detail>
+
+    <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
       <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'personen/berichte/personenbrief'" ids="checkboxes.ids" default-file-name="'Personenbrief.odt'|translate"></oo-generate-report>
-    </div>
+    </oo-sliding-detail>
   </div>
 </div>

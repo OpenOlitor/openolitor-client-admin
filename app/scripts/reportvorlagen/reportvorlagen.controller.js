@@ -3,19 +3,19 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('VorlagenController', ['$scope', 'VorlagenModel', 'msgBus',
+  .controller('ReportvorlagenController', ['$scope', 'ReportvorlagenModel', 'msgBus',
     'DataUtil', 'lodash', 'NgTableParams', 'gettext', 'Upload', 'API_URL',
-    'FileUtil', 'VorlagenService',
+    'FileUtil', 'ReportvorlagenService',
 
-    function($scope, VorlagenModel, msgBus, DataUtil, lodash, NgTableParams,
-      gettext, Upload, API_URL, FileUtil, VorlagenService) {
+    function($scope, ReportvorlagenModel, msgBus, DataUtil, lodash, NgTableParams,
+      gettext, Upload, API_URL, FileUtil, ReportvorlagenService) {
       $scope.template = {
         typ: $scope.typ
       };
       $scope.title = $scope.typ.replace('Vorlage', '');
 
       $scope.addVorlage = function() {
-        var vorlage = new VorlagenModel($scope.template);
+        var vorlage = new ReportvorlagenModel($scope.template);
         vorlage.$save();
         $scope.template.creating = true;
       };
@@ -39,7 +39,7 @@ angular.module('openolitor-admin')
       };
 
       var unwatch = $scope.$watch(function() {
-        return VorlagenService.getVorlagen($scope.typ);
+        return ReportvorlagenService.getVorlagen($scope.typ);
       }, function() {
         if ($scope.tableParams) {
           $scope.tableParams.reload();
@@ -69,7 +69,7 @@ angular.module('openolitor-admin')
               default: true
             }];
 
-            var vorlagen = VorlagenService.getVorlagen($scope.typ);
+            var vorlagen = ReportvorlagenService.getVorlagen($scope.typ);
 
             var allValues = (vorlagen) ? lodash.concat(values, vorlagen) : values;
 
@@ -125,7 +125,7 @@ angular.module('openolitor-admin')
         if ($scope.typ === msg.vorlage.typ) {
           msg.vorlage.editing = false;
           msg.vorlage.updateing = false;
-          $scope.tableParams.reload();          
+          $scope.tableParams.reload();
         }
       });
 

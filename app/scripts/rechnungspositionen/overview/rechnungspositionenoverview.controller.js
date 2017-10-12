@@ -8,11 +8,11 @@ angular.module('openolitor-admin')
     'RechnungsPositionenModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
+    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator',
     function($q, $scope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, VorlagenService,
+      FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator) {
 
       $scope.entries = [];
@@ -48,7 +48,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageRechnung');
+        return ReportvorlagenService.getVorlagen('VorlageRechnung');
       };
 
       // watch for data checkboxes

@@ -102,6 +102,10 @@
     <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id" ng-if="selectedAbo"></oo-abos-detail>
   </oo-sliding-detail>
 
+  <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="aboIdsMailing"></oo-email-dialog>
+  </oo-sliding-detail>
+
   <oo-sliding-detail slide-in="showCreateRechnungenDialog" slide-out-function="closeCreateRechnungenDialogFunct()">
     <oo-abos-overview-create-rechnungs-positionen on-close="closeCreateRechnungenDialog" abo-ids="checkboxes.ids" filter-query="search.query"></oo-abos-overview-create-rechnungen>
   </oo-sliding-detail>
