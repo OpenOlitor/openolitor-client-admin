@@ -25,6 +25,8 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.loadedProjectLoggedInOnce = false;
+
       //initial launch
       checkSize();
 
@@ -37,7 +39,8 @@ angular.module('openolitor-admin')
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
         $scope.user = user;
         if ($scope.loggedIn) {
-          ProjektService.resolveProjekt(false).then(function(projekt) {
+          ProjektService.resolveProjekt(false, !$scope.loadedProjectLoggedInOnce).then(function(projekt) {
+            $scope.loadedProjectLoggedInOnce = true;
             $scope.projekt = projekt;
             $rootScope.projekt = projekt;
             $scope.checkWelcomeMessage();

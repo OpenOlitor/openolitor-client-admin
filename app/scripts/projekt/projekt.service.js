@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
 
       var projekt;
 
-      var loadProjekt = function(openProjekt) {
+      var loadProjekt = function(openProjekt, reload) {
         var deferred = $q.defer();
 
         ooAuthService.resolveUser().then(function() {
-            if (projekt) {
+            if (!reload && projekt) {
               deferred.resolve(projekt);
             } else {
               if (!openProjekt){
