@@ -492,7 +492,14 @@ angular
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        redirectTo: '/abos'
+        redirectTo: '/dashboard'
+      })
+      .when('/dashboard', {
+        templateUrl: 'scripts/dashboard/dashboard.html',
+        controller: 'DashboardController',
+        name: 'Dashboard',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
       })
       .when('/abotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
@@ -589,10 +596,10 @@ angular
         name: 'AbosDetail',
         access: userRoles.Administrator
       })
-      .when('/lieferantenabrechnungen', {
-        templateUrl: 'scripts/lieferantenabrechnungen/overview/lieferantenabrechnungenoverview.html',
-        controller: 'LieferantenAbrechnungenOverviewController',
-        name: 'LieferantenAbrechnungenOverview',
+      .when('/einkaufsrechnungen', {
+        templateUrl: 'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
+        controller: 'EinkaufsrechnungenOverviewController',
+        name: 'EinkaufsrechnungenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })
@@ -764,7 +771,19 @@ angular
         name: 'ZahlungsImports',
         access: userRoles.Administrator
       })
-      .when('/settings', {
+      .when('/kundentypen', {
+        templateUrl: 'scripts/projekt/settings/kundentypen.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
+      .when('/produktkategorien', {
+        templateUrl: 'scripts/projekt/settings/produktkategorien.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
+      .when('/projektsettings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
         name: 'ProjektSettings',
@@ -776,6 +795,38 @@ angular
         name: 'VorlagenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
+      })
+      .when('/reports', {
+        templateUrl: 'scripts/reports/overview/reportsoverview.html',
+        controller: 'ReportsOverviewController',
+        name: 'ReportsOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/reports', {
+        templateUrl: 'scripts/reports/overview/reportsoverview.html',
+        controller: 'ReportsOverviewController',
+        name: 'ReportsOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/reports/:id/execute', {
+        templateUrl: 'scripts/reports/execute/reportsexecute.html',
+        controller: 'ReportsExecuteController',
+        name: 'ReportsExecute',
+        access: userRoles.Administrator
+      })
+      .when('/reports/:id', {
+        templateUrl: 'scripts/reports/detail/reportsdetail.html',
+        controller: 'ReportsDetailController',
+        name: 'ReportsDetail',
+        access: userRoles.Administrator
+      })
+      .when('/reports/new', {
+        templateUrl: 'scripts/reports/detail/reportsdetail.html',
+        controller: 'ReportsDetailController',
+        name: 'ReportsDetail',
+        access: userRoles.Administrator
       })
       .when('/journal', {
         templateUrl: 'scripts/journal/overview/journaloverview.html',

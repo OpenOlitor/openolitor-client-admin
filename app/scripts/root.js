@@ -7,18 +7,25 @@ angular.module('openolitor-admin')
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
     'ENV', 'VERSION', 'cssInjector', 'API_URL',
-    'ooAuthService', '$cookies', 'moment',
+    'ooAuthService', '$cookies', 'moment', 'dialogService',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
       $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL,
-      ooAuthService, $cookies, moment) {
+      ooAuthService, $cookies, moment, dialogService) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
 
       $scope.currentPathContains = function(pathJunk) {
-        return $location.url().indexOf(pathJunk) !== -1;
+        var currentUrl = $location.url();
+        if(currentUrl.indexOf('?') !== -1) {
+          return currentUrl.indexOf('/' + pathJunk + '?') !== -1;
+        } else {
+          return currentUrl === ('/' + pathJunk) || currentUrl.indexOf('/' + pathJunk + '/') !== -1;
+        }
       };
+
+      $scope.loadedProjectLoggedInOnce = false;
 
       //initial launch
       checkSize();
@@ -31,9 +38,15 @@ angular.module('openolitor-admin')
       }, function(user) {
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
         $scope.user = user;
-
-        if($scope.loggedIn) {
-          ProjektService.resolveProjekt().then(function(projekt) {
+        if ($scope.loggedIn) {
+          ProjektService.resolveProjekt(false, !$scope.loadedProjectLoggedInOnce).then(function(projekt) {
+            $scope.loadedProjectLoggedInOnce = true;
+            $scope.projekt = projekt;
+            $rootScope.projekt = projekt;
+            $scope.checkWelcomeMessage();
+          });
+        } else {
+          ProjektService.resolveProjekt(true).then(function(projekt) {
             $scope.projekt = projekt;
             $rootScope.projekt = projekt;
           });
@@ -61,7 +74,7 @@ angular.module('openolitor-admin')
       msgBus.onMsg('WebSocketClosed', $rootScope, function(event, msg) {
         $scope.connected = false;
         $scope.messagingSocketClosedReason = msg.reason;
-        if(angular.isUndefined($scope.messagingSocketClosedSetter)) {
+        if (angular.isUndefined($scope.messagingSocketClosedSetter)) {
           $scope.messagingSocketClosedSetter = $timeout(function() {
             $scope.showConnectionErrorMessage = true;
             $scope.messagingSocketClosedSetter = undefined;
@@ -73,7 +86,7 @@ angular.module('openolitor-admin')
       msgBus.onMsg('WebSocketOpen', $rootScope, function() {
         $scope.connected = true;
         $scope.showConnectionErrorMessage = false;
-        if(!angular.isUndefined($scope.messagingSocketClosedSetter) &&
+        if (!angular.isUndefined($scope.messagingSocketClosedSetter) &&
           !angular.isUndefined($scope.messagingSocketClosedSetter.close)) {
           $scope.messagingSocketClosedSetter.close();
           $scope.messagingSocketClosedSetter = undefined;
@@ -113,11 +126,11 @@ angular.module('openolitor-admin')
 
       if (angular.isUndefined($scope.storedActiveLang())) {
         var lang = $window.navigator.language || $window.navigator.userLanguage;
-        if(lang.indexOf('de-') > 0) {
+        if (lang.indexOf('de-') > 0) {
           $scope.changeLang('de');
-        } else if(lang.indexOf('fr-') > 0) {
+        } else if (lang.indexOf('fr-') > 0) {
           $scope.changeLang('fr');
-        } else if(lang.indexOf('en-') > 0) {
+        } else if (lang.indexOf('en-') > 0) {
           $scope.changeLang('en');
         } else {
           $scope.changeLang('de');
@@ -125,6 +138,18 @@ angular.module('openolitor-admin')
       } else {
         $scope.changeLang($scope.storedActiveLang());
       }
+
+      $scope.checkWelcomeMessage = function() {
+        if ($scope.projekt.welcomeMessage2) {
+          dialogService.displayDialogOkAbort(
+            $scope.projekt.welcomeMessage2,
+            function() {},
+            'Mitteilung',
+            true,
+            'Schliessen'
+          );
+        }
+      };
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();

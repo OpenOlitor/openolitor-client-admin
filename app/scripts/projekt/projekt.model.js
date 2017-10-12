@@ -1,17 +1,12 @@
 'use strict';
 
 /**
- */
+*/
 angular.module('openolitor-admin')
-  .factory('ProjektModel', ['$resource', 'API_URL', function($resource, API_URL) {
-    return $resource(API_URL + 'projekt/:id', {
-      id: '@id'
-    }, {
-      'query': {
-        method:'GET',
-        isArray: false
-      },
-      'fetchStyle': {
+  .factory('OpenProjektModel', ['$resource', 'API_URL', function($resource, API_URL) {
+    return $resource(API_URL + 'open/projekt', {
+    }, {'query': {method:'GET', isArray: false},
+    'fetchStyle': {
         url: API_URL + 'ressource/style/:style/download',
         method: 'GET',
         responseType: 'arraybuffer',
@@ -26,5 +21,11 @@ angular.module('openolitor-admin')
                 response: file
             };
         }
-      }});
+    }});
+  }])
+  .factory('ProjektModel', ['$resource', 'API_URL', function($resource, API_URL) {
+    return $resource(API_URL + 'projekt/:id', {
+    id: '@id'
+    }, {'query': {method:'GET', isArray: false}
+  });
   }]);

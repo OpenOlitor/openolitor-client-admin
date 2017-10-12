@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -17,12 +17,12 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="rechnungsPositionTable" display-export="true" export-file-name="RechnungsPositionen">
+        <div ng-show="entries" id="rechnungsPositionTable" display-export="true" export-file-name="RechnungsPositionen" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html" id="rechnungsPositionenTable">
-            <tr ng-repeat="rechnungsPosition in $data | filter: search.query.$">
+            <tr ng-repeat="rechnungsPosition in $data | filter: search.query.$" id="selectedRow_{{rechnungsPosition.id}}">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[rechnungsPosition.id]" />
               </td>
@@ -37,13 +37,13 @@
                 </span>
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'">
-                <a ng-click="selectRechnungsPosition(rechnungsPosition, 'detailButton_' + rechnungsPosition.id)">{{rechnungsPosition.id}}</a>
+                <a ng-click="selectRechnungsPosition(rechnungsPosition, 'selectedRow_' + rechnungsPosition.id)">{{rechnungsPosition.id}}  <i class="fa fa-chevron-right"></i></a>
               </td>
               <td data-title="'Abo'|translate" sortable="'aboId'">
                 <a ng-href="#/abos?q=id%3D{{rechnungsPosition.aboId}}">{{rechnungsPosition.aboId}}</a>
               </td>
               <td data-title="'Beschrieb'|translate" sortable="'titel'">
-                <a ng-href="#/rechnungen/{{rechnungsPosition.beschrieb}}">{{rechnungsPosition.beschrieb}}</a>
+                {{rechnungsPosition.beschrieb}}
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{rechnungsPosition.waehrung}} {{rechnungsPosition.betrag}}
@@ -57,23 +57,18 @@
               <td data-title="'Anzahl Lieferungen'|translate" sortable="'anzahlLieferungen'">
                 {{rechnungsPosition.anzahlLieferungen}}
               </td>
-              <td>
-                <div class="pull-right">
-                  <div class="btn-group" >
-                    <button id="detailButton_{{rechnungsPosition.id}}" uib-btn-checkbox ng-model="selectedRechnungsPosition" role="button" ng-href="" ng-show="rechnungsPosition.id" ng-click="selectRechnungsPosition(rechnungsPosition, 'detailButton_' + rechnungsPosition.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
-                  </div>
-                </div>
-              </td>
             </tr>
           </table>
         </div>
       </div>
     </div>
   </div>
-  <div id="selectedRechnungsPositionDetail" class="context content-box col-md-3" ng-show="selectedRechnungsPosition">
+
+  <oo-sliding-detail slide-in="selectedRechnungsPosition" slide-out-function="unselectRechnungsPositionFunct()">
     <oo-rechnungs-position-detail rechnungs-position="selectedRechnungsPosition" ng-if="selectedRechnungsPosition"></oo-rechnungs-position-detail>
-  </div>
-  <div class="context content-box col-md-3" ng-if="showCreateRechnungenDialog">
+  </oo-sliding-detail>
+
+  <oo-sliding-detail slide-in="showCreateRechnungenDialog" slide-out-function="closeCreateRechnungenDialogFunct()">
     <oo-rechnungs-positionen-overview-create-rechnungen on-close="closeCreateRechnungenDialog" rechnungs-positionen="checkboxes.checkedItems"></oo-rechnungs-positionen-overview-create-rechnungen>
-  </div>
+  </oo-sliding-detail>
 </div>

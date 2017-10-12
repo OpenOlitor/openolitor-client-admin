@@ -56,6 +56,9 @@ module.exports = function(grunt) {
       'prod-gmuesluzern': {
         'm1': 'https://prod.openolitor.ch/gmuesluzern/'
       },
+      'prod-croquterre': {
+        'm1': 'https://prod.openolitor.ch/croquterre/'
+      },
       'test-prod-soliterre': {
         'm1': 'https://testprod.openolitor.ch/soliterre/'
       },
@@ -64,12 +67,16 @@ module.exports = function(grunt) {
       },
       'test-prod-gmuesluzern': {
         'm1': 'https://testprod.openolitor.ch/gmuesluzern/'
+      },
+      'test-prod-croquterre': {
+        'm1': 'https://testprod.openolitor.ch/croquterre/'
       }
     },
     EMAIL_TO_ADDRESS: {
       'prod-soliterre': 'openolitor@soliterre.ch',
       'prod-bioabi': 'info@bioabi.ch',
       'prod-gmuesluzern': 'info@gmüeschorb-luzern.ch',
+      'prod-croquterre': 'info@croquterre.ch',
     }
   };
   var env = 'dev';

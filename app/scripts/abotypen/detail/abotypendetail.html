@@ -11,7 +11,7 @@
               <span class=" navbar-brand" ng-if="getModel() === 'zusatzAbotypen'">{{'Zusatzabotyp ' + zusatzAbotyp.name || 'Zusatzabotyp'|translate}}</span>
             <div class="btn-group pull-right" ng-if="getModel() === 'abotypen'" role="group">
               <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
-              <oo-delete-button ng-if="abotyp.anzahlAbonnenten === 0" model="abotyp" entity="Abotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+              <oo-delete-button ng-if="abotyp.anzahlAbonnenten === 0" model="abotyp" form="abotypForm" entity="Abotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
             </div>
             <div class="btn-group pull-right" ng-if="getModel() === 'zusatzAbotypen'" role="group">
               <oo-save-button model="zusatzAbotyp" form="abotypForm" entity="ZusatzAbotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Zusatzabotyp'|translate}}</oo-save-button>

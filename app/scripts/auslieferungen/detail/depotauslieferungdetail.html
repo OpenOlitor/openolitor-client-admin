@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -17,11 +17,11 @@
         <div ng-hide="model">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="model">
+        <div ng-show="model" id="korbTable">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-            <tr ng-repeat="korb in $data | filter: search.query.$">
+            <tr ng-repeat="korb in $data | filter: search.query.$" id="selectedRow_{{korb.abo.id}}">
               <td data-title="'Abo Nr.'|translate" sortable="'abo.id'">
-                {{korb.abo.id}}
+                <a ng-click="selectAbo(korb.abo, 'selectedRow_' + korb.abo.id)">{{korb.abo.id}} <i class="fa fa-chevron-right"></i></a>
               </td>
               <td>
                 <span class="color-box" ng-style="style(korb.abotyp)"></span>
@@ -40,23 +40,17 @@
               <td data-title="'PLZ Ort'|translate" sortable="'anzahlKoerbe'">
                 {{korb.kunde.plz}} {{korb.kunde.ort}}
               </td>
-              <td>
-                <div class="pull-right">
-                  <div class="btn-group">
-                    <button uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-click="selectAbo(korb.abo)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
-                  </div>
-                </div>
-              </td>
             </tr>
           </table>
         </div>
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
+
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
     <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'depotauslieferungen/berichte/'+reportType" ids="[model.id]" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
-  </div>
-  <div class="context content-box col-md-3" ng-if="selectedAbo">
+  </oo-sliding-detail>
+  <oo-sliding-detail slide-in="selectedAbo" slide-out-function="unselectAboFunct()">
     <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>
-  </div>
+  </oo-sliding-detail>
 </div>

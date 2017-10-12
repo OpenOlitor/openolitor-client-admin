@@ -107,6 +107,10 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       $scope.actions = [{
         labelFunction: function() {
           return gettext('Produzent erstellen');

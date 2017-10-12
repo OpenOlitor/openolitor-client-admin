@@ -3,12 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('LieferantenAbrechnungenOverviewController', ['$scope', '$filter',
-    '$location', 'LieferantenAbrechnungenOverviewModel', 'ProduzentenModel',
+  .controller('EinkaufsrechnungenOverviewController', ['$scope', '$filter',
+    '$location', 'EinkaufsrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
     'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService', 'gettext',
-    function($scope, $filter, $location, LieferantenAbrechnungenOverviewModel,
+    function($scope, $filter, $location, EinkaufsrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
       VorlagenService, gettext) {
@@ -50,19 +50,26 @@ angular.module('openolitor-admin')
       });
 
       $scope.selectBestellung = function(bestellung, itemId) {
-        var firstRow = angular.element('#abrechnungenTable table tbody tr').first();
-        var allButtons = angular.element('#abrechnungenTable table tbody button');
-        allButtons.removeClass('btn-warning');
-        var button = angular.element('#' + itemId);
-        button.addClass('btn-warning');
-        var offset = button.offset().top - firstRow.offset().top + 154;
-        angular.element('#selectedAbrechnungDetail').css('margin-top', offset);
+        var allRows = angular.element('#abrechnungenTable table tbody tr');
+        allRows.removeClass('row-selected');
         if ($scope.selectedBestellung === bestellung) {
           $scope.selectedBestellung = undefined;
         } else {
           $scope.selectedBestellung = bestellung;
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
         }
         $scope.showCreateAbrechnungDialog = false;
+      };
+
+      $scope.unselectBestellung = function() {
+        $scope.selectedAbo = undefined;
+        var allRows = angular.element('#abrechnungenTable table tbody tr');
+        allRows.removeClass('row-selected');
+      };
+
+      $scope.unselectBestellungFunct = function() {
+        return $scope.selectedBestellung;
       };
 
       // watch for check all checkbox
@@ -93,7 +100,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: LieferantenAbrechnungenOverviewModel,
+          exportODSModel: EinkaufsrechnungenOverviewModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -109,11 +116,19 @@ angular.module('openolitor-admin')
             $scope.filteredEntries = dataSet;
 
             params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
             return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       $scope.checkSelectedAbgeschlosseneBestellungen = function() {
@@ -160,17 +175,20 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       function search() {
         if ($scope.loading) {
           return;
         }
         $scope.loading = true;
-        $scope.entries = LieferantenAbrechnungenOverviewModel.query({
+        $scope.entries = EinkaufsrechnungenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 
@@ -181,6 +199,10 @@ angular.module('openolitor-admin')
 
       $scope.closeAbrechnungDialog = function() {
         $scope.showCreateAbrechnungDialog = false;
+      };
+
+      $scope.closeAbrechnungDialogFunct = function() {
+        return $scope.closeAbrechnungDialog;
       };
 
       $scope.projektVorlagen = function() {

@@ -65,18 +65,26 @@ angular.module('openolitor-admin')
       };
 
       $scope.selectAbo = function(abo, itemId) {
-        var firstRow = angular.element('#abosTable table tbody tr').first();
-        var allButtons = angular.element('#abosTable table tbody button');
-        allButtons.removeClass('btn-warning');
-        var button = angular.element('#' + itemId);
-        button.addClass('btn-warning');
-        var offset = button.offset().top - firstRow.offset().top + 154;
-        angular.element('#selectedAboDetail').css('margin-top', offset);
+        var allRows = angular.element('#abosTable table tbody tr');
+        allRows.removeClass('row-selected');
+
         if ($scope.selectedAbo === abo) {
           $scope.selectedAbo = undefined;
         } else {
           $scope.selectedAbo = abo;
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
         }
+      };
+
+      $scope.unselectAbo = function() {
+        $scope.selectedAbo = undefined;
+        var allRows = angular.element('#abosTable table tbody tr');
+        allRows.removeClass('row-selected');
+      };
+
+      $scope.unselectAboFunct = function() {
+        return $scope.unselectAbo;
       };
 
       if (!$scope.tableParams) {
@@ -116,16 +124,24 @@ angular.module('openolitor-admin')
             $scope.filteredEntries = dataSet;
 
             params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
             return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       $scope.actions = [{
         labelFunction: function() {
-          return gettext('Rechnungen erstellen');
+          return gettext('Rechnungspositionen erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
@@ -174,7 +190,6 @@ angular.module('openolitor-admin')
           $scope.entries = entries;
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 
@@ -185,6 +200,10 @@ angular.module('openolitor-admin')
 
       $scope.closeCreateRechnungenDialog = function() {
         $scope.showCreateRechnungenDialog = false;
+      };
+
+      $scope.closeCreateRechnungenDialogFunct = function() {
+        return $scope.closeCreateRechnungenDialog;
       };
 
       $scope.$watch('search.query', function() {

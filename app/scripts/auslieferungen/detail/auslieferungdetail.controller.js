@@ -154,13 +154,32 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
-      $scope.selectAbo = function(abo) {
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
+      $scope.selectAbo = function(abo, itemId) {
+        var allRows = angular.element('#korbTable table tbody tr');
+        allRows.removeClass('row-selected');
+
         if ($scope.selectedAbo === abo) {
           $scope.selectedAbo = undefined;
         }
         else {
           $scope.selectedAbo = abo;
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
         }
+      };
+
+      $scope.unselectAbo = function() {
+        $scope.selectedAbo = undefined;
+        var allRows = angular.element('#korbTable table tbody tr');
+        allRows.removeClass('row-selected');
+      };
+
+      $scope.unselectAboFunct = function() {
+        return $scope.unselectAbo;
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {

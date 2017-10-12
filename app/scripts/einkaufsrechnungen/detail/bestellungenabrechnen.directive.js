@@ -10,7 +10,7 @@ angular.module('openolitor-admin').directive('ooBestellungenAbrechnen', [
         onClose: '&'
       },
       transclude: false,
-      templateUrl: 'scripts/lieferantenabrechnungen/detail/bestellungenabrechnen.html',
+      templateUrl: 'scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html',
       controller: 'BestellungenAbrechnenController'
     };
   }

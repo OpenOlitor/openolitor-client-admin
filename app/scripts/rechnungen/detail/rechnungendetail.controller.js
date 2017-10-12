@@ -155,7 +155,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.rechnung.$save();
+        return $scope.rechnung.$save(function(){
+          $scope.rechnungForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {
@@ -206,7 +208,13 @@ angular.module('openolitor-admin')
           }
         },
         onExecute: function() {
-          return $scope.rechnung.$save();
+          return $scope.rechnung.$save(function(){
+            $scope.rechnungForm.$setPristine();
+          });
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.ERSTELLT;
         },
         noEntityText: true
       }, {
