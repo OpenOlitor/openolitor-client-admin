@@ -143,12 +143,12 @@
           <hr>
           <div class="col-md-3"> {{zusatzAbo.abotypName}} </div>
           <div class="col-md-5">
-              <p class="input-group">
+            <p class="input-group">
                 <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.start" is-open="openZusatzAbo.start[zusatzAbo.id]" enable-time="false" max-date="abo.ende" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
-            </span>
-          </p>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </p>
           </div>
           <div class="col-md-4">
             <div class="pull-right btn-group">
@@ -170,7 +170,6 @@
         </div>
         <hr>
       </div>
-
       </div>
       <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>
     </form>
