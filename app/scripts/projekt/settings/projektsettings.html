@@ -213,7 +213,7 @@
               <div class="col-md-2">
                 <label for="logo" translate>Logo</label>
               </div>
-              <div class="col-md-5" ng-if="logoUrl">
+              <div class="col-md-4" ng-if="logoUrl">
                 <img class="logo-maxsize" http-src="{{logoUrl}}" />
               </div>
               <div class="col-md-5">
@@ -226,13 +226,13 @@
               </div>
             </div>
             <div class="row form-group">
-              <div class="col-md-5">
-                <label for="logo" translate>Style (Admin-Seite)</label>
+              <div class="col-md-4">
+                <label for="logo" translate>Style<br />(Admin-Seite)</label>
               </div>
               <div class="col-md-2" ng-if="logoUrl">
                 <a href="" ng-click="downloadStyle('admin')" translate>Download</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
                   ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-admin')"
                   ngf-drop="uploadStyle($file, 'style-admin')">
@@ -241,13 +241,13 @@
               </div>
             </div>
             <div class="row form-group">
-              <div class="col-md-5">
-                <label for="logo" translate>Style (Kundenportal)</label>
+              <div class="col-md-4">
+                <label for="logo" translate>Style<br />(Kundenportal)</label>
               </div>
               <div class="col-md-2" ng-if="logoUrl">
                 <a href="" ng-click="downloadStyle('kundenportal')" translate>Download</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
                   ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-kundenportal')"
                   ngf-drop="uploadStyle($file, 'style-kundenportal')">
