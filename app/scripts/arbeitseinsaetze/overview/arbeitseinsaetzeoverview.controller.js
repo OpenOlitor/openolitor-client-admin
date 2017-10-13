@@ -60,6 +60,18 @@ angular.module('openolitor-admin')
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
 
+      $scope.projektVorlagen = function() {
+        return VorlagenService.getVorlagen('VorlageKundenbrief');
+      };
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
+
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       if (!$scope.tableParams) {
         //use default tableParams
         $scope.tableParams = new NgTableParams({ // jshint ignore:line

@@ -5,13 +5,13 @@
       <div class="row form-group">
         <div class="col-md-12">
           <h3>
-            <div class="col-md-2" translate>
+            <div class="col-md-4" translate>
               Arbeitsangebot
             </div>
             <div class="col-md-2">
                <small><label for="typen" translate>Arbeitskategorien</label></small>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
               <oo-arbeitskategorien arbeitskategorien-list="arbeitsangebot.arbeitskategorien"></oo-arbeitskategorien>
               <div class="btn-group pull-right" role="group">
                 <oo-save-button model="arbeitsangebot" form="arbeitsangebotForm" entity="Arbeitsangebot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Arbeitsangebot'|translate}}</oo-save-button>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
               <h3 class="panel-title"><span class="navbar-brand" translate>Basisdaten</span></h3>
@@ -61,26 +61,26 @@
                   <div class="col-md-4">
                     <label for="start" translate>Start</label>
                   </div>
-                  <div class="col-md-3">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="true" max-date="arbeitsangebot.zeitBis" min-date="initStart" timepicker-options="tpOptionsVon" required />
-                  </div>
-                  <div class="col-md-2">
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
-                    </span>
+                  <div class="col-md-4">
+                    <p class="input-group">
+                      <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="false"> <!--min-date="arbeitsangebot.zeitBis" />-->
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                    </p>
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="ende" translate>Ende</label>
                   </div>
-                  <div class="col-md-3">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="true" min-date="arbeitsangebot.zeitVon" timepicker-options="tpOptionsBis" required />
-                  </div>
-                  <div class="col-md-2">
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
-                    </span>
+                  <div class="col-md-4">
+                    <p class="input-group">
+                      <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="false"> <!-- max-date="arbeitsangebot.zeitVon" />-->
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                    </p>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -117,14 +117,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading clearfix">
                 <h3>
-                  <div class="col-md-2" translate>
+                  <div class="col-md-6" translate>
                     Eingeschriebene Personen
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-6">
                     <div class="btn-group pull-right" role="group">
                       <oo-actions-button model="model" actions="einsatzActions">{{'Person hinzufügen'|translate}}</oo-actions-button>
                     </div>
@@ -139,7 +139,7 @@
                         <td header="'headerCheckbox.html'">
                           <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" />
                         </td>
-                        <td data-title="'person'|translate" sortable="'titel'">
+                        <td data-title="'Person'|translate" sortable="'titel'">
                         {{arbeitseinsatz.titel}}</a>
                         </td>
                         <td data-title="'Abo'|translate" sortable="'aboBezeichnung'">

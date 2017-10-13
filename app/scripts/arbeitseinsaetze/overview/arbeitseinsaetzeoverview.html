@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
-
-  </div>
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'kunden/berichte/arbeitseinsatzbrief'" ids="checkboxes.ids" default-file-name="'Arbeitseinsatz.odt'|translate"></oo-generate-report>
+  </oo-sliding-detail>
 </div>

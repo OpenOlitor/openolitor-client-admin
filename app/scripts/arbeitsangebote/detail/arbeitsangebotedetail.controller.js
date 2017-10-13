@@ -17,6 +17,10 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.open = {
+        start: false
+      };
+
       $scope.tpOptionsVon = {
         showMeridian: false
       };
