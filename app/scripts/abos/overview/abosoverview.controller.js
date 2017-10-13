@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -65,19 +65,26 @@ angular.module('openolitor-admin')
       };
 
       $scope.selectAbo = function(abo, itemId) {
-        var firstRow = angular.element('#abosTable table tbody tr').first();
-        var allButtons = angular.element('#abosTable table tbody button');
-        allButtons.removeClass('btn-warning');
-        var button = angular.element('#' + itemId);
-        button.addClass('btn-warning');
-        var offset = button.offset().top - firstRow.offset().top + 154;
-        angular.element('#selectedAboDetail').css('margin-top', offset);
+        var allRows = angular.element('#abosTable table tbody tr');
+        allRows.removeClass('row-selected');
+
         if ($scope.selectedAbo === abo) {
           $scope.selectedAbo = undefined;
         } else {
           $scope.selectedAbo = abo;
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
         }
+      };
 
+      $scope.unselectAbo = function() {
+        $scope.selectedAbo = undefined;
+        var allRows = angular.element('#abosTable table tbody tr');
+        allRows.removeClass('row-selected');
+      };
+
+      $scope.unselectAboFunct = function() {
+        return $scope.unselectAbo;
       };
 
       if (!$scope.tableParams) {
@@ -107,26 +114,34 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries, $scope
-              .search.queryQuery);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
-              orderedData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), false, localeSensitiveComparator) :
+              dataSet;
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(),
+            params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
+            return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Rechnungen erstellen';
+          return gettext('Rechnungspositionen erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
@@ -138,7 +153,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Email versenden',
+        label: gettext('Email versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -169,12 +184,12 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
-        $scope.entries = AbosOverviewModel.query({
+        AbosOverviewModel.query({
           f: $scope.search.filterQuery
-        }, function() {
+        }, function(entries) {
+          $scope.entries = entries;
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 
@@ -185,6 +200,10 @@ angular.module('openolitor-admin')
 
       $scope.closeCreateRechnungenDialog = function() {
         $scope.showCreateRechnungenDialog = false;
+      };
+
+      $scope.closeCreateRechnungenDialogFunct = function() {
+        return $scope.closeCreateRechnungenDialog;
       };
 
       $scope.$watch('search.query', function() {

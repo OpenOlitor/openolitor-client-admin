@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3><span translate>Dokumente download</h3>
+</div>'
+<div class="modal-body">
+  Folgende Dokumente stehen zum Download bereit:
+  <ul class="fa-ul">
+    <li ng-repeat="result in results | orderBy: 'jobId.startTime'">
+      <i class="fa-li fa fa-check-square"></i>
+      <a href="" ng-click="downloadResult(result)">{{ result.numberOfSuccess }} {{result.jobId.name}} ({{result.jobId.startTime | date:'dd.MM.yyyy HH:mm'}})</a>
+      <span class="messages" ng-show="result.numberOfFailures > 0">
+        ({{ result.numberOfFailures }} <span translate>fehlerhaft</span>)
+      </span>
+      <span role="button">
+        <i ng-show="result.isDownloading" ng-cloak class="fa fa-lg fa-circle-o-notch fa-spin"></i>
+      </span>
+    </li>
+  <ul>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="close()" translate>Schliessen</button>
+    <button class="btn btn-primary" ng-click="downloadAllAndClose()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{'Alle Herunterladen'|translate}}</button>
+</div>

@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title">
+      <span>
+        <span translate ng-show="bestellungIds.length > 1">Bestellungen abrechnen</span>
+        <span translate ng-show="bestellungIds.length === 1">Bestellung abrechnen</span>
+        <span translate ng-show="bestellungIds.length === 0">Bestellung(en) abrechnen</span>
+    </span>
+  </h3>
+  </div>
+  <div class="panel-body">
+    <div class="alert alert-danger" ng-show="bestellungIds.length === 0" translate>Keine abgeschlossenen Bestellungen ausgewählt</div>
+    <form name="abrechnenForm" ng-show="bestellungIds.length > 0">
+      <div class="row form-group">
+        <div class="col-md-6">
+          <label for="rechnungsDatum" translate>Abrechnungsdatum</label>
+        </div>
+        <div class="col-md-6">
+          <p class="input-group">
+            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="bestellungenAbrechnen.datum" is-open="open.abrechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" required/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'abrechnungsDatum')"><i class="fa fa-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-12">
+          <span class="pull-right">
+            <a ng-if="!commandFinished" href="" role="button" ng-disabled="commandIssued || rechnungsDatum.$invalid" ng-click="batchModify()" class="btn btn-primary"><i class="fa fa-calculator" aria-hidden="true"></i> <span translate>Abrechnen</span> <i ng-show="commandIssued" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+            <a ng-if="!commandFinished" href="" role="button" ng-disabled="commandIssued"ng-click="onClose()()" class="btn btn-danger"><i class="fa fa-times"></i> <span translate>Abbrechen</span></a>
+            <a ng-if="commandFinished" href="" role="button" ng-click="finished()" class="btn btn-primary"><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span translate>Bestellungen abgerechnet</span></a>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

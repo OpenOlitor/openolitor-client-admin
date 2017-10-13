@@ -9,14 +9,14 @@ angular.module('openolitor-admin')
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'NgTableParams',
+    'API_URL', 'alertService', 'NgTableParams', 'gettextCatalog',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       AbosDetailModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
-      alertService, NgTableParams) {
+      alertService, NgTableParams, gettextCatalog) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -222,8 +222,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function() {
-          return !$scope.abo || $scope.abo.ende || $scope.abo.guthaben >
-            0 || $scope.abo
+          return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
             .anzahlLieferungen.length > 0 ||
             $scope.abo.anzahlAbwesenheiten.length > 0;
         },

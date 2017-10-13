@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -21,33 +21,36 @@
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
-          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}">
-            <tr ng-repeat="tourauslieferung in $data | filter: search.query.$">
-              <td header="'headerCheckbox.html'">
-                <input type="checkbox" ng-model="checkboxes.items[tourauslieferung.id]" />
-              </td>
-              <td data-title="'Nr. '|translate" sortable="'id'" >
-                <a ng-href="#/tourauslieferungen/{{tourauslieferung.id}}">{{tourauslieferung.id}}</a>
-              </td>
-              <td data-title="'Tour'|translate" sortable="'tourName'">
-                {{tourauslieferung.tourName}}
-              </td>
-              <td data-title="'Datum'|translate" sortable="'datum'">
-                {{tourauslieferung.datum|date:"dd.MM.yyyy"}}
-              </td>
-              <td data-title="'Anzahl Körbe'|translate" sortable="'anzahlKoerbe'">
-                {{tourauslieferung.anzahlKoerbe}}
-              </td>
-              <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
-                {{tourauslieferung.status}}
-              </td>
-            </tr>
-          </table>
+          <div ng-show="entries" id="auslieferungenTable" display-export="true" export-file-name="Depotauslieferungen" class="horizontal-scroll">
+            <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+              <tr ng-repeat="tourauslieferung in $data | filter: search.query.$">
+                <td header="'headerCheckbox.html'">
+                  <input type="checkbox" ng-model="checkboxes.items[tourauslieferung.id]" />
+                </td>
+                <td data-title="'Nr. '|translate" sortable="'id'" >
+                  <a ng-href="#/tourauslieferungen/{{tourauslieferung.id}}">{{tourauslieferung.id}}</a>
+                </td>
+                <td data-title="'Tour'|translate" sortable="'tourName'">
+                  {{tourauslieferung.tourName}}
+                </td>
+                <td data-title="'Datum'|translate" sortable="'datum'">
+                  {{tourauslieferung.datum|date:"dd.MM.yyyy"}}
+                </td>
+                <td data-title="'Anzahl Körbe'|translate" sortable="'anzahlKoerbe'">
+                  {{tourauslieferung.anzahlKoerbe}}
+                </td>
+                <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
+                  {{tourauslieferung.status}}
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
+
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
     <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'tourauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
-  </div>
+  </oo-sliding-detail>
 </div>

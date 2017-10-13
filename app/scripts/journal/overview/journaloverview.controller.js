@@ -32,7 +32,6 @@ angular.module('openolitor-admin')
             sequenceNr: 'desc'
           },
           filter: {
-            typen: ''
           }
         }, {
           filterDelay: 0,
@@ -50,13 +49,14 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.queryQuery);
-            var orderedData = $filter('orderBy')(filteredData, params.orderBy(), false, localeSensitiveComparator);
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = $filter('orderBy')(dataSet, params.orderBy(), false, localeSensitiveComparator);
 
-            params.total(orderedData.length);
+            params.total(dataSet.length);
             $scope.loading = false;
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });

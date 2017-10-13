@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('DepotsDetailController', ['$scope', '$filter', '$routeParams',
-    '$location', 'gettext', 'DepotsDetailModel',
+    '$location', 'gettext', 'DepotsDetailModel', 'gettextCatalog',
     function($scope, $filter, $routeParams, $location, gettext,
-      DepotsDetailModel) {
+      DepotsDetailModel, gettextCatalog) {
 
       var defaults = {
         model: {
@@ -22,6 +22,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.depot = result;
+          $scope.depotForm.$setPristine();
         });
       }
 
@@ -39,13 +40,15 @@ angular.module('openolitor-admin')
 
       $scope.fullName = function() {
         if ($scope.depot && $scope.depot.name) {
-          return 'Depot: ' + $scope.depot.name;
+          return gettextCatalog.getString('Depot:') + ' ' + $scope.depot.name;
         }
         return undefined;
       };
 
       $scope.save = function() {
-        return $scope.depot.$save();
+        return $scope.depot.$save(function() {
+          $scope.depotForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {

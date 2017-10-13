@@ -24,7 +24,7 @@ h3 .small {
 
 span.red,
 i.red {
-  color: red;
+  color: #c70000;
 }
 
 //ng validator
@@ -225,6 +225,11 @@ input.ng-invalid {
   margin-right: 10px;
 }
 
+.openolitor .ng-table td {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .openolitor .ng-table th {
   text-align: left;
 }
@@ -274,6 +279,10 @@ input.ng-invalid {
   padding-right: 1px;
 }
 
+.openolitor table a {
+  cursor: pointer;
+}
+
 .nonboxed-title .navbar-brand {
   margin-left: 0px !important;
   padding-top: 5px;
@@ -293,6 +302,15 @@ input.ng-invalid {
 .navbar-form.noRightSpace {
   margin-right: 0px !important;
   padding-right: 0px;
+}
+
+.panel-default > .panel-heading.panel-heading-person {
+  background-color: #fff3dc;
+  margin-top: 15px;
+}
+
+.panel-default > .panel-heading.panel-heading-detail {
+  background-color: #fff3dc;
 }
 
 /* Special Lieferplanung */
@@ -370,6 +388,11 @@ small.lieferplanung {
   border-width: 1px;
   border-color: black;
   box-shadow: 4px 4px 10px grey;
+}
+
+.table-striped > tbody > tr.row-selected,
+.row-selected {
+  background-color: #fff3dc;
 }
 
 //navbar styles
@@ -643,4 +666,49 @@ footer, .footer {
 }
 tr.error {
   background-color: rgba(255, 0, 0, 0.11) !important;
+}
+
+.oo-jobqueue {
+  margin: 15px;
+}
+
+.oo-jobqueue > .progress {
+  width: 200px;
+  float: left;
+  margin-right: 10px;
+}
+
+.badge-green {
+  background-color:#a8c052;
+}
+
+.progress-bar-success {
+  background-color:#a8c052;
+}
+
+*.icon-grey {color: grey}
+
+/* The navigation menu links */
+.sliding-detail {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 80; /* Stay on top */
+    top: 0;
+    right: -20px;
+    background-color: rgba(218, 217, 217, 0.9);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.2s; /* 0.5 second transition effect to slide in the sidenav */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sliding-detail .panel-default {
+  margin-top: 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+   .sliding-detail {padding-top: 15px;}
 }

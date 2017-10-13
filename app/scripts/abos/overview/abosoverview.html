@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -24,12 +24,12 @@
         </script>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-            <tr ng-repeat="abo in $data | filter: search.query.$">
+            <tr ng-repeat="abo in $data | filter: search.query.$" id="selectedRow_{{abo.id}}">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[abo.id]" />
               </td>
               <td data-title="'Nr.'|translate" sortable="'id'" filter="{id: 'number'}">
-                <a ng-click="selectAbo(abo, 'detailButton_' + abo.id)">{{abo.id}}</a>
+                <a ng-click="selectAbo(abo, 'selectedRow_' + abo.id)">{{abo.id}} <i class="fa fa-chevron-right"></i></a>
               </td>
               <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
@@ -69,24 +69,19 @@
               <td ng-if="showAll" data-title="'Guthaben vertraglich'|translate" sortable="'guthabenVertraglich'" filter="{guthabenVertraglich: 'number'}">
                 {{abo.guthabenVertraglich}}
               </td>
-              <td header="'headerShowAll.html'">
-                <div class="pull-right">
-                  <div class="btn-group" ng-hide="updatingAbo(abo)">
-                    <button id="detailButton_{{abo.id}}" uib-btn-checkbox ng-model="selectedAbo" role="button" ng-href="" ng-show="abo.id" ng-click="selectAbo(abo, 'detailButton_' + abo.id)" class="btn btn-sm btn-default" oo-stop-event><i class="fa fa-long-arrow-right"></i></button>
-                  </div>
-                  <i ng-show="updatingAbo(abo)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-                </div>
-              </td>
+              <td header="'headerShowAll.html'"></td>
             </tr>
           </table>
         </div>
       </div>
     </div>
   </div>
-  <div id="selectedAboDetail" class="context content-box col-md-3" ng-show="selectedAbo">
+
+  <oo-sliding-detail slide-in="selectedAbo" slide-out-function="unselectAboFunct()">
     <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id" ng-if="selectedAbo"></oo-abos-detail>
-  </div>
-  <div class="context content-box col-md-3" ng-if="showCreateRechnungenDialog">
-    <oo-abos-overview-create-rechnungen on-close="closeCreateRechnungenDialog" abo-ids="checkboxes.ids"></oo-abos-overview-create-rechnungen>
-  </div>
+  </oo-sliding-detail>
+
+  <oo-sliding-detail slide-in="showCreateRechnungenDialog" slide-out-function="closeCreateRechnungenDialogFunct()">
+    <oo-abos-overview-create-rechnungs-positionen on-close="closeCreateRechnungenDialog" abo-ids="checkboxes.ids" filter-query="search.query"></oo-abos-overview-create-rechnungen>
+  </oo-sliding-detail>
 </div>

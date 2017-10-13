@@ -6,18 +6,11 @@
           <div class="col-md-5">
             <ul class="nav navbar-nav">
               <script type="text/ng-template" id="anzahlOverallTooltipTemplate.html">
-                <span translate>Total Anzahl Körbe zu liefern: <a href="" ng-click="displayAbosTotal(KORBSTATUS.WIRDGELIEFERT)"><b>{{anzahlKoerbeZuLiefern}}</b></a></span><br />
-                <span translate>Total Anzahl Abwesenheiten: <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a></span><br />
-                <span translate>Total Anzahl <i>Saldo zu tief</i>: <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a></span>
+                <span translate>Total Anzahl Körbe zu liefern:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.WIRDGELIEFERT)"><b>{{anzahlKoerbeZuLiefern}}</b></a><br />
+                <span translate>Total Anzahl Abwesenheiten:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a><br />
+                <span translate>Total Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a>
               </script>
               <li class="navbar-brand"><span translate>Planung</span> <span uib-tooltip-template="'anzahlOverallTooltipTemplate.html'" tooltip-popup-close-delay="3000">#{{planung.id}}</span>: <span translate>Korbinhalt</span></li>
-              <li class="small" ng-show="valuesEditable()" translate>Abotyp hinzufügen:</li>
-              <li ng-show="valuesEditable()">
-                <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
-              </li>
-              <li ng-show="valuesEditable()">
-                <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip-html="('Bemerkungen zu dieser Lieferung: '|translate) + (planung.bemerkungen)"><span class="fa fa-pencil-square-o"></span></button>
-              </li>
             </ul>
           </div>
           <div class="col-md-7">
@@ -25,12 +18,26 @@
               <button type="button" role="button" ng-click="recalculateBestellungen(); setMode('lieferanten')" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
               <button role="button" ng-show="planung.status === 'Abgeschlossen' && !editNachAbgeschlossen" ng-click="setEditableNachAbgeschlossen()" class="btn btn-warning"><span class="fa fa-pencil-square-o"></span> <span translate>Planung editieren</span></button>
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
-              <span ng-show="planung.status === 'Offen'"><oo-actions-button  model="planung" actions="abschliessenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-if="korbForm.$pristine" ng-show="planung.status === 'Offen'"><oo-actions-button  model="planung" actions="abschliessenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-if="!korbForm.$pristine" ng-show="planung.status === 'Offen'"><oo-actions-button  model="planung" actions="abschliessenActionDisabled" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+
               <span ng-show="planung.status === 'Abgeschlossen'"><oo-actions-button model="planung" actions="verrechnenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-show="planung.status === 'Verrechnet'"><oo-actions-button model="planung" actions="verrechnetAction" btn-style="btn-success"></oo-actions-button></span>
             </div>
           </div>
         </h3>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2" ng-show="valuesEditable()">
+      <label for="addAbotyp" translate>Abotyp hinzufügen:</label>
+    </div>
+    <div class="col-md-1" ng-show="valuesEditable()">
+      <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
+    </div>
+    <div class="col-md-1" ng-show="valuesEditable()">
+      <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip-html="('Bemerkungen zu dieser Lieferung: '|translate) + (planung.bemerkungen)"><span class="fa fa-pencil-square-o"></span></button>
     </div>
   </div>
   <div class="row">
@@ -63,9 +70,9 @@
     </div>
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen | orderBy: 'abotypBeschrieb'">
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
-        <span translate>Anzahl Körbe zu liefern: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a></span><br />
-        <span translate>Anzahl Abwesenheiten: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a></span><br />
-        <span translate>Anzahl <i>Saldo zu tief</i>: <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a></span>
+        <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+        <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
+        <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
       </script>
       <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
         <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">
@@ -74,7 +81,7 @@
               <span class="pre-info" uib-tooltip-template="'anzahlTooltipTemplate.html'" tooltip-popup-close-delay="3000">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
               {{abotypLieferung.abotypBeschrieb}}
               <script type="text/ng-template" id="vertriebTooltipTemplate.html">
-                <span translate>Vertrieb: <b>{{abotypLieferung.vertriebBeschrieb}}</b></span>
+                <span translate>Vertrieb: </span><b>{{abotypLieferung.vertriebBeschrieb}}</b>
               </script>
               <span class="lieferplanung pre-info fa fa-info-circle" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb" uib-tooltip-template="'vertriebTooltipTemplate.html'" tooltip-popup-close-delay="500">
               </span>

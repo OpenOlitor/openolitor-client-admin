@@ -6,7 +6,8 @@ module.exports = function(config) {
     basePath: '../',
 
     files: [
-      'app/bower_components/jquery/jquery.js',
+      'app/bower_components/jquery/dist/jquery.js',
+      'app/bower_components/moment/min/moment-with-locales.min.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-animate/angular-animate.js',
@@ -28,7 +29,8 @@ module.exports = function(config) {
       'app/bower_components/angular-toArrayFilter/toArrayFilter.js',
       'app/bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
       'app/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js',
-      'app/bower_components/angular-color-picker/angularjs-color-picker.js',
+      'app/bower_components/tinycolor/dist/tinycolor-min.js',
+      'app/bower_components/angular-color-picker/dist/angularjs-color-picker.js',
       'app/bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js',
       'app/bower_components/angular-moment/angular-moment.js',
       'app/bower_components/ng-file-upload/ng-file-upload.js',

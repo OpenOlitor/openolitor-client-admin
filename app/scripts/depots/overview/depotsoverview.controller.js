@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('DepotsOverviewController', ['$scope', '$filter',
     'DepotsOverviewModel', 'NgTableParams', 'OverviewCheckboxUtil',
-    'VorlagenService', '$location', 'lodash', 'EmailUtil',
+    'VorlagenService', '$location', 'lodash', 'EmailUtil', 'gettext',
     function($scope, $filter, DepotsOverviewModel, NgTableParams,
-      OverviewCheckboxUtil, VorlagenService, $location, _, EmailUtil) {
+      OverviewCheckboxUtil, VorlagenService, $location, _, EmailUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -46,6 +46,10 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       // watch for data checkboxes
       $scope.$watch(function() {
         return $scope.checkboxes.items;
@@ -55,7 +59,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Depot erstellen';
+          return gettext('Depot erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -63,7 +67,7 @@ angular.module('openolitor-admin')
           return $location.path('/depots/new');
         }
       }, {
-        label: 'Depotbrief erstellen',
+        label: gettext('Depotbrief erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateReport = true;
@@ -73,7 +77,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Email an Kunden versenden',
+        label: gettext('Email an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -107,17 +111,17 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries, $scope
-              .search.query);
-            var orderedData = params.sorting ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
-              filteredData;
-            orderedData = $filter('filter')(orderedData, params.filter());
+            var dataSet = $filter('filter')($scope.entries, $scope.search.query);
+            // also filter by ngtable filters
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy()) :
+              dataSet;
+            dataSet = $filter('filter')(dataSet, params.filter());
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(),
+            params.total(dataSet.length);
+            return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
           }
 

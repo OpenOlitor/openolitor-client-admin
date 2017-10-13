@@ -80,5 +80,10 @@ angular.module('openolitor-admin')
         isArray: true,
         url: API_URL + 'lieferplanungen/:id/:korbStatus/aboIds'
       },
+      'getAllAuslieferungenByLieferplanungId': {
+        method: 'GET',
+        isArray: true,
+        url: API_URL + 'lieferplanungen/:id/auslieferungen'
+      },
     });
   }]);

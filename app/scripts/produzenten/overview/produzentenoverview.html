@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
         <h3  class="panel-title"><span class="navbar-brand" translate>Produzenten</span>
           <form class="navbar-form pull-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query.$">
+              <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
               <oo-actions-button model="model" actions="actions">{{'Produzent erstellen'|translate}}</oo-actions-button>
             </div>
           </form>
@@ -48,7 +48,8 @@
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
+
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
     <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'produzenten/berichte/produzentenbrief'" ids="checkboxes.ids" default-file-name="'Produzentenbrief.odt'|translate"></oo-generate-report>
-  </div>
+  </oo-sliding-detail>
 </div>

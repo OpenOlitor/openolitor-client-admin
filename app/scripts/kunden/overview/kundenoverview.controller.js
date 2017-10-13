@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil',
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil) {
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -48,6 +48,10 @@ angular.module('openolitor-admin')
         ids: []
       };
 
+      $scope.navigateToDetail = function(id) {
+        DetailNavigationService.detailFromOverview(id, $scope, 'kunden', $location.url());
+      };
+
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -70,9 +74,13 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
       $scope.actions = [{
         labelFunction: function() {
-          return 'Kunde erstellen';
+          return gettext('Kunde erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -80,7 +88,7 @@ angular.module('openolitor-admin')
           return $location.path('/kunden/new');
         }
       }, {
-        label: 'Kundenbrief',
+        label: gettext('Kundenbrief'),
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
@@ -91,7 +99,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Email versenden',
+        label: gettext('Email versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -137,20 +145,28 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.queryQuery);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
-              orderedData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), false, localeSensitiveComparator) :
+              dataSet;
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
+            return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       function search() {
@@ -165,7 +181,6 @@ angular.module('openolitor-admin')
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
 
       }

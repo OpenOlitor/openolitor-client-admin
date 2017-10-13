@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -17,7 +17,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="personTable" display-export="true" export-file-name="Personen">
+        <div ng-show="entries" id="personTable" display-export="true" export-file-name="Personen" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
@@ -30,8 +30,8 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[person.id]" />
               </td>
-              <td data-title="'Kunden Nr.'|translate" sortable="'kundeId'">
-                <a ng-href="#/kunden/{{person.kundeId}}">{{person.kundeId}}</a>
+              <td data-title="'Kdn / Pers'|translate" sortable="'kundeId'">
+                <a ng-href="#/kunden/{{person.kundeId}}">{{person.kundeId}} / {{person.id}}</a>
               </td>
               <td data-title="'Vorname'|translate" sortable="'vorname'">
                 {{person.vorname}}
@@ -57,7 +57,7 @@
               <td data-title="'Kundentyp'|translate" sortable="'kundentypen'" filter="{kundentypen: 'select'}" filter-data="kundentypen">
                 <span ng-repeat="kundentyp in person.kundentypen" class="badge" ng-if="kundentyp !== ''">
                     {{kundentyp|translate}}
-                  </span>
+                </span>
               </td>
               <td ng-if="showAll" data-title="'Bemerkungen'|translate" sortable="'bemerkungen'">
                 {{person.bemerkungen}}

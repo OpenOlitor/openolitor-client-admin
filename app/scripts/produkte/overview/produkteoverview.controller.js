@@ -106,15 +106,15 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
-              filteredData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.query);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) :
+              dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            params.total(dataSet.length);
+            return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
 
         });
@@ -128,12 +128,35 @@ angular.module('openolitor-admin')
           $scope.editing = true;
           var newProdukt = cloneObj(defaults.model);
           $scope.editingProdukt = newProdukt;
+          $scope.editingProdukt.isNew = true;
           $scope.entries.push(newProdukt);
           $scope.tableParams.reload();
         }
       };
 
+      $scope.cancel = function(produkt) {
+        if(produkt.isNew) {
+          var produktIndex = $scope.entries.indexOf(produkt);
+          $scope.entries.splice(produktIndex, 1);
+        }
+        if($scope.originalProdukt) {
+          var isProduktById = function (element) {
+            return produkt.id === element.id;
+          };
+          var originalProduktIndex = $scope.entries.findIndex(isProduktById);
+          if(originalProduktIndex >= 0) {
+            $scope.entries[originalProduktIndex] = $scope.originalProdukt;
+          }
+          $scope.originalProdukt = undefined;
+        }
+        produkt.editable = false;
+        $scope.editing = false;
+        $scope.editingProdukt = undefined;
+        $scope.tableParams.reload();
+      };
+
       $scope.edit = function(produkt) {
+        $scope.originalProdukt = cloneObj(produkt);
         produkt.editable = true;
         $scope.editingProdukt = produkt;
         $scope.editing = true;

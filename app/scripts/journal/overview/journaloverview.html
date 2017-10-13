@@ -16,7 +16,7 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="journalTable" display-export="true" export-file-name="Journal">
+        <div ng-show="entries" id="journalTable" display-export="true" export-file-name="Journal" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
@@ -29,7 +29,7 @@
                 {{journalEntry.message.persistenceId}}
               </td>
               <td data-title="'Datum'|translate">
-                  {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy hh:mm'}}
+                  {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy HH:mm'}}
               </td>
               <td data-title="'User'|translate">
                 <a ng-href="#/personen?q=id={{getFirstEntry(journalEntry.message.payload).meta.originator}}">

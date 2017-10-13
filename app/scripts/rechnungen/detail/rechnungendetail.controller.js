@@ -40,22 +40,25 @@ angular.module('openolitor-admin')
         };
       }
 
-      function resolveKunde(id) {
+      function resolveKunde(id, fillRechnungsAdresse) {
         return KundenDetailModel.get({
           id: id
         }, function(kunde) {
           $scope.kunde = kunde;
           $scope.rechnung.kundeId = kunde.id;
           $scope.rechnung.bezeichnung = kunde.bezeichnung;
-          $scope.rechnung.strasse = kunde.strasse;
-          $scope.rechnung.hausNummer = kunde.hausNummer;
-          $scope.rechnung.adressZusatz = kunde.adressZusatz;
-          $scope.rechnung.plz = kunde.plz;
-          $scope.rechnung.ort = kunde.ort;
+          if(fillRechnungsAdresse) {
+            $scope.rechnung.strasse = kunde.strasse;
+            $scope.rechnung.hausNummer = kunde.hausNummer;
+            $scope.rechnung.adressZusatz = kunde.adressZusatz;
+            $scope.rechnung.plz = kunde.plz;
+            $scope.rechnung.ort = kunde.ort;
+          }
 
           $scope.abos = kunde.abos.map(getAboEntry);
         }).$promise;
       }
+
 
       $scope.getKunden = function(filter) {
         if ($scope.loading) {
@@ -77,7 +80,7 @@ angular.module('openolitor-admin')
 
       $scope.loadKunde = function(selected) {
         if(selected && selected.id) {
-          resolveKunde(selected.id);
+          resolveKunde(selected.id, true);
         }
       };
 
@@ -86,7 +89,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.rechnung = result;
-          resolveKunde(result.kunde.id);
+          resolveKunde(result.kunde.id, false);
           $scope.aboId = result.abo.id;
           $scope.rechnung.aboId = result.abo.id;
         });
@@ -101,7 +104,7 @@ angular.module('openolitor-admin')
       if (!$routeParams.kundeId) {
         $scope.kunde = undefined;
       } else {
-        resolveKunde($routeParams.kundeId).then(function() {
+        resolveKunde($routeParams.kundeId,true).then(function() {
           if ($routeParams.aboId) {
             $scope.aboId = parseInt($routeParams.aboId);
             $scope.rechnung.aboId = $scope.aboId;
@@ -116,7 +119,7 @@ angular.module('openolitor-admin')
       };
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
-        if (msg.entity === 'Rechnung') {
+        if (msg.entity === 'Rechnung' && msg.data.id === $scope.rechnung.id) {
           DataUtil.update(msg.data, $scope.rechnung);
           $rootScope.$apply();
         }
@@ -152,7 +155,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.rechnung.$save();
+        return $scope.rechnung.$save(function(){
+          $scope.rechnungForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {
@@ -165,8 +170,13 @@ angular.module('openolitor-admin')
 
       $scope.canEdit = function() {
         return !$scope.isExisting() ||
-          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT ||
-          $scope.rechnung.status === RECHNUNGSTATUS.VERSCHICKT;
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT;
+      };
+
+      $scope.canEditBetrag = function() {
+        return !$scope.isExisting() ||
+          $scope.rechnung.status === RECHNUNGSTATUS.ERSTELLT &&
+          $scope.rechnung.rechnungsPositionen === 0;
       };
 
       $scope.downloadRechnung = function() {
@@ -192,16 +202,23 @@ angular.module('openolitor-admin')
       $scope.actions = [{
         labelFunction: function() {
           if ($scope.isExisting()) {
-            return 'speichern';
+            return gettext('Rechnung speichern');
           } else {
-            return 'erstellen';
+            return gettext('Rechnung erstellen');
           }
         },
         onExecute: function() {
-          return $scope.rechnung.$save();
-        }
+          return $scope.rechnung.$save(function(){
+            $scope.rechnungForm.$setPristine();
+          });
+        },
+        isDisabled: function() {
+          return $scope.isExisting() && $scope.rechnung.status !==
+            RECHNUNGSTATUS.ERSTELLT;
+        },
+        noEntityText: true
       }, {
-        label: 'verschickt',
+        label: gettext('Rechnung verschickt'),
         iconClass: 'fa fa-exchange',
         onExecute: function() {
           return $scope.rechnung.$verschicken();
@@ -209,9 +226,10 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !==
             RECHNUNGSTATUS.ERSTELLT;
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'Email versand*',
+        label: gettext('Email versand*'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
           return false;
@@ -221,7 +239,7 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: 'Mahnung verschickt',
+        label: gettext('Mahnung verschickt'),
         iconClass: 'fa fa-exclamation',
         onExecute: function() {
           return $scope.rechnung.$mahnungVerschicken();
@@ -232,7 +250,7 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: 'bezahlt',
+        label: gettext('Rechnung bezahlt'),
         iconClass: 'fa fa-usd',
         onExecute: function() {
           return $scope.rechnung.$bezahlen();
@@ -243,9 +261,10 @@ angular.module('openolitor-admin')
             RECHNUNGSTATUS.MAHNUNG_VERSCHICKT ||
             angular.isUndefined($scope.rechnung.einbezahlterBetrag) ||
             angular.isUndefined($scope.rechnung.eingangsDatum));
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'storniert',
+        label: gettext('Rechnung storniert'),
         iconClass: 'fa fa-times',
         onExecute: function() {
           $scope.rechnung.status = RECHNUNGSTATUS.STORNIERT;
@@ -254,9 +273,10 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return $scope.isExisting() && $scope.rechnung.status !==
             RECHNUNGSTATUS.VERSCHICKT;
-        }
+        },
+        noEntityText: true
       }, {
-        label: 'Rechnungsdokument erstellen',
+        label: gettext('Rechnungsdokument erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateRechnungReport = true;
@@ -270,7 +290,7 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: 'Mahnungsdokument erstellen',
+        label: gettext('Mahnungsdokument erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateMahnungReport = true;

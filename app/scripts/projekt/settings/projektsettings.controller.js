@@ -13,6 +13,8 @@ angular.module('openolitor-admin')
     'ArbeitskategorienModel',
     'ProjektService',
     'ProjektModel',
+    'KontoDatenService',
+    'KontoDatenModel',
     'EnumUtil',
     'FileSaver',
     'MONATE',
@@ -23,7 +25,7 @@ angular.module('openolitor-admin')
     function($scope, $filter, NgTableParams, KundentypenService,
       KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
       ArbeitskategorienService, ArbeitskategorienModel,
-      ProjektService, ProjektModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
+      ProjektService, ProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
       Upload, msgBus, API_URL
     ) {
       $scope.templateKundentyp = {};
@@ -99,6 +101,14 @@ angular.module('openolitor-admin')
         console.log('error', error);
       });
 
+      KontoDatenService.resolveKontodaten().then(function(kontodaten) {
+        if (kontodaten) {
+          $scope.kontodaten = kontodaten;
+        }
+      }, function(error) {
+        console.log('error', error);
+      });
+
       $scope.switchToEditMode = function() {
         $scope.editMode = true;
       };
@@ -111,7 +121,7 @@ angular.module('openolitor-admin')
       $scope.deletingArbeitskategorien = {};
       $scope.modelChangedKundentyp = function(kundentyp) {
         if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
-          $scope.changedKundentypen[kundentyp.kundentyp] = kundentyp;
+          $scope.changedKundentypen[kundentyp.id] = kundentyp;
         }
       };
       $scope.hasChangesKundentypen = function() {
@@ -434,7 +444,9 @@ angular.module('openolitor-admin')
       }
 
       $scope.saveProjekt = function() {
-        return $scope.projekt.$save();
+        return $scope.kontodaten.$save().then($scope.projekt.$save(function(){
+          $scope.projektForm.$setPristine();
+        }));
       };
 
       $scope.logoFile = undefined;

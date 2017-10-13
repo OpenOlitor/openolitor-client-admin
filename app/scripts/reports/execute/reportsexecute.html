@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="content content-box col-md-12">
+    <form name="reportForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row form-group">
+            <h3>
+              <div class="col-md-7">
+                <span translate>Auswertung</span>: {{report.name}}
+              </div>
+              <div class="col-md-5">
+                <div class="pull-right" role="group">
+                  <button type="button" class="btn btn-md btn-default" ng-click="editReport(report)" title="{{'Auswertung editieren'|translate}}"><span class="glyphicon glyphicon-edit"></span> Editieren</button>
+                  <button type="button" ng-hide="resulat" class="btn btn-md btn-warning" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span> Ausführen</button>
+                  <button type="button" ng-show="resulat" class="btn btn-md btn-success" ng-click="changeReport()" title="{{'Auswertung verändern'|translate}}"><span class="glyphicon glyphicon-pause"></span> Verändern</button>
+                </div>
+              </div>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title"><span class="navbar-brand" translate>Query</span></h3>
+            </div>
+            <div class="panel-body" >
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="vorname" translate>Beschreibung</label>
+                </div>
+                <div class="col-md-8">
+                  {{report.beschreibung}}
+                </div>
+              </div>
+              <div class="col-md-12">
+                <textarea ng-hide="resulat" class="form-control" name="query" ng-model="report.query" placeholder="select * from Entity where ..." rows="10"></textarea>
+                <span ng-show="resulat"><pre>{{report.query}}</pre></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row" ng-show="resulat">
+  <div class="content content-box col-md-12">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title"><span class="navbar-brand" translate>Resultate</span>
+          <form class="navbar-form pull-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="{{'Suche in Resultaten...'|translate}}" ng-model="search.query">
+            </div>
+          </form>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div ng-hide="resulat.entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="resulat.entries" display-export="true" export-file-name="Report_{{report.name}}">
+          <table ng-table-dynamic="tableParams with cols" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+            <tr ng-repeat="dataEntry in $data | filter: search.query.$">
+              <td ng-repeat="col in $columns" ng-bind-html="col.getValue(this, dataEntry)"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

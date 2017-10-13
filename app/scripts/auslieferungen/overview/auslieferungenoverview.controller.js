@@ -7,10 +7,11 @@ angular.module('openolitor-admin')
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
-    'VorlagenService', 'localeSensitiveComparator',
+    'VorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
     function($q, $scope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, VorlagenService, localeSensitiveComparator) {
+      AUSLIEFERUNGSTATUS, msgBus, VorlagenService, localeSensitiveComparator,
+      $location, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -99,7 +100,7 @@ angular.module('openolitor-admin')
       }, true);
 
       $scope.actions = [{
-        label: 'Lieferschein drucken',
+        label: gettext('Lieferschein drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferschein';
@@ -111,11 +112,11 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Lieferetiketten drucken',
+        label: gettext('Lieferetiketten drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
           $scope.reportType = 'lieferetiketten';
-          $scope.vorlageTyp = 'Lieferetikette';
+          $scope.vorlageTyp = 'Lieferetiketten';
           $scope.showGenerateReport = true;
           return true;
         },
@@ -123,7 +124,19 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Als ausgeliefert markieren',
+        label: gettext('Korbübersicht drucken'),
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.reportType = 'korbuebersicht';
+          $scope.vorlageTyp = 'Korbuebersicht';
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('Als ausgeliefert markieren'),
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
           return overviewModel.ausliefern($scope.checkboxes.ids);
@@ -141,6 +154,12 @@ angular.module('openolitor-admin')
           sorting: {
             datum: 'asc'
           },
+          exportODSModel: overviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
+          },
           filter: {
             status: undefined
           }
@@ -154,22 +173,29 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope
-              .search.query);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
-              orderedData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) :
+              dataSet;
 
-            $scope.filteredEntries = filteredData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(),
+            params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
+            return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       function search() {
@@ -180,7 +206,7 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = overviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery
         }, function(result) {
           $scope.entries = result;
           $scope.tableParams.reload();
@@ -188,15 +214,26 @@ angular.module('openolitor-admin')
         });
       }
 
-      search();
-
-      $scope.$watch('search.query', function() {
-        search();
-      }, true);
+      var existingQuery = $location.search().q;
+      if (existingQuery) {
+        $scope.search.query = existingQuery;
+      }
 
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
+
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
+      $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
+        search();
+      }, true);
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity.indexOf('Auslieferung') >= 0) {

@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT',
     'KORBSTATUS', 'msgBus', 'cloneObj',
-    'gettext', '$location', 'lodash', '$uibModal',
+    'gettext', '$location', 'lodash', '$uibModal', 'gettextCatalog',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
       LIEFEREINHEIT, KORBSTATUS, msgBus,
-      cloneObj, gettext, $location, lodash, $uibModal) {
+      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog) {
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 
@@ -265,7 +265,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.getDurchschnittspreisInfo = function(abotypLieferung) {
-        return gettext('# Lieferungen bisher: ') + (abotypLieferung.anzahlLieferungen - 1);
+        return gettextCatalog.getString('# Lieferungen bisher: ') + (abotypLieferung.anzahlLieferungen - 1);
       };
 
       $scope.isInvalid = function(korbprodukt) {
@@ -314,8 +314,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.dropProdukt = function(dragEl, dropEl, type) {
+        $scope.korbForm.$setDirty();
         if (!$scope.valuesEditable()) {
-          alertService.addAlert('lighterror', gettext(
+          alertService.addAlert('lighterror', gettextCatalog.getString(
             'Die Lieferungen dürfen nicht mehr verändert werden.'));
           $scope.$apply();
           return;
@@ -339,7 +340,7 @@ angular.module('openolitor-admin')
             return (newEntry.produktBeschrieb === entry.produktBeschrieb);
           });
           if (exists) {
-            dialogService.displayDialogOkAbort(gettext(
+            dialogService.displayDialogOkAbort(gettextCatalog.getString(
                 'Ein solches Produkt befindet sich schon in diesem Korb. Soll es dennoch eingefügt werden?'
               ),
               function() {
@@ -350,6 +351,7 @@ angular.module('openolitor-admin')
           }
         };
 
+        $scope.checkFreeProduct() ;
         switch (type) {
           case 'newProdukt':
             var prodUnlistet = {
@@ -368,6 +370,7 @@ angular.module('openolitor-admin')
             };
             checkOnDuplicateAndAsk(drop.scope().abotypLieferung.lieferpositionen,
               prodUnlistet);
+
             break;
           case 'prod':
             var produkt = drag.scope().produkt;
@@ -503,8 +506,8 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.recalculateBestellungen = function() {
-        var recalculate = function() {
+      $scope.recalculateBestellungen = function(callbackFunc) {
+        var recalculate = function(callbackFunc) {
           $scope.sammelbestellungen = {};
           if ($scope.planung.status === 'Offen') {
             lodash.forEach($scope.abotypenLieferungen, function(
@@ -523,6 +526,9 @@ angular.module('openolitor-admin')
                     korbprodukt);
                 });
             });
+            if(!angular.isUndefined(callbackFunc)) {
+              callbackFunc();
+            }
           } else {
             LieferplanungModel.getSammelbestellungen({
               id: $routeParams.id
@@ -599,6 +605,9 @@ angular.module('openolitor-admin')
                     });
                 });
               });
+              if(!angular.isUndefined(callbackFunc)) {
+                callbackFunc();
+              }
             });
           }
         };
@@ -608,10 +617,10 @@ angular.module('openolitor-admin')
             id: $routeParams.id,
             lieferplanungId: parseInt($routeParams.id)
           }, function() {
-            recalculate();
+            recalculate(callbackFunc);
           });
         } else {
-          recalculate();
+          recalculate(callbackFunc);
         }
       };
 
@@ -630,6 +639,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
+        $scope.korbForm.$setPristine();
         if ($scope.checkAllValues()) {
           $scope.editNachAbgeschlossen = false;
           var lieferungenModifyList = lodash.map($scope.abotypenLieferungen, function(abotypLieferung) {
@@ -639,7 +649,7 @@ angular.module('openolitor-admin')
                   preisTotal: abotypLieferung.preisTotal,
                   lieferpositionen: abotypLieferung.lieferpositionen
                 }
-              }
+              };
           });
 
           LieferplanungModel.modifyLieferplanungData({
@@ -655,6 +665,20 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.checkFreeProduct = function() {
+        var ret = true;
+        //check on Produzent on all Produkte
+        lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+          lodash.forEach(abotypLieferung.lieferpositionen, function(
+            korbEntry) {
+            if (ret && angular.isUndefined(korbEntry.produzentId)) {
+              ret = false;
+            }
+          });
+        });
+        return ret;
+      };
+
       $scope.checkAllValues = function() {
         var ret = true;
         //check on Produzent on all Produkte
@@ -663,13 +687,13 @@ angular.module('openolitor-admin')
             korbEntry) {
             if (ret && angular.isUndefined(korbEntry.produzentId)) {
               ret = false;
-              alertService.addAlert('lighterror', gettext(
+              alertService.addAlert('lighterror', gettextCatalog.getString(
                 'Für jedes Produkt muss ein Produzent ausgewählt sein.'
               ));
             }
             if (ret && angular.isUndefined(korbEntry.produktBeschrieb)) {
               ret = false;
-              alertService.addAlert('lighterror', gettext(
+              alertService.addAlert('lighterror', gettextCatalog.getString(
                 'Jedes Produkt muss über eine Beschreibung verfügen.'
               ));
             }
@@ -701,15 +725,17 @@ angular.module('openolitor-admin')
       };
 
       $scope.planungAbschliessen = function() {
-        LieferplanungModel.abschliessen({
-          id: $routeParams.id
-        }, function() {
-          $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
-        }, function(error) {
-          alertService.addAlert('error', gettext(
-              'Lieferplanung kan nicht abgeschlossen werden: ') +
-            error.status + ':' + error.statusText);
-        });
+        if ($scope.checkAllValues()) {
+            LieferplanungModel.abschliessen({
+              id: $routeParams.id
+            }, function() {
+              $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
+            }, function(error) {
+              alertService.addAlert('error', gettextCatalog.getString(
+                  'Lieferplanung kan nicht abgeschlossen werden: ') +
+                error.status + ':' + error.statusText);
+            });
+        }
       };
 
       $scope.planungVerrechnen = function() {
@@ -718,7 +744,7 @@ angular.module('openolitor-admin')
         }, function() {
           $scope.planung.status = LIEFERSTATUS.VERRECHNET;
         }, function(error) {
-          alertService.addAlert('error', gettext(
+          alertService.addAlert('error', gettextCatalog.getString(
               'Lieferplanung kan nicht verrechnet werden: ') +
             error.status + ':' + error.statusText);
         });
@@ -786,18 +812,27 @@ angular.module('openolitor-admin')
         });
       };
 
+      $scope.abschliessenActionDisabled= [{
+        label: gettextCatalog.getString('Lieferplanung abschliessen'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        isDisabled: function() { return true; },
+        onExecute: function() { }
+      }];
+      
+
       $scope.abschliessenAction = [{
-        label: gettext('Lieferplanung abschliessen'),
-        confirmMessage: gettext('Soll die Lieferplanung abgeschlossen werden?'),
+        label: gettextCatalog.getString('Lieferplanung abschliessen'),
+        confirmMessage: gettextCatalog.getString('Soll die Lieferplanung abgeschlossen werden?'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-chevron-right',
         onExecute: function() {
           return $scope.planungAbschliessen();
         }
       },{
-        label: gettext('Lieferplanung löschen'),
+        label: gettextCatalog.getString('Lieferplanung löschen'),
         iconClass: 'fa fa-times',
-        confirmMessage: gettext('Soll die Lieferplanung gelöscht werden?'),
+        confirmMessage: gettextCatalog.getString('Soll die Lieferplanung gelöscht werden?'),
         noEntityText: true,
         onExecute: function() {
           return $scope.delete();
@@ -807,52 +842,76 @@ angular.module('openolitor-admin')
 
       $scope.getPostAbschliessenAktionen = function() {
         return [{
-          label: gettext('Abrechnungen anzeigen'),
+          label: gettextCatalog.getString('Bestellung an alle Lieferanten versenden'),
+          confirmMessage: gettextCatalog.getString('Sollen wirklich Mail an alle Lieferanten verschickt werden?'),
+          iconClass: 'fa fa-check',
+          noEntityText: true,
+          isDisabled: function() { return angular.isUndefined($scope.planung) || $scope.planung.status !== 'Abgeschlossen'; },
+          onExecute: function() {
+            $scope.recalculateBestellungen(function() {
+              lodash.forEach($scope.sammelbestellungen, function(sammelbestellung) {
+                $scope.sammelbestellungVersenden(sammelbestellung);
+              });
+            });
+          }
+        },{
+          label: gettextCatalog.getString('Abrechnungen anzeigen'),
           iconClass: 'fa fa-calculator',
           confirm: false,
           noEntityText: true,
           onExecute: function() {
-            var result = lodash.map($scope.sammelbestellungen, 'id');
-            $location.path('/lieferantenabrechnungen').search('q', 'id=' + result.join());
+            $scope.recalculateBestellungen(function() {
+              var result = lodash.map($scope.sammelbestellungen, 'id');
+              $location.path('/einkaufsrechnungen').search('q', 'id=' + result.join());
+            });
           }
         },{
-          label: gettext('Depotauslieferungen anzeigen') + '*',
+          label: gettextCatalog.getString('Depotauslieferungen anzeigen'),
           iconClass: 'fa fa-building-o',
           confirm: false,
           noEntityText: true,
-          isDisabled: function() { return true; },
           onExecute: function() {
-            var result = 1;
-            $location.path('/depotauslieferungen').search('q', 'id=' + result.join());
+            LieferplanungModel.getAllAuslieferungenByLieferplanungId({
+              id: $routeParams.id
+            }, function(result) {
+              var res = lodash.map(result, 'id');
+              $location.path('/depotauslieferungen').search('q', 'id=' + res.join());
+            });
           }
         },{
-          label: gettext('Tourauslieferungen anzeigen') + '*',
+          label: gettextCatalog.getString('Tourauslieferungen anzeigen'),
           iconClass: 'fa fa-truck',
           noEntityText: true,
           confirm: false,
-          isDisabled: function() { return true; },
           onExecute: function() {
-            var result = 1;
-            $location.path('/tourauslieferungen').search('q', 'id=' + result.join());
+            LieferplanungModel.getAllAuslieferungenByLieferplanungId({
+              id: $routeParams.id
+            }, function(result) {
+              var res = lodash.map(result, 'id');
+              $location.path('/tourauslieferungen').search('q', 'id=' + res.join());
+            });
           }
         },{
-          label: gettext('Postauslieferungen anzeigen') + '*',
+          label: gettextCatalog.getString('Postauslieferungen anzeigen'),
           iconClass: 'fa fa-envelope',
           noEntityText: true,
           confirm: false,
-          isDisabled: function() { return true; },
           onExecute: function() {
-            var result = 1;
-             $location.path('/postauslieferungen').search('q', 'id=' + result.join());
+            LieferplanungModel.getAllAuslieferungenByLieferplanungId({
+              id: $routeParams.id
+            }, function(result) {
+              var res = lodash.map(result, 'id');
+              $location.path('/postauslieferungen').search('q', 'id=' + res.join());
+            });
           }
         }];
       };
 
       $scope.verrechnenAction = [{
         labelFunction: function() {
-          return gettext('Lieferplanung verrechnen');
+          return gettextCatalog.getString('Lieferplanung verrechnen');
         },
-        confirmMessage: gettext('Soll die Lieferplanung verrechnet werden?'),
+        confirmMessage: gettextCatalog.getString('Soll die Lieferplanung verrechnet werden?'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-chevron-right',
         onExecute: function() {
@@ -861,7 +920,7 @@ angular.module('openolitor-admin')
       } ].concat($scope.getPostAbschliessenAktionen());
 
       $scope.verrechnetAction = [{
-        label: gettext('Lieferplanung verrechnet'),
+        label: gettextCatalog.getString('Lieferplanung verrechnet'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-chevron-right',
         isDisabled: function() { return true; },
@@ -873,6 +932,12 @@ angular.module('openolitor-admin')
           .id === $routeParams.id) {
           $scope.$apply();
         }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferplanung' && msg.data.id === $scope.planung.id) {
+          $location.url('/lieferplanung');
+         }
       });
 
       load();

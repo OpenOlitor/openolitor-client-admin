@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -22,12 +22,12 @@
             <table class="table table-striped table-condensed">
               <thead>
                 <tr>
-                  <th tanslate>Position</th>
-                  <th tanslate>Bezeichnung</th>
-                  <th tanslate>Strasse / Nr.</th>
-                  <th tanslate>Adresszusatz</th>
-                  <th tanslate>PLZ / Ort</th>
-                  <th tanslate>Abotyp</th>
+                  <th translate>Position</th>
+                  <th translate>Bezeichnung</th>
+                  <th translate>Strasse / Nr.</th>
+                  <th translate>Adresszusatz</th>
+                  <th translate>PLZ / Ort</th>
+                  <th translate>Abotyp</th>
                 </tr>
               </thead>
               <tbody sv-part="model.koerbe">
@@ -68,10 +68,11 @@
       </div>
     </div>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateReport">
+
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
     <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'tourauslieferungen/berichte/'+reportType" ids="[model.id]" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
-  </div>
-  <div class="context content-box col-md-3" ng-if="selectedAbo">
+  </oo-sliding-detail>
+  <oo-sliding-detail slide-in="selectedAbo" slide-out-function="unselectAboFunct()">
     <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>
-  </div>
+  </oo-sliding-detail>
 </div>

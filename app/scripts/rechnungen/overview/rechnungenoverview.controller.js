@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
+    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
-      localeSensitiveComparator) {
+      localeSensitiveComparator, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -59,6 +59,10 @@ angular.module('openolitor-admin')
           });
       };
 
+      $scope.navigateToDetail = function(id) {
+        DetailNavigationService.detailFromOverview(id, $scope, 'rechnungen', $location.url());
+      };
+
       var alleRechnungenStorniertOderBezahlt = function(selectedItems, items) {
         var length = selectedItems.length;
         for (var i = 0; i < length; ++i) {
@@ -102,7 +106,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Rechnung erstellen';
+          return gettext('Rechnung erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -110,7 +114,7 @@ angular.module('openolitor-admin')
           return $location.path('/rechnungen/new');
         }
       }, {
-        label: 'Rechnungsdokumente erstellen',
+        label: gettext('Rechnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateRechnungReport = true;
@@ -122,7 +126,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Mahnungsdokumente erstellen',
+        label: gettext('Mahnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
           $scope.showGenerateMahnungReport = true;
@@ -134,7 +138,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Rechnungsdokumente herunterladen',
+        label: gettext('Rechnungsdokumente herunterladen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
@@ -147,7 +151,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Mahnungsdokumente herunterladen',
+        label: gettext('Mahnungsdokumente herunterladen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
@@ -160,7 +164,7 @@ angular.module('openolitor-admin')
               $scope.checkboxes.data);
         }
       }, {
-        label: 'Rechnungen verschickt',
+        label: gettext('Rechnungen verschickt'),
         iconClass: 'fa fa-exchange',
         onExecute: function() {
           return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
@@ -173,7 +177,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: 'Kundenliste anzeigen',
+        label: gettext('Kundenliste anzeigen'),
         iconClass: 'fa fa-user',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
@@ -186,13 +190,27 @@ angular.module('openolitor-admin')
           $location.path('/kunden').search('q', 'id=' + result.join());
         }
       }, {
-        label: 'Email Versand*',
+        label: gettext('Email Versand*'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
           return false;
         },
         isDisabled: function() {
           return true;
+        }
+      }, {
+        label: gettext('Rechnungen löschen'),
+        iconClass: 'fa fa-times',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          angular.forEach(result, function(r) {
+            r.$delete();
+          });
         }
       }];
 
@@ -218,21 +236,29 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.queryQuery);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), true, localeSensitiveComparator) :
-              orderedData;
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            // also filter by ngtable filters
+            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = params.sorting ?
+              $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) :
+              dataSet;
 
-            $scope.filteredEntries = orderedData;
+            $scope.filteredEntries = dataSet;
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) *
+            params.total(dataSet.length);
+
+            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
+            return dataSet.slice((params.page() - 1) *
               params.count(), params.page() * params.count());
           }
 
         });
+
+        var existingFilter = $location.search().tf;
+        if (existingFilter) {
+          $scope.tableParams.filter(JSON.parse(existingFilter));
+        }
       }
 
       function search() {
@@ -248,7 +274,6 @@ angular.module('openolitor-admin')
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 
@@ -269,8 +294,16 @@ angular.module('openolitor-admin')
         $scope.showGenerateRechnungReport = false;
       };
 
+      $scope.closeRechnungBerichtFunct = function() {
+        return $scope.closeRechnungBericht;
+      };
+
       $scope.closeMahnungBericht = function() {
         $scope.showGenerateMahnungReport = false;
+      };
+
+      $scope.closeMahnungBerichtFunct = function() {
+        return $scope.closeMahnungBericht;
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
@@ -290,6 +323,19 @@ angular.module('openolitor-admin')
 
               $scope.tableParams.reload();
             }
+
+            $scope.$apply();
+          }
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Rechnung') {
+          var removed = lodash.remove($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (removed !== []) {
+            $scope.tableParams.reload();
 
             $scope.$apply();
           }
