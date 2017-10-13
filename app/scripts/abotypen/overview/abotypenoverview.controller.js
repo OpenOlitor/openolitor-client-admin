@@ -4,7 +4,7 @@
  */
 angular.module('openolitor-admin')
   .controller('AbotypenOverviewController', ['$scope', '$filter',
-    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil', 'gettext',
+    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil','gettext',
     function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
@@ -45,7 +45,7 @@ angular.module('openolitor-admin')
       }, true);
 
       if (!$scope.abosTableParams) {
-        //use default tableParams
+        //use default abostableParams
         $scope.abosTableParams = new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
@@ -75,6 +75,7 @@ angular.module('openolitor-admin')
             return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
         });
+        console.log($scope)
       }
 
       $scope.actions = [{
@@ -119,13 +120,13 @@ angular.module('openolitor-admin')
         });
       }
 
-        $scope.style = function(abotyp) {
-            if (abotyp.farbCode) {
-                return {
-                    'background-color': abotyp.farbCode
-                };
-            }
-        };
+      $scope.style = function(abotyp) {
+        if (abotyp.farbCode) {
+          return {
+            'background-color': abotyp.farbCode
+          };
+        }
+      };
 
       var existingQuery = $location.search().q;
       if (existingQuery) {

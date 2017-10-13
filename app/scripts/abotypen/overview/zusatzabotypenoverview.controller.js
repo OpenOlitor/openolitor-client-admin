@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('ZusatzAbotypenOverviewController', ['$scope', '$filter',
-    'ZusatzAbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil',
-    function($scope, $filter, ZusatzAbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil) {
+    'ZusatzAbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil','gettext',
+    function($scope, $filter, ZusatzAbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -79,7 +79,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-            return 'Zusatzabotyp erstellen';
+          return gettext('Zusatzabotyp erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -87,7 +87,7 @@ angular.module('openolitor-admin')
           return $location.path('/zusatzAbotypen/new');
         }
       }, {
-        label: 'Email an Kunden versenden',
+        label: gettext('Email an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
