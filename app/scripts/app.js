@@ -255,27 +255,38 @@ angular
             show: true,
             now: {
                 show: false,
-                text: gettext('Jetzt')
+                text: gettext('Jetzt'),
+                cls: 'btn-sm btn-default'
             },
             today: {
                 show: false,
-                text: gettext('Heute')
+                text: gettext('Heute'),
+                cls: 'btn-sm btn-default'
             },
             clear: {
                 show: true,
-                text: gettext('Löschen')
+                text: gettext('Löschen'),
+                cls: 'btn-sm btn-default'
             },
             date: {
                 show: true,
-                text: gettext('Datum')
+                text: gettext('Datum'),
+                cls: 'btn-sm btn-default'
             },
             time: {
                 show: true,
-                text: gettext('Zeit')
+                text: gettext('Zeit'),
+                cls: 'btn-sm btn-default'
             },
             close: {
                 show: true,
-                text: gettext('Schliessen')
+                text: gettext('Schliessen'),
+                cls: 'btn-sm btn-default'
+            },
+            cancel: {
+                show: false,
+                text: gettext('Abbrechen'),
+                cls: 'btn-sm btn-default'
             }
         },
         closeOnDateSelection: true,

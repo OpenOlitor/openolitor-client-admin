@@ -93,10 +93,14 @@ angular.module('openolitor-admin')
         $scope.tpOptionsBis.minDate = $scope.arbeitsangebot.zeitVon;
 
         if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
-            var diff = $scope.arbeitsangebot.zeitVon.getTime() - $scope.arbeitsangebot.zeitBis.getTime();
-            $scope.arbeitsangebot.einsatzZeit = Math.abs(diff/(1000*60*60));
+            var diff = $scope.arbeitsangebot.zeitBis.getTime() - $scope.arbeitsangebot.zeitVon.getTime();
+            if(diff < 0) {
+              $scope.arbeitsangebot.einsatzZeit = gettext('Ende vor Start!');
+            } else {
+              $scope.arbeitsangebot.einsatzZeit = Math.abs(diff/(1000*60*60));
+            }
         } else {
-            $scope.arbeitsangebot.einsatzZeit = '';
+          $scope.arbeitsangebot.einsatzZeit = '';
         }
 
         // min max times
@@ -119,6 +123,17 @@ angular.module('openolitor-admin')
       $scope.$on('$destroy', function() {
           unwatchMinMaxValues();
       });
+
+      $scope.einsatzActions = [{
+        labelFunction: function() {
+          return gettext('Person hinzufügen');
+        },
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-plus',
+        onExecute: function() {
+          return 'TODO';
+        }
+      }];
 
     }
   ]);
