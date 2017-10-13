@@ -162,7 +162,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: DepotAuslieferungenModel,
+          exportODSModel: overviewModel,
           exportODSFilter: function() {
             return {
               f: $scope.search.filterQuery

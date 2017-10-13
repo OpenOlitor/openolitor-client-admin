@@ -16,6 +16,5 @@ angular.module('openolitor-admin')
         }
       },
       'exportODS': exportODSModuleFunction
-    }
-    );
+    });
   }]);
