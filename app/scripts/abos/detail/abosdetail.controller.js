@@ -9,13 +9,13 @@ angular.module('openolitor-admin')
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'NgTableParams', 'gettextCatalog',
+    'API_URL', 'alertService', 'NgTableParams',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, ZusatzAbotypenModel, ZusatzAboModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
-      alertService, NgTableParams, gettextCatalog) {
+      alertService, NgTableParams) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -39,7 +39,7 @@ angular.module('openolitor-admin')
       $scope.open = {
         start: false
       };
-      
+
       $scope.openZusatzAbo = {
         start: [],
         ende: []
@@ -138,28 +138,33 @@ angular.module('openolitor-admin')
         }
       });
 
-      var basePath = '/abos';
-      if ($routeParams.kundeId) {
-        basePath = '/kunden/' + $routeParams.kundeId;
-      }
+      $scope.init = function() {
 
-      if (!angular.isDefined(getAboId())) {
-        KundenDetailModel.get({
-          id: getKundeId()
-        }, function(kunde) {
-          $scope.kunde = kunde;
-          $scope.abo = new AbosDetailModel(defaults.model);
-          $scope.zusatzAbos = new AbosDetailModel(defaults.model);
-          $scope.abo.kundeId = $scope.kunde.id;
-          $scope.abo.kunde = $scope.kunde.bezeichnung;
-          $scope.abo.start = moment().startOf('day').toDate();
-          $scope.zusatzAboTyp = new ZusatzAbotypenModel(zusatzAbotypenDefaults.model);
-        });
-      } else {
-        if (!$scope.abo) {
-          loadAboDetail();
+        $scope.basePath = '/abos';
+        if ($routeParams.kundeId) {
+          $scope.basePath = '/kunden/' + $routeParams.kundeId;
         }
-      }
+
+        if (!angular.isDefined(getAboId())) {
+          KundenDetailModel.get({
+            id: getKundeId()
+          }, function(kunde) {
+            $scope.kunde = kunde;
+            $scope.abo = new AbosDetailModel(defaults.model);
+            $scope.zusatzAbos = new AbosDetailModel(defaults.model);
+            $scope.abo.kundeId = $scope.kunde.id;
+            $scope.abo.kunde = $scope.kunde.bezeichnung;
+            $scope.abo.start = moment().startOf('day').toDate();
+            $scope.zusatzAboTyp = new ZusatzAbotypenModel(zusatzAbotypDefaults.model);
+          });
+        } else {
+          if (!$scope.abo) {
+            loadAboDetail();
+          }
+        }
+      };
+
+      $scope.init();
 
       $scope.lists.abotypen = AbotypenOverviewModel.query({
         aktiv: true
@@ -171,7 +176,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.cancel = function() {
-        $location.path(basePath);
+        $location.path($scope.basePath);
       };
 
       $scope.delete = function() {
@@ -181,11 +186,11 @@ angular.module('openolitor-admin')
       $scope.newZusatzAbo = function(id){
         createNewZusatzAbo(id);
         return(true);
-      }
+      };
 
       $scope.deleteZusatzAbo = function(zusatzAbo){
         zusatzAbo.$delete();
-      }
+      };
 
       var showGuthabenAnpassenDialog = function() {
         var modalInstance = $uibModal.open({
@@ -476,7 +481,7 @@ angular.module('openolitor-admin')
       var isAboEntity = function(entity) {
         return $scope.ABOTYPEN_ARRAY.indexOf(entity) > -1;
       };
-      
+
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (isAboEntity(msg.entity)) {
           if ($scope.abo && $scope.abo.id === msg.data.id) {
@@ -495,14 +500,14 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if ((msg.entity) === 'ZusatzAbo') {
-            $scope.zusatzAbos.push(new ZusatzAboModel(msg.data))
+            $scope.zusatzAbos.push(new ZusatzAboModel(msg.data));
             $scope.$apply();
         }
       });
 
       msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
         if ((msg.entity) === 'ZusatzAbo') {
-            $scope.zusatzAbos.splice($scope.zusatzAbos.indexOf(event.data),1)
+            $scope.zusatzAbos.splice($scope.zusatzAbos.indexOf(event.data),1);
             $scope.$apply();
         }
       });

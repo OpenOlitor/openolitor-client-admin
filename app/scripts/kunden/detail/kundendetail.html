@@ -386,7 +386,7 @@
       <div ng-if="isExisting()" ng-include="'scripts/kunden/detail/abo/abos.html'"></div>
     </div>
 
-    <oo-sliding-detail slide-in="isNewAbo()" slide-out-function="closeBerichtFunct()">
+    <oo-sliding-detail ng-if="isNewAbo()" slide-in="isNewAbo()" slide-out-function="closeBerichtFunct()">
       <oo-abos-new kunde-id="kunde.id" on-save="onAboCreated()" on-cancel="onAboCreateCanceled()"></oo-abos-new>
     </oo-sliding-detail>
     <oo-sliding-detail slide-in="selectedAbo" slide-out-function="unselectAboFunct()">
