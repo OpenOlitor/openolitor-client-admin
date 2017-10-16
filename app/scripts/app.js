@@ -435,6 +435,9 @@ angular
     return {
       responseError: function (rejection) {
         var status = rejection.status;
+        if (status === 400) {
+          alertService.addAlert('error', gettext('Problem beim Aufruf einer Serverfunktion:'), rejection.data);
+        } else
         if (status === 401) {
             alertService.removeAllAlerts();
             $window.location = '#/logout';

@@ -36,6 +36,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.batchModify = function() {
+        $scope.bestellungenAbrechnen.ids = $scope.bestellungIds;
         EinkaufsrechnungenOverviewService.alsAbgerechnetMarkieren(
           $scope.bestellungenAbrechnen).then(function() {
           $scope.commandIssued = true;
