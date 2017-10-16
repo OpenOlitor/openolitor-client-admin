@@ -730,10 +730,6 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function() {
               $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
-            }, function(error) {
-              alertService.addAlert('error', gettextCatalog.getString(
-                  'Lieferplanung kan nicht abgeschlossen werden: ') +
-                error.status + ':' + error.statusText);
             });
         }
       };
@@ -743,10 +739,6 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function() {
           $scope.planung.status = LIEFERSTATUS.VERRECHNET;
-        }, function(error) {
-          alertService.addAlert('error', gettextCatalog.getString(
-              'Lieferplanung kan nicht verrechnet werden: ') +
-            error.status + ':' + error.statusText);
         });
       };
 
@@ -828,7 +820,7 @@ angular.module('openolitor-admin')
         isDisabled: function() { return true; },
         onExecute: function() { }
       }];
-      
+
       $scope.abschliessenAction = [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),
         confirmMessage: gettextCatalog.getString('Soll die Lieferplanung abgeschlossen werden?'),
