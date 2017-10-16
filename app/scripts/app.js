@@ -34,7 +34,7 @@ function convertDateStringsToDates(input) {
       input[key] = convertDateStringsToDates(value);
     }
   }
-  return input; } 
+  return input; }
 function addExtendedEnumValue(id, labelLong, labelShort, value) {
   return {
     id: id,
@@ -230,6 +230,64 @@ angular
   .constant('ROLLE', {
     KUNDE: gettext('Kunde'),
     ADMINISTRATOR: gettext('Administrator'),
+  })
+  .constant('uiDatetimePickerConfig', {
+      dateFormat: 'dd.MM.yyyy HH:mm',
+      defaultTime: '08:00:00',
+      html5Types: {
+          date: 'dd.MM.yyyy',
+          'datetime-local': 'yyyy-MM-ddTHH:mm:ss.sss',
+          'month': 'MMM yyyy'
+      },
+      initialPicker: 'date',
+      reOpenDefault: false,
+      enableDate: true,
+      enableTime: true,
+      buttonBar: {
+          show: true,
+          now: {
+              show: false,
+              text: gettext('Jetzt'),
+              cls: 'btn-sm btn-default'
+          },
+          today: {
+              show: false,
+              text: gettext('Heute'),
+              cls: 'btn-sm btn-default'
+          },
+          clear: {
+              show: true,
+              text: gettext('Löschen'),
+              cls: 'btn-sm btn-default'
+          },
+          date: {
+              show: true,
+              text: gettext('Datum'),
+              cls: 'btn-sm btn-default'
+          },
+          time: {
+              show: true,
+              text: gettext('Zeit'),
+              cls: 'btn-sm btn-default'
+          },
+          close: {
+              show: true,
+              text: gettext('Schliessen'),
+              cls: 'btn-sm btn-default'
+          },
+          cancel: {
+              show: false,
+              text: gettext('Abbrechen'),
+              cls: 'btn-sm btn-default'
+          }
+      },
+      closeOnDateSelection: true,
+      closeOnTimeNow: true,
+      appendToBody: false,
+      altInputFormats: [],
+      ngModelOptions: { },
+      saveAs: false,
+      readAs: false,
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
