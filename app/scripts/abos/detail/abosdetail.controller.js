@@ -210,10 +210,6 @@ angular.module('openolitor-admin')
             data).then(function() {
             alertService.addAlert('info', gettext(
               'Guthaben wurde erfolgreich angepasst'));
-          }, function(error) {
-            alertService.addAlert('error', gettext(
-                'Guthaben konnte nicht angepasst werden: ') +
-              error.status + ':' + error.statusText);
           });
         }, function() {
           $log.info('Modal dismissed at: ' + new Date());
@@ -244,10 +240,6 @@ angular.module('openolitor-admin')
             '/aktionen/vertriebsartanpassen', data).then(function() {
             alertService.addAlert('info', gettext(
               'Vertriebsart wurde erfolgreich angepasst'));
-          }, function(error) {
-            alertService.addAlert('error', gettext(
-                'Vertriebsart konnte nicht angepasst werden: ') +
-              error.status + ':' + error.statusText);
           });
         }, function() {
           $log.info('Modal dismissed at: ' + new Date());
