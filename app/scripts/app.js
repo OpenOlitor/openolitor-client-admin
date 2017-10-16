@@ -561,7 +561,6 @@ angular
       })
       .when('/abotypen', {
         templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
-        controller: 'AbotypenOverviewController',
         name: 'AbotypenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
@@ -577,13 +576,6 @@ angular
         controller: 'AbotypenDetailController',
         name: 'AbotypenDetail',
         access: userRoles.Administrator
-      })
-      .when('/zusatzAbotypen', {
-        templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
-        controller: 'ZusatzabotypenOverviewController',
-        name: 'ZusatzabotypenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
       })
       .when('/zusatzAbotypen/new', {
         templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
