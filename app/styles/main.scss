@@ -1,7 +1,7 @@
 body {
   font-family: 'Droid Sans', sans-serif;;
 
-  background-image: url('images/background.jpg');
+  background-image: url('../images/background.jpg');
   background-color: rgba(255,255,255,0.6);
   background-repeat: no-repeat;
   background-position: 50% 0;
@@ -469,7 +469,7 @@ footer, .footer {
 .openolitor>footer {
   text-align: right;
   background-color: rgba(255, 255, 255, 0.3);
-  color: white;
+  color: #777676;
   padding-top: 1px;
   padding-bottom: 1px;
   padding-right: 10px;
