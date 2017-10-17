@@ -730,10 +730,6 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function() {
               $scope.planung.status = LIEFERSTATUS.ABGESCHLOSSEN;
-            }, function(error) {
-              alertService.addAlert('error', gettextCatalog.getString(
-                  'Lieferplanung kan nicht abgeschlossen werden: ') +
-                error.status + ':' + error.statusText);
             });
         }
       };
@@ -743,10 +739,6 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function() {
           $scope.planung.status = LIEFERSTATUS.VERRECHNET;
-        }, function(error) {
-          alertService.addAlert('error', gettextCatalog.getString(
-              'Lieferplanung kan nicht verrechnet werden: ') +
-            error.status + ':' + error.statusText);
         });
       };
 
@@ -812,6 +804,15 @@ angular.module('openolitor-admin')
         });
       };
 
+      $scope.displayZusatzabos = function(lieferungId, korbStatus) {
+        LieferplanungModel.getZusatzaboIdsByKorbStatus({
+          id: $routeParams.id,
+          lieferungId: lieferungId,
+          korbStatus: korbStatus
+        }, function(result) {
+          $location.path('/abos').search('q', 'id=' + result.join());
+        });
+      };
       $scope.abschliessenActionDisabled= [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),
         noEntityText: true,
@@ -819,7 +820,6 @@ angular.module('openolitor-admin')
         isDisabled: function() { return true; },
         onExecute: function() { }
       }];
-      
 
       $scope.abschliessenAction = [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),

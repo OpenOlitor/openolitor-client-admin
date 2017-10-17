@@ -70,9 +70,16 @@
     </div>
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen | orderBy: 'abotypBeschrieb'">
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
-        <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
-        <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
-        <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+        <div  ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" >
+          <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+          <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
+          <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+        </div>
+        <div  ng-if="abotypLieferung.abotyp.typ === 'Abotyp'" >
+          <span translate>Anzahl Körbe zu liefern: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+          <span translate>Anzahl Abwesenheiten: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
+          <span translate>Anzahl <i>Saldo zu tief</i>: </span><a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+        </div>
       </script>
       <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
         <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">
@@ -80,17 +87,20 @@
             <span class="navbar-brand" data-toggle="collapse" data-target="#abotypLieferung_{{abotypLieferung.id}}" aria-expanded="true">
               <span class="pre-info" uib-tooltip-template="'anzahlTooltipTemplate.html'" tooltip-popup-close-delay="3000">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
               {{abotypLieferung.abotypBeschrieb}}
+              <span ng-if="abotypLieferung.abotyp.typ === 'Abotyp'"> 
               <script type="text/ng-template" id="vertriebTooltipTemplate.html">
                 <span translate>Vertrieb: </span><b>{{abotypLieferung.vertriebBeschrieb}}</b>
               </script>
               <span class="lieferplanung pre-info fa fa-info-circle" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb" uib-tooltip-template="'vertriebTooltipTemplate.html'" tooltip-popup-close-delay="500">
               </span>
+              </span> 
             </span>
             <span class="pull-right">
               <small class="lieferplanung" ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | {{abotypLieferung.datum | date}}</small>
               <span class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
+              <div ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" > Zusatzabo</div>
             </span>
           </h3>
         </div>

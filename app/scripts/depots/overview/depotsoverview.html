@@ -21,7 +21,7 @@
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
-          <table ng-table="tableParams" class="table table-striped">
+          <table ng-table="tableParams" class="table table-striped" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="depot in $data | filter: search.query.$ ">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[depot.id]" />

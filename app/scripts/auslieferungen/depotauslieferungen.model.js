@@ -3,8 +3,9 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('DepotAuslieferungenModel', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'depotauslieferungen/:id/:extendedPath/:aktion', {
+  .factory('DepotAuslieferungenModel', ['$resource', 'API_URL', 'exportODSModuleFunction', 
+    function($resource, API_URL, exportODSModuleFunction) {
+    return $resource(API_URL + 'depotauslieferungen/:id:exportType/:extendedPath/:aktion', {
       id: '@id'
     }, {
       ausliefern: {
@@ -16,4 +17,4 @@ angular.module('openolitor-admin')
       },
       'exportODS': exportODSModuleFunction
     });
-  });
+  }]);

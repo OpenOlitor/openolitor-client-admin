@@ -33,7 +33,8 @@ i.red {
 
 //ng validator
 .oo-invalid,
-input.ng-invalid {
+input.ng-invalid,
+textarea.ng-invalid {
   border-color: #D60000;
 }
 

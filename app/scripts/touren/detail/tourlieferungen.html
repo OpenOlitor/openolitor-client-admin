@@ -27,7 +27,7 @@
         {{tourlieferung.plz}} {{tourlieferung.ort}}
       </td>
       <td>
-        {{tourlieferung.abotypName}}
+        <span>{{tourlieferung.abotypName}}</span><span class="label label-default" ng-repeat="zusatzAbo in tourlieferung.zusatzAbos"> +{{zusatzAbo.abotypName}}</span>
       </td>
     </tr>
   </tbody>

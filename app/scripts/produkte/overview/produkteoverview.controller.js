@@ -227,7 +227,7 @@ angular.module('openolitor-admin')
       var throttledReload = lodash.throttle(function() {
           $scope.tableParams.reload();
       }, 200);
-      $scope.$watch('search.query.$',
+      $scope.$watch('search.query',
         function(newVal, oldVal) {
           if(newVal !== oldVal) {
             throttledReload();
