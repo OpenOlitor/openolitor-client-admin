@@ -50,7 +50,7 @@
                   <td>
                       <div ng-if="!!korb.kunde.ortLieferung || !!korb.kunde.plzLieferung">
                           {{korb.kunde.plzLieferung}} {{korb.kunde.ortLieferung}} </div>
-                      <div ng-if="!korb.kunde.ortLieferung || !korb.kunde.plzLieferung">
+                      <div ng-if="!korb.kunde.ortLieferung && !korb.kunde.plzLieferung">
                         {{korb.kunde.plz}} {{korb.kunde.ort}}</div>
                   </td>
                   <td>
