@@ -38,7 +38,10 @@
                 {{korb.kunde.bezeichnung|date:"dd.MM.yyyy"}}
               </td>
               <td data-title="'PLZ Ort'|translate" sortable="'anzahlKoerbe'">
-                {{korb.kunde.plz}} {{korb.kunde.ort}}
+                <div ng-if="!!korb.kunde.ortLieferung || !!korb.kunde.plzLieferung">
+                   {{korb.kunde.plzLieferung}} {{korb.kunde.ortLieferung}} </div>
+                <div ng-if="!korb.kunde.ortLieferung && !korb.kunde.plzLieferung">
+                   {{korb.kunde.plz}} {{korb.kunde.ort}}</div>
               </td>
               <td>
                 <div class="pull-right">

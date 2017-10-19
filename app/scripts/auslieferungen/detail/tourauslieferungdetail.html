@@ -48,7 +48,10 @@
                     {{korb.adressZusatz}}
                   </td>
                   <td>
-                    {{korb.kunde.plz}} {{korb.kunde.ort}}
+                      <div ng-if="!!korb.kunde.ortLieferung || !!korb.kunde.plzLieferung">
+                          {{korb.kunde.plzLieferung}} {{korb.kunde.ortLieferung}} </div>
+                      <div ng-if="!korb.kunde.ortLieferung && !korb.kunde.plzLieferung">
+                        {{korb.kunde.plz}} {{korb.kunde.ort}}</div>
                   </td>
                   <td>
                     <span class="color-box" ng-style="style(korb.abotyp)"></span> {{korb.abotyp.name}}
