@@ -255,10 +255,12 @@
       </div>
     </form>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateRechnungReport">
+  <oo-sliding-detail slide-in="showGenerateRechnungReport" slide-out-function="closeRechnungBerichtFunct()">
     <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/' + rechnung.id + '/berichte/rechnung'" default-file-name="'Rechnung.odt'|translate"></oo-generate-report>
   </div>
-  <div class="content-box col-md-3" ng-if="showGenerateMahnungReport">
+  </oo-sliding-detail>
+  <oo-sliding-detail slide-in="showGenerateMahnungReport" slide-out-function="closeMahnungBerichtFunct()">
     <oo-generate-report on-close="closeMahnungBericht" on-generated="closeMahnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/' + rechnung.id + '/berichte/mahnung'" default-file-name="'Mahnung.odt'|translate"></oo-generate-report>
   </div>
+  </oo-sliding-detail>
 </div>
