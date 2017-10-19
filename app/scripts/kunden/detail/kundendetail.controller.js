@@ -369,7 +369,7 @@ angular.module('openolitor-admin')
             alertService.addAlert('info', gettext('Abo wurde erstellt'));
             $scope.$apply();
           }
-        } else if (msg.entity === 'Pendenz') {
+        } else if ($scope.kunde && msg.entity === 'Pendenz') {
           var pendenzen = lodash.filter($scope.kunde.pendenzen, function(
             p) {
             return p.id === undefined &&
@@ -410,7 +410,7 @@ angular.module('openolitor-admin')
               }
             });
           }
-        } else if (msg.entity === 'Pendenz') {
+        } else if ($scope.kunde && msg.entity === 'Pendenz') {
           lodash.map(lodash.filter($scope.kunde.pendenzen, function(p) {
             return p.id === msg.data.id;
           }), function(p) {
