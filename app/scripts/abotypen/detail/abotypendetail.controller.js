@@ -27,9 +27,14 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.colorPickerOptions = {
+        alpha: false,
+        format: 'hex'
+      };
+
       $scope.getModel  = function(){
-        return $location.path().split('/')[1]
-      }
+        return $location.path().split('/')[1];
+      };
 
       $scope.unbeschraenkt = LAUFZEITEINHEITEN.UNBESCHRAENKT;
       $scope.selectedVertrieb = undefined;

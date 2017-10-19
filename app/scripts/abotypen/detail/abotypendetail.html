@@ -70,7 +70,7 @@
               <div class="col-md-4">
                 <label for="lieferrhythmus" ng-if="getModel() === 'abotypen'" translate>Lieferrhythmus</label>
               </div>
-              <div class="col-md-4"> 
+              <div class="col-md-4">
                 <oo-dropdown dropdown-id="lieferrhythmus" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
               </div>
             </div>
@@ -91,7 +91,7 @@
                   <span translate>pro</span>
                 </div>
                 <div class="col-md-3">
-                        
+
                   <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
                   <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'zusatzAbotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="zusatzAbotyp.preiseinheit" ng-required></oo-dropdown>
                 </div>
@@ -162,8 +162,8 @@
               <label for="farbCode" translate>Farbe-Code</label>
             </div>
             <div class="col-md-3">
-              <color-picker ng-if="getModel() === 'abotypen'" ng-model="abotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
-              <color-picker ng-if="getModel() === 'zusatzAbotypen'" ng-model="zusatzAbotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
+              <color-picker ng-if="getModel() === 'abotypen'" ng-model="abotyp.farbCode" options="colorPickerOptions"></color-picker>
+              <color-picker ng-if="getModel() === 'zusatzAbotypen'" ng-model="zusatzAbotyp.farbCode" options="colorPickerOptions"></color-picker>
             </div>
           </div>
           <div class="row form-group">
@@ -203,8 +203,8 @@
               <label for="farbCode" translate>Anzahl aktive Abonnemente</label>
             </div>
             <div class="col-md-2" >
-                <span ng-if="getModel() === 'abotypen'" >{{abotyp.anzahlAbonnentenAktiv}}</span> 
-                <span ng-if="getModel() === 'zusatzAbotypen'">{{zusatzAbotyp.anzahlAbonnentenAktiv}}</span> 
+                <span ng-if="getModel() === 'abotypen'" >{{abotyp.anzahlAbonnentenAktiv}}</span>
+                <span ng-if="getModel() === 'zusatzAbotypen'">{{zusatzAbotyp.anzahlAbonnentenAktiv}}</span>
             </div>
           </div>
         </div>
