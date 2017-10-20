@@ -1,7 +1,7 @@
     <div class="row">
       <div oo-error-overlay></div>
     <form name="abotypForm">
-  <div class="content content-box col-md-9">
+  <div class="content content-box col-md-12">
     <div class="alert alert-warning" ng-if="!abotyp.aktiv && getModel() === 'abotypen'" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
     <div class="alert alert-warning" ng-if="!zusatzAbotyp.aktiv && getModel() === 'zusatzAbotypen'" translate>Dieser Zusatzabotyp ist derzeit nicht aktiv</div>
       <div class="panel panel-default">
@@ -212,11 +212,13 @@
     </div>
     </form>
   </div>
+
   <div class="row" ng-if="getModel() === 'abotypen'">
-    <div class="content content-box col-md-9">
+    <div class="content content-box col-md-12">
       <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
     </div>
-    <div class="content-box col-md-3" ng-if="isVertriebExisting()">
-      <div ng-if="isVertriebExisting() && selectedVertrieb" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    <oo-sliding-detail slide-in="selectedVertrieb" slide-out-function="unselectVertriebFunct()">
+      <div ng-if="isVertriebExisting() " ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    </oo-sliding-detail>
     </div>
   </div>

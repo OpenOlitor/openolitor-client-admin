@@ -143,6 +143,12 @@ angular.module('openolitor-admin')
         } else {
           $scope.selectedVertrieb = vertrieb;
         }
+          if ($scope.showSelectedVertrieb === true){
+            $scope.showSelectedVertrieb = true;
+          }
+          else{ 
+            $scope.showSelectedVertrieb = false; 
+          }
         var msg = {
           type: 'VertriebSelected',
           vertrieb: $scope.selectedVertrieb
