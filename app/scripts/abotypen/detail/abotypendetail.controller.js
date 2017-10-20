@@ -159,5 +159,13 @@ angular.module('openolitor-admin')
       msgBus.onMsg('VertriebSelected', $scope, function(event, msg) {
         $scope.selectedVertrieb = msg.vertrieb;
       });
+
+      $scope.unselectVertrieb = function() {  
+        $scope.showSelectedVertrieb = false;
+      };
+
+      $scope.unselectVertriebFunct = function() {  
+        $scope.unselectVertrieb();
+      };
     }
   ]);
