@@ -15,7 +15,9 @@
             <th translate>Bezeichnung</th>
             <th translate>Liefertag</th>
             <th ng-if="depots.length > 0" translate>Depots</th>
+            <th></th>
             <th ng-if="touren.length > 0" translate>Touren</th>
+            <th></th>
             <th translate>Postlieferung</th>
         </tr>
         <tr ng-repeat="vertrieb in vertriebe" ng-class="vertriebClass(vertrieb)" ng-click="selectVertrieb(vertrieb)" >
@@ -29,6 +31,8 @@
               {{vertriebsart.depot.kurzzeichen}}
               <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteDepotlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
             </span>
+          </td>
+          <td>
             <span class="dropdown pull-right">
               <oo-dropdown dropdown-id="depot" display-style="uib-dropdown" values="depotByVertrieb[vertrieb.id]" filter="notIn:'id':selectedDepotIds(vertrieb)" property="name" selected-prop="id" selected-function="addDepotlieferung" selected-function-scope="vertrieb"></oo-dropdown>
             </span>
@@ -38,8 +42,10 @@
               {{vertriebsart.tour.name}}
               <span ng-hide="vertriebsart.anzahlAbos > 0" ng-click="deleteHeimlieferung(vertrieb, vertriebsart)" class="glyphicon glyphicon-remove"></span>
             </span>
+          </td>
+          <td>
             <span class="dropdown pull-right">
-              <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="touren" filter="notIn:'id':selectedTourIds(vertrieb)" property="name" selected-prop="id" selected-function="addHeimlieferung" selected-function-scope="vertrieb"></oo-dropdown>
+              <oo-dropdown dropdown-id="tour" display-style="uib-dropdown" values="tourenByVertrieb[vertrieb.id]" filter="notIn:'id':selectedTourenIds(vertrieb)" property="name" selected-prop="id" selected-function="addHeimlieferung" selected-function-scope="vertrieb"></oo-dropdown>
             </span>
           </td>
           <td>
