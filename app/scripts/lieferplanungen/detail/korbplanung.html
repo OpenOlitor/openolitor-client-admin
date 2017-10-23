@@ -87,7 +87,7 @@
             <span class="navbar-brand" data-toggle="collapse" data-target="#abotypLieferung_{{abotypLieferung.id}}" aria-expanded="true">
               <span class="pre-info" uib-tooltip-template="'anzahlTooltipTemplate.html'" tooltip-popup-close-delay="3000">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
               {{abotypLieferung.abotypBeschrieb}}
-              <div class="vertrieb-info" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb">
+              <div class="vertrieb-info" ng-if="abotypLieferung.vertriebBeschrieb && abotypLieferung.vertriebBeschrieb!==abotypLieferung.abotypBeschrieb && abotypLieferung.abotyp.typ === 'Abotyp'">
                 <span translate>Vertrieb: </span><span> {{abotypLieferung.vertriebBeschrieb}}</span>
               </div>
             </span>
