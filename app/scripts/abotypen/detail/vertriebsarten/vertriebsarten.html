@@ -20,8 +20,8 @@
             <th></th>
             <th translate>Postlieferung</th>
         </tr>
-        <tr ng-repeat="vertrieb in vertriebe" ng-class="vertriebClass(vertrieb)" ng-click="selectVertrieb(vertrieb)" >
-            <td><a> {{vertrieb.id}} <i class="fa fa-chevron-right"> </a></td>
+        <tr ng-repeat="vertrieb in vertriebe" ng-class="vertriebClass(vertrieb)">
+            <td><a ng-click="selectVertrieb(vertrieb)"> {{vertrieb.id}} <i class="fa fa-chevron-right"> </a></td>
           <td><input class="form-control" type="text" ng-model="vertrieb.beschrieb" /></td>
           <td>
             <oo-liefertage liefertag="vertrieb.liefertag" required></oo-liefertage>
