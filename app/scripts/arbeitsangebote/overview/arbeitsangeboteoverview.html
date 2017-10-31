@@ -37,6 +37,9 @@
                 {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'dd.MM.yyyy HH:mm'}}
                 </span>
               </td>
+              <td data-title="'Personen'|translate">
+                {{arbeitseinsatz.anzahlEingeschriebene}} / <span ng-if="!arbeitseinsatz.mehrPersonenOk" translate>max.</span>{{arbeitseinsatz.anzahlPersonen}}
+              </td>
               <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{kategorien: 'select'}" filter-data="kategorienL">
                 {{arbeitseinsatz.arbeitskategorien}}
               </td>

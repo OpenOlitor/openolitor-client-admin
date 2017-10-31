@@ -11,7 +11,7 @@
             <div class="col-md-2">
                <small><label for="typen" translate>Arbeitskategorien</label></small>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6">{{arbeitsangebot.arbeitskategorien}}
               <oo-arbeitskategorien arbeitskategorien-list="arbeitsangebot.arbeitskategorien"></oo-arbeitskategorien>
               <div class="btn-group pull-right" role="group">
                 <oo-save-button model="arbeitsangebot" form="arbeitsangebotForm" entity="Arbeitsangebot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Arbeitsangebot'|translate}}</oo-save-button>
@@ -116,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" ng-if="arbeitsangebot.id">
           <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading clearfix">

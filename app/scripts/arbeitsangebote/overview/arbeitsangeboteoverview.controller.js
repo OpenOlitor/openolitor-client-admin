@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('ArbeitsangeboteOverviewController', ['$q', '$scope', '$filter',
     'ArbeitseinsaetzeModel', 'ArbeitsangeboteModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService',
+    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService', 'gettext',
     function($q, $scope, $filter, ArbeitseinsaetzeModel, ArbeitsangeboteModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService) {
+      OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService, gettext) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -147,7 +147,7 @@ angular.module('openolitor-admin')
           return $location.path('/arbeitsangebote/new');
         }
       }, {
-        label: 'Arbeitseinsaetzebrief',
+        label: gettext('Arbeitseinsaetzebrief'),
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
