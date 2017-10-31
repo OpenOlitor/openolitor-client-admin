@@ -15,6 +15,11 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.colorPickerOptions = {
+        alpha: false,
+        format: 'hex'
+      };
+
       if (!$routeParams.id || $routeParams.id === 'new') {
         $scope.depot = new DepotsDetailModel(defaults.model);
       } else {

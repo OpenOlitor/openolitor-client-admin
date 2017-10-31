@@ -154,12 +154,6 @@ angular.module('openolitor-admin')
           sorting: {
             datum: 'asc'
           },
-          exportODSModel: overviewModel,
-          exportODSFilter: function() {
-            return {
-              f: $scope.search.filterQuery
-            };
-          },
           filter: {
             status: undefined
           }
@@ -167,6 +161,12 @@ angular.module('openolitor-admin')
           filterDelay: 0,
           groupOptions: {
             isExpanded: true
+          },
+          exportODSModel: overviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery
+            };
           },
           getData: function(params) {
             if (!$scope.entries) {

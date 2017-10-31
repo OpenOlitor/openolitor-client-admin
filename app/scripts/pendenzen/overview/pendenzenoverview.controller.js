@@ -17,7 +17,7 @@ angular.module('openolitor-admin')
       $scope.statusL = [];
       angular.forEach(PENDENZSTATUS, function(value, key) {
         $scope.statusL.push({
-          'id': key,
+          'id': value,
           'title': gettextCatalog.getString(value)
         });
       });
@@ -34,7 +34,7 @@ angular.module('openolitor-admin')
           sorting: {
             name: 'asc'
           },
-          filter: { status: 'AUSSTEHEND' }
+          filter: { status: 'Ausstehend' }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -47,7 +47,7 @@ angular.module('openolitor-admin')
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.entries, $scope.search.query);
             // also filter by ngtable filters
-            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = $filter('filter')(dataSet, params.filter(), true);
             dataSet = params.sorting ?
               $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) : dataSet;
 

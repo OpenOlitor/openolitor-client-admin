@@ -1,7 +1,7 @@
 body {
   font-family: 'Droid Sans', sans-serif;;
 
-  background-image: url('/images/background.jpg');
+  background-image: url('../images/background.jpg');
   background-color: rgba(255,255,255,0.6);
   background-repeat: no-repeat;
   background-position: 50% 0;
@@ -29,7 +29,8 @@ i.red {
 
 //ng validator
 .oo-invalid,
-input.ng-invalid {
+input.ng-invalid,
+textarea.ng-invalid {
   border-color: #D60000;
 }
 
@@ -324,6 +325,10 @@ input.ng-invalid {
   color: #555;
 }
 
+#lieferplanung .lieferplanung-title .navbar-brand .vertrieb-info {
+  font-size: 65%;
+}
+
 #lieferplanung .panel-lieferplanung {
 
 }
@@ -461,7 +466,7 @@ footer, .footer {
 .openolitor>footer {
   text-align: right;
   background-color: rgba(255, 255, 255, 0.3);
-  color: white;
+  color: #777676;
   padding-top: 1px;
   padding-bottom: 1px;
   padding-right: 10px;
@@ -498,10 +503,7 @@ footer, .footer {
 
 .version-tooltip {
   font-size: 70%;
-  width: 130px;
-  right: 0px;
-  margin: 5px;
-  left: auto !important;
+  width: 200px;
 }
 
 .preis-tooltip {

@@ -63,7 +63,7 @@
         <div ng-hide="resulat.entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="resulat.entries" display-export="true" export-file-name="Report_{{report.name}}">
+        <div ng-show="resulat.entries" display-export="true" export-file-name="Report_{{report.name}}" class="horizontal-scroll">
           <table ng-table-dynamic="tableParams with cols" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="dataEntry in $data | filter: search.query.$">
               <td ng-repeat="col in $columns" ng-bind-html="col.getValue(this, dataEntry)"></td>

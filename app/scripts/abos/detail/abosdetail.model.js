@@ -18,6 +18,6 @@ angular.module('openolitor-admin')
           guthabenNeu: undefined,
           bemerkung: undefined
         }
-      }
+    }
     });
   });

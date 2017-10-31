@@ -39,7 +39,7 @@
                   </span>
                   </td>
                   <td>
-                    <a ng-href="#/kunden/{{korb.kunde.kundeId}}">{{korb.kunde.bezeichnung}}</a>
+                    <a ng-href="#/kunden/{{korb.kunde.id}}">{{korb.kunde.bezeichnung}}</a>
                   </td>
                   <td>
                     {{korb.kunde.strasse}} {{korb.kunde.hausNummer}}
@@ -48,7 +48,10 @@
                     {{korb.adressZusatz}}
                   </td>
                   <td>
-                    {{korb.kunde.plz}} {{korb.kunde.ort}}
+                      <div ng-if="!!korb.kunde.ortLieferung || !!korb.kunde.plzLieferung">
+                          {{korb.kunde.plzLieferung}} {{korb.kunde.ortLieferung}} </div>
+                      <div ng-if="!korb.kunde.ortLieferung && !korb.kunde.plzLieferung">
+                        {{korb.kunde.plz}} {{korb.kunde.ort}}</div>
                   </td>
                   <td>
                     <span class="color-box" ng-style="style(korb.abotyp)"></span> {{korb.abotyp.name}}

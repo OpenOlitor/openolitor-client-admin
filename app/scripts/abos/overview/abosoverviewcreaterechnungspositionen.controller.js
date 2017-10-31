@@ -14,7 +14,6 @@ angular.module('openolitor-admin')
       alertService, AbosOverviewService) {
 
       $scope.rechnungsPositionen = {
-        ids: $scope.aboIds,
         waehrung: 'CHF'
       };
 
@@ -35,6 +34,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.batchCreate = function() {
+        $scope.rechnungsPositionen.ids = $scope.aboIds;
         switch($scope.form.mode) {
           case 'AnzahlLieferungen':
             AbosOverviewService.createAnzahlLieferungenRechnungsPositionen($scope.rechnungsPositionen).then(function() {
@@ -73,7 +73,7 @@ angular.module('openolitor-admin')
       $scope.jumpToAbosWhereCreateHasFailed = function() {
         $scope.filterQuery = 'id=' + $scope.batchCreated.openAboIds.join();
       };
-      
+
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === 'RechnungsPosition') {
           if(_.includes($scope.rechnungsPositionen.ids, msg.data.aboId)) {

@@ -3,9 +3,9 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbotypenOverviewController', ['$scope', '$filter',
-    'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil','gettext',
-    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
+  .controller('ZusatzAbotypenOverviewController', ['$scope', '$filter',
+    'ZusatzAbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil','gettext',
+    function($scope, $filter, ZusatzAbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -44,9 +44,9 @@ angular.module('openolitor-admin')
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
 
-      if (!$scope.abosTableParams) {
-        //use default abostableParams
-        $scope.abosTableParams = new NgTableParams({ // jshint ignore:line
+      if (!$scope.zusatzAbosTableParams) {
+        //use default zusatzAbosTableParams
+        $scope.zusatzAbosTableParams= new NgTableParams({ // jshint ignore:line
           page: 1,
           count: 10,
           sorting: {
@@ -75,24 +75,23 @@ angular.module('openolitor-admin')
             return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
         });
-        console.log($scope)
       }
 
       $scope.actions = [{
         labelFunction: function() {
-          return gettext('Abotyp erstellen');
+          return gettext('Zusatzabotyp erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
         onExecute: function() {
-          return $location.path('/abotypen/new');
+          return $location.path('/zusatzAbotypen/new');
         }
       }, {
         label: gettext('Email an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          AbotypenOverviewModel.personen({
+          ZusatzAbotypenOverviewModel.personen({
             f: 'id=' + $scope.checkboxes.ids + ';'
           }, function(personen) {
             var emailAddresses = _.map(personen, 'email');
@@ -111,19 +110,19 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
-        $scope.entries = AbotypenOverviewModel.query({
+        $scope.entries = ZusatzAbotypenOverviewModel.query({
           f: $scope.search.filterQuery
         }, function() {
-          $scope.abosTableParams.reload();
+          $scope.zusatzAbosTableParams.reload();
           $scope.loading = false;
           $location.search('q', $scope.search.query);
         });
       }
 
-      $scope.style = function(abotyp) {
-        if (abotyp.farbCode) {
+      $scope.style = function(zusatzAbotyp) {
+        if (zusatzAbotyp.farbCode) {
           return {
-            'background-color': abotyp.farbCode
+            'background-color': zusatzAbotyp.farbCode
           };
         }
       };

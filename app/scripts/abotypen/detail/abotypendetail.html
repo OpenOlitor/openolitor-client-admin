@@ -1,14 +1,21 @@
     <div class="row">
       <div oo-error-overlay></div>
-    <form name="abotypForm" oo-confirm-on-dirty>
+    <form name="abotypForm">
   <div class="content content-box col-md-12">
-    <div class="alert alert-warning" ng-if="!abotyp.aktiv" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
+    <div class="alert alert-warning" ng-if="!abotyp.aktiv && getModel() === 'abotypen'" translate>Dieser Abotyp ist derzeit nicht aktiv</div>
+    <div class="alert alert-warning" ng-if="!zusatzAbotyp.aktiv && getModel() === 'zusatzAbotypen'" translate>Dieser Zusatzabotyp ist derzeit nicht aktiv</div>
       <div class="panel panel-default">
         <div class="panel-heading clearfix abotypHeader" ng-style="abotypStyle" >
-          <h3 class="panel-title"><span class=" navbar-brand">{{('Abotyp' |translate) + ' ' + abotyp.name || ('Abotyp'|translate)}}</span>
-            <div class="btn-group pull-right" role="group">
+          <h3 class="panel-title">
+              <span class=" navbar-brand" ng-if="getModel() === 'abotypen'">{{'Abotyp ' + abotyp.name || 'Abotyp'|translate}}</span>
+              <span class=" navbar-brand" ng-if="getModel() === 'zusatzAbotypen'">{{'Zusatzabotyp ' + zusatzAbotyp.name || 'Zusatzabotyp'|translate}}</span>
+            <div class="btn-group pull-right" ng-if="getModel() === 'abotypen'" role="group">
               <oo-save-button model="abotyp" form="abotypForm" entity="Abotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Abotyp'|translate}}</oo-save-button>
               <oo-delete-button ng-if="abotyp.anzahlAbonnenten === 0" model="abotyp" form="abotypForm" entity="Abotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
+            </div>
+            <div class="btn-group pull-right" ng-if="getModel() === 'zusatzAbotypen'" role="group">
+              <oo-save-button model="zusatzAbotyp" form="abotypForm" entity="ZusatzAbotyp" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Zusatzabotyp'|translate}}</oo-save-button>
+              <oo-delete-button ng-if="zusatzAbotyp.anzahlAbonnenten === 0" model="zusatzAbotyp" entity="ZusatzAbotyp" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
             </div>
           </h3>
         </div>
@@ -18,7 +25,8 @@
                 <label for="name" translate>Name</label>
               </div>
               <div class="col-md-8">
-                <input type="text" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
+                <input type="text" ng-if="getModel() === 'abotypen'" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
+                <input type="text" ng-if="getModel() === 'zusatzAbotypen'" class="form-control" name="name" ng-model="zusatzAbotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
               </div>
             </div>
             <div class="row form-group">
@@ -26,7 +34,8 @@
                 <label for="beschreibung" translate>Beschreibung</label>
               </div>
               <div class="col-md-8">
-                <textarea class="form-control" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                <textarea class="form-control" ng-if="getModel() === 'abotypen'" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                <textarea class="form-control" ng-if="getModel() === 'zusatzAbotypen'" name="beschreibung" ng-model="zusatzAbotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
               </div>
             </div>
             <div class="row form-group">
@@ -36,7 +45,8 @@
               <div class="col-md-8 row">
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="abotyp.aktivBis" />
+                    <input type="text" ng-if="getModel() === 'abotypen'" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="abotyp.aktivBis" />
+                    <input type="text" ng-if="getModel() === 'zusatzAbotypen'" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="zusatzAbotyp.aktivVon" is-open="open.aktivVon" enable-time="false" max-date="zusatzAbotyp.aktivBis" />
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivVon')"><i class="fa fa-calendar"></i></button>
                     </span>
@@ -47,7 +57,8 @@
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
+                    <input type="text" ng-if="getModel() === 'abotypen'" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="abotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="abotyp.aktivVon" />
+                    <input type="text"  ng-if="getModel() === 'zusatzAbotypen'" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="zusatzAbotyp.aktivBis" is-open="open.aktivBis" enable-time="false" min-date="zusatzAbotyp.aktivVon" />
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'aktivBis')"><i class="fa fa-calendar"></i></button>
                     </span>
@@ -57,10 +68,10 @@
             </div>
             <div class="row form-group">
               <div class="col-md-4">
-                <label for="lieferrhythmus" translate>Lieferrhythmus</label>
+                <label for="lieferrhythmus" ng-if="getModel() === 'abotypen'" translate>Lieferrhythmus</label>
               </div>
               <div class="col-md-4">
-                <oo-dropdown dropdown-id="lieferrhythmus" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
+                <oo-dropdown dropdown-id="lieferrhythmus" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group">
@@ -70,19 +81,23 @@
               <div class="col-md-8 row">
                 <div class="col-md-5">
                   <div class="input-group">
-                    <div class="input-group-addon">{{abotyp.waehrung}}</div>
-                    <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
+                    <div class="input-group-addon" ng-if="getModel() === 'abotypen'">{{abotyp.waehrung}}</div>
+                    <div class="input-group-addon" ng-if="getModel() === 'zusatzAbotypen'">{{zusatzAbotyp.waehrung}}</div>
+                    <input type="number" ng-if="getModel() === 'abotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
+                    <input type="number" ng-if="getModel() === 'zusatzAbotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="zusatzAbotyp.preis" required></input>
                   </div>
                 </div>
                 <div class="col-md-2" style="line-height:30px">
                   <span translate>pro</span>
                 </div>
                 <div class="col-md-3">
-                  <oo-dropdown dropdown-id="preiseinheit" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
+
+                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'zusatzAbotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="zusatzAbotyp.preiseinheit" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>
-            <div class="row form-group">
+            <div class="row form-group" ng-if="getModel() === 'abotypen'">
               <div class="col-md-4">
                 <label for="laufzeit" translate>Laufzeit</label>
               </div>
@@ -100,7 +115,7 @@
                 <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
               </div>
             </div>
-            <div class="row form-group">
+            <div class="row form-group" ng-if="getModel() === 'abotypen'">
               <div class="col-md-4">
                 <label for="kuendigungsfrist" translate>Kündigungsfrist</label>
               </div>
@@ -117,7 +132,8 @@
                 <label for="lieferrhythmus" translate>Guthaben Mindestbestand</label>
               </div>
               <div class="col-md-2">
-                <input type="number" step="1" class="form-control" name="guthabenMindestbestand" ng-model="abotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
+                <input type="number"  ng-if="getModel() === 'abotypen'" step="1" class="form-control" name="guthabenMindestbestand" ng-model="abotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
+                <input type="number"  ng-if="getModel() === 'zusatzAbotypen'" step="1" class="form-control" name="guthabenMindestbestand" ng-model="zusatzAbotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
               </div>
             </div>
         </div>
@@ -125,7 +141,7 @@
           <h3 class="panel-title" translate>Zusatzdaten</h3>
         </div>
         <div class="panel-body">
-          <div class="row form-group">
+          <div class="row form-group" ng-if="getModel() === 'abotypen'">
             <div class="col-md-4">
               <label for="wirdGeplant" translate>Wird standartmässig geplant</label>
             </div>
@@ -133,7 +149,7 @@
               <input bs-switch ng-model="abotyp.wirdGeplant" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
             </div>
           </div>
-          <div class="row form-group">
+          <div class="row form-group" ng-if="getModel() === 'abotypen'">
             <div class="col-md-4">
               <label for="anzahlAbwesenheiten" translate>Anzahl Soll-Abwesenheiten</label>
             </div>
@@ -146,7 +162,8 @@
               <label for="farbCode" translate>Farbe-Code</label>
             </div>
             <div class="col-md-3">
-              <color-picker ng-model="abotyp.farbCode" color-picker-alpha="false" color-picker-format="'hex'"></color-picker>
+              <color-picker ng-if="getModel() === 'abotypen'" ng-model="abotyp.farbCode" options="colorPickerOptions"></color-picker>
+              <color-picker ng-if="getModel() === 'zusatzAbotypen'" ng-model="zusatzAbotyp.farbCode" options="colorPickerOptions"></color-picker>
             </div>
           </div>
           <div class="row form-group">
@@ -156,8 +173,10 @@
             <div class="col-md-6 row">
               <div class="col-md-7">
                 <div class="input-group">
-                  <div class="input-group-addon">{{abotyp.waehrung}}</div>
-                  <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="abotyp.zielpreis"></input>
+                  <div class="input-group-addon" ng-if="getModel() === 'abotypen'" >{{abotyp.waehrung}}</div>
+                  <div class="input-group-addon" ng-if="getModel() === 'zusatzAbotypen'" >{{zusatzAbotyp.waehrung}}</div>
+                  <input type="number" ng-if="getModel() === 'abotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="abotyp.zielpreis"></input>
+                  <input type="number" ng-if="getModel() === 'zusatzAbotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="zusatzAbotyp.zielpreis"></input>
                 </div>
               </div>
               <div class="col-md-5" style="line-height:30px">
@@ -172,7 +191,8 @@
             <div class="col-md-6 row">
               <div class="col-md-7">
                 <div class="input-group">
-                  <input type="number" placeholder="{{'Satz'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="adminProzente" ng-model="abotyp.adminProzente" required></input>
+                  <input type="number" ng-if="getModel() === 'abotypen'" placeholder="{{'Satz'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="adminProzente" ng-model="abotyp.adminProzente" required></input>
+                  <input type="number" ng-if="getModel() === 'zusatzAbotypen'" placeholder="{{'Satz'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="adminProzente" ng-model="zusatzAbotyp.adminProzente" required></input>
                   <div class="input-group-addon" translate>%</div>
                 </div>
               </div>
@@ -182,8 +202,9 @@
             <div class="col-md-4">
               <label for="farbCode" translate>Anzahl aktive Abonnemente</label>
             </div>
-            <div class="col-md-2">
-              {{abotyp.anzahlAbonnentenAktiv}}
+            <div class="col-md-2" >
+                <span ng-if="getModel() === 'abotypen'" >{{abotyp.anzahlAbonnentenAktiv}}</span>
+                <span ng-if="getModel() === 'zusatzAbotypen'">{{zusatzAbotyp.anzahlAbonnentenAktiv}}</span>
             </div>
           </div>
         </div>
@@ -191,11 +212,13 @@
     </div>
     </form>
   </div>
-  <div class="row">
+
+  <div class="row" ng-if="getModel() === 'abotypen'">
     <div class="content content-box col-md-12">
       <div ng-if="isExisting()" ng-controller="VertriebsartenListController" ng-include="'scripts/abotypen/detail/vertriebsarten/vertriebsarten.html'"></div>
     </div>
-    <div class="content-box col-md-3" ng-if="isVertriebExisting()">
-      <div ng-if="isVertriebExisting() && selectedVertrieb" ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    <oo-sliding-detail slide-in="selectedVertrieb" slide-out-function="unselectVertriebFunct()">
+      <div ng-if="isVertriebExisting() " ng-controller="LieferungenListController" ng-include="'scripts/abotypen/detail/lieferungen/lieferungen.html'"></div>
+    </oo-sliding-detail>
     </div>
   </div>

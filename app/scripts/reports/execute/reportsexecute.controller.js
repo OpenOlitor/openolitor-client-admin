@@ -69,8 +69,6 @@ angular.module('openolitor-admin')
             var dataSet = $filter('filter')($scope.resulat.entries, $scope.search.query);
             // also filter by ngtable filters
             dataSet = $filter('filter')(dataSet, params.filter());
-            dataSet = params.sorting ?
-              $filter('orderBy')(dataSet, params.orderBy(), true, localeSensitiveComparator) : dataSet;
 
             params.total(dataSet.length);
             return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());

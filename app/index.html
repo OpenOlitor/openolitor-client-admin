@@ -46,6 +46,10 @@
         <p class="navbar-text"><span translate>Administrationsumgebung <span ng-if="projekt">für</span></span> <span>{{projekt.bezeichnung}}</span></p>
         <ul class="nav navbar-nav pull-right">
           <li><oo-jobqueue></oo-jobqueue></li>
+          <li>
+            <script type="text/ng-template" id="feedbackInfoTooltipTemplate.html"><span translate>Wir sind froh über Rückmeldungen, Ideen und Verbesserungsvorschläge.</span></script>
+            <a ng-href="http://openolitor.org/en/feedback/" target="_blank"><i class="fa fa-commenting-o" uib-tooltip-template="'feedbackInfoTooltipTemplate.html'" tooltip-placement="bottom-right" aria-hidden="true"></i></a>
+          </li>
           <li class="dropdown">
             <a href="" class="dropdown-toggle uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{activeLang()}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -65,8 +69,6 @@
             </ul>
           </li>
         </ul>
-        <script type="text/ng-template" id="feedbackInfoTooltipTemplate.html"><span translate>Wir sind froh über Rückmeldungen, Ideen und Verbesserungsvorschläge.</span></script>
-        <a class="navbar-text navbar-right" ng-href="http://openolitor.org/en/feedback/"><i class="fa fa-commenting-o" uib-tooltip-template="'feedbackInfoTooltipTemplate.html'" tooltip-placement="bottom"aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
@@ -129,7 +131,7 @@
     </script>
     <a href="http://www.openolitor.org" target="_blank">www.openolitor.org</a>
     <span class="pre-info">
-      <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top" tooltip-class="version-tooltip"></span>
+      <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top-right" tooltip-class="version-tooltip"></span>
     </span>
     <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
   </footer>
@@ -187,10 +189,10 @@
   <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <!-- endbower -->
-  <!-- endbuild -->
-
   <!-- language specific angular file -->
-  <script src="/bower_components/angular-i18n/angular-locale_de-ch.js"></script>
+  <script src="bower_components/angular-i18n/angular-locale_de-ch.js"></script>
+
+  <!-- endbuild -->
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
@@ -200,11 +202,14 @@
 
   <script src="scripts/abotypen/overview/abotypenoverview.model.js"></script>
   <script src="scripts/abotypen/overview/abotypenoverview.controller.js"></script>
+  <script src="scripts/abotypen/overview/zusatzabotypenoverview.model.js"></script>
+  <script src="scripts/abotypen/overview/zusatzabotypenoverview.controller.js"></script>
   <script src="scripts/abotypen/detail/vertriebsarten/vertriebsarten.controller.js"></script>
   <script src="scripts/abotypen/detail/vertriebsarten/vertriebe.model.js"></script>
   <script src="scripts/abotypen/detail/vertriebsarten/vertriebsarten.model.js"></script>
   <script src="scripts/abotypen/detail/abotypendetail.model.js"></script>
   <script src="scripts/abotypen/detail/abotypendetail.controller.js"></script>
+  <script src="scripts/abotypen/detail/zusatzabotypendetail.model.js"></script>
   <script src="scripts/abotypen/detail/lieferungen/lieferungen.controller.js"></script>
   <script src="scripts/abotypen/detail/lieferungen/lieferungen.model.js"></script>
   <script src="scripts/abotypen/detail/lieferungen/generate-lieferungen.controller.js"></script>
@@ -275,6 +280,9 @@
 
   <script src="scripts/abos/detail/abwesenheiten/abwesenheiten.directive.js"></script>
   <script src="scripts/abos/detail/abwesenheiten/abwesenheiten.model.js"></script>
+
+  <script src="scripts/abos/detail/zusatzabotyp.model.js"></script>
+  <script src="scripts/abos/detail/zusatzabo.model.js"></script>
 
   <script src="scripts/pendenzen/overview/pendenzenoverview.model.js"></script>
   <script src="scripts/pendenzen/overview/pendenzenoverview.controller.js"></script>

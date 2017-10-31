@@ -316,5 +316,13 @@ angular.module('openolitor-admin')
       $scope.closeMahnungBericht = function() {
         $scope.showGenerateMahnungReport = false;
       };
+
+      $scope.closeRechnungBerichtFunct = function() {
+        return $scope.closeRechnungBericht;
+      };
+      
+      $scope.closeMahnungBerichtFunct = function() {
+        return $scope.closeMahnungBericht;
+      };
     }
   ]);
