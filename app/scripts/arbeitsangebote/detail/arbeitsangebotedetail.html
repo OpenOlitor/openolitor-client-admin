@@ -121,12 +121,12 @@
             <div class="panel panel-default">
               <div class="panel-heading clearfix">
                 <h3>
-                  <div class="col-md-6" translate>
-                    Eingeschriebene Personen
+                  <div class="col-md-6">
+                    <span translate>Eingeschriebene Personen</span> ({{sumPersonen()}})
                   </div>
                   <div class="col-md-6">
                     <div class="btn-group pull-right" role="group">
-                      <oo-actions-button model="model" actions="einsatzActions">{{'Person hinzufügen'|translate}}</oo-actions-button>
+                      <oo-actions-button model="arbeitsangebot" actions="einsatzActions"></oo-actions-button>
                     </div>
                   </div>
                 </h3>
@@ -134,16 +134,16 @@
               <div class="panel-body">
                 <div class="row">
                   <div class="col-md-12">
+                    <script type="text/ng-template" id="headerCheckbox.html">
+                      <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+                    </script>
                     <table ng-table="tableParams" class="table table-striped" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
                       <tr ng-repeat="arbeitseinsatz in $data | filter: search.query.$">
                         <td header="'headerCheckbox.html'">
                           <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" />
                         </td>
                         <td data-title="'Person'|translate" sortable="'titel'">
-                        {{arbeitseinsatz.titel}}</a>
-                        </td>
-                        <td data-title="'Abo'|translate" sortable="'aboBezeichnung'">
-                          {{arbeitseinsatz.aboBezeichnung}}
+                        {{arbeitseinsatz.personName}}</a>
                         </td>
                         <td data-title="'# Personen'|translate" sortable="'anzahlPersonen'">
                           {{arbeitseinsatz.anzahlPersonen}}
@@ -151,14 +151,20 @@
                         <td data-title="'Bemerkungen'|translate" sortable="'bemerkungen'">
                           {{arbeitseinsatz.bemerkungen}}
                         </td>
+                        <td>
+                          <oo-delete-button model="arbeitseinsatz" entity="Arbeitseinsatz" on-delete="deleteArbeitseinsatz" condensed="true" confirm="true"></oo-delete-button>
+                        </td>
                       </tr>
                     </table>
                   </div>
                 </div>
               </div>
-            </div
+            </div>
           </div>
         </div>
+        <oo-sliding-detail slide-in="displayAddPerson" slide-out-function="closeAddPersonFunct()">
+          <oo-add-person-to-einsatz></oo-add-person-to-einsatz>
+        </oo-sliding-detail>
       </div>
     </div>
   </form>

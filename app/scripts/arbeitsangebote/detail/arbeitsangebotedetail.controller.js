@@ -5,8 +5,12 @@
 angular.module('openolitor-admin')
   .controller('ArbeitsangeboteDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'ArbeitsangeboteDetailModel', 'ARBEITSEINSATZSTATUS',
+    'PersonenOverviewModel', 'ArbeitseinsaetzeDetailModel', 'localeSensitiveComparator',
+    'NgTableParams', 'lodash', 'OverviewCheckboxUtil',
     function($scope, $filter, $routeParams, $location, gettext,
-      ArbeitsangeboteDetailModel, ARBEITSEINSATZSTATUS) {
+      ArbeitsangeboteDetailModel, ARBEITSEINSATZSTATUS, PersonenOverviewModel,
+      ArbeitseinsaetzeDetailModel, localeSensitiveComparator, NgTableParams, lodash,
+      OverviewCheckboxUtil) {
 
       var defaults = {
         model: {
@@ -15,6 +19,16 @@ angular.module('openolitor-admin')
           mehrPersonenOk: true,
           status: ARBEITSEINSATZSTATUS.INVORBEREITUNG
         }
+      };
+
+      $scope.filteredEntries = [];
+
+      $scope.checkboxes = {
+        checked: false,
+        checkedAny: false,
+        items: {},
+        css: '',
+        ids: []
       };
 
       $scope.open = {
@@ -28,16 +42,6 @@ angular.module('openolitor-admin')
       $scope.tpOptionsBis = {
         showMeridian: false
       };
-
-      if (!$routeParams.id || $routeParams.id === 'new') {
-        $scope.arbeitsangebot = new ArbeitsangeboteDetailModel(defaults.model);
-      } else {
-        ArbeitsangeboteDetailModel.get({
-          id: $routeParams.id
-        }, function(result) {
-          $scope.arbeitsangebot = result;
-        });
-      }
 
       $scope.delete = function() {
         if ($scope.arbeitsangebot.anzahlAbonnenten > 0) {
@@ -108,21 +112,19 @@ angular.module('openolitor-admin')
         $scope.tpOptionsBis.min = $scope.arbeitsangebot.zeitVon;
       }, true);
 
-      $scope.actions = [{
-        labelFunction: function() {
-          return 'Person hinzufügen';
-        },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-plus',
-        onExecute: function() {
-          return undefined;
-        }
-      }];
-
       // destroy watcher
       $scope.$on('$destroy', function() {
           unwatchMinMaxValues();
       });
+
+      $scope.closeAddPerson = function() {
+        $scope.displayAddPerson = undefined;
+        $scope.addingPerson = undefined;
+      };
+
+      $scope.closeAddPersonFunct = function() {
+        return $scope.closeAddPerson;
+      };
 
       $scope.einsatzActions = [{
         labelFunction: function() {
@@ -131,9 +133,125 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
         onExecute: function() {
-          return 'TODO';
+          $scope.displayAddPerson = true;
+          return true;
         }
       }];
+
+      $scope.getPersonen = function(filter) {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+
+        return PersonenOverviewModel.query({
+          q: filter
+        }, function() {
+          $scope.loading = false;
+        }).$promise.then(function(personen) {
+          var filtered = $filter('filter')(personen, filter);
+          console.log('Filtered: ', filtered, ' with filter ', filter);
+          return filtered;
+        });
+      };
+
+      // watch for check all checkbox
+      $scope.$watch(function() {
+        return $scope.checkboxes.checked;
+      }, function(value) {
+        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+      });
+
+      // watch for data checkboxes
+      $scope.$watch(function() {
+        return $scope.checkboxes.items;
+      }, function() {
+        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+      }, true);
+
+      if (!$scope.tableParams) {
+        //use default tableParams
+        $scope.tableParams = new NgTableParams({ // jshint ignore:line
+          page: 1,
+          count: 10,
+          sorting: {
+            kurzzeichen: 'asc'
+          }
+        }, {
+          filterDelay: 0,
+          groupOptions: {
+            isExpanded: true
+          },
+          getData: function(params) {
+            if (!$scope.arbeitseinsaetze) {
+              return;
+            }
+            var orderedData = params.sorting ?
+              $filter('orderBy')($scope.arbeitseinsaetze, params.orderBy(), false, localeSensitiveComparator) :
+              $scope.arbeitseinsaetze;
+
+            $scope.filteredEntries = orderedData;
+
+            params.total(orderedData.length);
+            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+          }
+
+        });
+      }
+
+      $scope.selectPerson = function(person) {
+        $scope.newEinsatz = {
+          person: person,
+          entity: {
+            arbeitsangebotId: $scope.arbeitsangebot.id,
+            arbeitsangebotTitel:  $scope.arbeitsangebot.titel,
+            zeitVon: $scope.arbeitsangebot.zeitVon,
+            zeitBis: $scope.arbeitsangebot.zeitBis,
+            kundeId: person.kundeId,
+            kundeBezeichnung: person.kundeBezeichnung,
+            personId: person.id,
+            personName: person.vorname + ' ' + person.name,
+            anzahlPersonen: 1
+          }
+        };
+      };
+
+      $scope.addPersonSave = function() {
+        ArbeitseinsaetzeDetailModel.save($scope.newEinsatz.entity, function() {
+          $scope.closeAddPerson();
+        });
+      };
+
+      $scope.deleteArbeitseinsatz = function(einsatz) {
+        ArbeitseinsaetzeDetailModel.$delete(einsatz);
+      };
+
+      $scope.sumPersonen = function() {
+        if ($scope.arbeitseinsaetze) {
+          return lodash.sumBy($scope.arbeitseinsaetze, 'anzahlPersonen');
+        } else {
+          return 0;
+        }
+      };
+
+      if (!$routeParams.id || $routeParams.id === 'new') {
+        $scope.arbeitsangebot = new ArbeitsangeboteDetailModel(defaults.model);
+      } else {
+        ArbeitsangeboteDetailModel.get({
+          id: $routeParams.id
+        }, function(result) {
+          $scope.arbeitsangebot = result;
+          if(angular.isUndefined($scope.arbeitseinsaetze)) {
+              ArbeitseinsaetzeDetailModel.query({
+                arbeitsangebotId:  $scope.arbeitsangebot.id
+              }, function(data) {
+                $scope.arbeitseinsaetze = data;
+                $scope.tableParams.reload();
+              });
+          }
+        });
+      }
 
     }
   ]);
