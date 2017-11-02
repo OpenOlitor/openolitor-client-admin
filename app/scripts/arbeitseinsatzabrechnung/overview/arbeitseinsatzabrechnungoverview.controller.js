@@ -3,10 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ArbeitseinsaetzeOverviewController', ['$q', '$scope', '$filter',
-    'ArbeitseinsaetzeModel', 'NgTableParams', 'localeSensitiveComparator',
+  .controller('ArbeitseinsatzabrechnungOverviewController', ['$q', '$scope', '$filter',
+    'ArbeitseinsatzabrechnungModel', 'NgTableParams', 'localeSensitiveComparator',
     'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService', 'gettext',
-    function($q, $scope, $filter, ArbeitseinsaetzeModel, NgTableParams, localeSensitiveComparator,
+    function($q, $scope, $filter, ArbeitseinsatzabrechnungModel, NgTableParams, localeSensitiveComparator,
       OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService, gettext) {
 
       $scope.entries = [];
@@ -89,7 +89,7 @@ angular.module('openolitor-admin')
           groupOptions: {
             isExpanded: true
           },
-          exportODSModel: ArbeitseinsaetzeModel,
+          exportODSModel: ArbeitseinsatzabrechnungModel,
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -119,7 +119,7 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = ArbeitseinsaetzeModel.query({
+        $scope.entries = ArbeitseinsatzabrechnungModel.query({
           q: $scope.query
         }, function() {
           $scope.tableParams.reload();
@@ -130,7 +130,7 @@ angular.module('openolitor-admin')
       search();
 
       $scope.actions = [{
-        label: gettext('Arbeitseinsaetzebrief'),
+        label: gettext('Arbeitseinsatzabrechnungbrief'),
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {

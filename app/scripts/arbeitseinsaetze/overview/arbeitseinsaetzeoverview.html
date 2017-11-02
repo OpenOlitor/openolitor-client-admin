@@ -26,14 +26,19 @@
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" />
               </td>
-              <td data-title="'Titel'|translate" sortable="'titel'">
-                <a ng-href="#/arbeitseinsaetze/{{arbeitseinsatz.id}}">{{arbeitseinsatz.titel}}</a>
+              <td data-title="'Arbeitsangebot'|translate" sortable="'titel'">
+                <a ng-href="#/arbeitsangebote/{{arbeitseinsatz.arbeitsangebotId}}">{{arbeitseinsatz.arbeitsangebotTitel}}</a>
+              </td>
+              <td data-title="'Person'|translate" sortable="'kundeBezeichnung'">
+                {{arbeitseinsatz.kundeBezeichnung}}
               </td>
               <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'">
-                {{arbeitseinsatz.zeitVon}} - {{arbeitseinsatz.zeitBis}}
-              </td>
-              <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{kategorien: 'select'}" filter-data="kategorienL">
-                {{arbeitseinsatz.arbeitskategorien}}
+                <span ng-if="sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
+                  {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'HH:mm'}}
+                </span>
+                <span ng-if="!sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
+                  {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'dd.MM.yyyy HH:mm'}}
+                </span>
               </td>
               <td data-title="'Status'|translate" sortable="'aktiv'">
                 <i ng-if="arbeitseinsatz.status === 'InVorbereitung'" class="fa fa-clock-o"></i>

@@ -17,36 +17,36 @@
         <div ng-hide="entries">
           <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
         </div>
-        <div ng-show="entries" id="arbeitseinsatzTable" display-export="true" export-file-name="Arbeitseinsaetze">
+        <div ng-show="entries" id="arbeitsangebotTable" display-export="true" export-file-name="Arbeitseinsaetze">
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
-            <tr ng-repeat="arbeitseinsatz in $data | filter: search.query.$">
+            <tr ng-repeat="arbeitsangebot in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
-                <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" />
+                <input type="checkbox" ng-model="checkboxes.items[arbeitsangebot.id]" />
               </td>
               <td data-title="'Titel'|translate" sortable="'titel'">
-                <a ng-href="#/arbeitsangebote/{{arbeitseinsatz.id}}">{{arbeitseinsatz.titel}}</a>
+                <a ng-href="#/arbeitsangebote/{{arbeitsangebot.id}}">{{arbeitsangebot.titel}}</a>
               </td>
               <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'">
-                <span ng-if="sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
-                {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'HH:mm'}}
+                <span ng-if="sameDay(arbeitsangebot.zeitVon, arbeitsangebot.zeitBis)">
+                  {{arbeitsangebot.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitsangebot.zeitBis | date : 'HH:mm'}}
                 </span>
-                <span ng-if="!sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
-                {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'dd.MM.yyyy HH:mm'}}
+                <span ng-if="!sameDay(arbeitsangebot.zeitVon, arbeitsangebot.zeitBis)">
+                  {{arbeitsangebot.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitsangebot.zeitBis | date : 'dd.MM.yyyy HH:mm'}}
                 </span>
               </td>
               <td data-title="'Personen'|translate">
-                {{arbeitseinsatz.anzahlEingeschriebene}} / <span ng-if="!arbeitseinsatz.mehrPersonenOk" translate>max.</span>{{arbeitseinsatz.anzahlPersonen}}
+                {{arbeitsangebot.anzahlEingeschriebene}} / <span ng-if="!arbeitsangebot.mehrPersonenOk" translate>max.</span>{{arbeitsangebot.anzahlPersonen}}
               </td>
               <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{kategorien: 'select'}" filter-data="kategorienL">
-                {{arbeitseinsatz.arbeitskategorien}}
+                {{arbeitsangebot.arbeitskategorien}}
               </td>
               <td data-title="'Status'|translate" sortable="'aktiv'">
-                <i ng-if="arbeitseinsatz.status === 'InVorbereitung'" class="fa fa-clock-o"></i>
-                <i ng-if="arbeitseinsatz.status === 'Offen'" class="fa fa-calendar-plus-o"></i>
-                <i ng-if="arbeitseinsatz.status === 'Abgesagt'" class="fa fa-times-circle-o"></i>
+                <i ng-if="arbeitsangebot.status === 'InVorbereitung'" class="fa fa-clock-o"></i>
+                <i ng-if="arbeitsangebot.status === 'Offen'" class="fa fa-calendar-plus-o"></i>
+                <i ng-if="arbeitsangebot.status === 'Abgesagt'" class="fa fa-times-circle-o"></i>
               </td>
             </tr>
           </table>

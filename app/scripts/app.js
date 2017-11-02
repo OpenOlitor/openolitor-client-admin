@@ -911,6 +911,12 @@ angular
         name: 'ArbeitseinsaetzeOverview',
         access: userRoles.Administrator
       })
+      .when('/arbeitseinsatzabrechnung', {
+        templateUrl: 'scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html',
+        controller: 'ArbeitseinsatzabrechnungOverviewController',
+        name: 'ArbeitseinsatzabrechnungOverview',
+        access: userRoles.Administrator
+      })
       .when('/journal', {
         templateUrl: 'scripts/journal/overview/journaloverview.html',
         controller: 'JournalOverviewController',
