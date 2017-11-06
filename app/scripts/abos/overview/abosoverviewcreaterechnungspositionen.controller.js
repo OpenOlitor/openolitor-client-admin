@@ -67,7 +67,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.jumpToRechnungspositionen = function() {
-        $location.path('/rechnungspositionen').search('q', 'id=' + $scope.batchCreated.ids.join());
+        $location.path('/rechnungspositionen').search({'q': 'id=' + $scope.batchCreated.ids.join()});
       };
 
       $scope.jumpToAbosWhereCreateHasFailed = function() {

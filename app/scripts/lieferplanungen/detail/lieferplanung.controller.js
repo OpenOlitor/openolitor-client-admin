@@ -790,7 +790,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search('q', 'id=' + result.join());
+          $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
 
@@ -800,7 +800,7 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search('q', 'id=' + result.join());
+          $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
 
@@ -810,7 +810,7 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search('q', 'id=' + result.join());
+          $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
       $scope.abschliessenActionDisabled= [{
@@ -862,7 +862,7 @@ angular.module('openolitor-admin')
           onExecute: function() {
             $scope.recalculateBestellungen(function() {
               var result = lodash.map($scope.sammelbestellungen, 'id');
-              $location.path('/einkaufsrechnungen').search('q', 'id=' + result.join());
+              $location.path('/einkaufsrechnungen').search({'q': 'id=' + result.join()});
             });
           }
         },{
@@ -875,7 +875,7 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/depotauslieferungen').search('q', 'id=' + res.join());
+              $location.path('/depotauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
         },{
@@ -888,7 +888,7 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/tourauslieferungen').search('q', 'id=' + res.join());
+              $location.path('/tourauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
         },{
@@ -901,7 +901,7 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/postauslieferungen').search('q', 'id=' + res.join());
+              $location.path('/postauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
         }];
