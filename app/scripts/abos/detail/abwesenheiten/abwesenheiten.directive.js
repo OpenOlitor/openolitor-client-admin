@@ -16,7 +16,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
         $scope.projekt = $rootScope.projekt;
         $scope.getCurrentlyMatchingGJItem = undefined;
         $scope.templateObject= {};
-        $scope.templateObject.showOnlyPendenten = true;
+        $scope.templateObject.showOnlyPending = true;
         $scope.deletingAbwesenheit = {};
         $scope.template = {
           creating: 0
