@@ -119,11 +119,12 @@
         </div>
         <div class="col-md-12">
           <table ng-table="koerbeTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="korb in $data | orderBy:'-korb.lieferung.datum'">
+            <tr ng-repeat="korb in $data | orderBy:'-':korb.lieferung.datum">
               <td data-title="'Datum'|translate">
                 {{korb.lieferung.datum|date:"EEE, dd.MM.yyyy"}}
               </td>
               <td data-title="'Lieferstatus'|translate">
+                <i class="glyphicon glyphicon-thumbs-up" ng-show="korb.status === 'WirdGeliefert'" title="{{'WirdGeliefert'|translate}}"></i>
                 <i class="glyphicon fa-battery-empty" ng-show="korb.status === 'FaelltAusSaldoZuTief'" title="{{'Saldo zu tief'|translate}}"></i>
                 <i class="glyphicon glyphicon-globe" ng-show="korb.status === 'FaelltAusAbwesend'" title="{{'Abwesend'|translate}}"></i>
                 <i class="glyphicon glyphicon-check" ng-show="korb.status === 'Geliefert'" title="{{'Geliefert'|translate}}"></i>
