@@ -121,6 +121,15 @@ angular.module('openolitor-admin')
               $filter('orderBy')(dataSet, params.orderBy(), false, localeSensitiveComparator) :
               dataSet;
 
+            // Add sortby attribute for ng-table. (ng-table can't sort on the result of a function)
+            for(var abo of dataSet) {
+              if(abo.depotId) {
+                abo.depotTourSortBy = abo.depotName;
+              } else {
+                abo.depotTourSortBy = abo.tourName;
+              }
+            }
+
             $scope.filteredEntries = dataSet;
 
             params.total(dataSet.length);

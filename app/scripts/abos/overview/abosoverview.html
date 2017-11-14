@@ -55,7 +55,7 @@
                 <i ng-if="abo.aktiv" class="glyphicon glyphicon-ok"></i>
                 <i ng-if="!abo.aktiv" class="glyphicon glyphicon-remove"></i>
               </td>
-              <td data-title="'Depot/Tour'|translate">
+              <td data-title="'Depot/Tour'|translate" sortable="'depotTourSortBy'">
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
                 <a ng-href="#/touren/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
               </td>
