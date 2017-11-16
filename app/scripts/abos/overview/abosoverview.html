@@ -62,7 +62,7 @@
               <td ng-if="showAll" data-title="'# Abw.'|translate">
                 {{abo.anzahlAbwesenheiten | lastElement:'value'}}
               </td>
-              <td ng-if="showAll" data-title="'Letzte Lieferung'|translate" sortable="'letzteLieferung'">
+              <td ng-if="showAll" data-title="'Vorige Lieferung'|translate" sortable="'letzteLieferung'">
                 {{abo.letzteLieferung | date:'EEE, dd.MM.yyyy'}}
               </td>
               <td ng-if="showAll" data-title="'Guthaben'|translate" sortable="'guthaben'" filter="{guthaben: 'number'}">
