@@ -713,6 +713,7 @@ angular.module('openolitor-admin')
       $scope.editNachAbgeschlossen = false;
 
       $scope.setEditableNachAbgeschlossen = function() {
+        $scope.korbForm.$setPristine();
         $scope.editNachAbgeschlossen = true;
       };
 
@@ -813,6 +814,7 @@ angular.module('openolitor-admin')
           $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
+
       $scope.abschliessenActionDisabled= [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),
         noEntityText: true,
@@ -906,6 +908,14 @@ angular.module('openolitor-admin')
           }
         }];
       };
+
+      $scope.verrechnenActionDisabled= [{
+        label: gettextCatalog.getString('Lieferplanung verrechnen'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        isDisabled: function() { return true; },
+        onExecute: function() { }
+      }];
 
       $scope.verrechnenAction = [{
         labelFunction: function() {
