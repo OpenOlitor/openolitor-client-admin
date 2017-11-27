@@ -13,7 +13,7 @@
           <label translate>Beschrieb</label>
         </div>
         <div class="col-md-12">
-          <input ng-show="rechnungsPosition.status == 'Offen'" type="text" class="form-control" name="beschrieb" ng-model="rechnungsPosition.beschrieb" placeholder="{{'Beschrieb'|translate}}" required>
+          <input ng-show="rechnungsPosition.status == 'Offen'" type="text" class="form-control" name="beschrieb" ng-model="rechnungsPosition.beschrieb" placeholder="{{'Beschrieb'|translate}}" maxlength="100" required>
           <span ng-show="rechnungsPosition.status != 'Offen'">{{rechnungsPosition.beschrieb}}</span>
         </div>
       </div>
