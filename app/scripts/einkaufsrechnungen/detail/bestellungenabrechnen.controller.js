@@ -51,7 +51,7 @@ angular.module('openolitor-admin')
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
-        if (msg.entity === 'Bestellung') {
+        if (msg.entity === 'Sammelbestellung') {
           if (lodash.includes($scope.bestellungIds, msg.data.id)) {
             $scope.batchModified.ids.push(msg.data.id);
             if ($scope.batchModified.ids.length === $scope.bestellungIds.length) {
