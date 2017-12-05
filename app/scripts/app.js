@@ -82,6 +82,7 @@ angular
     'angular-sortable-view',
     'angular.css.injector',
     'angular-toArrayFilter',
+    'mm.iban',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
