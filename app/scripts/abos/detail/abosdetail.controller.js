@@ -275,7 +275,7 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
             .anzahlLieferungen.length > 0 ||
-            $scope.abo.anzahlAbwesenheiten.length > 0;
+            !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function() {
           return $scope.abo.$delete();
