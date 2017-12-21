@@ -97,9 +97,11 @@ angular.module('openolitor-admin')
         $scope.anzahlSaldoZuTief = 0;
         lodash.forEach($scope.abotypenLieferungen,
           function(lieferung) {
-            $scope.anzahlKoerbeZuLiefern += lieferung.anzahlKoerbeZuLiefern;
-            $scope.anzahlAbwesenheiten += lieferung.anzahlAbwesenheiten;
-            $scope.anzahlSaldoZuTief += lieferung.anzahlSaldoZuTief;
+            if(lieferung.abotyp.typ === 'Abotyp') {
+              $scope.anzahlKoerbeZuLiefern += lieferung.anzahlKoerbeZuLiefern;
+              $scope.anzahlAbwesenheiten += lieferung.anzahlAbwesenheiten;
+              $scope.anzahlSaldoZuTief += lieferung.anzahlSaldoZuTief;
+            }
           });
       };
 

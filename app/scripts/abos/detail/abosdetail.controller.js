@@ -316,7 +316,13 @@ angular.module('openolitor-admin')
       };
 
       $scope.saveZusatzAbo = function(zusatzAbo) {
-        return zusatzAbo.$save();
+        if(angular.isUndefined(zusatzAbo.ende) || zusatzAbo.start < zusatzAbo.ende) {
+          return zusatzAbo.$save();
+        } else {
+          alertService.addAlert('error', gettext(
+            'Enddatum muss vor Startdatum liegen'));
+          return "";
+        }
       };
 
       function createPermutations(abotyp) {
@@ -393,7 +399,7 @@ angular.module('openolitor-admin')
             case VERTRIEBSARTEN.DEPOTLIEFERUNG:
               $scope.abo.depotId = vertriebsart.depot.id;
               $scope.abo.depotName = vertriebsart.depot.name;
-              delete $scope.abo.tourId 
+              delete $scope.abo.tourId
               delete $scope.abo.tourName
               break;
             case VERTRIEBSARTEN.HEIMLIEFERUNG:
@@ -403,7 +409,7 @@ angular.module('openolitor-admin')
               delete $scope.abo.depotName
               break;
             case VERTRIEBSARTEN.POSTLIEFERUNG:
-              delete $scope.abo.tourId 
+              delete $scope.abo.tourId
               delete $scope.abo.tourName
               delete $scope.abo.depotId
               delete $scope.abo.depotName

@@ -72,9 +72,7 @@
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen | orderBy: 'abotypBeschrieb'">
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
         <div  ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" >
-          <span translate>Anzahl Körbe zu liefern:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
-          <span translate>Anzahl Abwesenheiten:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
-          <span translate>Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
+          <span translate>Anzahl Zusatzabos zu liefern:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
         </div>
         <div  ng-if="abotypLieferung.abotyp.typ === 'Abotyp'" >
           <span translate>Anzahl Körbe zu liefern:</span> <a href="" ng-click="displayAbos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
