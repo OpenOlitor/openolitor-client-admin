@@ -361,30 +361,36 @@ angular.module('openolitor-admin')
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (isAboEntity(msg.entity)) {
           if ($scope.kunde) {
-            if ($scope.kunde.abos) {
-              $scope.kunde.abos.push(msg.data);
-            } else {
-              $scope.kunde.abos = [msg.data];
+            if (msg.data.kundeId === $scope.kunde.id) {
+              if ($scope.kunde.abos) {
+                $scope.kunde.abos.push(msg.data);
+              } else {
+                $scope.kunde.abos = [msg.data];
+              }
+              alertService.addAlert('info', gettext('Abo wurde erstellt'));
+              $scope.$apply();
             }
-            alertService.addAlert('info', gettext('Abo wurde erstellt'));
-            $scope.$apply();
           }
         } else if ($scope.kunde && msg.entity === 'Pendenz') {
-          var pendenzen = lodash.filter($scope.kunde.pendenzen, function(
-            p) {
-            return p.id === undefined &&
-              moment(p.datum).startOf('day').isSame(moment(msg.data.datum)
-                .startOf('day')) &&
-              p.bemerkung === msg.data.bemerkung;
-          });
-          lodash.map(pendenzen, function(p) {
-            p.editable = false;
-            p.id = msg.data.id;
-          });
-          $scope.$apply();
+          if ($scope.kunde) {
+            if (msg.data.kundeId === $scope.kunde.id) {
+              var pendenzen = lodash.filter($scope.kunde.pendenzen, function (
+                p) {
+                return p.id === undefined &&
+                  moment(p.datum).startOf('day').isSame(moment(msg.data.datum)
+                    .startOf('day')) &&
+                  p.bemerkung === msg.data.bemerkung;
+              });
+              lodash.map(pendenzen, function (p) {
+                p.editable = false;
+                p.id = msg.data.id;
+              });
+              $scope.$apply();
+            }
+          }
         } else if (msg.entity === 'Person') {
           if ($scope.kunde && $scope.kunde.ansprechpersonen) {
-            angular.forEach($scope.kunde.ansprechpersonen, function(
+            angular.forEach($scope.kunde.ansprechpersonen, function (
               person) {
               if (person.anrede === msg.data.anrede && person.vorname ===
                 msg.data.vorname && person.name === msg.data.name) {
@@ -399,29 +405,35 @@ angular.module('openolitor-admin')
         }
       });
 
-      msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
+      msgBus.onMsg('EntityModified', $rootScope, function (event, msg) {
         if (isAboEntity(msg.entity)) {
           if ($scope.kunde) {
-            angular.forEach($scope.kunde.abos, function(abo) {
-              if (abo.id === msg.data.id) {
-                DataUtil.update(msg.data, abo);
-                $scope.$apply();
-                return;
-              }
-            });
+            if (msg.data.kundeId === $scope.kunde.id) {
+              angular.forEach($scope.kunde.abos, function (abo) {
+                if (abo.id === msg.data.id) {
+                  DataUtil.update(msg.data, abo);
+                  $scope.$apply();
+                  return;
+                }
+              });
+            }
           }
         } else if ($scope.kunde && msg.entity === 'Pendenz') {
-          lodash.map(lodash.filter($scope.kunde.pendenzen, function(p) {
-            return p.id === msg.data.id;
-          }), function(p) {
-            p.editable = false;
-          });
-          $scope.$apply();
+          if ($scope.kunde) {
+            if (msg.data.kundeId === $scope.kunde.id) {
+              lodash.map(lodash.filter($scope.kunde.pendenzen, function (p) {
+                return p.id === msg.data.id;
+              }), function (p) {
+                p.editable = false;
+              });
+              $scope.$apply();
+            }
+          }
         } else if (msg.entity === 'Kunde') {
           $scope.$apply();
         } else if (msg.entity === 'PersonDetail') {
           if ($scope.kunde) {
-            angular.forEach($scope.kunde.ansprechpersonen, function(person) {
+            angular.forEach($scope.kunde.ansprechpersonen, function (person) {
               if (person.id === msg.data.id) {
                 DataUtil.update(msg.data, person);
                 $scope.$apply();
