@@ -316,12 +316,12 @@ angular.module('openolitor-admin')
       };
 
       $scope.saveZusatzAbo = function(zusatzAbo) {
-        if(angular.isUndefined(zusatzAbo.ende) || zusatzAbo.start < zusatzAbo.ende) {
+        if(angular.isUndefined(zusatzAbo.ende) || zusatzAbo.ende == null || zusatzAbo.ende === '' || zusatzAbo.start < zusatzAbo.ende) {
           return zusatzAbo.$save();
         } else {
           alertService.addAlert('error', gettext(
             'Enddatum muss vor Startdatum liegen'));
-          return "";
+          return '';
         }
       };
 
