@@ -46,10 +46,10 @@
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
-                {{rechnung.waehrung}} {{rechnung.betrag}}
+                {{projekt.waehrung}} {{rechnung.betrag}}
               </td>
               <td data-title="'Einbezahlter Betrag'|translate" sortable="'einbezahlterBetrag'">
-                <span ng-if="rechnung.einbezahlterBetrag">{{rechnung.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
+                <span ng-if="rechnung.einbezahlterBetrag">{{projekt.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
               </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungStati">
                 {{rechnung.status|translate}}
