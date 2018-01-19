@@ -38,10 +38,10 @@
               </span>
               </td>
               <td data-title="'Preis'|translate" sortable="'preis'" ng-class="[{'col-md-2': produkt.editable}]">
-                <span ng-hide="produkt.editable">{{produkt.preis| ooCHF:true}}</span>
+                <span ng-hide="produkt.editable">{{produkt.preis| ooCHF:true:projekt.waehrung}}</span>
                 <span ng-show="produkt.editable">
                 <div class="input-group">
-                  <div class="input-group-addon">{{'CHF'|translate}}</div>
+                  <div class="input-group-addon">{{projekt.waehrung}}</div>
                   <input type="number" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" min="0" step="0.01" class="form-control" name="preis" ng-model="produkt.preis" required></input>
                 </div>
               </span>
