@@ -81,8 +81,8 @@
               <div class="col-md-8 row">
                 <div class="col-md-5">
                   <div class="input-group">
-                    <div class="input-group-addon" ng-if="getModel() === 'abotypen'">{{abotyp.waehrung}}</div>
-                    <div class="input-group-addon" ng-if="getModel() === 'zusatzAbotypen'">{{zusatzAbotyp.waehrung}}</div>
+                    <div class="input-group-addon" ng-if="getModel() === 'abotypen'">{{projekt.waehrung}}</div>
+                    <div class="input-group-addon" ng-if="getModel() === 'zusatzAbotypen'">{{projekt.waehrung}}</div>
                     <input type="number" ng-if="getModel() === 'abotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="abotyp.preis" required></input>
                     <input type="number" ng-if="getModel() === 'zusatzAbotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="preis" ng-model="zusatzAbotyp.preis" required></input>
                   </div>
@@ -172,8 +172,8 @@
             <div class="col-md-6 row">
               <div class="col-md-7">
                 <div class="input-group">
-                  <div class="input-group-addon" ng-if="getModel() === 'abotypen'" >{{abotyp.waehrung}}</div>
-                  <div class="input-group-addon" ng-if="getModel() === 'zusatzAbotypen'" >{{zusatzAbotyp.waehrung}}</div>
+                  <div class="input-group-addon" ng-if="getModel() === 'abotypen'" >{{projekt.waehrung}}</div>
+                  <div class="input-group-addon" ng-if="getModel() === 'zusatzAbotypen'" >{{projekt.waehrung}}</div>
                   <input type="number" ng-if="getModel() === 'abotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="abotyp.zielpreis"></input>
                   <input type="number" ng-if="getModel() === 'zusatzAbotypen'" placeholder="{{'Preis'|translate}}" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="zielpreis" ng-model="zusatzAbotyp.zielpreis"></input>
                 </div>
