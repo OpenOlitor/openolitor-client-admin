@@ -42,7 +42,7 @@
                             {{abotyp.lieferrhythmus|translate}}
                         </td>
                         <td data-title="'Preis'|translate" sortable="'preis'">
-                            <span ng-bind="abotyp|ooPreisProEinheit" />
+                            <span ng-bind="abotyp|ooPreisProEinheit:projekt.waehrung" />
                         </td>
                         <td data-title="'Aktiv'|translate" sortable="'aktiv'">
                             <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
