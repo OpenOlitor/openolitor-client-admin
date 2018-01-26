@@ -13,28 +13,32 @@ module.exports = function(grunt) {
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var CONFIG = {
     API_URL: {
-      'csa1': {
+      'dev': {
+        'm1': 'http://localhost:9003/m1/',
+        'm2': 'http://localhost:9003/m2/'
+      },
+      'test-prod-csa1': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa1/'
       },
-      'csa2': {
+      'test-prod-csa2': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa2/'
       },
-      'csa3': {
+      'test-prod-csa3': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa3/'
       },
-      'csa4': {
+      'test-prod-csa4': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa4/'
       },
-      'csa5': {
+      'test-prod-csa5': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa5/'
       },
-      'csa6': {
+      'test-prod-csa6': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa6/'
       },
-      'csa7': {
+      'test-prod-csa7': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa7/'
       },
-      'csa8': {
+      'test-prod-csa8': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa8/'
       }
     },
