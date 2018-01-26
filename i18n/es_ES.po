@@ -11,7 +11,7 @@ msgstr ""
 "Last-Translator: al_openolitor <alwin.egger@openolitor.ch>\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2018-01-31 14:23-0500\n"
+"PO-Revision-Date: 2018-02-06 16:39-0500\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -27,7 +27,7 @@ msgstr "Abonados"
 #: app/scripts/depots/overview/depotsoverview.html:47
 #: app/scripts/touren/overview/tourenoverview.html:37
 msgid "# Abos"
-msgstr "Abonos"
+msgstr "Nº Abonos"
 
 #: app/scripts/abos/overview/abosoverview.html:57
 #: app/scripts/kunden/detail/abo/abos.html:17
@@ -50,7 +50,7 @@ msgstr "Nº de enlaces"
 
 #: app/scripts/kunden/overview/kundenoverview.html:48
 msgid "#&nbsp;Abos"
-msgstr "Nº&nbsp;Subscripciones"
+msgstr "Nº&nbsp;Abonos"
 
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:66
 msgid "#&nbsp;Lieferungen"
@@ -117,7 +117,7 @@ msgstr "Cerrado"
 
 #: app/index.html:68
 msgid "Abmelden"
-msgstr "Dar de baja"
+msgstr "Cerrar sesión"
 
 #: app/scripts/abos/detail/abosdetail.html:4
 #: app/scripts/abos/detail/abosdetail.html:8
@@ -129,7 +129,7 @@ msgstr "Abono"
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:23
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:23
 msgid "Abo Nr."
-msgstr "Suscripción no."
+msgstr "Abono nº"
 
 #: app/scripts/abos/detail/create-abo.html:56
 msgid "Abo erstellen"
@@ -137,11 +137,11 @@ msgstr "Crear Presupuesto"
 
 #: app/scripts/abos/detail/create-abo.html:4
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
-msgstr "Crear suscripción para {{kunde.bezeichnung}}"
+msgstr "Crear abono para {{kunde.bezeichnung}}"
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:369
 msgid "Abo wurde erstellt"
-msgstr "Restaurar suscripciones"
+msgstr "Restaurar abonos"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:246
 msgid "Abo:"
@@ -149,7 +149,7 @@ msgstr "Subscripción:"
 
 #: app/scripts/abos/overview/abosoverview.html:40
 msgid "Abonnentin"
-msgstr "Suscriptor"
+msgstr "Abonado"
 
 #: app/index.html:82
 #: app/scripts/abos/overview/abosoverview.html:6
@@ -1104,7 +1104,7 @@ msgstr "Entrega a domicilio"
 
 #: app/scripts/app.js:129
 msgid "HeimlieferungAbo"
-msgstr "Suscripción con entrega a domicilio"
+msgstr "Abono con entrega a domicilio"
 
 #: app/scripts/app.js:124
 msgid "Herr"
@@ -1182,7 +1182,7 @@ msgstr "Ahora"
 #: app/index.html:108
 #: app/scripts/journal/overview/journaloverview.html:6
 msgid "Journal"
-msgstr "Revista"
+msgstr "Registro de actividades"
 
 #: app/scripts/app.js:209
 msgid "Jul"
@@ -1204,7 +1204,7 @@ msgstr "Junio"
 #: app/scripts/produzenten/detail/produzentendetail.html:42
 #: app/scripts/produzenten/overview/produzentenoverview.html:29
 msgid "KRZ"
-msgstr ""
+msgstr "ABR"
 
 #: app/scripts/app.js:181
 msgid "Kanadischer Dollar"
@@ -1271,7 +1271,7 @@ msgstr "Imprimir el contenido de la cesta"
 
 #: app/scripts/depots/overview/depotsoverview.html:29
 msgid "Krzz."
-msgstr ""
+msgstr "Abreviación"
 
 #: app/index.html:79
 #: app/scripts/abos/detail/abosdetail.html:37
@@ -1617,7 +1617,7 @@ msgstr "Marzo"
 #: app/scripts/touren/overview/tourenoverview.html:31
 #: app/scripts/vorlagen/vorlagen.html:23
 msgid "Name"
-msgstr "Nombre"
+msgstr "Apellidos"
 
 #: app/scripts/produzenten/detail/produzentendetail.html:47
 msgid "Name / Betrieb"
@@ -2132,7 +2132,7 @@ msgstr "Número de referencia"
 #: app/scripts/projekt/settings/projektsettings.html:194
 #: app/scripts/projekt/settings/projektsettings.html:197
 msgid "Referenznummer Präfix"
-msgstr ""
+msgstr "Prefijo del número de referencia"
 
 #: app/scripts/reports/execute/reportsexecute.html:54
 msgid "Resultate"
@@ -2355,7 +2355,7 @@ msgstr "Búsqueda en resultados..."
 #: app/scripts/touren/overview/tourenoverview.html:9
 #: app/scripts/zahlungsimports/overview/zahlungsimportsoverview.html:9
 msgid "Suche in Übersicht..."
-msgstr "Buscar en el resumen..."
+msgstr "Buscar..."
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:46
 msgid "Summe"
@@ -2599,15 +2599,15 @@ msgstr "De"
 
 #: app/index.html:109
 msgid "Vorlagen"
-msgstr "Modelos"
+msgstr "Plantillas"
 
 #: app/scripts/vorlagen/vorlagen.html:9
 msgid "Vorlagen Name..."
-msgstr "Nombre de los modelos"
+msgstr "Nombre de las plantillas..."
 
 #: app/scripts/vorlagen/vorlagenoverview.html:4
 msgid "Vorlagen-Verwaltung"
-msgstr "Gestión de los modelos"
+msgstr "Gestión de plantillas"
 
 #: app/scripts/depots/detail/depotsdetail.html:137
 #: app/scripts/depots/detail/depotsdetail.html:140
