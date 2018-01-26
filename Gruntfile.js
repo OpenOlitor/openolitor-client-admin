@@ -13,7 +13,11 @@ module.exports = function(grunt) {
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var CONFIG = {
     API_URL: {
-      'csa1': {
+      'dev': {
+        'm1': 'http://localhost:9003/m1/',
+        'm2': 'http://localhost:9003/m2/'
+      },
+      'test-prod-csa1': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa1/'
       },
       'test-prod-landolfshausen': {
