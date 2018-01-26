@@ -13,44 +13,40 @@ module.exports = function(grunt) {
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var CONFIG = {
     API_URL: {
-      'dev': {
-        'm1': 'http://localhost:9003/m1/',
-        'm2': 'http://localhost:9003/m2/'
-      },
-      'test-prod-landolfshausen': {
-        'm1': 'https://sunu-server-testprod.scapp.io/landolfshausen/'
-      },
-      'test-prod-nuertingen': {
-        'm1': 'https://sunu-server-testprod.scapp.io/nuertingen/'
-      },
-      'test-prod-nordheide': {
-        'm1': 'https://sunu-server-testprod.scapp.io/nordheide/'
-      },
-      'test-prod-kassel': {
-        'm1': 'https://sunu-server-testprod.scapp.io/kassel/'
-      },
-      'test-prod-ulm': {
-        'm1': 'https://sunu-server-testprod.scapp.io/ulm/'
-      },
-      'test-prod-dublincsa': {
-        'm1': 'https://sunu-server-testprod.scapp.io/dublincsa/'
+      'test-prod-csa8': {
+        'm1': 'https://testprod.openolitor.ch/csa8/'
       },
       'test-prod-csa7': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa7/'
+        'm1': 'https://testprod.openolitor.ch/csa7/'
       },
-      'test-prod-csa8': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa8/'
+      'test-prod-dublincsa': {
+        'm1': 'https://testprod.openolitor.ch/dublincsa/'
+      },
+      'test-prod-kassel': {
+        'm1': 'https://testprod.openolitor.ch/kassel/'
+      },
+      'test-prod-ulm': {
+        'm1': 'https://testprod.openolitor.ch/ulm/'
+      },
+      'test-prod-landolfshausen': {
+        'm1': 'https://testprod.openolitor.ch/landolfshausen/'
+      },
+      'test-prod-nordheide': {
+        'm1': 'https://testprod.openolitor.ch/nordheide/'
+      },
+      'test-prod-nuertingen': {
+        'm1': 'https://testprod.openolitor.ch/nuertingen/'
       }
     },
     EMAIL_TO_ADDRESS: {
-      'prod-csa7': 'csa7@sunu.de',
-      'prod-csa8': 'csa8@sunu.de',
-      'prod-dublincsa': 'dublincsa@sunu.de',
-      'prod-kassel': 'kassel@sunu.de',
-      'prod-ulm': 'ulm@sunu.de',
-      'prod-landolfshausen': 'landolfshausen@sunu.de',
-      'prod-nordheide': 'nordheide@sunu.de',
-      'prod-nuertingen': 'nuertingen@sunu.de',
+      'prod-': 'csa7@sunu.de',
+      'prod-': 'csa8@sunu.de',
+      'prod-': 'dublincsa@sunu.de',
+      'prod-': 'kassel@sunu.de',
+      'prod-': 'ulm@sunu.de',
+      'prod-': 'landolfshausen@sunu.de',
+      'prod-': 'nordheide@sunu.de',
+      'prod-': 'nuertingen@sunu.de',
     }
   };
   var env = 'dev';
