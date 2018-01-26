@@ -17,23 +17,23 @@ module.exports = function(grunt) {
         'm1': 'http://localhost:9003/m1/',
         'm2': 'http://localhost:9003/m2/'
       },
-      'test-prod-csa1': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa1/'
+      'test-prod-landolfshausen': {
+        'm1': 'https://sunu-server-testprod.scapp.io/landolfshausen/'
       },
-      'test-prod-csa2': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa2/'
+      'test-prod-nuertingen': {
+        'm1': 'https://sunu-server-testprod.scapp.io/nuertingen/'
       },
-      'test-prod-csa3': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa3/'
+      'test-prod-nordheide': {
+        'm1': 'https://sunu-server-testprod.scapp.io/nordheide/'
       },
-      'test-prod-csa4': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa4/'
+      'test-prod-kassel': {
+        'm1': 'https://sunu-server-testprod.scapp.io/kassel/'
       },
-      'test-prod-csa5': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa5/'
+      'test-prod-ulm': {
+        'm1': 'https://sunu-server-testprod.scapp.io/ulm/'
       },
-      'test-prod-csa6': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa6/'
+      'test-prod-dublincsa': {
+        'm1': 'https://sunu-server-testprod.scapp.io/dublincsa/'
       },
       'test-prod-csa7': {
         'm1': 'https://sunu-server-testprod.scapp.io/csa7/'
