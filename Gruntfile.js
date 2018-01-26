@@ -13,8 +13,8 @@ module.exports = function(grunt) {
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
   var CONFIG = {
     API_URL: {
-      'test-prod-csa8': {
-        'm1': 'https://testprod.openolitor.ch/csa8/'
+      'csa1': {
+        'm1': 'https://sunu-server-testprod.scapp.io/csa1/'
       },
       'test-prod-landolfshausen': {
         'm1': 'https://sunu-server-testprod.scapp.io/landolfshausen/'
