@@ -63,6 +63,10 @@ angular.module('openolitor-admin')
 
             $scope.monate = EnumUtil.asArray(MONATE);
 
+            $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+
+            $scope.monate = EnumUtil.asArray(MONATE);
+
             $scope.tage = [];
             for (var i = 1; i <= 31; i++) {
                 $scope.tage.push({
@@ -109,6 +113,86 @@ angular.module('openolitor-admin')
                         }
                       });
                       $scope.arbeitskategorienTableParams.reload();
+                    }
+                });
+
+
+            ProjektService.resolveProjekt().then(function(projekt) {
+                if (projekt) {
+                    $scope.projekt = projekt;
+                    $scope.logoUrl = $scope.generateLogoUrl();
+                    $scope.editMode = false;
+                } else {
+                    $scope.editMode = true;
+                }
+                $scope.projectResolved = true;
+            }, function(error) {
+                console.log('error', error);
+            });
+
+            KontoDatenService.resolveKontodaten().then(function(kontodaten) {
+                if (kontodaten) {
+                    $scope.kontodaten = kontodaten;
+                }
+            }, function(error) {
+                console.log('error', error);
+            });
+
+            $scope.switchToEditMode = function() {
+                $scope.editMode = true;
+            };
+
+            $scope.changedKundentypen = {};
+            $scope.deletingKundentypen = {};
+            $scope.changedProduktekategorien = {};
+            $scope.deletingProduktekategorien = {};
+            $scope.modelChangedKundentyp = function(kundentyp) {
+                if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
+                    $scope.changedKundentypen[kundentyp.id] = kundentyp;
+                }
+            };
+            $scope.hasChangesKundentypen = function() {
+                return Object.getOwnPropertyNames($scope.changedKundentypen).length >
+                    0;
+            };
+
+            $scope.modelChangedProduktekategorie = function(produktekategorie) {
+                if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
+                    $scope.changedProduktekategorien[produktekategorie.id] =
+                        produktekategorie;
+                }
+            };
+
+            $scope.hasChangesProduktekategorien = function() {
+                return Object.getOwnPropertyNames($scope.changedProduktekategorien)
+                    .length > 0;
+            };
+
+            //watch for set of kundentypen
+            $scope.$watch(KundentypenService.getKundentypen,
+                function(list) {
+                    if (list) {
+                        $scope.kundentypen = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.kundentypen.push(item);
+                            }
+                        });
+                        $scope.kundentypenTableParams.reload();
+                    }
+                });
+
+            //watch for set of produktekategorien
+            $scope.$watch(ProduktekategorienService.getProduktekategorien,
+                function(list) {
+                    if (list) {
+                        $scope.produktekategorien = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.produktekategorien.push(item);
+                            }
+                        });
+                        $scope.produktekategorienTableParams.reload();
                     }
                 });
 
@@ -193,7 +277,7 @@ angular.module('openolitor-admin')
                 }
             };
 
-            //functions to save, cancel, modify or delete the produkteKategorie
+            //functions to save, cancel, modify or delete the produkteKategorie 
 
             $scope.saveProduktekategorie = function(produktekategorie) {
                 produktekategorie.editable = false;

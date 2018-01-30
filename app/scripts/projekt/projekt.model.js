@@ -21,6 +21,22 @@ angular.module('openolitor-admin')
                 response: file
             };
         }
+    },
+    'fetchImportFile': {
+        url: API_URL + 'open/projekt/importFile',
+        method: 'GET',
+        responseType: 'arraybuffer',
+        transformResponse: function (data) {
+            var file;
+            if (data) {
+                file = new Blob([data], {
+                    type: 'application/vnd.oasis.opendocument.spreadsheet'
+                });
+            }
+            return {
+                response: file
+            };
+        }
     }});
   }])
   .factory('ProjektModel', ['$resource', 'API_URL', function($resource, API_URL) {
