@@ -162,6 +162,7 @@ angular.module('openolitor-admin')
           .length > 0;
       };
 
+
             //watch for set of kundentypen
             $scope.$watch(KundentypenService.getKundentypen,
                 function(list) {
@@ -492,8 +493,15 @@ angular.module('openolitor-admin')
                 return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
             };
 
+            $scope.downloadImportFile = function() {
+                OpenProjektModel.fetchImportFile({
+                }, function(file) {
+                    FileSaver.saveAs(file.response, 'importFile' + '.ods');
+                });
+            };
+
             $scope.downloadStyle = function(style) {
-                ProjektModel.fetchStyle({
+                OpenProjektModel.fetchStyle({
                     style: style
                 }, function(file) {
                     FileSaver.saveAs(file.response, style + '.css');
