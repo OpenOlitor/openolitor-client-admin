@@ -161,6 +161,7 @@ angular.module('openolitor-admin')
           .length > 0;
       };
 
+
             //watch for set of kundentypen
             $scope.$watch(KundentypenService.getKundentypen,
                 function(list) {
