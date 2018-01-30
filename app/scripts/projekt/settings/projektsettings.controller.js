@@ -3,60 +3,126 @@
 /**
 */
 angular.module('openolitor-admin')
-    .controller('ProjektSettingsController', ['$scope', '$filter',
-        'NgTableParams',
-        'KundentypenService',
-        'KundentypenModel',
-        'ProduktekategorienService',
-        'ProduktekategorienModel',
-        'ProjektService',
-        'ProjektModel',
-        'KontoDatenService',
-        'KontoDatenModel',    
-        'EnumUtil',
-        'FileSaver',
-        'MONATE',
-        'WAEHRUNG',
-        'Upload',
-        'msgBus',
-        'cloneObj',
-        'API_URL',
-        function($scope, $filter, NgTableParams, KundentypenService,
-            KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-            ProjektService, ProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
-            Upload, msgBus, cloneObj, API_URL
-        ) {
-            $scope.templateKundentyp = {};
-            $scope.templateProduktekategorie = {};
-            $scope.editingKundentypBool = false;
-            $scope.editingProduktekategorieBool = false;
+  .controller('ProjektSettingsController', ['$scope', '$filter',
+    'NgTableParams',
+    'KundentypenService',
+    'KundentypenModel',
+    'ProduktekategorienService',
+    'ProduktekategorienModel',
+    'ProjektService',
+    'ProjektModel',
+    'OpenProjektModel',
+    'KontoDatenService',
+    'KontoDatenModel',    
+    'EnumUtil',
+    'FileSaver',
+    'MONATE',
+    'WAEHRUNG',
+    'Upload',
+    'msgBus',
+    'API_URL',
+    function($scope, $filter, NgTableParams, KundentypenService,
+      KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
+      ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
+      Upload, msgBus, API_URL
+    ) {
+      $scope.templateKundentyp = {};
+      $scope.templateProduktekategorie = {};
 
-            // first fake to true to work around bs-switch bug
-            $scope.projectResolved = false;
-            $scope.editMode = true;
+      // first fake to true to work around bs-switch bug
+      $scope.projectResolved = false;
+      $scope.editMode = true;
 
-            var defaults = {
-                modelKundentyp: {
-                    kundentyp: '',
-                    beschreibung: '', 
-                    editable:true
-                },
-                modelProduktekategorie: {
-                    beschreibung: '', 
-                    editable:true
-                }
-            };
+      $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
-            $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+      $scope.monate = EnumUtil.asArray(MONATE);
 
-            $scope.monate = EnumUtil.asArray(MONATE);
+      $scope.tage = [];
+      for (var i = 1; i <= 31; i++) {
+        $scope.tage.push({
+          id: i
+        });
+      }
 
-            $scope.tage = [];
-            for (var i = 1; i <= 31; i++) {
-                $scope.tage.push({
-                    id: i
-                });
-            }
+      //watch for set of kundentypen
+      $scope.$watch(KundentypenService.getKundentypen,
+        function(list) {
+          if (list) {
+            $scope.kundentypen = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.kundentypen.push(item);
+              }
+            });
+            $scope.kundentypenTableParams.reload();
+          }
+        });
+
+      //watch for set of produktekategorien
+      $scope.$watch(ProduktekategorienService.getProduktekategorien,
+        function(list) {
+          if (list) {
+            $scope.produktekategorien = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.produktekategorien.push(item);
+              }
+            });
+            $scope.produktekategorienTableParams.reload();
+          }
+        });
+
+
+      ProjektService.resolveProjekt().then(function(projekt) {
+        if (projekt) {
+          $scope.projekt = projekt;
+          $scope.logoUrl = $scope.generateLogoUrl();
+          $scope.editMode = false;
+        } else {
+          $scope.editMode = true;
+        }
+        $scope.projectResolved = true;
+      }, function(error) {
+        console.log('error', error);
+      });
+
+      KontoDatenService.resolveKontodaten().then(function(kontodaten) {
+        if (kontodaten) {
+          $scope.kontodaten = kontodaten;
+        }
+      }, function(error) {
+        console.log('error', error);
+      });
+
+      $scope.switchToEditMode = function() {
+        $scope.editMode = true;
+      };
+
+      $scope.changedKundentypen = {};
+      $scope.deletingKundentypen = {};
+      $scope.changedProduktekategorien = {};
+      $scope.deletingProduktekategorien = {};
+      $scope.modelChangedKundentyp = function(kundentyp) {
+        if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
+          $scope.changedKundentypen[kundentyp.id] = kundentyp;
+        }
+      };
+      $scope.hasChangesKundentypen = function() {
+        return Object.getOwnPropertyNames($scope.changedKundentypen).length >
+          0;
+      };
+
+      $scope.modelChangedProduktekategorie = function(produktekategorie) {
+        if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
+          $scope.changedProduktekategorien[produktekategorie.id] =
+            produktekategorie;
+        }
+      };
+
+      $scope.hasChangesProduktekategorien = function() {
+        return Object.getOwnPropertyNames($scope.changedProduktekategorien)
+          .length > 0;
+      };
 
             //watch for set of kundentypen
             $scope.$watch(KundentypenService.getKundentypen,
@@ -335,5 +401,6 @@ angular.module('openolitor-admin')
             };
 
             $scope.localeBCP47Pattern = /^(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)|((en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang)))$/;
+
         }
     ]);
