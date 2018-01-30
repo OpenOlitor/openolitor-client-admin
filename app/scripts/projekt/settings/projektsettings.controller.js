@@ -229,20 +229,6 @@ angular.module('openolitor-admin')
           .length > 0;
       };
 
-      //watch for set of kundentypen
-      $scope.$watch(KundentypenService.getKundentypen,
-        function(list) {
-          if (list) {
-            $scope.kundentypen = [];
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.kundentypen.push(item);
-              }
-            });
-            $scope.kundentypenTableParams.reload();
-          }
-        });
-
       //watch for set of produktekategorien
       $scope.$watch(ProduktekategorienService.getProduktekategorien,
         function(list) {
