@@ -451,7 +451,6 @@ angular.module('openolitor-admin')
             params.total(orderedData.length);
             return orderedData;
           }
-
         });
       }
 
