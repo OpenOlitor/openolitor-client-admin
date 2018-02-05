@@ -7,6 +7,8 @@ angular.module('openolitor-admin')
         'NgTableParams',
         'KundentypenService',
         'KundentypenModel',
+        'PersonCategoriesService',
+        'PersonCategoriesModel',
         'ProduktekategorienService',
         'ProduktekategorienModel',
         'ArbeitskategorienService',
@@ -26,7 +28,7 @@ angular.module('openolitor-admin')
         'cloneObj',
         'API_URL',
         function($scope, $filter, NgTableParams, KundentypenService,
-            KundentypenModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
+            KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
             ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, API_URL
         ) {
@@ -129,210 +131,237 @@ angular.module('openolitor-admin')
             }, function(error) {
                 console.log('error', error);
             });
+            $scope.kundentypenTableParams.reload();
+          }
+        });
 
-            KontoDatenService.resolveKontodaten().then(function(kontodaten) {
-                if (kontodaten) {
-                    $scope.kontodaten = kontodaten;
-                }
-            }, function(error) {
-                console.log('error', error);
+      //watch for set of kundentypen
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            $scope.personCategories = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.personCategories.push(item);
+              }
             });
+            $scope.personCategoriesTableParams.reload();
+          }
+        });
 
-            $scope.switchToEditMode = function() {
-                $scope.editMode = true;
-            };
-
-            $scope.changedKundentypen = {};
-            $scope.deletingKundentypen = {};
-            $scope.changedProduktekategorien = {};
-            $scope.deletingProduktekategorien = {};
-            $scope.modelChangedKundentyp = function(kundentyp) {
-                if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
-                    $scope.changedKundentypen[kundentyp.id] = kundentyp;
-                }
-            };
-            $scope.hasChangesKundentypen = function() {
-                return Object.getOwnPropertyNames($scope.changedKundentypen).length >
-                    0;
-            };
-
-            $scope.modelChangedProduktekategorie = function(produktekategorie) {
-                if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
-                    $scope.changedProduktekategorien[produktekategorie.id] =
-                        produktekategorie;
-                }
-            };
-
-            $scope.hasChangesProduktekategorien = function() {
-                return Object.getOwnPropertyNames($scope.changedProduktekategorien)
-                    .length > 0;
-            };
-
-            //watch for set of kundentypen
-            $scope.$watch(KundentypenService.getKundentypen,
-                function(list) {
-                    if (list) {
-                        $scope.kundentypen = [];
-                        angular.forEach(list, function(item) {
-                            if (item.id) {
-                                $scope.kundentypen.push(item);
-                            }
-                        });
-                        $scope.kundentypenTableParams.reload();
-                    }
-                });
-
-            //watch for set of produktekategorien
-            $scope.$watch(ProduktekategorienService.getProduktekategorien,
-                function(list) {
-                    if (list) {
-                        $scope.produktekategorien = [];
-                        angular.forEach(list, function(item) {
-                            if (item.id) {
-                                $scope.produktekategorien.push(item);
-                            }
-                        });
-                        $scope.produktekategorienTableParams.reload();
-                    }
-                });
-
-
-            ProjektService.resolveProjekt().then(function(projekt) {
-                if (projekt) {
-                    $scope.projekt = projekt;
-                    $scope.logoUrl = $scope.generateLogoUrl();
-                    $scope.editMode = false;
-                } else {
-                    $scope.editMode = true;
-                }
-                $scope.projectResolved = true;
-            }, function(error) {
-                console.log('error', error);
+      //watch for set of produktekategorien
+      $scope.$watch(ProduktekategorienService.getProduktekategorien,
+        function(list) {
+          if (list) {
+            $scope.produktekategorien = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.produktekategorien.push(item);
+              }
             });
+            $scope.produktekategorienTableParams.reload();
+          }
+        });
 
-            KontoDatenService.resolveKontodaten().then(function(kontodaten) {
-                if (kontodaten) {
-                    $scope.kontodaten = kontodaten;
-                }
-            }, function(error) {
-                console.log('error', error);
+
+      ProjektService.resolveProjekt().then(function(projekt) {
+        if (projekt) {
+          $scope.projekt = projekt;
+          $scope.logoUrl = $scope.generateLogoUrl();
+          $scope.editMode = false;
+        } else {
+          $scope.editMode = true;
+        }
+        $scope.projectResolved = true;
+      }, function(error) {
+        console.log('error', error);
+      });
+
+      KontoDatenService.resolveKontodaten().then(function(kontodaten) {
+        if (kontodaten) {
+          $scope.kontodaten = kontodaten;
+        }
+      }, function(error) {
+        console.log('error', error);
+      });
+
+      $scope.switchToEditMode = function() {
+        $scope.editMode = true;
+      };
+
+      $scope.changedKundentypen = {};
+      $scope.deletingKundentypen = {};
+      $scope.changedProduktekategorien = {};
+      $scope.deletingProduktekategorien = {};
+      $scope.modelChangedKundentyp = function(kundentyp) {
+        if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
+          $scope.changedKundentypen[kundentyp.id] = kundentyp;
+        }
+      };
+      $scope.hasChangesKundentypen = function() {
+        return Object.getOwnPropertyNames($scope.changedKundentypen).length >
+          0;
+      };
+
+      $scope.changedPersonCategories = {};
+      $scope.deletingPersonCategories = {};
+      $scope.changedProduktekategorien = {};
+      $scope.deletingProduktekategorien = {};
+      $scope.modelChangedPersonCategory = function(personCategory) {
+        if (!(personCategory.personCategory in $scope.changedPersonCategories)) {
+          $scope.changedPersonCategories[personCategory.id] = personCategory;
+        }
+      };
+      $scope.hasChangesPersonCategories = function() {
+        return Object.getOwnPropertyNames($scope.changedPersonCategories).length >
+          0;
+      };
+      $scope.modelChangedProduktekategorie = function(produktekategorie) {
+        if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
+          $scope.changedProduktekategorien[produktekategorie.id] =
+            produktekategorie;
+        }
+      };
+
+      $scope.switchToEditMode = function() {
+        $scope.editMode = true;
+      };
+
+      $scope.changedKundentypen = {};
+      $scope.deletingKundentypen = {};
+      $scope.changedProduktekategorien = {};
+      $scope.deletingProduktekategorien = {};
+      $scope.modelChangedKundentyp = function(kundentyp) {
+        if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
+          $scope.changedKundentypen[kundentyp.id] = kundentyp;
+        }
+      };
+      $scope.hasChangesKundentypen = function() {
+        return Object.getOwnPropertyNames($scope.changedKundentypen).length >
+          0;
+      };
+
+      $scope.modelChangedProduktekategorie = function(produktekategorie) {
+        if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
+          $scope.changedProduktekategorien[produktekategorie.id] =
+            produktekategorie;
+        }
+      };
+
+      $scope.hasChangesProduktekategorien = function() {
+        return Object.getOwnPropertyNames($scope.changedProduktekategorien)
+          .length > 0;
+      };
+
+      //watch for set of kundentypen
+      $scope.$watch(KundentypenService.getKundentypen,
+        function(list) {
+          if (list) {
+            $scope.kundentypen = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.kundentypen.push(item);
+              }
             });
+            $scope.kundentypenTableParams.reload();
+          }
+        });
 
-            $scope.switchToEditMode = function() {
-                $scope.editMode = true;
-            };
+      //watch for set of produktekategorien
+      $scope.$watch(ProduktekategorienService.getProduktekategorien,
+        function(list) {
+          if (list) {
+            $scope.produktekategorien = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.produktekategorien.push(item);
+              }
+            });
+            $scope.produktekategorienTableParams.reload();
+          }
+        });
 
-            //functions to save, cancel, modify or delete the kundentypen
 
-            $scope.saveKundentyp = function(kundentyp) {
-                kundentyp.editable = false;
-                $scope.editingKundentypBool = false;
-                $scope.kundentyp = new KundentypenModel(kundentyp);
-                return $scope.kundentyp.$save();
-            };
+      ProjektService.resolveProjekt().then(function(projekt) {
+        if (projekt) {
+          $scope.projekt = projekt;
+          $scope.logoUrl = $scope.generateLogoUrl();
+          $scope.editMode = false;
+        } else {
+          $scope.editMode = true;
+        }
+        $scope.projectResolved = true;
+      }, function(error) {
+        console.log('error', error);
+      });
 
-            $scope.cancelKundentyp = function(kundentyp) {
-                if(kundentyp.isNew) {
-                    var kundentypIndex = $scope.kundentypen.indexOf(kundentyp);
-                    $scope.kundentypen.splice(kundentypIndex, 1);
-                }
-                if($scope.originalKundentyp) {
-                    var isKundentypById = function (element) {
-                        return kundentyp.id === element.id;
-                    };
-                    var originalKundentypIndex = $scope.kundentypen.findIndex(isKundentypById);
-                    if(originalKundentypIndex >= 0) {
-                        $scope.kundentypen[originalKundentypIndex] = $scope.originalKundentyp;
-                    }
-                    $scope.originalKundentyp= undefined;
-                }
-                kundentyp.editable = false;
-                $scope.editingKundentypBool = false;
-                $scope.kundentypenTableParams.reload();
-            };
+      KontoDatenService.resolveKontodaten().then(function(kontodaten) {
+        if (kontodaten) {
+          $scope.kontodaten = kontodaten;
+        }
+      }, function(error) {
+        console.log('error', error);
+      });
 
-            $scope.editKundentyp = function(kundentyp) {
-                $scope.originalKundentyp = cloneObj(kundentyp);
-                kundentyp.editable = true;
-                $scope.editingKundentypBool = true;
-            };
+      $scope.switchToEditMode = function() {
+        $scope.editMode = true;
+      };
 
-            $scope.deleteKundentyp = function(kundentyp) {
-                kundentyp.editable = false;
-                $scope.kundentyp = new KundentypenModel(kundentyp);
-                return $scope.kundentyp.$delete();
-            };
+      //functions to save, cancel, modify or delete the kundentypen
 
-            $scope.addKundentyp = function() {
-                if(!$scope.editingKundentypBool) {
-                    if(angular.isUndefined($scope.kundentypen)) {
-                        $scope.kundentypen = [];
-                    }
-                    $scope.editingKundentypBool = true;
-                    var newKundentyp = cloneObj(defaults.modelKundentyp);
-                    $scope.editingKundentyp = newKundentyp;
-                    $scope.editingKundentyp.isNew = true;
-                    $scope.kundentypen.unshift(newKundentyp);
-                    $scope.kundentypenTableParams.reload();
-                }
-            };
+      $scope.saveKundentyp = function(kundentyp) {
+        kundentyp.editable = false;
+        $scope.editingKundentypBool = false;
+        $scope.kundentyp = new KundentypenModel(kundentyp);
+        return $scope.kundentyp.$save();
+      };
 
-            //functions to save, cancel, modify or delete the produkteKategorie 
+      $scope.cancelKundentyp = function(kundentyp) {
+        if(kundentyp.isNew) {
+          var kundentypIndex = $scope.kundentypen.indexOf(kundentyp);
+          $scope.kundentypen.splice(kundentypIndex, 1);
+        }
+        if($scope.originalKundentyp) {
+          var isKundentypById = function (element) {
+            return kundentyp.id === element.id;
+          };
+          var originalKundentypIndex = $scope.kundentypen.findIndex(isKundentypById);
+          if(originalKundentypIndex >= 0) {
+            $scope.kundentypen[originalKundentypIndex] = $scope.originalKundentyp;
+          }
+          $scope.originalKundentyp= undefined;
+        }
+        kundentyp.editable = false;
+        $scope.editingKundentypBool = false;
+        $scope.kundentypenTableParams.reload();
+      };
 
-            $scope.saveProduktekategorie = function(produktekategorie) {
-                produktekategorie.editable = false;
-                $scope.editingProduktekategorieBool = false;
-                $scope.produktekategorie = new ProduktekategorienModel(produktekategorie);
-                return $scope.produktekategorie.$save();
-            };
+      $scope.editKundentyp = function(kundentyp) {
+        $scope.originalKundentyp = cloneObj(kundentyp);
+        kundentyp.editable = true;
+        $scope.editingKundentypBool = true;
+      };
 
-            $scope.cancelProduktekategorie = function(produktekategorie) {
-                if(produktekategorie.isNew) {
-                    var produktekategorieIndex = $scope.produktekategorien.indexOf(produktekategorie);
-                    $scope.produktekategorien.splice(produktekategorieIndex, 1);
-                }
-                if($scope.originalProduktekategorie) {
-                    var isProduktekategorieById = function (element) {
-                        return produktekategorie.id === element.id;
-                    };
-                    var originalProduktekategorieIndex = $scope.produktekategorien.findIndex(isProduktekategorieById);
-                    if(originalProduktekategorieIndex >= 0) {
-                        $scope.produktekategorien[originalProduktekategorieIndex] = $scope.originalProduktekategorie;
-                    }
-                    $scope.produktekategorie = undefined;
-                }
-                produktekategorie.editable = false;
-                $scope.editingProduktekategorieBool = false;
-                $scope.produktekategorienTableParams.reload();
-            };
+      $scope.deleteKundentyp = function(kundentyp) {
+        kundentyp.editable = false;
+        $scope.kundentyp = new KundentypenModel(kundentyp);
+        return $scope.kundentyp.$delete();
+      };
 
-            $scope.editProduktekategorie = function(produktekategorie) {
-                $scope.originalProduktekategorie = cloneObj(produktekategorie);
-                produktekategorie.editable = true;
-                $scope.editingProduktekategorieBool = true;
-            };
+      $scope.addKundentyp = function() {
+        if(!$scope.editingKundentypBool) {
+          if(angular.isUndefined($scope.kundentypen)) {
+            $scope.kundentypen = [];
+          }
+          $scope.editingKundentypBool = true;
+          var newKundentyp = cloneObj(defaults.modelKundentyp);
+          $scope.editingKundentyp = newKundentyp;
+          $scope.editingKundentyp.isNew = true;
+          $scope.kundentypen.unshift(newKundentyp);
+          $scope.kundentypenTableParams.reload();
+        }
+      };
 
-            $scope.deleteProduktekategorie = function(produktekategorie) {
-                produktekategorie.editable = false;
-                $scope.produktekategorie = new ProduktekategorienModel(produktekategorie);
-                return $scope.produktekategorie.$delete();
-            };
-
-            $scope.addProduktekategorie = function() {
-                if(!$scope.editingProduktekategorieBool) {
-                    if(angular.isUndefined($scope.produktekategorien)) {
-                        $scope.produktekategorien = [];
-                    }
-                    $scope.editingProduktekategorieBool = true;
-                    var newProduktekategorie = cloneObj(defaults.modelProduktekategorie);
-                    $scope.editingProduktekategorie = newProduktekategorie;
-                    $scope.editingProduktekategorie.isNew = true;
-                    $scope.produktekategorien.unshift(newProduktekategorie);
-                    $scope.produktekategorienTableParams.reload();
-                }
-            };
-
-            //functions to save, cancel, modify or delete the arbeitskategorien
 
             $scope.saveArbeitskategorie = function(arbeitskategorie) {
                 arbeitskategorie.editable = false;
@@ -387,63 +416,13 @@ angular.module('openolitor-admin')
                 }
             };
 
-            if (!$scope.kundentypenTableParams) {
-                //use default tableParams
-                $scope.kundentypenTableParams = new NgTableParams({ // jshint ignore:line
-                    page: 1,
-                    count: 1000,
-                    sorting: {
-                        name: 'asc'
-                    }
-                }, {
-                    filterDelay: 0,
-                    groupOptions: {
-                        isExpanded: true
-                    },
-                    getData: function(params) {
-                        if (!$scope.kundentypen) {
-                            return;
-                        }
-                        // use build-in angular filter
-                        var orderedData = params.sorting ?
-                            $filter('orderBy')($scope.kundentypen, params.orderBy()) :
-                            $scope.kundentypen;
 
-                        params.total(orderedData.length);
-                        return orderedData;
-                    }
-
-                });
-            }
-
-            if (!$scope.produktekategorienTableParams) {
-                //use default tableParams
-                $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
-                    page: 1,
-                    count: 1000,
-                    sorting: {
-                        name: 'asc'
-                    }
-                }, {
-                    filterDelay: 0,
-                    groupOptions: {
-                        isExpanded: true
-                    },
-                    getData: function(params) {
-                        if (!$scope.produktekategorien) {
-                            return;
-                        }
-                        // use build-in angular filter
-                        var orderedData = params.sorting ?
-                            $filter('orderBy')($scope.produktekategorien, params.orderBy()) :
-                            $scope.produktekategorien;
-
-                        params.total(orderedData.length);
-                        return orderedData;
-                    }
-
-                });
-            }
+      $scope.saveProduktekategorie = function(produktekategorie) {
+        produktekategorie.editable = false;
+        $scope.editingProduktekategorieBool = false;
+        $scope.produktekategorie = new ProduktekategorienModel(produktekategorie);
+        return $scope.produktekategorie.$save();
+      };
 
             if (!$scope.arbeitskategorienTableParams) {
                 //use default tableParams
@@ -529,5 +508,3 @@ angular.module('openolitor-admin')
             };
 
             $scope.localeBCP47Pattern = /^(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)|((en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang)))$/;
-        }
-    ]);
