@@ -136,7 +136,8 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: ''
+            kundentypen: '',
+            personentypen: ''
           }
         }, {
           filterDelay: 0,
