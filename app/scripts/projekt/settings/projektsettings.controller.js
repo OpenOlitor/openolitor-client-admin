@@ -29,6 +29,7 @@ angular.module('openolitor-admin')
       Upload, msgBus, API_URL
     ) {
       $scope.templateKundentyp = {};
+      $scope.templatePersonCategory = {};
       $scope.templateProduktekategorie = {};
 
       // first fake to true to work around bs-switch bug
@@ -60,7 +61,7 @@ angular.module('openolitor-admin')
           }
         });
 
-      //watch for set of kundentypen
+      //watch for set of PersonCategory
       $scope.$watch(PersonCategoriesService.getPersonCategories,
         function(list) {
           if (list) {
@@ -414,7 +415,6 @@ angular.module('openolitor-admin')
             params.total(orderedData.length);
             return orderedData;
           }
-
         });
       }
 
