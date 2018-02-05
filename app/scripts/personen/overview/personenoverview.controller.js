@@ -135,6 +135,10 @@ angular.module('openolitor-admin')
           sorting: {
             name: 'asc'
           },
+          filter: {
+            kundentypen: '',
+            personentypen: ''
+          }
         }, {
           filterDelay: 0,
           groupOptions: {
