@@ -29,6 +29,7 @@ angular.module('openolitor-admin')
       Upload, msgBus, API_URL
     ) {
       $scope.templateKundentyp = {};
+      $scope.templatePersonCategory = {};
       $scope.templateProduktekategorie = {};
 
       // first fake to true to work around bs-switch bug
@@ -60,7 +61,7 @@ angular.module('openolitor-admin')
           }
         });
 
-      //watch for set of kundentypen
+      //watch for set of PersonCategory
       $scope.$watch(PersonCategoriesService.getPersonCategories,
         function(list) {
           if (list) {
@@ -346,36 +347,6 @@ angular.module('openolitor-admin')
                 });
             }
 
-            if (!$scope.produktekategorienTableParams) {
-                //use default tableParams
-                $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
-                    page: 1,
-                    count: 1000,
-                    sorting: {
-                        name: 'asc'
-                    }
-                }, {
-                    filterDelay: 0,
-                    groupOptions: {
-                        isExpanded: true
-                    },
-                    getData: function(params) {
-                        if (!$scope.produktekategorien) {
-                            return;
-                        }
-                        // use build-in angular filter
-                        var orderedData = params.sorting ?
-                            $filter('orderBy')($scope.produktekategorien, params.orderBy()) :
-                            $scope.produktekategorien;
-
-                        params.total(orderedData.length);
-                        return orderedData;
-                    }
-
-                });
-            }
-
-<<<<<<< HEAD
             $scope.saveProjekt = function() {
                 return $scope.kontodaten.$save().then($scope.projekt.$save(function(){
                     $scope.projektForm.$setPristine();
