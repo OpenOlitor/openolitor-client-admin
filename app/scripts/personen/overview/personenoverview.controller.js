@@ -32,6 +32,23 @@ angular.module('openolitor-admin')
           }
         });
 
+      $scope.personentypen = [];
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var id = (item.personCategory) ? item.personCategory:
+                item;
+              $scope.personCategories.push({
+                'id': id,
+                'title': id
+              });
+            });
+            $scope.tableParams.reload();
+          }
+        });
+
       $scope.search = {
         query: '',
         queryQuery: '',
@@ -119,7 +136,8 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: ''
+            kundentypen: '',
+            personentypen: ''
           }
         }, {
           filterDelay: 0,
