@@ -4,8 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams,
+<<<<<<< HEAD
+    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
+    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
       KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext, DetailNavigationService) {
 
       $scope.entries = [];
@@ -24,6 +25,23 @@ angular.module('openolitor-admin')
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
               $scope.kundentypen.push({
+                'id': id,
+                'title': id
+              });
+            });
+            $scope.tableParams.reload();
+          }
+        });
+
+      $scope.personentypen = [];
+        $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var id = (item.personCategory) ? item.personCategory:
+                item;
+              $scope.personCategories.push({
                 'id': id,
                 'title': id
               });
@@ -119,7 +137,8 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: ''
+            kundentypen: '',
+            personentypen: ''
           }
         }, {
           filterDelay: 0,

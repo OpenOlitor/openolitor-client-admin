@@ -1,44 +1,50 @@
-<div class="row">
-  <div class="content content-box col-md-12">
-    <div oo-error-overlay></div>
-      <div class="col-md-12">
+   <div class="row">
+    <div class="content content-box col-md-12">
+        <div oo-error-overlay></div>
         <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title"><span class="navbar-brand" translate>PersonenKategorien</span>
-              <form name="createPersonCategoryForm" class="navbar-form pull-right">
-                <div class="form-group">
-                  <a ng-disabled=" templatePersonCategory.creating" role="button" ng-click="addPersonCategory()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span></a>
-                  <a role="button" ng-click="savePersonCategories()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span></a>
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title"><span class="navbar-brand" translate>Personenkategorien</span>
+                    <form name="createPersonCategoryForm" class="navbar-form pull-right">
+                        <div class="form-group">
+                            <a role="button" ng-click="addPersonCategory()" ng-disabled="editingPersonCategoryBool" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>PersonKategorie Erstellen</span></a>
+                        </div>
+                    </form>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div ng-hide="personCategories">
+                    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
                 </div>
-              </form>
-            </h3>
-          </div>
-          <div class="panel-body">
-              <div ng-hide="personCategories">
-                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-              </div>
-              <div ng-show="personCategories" class="horizontal-scroll">
-                <table ng-table="personCategoriesTableParams" class="table table-striped">
-                  <tr ng-repeat="personCategory in $data">
-                      <td data-title="'PersonenKategory'|translate" sortable="'name'" ng-class="[{'col-md-3': personCategory.editable}]">
-                        <span ng-hide="personCategory.editable">{{personCategory.name}}</span>
-                        <span ng-show="personCategory.editable">
-                      <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'PersonKategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
-                    </td>
-                    <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
-                        <span ng-hide="personCategory.editable">{{personCategory.description}}</span>
-                        <span ng-show="personCategory.editable">
-                      <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></textarea>
-                    </td>
-                    <td>
-                      <a href="" ng-click="deletePersonCategory(personCategory)" ng-hide="deletingPersonCategory(personCategory)"><i class="fa fa-times"></i></a>
-                       <i ng-show="deletingPersonCategory(personCategory)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-          </div>
+                <div ng-show="personCategories" class="horizontal-scroll">
+                    <table ng-table="personCategoriesTableParams" class="table table-striped">
+                        <tr ng-repeat="personCategory in $data">
+                            <td data-title="'PersonenKategorie'|translate" sortable="'name'" ng-class="[{'col-md-3': personCategory.editable}]">
+                                <span ng-hide="personCategory.editable">{{personCategory.name}}</span>
+                                <span ng-show="personCategory.editable">
+                                    <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'PersonKategorie'|translate}}..."></input>
+                            </td>
+                            <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
+                                <span ng-hide="personCategory.editable">{{personCategory.description}}</span>
+                                <span ng-show="personCategory.editable">
+                                    <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                            </td>
+                            <td><div ng-hide="editingPersonCategoryBool" class="pull-right">
+                                    <a role="button" class="btn btn-sm btn-primary" ng-click="editPersonCategory(personCategory)">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <oo-delete-button model="personCategory" entity="PersonCategory" on-delete="deletePersonCategory" condensed="true" confirm="true"></oo-delete-button> 
+                                </div> 
+                                <div ng-show="personCategory.editable" class="pull-right"> 
+                                    <oo-save-button model="personCategory" entity="PersonCategory" on-save="savePersonCategory" condensed="true"></oo-save-button>
+                                    <a role="button" class="btn btn-sm btn-default" ng-click="cancelPersonCategory(personCategory)">
+                                        <span class="glyphicon glyphicon-stop"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-</div>
+    </div>
+</div> 
