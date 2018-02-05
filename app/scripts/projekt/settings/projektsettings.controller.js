@@ -35,6 +35,7 @@ angular.module('openolitor-admin')
             $scope.templateKundentyp = {};
             $scope.templateProduktekategorie = {};
             $scope.templateArbeitskategorie = {};
+            $scope.templatePersonCategory = {};
             $scope.editingKundentypBool = false;
             $scope.editingProduktekategorieBool = false;
             $scope.editingArbeitskategorienBool = false;
@@ -135,7 +136,7 @@ angular.module('openolitor-admin')
           }
         });
 
-      //watch for set of kundentypen
+      //watch for set of PersonCategory
       $scope.$watch(PersonCategoriesService.getPersonCategories,
         function(list) {
           if (list) {
