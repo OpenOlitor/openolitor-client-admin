@@ -22,11 +22,11 @@
               <div ng-show="personCategories" class="horizontal-scroll">
                 <table ng-table="personCategoriesTableParams" class="table table-striped">
                   <tr ng-repeat="personCategory in $data">
-                    <td data-title="'PersonCategory'|translate" sortable="'personCategory'">
-                      <input type="text" class="form-control" name="beschreibung" ng-model="personCategory.personCategory" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'personCategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
+                    <td data-title="'Person Kategory'|translate" sortable="'personCategory'">
+                      <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Person Kategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
                     </td>
                     <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
-                      <textarea class="form-control" name="beschreibung" ng-model="personCategory.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></textarea>
+                      <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></textarea>
                     </td>
                     <td>
                       <a href="" ng-click="deletePersonCategory(personCategory)" ng-hide="deletingPersonCategory(personCategory)"><i class="fa fa-times"></i></a>
