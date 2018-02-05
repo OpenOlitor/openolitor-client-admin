@@ -7,6 +7,8 @@ angular.module('openolitor-admin')
     'NgTableParams',
     'KundentypenService',
     'KundentypenModel',
+    'PersonCategoriesService',
+    'PersonCategoriesModel',
     'ProduktekategorienService',
     'ProduktekategorienModel',
     'ProjektService',
@@ -22,7 +24,7 @@ angular.module('openolitor-admin')
     'msgBus',
     'API_URL',
     function($scope, $filter, NgTableParams, KundentypenService,
-      KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
+      KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel,
       ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
       Upload, msgBus, API_URL
     ) {
@@ -55,6 +57,20 @@ angular.module('openolitor-admin')
               }
             });
             $scope.kundentypenTableParams.reload();
+          }
+        });
+
+      //watch for set of kundentypen
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            $scope.personCategories = [];
+            angular.forEach(list, function(item) {
+              if (item.id) {
+                $scope.personCategories.push(item);
+              }
+            });
+            $scope.personCategoriesTableParams.reload();
           }
         });
 
@@ -112,6 +128,19 @@ angular.module('openolitor-admin')
           0;
       };
 
+      $scope.changedPersonCategories = {};
+      $scope.deletingPersonCategories = {};
+      $scope.changedProduktekategorien = {};
+      $scope.deletingProduktekategorien = {};
+      $scope.modelChangedPersonCategory = function(personCategory) {
+        if (!(personCategory.personCategory in $scope.changedPersonCategories)) {
+          $scope.changedPersonCategories[personCategory.id] = personCategory;
+        }
+      };
+      $scope.hasChangesPersonCategories = function() {
+        return Object.getOwnPropertyNames($scope.changedPersonCategories).length >
+          0;
+      };
       $scope.modelChangedProduktekategorie = function(produktekategorie) {
         if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
           $scope.changedProduktekategorien[produktekategorie.id] =
@@ -166,13 +195,172 @@ angular.module('openolitor-admin')
                 console.log('error', error);
             });
 
-            KontoDatenService.resolveKontodaten().then(function(kontodaten) {
-                if (kontodaten) {
-                    $scope.kontodaten = kontodaten;
-                }
-            }, function(error) {
-                console.log('error', error);
+      $scope.savePersonCategories = function() {
+        if (!$scope.hasChangesPersonCategories()) {
+          return;
+        }
+        $scope.templatePersonCategory.updating = true;
+        angular.forEach($scope.changedPersonCategories, function(personCategory) {
+          personCategory.$save();
+        });
+      };
+
+      $scope.deletingPersonCategory = function(personCategory) {
+        return $scope.deletingPersonCategories[personCategory.personCategory];
+      };
+
+      $scope.deletePersonCategory = function(personCategory) {
+        $scope.deletingPersonCategories[personCategory.personCategory] = true;
+        personCategory.$delete();
+      };
+
+      $scope.addPersonCategory = function() {
+        if ($scope.createPersonCategoryForm.$invalid) {
+
+          angular.forEach($scope.createPersonCategoryForm.$error, function(
+            field) {
+            angular.forEach(field, function(errorField) {
+              errorField.$setTouched();
             });
+          });
+          return;
+        }
+        var newModel = new PersonCategoriesModel({
+          id: undefined,
+          personCategory : $scope.templatePersonCategory.personCategory
+        });
+        newModel.$save();
+        $scope.templatePersonCategory.creating = true;
+        $scope.templatePersonCategory.personCategory = undefined;
+      };
+
+      $scope.saveProduktekategorie = function() {
+        if (!$scope.hasChangesProduktekategorien()) {
+          return;
+        }
+        $scope.templateProduktekategorie.updating = true;
+        angular.forEach($scope.changedProduktekategorien, function(
+          produktekategorie) {
+          produktekategorie.$save();
+        });
+      };
+
+      $scope.deletingProduktekategorie = function(produktekategorie) {
+        return $scope.deletingKundentypen[produktekategorie.id];
+      };
+
+      $scope.deleteProduktekategorie = function(produktekategorie) {
+        $scope.deletingProduktekategorie[produktekategorie.id] = true;
+        produktekategorie.$delete();
+      };
+
+      $scope.addProduktekategorie = function() {
+        if ($scope.createProduktekategorieForm.$invalid) {
+
+          angular.forEach($scope.createProduktekategorieForm.$error,
+            function(
+              field) {
+              angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+              });
+            });
+          return;
+        }
+        var newModel = new ProduktekategorienModel({
+          id: undefined,
+          beschreibung: $scope.templateProduktekategorie.produktekategorie
+        });
+        newModel.$save();
+        $scope.templateProduktekategorie.creating = true;
+        $scope.templateProduktekategorie.produktekategorie = undefined;
+      };
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          $scope.templateKundentyp.creating = undefined;
+
+          $scope.kundentypen.push(new KundentypenModel(msg.data));
+          $scope.kundentypenTableParams.reload();
+
+          $scope.$apply();
+        } else if (msg.entity === 'PersonCategory') {
+          $scope.templatePersonCategory.creating = undefined;
+
+          $scope.personCategories.push(new PersonCategoriesModel(msg.data));
+          $scope.personCategoriesTableParams.reload();
+
+          $scope.$apply();
+        }
+          else if (msg.entity === 'Produktekategorie') {
+          $scope.templateProduktekategorie.creating = undefined;
+
+          $scope.produktekategorien.push(new ProduktekategorienModel(msg.data));
+          $scope.produktekategorienTableParams.reload();
+
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          $scope.templateKundentyp.updating = undefined;
+          $scope.$apply();
+        }
+        else if (msg.entity === 'PersonCategory') {
+          $scope.templatePersonCategory.updating = undefined;
+          $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'CustomKundentyp') {
+          $scope.templateKundentyp.deleting = undefined;
+          $scope.deletingKundentypen[msg.data.id] = undefined;
+          angular.forEach($scope.kundentypen, function(kundentyp) {
+            if (kundentyp.id === msg.data.id) {
+              var index = $scope.kundentypen.indexOf(kundentyp);
+              if (index > -1) {
+                $scope.kundentypen.splice(index, 1);
+              }
+            }
+          });
+
+          $scope.kundentypenTableParams.reload();
+          $scope.$apply();
+        }
+        else if (msg.entity === 'PersonCategory') {
+          $scope.templatePersonCategory.deleting = undefined;
+          $scope.deletingPersonCategories[msg.data.id] = undefined;
+          angular.forEach($scope.personCategories, function(personCategory) {
+            if (personCategory.id === msg.data.id) {
+              var index = $scope.personCategories.indexOf(personCategory);
+              if (index > -1) {
+                $scope.personCategories.splice(index, 1);
+              }
+            }
+          });
+
+          $scope.personCategoriesTableParams.reload();
+          $scope.$apply();
+        }
+          else if (msg.entity === 'Produktekategorie') {
+          $scope.templateProduktekategorie.deleting = undefined;
+          $scope.deletingProduktekategorie[msg.data.id] = undefined;
+          angular.forEach($scope.produktekategorien, function(
+            produktekategorie) {
+            if (produktekategorie.id === msg.data.id) {
+              var index = $scope.produktekategorien.indexOf(
+                produktekategorie);
+              if (index > -1) {
+                $scope.produktekategorien.splice(index, 1);
+              }
+            }
+          });
+
+          $scope.produktekategorienTableParams.reload();
+          $scope.$apply();
+        }
+      });
 
             $scope.switchToEditMode = function() {
                 $scope.editMode = true;
@@ -316,34 +504,54 @@ angular.module('openolitor-admin')
 
                 });
             }
+        });
+      }
 
-            if (!$scope.produktekategorienTableParams) {
-                //use default tableParams
-                $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
-                    page: 1,
-                    count: 1000,
-                    sorting: {
-                        name: 'asc'
-                    }
-                }, {
-                    filterDelay: 0,
-                    groupOptions: {
-                        isExpanded: true
-                    },
-                    getData: function(params) {
-                        if (!$scope.produktekategorien) {
-                            return;
-                        }
-                        // use build-in angular filter
-                        var orderedData = params.sorting ?
-                            $filter('orderBy')($scope.produktekategorien, params.orderBy()) :
-                            $scope.produktekategorien;
+      if (!$scope.personCategoriesTableParams) {
+        //use default tableParams
+        $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
+          page: 1,
+          count: 1000,
+          sorting: {
+            name: 'asc'
+          }
+        }, {
+          filterDelay: 0,
+          groupOptions: {
+            isExpanded: true
+          },
+          getData: function(params) {
+            if (!$scope.personCategories) {
+              return;
+            }
+            // use build-in angular filter
+            var orderedData = params.sorting ?
+              $filter('orderBy')($scope.personCategories, params.orderBy()) :
+              $scope.personCategories;
 
-                        params.total(orderedData.length);
-                        return orderedData;
-                    }
+            params.total(orderedData.length);
+            return orderedData;
+          }
 
-                });
+        });
+      }
+
+      if (!$scope.produktekategorienTableParams) {
+        //use default tableParams
+        $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
+          page: 1,
+          count: 1000,
+          sorting: {
+            name: 'asc'
+          }
+        }, {
+          filterDelay: 0,
+          groupOptions: {
+            isExpanded: true
+          },
+          getData: function(params) {
+            if (!$scope.produktekategorien) {
+              return;
             }
 
             $scope.saveProjekt = function() {
