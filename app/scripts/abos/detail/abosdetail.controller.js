@@ -266,7 +266,7 @@ angular.module('openolitor-admin')
         label: gettext('Speichern'),
         noEntityText: true,
         onExecute: function() {
-          return $scope.abo.$save();
+          return $scope.save();
         }
       }, {
         label: gettext('Löschen'),
@@ -312,11 +312,17 @@ angular.module('openolitor-admin')
       }];
 
       $scope.save = function() {
-        return $scope.abo.$save();
+        if(angular.isUndefined($scope.abo.ende) || $scope.abo.ende === null || $scope.abo.ende === '' || $scope.abo.start <= $scope.abo.ende) {
+          return $scope.abo.$save();
+        } else {
+          alertService.addAlert('error', gettext(
+            'Enddatum muss vor Startdatum liegen'));
+          return '';
+        }
       };
 
       $scope.saveZusatzAbo = function(zusatzAbo) {
-        if(angular.isUndefined(zusatzAbo.ende) || zusatzAbo.ende == null || zusatzAbo.ende === '' || zusatzAbo.start < zusatzAbo.ende) {
+        if(angular.isUndefined(zusatzAbo.ende) || zusatzAbo.ende === null || zusatzAbo.ende === '' || zusatzAbo.start <= zusatzAbo.ende) {
           return zusatzAbo.$save();
         } else {
           alertService.addAlert('error', gettext(
