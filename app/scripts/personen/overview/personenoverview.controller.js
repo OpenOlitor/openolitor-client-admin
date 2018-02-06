@@ -4,8 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext',
-    function($q, $scope, $filter, $location, PersonenOverviewModel, NgTableParams ,PersonCategoriesService, KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext) {
+    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext',
+    function($q, $scope, $filter, $location, PersonenOverviewModel, NgTableParams,
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -17,28 +18,10 @@ angular.module('openolitor-admin')
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {
-              //check if system or custom kundentyp, use only id
+              //check if system or custom personentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
               $scope.kundentypen.push({
-                'id': id,
-                'title': id
-              });
-            });
-            $scope.tableParams.reload();
-          }
-        });
-
-      $scope.personCategories = [];
-      $scope.$watch(PersonCategoriesService.getPersonCategories,
-        function(list) {
-          if (list) {
-            angular.forEach(list, function(item) {
-              //check if system or custom personentyp, use only id
-              var id = (item.name) ? item.name:
-                item;
-                console.log(id)
-              $scope.personCategories.push({
                 'id': id,
                 'title': id
               });
@@ -115,8 +98,7 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: '',
-            personCategories: ''
+            kundentypen: ''
           }
         }, {
           filterDelay: 0,
@@ -133,6 +115,7 @@ angular.module('openolitor-admin')
             if (!$scope.entries) {
               return;
             }
+
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
             // also filter by ngtable filters
