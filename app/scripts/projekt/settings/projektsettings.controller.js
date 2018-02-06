@@ -22,16 +22,24 @@ angular.module('openolitor-admin')
     'WAEHRUNG',
     'Upload',
     'msgBus',
+    'cloneObj',
     'API_URL',
     function($scope, $filter, NgTableParams, KundentypenService,
       KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel,
       ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
-      Upload, msgBus, API_URL
+      Upload, msgBus, cloneObj, API_URL
     ) {
       $scope.templateKundentyp = {};
       $scope.templatePersonCategory = {};
       $scope.templateProduktekategorie = {};
 
+      var defaults = {
+        modelPersonCategory: {
+          id: undefined,
+          name: '',
+          description: ''
+        }
+      };
       // first fake to true to work around bs-switch bug
       $scope.projectResolved = false;
       $scope.editMode = true;
