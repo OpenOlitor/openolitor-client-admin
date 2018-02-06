@@ -215,6 +215,59 @@ angular.module('openolitor-admin')
             }, function(error) {
                 console.log('error', error);
             });
+          });
+          return;
+        }
+        var newModel = new KundentypenModel({
+          id: undefined,
+          kundentyp: $scope.templateKundentyp.kundentyp
+        });
+        newModel.$save();
+        $scope.templateKundentyp.creating = true;
+        $scope.templateKundentyp.kundentyp = undefined;
+      };
+
+
+      $scope.savePersonCategories = function() {
+        if (!$scope.hasChangesPersonCategories()) {
+          return;
+        }
+        $scope.templatePersonCategory.updating = true;
+        angular.forEach($scope.changedPersonCategories, function(personCategory) {
+          personCategory.$save();
+        });
+      };
+
+      $scope.deletingPersonCategory = function(personCategory) {
+        return $scope.deletingPersonCategories[personCategory.personCategory];
+      };
+
+      $scope.deletePersonCategory = function(personCategory) {
+        $scope.deletingPersonCategories[personCategory.personCategory] = true;
+        personCategory.$delete();
+      };
+
+      $scope.addPersonCategory = function() {
+        var newPersonCategory = cloneObj(defaults.modelPersonCategory);
+        $scope.personCategories.push(newPersonCategory);
+        $scope.personCategoriesTableParams.reload();
+        $scope.templatePersonCategory.creating = true;
+      };
+
+      $scope.saveProduktekategorie = function() {
+        if (!$scope.hasChangesProduktekategorien()) {
+          return;
+        }
+        $scope.templateProduktekategorie.updating = true;
+        angular.forEach($scope.changedProduktekategorien, function(
+          produktekategorie) {
+          produktekategorie.$save();
+        });
+      };
+
+      $scope.deletingProduktekategorie = function(produktekategorie) {
+        return $scope.deletingKundentypen[produktekategorie.id];
+      };
 
             KontoDatenService.resolveKontodaten().then(function(kontodaten) {
                 if (kontodaten) {

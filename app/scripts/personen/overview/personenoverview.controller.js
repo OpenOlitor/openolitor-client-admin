@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {
-              //check if system or custom kundentyp, use only id
+              //check if system or custom personentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
               $scope.kundentypen.push({
@@ -136,8 +136,7 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: '',
-            personCategories: ''
+            kundentypen: ''
           }
         }, {
           filterDelay: 0,
@@ -154,6 +153,7 @@ angular.module('openolitor-admin')
             if (!$scope.entries) {
               return;
             }
+
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.entries, $scope.search.query);
             // also filter by ngtable filters
