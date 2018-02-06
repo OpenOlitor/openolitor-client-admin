@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {
-              //check if system or custom personentyp, use only id
+              //check if system or custom kundentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
               $scope.kundentypen.push({
@@ -33,14 +33,15 @@ angular.module('openolitor-admin')
           }
         });
 
-      $scope.personentypen = [];
+      $scope.personCategories = [];
       $scope.$watch(PersonCategoriesService.getPersonCategories,
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {
               //check if system or custom personentyp, use only id
-              var id = (item.personCategory) ? item.personCategory:
+              var id = (item.name) ? item.name:
                 item;
+                console.log(id)
               $scope.personCategories.push({
                 'id': id,
                 'title': id
@@ -138,7 +139,7 @@ angular.module('openolitor-admin')
           },
           filter: {
             kundentypen: '',
-            personentypen: ''
+            personCategories: ''
           }
         }, {
           filterDelay: 0,
