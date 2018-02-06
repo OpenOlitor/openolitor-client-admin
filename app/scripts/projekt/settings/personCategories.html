@@ -8,7 +8,7 @@
               <form name="createPersonCategoryForm" class="navbar-form pull-right">
                 <div class="form-group" ng-class="{ 'has-error' : createPersonCategoryForm.personCategory.$invalid && createPersonCategoryForm.personCategory.$touched }" >
                   <input type="text" name="personCategory" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'personCategory Name...'|translate}}" ng-model="templatePersonCategory.personCategory" required>
-                  <a ng-disabled="createPersonCategoryForm.$invalid || templatePersonCategory.creating" role="button" ng-href="" ng-click="addPersonCategory()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templatePersonCategory.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                  <a ng-disabled=" templatePersonCategory.creating" role="button" ng-href="" ng-click="addPersonCategory()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templatePersonCategory.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
                   <a role="button" ng-click="savePersonCategories()" ng-disabled="templatePersonCategory.updating || !hasChangesPersonCategories()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templatePersonCategory.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
                 </div>
               </form>
@@ -23,7 +23,7 @@
                 <table ng-table="personCategoriesTableParams" class="table table-striped">
                   <tr ng-repeat="personCategory in $data">
                     <td data-title="'Person Kategory'|translate" sortable="'personCategory'">
-                      <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Person Kategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
+                      <input type="text" class="form-control" name="personCategory" ng-model="personCategory." ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Person Kategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
                     </td>
                     <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
                       <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></textarea>
