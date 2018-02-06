@@ -62,8 +62,8 @@
                     {{kundentyp|translate}}
                 </span>
               </td>
-              <td data-title="'PersonCategory'|translate" sortable="'personCategories'" filter="{personentypen: 'select'}" filter-data="personCategories">
-                <span ng-repeat="PersonCategory in person.personCategories" class="badge" ng-if="PersonCategory !== ''">
+              <td data-title="'Person Category'|translate" sortable="'personCategories'" filter="{personCategories:'select'}" filter-data="personCategories">
+                <span ng-repeat="PersonCategory in $scope.personCategories" class="badge" ng-if="PersonCategory !== ''">
                     {{PersonCategory|translate}}
                 </span>
               </td>
