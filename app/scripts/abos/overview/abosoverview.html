@@ -34,8 +34,8 @@
               <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
                 <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
                 <span ng-if="abo.zusatzAboIds.length > 0">
-                  <span ng-repeat="name in abo.zusatzAbotypNames" class="badge">
-                    {{name|translate}}
+                  <span ng-repeat="(name, occ) in abo.zusatzAbotypNames | countOcc " class="badge">
+                    <span ng-if="occ > 1">{{occ}}x </span>{{name|translate}}
                   </span>
                 </span>
               </td>
