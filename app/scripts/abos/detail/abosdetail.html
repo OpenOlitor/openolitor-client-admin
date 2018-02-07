@@ -102,7 +102,7 @@
       </div>
       <div class="row form-group">
         <div class="col-md-4">
-          <label translate>Letzte Lieferung</label>
+          <label translate>Vorige Lieferung</label>
         </div>
         <div class="col-md-4">{{abo.letzteLieferung | date: 'dd.MM.yyyy'}}</div>
         <div class="col-md-4">
@@ -180,8 +180,9 @@
             <div class="col-md-offset-4 col-md-4" translate>
               Guthaben:
             </div>
-            <div class="col-md-2">
-              {{zusatzAbo.guthaben}}
+            <div class="col-md-4">
+              <span ng-class="guthabenClass(zusatzAbo)">{{aboGuthaben(zusatzAbo)}}</span>
+              <span class="fa fa-info-circle" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="guthabenTooltip(zusatzAbo)"></span>
             </div>
           </div>
         <hr>

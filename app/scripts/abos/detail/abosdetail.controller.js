@@ -405,20 +405,20 @@ angular.module('openolitor-admin')
             case VERTRIEBSARTEN.DEPOTLIEFERUNG:
               $scope.abo.depotId = vertriebsart.depot.id;
               $scope.abo.depotName = vertriebsart.depot.name;
-              delete $scope.abo.tourId
-              delete $scope.abo.tourName
+              delete $scope.abo.tourId;
+              delete $scope.abo.tourName;
               break;
             case VERTRIEBSARTEN.HEIMLIEFERUNG:
               $scope.abo.tourId = vertriebsart.tour.id;
               $scope.abo.tourName = vertriebsart.tour.name;
-              delete $scope.abo.depotId
-              delete $scope.abo.depotName
+              delete $scope.abo.depotId;
+              delete $scope.abo.depotName;
               break;
             case VERTRIEBSARTEN.POSTLIEFERUNG:
-              delete $scope.abo.tourId
-              delete $scope.abo.tourName
-              delete $scope.abo.depotId
-              delete $scope.abo.depotName
+              delete $scope.abo.tourId;
+              delete $scope.abo.tourName;
+              delete $scope.abo.depotId;
+              delete $scope.abo.depotName;
               break;
           }
         }
@@ -437,11 +437,10 @@ angular.module('openolitor-admin')
           vertrag = '<b>' + gettext('Vertraglich') + ':</b> ' + abo.guthabenVertraglich +
             '<br />';
         }
-        return '<b>' + gettext('Aktuell') + ':</b> ' + abo.guthaben + ' ' +
-          gettext('bezahlt') + ' + ' + abo.guthabenInRechnung +
-          ' ' + gettext('verrechnet') + ' = ' + $scope.aboGuthaben(abo) +
-          ' ' +
-          gettext('total');
+        return '<b>' + gettext('Aktuell') + ':</b> <br />' + abo.guthaben + ' ' +
+          gettext('bezahlt') + ' <br />+ ' + abo.guthabenInRechnung +
+          ' ' + gettext('verrechnet') + ' <br />= ' + $scope.aboGuthaben(abo) +
+          ' ' + gettext('total');
       };
 
       $scope.vertriebsart = function() {
