@@ -551,6 +551,23 @@ angular
       return filtered;
     };
   })
+  .filter('countOcc', function() {
+    return function(items) {
+      var filtered = {};
+      if (!items) {
+        return filtered;
+      }
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if(!angular.isUndefined(filtered[item])) {
+          filtered[item] = filtered[item] + 1;
+        } else {
+          filtered[item] = 1;
+        }
+      }
+      return filtered;
+    };
+  })
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {

@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -223,5 +223,16 @@ angular.module('openolitor-admin')
           .query);
         search();
       }, true);
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity.indexOf('Abo') >= 0) {
+          $scope.entries.map(function(entry) {
+            if(entry.id === msg.data.id) {
+              angular.copy(msg.data, entry);
+            }
+          });
+          $scope.$apply();
+        }
+      });
     }
   ]);
