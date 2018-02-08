@@ -23,13 +23,13 @@
                                     <span ng-show="produktekategorie.editable">
                                         <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></input>
                                 </td>
-                                <td><div ng-hide="produktekategorie.editable || editing" class="pull-right">
+                                <td><div ng-hide="editingProduktekategorieBool" class="pull-right">
                                         <a role="button" class="btn btn-sm btn-primary" ng-click="editProduktekategorie(produktekategorie)">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                         <oo-delete-button model="produktekategorie" entity="Produktekategorie" on-delete="deleteProduktekategorie" condensed="true" confirm="true"></oo-delete-button> 
                                     </div> 
-                                    <div ng-show="produktekategorie.editable" class="pull-right btn-group"> 
+                                    <div ng-show="produktekategorie.editable" class="pull-right"> 
                                         <oo-save-button model="produktekategorie" entity="Produktekategorie" on-save="saveProduktekategorie" condensed="true"></oo-save-button>
                                         <a role="button" class="btn btn-sm btn-default" ng-click="cancelProduktekategorie(produktekategorie)">
                                             <span class="glyphicon glyphicon-stop"></span>

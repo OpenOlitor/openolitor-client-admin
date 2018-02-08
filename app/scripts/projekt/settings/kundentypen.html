@@ -31,17 +31,17 @@
                             <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
                                 {{kundentyp.anzahlVerknuepfungen}}
                             </td>
-                            <td><div ng-hide="kundentyp.editable || editing" class="pull-right">
+                            <td><div ng-hide="editingKundentypBool" class="pull-right">
                                     <a role="button" class="btn btn-sm btn-primary" ng-click="editKundentyp(kundentyp)">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     <oo-delete-button model="kundentyp" entity="Kundentyp" on-delete="deleteKundentyp" condensed="true" confirm="true"></oo-delete-button> 
                                 </div> 
-                                <div ng-show="kundentyp.editable" class="pull-right btn-group"> 
-                                    <oo-save-button model="kundentyp" entity="Kundentyp" on-save="saveKundentyp" condensed="true"></oo-save-button>
+                                <div ng-show="kundentyp.editable" class="pull-right"> 
                                     <a role="button" class="btn btn-sm btn-default" ng-click="cancelKundentyp(kundentyp)">
                                         <span class="glyphicon glyphicon-stop"></span>
                                     </a>
+                                    <oo-save-button model="kundentyp" entity="Kundentyp" on-save="saveKundentyp" condensed="true"></oo-save-button>
                                 </div>
                             </td>
                         </tr>
