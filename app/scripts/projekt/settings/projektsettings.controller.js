@@ -35,9 +35,9 @@ angular.module('openolitor-admin')
 
       var defaults = {
         modelPersonCategory: {
-          id: undefined,
           name: '',
-          description: ''
+          description: '', 
+          editable:true
         }
       };
       // first fake to true to work around bs-switch bug
