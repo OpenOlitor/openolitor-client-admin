@@ -1,40 +1,47 @@
 <div class="row">
-  <div class="content content-box col-md-12">
-    <div oo-error-overlay></div>
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title"><span class="navbar-brand" translate>Produktekategorien</span>
-              <form name="createProduktekategorieForm" class="navbar-form pull-right">
-                <div class="form-group" ng-class="{ 'has-error' : createProduktekategorieForm.produktekategorie.$invalid && createProduktekategorieForm.produktekategorie.$touched }" >
-                  <input type="text" name="produktekategorie" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Produktekategorie Name...'|translate}}" ng-model="templateProduktekategorie.produktekategorie" required>
-                  <a ng-disabled="createProduktekategorieForm.$invalid || templateProduktekategorie.creating" role="button" ng-href="" ng-click="addProduktekategorie()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateProduktekategorie.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                  <a role="button" ng-click="saveProduktekategorie()" ng-disabled="settingsForm.$invalid || templateProduktekategorie.updating || !hasChangesProduktekategorien()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateProduktekategorie.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+    <div class="content content-box col-md-12">
+        <div oo-error-overlay></div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title"><span class="navbar-brand" translate>Produktekategorien</span>
+                        <form name="createProduktekategorieForm" class="navbar-form pull-right">
+                            <div class="form-group">
+                                <a role="button" ng-click="addProduktekategorie()" ng-disabled="editingProduktekategorieBool" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Produktekategorie erstellen</span></a>
+                            </div>
+                        </form>
+                    </h3>
                 </div>
-              </form>
-            </h3>
-          </div>
-          <div class="panel-body">
-            <form name="settingsForm">
-              <div ng-hide="produktekategorien">
-                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-              </div>
-              <div ng-show="produktekategorien" class="horizontal-scroll">
-                <table ng-table="produktekategorienTableParams" class="table table-striped">
-                  <tr ng-repeat="produktekategorie in $data">
-                    <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
-                      <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedProduktekategorie(produktekategorie)"></input>
-                    </td>
-                    <td>
-                      <a href="" ng-click="deleteProduktekategorie(produktekategorie)" ng-hide="deletingProduktekategorie(produktekategorie)"><i class="fa fa-times"></i></a>
-                       <i ng-show="deletingProduktekategorie(produktekategorie)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </form>
-          </div>
+                <div class="panel-body">
+                    <div ng-hide="produktekategorien">
+                        <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+                    </div>
+                    <div ng-show="produktekategorien" class="horizontal-scroll">
+                        <table ng-table="produktekategorienTableParams" class="table table-striped">
+                            <tr ng-repeat="produktekategorie in $data">
+                                <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
+                                    <span ng-hide="produktekategorie.editable">{{produktekategorie.beschreibung}}</span>
+                                    <span ng-show="produktekategorie.editable">
+                                        <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></input>
+                                </td>
+                                <td><div ng-hide="produktekategorie.editable || editing" class="pull-right">
+                                        <a role="button" class="btn btn-sm btn-primary" ng-click="editProduktekategorie(produktekategorie)">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                        <oo-delete-button model="produktekategorie" entity="Produktekategorie" on-delete="deleteProduktekategorie" condensed="true" confirm="true"></oo-delete-button> 
+                                    </div> 
+                                    <div ng-show="produktekategorie.editable" class="pull-right btn-group"> 
+                                        <oo-save-button model="produktekategorie" entity="Produktekategorie" on-save="saveProduktekategorie" condensed="true"></oo-save-button>
+                                        <a role="button" class="btn btn-sm btn-default" ng-click="cancelProduktekategorie(produktekategorie)">
+                                            <span class="glyphicon glyphicon-stop"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
 </div>

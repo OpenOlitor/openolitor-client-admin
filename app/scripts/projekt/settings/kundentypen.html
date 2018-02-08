@@ -1,46 +1,53 @@
 <div class="row">
-  <div class="content content-box col-md-12">
-    <div oo-error-overlay></div>
-      <div class="col-md-12">
+    <div class="content content-box col-md-12">
+        <div oo-error-overlay></div>
         <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title"><span class="navbar-brand" translate>Kundentypen</span>
-              <form name="createKundentypForm" class="navbar-form pull-right">
-                <div class="form-group" ng-class="{ 'has-error' : createKundentypForm.kundentyp.$invalid && createKundentypForm.kundentyp.$touched }" >
-                  <input type="text" name="kundentyp" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Kundentyp Name...'|translate}}" ng-model="templateKundentyp.kundentyp" required>
-                  <a ng-disabled="createKundentypForm.$invalid || templateKundentyp.creating" role="button" ng-href="" ng-click="addKundentyp()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templateKundentyp.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                  <a role="button" ng-click="saveKundentypen()" ng-disabled="templateKundentyp.updating || !hasChangesKundentypen()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templateKundentyp.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title"><span class="navbar-brand" translate>Kundentypen</span>
+                    <form name="createKundentypForm" class="navbar-form pull-right">
+                        <div class="form-group">
+                            <a role="button" ng-click="addKundentyp()" ng-disabled="editingKundentypBool" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Kundentyp erstellen</span></a>
+                        </div>
+                    </form>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div ng-hide="kundentypen">
+                    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
                 </div>
-              </form>
-            </h3>
-          </div>
-          <div class="panel-body">
-            <form name="settingsForm">
-              <div ng-hide="kundentypen">
-                <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
-              </div>
-              <div ng-show="kundentypen" class="horizontal-scroll">
-                <table ng-table="kundentypenTableParams" class="table table-striped">
-                  <tr ng-repeat="kundentyp in $data">
-                    <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">
-                      <input type="text" class="form-control" name="beschreibung" ng-model="kundentyp.kundentyp" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Kundentyp'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></input>
-                    </td>
-                    <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
-                      <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></textarea>
-                    </td>
-                    <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
-                      {{kundentyp.anzahlVerknuepfungen}}
-                    </td>
-                    <td>
-                      <a href="" ng-click="deleteKundentyp(kundentyp)" ng-hide="deletingKundentyp(kundentyp)"><i class="fa fa-times"></i></a>
-                       <i ng-show="deletingKundentyp(kundentyp)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </form>
-          </div>
+                <div ng-show="kundentypen" class="horizontal-scroll">
+                    <table ng-table="kundentypenTableParams" class="table table-striped"  template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+                        <tr ng-repeat="kundentyp in $data ">
+                            <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">
+                                <span ng-hide="kundentyp.editable">{{kundentyp.kundentyp}}</span>
+                                <span ng-show="kundentyp.editable">
+                                    <input type="text" class="form-control" name="kundentyp" ng-model="kundentyp.kundentyp" placeholder="{{'Kundentyp'|translate}}..."></input>
+                            </td>
+                            <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
+                                <span ng-hide="kundentyp.editable">{{kundentyp.beschreibung}}</span>
+                                <span ng-show="kundentyp.editable">
+                                    <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                            </td>
+                            <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
+                                {{kundentyp.anzahlVerknuepfungen}}
+                            </td>
+                            <td><div ng-hide="kundentyp.editable || editing" class="pull-right">
+                                    <a role="button" class="btn btn-sm btn-primary" ng-click="editKundentyp(kundentyp)">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <oo-delete-button model="kundentyp" entity="Kundentyp" on-delete="deleteKundentyp" condensed="true" confirm="true"></oo-delete-button> 
+                                </div> 
+                                <div ng-show="kundentyp.editable" class="pull-right btn-group"> 
+                                    <oo-save-button model="kundentyp" entity="Kundentyp" on-save="saveKundentyp" condensed="true"></oo-save-button>
+                                    <a role="button" class="btn btn-sm btn-default" ng-click="cancelKundentyp(kundentyp)">
+                                        <span class="glyphicon glyphicon-stop"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
 </div>
