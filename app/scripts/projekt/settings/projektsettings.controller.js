@@ -35,9 +35,9 @@ angular.module('openolitor-admin')
 
       var defaults = {
         modelPersonCategory: {
-          id: undefined,
           name: '',
-          description: ''
+          description: '', 
+          editable:true
         }
       };
       // first fake to true to work around bs-switch bug
@@ -205,12 +205,15 @@ angular.module('openolitor-admin')
             });
 
       $scope.savePersonCategories = function() {
-        if (!$scope.hasChangesPersonCategories()) {
-          return;
-        }
-        $scope.templatePersonCategory.updating = true;
+        $scope.templatePersonCategory.creating = false;
         angular.forEach($scope.changedPersonCategories, function(personCategory) {
-          personCategory.$save();
+             var newPersonCategory = {
+                name: personCategory.name,
+                description: personCategory.description 
+        };
+        $scope.personCategory = new PersonCategoriesModel(newPersonCategory)
+       
+              $scope.personCategory.$save();
         });
       };
 
@@ -224,10 +227,13 @@ angular.module('openolitor-admin')
       };
 
       $scope.addPersonCategory = function() {
-        var newPersonCategory = cloneObj(defaults.modelPersonCategory);
-        $scope.personCategories.push(newPersonCategory);
-        $scope.personCategoriesTableParams.reload();
         $scope.templatePersonCategory.creating = true;
+        $scope.personCategory = cloneObj(defaults.modelPersonCategory);
+        
+          console.log("$scope.personCategories ");
+        console.log($scope.personCategories);
+        $scope.personCategories.push($scope.personCategory);
+        $scope.personCategoriesTableParams.reload();
       };
 
       $scope.saveProduktekategorie = function() {
