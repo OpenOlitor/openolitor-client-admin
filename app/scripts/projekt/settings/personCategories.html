@@ -6,26 +6,28 @@
           <div class="panel-heading clearfix">
             <h3 class="panel-title"><span class="navbar-brand" translate>PersonenKategorien</span>
               <form name="createPersonCategoryForm" class="navbar-form pull-right">
-                <div class="form-group" ng-class="{ 'has-error' : createPersonCategoryForm.personCategory.$invalid && createPersonCategoryForm.personCategory.$touched }" >
-                  <input type="text" name="personCategory" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'personCategory Name...'|translate}}" ng-model="templatePersonCategory.personCategory" required>
-                  <a ng-disabled=" templatePersonCategory.creating" role="button" ng-href="" ng-click="addPersonCategory()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="templatePersonCategory.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
-                  <a role="button" ng-click="savePersonCategories()" ng-disabled="templatePersonCategory.updating || !hasChangesPersonCategories()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span> <i ng-show="templatePersonCategory.updating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+                <div class="form-group">
+                  <a ng-disabled=" templatePersonCategory.creating" role="button" ng-click="addPersonCategory()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span></a>
+                  <a role="button" ng-click="savePersonCategories()" class="btn btn-primary"><i class="fa fa-floppy-o"></i> <span translate>Speichern</span></a>
                 </div>
               </form>
             </h3>
           </div>
           <div class="panel-body">
-            <form name="settingsForm">
               <div ng-hide="personCategories">
                 <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
               </div>
               <div ng-show="personCategories" class="horizontal-scroll">
                 <table ng-table="personCategoriesTableParams" class="table table-striped">
                   <tr ng-repeat="personCategory in $data">
-                    <td data-title="'Person Kategory'|translate" sortable="'personCategory'">
-                      <input type="text" class="form-control" name="personCategory" ng-model="personCategory." ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Person Kategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
+                      <td data-title="'PersonenKategory'|translate" sortable="'name'" ng-class="[{'col-md-3': personCategory.editable}]">
+                        <span ng-hide="personCategory.editable">{{personCategory.name}}</span>
+                        <span ng-show="personCategory.editable">
+                      <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'PersonKategory'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></input>
                     </td>
                     <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
+                        <span ng-hide="personCategory.editable">{{personCategory.description}}</span>
+                        <span ng-show="personCategory.editable">
                       <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedPersonCategory(personCategory)"></textarea>
                     </td>
                     <td>
@@ -35,7 +37,6 @@
                   </tr>
                 </table>
               </div>
-            </form>
           </div>
         </div>
       </div>
