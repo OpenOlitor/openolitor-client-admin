@@ -277,7 +277,7 @@ angular.module('openolitor-admin')
             };
 
             //functions to save, cancel, modify or delete the kundentypen
-            
+
             $scope.saveKundentyp = function(kundentyp) {
                 kundentyp.editable = false;
                 $scope.editingKundentypBool = false;
@@ -332,7 +332,7 @@ angular.module('openolitor-admin')
             };
 
             //functions to save, cancel, modify or delete the produkteKategorie 
-            
+
             $scope.saveProduktekategorie = function(produktekategorie) {
                 produktekategorie.editable = false;
                 $scope.editingProduktekategorieBool = false;
@@ -385,6 +385,62 @@ angular.module('openolitor-admin')
                     $scope.produktekategorienTableParams.reload();
                 }
             };
+
+            //functions to save, cancel, modify or delete the PersonCategory 
+
+            $scope.savePersonCategory = function(personCategory) {
+                personCategory.editable = false;
+                $scope.editingPersonCategoryBool = false;
+                $scope.personCategory = new PersonCategoriesModel(personCategory);
+                return $scope.personCategory.$save();
+            };
+
+            $scope.cancelPersonCategory = function(personCategory) {
+                if(personCategory.isNew) {
+                    var personCategoryIndex = $scope.personCategories.indexOf(personCategory);
+                    $scope.personCategories.splice(personCategoryIndex, 1);
+                }
+                if($scope.originalPersonCategory) {
+                    var isPersonCategoryById = function (element) {
+                        return personCategory.id === element.id;
+                    };
+                    var originalPersonCategoryIndex = $scope.personCategories.findIndex(isPersonCategoryById);
+                    if(originalPersonCategoryIndex >= 0) {
+                        $scope.personCategories[originalPersonCategoryIndex] = $scope.originalPersonCategory;
+                    }
+                    $scope.originalPersonCategory = undefined;
+                }
+                personCategory.editable = false;
+                $scope.editingPersonCategoryBool = false;
+                $scope.personCategoriesTableParams.reload();
+            };
+
+            $scope.editPersonCategory = function(personCategory) {
+                $scope.originalPersonCategory = cloneObj(personCategory);
+                personCategory.editable = true;
+                $scope.editingPersonCategoryBool = true;
+            };
+
+            $scope.deletePersonCategory = function(personCategory) {
+                personCategory.editable = false;
+                $scope.personCategory = new PersonCategoriesModel(personCategory);
+                return $scope.personCategory.$delete();
+            };
+
+            $scope.addPersonCategory = function() {
+                if(!$scope.editingPersonCategoryBool) {
+                    if(angular.isUndefined($scope.personCategories)) {
+                        $scope.personCategories = [];
+                    }
+                    $scope.editingPersonCategoryBool = true;
+                    var newPersonCategory = cloneObj(defaults.modelPersonCategory);
+                    $scope.editingPersonCategory = newPersonCategory;
+                    $scope.editingPersonCategory.isNew = true;
+                    $scope.personCategories.unshift(newPersonCategory);
+                    $scope.personCategoriesTableParams.reload();
+                }
+            };
+
 
             if (!$scope.kundentypenTableParams) {
                 //use default tableParams
@@ -462,6 +518,35 @@ angular.module('openolitor-admin')
           getData: function(params) {
             if (!$scope.produktekategorien) {
               return;
+            }
+
+            if (!$scope.personCategoriesTableParams) {
+                //use default tableParams
+                $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
+                    page: 1,
+                    count: 1000,
+                    sorting: {
+                        name: 'asc'
+                    }
+                }, {
+                    filterDelay: 0,
+                    groupOptions: {
+                        isExpanded: true
+                    },
+                    getData: function(params) {
+                        if (!$scope.personCategories) {
+                            return;
+                        }
+                        // use build-in angular filter
+                        var orderedData = params.sorting ?
+                            $filter('orderBy')($scope.personCategories, params.orderBy()) :
+                            $scope.personCategories;
+
+                        params.total(orderedData.length);
+                        return orderedData;
+                    }
+
+                });
             }
 
             $scope.saveProjekt = function() {

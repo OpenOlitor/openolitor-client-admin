@@ -21,20 +21,24 @@
                             <td data-title="'PersonenKategorie'|translate" sortable="'name'" ng-class="[{'col-md-3': personCategory.editable}]">
                                 <span ng-hide="personCategory.editable">{{personCategory.name}}</span>
                                 <span ng-show="personCategory.editable">
-                                    <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'PersonKategorie'|translate}}..."></input> </td>
+                                    <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'PersonKategorie'|translate}}..."></input>
+                            </td>
                             <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
-                                <span ng-hide="personCategory.editable">{{personCategory.description}}</span> <span ng-show="personCategory.editable">
+                                <span ng-hide="personCategory.editable">{{personCategory.description}}</span>
+                                <span ng-show="personCategory.editable">
                                     <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."></textarea>
                             </td>
-                            <td><div ng-hide="editingPersonCategoryBool" class="pull-right"> <a role="button" class="btn btn-sm btn-primary" ng-click="editPersonCategory(personCategory)"> <span class="glyphicon glyphicon-edit"></span>
+                            <td><div ng-hide="editingPersonCategoryBool" class="pull-right">
+                                    <a role="button" class="btn btn-sm btn-primary" ng-click="editPersonCategory(personCategory)">
+                                        <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     <oo-delete-button model="personCategory" entity="PersonCategory" on-delete="deletePersonCategory" condensed="true" confirm="true"></oo-delete-button> 
                                 </div> 
                                 <div ng-show="personCategory.editable" class="pull-right"> 
                                     <oo-save-button model="personCategory" entity="PersonCategory" on-save="savePersonCategory" condensed="true"></oo-save-button>
-                                                            <a role="button" class="btn btn-sm btn-default" ng-click="cancelPersonCategory(personCategory)">
-                                                                <span class="glyphicon glyphicon-stop"></span>
-                                                            </a>
+                                    <a role="button" class="btn btn-sm btn-default" ng-click="cancelPersonCategory(personCategory)">
+                                        <span class="glyphicon glyphicon-stop"></span>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
