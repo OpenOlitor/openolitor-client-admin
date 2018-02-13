@@ -262,6 +262,32 @@ angular.module('openolitor-admin')
         });
       }
 
+      $scope.zusatzAboActions = [{
+        label: gettext('Speichern'),
+        noEntityText: true,
+        onExecute: function(zusatzabo) {
+          return zusatzabo.$save();
+        }
+      }, {
+        label: gettext('Löschen'),
+        iconClass: 'glyphicon glyphicon-remove',
+        noEntityText: true,
+        isDisabled: function(zusatzabo) {
+          return !angular.isUndefined(zusatzabo) && !angular.isUndefined(zusatzabo.anzahlLieferungen) && zusatzabo.anzahlLieferungen.length > 0;
+        },
+        onExecute: function(zusatzabo) {
+          return zusatzabo.$delete();
+        }
+      },{
+        label: gettext('Rechnungsposition manuell erstellen'),
+        noEntityText: true,
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function(zusatzabo) {
+          return $q.when($location.path('kunden/' + getKundeId() +
+            '/abos/' + zusatzabo.id + '/rechnungen/new'));
+        }
+      }];
+
       $scope.actions = [{
         label: gettext('Speichern'),
         noEntityText: true,
@@ -302,7 +328,7 @@ angular.module('openolitor-admin')
               2);
         }
       }, {
-        label: gettext('Manuelle Rechnung erstellen'),
+        label: gettext('Rechnungsposition manuell erstellen'),
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {

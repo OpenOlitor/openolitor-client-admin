@@ -6,6 +6,7 @@
           <div class="col-md-5">
             <ul class="nav navbar-nav">
               <script type="text/ng-template" id="anzahlOverallTooltipTemplate.html">
+                <span translate>Summe jeweils ohne Zusatzabos!</span><br />
                 <span translate>Total Anzahl Körbe zu liefern:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.WIRDGELIEFERT)"><b>{{anzahlKoerbeZuLiefern}}</b></a><br />
                 <span translate>Total Anzahl Abwesenheiten:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a><br />
                 <span translate>Total Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a>
@@ -73,6 +74,7 @@
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
         <div  ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" >
           <span translate>Anzahl Zusatzabos zu liefern:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+          <span translate>Anzahl Abwesenheiten:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
           <span translate>Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
         </div>
         <div  ng-if="abotypLieferung.abotyp.typ === 'Abotyp'" >
