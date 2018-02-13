@@ -7,6 +7,7 @@ angular.module('openolitor-admin')
         'NgTableParams',
         'KundentypenService',
         'KundentypenModel',
+        'PersonCategoriesService',
         'PersonCategoriesModel',
         'ProduktekategorienService',
         'ProduktekategorienModel',
@@ -24,7 +25,7 @@ angular.module('openolitor-admin')
         'cloneObj',
         'API_URL',
         function($scope, $filter, NgTableParams, KundentypenService,
-            KundentypenModel, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel,
+            KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel,
             ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
             Upload, msgBus, cloneObj, API_URL
         ) {
@@ -48,7 +49,7 @@ angular.module('openolitor-admin')
                 },
                 modelPersonCategory: {
                     name: '', 
-                    beschreibung: '', 
+                    description: '', 
                     editable:true
                 }
             };
@@ -92,6 +93,19 @@ angular.module('openolitor-admin')
                     }
                 });
 
+            //watch for set of personCategories
+            $scope.$watch(PersonCategoriesService.getPersonCategories,
+                function(list) {
+                    if (list) {
+                        $scope.personCategories = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.personCategories.push(item);
+                            }
+                        });
+                        $scope.personCategoriesTableParams.reload();
+                    }
+                });
 
             ProjektService.resolveProjekt().then(function(projekt) {
                 if (projekt) {
