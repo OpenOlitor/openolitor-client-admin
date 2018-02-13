@@ -14,6 +14,7 @@ angular.module('openolitor-admin')
       $scope.model = {};
 
       $scope.kundentypen = [];
+      $scope.personCategories = [];
       $scope.$watch(KundentypenService.getKundentypen,
 
 
@@ -31,6 +32,22 @@ angular.module('openolitor-admin')
             $scope.tableParams.reload();
           }
         });
+
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var personCategory = (item.personCategory) ? item.personCategory:
+                item;
+              $scope.personCategories.push({
+                'id': personCategory.name,
+                'title': personCategory.name
+              });
+            });
+            $scope.tableParams.reload();
+          }
+      });
 
       $scope.search = {
         query: '',
@@ -118,9 +135,6 @@ angular.module('openolitor-admin')
           sorting: {
             name: 'asc'
           },
-          filter: {
-            kundentypen: ''
-          }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -136,9 +150,8 @@ angular.module('openolitor-admin')
             if (!$scope.entries) {
               return;
             }
-
             // use build-in angular filter
-            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
+            var dataSet = $filter('filter')($scope.entries, $scope.search.query);
             // also filter by ngtable filters
             dataSet = $filter('filter')(dataSet, params.filter(true));
             dataSet = params.sorting ?

@@ -156,7 +156,6 @@ angular.module('openolitor-admin')
             produktekategorie;
         }
       };
-
       $scope.hasChangesProduktekategorien = function() {
         return Object.getOwnPropertyNames($scope.changedProduktekategorien)
           .length > 0;
@@ -190,6 +189,19 @@ angular.module('openolitor-admin')
                     }
                 });
 
+            //watch for set of personCategories
+            $scope.$watch(PersonCategoriesService.getPersonCategories,
+                function(list) {
+                    if (list) {
+                        $scope.personCategories = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.personCategories.push(item);
+                            }
+                        });
+                        $scope.personCategoriesTableParams.reload();
+                    }
+                });
 
             ProjektService.resolveProjekt().then(function(projekt) {
                 if (projekt) {
