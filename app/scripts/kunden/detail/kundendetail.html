@@ -97,7 +97,7 @@
                   <label for="emailAlternative" translate>E-Mail alt.</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="email" class="form-control" name="emailAlternativePerson" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
+              <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -116,8 +116,16 @@
                   <input type="text" class="form-control" name="telefonFestnetzPerson" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
                 </div>
               </div>
+              <div class="row form-group">
+                  <div class="col-md-4">
+                      <label for="personCategory" translate>PersonKategorie</label>
+                  </div>
+              <div class="col-lg-6 col-md-5">
+                <oo-person-categories person-categories-list="person.categories"></oo-person-categories>
+              </div>
+              </div>
               <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
-                <div class="col-md-4">
+                  <div class="col-md-4">
                   <label for="bemerkungen" translate>Bemerkungen</label>
                 </div>
                 <div class="col-md-8">

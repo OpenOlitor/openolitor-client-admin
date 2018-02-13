@@ -224,31 +224,6 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.switchToEditMode = function() {
-        $scope.editMode = true;
-      };
-
-      $scope.changedKundentypen = {};
-      $scope.deletingKundentypen = {};
-      $scope.changedProduktekategorien = {};
-      $scope.deletingProduktekategorien = {};
-      $scope.modelChangedKundentyp = function(kundentyp) {
-        if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
-          $scope.changedKundentypen[kundentyp.id] = kundentyp;
-        }
-      };
-      $scope.hasChangesKundentypen = function() {
-        return Object.getOwnPropertyNames($scope.changedKundentypen).length >
-          0;
-      };
-
-      $scope.modelChangedProduktekategorie = function(produktekategorie) {
-        if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
-          $scope.changedProduktekategorien[produktekategorie.id] =
-            produktekategorie;
-        }
-      };
-
       $scope.hasChangesProduktekategorien = function() {
         return Object.getOwnPropertyNames($scope.changedProduktekategorien)
           .length > 0;
@@ -282,6 +257,19 @@ angular.module('openolitor-admin')
           }
         });
 
+            //watch for set of personCategories
+            $scope.$watch(PersonCategoriesService.getPersonCategories,
+                function(list) {
+                    if (list) {
+                        $scope.personCategories = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.personCategories.push(item);
+                            }
+                        });
+                        $scope.personCategoriesTableParams.reload();
+                    }
+                });
 
       ProjektService.resolveProjekt().then(function(projekt) {
         if (projekt) {
