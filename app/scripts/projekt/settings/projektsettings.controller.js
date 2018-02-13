@@ -3,159 +3,59 @@
 /**
 */
 angular.module('openolitor-admin')
-  .controller('ProjektSettingsController', ['$scope', '$filter',
-    'NgTableParams',
-    'KundentypenService',
-    'KundentypenModel',
-    'PersonCategoriesService',
-    'PersonCategoriesModel',
-    'ProduktekategorienService',
-    'ProduktekategorienModel',
-    'ProjektService',
-    'ProjektModel',
-    'OpenProjektModel',
-    'KontoDatenService',
-    'KontoDatenModel',    
-    'EnumUtil',
-    'FileSaver',
-    'MONATE',
-    'WAEHRUNG',
-    'Upload',
-    'msgBus',
-    'cloneObj',
-    'API_URL',
-    function($scope, $filter, NgTableParams, KundentypenService,
-      KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel,
-      ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
-      Upload, msgBus, cloneObj, API_URL
-    ) {
-      $scope.templateKundentyp = {};
-      $scope.templatePersonCategory = {};
-      $scope.templateProduktekategorie = {};
+    .controller('ProjektSettingsController', ['$scope', '$filter',
+        'NgTableParams',
+        'KundentypenService',
+        'KundentypenModel',
+        'PersonCategoriesService',
+        'PersonCategoriesModel',
+        'ProduktekategorienService',
+        'ProduktekategorienModel',
+        'ProjektService',
+        'ProjektModel',
+        'OpenProjektModel',
+        'KontoDatenService',
+        'KontoDatenModel',    
+        'EnumUtil',
+        'FileSaver',
+        'MONATE',
+        'WAEHRUNG',
+        'Upload',
+        'msgBus',
+        'cloneObj',
+        'API_URL',
+        function($scope, $filter, NgTableParams, KundentypenService,
+            KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel,
+            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
+            Upload, msgBus, cloneObj, API_URL
+        ) {
+            $scope.editingKundentypBool = false;
+            $scope.editingProduktekategorieBool = false;
+            $scope.editingPersonCategoriesBool = false;
 
-      var defaults = {
-        modelPersonCategory: {
-          name: '',
-          description: '', 
-          editable:true
-        }
-      };
-      // first fake to true to work around bs-switch bug
-      $scope.projectResolved = false;
-      $scope.editMode = true;
+            // first fake to true to work around bs-switch bug
+            $scope.projectResolved = false;
+            $scope.editMode = true;
 
-      $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+            var defaults = {
+                modelKundentyp: {
+                    kundentyp: '',
+                    beschreibung: '', 
+                    editable:true
+                },
+                modelProduktekategorie: {
+                    beschreibung: '', 
+                    editable:true
+                },
+                modelPersonCategory: {
+                    name: '', 
+                    description: '', 
+                    editable:true
+                }
+            };
 
-      $scope.monate = EnumUtil.asArray(MONATE);
+            $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
-      $scope.tage = [];
-      for (var i = 1; i <= 31; i++) {
-        $scope.tage.push({
-          id: i
-        });
-      }
-
-      //watch for set of kundentypen
-      $scope.$watch(KundentypenService.getKundentypen,
-        function(list) {
-          if (list) {
-            $scope.kundentypen = [];
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.kundentypen.push(item);
-              }
-            });
-            $scope.kundentypenTableParams.reload();
-          }
-        });
-
-      //watch for set of PersonCategory
-      $scope.$watch(PersonCategoriesService.getPersonCategories,
-        function(list) {
-          if (list) {
-            $scope.personCategories = [];
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.personCategories.push(item);
-              }
-            });
-            $scope.personCategoriesTableParams.reload();
-          }
-        });
-
-      //watch for set of produktekategorien
-      $scope.$watch(ProduktekategorienService.getProduktekategorien,
-        function(list) {
-          if (list) {
-            $scope.produktekategorien = [];
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.produktekategorien.push(item);
-              }
-            });
-            $scope.produktekategorienTableParams.reload();
-          }
-        });
-
-
-      ProjektService.resolveProjekt().then(function(projekt) {
-        if (projekt) {
-          $scope.projekt = projekt;
-          $scope.logoUrl = $scope.generateLogoUrl();
-          $scope.editMode = false;
-        } else {
-          $scope.editMode = true;
-        }
-        $scope.projectResolved = true;
-      }, function(error) {
-        console.log('error', error);
-      });
-
-      KontoDatenService.resolveKontodaten().then(function(kontodaten) {
-        if (kontodaten) {
-          $scope.kontodaten = kontodaten;
-        }
-      }, function(error) {
-        console.log('error', error);
-      });
-
-      $scope.switchToEditMode = function() {
-        $scope.editMode = true;
-      };
-
-      $scope.changedKundentypen = {};
-      $scope.deletingKundentypen = {};
-      $scope.changedProduktekategorien = {};
-      $scope.deletingProduktekategorien = {};
-      $scope.modelChangedKundentyp = function(kundentyp) {
-        if (!(kundentyp.kundentyp in $scope.changedKundentypen)) {
-          $scope.changedKundentypen[kundentyp.id] = kundentyp;
-        }
-      };
-      $scope.hasChangesKundentypen = function() {
-        return Object.getOwnPropertyNames($scope.changedKundentypen).length >
-          0;
-      };
-
-      $scope.changedPersonCategories = {};
-      $scope.deletingPersonCategories = {};
-      $scope.changedProduktekategorien = {};
-      $scope.deletingProduktekategorien = {};
-      $scope.modelChangedPersonCategory = function(personCategory) {
-        if (!(personCategory.personCategory in $scope.changedPersonCategories)) {
-          $scope.changedPersonCategories[personCategory.id] = personCategory;
-        }
-      };
-      $scope.hasChangesPersonCategories = function() {
-        return Object.getOwnPropertyNames($scope.changedPersonCategories).length >
-          0;
-      };
-      $scope.modelChangedProduktekategorie = function(produktekategorie) {
-        if (!(produktekategorie.produktekategorie in $scope.changedProduktekategorien)) {
-          $scope.changedProduktekategorien[produktekategorie.id] =
-            produktekategorie;
-        }
-      };
       $scope.hasChangesProduktekategorien = function() {
         return Object.getOwnPropertyNames($scope.changedProduktekategorien)
           .length > 0;

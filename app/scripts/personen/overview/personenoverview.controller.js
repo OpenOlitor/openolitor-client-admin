@@ -40,7 +40,6 @@ angular.module('openolitor-admin')
               //check if system or custom personentyp, use only id
               var personCategory = (item.personCategory) ? item.personCategory:
                 item;
-                console.log(id)
               $scope.personCategories.push({
                 'id': personCategory.name,
                 'title': personCategory.name
@@ -136,9 +135,6 @@ angular.module('openolitor-admin')
           sorting: {
             name: 'asc'
           },
-          filter: {
-            kundentypen: ''
-          }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -154,7 +150,6 @@ angular.module('openolitor-admin')
             if (!$scope.entries) {
               return;
             }
-
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.entries, $scope.search.query);
             // also filter by ngtable filters
