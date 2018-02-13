@@ -6,7 +6,7 @@ angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
     'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
+      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, EmailUtil, lodash, FilterQueryUtil, gettext, DetailNavigationService) {
       
       $scope.showCreateEMailDialog = false;
       $scope.entries = [];
@@ -145,7 +145,22 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
-      }];
+      }, {
+        label: gettext('Abosliste anzeigen'),
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'id');
+            //overwritting the tf parameter with an empty abotypId filter to avoid the heritage of the current typen filter
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+        }
+      }
+      ];
 
       if (!$scope.tableParams) {
         //use default tableParams
