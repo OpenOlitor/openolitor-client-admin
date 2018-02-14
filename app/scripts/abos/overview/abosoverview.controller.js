@@ -200,7 +200,7 @@ angular.module('openolitor-admin')
         $scope.loading = true;
         AbosOverviewModel.query({
           f: $scope.search.filterQuery,
-          zusatzAbosAktiv: $scope.search.complexFlags.zusatzAbosAktiv
+          x: $scope.search.complexFlags
         }, function(entries) {
           $scope.entries = entries;
           $scope.tableParams.reload();

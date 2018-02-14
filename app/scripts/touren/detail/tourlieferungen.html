@@ -27,7 +27,12 @@
         {{tourlieferung.plz}} {{tourlieferung.ort}}
       </td>
       <td>
-        <span>{{tourlieferung.abotypName}}</span><span class="label label-default" ng-repeat="zusatzAbo in tourlieferung.zusatzAbos"> +{{zusatzAbo.abotypName}}</span>
+        <span>{{tourlieferung.abotypName}}</span>
+        <span ng-if="tourlieferung.zusatzAbos.length > 0">
+          <span ng-repeat="zusatzAbo in tourlieferung.zusatzAbos" class="badge">
+            + {{zusatzAbo.abotypName|translate}}
+          </span>
+        </span>
       </td>
     </tr>
   </tbody>
