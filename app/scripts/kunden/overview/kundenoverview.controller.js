@@ -116,7 +116,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: gettext('Abosliste anzeigen'),
+        label: gettext('Aboliste anzeigen'),
         iconClass: 'fa fa-user',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
