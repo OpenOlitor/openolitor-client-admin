@@ -18,7 +18,10 @@ angular.module('openolitor-admin')
       $scope.search = {
         query: '',
         queryQuery: '',
-        filterQuery: ''
+        filterQuery: '',
+        complexFlags: {
+          zusatzAbosAktiv: false
+        }
       };
 
       $scope.checkboxes = {
@@ -96,7 +99,8 @@ angular.module('openolitor-admin')
             id: 'asc'
           },
           filter: {
-            abotypId: ''
+            abotypId: '',
+            aktiv: true
           }
         }, {
           filterDelay: 0,
@@ -135,7 +139,7 @@ angular.module('openolitor-admin')
 
             params.total(dataSet.length);
 
-            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+            $location.search({'q': $scope.search.query, 'f': JSON.stringify($scope.search.complexFlags) ,'tf': JSON.stringify($scope.tableParams.filter())});
 
             return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
@@ -195,7 +199,8 @@ angular.module('openolitor-admin')
         }
         $scope.loading = true;
         AbosOverviewModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          x: $scope.search.complexFlags
         }, function(entries) {
           $scope.entries = entries;
           $scope.tableParams.reload();
@@ -216,7 +221,7 @@ angular.module('openolitor-admin')
         return $scope.closeCreateRechnungenDialog;
       };
 
-      $scope.$watch('search.query', function() {
+      $scope.$watchGroup(['search.query', 'search.complexFlags.zusatzAbosAktiv'], function() {
         $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
           .query);
         $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search

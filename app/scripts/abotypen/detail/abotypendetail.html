@@ -127,13 +127,12 @@
                 <oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
               </div>
             </div>
-            <div class="row form-group">
+            <div class="row form-group" ng-if="getModel() === 'abotypen'">
               <div class="col-md-4">
                 <label for="lieferrhythmus" translate>Guthaben Mindestbestand</label>
               </div>
               <div class="col-md-2">
                 <input type="number"  ng-if="getModel() === 'abotypen'" step="1" class="form-control" name="guthabenMindestbestand" ng-model="abotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
-                <input type="number"  ng-if="getModel() === 'zusatzAbotypen'" step="1" class="form-control" name="guthabenMindestbestand" ng-model="zusatzAbotyp.guthabenMindestbestand" placeholder="{{'Guthaben'|translate}}" required></input>
               </div>
             </div>
         </div>

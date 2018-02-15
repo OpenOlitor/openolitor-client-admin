@@ -382,6 +382,13 @@ angular
     console.log('Start clientMessageService');
     clientMessageService.start();
   }])
+  .config(['ngTableFilterConfigProvider', function(ngTableFilterConfigProvider) {
+    ngTableFilterConfigProvider.setConfig({
+      aliasUrls: {
+        'boolean' : 'scripts/utils/ng-table/ng-table-boolean-filter.html'
+      }
+    });
+  }])
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.transformResponse.push(function(responseData) {
       return convertDateStringsToDates(responseData);

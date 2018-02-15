@@ -1,0 +1,15 @@
+<span>
+  <input bs-switch
+    ng-model="params.filter()[name]"
+    type="checkbox"
+    switch-size="mini"
+    switch-animate="true"
+    switch-on-text="{{'J'|translate}}"
+    switch-off-text="{{'N'|translate}}"
+    switch-on-color="success"
+    switch-off-color="warning"
+    switch-radio-off="false"
+    ng-true-value="true"
+    ng-false-value="false">
+  <button type="button" class="btn btn-default btn-xs" ng-attr-title="{{'Alle Anzeigen' | translate}}"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-click="params.filter()[name] = undefined"></span></button>
+</span>

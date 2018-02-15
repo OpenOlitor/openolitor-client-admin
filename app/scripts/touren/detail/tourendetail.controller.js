@@ -12,6 +12,10 @@ angular.module('openolitor-admin')
       $scope.sortedTourlieferungen = [];
       $scope.loading = false;
 
+      $scope.query = {
+        aktiveAbos: true
+      };
+
       var defaults = {
         model: {
           id: undefined,
@@ -50,9 +54,12 @@ angular.module('openolitor-admin')
 
       $scope.loadTour = function() {
         TourenDetailModel.get({
-          id: $routeParams.id
+          id: $routeParams.id,
+          aktiveOnly: $scope.query.aktiveAbos
         }, function(result) {
           $scope.tour = result;
+          $scope.unsortedTourlieferungen = [];
+          $scope.sortedTourlieferungen = [];
           $scope.checkUnsorted();
         });
       };
@@ -119,6 +126,10 @@ angular.module('openolitor-admin')
         }
         $scope.hasUnsorted = hasUnsorted;
       };
+
+      $scope.$watch('query.aktiveAbos', function() {
+        $scope.loadTour();
+      }, true);
 
       if (!$routeParams.id || $routeParams.id === 'new') {
         $scope.tour = new TourenDetailModel(defaults.model);
