@@ -214,7 +214,7 @@ angular.module('openolitor-admin')
             '/abos/' + $scope.abo.id + '/aktionen/guthabenanpassen',
             data).then(function() {
             alertService.addAlert('info', gettext(
-              'Preis wurde erfolgreich angepasst'));
+              'Guthaben wurde erfolgreich angepasst'));
           });
         }, function() {
           $log.info('Modal dismissed at: ' + new Date());
@@ -497,7 +497,7 @@ angular.module('openolitor-admin')
 
       $scope.aboPrice = function(abo) {
         if (!abo) {
-          return 
+          return
         }
         else {
             if (!abo.price){
@@ -514,7 +514,7 @@ angular.module('openolitor-admin')
             return ;
         } else {
             $scope.zusatzAboTyp.forEach(function(za) {
-                if (za.id === id) { 
+                if (za.id === id) {
                     zusatzaboTypPrice = za.preis;
                 }
             });
@@ -524,7 +524,7 @@ angular.module('openolitor-admin')
 
       $scope.zusatzaboPrice = function(zusatzabo) {
         if (!zusatzabo) {
-          return 
+          return
         }
         else {
             if (!zusatzabo.price){
@@ -534,7 +534,7 @@ angular.module('openolitor-admin')
             }
         }
       }
-      
+
       $scope.guthabenTooltip = function(abo) {
         var vertrag = '';
         if (abo.guthabenVertraglich) {
