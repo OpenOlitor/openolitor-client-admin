@@ -273,7 +273,8 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function(zusatzabo) {
-          return !angular.isUndefined(zusatzabo) && !angular.isUndefined(zusatzabo.anzahlLieferungen) && zusatzabo.anzahlLieferungen.length > 0;
+          return !zusatzabo || zusatzabo.anzahlLieferungen.length > 0 ||
+            !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0})
         },
         onExecute: function(zusatzabo) {
           return zusatzabo.$delete();
