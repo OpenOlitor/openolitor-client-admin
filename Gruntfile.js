@@ -17,66 +17,40 @@ module.exports = function(grunt) {
         'm1': 'http://localhost:9003/m1/',
         'm2': 'http://localhost:9003/m2/'
       },
-      'test': {
-        'm1': 'https://test.openolitor.ch/m1/'
+      'test-prod-landolfshausen': {
+        'm1': 'https://sunu-server-testprod.scapp.io/landolfshausen/'
       },
-      'int1': {
-        'm1': 'https://int.openolitor.ch/int1/'
+      'test-prod-nuertingen': {
+        'm1': 'https://sunu-server-testprod.scapp.io/nuertingen/'
       },
-      'int2': {
-        'm1': 'https://int.openolitor.ch/int2/'
+      'test-prod-nordheide': {
+        'm1': 'https://sunu-server-testprod.scapp.io/nordheide/'
       },
-      'int3': {
-        'm1': 'https://int.openolitor.ch/int3/'
+      'test-prod-kassel': {
+        'm1': 'https://sunu-server-testprod.scapp.io/kassel/'
       },
-      'int4': {
-        'm1': 'https://int.openolitor.ch/int4/'
+      'test-prod-ulm': {
+        'm1': 'https://sunu-server-testprod.scapp.io/ulm/'
       },
-      'int5': {
-        'm1': 'https://int.openolitor.ch/int5/'
+      'test-prod-dublincsa': {
+        'm1': 'https://sunu-server-testprod.scapp.io/dublincsa/'
       },
-      'int6': {
-        'm1': 'https://int.openolitor.ch/int6/'
+      'test-prod-csa7': {
+        'm1': 'https://sunu-server-testprod.scapp.io/csa7/'
       },
-      'int7': {
-        'm1': 'https://int.openolitor.ch/int7/'
-      },
-      'int8': {
-        'm1': 'https://int.openolitor.ch/int8/'
-      },
-      'int9': {
-        'm1': 'https://int.openolitor.ch/int9/'
-      },
-      'prod-soliterre': {
-        'm1': 'https://prod.openolitor.ch/soliterre/'
-      },
-      'prod-bioabi': {
-        'm1': 'https://prod.openolitor.ch/bioabi/'
-      },
-      'prod-gmuesluzern': {
-        'm1': 'https://prod.openolitor.ch/gmuesluzern/'
-      },
-      'prod-croquterre': {
-        'm1': 'https://prod.openolitor.ch/croquterre/'
-      },
-      'test-prod-soliterre': {
-        'm1': 'https://testprod.openolitor.ch/soliterre/'
-      },
-      'test-prod-bioabi': {
-        'm1': 'https://testprod.openolitor.ch/bioabi/'
-      },
-      'test-prod-gmuesluzern': {
-        'm1': 'https://testprod.openolitor.ch/gmuesluzern/'
-      },
-      'test-prod-croquterre': {
-        'm1': 'https://testprod.openolitor.ch/croquterre/'
+      'test-prod-csa8': {
+        'm1': 'https://sunu-server-testprod.scapp.io/csa8/'
       }
     },
     EMAIL_TO_ADDRESS: {
-      'prod-soliterre': 'openolitor@soliterre.ch',
-      'prod-bioabi': 'info@bioabi.ch',
-      'prod-gmuesluzern': 'info@gmüeschorb-luzern.ch',
-      'prod-croquterre': 'info@croquterre.ch',
+      'prod-csa7': 'csa7@sunu.de',
+      'prod-csa8': 'csa8@sunu.de',
+      'prod-dublincsa': 'dublincsa@sunu.de',
+      'prod-kassel': 'kassel@sunu.de',
+      'prod-ulm': 'ulm@sunu.de',
+      'prod-landolfshausen': 'landolfshausen@sunu.de',
+      'prod-nordheide': 'nordheide@sunu.de',
+      'prod-nuertingen': 'nuertingen@sunu.de',
     }
   };
   var env = 'dev';

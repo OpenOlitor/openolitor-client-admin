@@ -7,12 +7,12 @@ angular.module('openolitor-admin')
     '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
     'PendenzDetailModel', 'KundenOverviewModel',
-    'KundentypenService', 'alertService',
+    'KundentypenService', 'PersonCategoriesService' ,'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
-      KundenOverviewModel, KundentypenService, alertService, EnumUtil, DataUtil,
+      KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
 
@@ -32,6 +32,8 @@ angular.module('openolitor-admin')
       $scope.einladungSend = {};
       $scope.einladungSendFailed = {};
 
+      $scope.personCategories = [];
+
       $scope.abotypenArray = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
         return typ.id;
       });
@@ -41,6 +43,22 @@ angular.module('openolitor-admin')
       $scope.anreden = ANREDE;
       $scope.updatingAbo = {};
       $scope.selectedAbo = undefined;
+
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var personCategory = (item.personCategory) ? item.personCategory:
+                item;
+
+              $scope.personCategories.push({
+                'id': personCategory.id,
+                'name': personCategory.name
+              });
+            });
+          }
+      });
 
       $scope.actions = [{
         noEntityText: true,
