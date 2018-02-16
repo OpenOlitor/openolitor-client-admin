@@ -848,6 +848,12 @@ angular
         name: 'ProjektSettings',
         access: userRoles.Administrator
       })
+      .when('/personCategories', {
+        templateUrl: 'scripts/projekt/settings/personCategories.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
       .when('/produktkategorien', {
         templateUrl: 'scripts/projekt/settings/produktkategorien.html',
         controller: 'ProjektSettingsController',
