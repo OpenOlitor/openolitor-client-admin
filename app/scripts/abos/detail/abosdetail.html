@@ -93,6 +93,14 @@
       </div>
       <div class="row form-group">
         <div class="col-md-4">
+          <label translate>Preis</label>
+        </div>
+        <div class="col-md-8">
+            {{aboPrice(abo)}}
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
           <label translate>Guthaben</label>
         </div>
         <div class="col-md-8">
@@ -163,6 +171,22 @@
                       <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
                   </span>
                 </p>
+              </div>
+              <div class="col-md-6 col-md-offset-4">
+                <p class="input-group">
+                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.ende" is-open="openZusatzAbo.ende[zusatzAbo.id]" enable-time="false" max-date="abo.ende"/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id ,'ende')"><i class="fa fa-calendar"></i></button>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="col-md-offset-2 col-md-3" translate>
+              Preis:
+            </div>
+            <div class="col-md-5">
+              {{zusatzaboPrice(zusatzAbo)}}
             </div>
             <div class="col-md-6 col-md-offset-4">
               <p class="input-group">
