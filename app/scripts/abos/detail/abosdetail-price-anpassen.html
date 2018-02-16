@@ -7,12 +7,12 @@
         </div>
         <!-- abos -->
         <div class="form-group row">
-            <span class="col-md-4"><label for="price" class="form-label" translate>Eigener Preis festsetzen</label></span>
+            <span class="col-md-4"><label for="price" class="form-label" translate>Hauptabo Preis Neu</label></span>
             <span class="col-md-5">
                 <input type="number" step="0.01" class="form-control" id="price" ng-model="formDaten.newPrice" required>
             </span>
             <span class="col-md-3">
-                <button class="btn btn-primary" ng-click="restartAboPrice()" translate>Preis von Abotyp übernehmen</button>
+                <button class="btn btn-primary" ng-click="restartAboPrice()" translate>Restart price</button>
             </span>
             <div class="col-md-12">
                 <div ng-repeat="zusatzAbo in zusatzAbos" class="row">
@@ -22,7 +22,7 @@
                         <input type="number" step="0.01" class="form-control" id="price" ng-model="zusatzAbo.price" required>
                     </div>
             <div class="col-md-3">
-                <button class="btn btn-primary" ng-click="restartZusatzaboPrice(zusatzAbo)" translate>Preis von Abotyp übernehmen</button>
+                <button class="btn btn-primary" ng-click="restartZusatzaboPrice(zusatzAbo)" translate>Restart price</button>
             </div>
                 </div>
             </div>
