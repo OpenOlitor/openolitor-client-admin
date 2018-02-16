@@ -56,11 +56,14 @@ angular.module('openolitor-admin')
 
             $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
 
-      $scope.hasChangesProduktekategorien = function() {
-        return Object.getOwnPropertyNames($scope.changedProduktekategorien)
-          .length > 0;
-      };
+            $scope.monate = EnumUtil.asArray(MONATE);
 
+            $scope.tage = [];
+            for (var i = 1; i <= 31; i++) {
+                $scope.tage.push({
+                    id: i
+                });
+            }
 
             //watch for set of kundentypen
             $scope.$watch(KundentypenService.getKundentypen,
@@ -116,65 +119,6 @@ angular.module('openolitor-admin')
             }, function(error) {
                 console.log('error', error);
             });
-          });
-          return;
-        }
-        var newModel = new KundentypenModel({
-          id: undefined,
-          kundentyp: $scope.templateKundentyp.kundentyp
-        });
-        newModel.$save();
-        $scope.templateKundentyp.creating = true;
-        $scope.templateKundentyp.kundentyp = undefined;
-      };
-
-
-      $scope.savePersonCategories = function() {
-        $scope.templatePersonCategory.creating = false;
-        angular.forEach($scope.changedPersonCategories, function(personCategory) {
-             var newPersonCategory = {
-                name: personCategory.name,
-                description: personCategory.description 
-        };
-        $scope.personCategory = new PersonCategoriesModel(newPersonCategory)
-       
-              $scope.personCategory.$save();
-        });
-      };
-
-      $scope.deletingPersonCategory = function(personCategory) {
-        return $scope.deletingPersonCategories[personCategory.personCategory];
-      };
-
-      $scope.deletePersonCategory = function(personCategory) {
-        $scope.deletingPersonCategories[personCategory.personCategory] = true;
-        personCategory.$delete();
-      };
-
-      $scope.addPersonCategory = function() {
-        $scope.templatePersonCategory.creating = true;
-        $scope.personCategory = cloneObj(defaults.modelPersonCategory);
-        
-          console.log("$scope.personCategories ");
-        console.log($scope.personCategories);
-        $scope.personCategories.push($scope.personCategory);
-        $scope.personCategoriesTableParams.reload();
-      };
-
-      $scope.saveProduktekategorie = function() {
-        if (!$scope.hasChangesProduktekategorien()) {
-          return;
-        }
-        $scope.templateProduktekategorie.updating = true;
-        angular.forEach($scope.changedProduktekategorien, function(
-          produktekategorie) {
-          produktekategorie.$save();
-        });
-      };
-
-      $scope.deletingProduktekategorie = function(produktekategorie) {
-        return $scope.deletingKundentypen[produktekategorie.id];
-      };
 
             KontoDatenService.resolveKontodaten().then(function(kontodaten) {
                 if (kontodaten) {
@@ -383,58 +327,9 @@ angular.module('openolitor-admin')
                 });
             }
 
-        });
-      }
-
-      if (!$scope.personCategoriesTableParams) {
-        //use default tableParams
-        $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
-          page: 1,
-          count: 1000,
-          sorting: {
-            name: 'asc'
-          }
-        }, {
-          filterDelay: 0,
-          groupOptions: {
-            isExpanded: true
-          },
-          getData: function(params) {
-            if (!$scope.personCategories) {
-              return;
-            }
-            // use build-in angular filter
-            var orderedData = params.sorting ?
-              $filter('orderBy')($scope.personCategories, params.orderBy()) :
-              $scope.personCategories;
-
-            params.total(orderedData.length);
-            return orderedData;
-          }
-        });
-      }
-
-      if (!$scope.produktekategorienTableParams) {
-        //use default tableParams
-        $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
-          page: 1,
-          count: 1000,
-          sorting: {
-            name: 'asc'
-          }
-        }, {
-          filterDelay: 0,
-          groupOptions: {
-            isExpanded: true
-          },
-          getData: function(params) {
-            if (!$scope.produktekategorien) {
-              return;
-            }
-
-            if (!$scope.personCategoriesTableParams) {
+            if (!$scope.produktekategorienTableParams) {
                 //use default tableParams
-                $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
+                $scope.produktekategorienTableParams = new NgTableParams({ // jshint ignore:line
                     page: 1,
                     count: 1000,
                     sorting: {
@@ -446,13 +341,13 @@ angular.module('openolitor-admin')
                         isExpanded: true
                     },
                     getData: function(params) {
-                        if (!$scope.personCategories) {
+                        if (!$scope.produktekategorien) {
                             return;
                         }
                         // use build-in angular filter
                         var orderedData = params.sorting ?
-                            $filter('orderBy')($scope.personCategories, params.orderBy()) :
-                            $scope.personCategories;
+                            $filter('orderBy')($scope.produktekategorien, params.orderBy()) :
+                            $scope.produktekategorien;
 
                         params.total(orderedData.length);
                         return orderedData;
