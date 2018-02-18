@@ -29,26 +29,13 @@ module.exports = function(grunt) {
       'test-prod-kassel': {
         'm1': 'https://sunu-server-testprod.scapp.io/kassel/'
       },
-      'test-prod-ulm': {
-        'm1': 'https://sunu-server-testprod.scapp.io/ulm/'
-      },
-      'test-prod-dublincsa': {
-        'm1': 'https://sunu-server-testprod.scapp.io/dublincsa/'
-      },
-      'test-prod-csa7': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa7/'
-      },
-      'test-prod-csa8': {
-        'm1': 'https://sunu-server-testprod.scapp.io/csa8/'
-      }
+      'test-prod-bayreuth': {
+        'm1': 'https://sunu-server-testprod.scapp.io/bayreuth/'
     },
     EMAIL_TO_ADDRESS: {
-      'prod-csa7': 'csa7@sunu.de',
-      'prod-csa8': 'csa8@sunu.de',
-      'prod-dublincsa': 'dublincsa@sunu.de',
+      'prod-bayreuth: 'bayreuth@sunu.de',
       'prod-kassel': 'kassel@sunu.de',
-      'prod-ulm': 'ulm@sunu.de',
-      'prod-landolfshausen': 'landolfshausen@sunu.de',
+      'prod-landolfshausen''prod-landolfshausen': 'landolfshausen@sunu.de',
       'prod-nordheide': 'nordheide@sunu.de',
       'prod-nuertingen': 'nuertingen@sunu.de',
     }
