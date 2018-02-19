@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     EMAIL_TO_ADDRESS: {
       'prod-bayreuth': 'bayreuth@sunu.de',
       'prod-kassel': 'kassel@sunu.de',
-      'prod-landolfshausen''prod-landolfshausen': 'landolfshausen@sunu.de',
+      'prod-landolfshausen': 'landolfshausen@sunu.de',
       'prod-nordheide': 'nordheide@sunu.de',
       'prod-nuertingen': 'nuertingen@sunu.de',
     }
