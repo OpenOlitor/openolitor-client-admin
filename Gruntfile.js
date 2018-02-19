@@ -17,6 +17,9 @@ module.exports = function(grunt) {
         'm1': 'http://localhost:9003/m1/',
         'm2': 'http://localhost:9003/m2/'
       },
+      'test-prod-sunu': {
+        'm1': 'https://sunu-server-testprod.scapp.io/sunu/'
+      },
       'test-prod-landolfshausen': {
         'm1': 'https://sunu-server-testprod.scapp.io/landolfshausen/'
       },
@@ -34,6 +37,7 @@ module.exports = function(grunt) {
       }
     },
     EMAIL_TO_ADDRESS: {
+      'prod-sunu': 'sunu@sunu.de',
       'prod-bayreuth': 'bayreuth@sunu.de',
       'prod-kassel': 'kassel@sunu.de',
       'prod-landolfshausen': 'landolfshausen@sunu.de',
