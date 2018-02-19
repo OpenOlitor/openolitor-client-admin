@@ -31,6 +31,7 @@ module.exports = function(grunt) {
       },
       'test-prod-bayreuth': {
         'm1': 'https://sunu-server-testprod.scapp.io/bayreuth/'
+      }
     },
     EMAIL_TO_ADDRESS: {
       'prod-bayreuth: 'bayreuth@sunu.de',
