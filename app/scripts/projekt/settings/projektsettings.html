@@ -239,6 +239,14 @@
                 </div>
               </div>
 
+                <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Gläubiger-Identifikationsnummer</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" pattern="[A-zA-Z0-9]{0,35}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.creditorIdentifier" placeholder="{{'Gläubiger-Identifikationsnummer'|translate}}">
+                </div>
+              </div>
             </div>
           </div>
         </div>
