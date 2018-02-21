@@ -386,35 +386,6 @@ angular.module('openolitor-admin')
                 });
             }
 
-            if (!$scope.personCategoriesTableParams) {
-                //use default tableParams
-                $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
-                    page: 1,
-                    count: 1000,
-                    sorting: {
-                        name: 'asc'
-                    }
-                }, {
-                    filterDelay: 0,
-                    groupOptions: {
-                        isExpanded: true
-                    },
-                    getData: function(params) {
-                        if (!$scope.personCategories) {
-                            return;
-                        }
-                        // use build-in angular filter
-                        var orderedData = params.sorting ?
-                            $filter('orderBy')($scope.personCategories, params.orderBy()) :
-                            $scope.personCategories;
-
-                        params.total(orderedData.length);
-                        return orderedData;
-                    }
-
-                });
-            }
-
             $scope.saveProjekt = function() {
                 return $scope.kontodaten.$save().then($scope.projekt.$save(function(){
                     $scope.projektForm.$setPristine();
