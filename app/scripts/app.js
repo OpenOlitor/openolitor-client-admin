@@ -126,6 +126,11 @@ angular
     HERR: addExtendedEnumValue('Herr', gettext('Herr'), gettext('Hr.')),
     FRAU: addExtendedEnumValue('Frau', gettext('Frau'), gettext('Fr.'))
   })
+  .constant('PAYMENT_TYPES', {
+    KEINE: addExtendedEnumValue(undefined,gettext('Keine')),
+    DIRECT_DEBIT: addExtendedEnumValue('directDebit',gettext('Direct Debit')),
+    TRANSFER: addExtendedEnumValue('transfer',gettext('Transfer'))
+  })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: gettext('DepotlieferungAbo'),
     HEIMLIEFERUNGABO: gettext('HeimlieferungAbo'),
