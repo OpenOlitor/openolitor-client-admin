@@ -258,9 +258,9 @@
                 <span translate>Lieferadresse</span>
               </a>
               <small class="navbar-text" ng-if="kunde.abweichendeLieferadresse">
-                {{kunde.bezeichnungLieferung}} {{kunde.adressZusatzLieferung}} {{kunde.strasseLieferung}} {{kunde.hausNummerLieferung}} {{kunde.plzLieferung}} {{kunde.ortLieferung}} {{kunde.zusatzinfoLieferung | limitTo : 50}}
+                {{kunde.bezeichnungLieferung}} {{kunde.adressZusatzLieferung}} {{kunde.strasseLieferung}} {{kunde.hausNummerLieferung}} {{kunde.plzLieferung}} {{kunde.ortLieferung}} - {{kunde.zusatzinfoLieferung | limitTo : 50}}
               </small>
-              <small class="navbar-text" ng-if="!kunde.abweichendeLieferadresse" translate>
+              <small class="navbar-text" ng-if="!kunde.abweichendeLieferadresse && !kunde.zusatzinfoLieferung" translate>
                 Keine
               </small>
             </h3>
