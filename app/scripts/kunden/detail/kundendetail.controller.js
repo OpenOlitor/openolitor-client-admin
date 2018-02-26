@@ -95,12 +95,19 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.kunde = result;
-          if (!$scope.kunde.kontoDaten.nameAccountHolder){
-            $scope.kunde.kontoDaten.nameAccountHolder = $scope.kunde.bezeichnung;
-          }
-          if (!$scope.kunde.kontoDaten.addressAccountHolder){
-            $scope.kunde.kontoDaten.addressAccountHolder = $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort;
-          }
+            if (!$scope.kunde.kontoDaten)
+            $scope.kunde.kontoDaten = {
+                nameAccountHolder : $scope.kunde.bezeichnung,
+                addressAccountHolder : $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort
+            }
+            else {
+                if (!$scope.kunde.kontoDaten.nameAccountHolder){
+                    $scope.kunde.kontoDaten.nameAccountHolder = $scope.kunde.bezeichnung;
+                }
+                if (!$scope.kunde.kontoDaten.addressAccountHolder){
+                    $scope.kunde.kontoDaten.addressAccountHolder = $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort;
+                }
+            }
 
           if ($routeParams.aboId) {
             var abo = lodash.filter($scope.kunde.abos,
