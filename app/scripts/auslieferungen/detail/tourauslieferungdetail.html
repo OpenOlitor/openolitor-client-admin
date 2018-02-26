@@ -59,7 +59,7 @@
                   </td>
 
                   <td>
-                <span ng-repeat="zusatzkorb in korb.abo.zusatzAbotypNames" class="badge">
+                <span ng-repeat="zusatzkorb in korb.abo.zusatzAbotypNames track by $index" class="badge">
                   {{zusatzkorb}}
                 </span>
                   </td>
