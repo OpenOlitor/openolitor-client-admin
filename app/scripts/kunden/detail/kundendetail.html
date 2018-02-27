@@ -257,7 +257,7 @@
               <a data-toggle="collapse" data-target="#lieferadresse" class="navbar-brand">
                 <span translate>Lieferadresse</span>
               </a>
-              <small class="navbar-text" ng-if="kunde.abweichendeLieferadresse">
+              <small class="navbar-text" ng-if="kunde.abweichendeLieferadresse || kunde.zusatzinfoLieferung">
                 {{kunde.bezeichnungLieferung}} {{kunde.adressZusatzLieferung}} {{kunde.strasseLieferung}} {{kunde.hausNummerLieferung}} {{kunde.plzLieferung}} {{kunde.ortLieferung}} - {{kunde.zusatzinfoLieferung | limitTo : 50}}
               </small>
               <small class="navbar-text" ng-if="!kunde.abweichendeLieferadresse && !kunde.zusatzinfoLieferung" translate>
