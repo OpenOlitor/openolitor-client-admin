@@ -118,7 +118,7 @@ angular.module('openolitor-admin')
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
             // also filter by ngtable filters
-            dataSet = $filter('filter')(dataSet, params.filter());
+            dataSet = $filter('filter')(dataSet, params.filter(true));
             dataSet = params.sorting ?
               $filter('orderBy')(dataSet, params.orderBy(), false, localeSensitiveComparator) :
               dataSet;
