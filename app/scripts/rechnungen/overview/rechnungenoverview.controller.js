@@ -7,12 +7,12 @@ angular.module('openolitor-admin')
     '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
+    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, ReportvorlagenService,
+      FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService) {
 
       $scope.showCreateEMailDialog = false;
@@ -20,6 +20,25 @@ angular.module('openolitor-admin')
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
+        
+      function getFullName(item, index) {
+          if (index === 0){
+           var array = {
+               id : undefined,
+               title : item.label 
+           }
+           return array;
+          } else {
+          var array = {
+               id : item.id,
+               title : item.label
+           }
+           return array;
+          }
+      }
+
+      var pt = EnumUtil.asArray(PAYMENT_TYPES);
+      $scope.paymentTypes = pt.map(getFullName);
       $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 
       $scope.search = {
@@ -254,6 +273,18 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
         }, {
+        label: gettext('pain.008.003.02 erstellen'),
+        iconClass: 'fa fa-download',
+        onExecute: function() {
+          return $http.post(API_URL + 'rechnungen/aktionen/pain_008', {
+            'ids': $scope.checkboxes.ids
+          }).then(function() {
+            $scope.model.actionInProgress = undefined;
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }},{
         label: gettext('Rechnungen löschen'),
         iconClass: 'fa fa-times',
         isDisabled: function() {
