@@ -48,6 +48,9 @@
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{projekt.waehrung}} {{rechnung.betrag}}
               </td>
+              <td data-title="'Payment Type'|translate" sortable="'paymentType'" filter="{paymentType: 'select'}" filter-data="paymentTypes">
+                {{rechnung.paymentType|translate}} 
+              </td>
               <td data-title="'Einbezahlter Betrag'|translate" sortable="'einbezahlterBetrag'">
                 <span ng-if="rechnung.einbezahlterBetrag">{{projekt.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
               </td>
