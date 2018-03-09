@@ -854,6 +854,25 @@ angular
         name: 'ZahlungsImports',
         access: userRoles.Administrator
       })
+      .when('/zahlungsexports', {
+        templateUrl: 'scripts/zahlungsexports/overview/zahlungsexportsoverview.html',
+        controller: 'ZahlungsExportsOverviewController',
+        name: 'ZahlungsExportsOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/zahlungsexports/new', {
+        templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
+        controller: 'ZahlungsExportsController',
+        name: 'ZahlungsExports',
+        access: userRoles.Administrator
+      })
+      .when('/zahlungsexports/:id', {
+        templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
+        controller: 'ZahlungsExportsController',
+        name: 'ZahlungsExports',
+        access: userRoles.Administrator
+      })
       .when('/kundentypen', {
         templateUrl: 'scripts/projekt/settings/kundentypen.html',
         controller: 'ProjektSettingsController',
