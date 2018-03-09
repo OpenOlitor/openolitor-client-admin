@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="content content-box col-md-12">
+    <div oo-error-overlay></div>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title"><span class="navbar-brand" translate>Zahlungs-Exports</span>
+        <form class="navbar-form pull-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
+          </div>
+        </form>
+      </span>
+      </h3>
+      </div>
+      <div class="panel-body">
+        <div ng-hide="entries">
+          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+        </div>
+        <div ng-show="entries" id="zahlungsExportsTable" display-export="true" export-file-name="ZahlungsExports">
+          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+            <tr ng-repeat="zahlungsExport in $data | filter: search.query.$">
+              <td data-title="'Nr.'|translate" sortable="'id'">
+                {{zahlungsExport.id}}
+              </td>
+              <td data-title="'file'|translate" sortable="'id'">
+                  <a ng-click="download('pain.008.001.02.xml', zahlungsExport.file)">Download</a>
+              </td>
+              <td data-title="'Rechnungen'|translate" sortable="'id'">
+                  {{zahlungsExport.rechnungen}} <a ng-click="prueba(zahlungsExport.rechnungen)" translate>  Go to the invoices</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
