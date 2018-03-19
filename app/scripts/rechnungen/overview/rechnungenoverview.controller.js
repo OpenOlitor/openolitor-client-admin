@@ -218,10 +218,10 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: gettext('pain.008.003.02 erstellen'),
+        label: gettext('pain.008.001.07 erstellen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return $http.post(API_URL + 'rechnungen/aktionen/pain_008', {
+          return $http.post(API_URL + 'rechnungen/aktionen/pain_008_001_07', {
             'ids': $scope.checkboxes.ids
           }).then(function() {
             $scope.model.actionInProgress = undefined;

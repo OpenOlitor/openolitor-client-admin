@@ -19,15 +19,18 @@
         <div ng-show="entries" id="zahlungsExportsTable" display-export="true" export-file-name="ZahlungsExports">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="zahlungsExport in $data | filter: search.query.$">
-              <td data-title="'Nr.'|translate" sortable="'id'">
+              <td data-title="'Nr.'|translate" sortable="'erstelldat'">
                 {{zahlungsExport.id}}
               </td>
-              <td data-title="'file'|translate" sortable="'id'">
-                  <a ng-click="download('pain.008.001.02.xml', zahlungsExport.file)">Download</a>
+              <td data-title="'Datei'|translate" sortable="'erstelldat'">
+                  <a ng-click="download(zahlungsExport.id)">Download</a>
               </td>
-              <td data-title="'Rechnungen'|translate" sortable="'id'">
-                  {{zahlungsExport.rechnungen}} <a ng-click="prueba(zahlungsExport.rechnungen)" translate>  Go to the invoices</a>
+              <td data-title="'Rechnungen'|translate" sortable="'erstelldat'"> <a ng-click="createRechnungenLink(zahlungsExport.rechnungen)" translate> Rechnungen anzeigen</a>
               </td>
+              <td data-title="'Erstelldat'|translate" sortable="'erstelldat'">
+                {{zahlungsExport.erstelldat|date}}
+              </td>
+            </tr>
             </tr>
           </table>
         </div>
