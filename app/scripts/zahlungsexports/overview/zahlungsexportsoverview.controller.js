@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('ZahlungsExportsOverviewController', ['$q', '$scope', '$filter', '$location',
-    'ZahlungsExportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator',
+    'ZahlungsExportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator','FileSaver',
     function($q, $scope, $filter, $location, ZahlungsExportsOverviewModel, NgTableParams,
-      localeSensitiveComparator) {
+      localeSensitiveComparator, FileSaver) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -51,21 +51,17 @@ angular.module('openolitor-admin')
         });
       }
 
-      $scope.prueba = function(rechnungen){
+      $scope.createRechnungenLink = function(rechnungen){
           $location.path('/rechnungen').search('q', 'id=' + rechnungen).search('tf','{"status":""}')
-      }
-      $scope.download = function(filename, text){
-        var element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-            element.setAttribute('download', filename);
+      };
 
-            element.style.display = 'none';
-            document.body.appendChild(element);
-
-            element.click();
-
-            document.body.removeChild(element);
-      }
+      $scope.download = function(id){
+            ZahlungsExportsOverviewModel.fetchFile({
+                id:id 
+            }, function(file) {
+                FileSaver.saveAs(file.response, 'pain_008_001_07.xml');
+            });
+      };
         
       function search() {
         if ($scope.loading) {
