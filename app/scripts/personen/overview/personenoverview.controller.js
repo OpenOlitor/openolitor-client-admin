@@ -6,7 +6,7 @@ angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
     'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext, DetailNavigationService) {
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, lodash, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -125,7 +125,21 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
-      }];
+      },{
+        label: gettext('Aboliste anzeigen'),
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'kundeId');
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+        }
+        }
+      ];
 
       if (!$scope.tableParams) {
         //use default tableParams
