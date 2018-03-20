@@ -17,6 +17,9 @@ module.exports = function(grunt) {
         'm1': 'http://localhost:9003/m1/',
         'm2': 'http://localhost:9003/m2/'
       },
+      'test': {
+        'm1': 'https://sunu-server-test.scapp.io/sunu/'
+      },
       'test-prod-sunu': {
         'm1': 'https://sunu-server-testprod.scapp.io/sunu/'
       },
