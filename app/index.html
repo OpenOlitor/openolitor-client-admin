@@ -95,6 +95,7 @@
       <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
       <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-einkaufsrechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkaufsrechnungen')}]" href="" ng-href="#/einkaufsrechnungen"><i class="fa fa-calculator"></i> <span translate>Einkaufsrechnungen</span></a></li>
       <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
+      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-zahlungsexports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsexports')}]" href="" ng-href="#/zahlungsexports"><i class="fa fa-credit-card"></i> <span translate>Zahlungsauftrag-Exports</span></a></li>
 
       <li><a id="nav-einstellungen" class="nav-item" ng-click="menushow['einstellungen'] = !menushow['einstellungen']"><span><i class="fa fa-database"></i> <span translate>Einstellungen</span></span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-depots" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots"><i class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
@@ -317,6 +318,11 @@
   <script src="scripts/zahlungsimports/import/zahlungsimports.model.js"></script>
   <script src="scripts/zahlungsimports/import/zahlungsimports.controller.js"></script>
   <script src="scripts/zahlungsimports/import/zahlungseingaenge.model.js"></script>
+
+  <script src="scripts/zahlungsexports/overview/zahlungsexportsoverview.model.js"></script>
+  <script src="scripts/zahlungsexports/overview/zahlungsexportsoverview.controller.js"></script>
+  <script src="scripts/zahlungsexports/import/zahlungsexports.model.js"></script>
+  <script src="scripts/zahlungsexports/import/zahlungsexports.controller.js"></script>
 
   <script src="scripts/projekt/kontodaten.model.js"></script>
   <script src="scripts/projekt/kontodaten.service.js"></script>
