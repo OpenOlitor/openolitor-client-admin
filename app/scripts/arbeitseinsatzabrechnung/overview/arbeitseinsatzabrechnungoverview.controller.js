@@ -130,7 +130,7 @@ angular.module('openolitor-admin')
       search();
 
       $scope.actions = [{
-        label: gettext('Arbeitseinsatzabrechnungbrief'),
+        label: gettext('Arbeitseinsatzabrechnung-Brief'),
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {

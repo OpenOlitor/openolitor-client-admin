@@ -27,7 +27,7 @@
                 <input type="checkbox" ng-model="checkboxes.items[kunde.id]" />
               </td>
               <td data-title="'Kunde'|translate" sortable="'bezeichnung'">
-                {{kunde.bezeichnung}}
+                <a ng-href="#/kunden/{{kunde.kundeId}}">{{kunde.kundeBezeichnung}}</a>
               </td>
               <td data-title="'Summe der Soll-Einsätze'|translate" sortable="'summeEinsaetzeSoll'">
                 {{kunde.summeEinsaetzeSoll}}
