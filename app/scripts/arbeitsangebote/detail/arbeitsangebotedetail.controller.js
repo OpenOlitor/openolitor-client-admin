@@ -3,14 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ArbeitsangeboteDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('ArbeitsangeboteDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', 'gettext', 'ArbeitsangeboteDetailModel', 'ARBEITSEINSATZSTATUS',
     'PersonenOverviewModel', 'ArbeitseinsaetzeDetailModel', 'localeSensitiveComparator',
-    'NgTableParams', 'lodash', 'OverviewCheckboxUtil',
-    function($scope, $filter, $routeParams, $location, gettext,
+    'NgTableParams', 'lodash', 'OverviewCheckboxUtil', 'msgBus',
+    function($scope, $rootScope, $filter, $routeParams, $location, gettext,
       ArbeitsangeboteDetailModel, ARBEITSEINSATZSTATUS, PersonenOverviewModel,
       ArbeitseinsaetzeDetailModel, localeSensitiveComparator, NgTableParams, lodash,
-      OverviewCheckboxUtil) {
+      OverviewCheckboxUtil, msgBus) {
 
       var defaults = {
         model: {
@@ -120,6 +120,7 @@ angular.module('openolitor-admin')
       $scope.closeAddPerson = function() {
         $scope.displayAddPerson = undefined;
         $scope.addingPerson = undefined;
+        $scope.newEinsatz = undefined;
       };
 
       $scope.closeAddPersonFunct = function() {
@@ -134,6 +135,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-plus',
         onExecute: function() {
           $scope.displayAddPerson = true;
+          $scope.newEinsatz = undefined;
           return true;
         }
       }];
@@ -215,16 +217,17 @@ angular.module('openolitor-admin')
             anzahlPersonen: 1
           }
         };
+        $scope.newEinsatzEntity = new ArbeitseinsaetzeDetailModel($scope.newEinsatz.entity);
       };
 
       $scope.addPersonSave = function() {
-        ArbeitseinsaetzeDetailModel.save($scope.newEinsatz.entity, function() {
+        $scope.newEinsatzEntity.$save(function() {
           $scope.closeAddPerson();
         });
       };
 
       $scope.deleteArbeitseinsatz = function(einsatz) {
-        ArbeitseinsaetzeDetailModel.$delete(einsatz);
+        einsatz.$delete();
       };
 
       $scope.sumPersonen = function() {
@@ -252,6 +255,34 @@ angular.module('openolitor-admin')
           }
         });
       }
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (msg.entity === 'Arbeitseinsatz') {
+          if($scope.user.id === msg.data.modifikator) {
+            $scope.arbeitseinsaetze.push(msg.data);
+            $scope.$apply();
+            $scope.tableParams.reload();
+          }
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $rootScope, function(event, msg) {
+        if (msg.entity === 'Arbeitseinsatz') {
+          if($scope.user.id === msg.data.modifikator) {
+            angular.forEach($scope.arbeitseinsaetze, function(arbeitseinsats) {
+              if (arbeitseinsats.id === msg.data.id) {
+                var index = $scope.arbeitseinsaetze.indexOf(
+                  arbeitseinsats);
+                if (index > -1) {
+                  $scope.arbeitseinsaetze.splice(index, 1);
+                }
+              }
+            });
+            $scope.$apply();
+            $scope.tableParams.reload();
+          }
+        }
+      });
 
     }
   ]);
