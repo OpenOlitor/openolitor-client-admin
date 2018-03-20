@@ -11,7 +11,7 @@
             <div class="col-md-2">
                <small><label for="typen" translate>Arbeitskategorien</label></small>
             </div>
-            <div class="col-md-6">{{arbeitsangebot.arbeitskategorien}}
+            <div class="col-md-6">
               <oo-arbeitskategorien arbeitskategorien-list="arbeitsangebot.arbeitskategorien"></oo-arbeitskategorien>
               <div class="btn-group pull-right" role="group">
                 <oo-save-button model="arbeitsangebot" form="arbeitsangebotForm" entity="Arbeitsangebot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Arbeitsangebot'|translate}}</oo-save-button>

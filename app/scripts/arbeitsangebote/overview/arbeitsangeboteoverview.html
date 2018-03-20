@@ -41,12 +41,15 @@
                 {{arbeitsangebot.anzahlEingeschriebene}} / <span ng-if="!arbeitsangebot.mehrPersonenOk" translate>max.</span>{{arbeitsangebot.anzahlPersonen}}
               </td>
               <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{kategorien: 'select'}" filter-data="kategorienL">
-                {{arbeitsangebot.arbeitskategorien}}
+                {{}}
+                <span ng-repeat="arbeitskategorie in arbeitsangebot.arbeitskategorien" class="badge" ng-if="arbeitskategorie !== ''">
+                  {{arbeitskategorie|translate}}
+                </span>
               </td>
               <td data-title="'Status'|translate" sortable="'aktiv'">
-                <i ng-if="arbeitsangebot.status === 'InVorbereitung'" class="fa fa-clock-o"></i>
-                <i ng-if="arbeitsangebot.status === 'Offen'" class="fa fa-calendar-plus-o"></i>
-                <i ng-if="arbeitsangebot.status === 'Abgesagt'" class="fa fa-times-circle-o"></i>
+                <i ng-if="arbeitsangebot.status === 'InVorbereitung'" ng-attr-title="{{'In Vorbereitung'|translate}}" class="fa fa-clock-o"></i>
+                <i ng-if="arbeitsangebot.status === 'Offen'" ng-attr-title="{{'Offen'|translate}}" class="fa fa-calendar-plus-o"></i>
+                <i ng-if="arbeitsangebot.status === 'Abgesagt'" ng-attr-title="{{'Abgesagt'|translate}}" class="fa fa-times-circle-o"></i>
               </td>
             </tr>
           </table>

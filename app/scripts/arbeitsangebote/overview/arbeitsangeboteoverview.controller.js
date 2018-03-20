@@ -97,7 +97,7 @@ angular.module('openolitor-admin')
             // use build-in angular filter
             var filteredData = $filter('filter')($scope.entries,
               $scope.search.query);
-            var orderedData = $filter('filter')(filteredData, params.filter());
+            var orderedData = $filter('filter')(filteredData, params.filter(true));
             orderedData = params.sorting ?
               $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
               orderedData;
