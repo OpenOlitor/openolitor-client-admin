@@ -223,7 +223,8 @@ angular.module('openolitor-admin')
       $scope.addPerson = function() {
         $scope.kunde.ansprechpersonen.push({
           id: undefined,
-          anrede: undefined
+          anrede: undefined,
+          categories: [] 
         });
       };
 

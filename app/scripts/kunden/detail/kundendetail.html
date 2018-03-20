@@ -116,7 +116,7 @@
                                     <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
                                 </div>
                             </div>
-                            <div class="row form-group">
+                            <div ng-show="personCategories.length > 0" class="row form-group">
                                 <div class="col-md-4">
                                     <label for="personCategory" translate>PersonKategorie</label>
                                 </div>
