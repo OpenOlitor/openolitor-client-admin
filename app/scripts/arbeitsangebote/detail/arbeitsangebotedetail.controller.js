@@ -137,6 +137,9 @@ angular.module('openolitor-admin')
           $scope.displayAddPerson = true;
           $scope.newEinsatz = undefined;
           return true;
+        },
+        isDisabled: function() {
+          return !$scope.arbeitsangebot.mehrPersonenOk || $scope.arbeitsangebot.anzahlPersonen > $scope.sumPersonen();
         }
       }];
 
@@ -217,10 +220,10 @@ angular.module('openolitor-admin')
             anzahlPersonen: 1
           }
         };
-        $scope.newEinsatzEntity = new ArbeitseinsaetzeDetailModel($scope.newEinsatz.entity);
       };
 
       $scope.addPersonSave = function() {
+        $scope.newEinsatzEntity = new ArbeitseinsaetzeDetailModel($scope.newEinsatz.entity);
         $scope.newEinsatzEntity.$save(function() {
           $scope.closeAddPerson();
         });
