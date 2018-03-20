@@ -28,6 +28,7 @@
                   <th translate>Adresszusatz</th>
                   <th translate>PLZ / Ort</th>
                   <th translate>Abotyp</th>
+                  <th translate>Zusatzkorb</th>
                 </tr>
               </thead>
               <tbody sv-part="model.koerbe">
@@ -55,6 +56,12 @@
                   </td>
                   <td>
                     <span class="color-box" ng-style="style(korb.abotyp)"></span> {{korb.abotyp.name}}
+                  </td>
+
+                  <td>
+                <span ng-repeat="zusatzkorb in korb.abo.zusatzAbotypNames track by $index" class="badge">
+                  {{zusatzkorb}}
+                </span>
                   </td>
                   <td>
                     <div class="pull-right">

@@ -5,6 +5,7 @@ angular.module('openolitor-admin').directive('ignoreDirty', [function() {
       restrict: 'A',
       require: 'ngModel',
       link: function(scope, elm, attrs, ctrl) {
+        ctrl.$setPristine = function() {};
         ctrl.$pristine = false;
       }
     };

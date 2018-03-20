@@ -97,9 +97,11 @@ angular.module('openolitor-admin')
         $scope.anzahlSaldoZuTief = 0;
         lodash.forEach($scope.abotypenLieferungen,
           function(lieferung) {
-            $scope.anzahlKoerbeZuLiefern += lieferung.anzahlKoerbeZuLiefern;
-            $scope.anzahlAbwesenheiten += lieferung.anzahlAbwesenheiten;
-            $scope.anzahlSaldoZuTief += lieferung.anzahlSaldoZuTief;
+            if(lieferung.abotyp.typ === 'Abotyp') {
+              $scope.anzahlKoerbeZuLiefern += lieferung.anzahlKoerbeZuLiefern;
+              $scope.anzahlAbwesenheiten += lieferung.anzahlAbwesenheiten;
+              $scope.anzahlSaldoZuTief += lieferung.anzahlSaldoZuTief;
+            }
           });
       };
 
@@ -713,6 +715,7 @@ angular.module('openolitor-admin')
       $scope.editNachAbgeschlossen = false;
 
       $scope.setEditableNachAbgeschlossen = function() {
+        $scope.korbForm.$setPristine();
         $scope.editNachAbgeschlossen = true;
       };
 
@@ -790,7 +793,7 @@ angular.module('openolitor-admin')
           id: $routeParams.id,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search('q', 'id=' + result.join());
+          $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
 
@@ -800,7 +803,7 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search('q', 'id=' + result.join());
+          $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
 
@@ -810,9 +813,10 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search('q', 'id=' + result.join());
+          $location.path('/abos').search({'q': 'id=' + result.join()});
         });
       };
+
       $scope.abschliessenActionDisabled= [{
         label: gettextCatalog.getString('Lieferplanung abschliessen'),
         noEntityText: true,
@@ -862,7 +866,7 @@ angular.module('openolitor-admin')
           onExecute: function() {
             $scope.recalculateBestellungen(function() {
               var result = lodash.map($scope.sammelbestellungen, 'id');
-              $location.path('/einkaufsrechnungen').search('q', 'id=' + result.join());
+              $location.path('/einkaufsrechnungen').search({'q': 'id=' + result.join()});
             });
           }
         },{
@@ -875,7 +879,7 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/depotauslieferungen').search('q', 'id=' + res.join());
+              $location.path('/depotauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
         },{
@@ -888,7 +892,7 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/tourauslieferungen').search('q', 'id=' + res.join());
+              $location.path('/tourauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
         },{
@@ -901,11 +905,19 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/postauslieferungen').search('q', 'id=' + res.join());
+              $location.path('/postauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
         }];
       };
+
+      $scope.verrechnenActionDisabled= [{
+        label: gettextCatalog.getString('Lieferplanung verrechnen'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-chevron-right',
+        isDisabled: function() { return true; },
+        onExecute: function() { }
+      }];
 
       $scope.verrechnenAction = [{
         labelFunction: function() {

@@ -13,13 +13,18 @@ angular.module('openolitor-admin')
       moment, EnumUtil, DataUtil, msgBus, $q, _, API_URL,
       alertService, AbosOverviewService) {
 
+      // rechnungen object with defaults and without ids
       $scope.rechnungen = {
-        ids: _.map(_.filter($scope.rechnungsPositionen, ['status', 'Offen']), 'id'),
         titel: '',
-        rechnungsDatum: new Date(), 
+        rechnungsDatum: new Date(),
         faelligkeitsDatum: new Date(moment().add(1, 'month').subtract(1, 'day').valueOf())
       };
-      
+
+      $scope.getRechnungen = function() {
+        $scope.rechnungen.ids = _.map(_.filter($scope.rechnungsPositionen, ['status', 'Offen']), 'id');
+        return $scope.rechnungen;
+      };
+
       $scope.form = {
         mode: 'AnzahlLieferungen',
         manuellerBetrag: false
@@ -40,17 +45,15 @@ angular.module('openolitor-admin')
       };
 
       $scope.batchCreate = function() {
-          $http.post(API_URL +
-                     'rechnungspositionen/aktionen/createrechnungen',
-                     $scope.rechnungen).then(function(){
-                         $scope.commandIssued = true;
-                     });
+        $http.post(API_URL + 'rechnungspositionen/aktionen/createrechnungen', $scope.getRechnungen()).then(function() {
+          $scope.commandIssued = true;
+        });
       };
 
       $scope.jumpToRechnungen = function() {
         $location.path('/rechnungen').search('q', 'id=' + $scope.batchCreated.rechnungsIds.join());
       };
-      
+
       $scope.batchCreated = {
         ids: [],
         rechnungsIds: [],
@@ -63,10 +66,10 @@ angular.module('openolitor-admin')
           console.log('RP', msg);
           console.log('$scope.rechnungen.ids', $scope.rechnungen.ids);
           console.log('msg.data.id', msg.data.id);
-          if(_.includes($scope.rechnungen.ids, msg.data.id)) {
+          if (_.includes($scope.rechnungen.ids, msg.data.id)) {
             console.log('includes', msg.data.id);
             $scope.batchCreated.ids.push(msg.data.id);
-            if(!_.includes($scope.batchCreated.rechnungsIds, msg.data.rechnungId)) {
+            if (!_.includes($scope.batchCreated.rechnungsIds, msg.data.rechnungId)) {
               $scope.batchCreated.rechnungsIds.push(msg.data.rechnungId);
             }
             $scope.$apply();

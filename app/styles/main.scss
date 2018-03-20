@@ -714,3 +714,21 @@ tr.error {
 @media screen and (max-height: 450px) {
    .sliding-detail {padding-top: 15px;}
 }
+
+.white-space-pre{
+    white-space: pre;
+}
+
+.row .zusatzabo {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.row .zusatzabo:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+hr.light {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

@@ -6,12 +6,12 @@ angular.module('openolitor-admin')
   .controller('AbosOverviewCreateRechnungsPositionenController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'AbosOverviewService',
+    'API_URL', 'alertService', 'AbosOverviewService','ooAuthService',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       moment, EnumUtil, DataUtil, msgBus, $q, _, API_URL,
-      alertService, AbosOverviewService) {
+      alertService, AbosOverviewService, ooAuthService) {
 
       $scope.rechnungsPositionen = {
         waehrung: 'CHF'
@@ -34,6 +34,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.batchCreate = function() {
+        $scope.user = ooAuthService.getUser();
         $scope.rechnungsPositionen.ids = $scope.aboIds;
         switch($scope.form.mode) {
           case 'AnzahlLieferungen':
@@ -67,7 +68,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.jumpToRechnungspositionen = function() {
-        $location.path('/rechnungspositionen').search('q', 'id=' + $scope.batchCreated.ids.join());
+        $location.path('/rechnungspositionen').search({'q': 'id=' + $scope.batchCreated.ids.join()});
       };
 
       $scope.jumpToAbosWhereCreateHasFailed = function() {
@@ -76,7 +77,7 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === 'RechnungsPosition') {
-          if(_.includes($scope.rechnungsPositionen.ids, msg.data.aboId)) {
+          if($scope.user.id === msg.data.modifikator) {
             $scope.batchCreated.ids.push(msg.data.id);
             _.pull($scope.batchCreated.openAboIds, msg.data.aboId);
             $scope.$apply();

@@ -262,11 +262,38 @@ angular.module('openolitor-admin')
         });
       }
 
+      $scope.zusatzAboActions = [{
+        label: gettext('Speichern'),
+        noEntityText: true,
+        onExecute: function(zusatzabo) {
+          return zusatzabo.$save();
+        }
+      }, {
+        label: gettext('Löschen'),
+        iconClass: 'glyphicon glyphicon-remove',
+        noEntityText: true,
+        isDisabled: function(zusatzabo) {
+          return !zusatzabo || zusatzabo.anzahlLieferungen.length > 0 ||
+            !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0})
+        },
+        onExecute: function(zusatzabo) {
+          return zusatzabo.$delete();
+        }
+      },{
+        label: gettext('Rechnungsposition manuell erstellen'),
+        noEntityText: true,
+        iconClass: 'fa fa-envelope-o',
+        onExecute: function(zusatzabo) {
+          return $q.when($location.path('kunden/' + getKundeId() +
+            '/abos/' + zusatzabo.id + '/rechnungen/new'));
+        }
+      }];
+
       $scope.actions = [{
         label: gettext('Speichern'),
         noEntityText: true,
         onExecute: function() {
-          return $scope.abo.$save();
+          return $scope.save();
         }
       }, {
         label: gettext('Löschen'),
@@ -275,7 +302,7 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
             .anzahlLieferungen.length > 0 ||
-            $scope.abo.anzahlAbwesenheiten.length > 0;
+            !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function() {
           return $scope.abo.$delete();
@@ -302,7 +329,7 @@ angular.module('openolitor-admin')
               2);
         }
       }, {
-        label: gettext('Manuelle Rechnung erstellen'),
+        label: gettext('Rechnungsposition manuell erstellen'),
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
@@ -312,11 +339,23 @@ angular.module('openolitor-admin')
       }];
 
       $scope.save = function() {
-        return $scope.abo.$save();
+        if(angular.isUndefined($scope.abo.ende) || $scope.abo.ende === null || $scope.abo.ende === '' || $scope.abo.start <= $scope.abo.ende) {
+          return $scope.abo.$save();
+        } else {
+          alertService.addAlert('error', gettext(
+            'Enddatum muss vor Startdatum liegen'));
+          return '';
+        }
       };
 
       $scope.saveZusatzAbo = function(zusatzAbo) {
-        return zusatzAbo.$save();
+        if(angular.isUndefined(zusatzAbo.ende) || zusatzAbo.ende === null || zusatzAbo.ende === '' || zusatzAbo.start <= zusatzAbo.ende) {
+          return zusatzAbo.$save();
+        } else {
+          alertService.addAlert('error', gettext(
+            'Enddatum muss vor Startdatum liegen'));
+          return '';
+        }
       };
 
       function createPermutations(abotyp) {
@@ -393,20 +432,20 @@ angular.module('openolitor-admin')
             case VERTRIEBSARTEN.DEPOTLIEFERUNG:
               $scope.abo.depotId = vertriebsart.depot.id;
               $scope.abo.depotName = vertriebsart.depot.name;
-              delete $scope.abo.tourId 
-              delete $scope.abo.tourName
+              delete $scope.abo.tourId;
+              delete $scope.abo.tourName;
               break;
             case VERTRIEBSARTEN.HEIMLIEFERUNG:
               $scope.abo.tourId = vertriebsart.tour.id;
               $scope.abo.tourName = vertriebsart.tour.name;
-              delete $scope.abo.depotId
-              delete $scope.abo.depotName
+              delete $scope.abo.depotId;
+              delete $scope.abo.depotName;
               break;
             case VERTRIEBSARTEN.POSTLIEFERUNG:
-              delete $scope.abo.tourId 
-              delete $scope.abo.tourName
-              delete $scope.abo.depotId
-              delete $scope.abo.depotName
+              delete $scope.abo.tourId;
+              delete $scope.abo.tourName;
+              delete $scope.abo.depotId;
+              delete $scope.abo.depotName;
               break;
           }
         }
@@ -425,11 +464,10 @@ angular.module('openolitor-admin')
           vertrag = '<b>' + gettext('Vertraglich') + ':</b> ' + abo.guthabenVertraglich +
             '<br />';
         }
-        return '<b>' + gettext('Aktuell') + ':</b> ' + abo.guthaben + ' ' +
-          gettext('bezahlt') + ' + ' + abo.guthabenInRechnung +
-          ' ' + gettext('verrechnet') + ' = ' + $scope.aboGuthaben(abo) +
-          ' ' +
-          gettext('total');
+        return '<b>' + gettext('Aktuell') + ':</b> <br />' + abo.guthaben + ' ' +
+          gettext('bezahlt') + ' <br />+ ' + abo.guthabenInRechnung +
+          ' ' + gettext('verrechnet') + ' <br />= ' + $scope.aboGuthaben(abo) +
+          ' ' + gettext('total');
       };
 
       $scope.vertriebsart = function() {

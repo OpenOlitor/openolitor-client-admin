@@ -23,19 +23,12 @@
           </script>
           <script type="text/ng-template" id="headerSwitch.html">
           <span class="pull-right">
-            <input bs-switch
-              ng-model="showAllAbwesenheiten"
-              type="checkbox"
-              switch-size="mini"
-              switch-animate="true"
-              switch-on-text="{{'alle' | translate}}"
-              switch-off-text="{{'pendente' | translate}}"
-              switch-icon="fa fa-history">
+            <input bs-switch ng-model="templateObject.showOnlyPending" type="checkbox" switch-size="mini"
+              switch-animate="true" switch-off-text="{{'alle' | translate}}" switch-on-text="{{'pendente' | translate}}" ng-true-value="true" ng-false-value="false" switch-icon="fa fa-history">
             </span>
           </script>
-          {{$data}}
           <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="abw in $data | filter:(showAllAbwesenheiten || '') && {abw: {lieferung : {status: 'Offen'}}} | orderBy:'datum'">
+            <tr ng-repeat="abw in $data | filter:(templateObject.showOnlyPending || '') && myFilter | orderBy:'-':datum">
               <td data-title="'Datum'|translate">
                 {{abw.datum|date:"EEE, dd.MM.yyyy"}}
                 <i ng-if="abw.bemerkung"  class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{abw.bemerkung}}" tooltip-popup-close-delay="500"></i>

@@ -82,6 +82,7 @@ angular
     'angular-sortable-view',
     'angular.css.injector',
     'angular-toArrayFilter',
+    'mm.iban',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
@@ -387,6 +388,13 @@ angular
     console.log('Start clientMessageService');
     clientMessageService.start();
   }])
+  .config(['ngTableFilterConfigProvider', function(ngTableFilterConfigProvider) {
+    ngTableFilterConfigProvider.setConfig({
+      aliasUrls: {
+        'boolean' : 'scripts/utils/ng-table/ng-table-boolean-filter.html'
+      }
+    });
+  }])
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.transformResponse.push(function(responseData) {
       return convertDateStringsToDates(responseData);
@@ -551,6 +559,23 @@ angular
         var val = item[property];
         if (elements.indexOf(val) < 0) {
           filtered.push(item);
+        }
+      }
+      return filtered;
+    };
+  })
+  .filter('countOcc', function() {
+    return function(items) {
+      var filtered = {};
+      if (!items) {
+        return filtered;
+      }
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if(!angular.isUndefined(filtered[item])) {
+          filtered[item] = filtered[item] + 1;
+        } else {
+          filtered[item] = 1;
         }
       }
       return filtered;

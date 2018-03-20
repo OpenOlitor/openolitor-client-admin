@@ -15,11 +15,18 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
 
         $scope.projekt = $rootScope.projekt;
         $scope.getCurrentlyMatchingGJItem = undefined;
-        $scope.showAllAbwesenheiten = false;
+        $scope.templateObject= {};
+        $scope.templateObject.showOnlyPending = true;
         $scope.deletingAbwesenheit = {};
         $scope.template = {
           creating: 0
         };
+
+        $scope.myFilter = function(item){
+           if ($scope.isLieferungOpen(item))
+             return item;
+           else return '';
+        }
 
         $scope.abwesenheitsDaten = function() {
           if (!$scope.abwesenheiten) {

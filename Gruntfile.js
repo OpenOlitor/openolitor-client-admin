@@ -59,6 +59,9 @@ module.exports = function(grunt) {
       'prod-croquterre': {
         'm1': 'https://prod.openolitor.ch/croquterre/'
       },
+      'prod-nuglar': {
+        'm1': 'https://prod.openolitor.ch/nuglar/'
+      },
       'test-prod-soliterre': {
         'm1': 'https://testprod.openolitor.ch/soliterre/'
       },
@@ -70,6 +73,9 @@ module.exports = function(grunt) {
       },
       'test-prod-croquterre': {
         'm1': 'https://testprod.openolitor.ch/croquterre/'
+      },
+      'test-prod-nuglar': {
+        'm1': 'https://testprod.openolitor.ch/nuglar/'
       }
     },
     EMAIL_TO_ADDRESS: {

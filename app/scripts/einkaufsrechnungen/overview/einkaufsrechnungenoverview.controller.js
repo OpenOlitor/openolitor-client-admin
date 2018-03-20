@@ -225,15 +225,6 @@ angular.module('openolitor-admin')
             }
           });
           $scope.$apply();
-        } else
-        if (msg.entity === 'Bestellung') {
-          if (lodash.includes($scope.bestellungIds, msg.data.id)) {
-            $scope.batchModified.ids.push(msg.data.id);
-            if ($scope.batchModified.ids.length === $scope.bestellungIds.length) {
-              $scope.commandFinished = true;
-            }
-            $scope.$apply();
-          }
         }
       });
     }

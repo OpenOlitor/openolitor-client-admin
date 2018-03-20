@@ -30,8 +30,8 @@
                 {{korb.abotyp.name}}
               </td>
               <td data-title="'Zusatzkorb'|translate" >
-                <span ng-repeat="zusatzkorb in korb.zusatzKoerbe" class="badge" ng-if="zusatzkorb.abo.vertriebBeschrieb !== ''">
-                  {{zusatzkorb.abo.vertriebBeschrieb}}
+                <span ng-repeat="zusatzkorb in korb.abo.zusatzAbotypNames track by $index" class="badge">
+                  {{zusatzkorb}}
                 </span>
               </td>
               <td data-title="'Kunde'|translate" sortable="'kunde.bezeichnung'">

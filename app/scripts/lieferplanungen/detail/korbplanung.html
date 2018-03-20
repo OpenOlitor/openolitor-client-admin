@@ -6,6 +6,7 @@
           <div class="col-md-5">
             <ul class="nav navbar-nav">
               <script type="text/ng-template" id="anzahlOverallTooltipTemplate.html">
+                <span translate>Summe jeweils ohne Zusatzabos!</span><br />
                 <span translate>Total Anzahl Körbe zu liefern:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.WIRDGELIEFERT)"><b>{{anzahlKoerbeZuLiefern}}</b></a><br />
                 <span translate>Total Anzahl Abwesenheiten:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a><br />
                 <span translate>Total Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a>
@@ -20,8 +21,9 @@
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
               <span ng-if="korbForm.$pristine" ng-show="planung.status === 'Offen'"><oo-actions-button  model="planung" actions="abschliessenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
               <span ng-if="!korbForm.$pristine" ng-show="planung.status === 'Offen'"><oo-actions-button  model="planung" actions="abschliessenActionDisabled" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-if="korbForm.$pristine" ng-show="planung.status === 'Abgeschlossen'"><oo-actions-button  model="planung" actions="verrechnenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
+              <span ng-if="!korbForm.$pristine" ng-show="planung.status === 'Abgeschlossen'"><oo-actions-button  model="planung" actions="verrechnenActionDisabled" confirm="true" btn-style="btn-success"></oo-actions-button></span>
 
-              <span ng-show="planung.status === 'Abgeschlossen'"><oo-actions-button model="planung" actions="verrechnenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
               <span ng-show="planung.status === 'Verrechnet'"><oo-actions-button model="planung" actions="verrechnetAction" btn-style="btn-success"></oo-actions-button></span>
             </div>
           </div>
@@ -71,7 +73,7 @@
     <div class="col-md-4" ng-repeat="abotypLieferung in abotypenLieferungen | orderBy: 'abotypBeschrieb'">
       <script type="text/ng-template" id="anzahlTooltipTemplate.html">
         <div  ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" >
-          <span translate>Anzahl Körbe zu liefern:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
+          <span translate>Anzahl Zusatzabos zu liefern:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.WIRDGELIEFERT)"><b>{{abotypLieferung.anzahlKoerbeZuLiefern}}</b></a><br />
           <span translate>Anzahl Abwesenheiten:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSABWESEND)"><b>{{abotypLieferung.anzahlAbwesenheiten}}</b></a><br />
           <span translate>Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayZusatzabos(abotypLieferung.id, KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{abotypLieferung.anzahlSaldoZuTief}}</b></a>
         </div>
@@ -95,7 +97,8 @@
               <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
               <span class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
-              <oo-delete-button model="abotypLieferung" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
+              <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
+              <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?'|translate}}"></oo-delete-button>
               <div ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" > Zusatzabo</div>
             </span>
           </h3>
