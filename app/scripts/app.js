@@ -867,6 +867,12 @@ angular
         name: 'ProjektSettings',
         access: userRoles.Administrator
       })
+      .when('/arbeitskategorien', {
+        templateUrl: 'scripts/projekt/settings/arbeitskategorien.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
       .when('/projektsettings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',

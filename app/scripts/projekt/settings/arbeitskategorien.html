@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="content content-box col-md-12">
+        <div oo-error-overlay></div>
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title"><span class="navbar-brand" translate>Arbeitskategorien</span>
+                    <form name="createArbeitskategorieForm" class="navbar-form pull-right">
+                        <div class="form-group">
+                            <a role="button" ng-click="addArbeitskategorie()" ng-disabled="editingArbeitskategorienBool" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Arbeitskategorie erstellen</span></a>
+                        </div>
+                    </form>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div ng-hide="arbeitskategorien">
+                    <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+                </div>
+                <div ng-show="arbeitskategorien" class="horizontal-scroll">
+                    <table ng-table="arbeitskategorienTableParams" class="table table-striped"  template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+                        <tr ng-repeat="arbeitskategorie in $data ">
+                            <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
+                                <span ng-hide="arbeitskategorie.editable">{{arbeitskategorie.beschreibung}}</span>
+                                <span ng-show="arbeitskategorie.editable">
+                                    <textarea class="form-control" name="beschreibung" ng-model="arbeitskategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                            </td>
+                            <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
+                                {{arbeitskategorie.anzahlVerknuepfungen}}
+                            </td>
+                            <td><div ng-hide="editingArbeitskategorieBool" class="pull-right">
+                                    <a role="button" class="btn btn-sm btn-primary" ng-click="editArbeitskategorie(arbeitskategorie)">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <oo-delete-button model="arbeitskategorie" entity="Arbeitskategorie" on-delete="deleteArbeitskategorie" condensed="true" confirm="true"></oo-delete-button>
+                                </div>
+                                <div ng-show="arbeitskategorie.editable" class="pull-right">
+                                  <oo-save-button model="arbeitskategorie" entity="Arbeitskategorie" on-save="saveArbeitskategorie" condensed="true"></oo-save-button>
+                                  <a role="button" class="btn btn-sm btn-default" ng-click="cancelArbeitskategorie(arbeitskategorie)">
+                                      <span class="glyphicon glyphicon-stop"></span>
+                                  </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
