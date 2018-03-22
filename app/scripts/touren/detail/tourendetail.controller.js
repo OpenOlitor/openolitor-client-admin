@@ -4,10 +4,11 @@
  */
 angular.module('openolitor-admin')
   .controller('TourenDetailController', ['$scope', '$filter', 'localeSensitiveComparator',
-    'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location',
+    'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location', 'DetailNavigationService',
     function($scope, $filter, localeSensitiveComparator,TourenService, TourenDetailModel,
-      NgTableParams, cloneObj, $routeParams, $location) {
+      NgTableParams, cloneObj, $routeParams, $location, DetailNavigationService) {
 
+      DetailNavigationService.cleanKundeList();
       $scope.unsortedTourlieferungen = [];
       $scope.sortedTourlieferungen = [];
       $scope.loading = false;

@@ -15,6 +15,7 @@ angular.module('openolitor-admin')
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService) {
 
+      DetailNavigationService.cleanKundeList();
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;

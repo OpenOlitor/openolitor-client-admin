@@ -7,11 +7,12 @@ angular.module('openolitor-admin')
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'VorlagenService', 'localeSensitiveComparator', 'gettext',
+    'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext) {
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext,DetailNavigationService) {
 
+      DetailNavigationService.cleanKundeList();
       $scope.loading = false;
       $scope.model = {};
       $scope.selectedAbo = undefined;

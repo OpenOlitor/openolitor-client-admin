@@ -6,14 +6,15 @@ angular.module('openolitor-admin')
   .controller('RechnungsPositionDetailController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'RechnungsPositionenModel', 'KundenDetailModel', 'RECHNUNGSPOSITIONSSTATUS',
-    'moment', 'EnumUtil',
+    'moment', 'EnumUtil', 'DetailNavigationService',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       RechnungsPositionenModel, KundenDetailModel, RECHNUNGSPOSITIONSSTATUS,
-      moment, EnumUtil) {
+      moment, EnumUtil, DetailNavigationService) {
 
 
+      DetailNavigationService.cleanKundeList();
       $scope.rechnungsPositionenStatus = EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS);
 
       function resolveKunde(id) {

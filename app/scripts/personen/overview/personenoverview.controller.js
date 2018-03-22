@@ -4,17 +4,22 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext',
+<<<<<<< Updated upstream
+    'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, PersonenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext) {
+      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
 
+      DetailNavigationService.cleanKundeList();
+
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
+
+
         function(list) {
           if (list) {
             angular.forEach(list, function(item) {

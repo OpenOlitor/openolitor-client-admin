@@ -4,9 +4,10 @@
  */
 angular.module('openolitor-admin')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$filter',
-    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog',
-    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog) {
+    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog', 'DetailNavigationService',
+    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService) {
 
+      DetailNavigationService.cleanKundeList();
       $scope.entries = [];
       $scope.loading = false;
 

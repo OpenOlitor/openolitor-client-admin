@@ -5,15 +5,16 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
     'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService',
     function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.selectedAbo = undefined;
       $scope.model = {};
+      DetailNavigationService.cleanKundeList();
 
       $scope.search = {
         query: '',
