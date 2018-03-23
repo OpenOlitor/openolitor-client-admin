@@ -110,7 +110,8 @@ angular.module('openolitor-admin')
           exportODSModel: AbosOverviewModel,
           exportODSFilter: function() {
             return {
-              f: $scope.search.filterQuery
+              f: $scope.search.filterQuery,
+              x: $scope.search.complexFlags
             };
           },
           getData: function(params) {
