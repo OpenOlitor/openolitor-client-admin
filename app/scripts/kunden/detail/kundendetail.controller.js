@@ -87,6 +87,10 @@ angular.module('openolitor-admin')
             }
           }
 
+          angular.forEach($scope.kunde.ansprechpersonen, function(person) {
+            person.initRolle = person.rolle;
+          });
+
           $scope.rechnungen = KundenRechnungenModel.query({
             kundeId: $scope.kunde.id
           });
@@ -227,6 +231,10 @@ angular.module('openolitor-admin')
       };
 
       $scope.changeRolle = function(person) {
+        if(person.rolle === undefined || person.rolle === null) {
+          //detault value
+          person.rolle = ROLLE.KUNDE;
+        }
         KundenDetailService.changeRolle($routeParams.id, person.id, person.rolle);
       };
 
