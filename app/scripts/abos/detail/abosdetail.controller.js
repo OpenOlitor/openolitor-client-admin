@@ -274,13 +274,13 @@ angular.module('openolitor-admin')
         noEntityText: true,
         isDisabled: function(zusatzabo) {
           return !zusatzabo || zusatzabo.anzahlLieferungen.length > 0 ||
-            !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0})
+            !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function(zusatzabo) {
           return zusatzabo.$delete();
         }
       },{
-        label: gettext('Rechnungsposition manuell erstellen'),
+        label: gettext('Rechnung manuell erstellen'),
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
         onExecute: function(zusatzabo) {
