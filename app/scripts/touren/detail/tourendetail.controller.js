@@ -4,11 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('TourenDetailController', ['$scope', '$filter', 'localeSensitiveComparator',
-    'TourenService', 'TourenDetailModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location', 'DetailNavigationService',
-    function($scope, $filter, localeSensitiveComparator,TourenService, TourenDetailModel,
-      NgTableParams, cloneObj, $routeParams, $location, DetailNavigationService) {
+    'TourenService', 'TourenDetailModel', 'KundenOverviewModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location', 'DetailNavigationService',
+    function($scope, $filter, localeSensitiveComparator,TourenService, TourenDetailModel,KundenOverviewModel, NgTableParams, cloneObj, $routeParams, $location, DetailNavigationService) {
 
-      DetailNavigationService.cleanKundeList();
       $scope.unsortedTourlieferungen = [];
       $scope.sortedTourlieferungen = [];
       $scope.loading = false;
@@ -24,6 +22,32 @@ angular.module('openolitor-admin')
           beschreibung: undefined,
           tourlieferungen: []
         }
+      };
+
+      $scope.listToUse = function(id) {
+        if ($filter('filter')($scope.sortedTourlieferungen,{id:id},true)[0] === undefined){
+           return $scope.unsortedTourlieferungen;
+        }
+        else { return $scope.sortedTourlieferungen; }
+      };
+
+      $scope.navigateToKunde = function(id) {
+          $scope.filteredEntries = [];
+          var listKundeIds = []
+          var list = $scope.listToUse(id)
+          var currentKundeId = $filter('filter')(list,{id:id},true)[0];
+
+          angular.forEach(list, function(tour){
+              listKundeIds.push(tour.kundeId);
+          });
+
+          var allEntries = KundenOverviewModel.query({
+          }, function() {
+              angular.forEach(listKundeIds, function(kundeId){
+                  $scope.filteredEntries.push($filter('filter')(allEntries,{id:kundeId},true)[0]);
+              });
+              DetailNavigationService.detailFromOverview(currentKundeId.kundeId, $scope, 'kunden', $location.url());
+          });
       };
 
       $scope.save = function() {

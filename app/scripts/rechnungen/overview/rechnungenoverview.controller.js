@@ -4,18 +4,17 @@
  */
 angular.module('openolitor-admin')
   .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
-    '$location',
+    '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
     'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, RechnungenOverviewModel,
+    function($q, $scope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService) {
 
-      DetailNavigationService.cleanKundeList();
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
@@ -40,6 +39,25 @@ angular.module('openolitor-admin')
         ids: []
       };
 
+      $scope.navigateToKunde = function(id) {
+        $scope.filteredEntries = [];
+        var listKundeIds = []
+        var currentKundeId = $filter('filter')($scope.entries,{id:id},true)[0];
+        angular.forEach($scope.checkboxes.ids, function(id){
+            listKundeIds.push($scope.checkboxes.data[id].kundeId);
+        });
+
+        var allEntries = KundenOverviewModel.query({
+            f: $scope.search.filterQuery
+        }, function() {
+            angular.forEach(listKundeIds, function(kundeId){
+                $scope.filteredEntries.push($filter('filter')(allEntries,{id:kundeId},true)[0]);
+            });
+            DetailNavigationService.detailFromOverview(currentKundeId.kundeId, $scope, 'kunden', $location.url());
+        });
+      };
+
+    
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
         FileUtil.downloadGet('rechnungen/' + rechnung.id +

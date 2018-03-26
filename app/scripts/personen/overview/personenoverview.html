@@ -31,7 +31,7 @@
                 <input type="checkbox" ng-model="checkboxes.items[person.id]" />
               </td>
               <td data-title="'Kdn / Pers'|translate" sortable="'kundeId'">
-                <a ng-href="#/kunden/{{person.kundeId}}">{{person.kundeId}} / {{person.id}}</a>
+                <a ng-click="navigateToKunde(person.kundeId)" ng-href="#/kunden/{{person.kundeId}}">{{person.kundeId}} / {{person.id}}</a>
               </td>
               <td data-title="'Vorname'|translate" sortable="'vorname'">
                 {{person.vorname}}

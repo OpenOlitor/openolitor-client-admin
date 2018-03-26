@@ -6,13 +6,12 @@ angular.module('openolitor-admin')
   .controller('AuslieferungDetailController', ['$q', '$scope', '$filter',
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
-    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
+    'PostAuslieferungenModel', 'KundenOverviewModel', 'DetailNavigationService', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
+    'VorlagenService', 'localeSensitiveComparator', 'gettext','$location', 
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
-      TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext,DetailNavigationService) {
+      TourAuslieferungenModel, PostAuslieferungenModel, KundenOverviewModel, DetailNavigationService, NgTableParams,
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext, $location) {
 
-      DetailNavigationService.cleanKundeList();
       $scope.loading = false;
       $scope.model = {};
       $scope.selectedAbo = undefined;
@@ -34,6 +33,23 @@ angular.module('openolitor-admin')
           detailModel = PostAuslieferungenModel;
           break;
       }
+
+      $scope.navigateToKunde = function(id) {
+          $scope.filteredEntries = [];
+          var listKundeIds = []
+          var currentKorb = $filter('filter')($scope.tableParams.data,{id:id},true)[0];
+
+          angular.forEach($scope.model.koerbe, function(korbe){
+              listKundeIds.push(korbe.kunde.id);
+          });
+          var allEntries = KundenOverviewModel.query({
+          }, function() {
+              angular.forEach(listKundeIds, function(kundeId){
+                  $scope.filteredEntries.push($filter('filter')(allEntries,{id:kundeId},true)[0]);
+              });
+              DetailNavigationService.detailFromOverview(currentKorb.kunde.id, $scope, 'kunden',  $location.url() );
+          });
+      };
 
       $scope.projektVorlagen = function() {
         return VorlagenService.getVorlagen('Vorlage'+$scope.modelType+$scope.vorlageTyp);
