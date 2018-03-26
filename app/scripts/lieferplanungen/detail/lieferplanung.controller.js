@@ -831,7 +831,24 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-chevron-right',
         onExecute: function() {
-          return $scope.planungAbschliessen();
+          var hasEmpty = false;
+          lodash.forEach($scope.abotypenLieferungen, function(abotypLieferung) {
+            if((abotypLieferung.abotyp !== undefined && abotypLieferung.abotyp.typ !== 'ZusatzAbotyp') && (abotypLieferung.lieferpositionen === undefined || abotypLieferung.lieferpositionen.length === 0)) {
+              hasEmpty = true;
+            }
+          });
+          if(!hasEmpty) {
+            return $scope.planungAbschliessen();
+          } else {
+            //ask if it's ok to have empty Lieferungen (no product)
+            dialogService.displayDialogOkAbort(gettextCatalog.getString(
+                'Eine oder mehrere Lieferungen aus Hauptabos haben keine Produkte eingetragen. \nTrotzdem fortfahren?'
+              ),
+              function() {
+                return $scope.planungAbschliessen();
+              });
+          }
+
         }
       },{
         label: gettextCatalog.getString('Lieferplanung löschen'),
