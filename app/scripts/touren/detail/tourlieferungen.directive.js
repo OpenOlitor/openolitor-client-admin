@@ -6,11 +6,14 @@ angular.module('openolitor-admin').directive('ooTourlieferungen', [
       restrict: 'E',
       replace: true,
       scope: {
-        itemFilter: '=',
-        tourlieferungen: '='
+        itemFilter: "=",
+        tourlieferungen: "=",
+        unsortedTourlieferungen: "@",
+        sortedTourlieferungen: "@"
       },
       transclude: true,
-      templateUrl: 'scripts/touren/detail/tourlieferungen.html'
+      templateUrl: 'scripts/touren/detail/tourlieferungen.html',
+      controller: 'TourenDetailController'
     };
   }
 ]);

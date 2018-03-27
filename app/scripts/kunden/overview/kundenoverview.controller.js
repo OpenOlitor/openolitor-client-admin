@@ -9,7 +9,6 @@ angular.module('openolitor-admin')
       KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
 
       $scope.entries = [];
-      $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
 

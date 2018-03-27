@@ -6,11 +6,11 @@ angular.module('openolitor-admin')
   .controller('AuslieferungDetailController', ['$q', '$scope', '$filter',
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
-    'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'VorlagenService', 'localeSensitiveComparator', 'gettext',
+    'PostAuslieferungenModel', 'KundenOverviewModel', 'DetailNavigationService', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
+    'VorlagenService', 'localeSensitiveComparator', 'gettext','$location', 
     function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
-      TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext) {
+      TourAuslieferungenModel, PostAuslieferungenModel, KundenOverviewModel, DetailNavigationService, NgTableParams,
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext, $location) {
 
       $scope.loading = false;
       $scope.model = {};
@@ -33,6 +33,23 @@ angular.module('openolitor-admin')
           detailModel = PostAuslieferungenModel;
           break;
       }
+
+      $scope.navigateToKunde = function(id) {
+          $scope.filteredEntries = [];
+          var listKundeIds = []
+          var currentKorb = $filter('filter')($scope.tableParams.data,{id:id},true)[0];
+
+          angular.forEach($scope.model.koerbe, function(korbe){
+              listKundeIds.push(korbe.kunde.id);
+          });
+          var allEntries = KundenOverviewModel.query({
+          }, function() {
+              angular.forEach(listKundeIds, function(kundeId){
+                  $scope.filteredEntries.push($filter('filter')(allEntries,{id:kundeId},true)[0]);
+              });
+              DetailNavigationService.detailFromOverview(currentKorb.kunde.id, $scope, 'kunden',  $location.url() );
+          });
+      };
 
       $scope.projektVorlagen = function() {
         return VorlagenService.getVorlagen('Vorlage'+$scope.modelType+$scope.vorlageTyp);

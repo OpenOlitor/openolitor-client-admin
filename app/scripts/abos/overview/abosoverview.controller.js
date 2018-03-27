@@ -4,16 +4,36 @@
  */
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$filter', '$location',
-    'AbosOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus',
-    function($scope, $filter, $location, AbosOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus) {
+    'AbosOverviewModel', 'KundenOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService',
+    function($scope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.selectedAbo = undefined;
       $scope.model = {};
+
+      $scope.navigateToKunde = function(id) {
+          $scope.filteredEntries = [];
+          var listKundeIds = []
+          var currentKundeId = $filter('filter')($scope.entries,{kundeId:id},true)[0];
+
+          angular.forEach($scope.checkboxes.ids, function(id){
+              listKundeIds.push($scope.checkboxes.data[id].kundeId);
+          });
+
+          $scope.allEntries = KundenOverviewModel.query({
+              f: $scope.search.filterQuery
+          }, function() {
+              $scope.loading = false;
+              angular.forEach(listKundeIds, function(kundeId){
+                  $scope.filteredEntries.push($filter('filter')($scope.allEntries,{id:kundeId},true)[0]);
+              });
+              DetailNavigationService.detailFromOverview(currentKundeId.kundeId, $scope, 'kunden', $location.url());
+          });
+      };
 
       $scope.search = {
         query: '',

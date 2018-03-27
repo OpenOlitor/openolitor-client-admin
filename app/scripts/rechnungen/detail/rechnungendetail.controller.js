@@ -8,13 +8,15 @@ angular.module('openolitor-admin')
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
-    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'VorlagenService',
+    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'VorlagenService', 'DetailNavigationService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
-      RECHNUNGSTATUS, FileUtil, DataUtil, VorlagenService) {
+      RECHNUNGSTATUS, FileUtil, DataUtil, VorlagenService, DetailNavigationService) {
+
+      DetailNavigationService.cleanKundeList();
 
       var defaults = {
         model: {

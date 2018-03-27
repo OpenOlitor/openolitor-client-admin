@@ -15,7 +15,7 @@
         <span>&#8942;</span> {{tourlieferung.sort}}
       </td>
       <td>
-        <a ng-href="#/kunden/{{tourlieferung.kundeId}}">{{tourlieferung.kundeBezeichnung}}</a>
+        <a ng-click="navigateToKunde(tourlieferung.id)" ng-href="#/kunden/{{tourlieferung.kundeId}}">{{tourlieferung.kundeBezeichnung}}</a>
       </td>
       <td>
         {{tourlieferung.strasse}} {{tourlieferung.hausNummer}}
