@@ -171,7 +171,7 @@ angular
   })
   .constant('ARBEITSEINSATZSTATUS', {
     INVORBEREITUNG: gettext('InVorbereitung'),
-    OFFEN: gettext('Offen'),
+    BEREIT: gettext('Bereit'),
     ABGESAGT: gettext('Abgesagt'),
     ARCHIVIERT: gettext('Archiviert')
   })

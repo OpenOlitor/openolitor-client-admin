@@ -139,7 +139,7 @@ angular.module('openolitor-admin')
           return true;
         },
         isDisabled: function() {
-          return !$scope.arbeitsangebot.mehrPersonenOk || $scope.arbeitsangebot.anzahlPersonen > $scope.sumPersonen();
+          return !$scope.arbeitsangebot.mehrPersonenOk || $scope.arbeitsangebot.anzahlPersonen <= $scope.sumPersonen();
         }
       }];
 
@@ -258,6 +258,26 @@ angular.module('openolitor-admin')
           }
         });
       }
+
+      $scope.aaFreischalten = function() {
+        $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.BEREIT;
+        $scope.save();
+      };
+
+      $scope.aaZurueckziehen = function() {
+        $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.INVORBEREITUNG;
+        $scope.save();
+      };
+
+      $scope.aaAbsagen = function() {
+        $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.ABGESAGT;
+        $scope.save();
+      };
+
+      $scope.aaAbschliessen = function() {
+        $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.ARCHIVIERT;
+        $scope.save();
+      };
 
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (msg.entity === 'Arbeitseinsatz') {
