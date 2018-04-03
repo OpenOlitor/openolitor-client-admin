@@ -22,7 +22,8 @@ angular.module('openolitor-admin')
           typen: [],
           ansprechpersonen: [{
             id: undefined,
-            anrede: undefined
+            anrede: undefined,
+            categories: []
           }],
           pendenzen: [],
           abweichendeLieferadresse: false
