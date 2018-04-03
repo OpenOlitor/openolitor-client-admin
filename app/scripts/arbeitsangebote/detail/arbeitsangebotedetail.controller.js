@@ -139,7 +139,7 @@ angular.module('openolitor-admin')
           return true;
         },
         isDisabled: function() {
-          return !$scope.arbeitsangebot.mehrPersonenOk || $scope.arbeitsangebot.anzahlPersonen <= $scope.sumPersonen();
+          return !$scope.arbeitsangebot.mehrPersonenOk && $scope.arbeitsangebot.anzahlPersonen <= $scope.sumPersonen();
         }
       }];
 
@@ -217,7 +217,8 @@ angular.module('openolitor-admin')
             kundeBezeichnung: person.kundeBezeichnung,
             personId: person.id,
             personName: person.vorname + ' ' + person.name,
-            anzahlPersonen: 1
+            anzahlPersonen: 1,
+            einsatzZeit: $scope.arbeitsangebot.einsatzZeit
           }
         };
       };

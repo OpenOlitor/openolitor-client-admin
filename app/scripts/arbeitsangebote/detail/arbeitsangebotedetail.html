@@ -140,7 +140,7 @@
                   <div class="col-md-6">
                     <span translate>Eingeschriebene Personen</span> ({{sumPersonen()}})
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6" ng-if="arbeitsangebot.status === 'InVorbereitung' || arbeitsangebot.status === 'Bereit'">
                     <div class="btn-group pull-right" role="group">
                       <oo-actions-button model="arbeitsangebot" actions="einsatzActions"></oo-actions-button>
                     </div>
