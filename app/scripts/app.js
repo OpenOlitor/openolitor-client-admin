@@ -459,6 +459,25 @@ angular
     $httpProvider.interceptors.push('loggedOutInterceptor');
     $httpProvider.interceptors.push('errbitErrorInterceptor');
   }])
+  .filter('custNumber', function($filter, LIEFEREINHEIT) {
+    return function(number, einheit) {
+
+      if(LIEFEREINHEIT.KILOGRAMM.id === einheit) {
+        //return $filter.number(number, digits);
+        return Number(number).toFixed(3);
+      } else if(LIEFEREINHEIT.STUECK.id === einheit ||
+        LIEFEREINHEIT.BUND.id === einheit ||
+        LIEFEREINHEIT.PORTION.id === einheit) {
+        return Number(number).toFixed(1);
+      } else if(LIEFEREINHEIT.GRAMM.id === einheit) {
+      return Number(number).toFixed(0);
+      } else if(LIEFEREINHEIT.LITER.id === einheit) {
+        return Number(number).toFixed(2);
+      } else {
+        return number;
+      }
+    };
+  })
   .filter('fromNow', function(moment) {
     return function(input) {
       return moment(input).fromNow();
