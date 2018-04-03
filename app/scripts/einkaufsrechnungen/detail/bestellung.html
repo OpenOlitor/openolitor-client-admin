@@ -16,7 +16,7 @@
         <tbody>
           <tr ng-repeat="position in bestellung.positionen | orderBy:'produktBeschrieb'">
             <td>
-              {{(position.menge * position.anzahl)  | number:2}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}
+              {{(position.menge * position.anzahl)  | custNumber:position.einheit}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}
             </td>
             <td>
               {{position.produktBeschrieb}}
