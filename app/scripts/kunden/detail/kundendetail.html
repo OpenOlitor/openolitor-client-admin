@@ -280,7 +280,7 @@
                                     <label for="nameAccountHolder" translate>Name of the Account Holder</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}">
+                                    <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}" ng-required="kunde.paymentType==='directDebit'">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -288,7 +288,7 @@
                                     <label for="addressAccountHolder" translate>Address of the account holder</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="addressAccountHolder" ng-model="kunde.kontoDaten.addressAccountHolder" placeholder="{{'Address of the Account Holder'|translate}}">
+                                    <input type="text" class="form-control" name="addressAccountHolder" ng-model="kunde.kontoDaten.addressAccountHolder" placeholder="{{'Address of the Account Holder'|translate}}" ng-required="kunde.paymentType==='directDebit'">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -296,7 +296,7 @@
                                     <label for="iban" translate>IBAN</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="iban" ng-model="kunde.kontoDaten.iban" placeholder="{{'IBAN'|translate}}" ng-iban>
+                                    <input type="text" class="form-control" name="iban" ng-model="kunde.kontoDaten.iban" placeholder="{{'IBAN'|translate}}" ng-iban ng-required="kunde.paymentType==='directDebit'">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -304,7 +304,7 @@
                                     <label for="bankName" translate>Bank Name</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="bankName" ng-model="kunde.kontoDaten.bankName" placeholder="{{'Bank Name'|translate}}">
+                                    <input type="text" class="form-control" name="bankName" ng-model="kunde.kontoDaten.bankName" placeholder="{{'Bank Name'|translate}}" ng-required="kunde.paymentType==='directDebit'">
                                 </div>
                             </div>
                             <div class="row form-group">
