@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','ZahlungsExportsOverviewModel','FileSaver',
+    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','FileSaver',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, VorlagenService,
-      localeSensitiveComparator, gettext, DetailNavigationService,ZahlungsExportsOverviewModel,FileSaver) {
+      localeSensitiveComparator, gettext, DetailNavigationService,FileSaver) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
