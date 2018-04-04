@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
+    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','ZahlungsExportsOverviewModel','FileSaver',
     function($q, $scope, $filter, $location, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, VorlagenService,
-      localeSensitiveComparator, gettext, DetailNavigationService) {
+      localeSensitiveComparator, gettext, DetailNavigationService,ZahlungsExportsOverviewModel,FileSaver) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -223,8 +223,9 @@ angular.module('openolitor-admin')
         onExecute: function() {
           return $http.post(API_URL + 'rechnungen/aktionen/pain_008_001_07', {
             'ids': $scope.checkboxes.ids
-          }).then(function() {
-            $scope.model.actionInProgress = undefined;
+          }).then(function(file) {
+             var data = new Blob([file.data], { type: 'text/plain;charset=utf-8' });
+             FileSaver.saveAs(data, 'pain_008_001_07.xml');
           });
         },
         isDisabled: function() {
