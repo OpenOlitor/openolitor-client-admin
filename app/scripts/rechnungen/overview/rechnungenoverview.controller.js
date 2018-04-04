@@ -37,8 +37,7 @@ angular.module('openolitor-admin')
           }
       }
 
-      var pt = EnumUtil.asArray(PAYMENT_TYPES);
-      $scope.paymentTypes = pt.map(getFullName);
+      $scope.paymentTypes = EnumUtil.asArray(PAYMENT_TYPES);
       $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 
       $scope.search = {
