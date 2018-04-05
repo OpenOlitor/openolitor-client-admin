@@ -23,6 +23,5 @@ angular.module('openolitor-admin')
                 response: file
             };
         }
-    
     }});
   }]);

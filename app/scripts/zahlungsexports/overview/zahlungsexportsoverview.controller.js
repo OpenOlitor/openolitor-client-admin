@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('ZahlungsExportsOverviewController', ['$q', '$scope', '$filter', '$location',
-    'ZahlungsExportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator','FileSaver',
+    'ZahlungsExportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator','FileSaver', 'ZAHLUNGSEXPORTSTATUS',
     function($q, $scope, $filter, $location, ZahlungsExportsOverviewModel, NgTableParams,
-      localeSensitiveComparator, FileSaver) {
+      localeSensitiveComparator, FileSaver, ZAHLUNGSEXPORTSTATUS) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -15,6 +15,7 @@ angular.module('openolitor-admin')
         query: ''
       };
 
+      $scope.zahlungsExportStatus = ZAHLUNGSEXPORTSTATUS;
       $scope.hasData = function() {
         return $scope.entries !== undefined;
       };
@@ -62,6 +63,14 @@ angular.module('openolitor-admin')
                 FileSaver.saveAs(file.response, 'pain_008_001_07.xml');
             });
       };
+
+      $scope.saveStatusFunc = function(zahlungExportId){
+          return function (status) {
+          var index = $scope.entries.findIndex(entry => entry.id == zahlungExportId);
+              $scope.entries[index].status= status;
+          $scope.entries[index].$save();
+        };
+        }
         
       function search() {
         if ($scope.loading) {
@@ -84,6 +93,6 @@ angular.module('openolitor-admin')
       $scope.$watch('search.query', function() {
         search();
       }, true);
-
-    }
+      }
+   
   ]);
