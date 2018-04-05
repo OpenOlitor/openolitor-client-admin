@@ -305,6 +305,11 @@ angular
     ERLEDIGT: gettext('Erledigt'),
     NICHTERLEDIGT: gettext('NichtErledigt')
   })
+  .constant('ZAHLUNGSEXPORTSTATUS', {
+    SENT: gettext('Sent'),
+    CREATED: gettext('Created'),
+    ARCHIVED: gettext('Archived')
+  })
   .constant('AUSLIEFERUNGSTATUS', {
     ERFASST: gettext('Erfasst'),
     AUSGELIEFERT: gettext('Ausgeliefert')
