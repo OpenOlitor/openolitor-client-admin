@@ -94,8 +94,9 @@ angular.module('openolitor-admin')
          },function(zusatzAbos){
            $scope.zusatzAbos = zusatzAbos;
            $scope.zusatzAbos.forEach(function(zusatzAbo){
-               if (zusatzAbo.price){
-                  zusatzAbo.price = $scope.getZusatzabotypPrice($scope.zusatzAbo.abotypId);
+               zusatzAbo.zusatzaboTypPrice = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
+               if (!zusatzAbo.price){
+                  zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
                }
            });
          });
@@ -124,6 +125,7 @@ angular.module('openolitor-admin')
               id: $scope.abo.kundeId
             }, function(kunde) {
               $scope.kunde = kunde;
+              $scope.abo.price = $scope.aboPrice($scope.abo);
             });
           }
 
@@ -352,13 +354,6 @@ angular.module('openolitor-admin')
               2);
         }
       }, {
-        label: gettext('Price anpassen'),
-        noEntityText: true,
-        iconClass: 'fa fa-balance-scale',
-        onExecute: function() {
-          showChangePriceDialog();
-        }
-      }, {
         label: gettext('Manuelle Rechnung erstellen'),
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
@@ -494,20 +489,32 @@ angular.module('openolitor-admin')
         }
         else {
             if (!abo.price){
-                return (abo.abotyp.preis + " " + gettext(' (default price for ') + abo.abotyp.name + ')');
+                return (abo.abotyp.preis);
             } else {
                 return (abo.price);
             }
         }
       }
 
-      $scope.getZusatzabotypPrice = function(id) {
+      $scope.defaultAboPrice = function() {
+        $scope.abo.price = $scope.abo.abotyp.preis
+      }
+
+      $scope.defaultZusatzaboPrice = function(zusatzaboId) {
+        $scope.zusatzAbos.forEach(function(zusatzAbo){
+          if (zusatzAbo.id === zusatzaboId){
+            zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
+          }
+        });
+      }
+
+      $scope.getZusatzabotypPrice = function(zusatzaboTypId) {
         var zusatzaboTypPrice;
-        if (!$scope.zusatzAboTyp)  {
+        if (zusatzaboTypId == null)  {
             return ;
         } else {
             $scope.zusatzAboTyp.forEach(function(za) {
-                if (za.id === id) {
+                if (za.id === zusatzaboTypId) {
                     zusatzaboTypPrice = za.preis;
                 }
             });
@@ -517,11 +524,11 @@ angular.module('openolitor-admin')
 
       $scope.zusatzaboPrice = function(zusatzabo) {
         if (!zusatzabo) {
-          return
+          return 
         }
         else {
             if (!zusatzabo.price){
-                return ($scope.getZusatzabotypPrice(zusatzabo.abotypId) + " " + gettext(' (default price for ') + zusatzabo.abotypName + ')');
+                return $scope.getZusatzabotypPrice(zusatzabo.abotypId);
             } else {
                 return (zusatzabo.price);
             }
