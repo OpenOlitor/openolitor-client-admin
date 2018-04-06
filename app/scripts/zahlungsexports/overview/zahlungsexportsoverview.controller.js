@@ -66,8 +66,15 @@ angular.module('openolitor-admin')
 
       $scope.saveStatusFunc = function(zahlungExportId){
           return function (status) {
-          var index = $scope.entries.findIndex(entry => entry.id == zahlungExportId);
-              $scope.entries[index].status= status;
+          var index = 0;
+          var i = 0;
+          $scope.entries.forEach(function(entry){
+                  if(entry.id == zahlungExportId){
+                      index = i;
+                  }
+          });
+          
+          $scope.entries[index].status= status;
           $scope.entries[index].$save();
         };
         }
