@@ -96,7 +96,8 @@
           <label translate>Preis</label>
         </div>
         <div class="col-md-8">
-            {{aboPrice(abo)}}
+            <input class="col-md-6" type="number" step="0.01" ng-model="abo.price">
+            <div ng-if="abo.price != abo.abotyp.preis" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultAboPrice()" title="{{'Den Standardpreis wiederherstellen'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button></div>
         </div>
       </div>
       <div class="row form-group">
@@ -154,48 +155,50 @@
         <div class="col-md-12" ng-if="zusatzAbos.length === 0" translate>Kein Zusatzabo vorhanden.</div>
 
         <div class="col-md-12">
-          <div ng-repeat="zusatzAbo in zusatzAbos" class="row">
+            <div ng-repeat="zusatzAbo in zusatzAbos" class="row">
+                <hr class="light">
+                <div class="zusatzabo">
+                    <div class="col-md-offset-1 col-md-4"> {{zusatzAbo.abotypName}}</div>
+                    <div class="col-md-7">
+                        <p class="pull-right input-group">
+                        <oo-actions-button model="zusatzAbo" form="zusatzAboForm" entity="ZusatzAbo" actions="zusatzAboActions" small="true">{{'Zusatzabo'|translate}}</oo-actions-button>
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-md-offset-5">
+                        <p class="input-group">
+                        <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.start" is-open="openZusatzAbo.start[zusatzAbo.id]" enable-time="false" max-date="abo.ende" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-md-offset-5">
+                        <p class="input-group">
+                        <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.ende" is-open="openZusatzAbo.ende[zusatzAbo.id]" enable-time="false" max-date="abo.ende"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id ,'ende')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                        </p>
+                    </div>
+                    <div class="col-md-offset-2 col-md-3" translate>
+                        Preis:
+                    </div>
+                    <div class="col-md-6" translate>
+                    <input id="zusatzaboPrice" class="col-md-9" type="number" step="0.01" ng-model="zusatzAbo.price">
+                    <div ng-if="zusatzAbo.price != zusatzAbozusatzaboTypPrice" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultZusatzaboPrice(zusatzAbo.id)" title="{{'Den Standardpreis wiederherstellen'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button>
+                    </div>
+                    </div>
+                    <div class="col-md-offset-2 col-md-3" translate>
+                        Guthaben:
+                    </div>
+                    <div class="col-md-5">
+                        {{zusatzAbo.guthaben}}
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
             <hr class="light">
-            <div class="zusatzabo">
-              <div class="col-md-offset-1 col-md-5"> {{zusatzAbo.abotypName}}</div>
-              <div class="col-md-6">
-                <p class="pull-right input-group">
-                  <oo-actions-button model="zusatzAbo" form="zusatzAboForm" entity="ZusatzAbo" actions="zusatzAboActions" small="true">{{'Zusatzabo'|translate}}</oo-actions-button>
-                </p>
-              </div>
-              <div class="col-md-6 col-md-offset-4">
-                <p class="input-group">
-                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.start" is-open="openZusatzAbo.start[zusatzAbo.id]" enable-time="false" max-date="abo.ende" />
-                  <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
-                  </span>
-                </p>
-              </div>
-              <div class="col-md-6 col-md-offset-4">
-                <p class="input-group">
-                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.ende" is-open="openZusatzAbo.ende[zusatzAbo.id]" enable-time="false" max-date="abo.ende"/>
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id ,'ende')"><i class="fa fa-calendar"></i></button>
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div class="clearfix"> </div>
-            <div class="col-md-offset-2 col-md-3" translate>
-              Preis:
-            </div>
-            <div class="col-md-5">
-              {{zusatzaboPrice(zusatzAbo)}}
-            </div>
-            <div class="col-md-offset-2 col-md-3" translate>
-              Guthaben:
-            </div>
-            <div class="col-md-5">
-              {{zusatzAbo.guthaben}}
-            </div>
-          </div>
-        <hr class="light">
-      </div>
+        </div>
       </div>
       <oo-abo-abwesenheiten abo="abo"></oo-abo-abwesenheiten>
     </form>
