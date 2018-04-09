@@ -38,7 +38,7 @@
                 </span>
               </td>
               <td data-title="'Personen'|translate">
-                {{arbeitsangebot.anzahlEingeschriebene}} / <span ng-if="!arbeitsangebot.mehrPersonenOk" translate>max.</span>{{arbeitsangebot.anzahlPersonen}}
+                {{arbeitsangebot.anzahlEingeschriebene}} / <span ng-if="!arbeitsangebot.mehrPersonenOk" translate>max.</span>{{arbeitsangebot.anzahlPersonen}}<span ng-if="arbeitsangebot.mehrPersonenOk" translate>&nbsp;+</span>
               </td>
               <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{kategorien: 'select'}" filter-data="kategorienL">
                 {{}}

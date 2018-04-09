@@ -141,6 +141,19 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.arbeitsangebot.mehrPersonenOk && $scope.arbeitsangebot.anzahlPersonen <= $scope.sumPersonen();
         }
+      }, {
+        label: gettext('Personenliste anzeigen'),
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'personId');
+          $location.path('/personen').search('q', 'id=' + result.join());
+        }
       }];
 
       $scope.getPersonen = function(filter) {
