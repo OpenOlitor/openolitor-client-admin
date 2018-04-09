@@ -295,7 +295,7 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (msg.entity === 'Arbeitseinsatz') {
-          if($scope.user.id === msg.data.modifikator) {
+          if($scope.user.id === msg.data.modifikator && $scope.arbeitseinsaetze) {
             $scope.arbeitseinsaetze.push(msg.data);
             $scope.$apply();
             $scope.tableParams.reload();
@@ -307,7 +307,7 @@ angular.module('openolitor-admin')
         if (msg.entity === 'Arbeitseinsatz') {
           if($scope.user.id === msg.data.modifikator) {
             angular.forEach($scope.arbeitseinsaetze, function(arbeitseinsats) {
-              if (arbeitseinsats.id === msg.data.id) {
+              if (arbeitseinsats.id === msg.data.id && $scope.arbeitseinsaetze) {
                 var index = $scope.arbeitseinsaetze.indexOf(
                   arbeitseinsats);
                 if (index > -1) {

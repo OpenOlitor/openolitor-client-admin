@@ -48,8 +48,9 @@
               </td>
               <td data-title="'Status'|translate" sortable="'aktiv'">
                 <i ng-if="arbeitsangebot.status === 'InVorbereitung'" ng-attr-title="{{'In Vorbereitung'|translate}}" class="fa fa-clock-o"></i>
-                <i ng-if="arbeitsangebot.status === 'Offen'" ng-attr-title="{{'Offen'|translate}}" class="fa fa-calendar-plus-o"></i>
+                <i ng-if="arbeitsangebot.status === 'Bereit'" ng-attr-title="{{'Bereit'|translate}}" class="fa fa-calendar-plus-o"></i>
                 <i ng-if="arbeitsangebot.status === 'Abgesagt'" ng-attr-title="{{'Abgesagt'|translate}}" class="fa fa-times-circle-o"></i>
+                <i ng-if="arbeitsangebot.status === 'Archiviert'" ng-attr-title="{{'Archiviert'|translate}}" class="fa fa-archive"></i>
               </td>
             </tr>
           </table>
