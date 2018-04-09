@@ -299,7 +299,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         isDisabled: function(zusatzabo) {
           return !zusatzabo || zusatzabo.anzahlLieferungen.length > 0 ||
-            !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0})
+            !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function(zusatzabo) {
           return zusatzabo.$delete();
@@ -485,7 +485,7 @@ angular.module('openolitor-admin')
 
       $scope.aboPrice = function(abo) {
         if (!abo) {
-          return
+          return;
         }
         else {
             if (!abo.price){
@@ -494,11 +494,11 @@ angular.module('openolitor-admin')
                 return (abo.price);
             }
         }
-      }
+      };
 
       $scope.defaultAboPrice = function() {
-        $scope.abo.price = $scope.abo.abotyp.preis
-      }
+        $scope.abo.price = $scope.abo.abotyp.preis;
+      };
 
       $scope.defaultZusatzaboPrice = function(zusatzaboId) {
         $scope.zusatzAbos.forEach(function(zusatzAbo){
@@ -506,11 +506,11 @@ angular.module('openolitor-admin')
             zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
           }
         });
-      }
+      };
 
       $scope.getZusatzabotypPrice = function(zusatzaboTypId) {
         var zusatzaboTypPrice;
-        if (zusatzaboTypId == null)  {
+        if (zusatzaboTypId === null) {
             return ;
         } else {
             $scope.zusatzAboTyp.forEach(function(za) {
@@ -520,11 +520,11 @@ angular.module('openolitor-admin')
             });
             return zusatzaboTypPrice;
         }
-      }
+      };
 
       $scope.zusatzaboPrice = function(zusatzabo) {
         if (!zusatzabo) {
-          return 
+          return;
         }
         else {
             if (!zusatzabo.price){
@@ -533,7 +533,7 @@ angular.module('openolitor-admin')
                 return (zusatzabo.price);
             }
         }
-      }
+      };
 
       $scope.guthabenTooltip = function(abo) {
         var vertrag = '';
