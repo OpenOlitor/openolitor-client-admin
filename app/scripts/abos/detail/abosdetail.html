@@ -97,7 +97,7 @@
         </div>
         <div class="col-md-8">
             <input class="col-md-6" type="number" step="0.01" ng-model="abo.price">
-            <div ng-if="abo.price != abo.abotyp.preis" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultAboPrice()" title="{{'Initialize with the zusatzabo default price'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button></div>
+            <div ng-if="abo.price != abo.abotyp.preis" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultAboPrice()" title="{{'Den Standardpreis wiederherstellen'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button></div>
         </div>
       </div>
       <div class="row form-group">
@@ -223,7 +223,7 @@
                     </div>
                     <div class="col-md-6" translate>
                     <input id="zusatzaboPrice" class="col-md-9" type="number" step="0.01" ng-model="zusatzAbo.price">
-                    <div ng-if="zusatzAbo.price != zusatzAbozusatzaboTypPrice" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultZusatzaboPrice(zusatzAbo.id)" title="{{'Initialize with the zusatzabo default price'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button>
+                    <div ng-if="zusatzAbo.price != zusatzAbozusatzaboTypPrice" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultZusatzaboPrice(zusatzAbo.id)" title="{{'Den Standardpreis wiederherstellen'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button>
                     </div>
                     </div>
                     <div class="col-md-offset-2 col-md-3" translate>
