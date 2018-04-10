@@ -578,10 +578,19 @@ angular.module('openolitor-admin')
           'w' : 'M';
         var now = moment();
         var laufzeit = moment(abo.start);
-        do {
-          laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert - 1, einheit);
-        } while (laufzeit.isBefore(now));
-        return laufzeit.endOf(einheit).toDate();
+        if (abo.abotyp.vertragslaufzeit.wert !== 0 ){
+          laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert  , einheit);
+          if(laufzeit.isBefore(now.add(abo.abotyp.kuendigungsfrist.wert ,einheit))){
+            return now.endOf(einheit).toDate();
+          }
+          else{
+            return laufzeit.endOf(einheit).toDate();
+          }
+        }
+        else{ 
+            laufzeit = laufzeit.add(abo.abotyp.kuendigungsfrist.wert ,einheit);
+            return laufzeit.endOf(einheit).toDate();
+        }
       };
 
       $scope.kuendigungsfrist = function(abo) {
