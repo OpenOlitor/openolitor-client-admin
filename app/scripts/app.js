@@ -128,7 +128,7 @@ angular
   })
   .constant('PAYMENT_TYPES', {
     ANDERER: gettext('Anderer'),
-    DIRECT_DEBIT: gettext('Direct Debit'),
+    DIRECT_DEBIT: gettext('DirectDebit'),
     TRANSFER: gettext('Transfer')
   })
   .constant('ABOTYPEN', {

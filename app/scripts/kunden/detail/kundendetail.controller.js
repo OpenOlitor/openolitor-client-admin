@@ -26,7 +26,8 @@ angular.module('openolitor-admin')
             categories: []
           }],
           pendenzen: [],
-          abweichendeLieferadresse: false
+          abweichendeLieferadresse: false,
+          paymentType: "Anderer"
         }
       };
 
