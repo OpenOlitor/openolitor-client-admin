@@ -62,6 +62,9 @@ module.exports = function(grunt) {
       'prod-nuglar': {
         'm1': 'https://prod.openolitor.ch/nuglar/'
       },
+      'prod-randebandi': {
+        'm1': 'https://prod.openolitor.ch/randebandi/'
+      },
       'test-prod-soliterre': {
         'm1': 'https://testprod.openolitor.ch/soliterre/'
       },
@@ -76,6 +79,9 @@ module.exports = function(grunt) {
       },
       'test-prod-nuglar': {
         'm1': 'https://testprod.openolitor.ch/nuglar/'
+      },
+      'test-prod-randebandi': {
+        'm1': 'https://testprod.openolitor.ch/randebandi/'
       }
     },
     EMAIL_TO_ADDRESS: {
@@ -83,6 +89,8 @@ module.exports = function(grunt) {
       'prod-bioabi': 'info@bioabi.ch',
       'prod-gmuesluzern': 'info@gmüeschorb-luzern.ch',
       'prod-croquterre': 'info@croquterre.ch',
+      'prod-nuglar': 'info@nuglargaerten.ch',
+      'prod-randebandi': 'info@randebandi.ch',
     }
   };
   var env = 'dev';

@@ -42,7 +42,7 @@
                 </span>
               </td>
               <td data-title="'Abonnentin'|translate" sortable="'kunde'">
-                <a ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
+                <a  ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
               </td>
               <td data-title="'Start'|translate" sortable="'start'">
                 {{abo.start | date:'dd.MM.yyyy'}}
