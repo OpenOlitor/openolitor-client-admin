@@ -7,7 +7,7 @@ angular.module('openolitor-admin').directive('ooAddPersonToEinsatz', [
       replace: true,
       scope: false,
       transclude: true,
-      templateUrl: '/scripts/arbeitsangebote/detail/addpersontoeinsatz.html',
+      templateUrl: 'scripts/arbeitsangebote/detail/addpersontoeinsatz.html',
       controller: 'ArbeitsangeboteDetailController'
     };
   }
