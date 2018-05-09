@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     '$location', 'EinkaufsrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
-    'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService', 'gettext',
+    'msgBus', 'lodash', 'localeSensitiveComparator', 'ReportvorlagenService', 'gettext',
     function($scope, $filter, $location, EinkaufsrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
-      VorlagenService, gettext) {
+      ReportvorlagenService, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -206,7 +206,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageLieferantenabrechnung');
+        return ReportvorlagenService.getVorlagen('VorlageLieferantenabrechnung');
       };
 
       $scope.$watch('search.query', function() {

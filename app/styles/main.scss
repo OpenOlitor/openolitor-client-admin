@@ -533,14 +533,15 @@ footer, .footer {
 /* Sidebar Styles */
 
 .sidebar-nav {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 240px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background: rgba(255,255,255,0.9);
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 240px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgba(255,255,255,0.9);
+  padding-bottom: 20px;
 }
 
 .sidebar-nav li {

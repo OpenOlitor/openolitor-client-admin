@@ -5,9 +5,9 @@
 angular.module('openolitor-admin')
   .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
     'ProduzentenModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'FilterQueryUtil', 'gettext',
+    'OverviewCheckboxUtil', '$location', 'ReportvorlagenService', 'FilterQueryUtil', 'gettext',
     function($q, $scope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, FilterQueryUtil, gettext) {
+      OverviewCheckboxUtil, $location, ReportvorlagenService, FilterQueryUtil, gettext) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -100,7 +100,7 @@ angular.module('openolitor-admin')
       search();
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageProduzentenbrief');
+        return ReportvorlagenService.getVorlagen('VorlageProduzentenbrief');
       };
 
       $scope.closeBericht = function() {

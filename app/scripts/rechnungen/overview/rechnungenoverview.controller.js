@@ -8,11 +8,11 @@ angular.module('openolitor-admin')
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
+    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
+      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService) {
 
       $scope.entries = [];
@@ -113,7 +113,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageRechnung');
+        return ReportvorlagenService.getVorlagen('VorlageRechnung');
       };
 
       // watch for data checkboxes
@@ -209,9 +209,10 @@ angular.module('openolitor-admin')
           $location.path('/kunden').search('q', 'id=' + result.join());
         }
       }, {
-        label: gettext('Email Versand*'),
+        label: gettext('Rechungen per E-Mail verschicken'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
+          //TODO OO-762 using Mail-Service functionality on Overview
           return false;
         },
         isDisabled: function() {

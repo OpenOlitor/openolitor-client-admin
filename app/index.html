@@ -106,7 +106,8 @@
       <li><a id="nav-administration" class="nav-item" ng-click="menushow['administration'] = !menushow['administration']"><span><i class="fa fa-cogs"></i> <span translate>Administration</span></span></a></li>
       <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reports')}]" href="" ng-href="#/reports"><i class="fa fa-bar-chart"></i> <span translate>Auswertungen</span></a></li>
       <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-journal" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('journal')}]" href="" ng-href="#/journal"><i class="fa fa-list-ul"></i> <span translate>Journal</span></a></li>
-      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-vorlagen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('vorlagen')}]" href="" ng-href="#/vorlagen"><i class="fa fa-file-text-o"></i> <span translate>Vorlagen</span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reportvorlagen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reportvorlagen')}]" href="" ng-href="#/reportvorlagen"><i class="fa fa-file-text-o"></i> <span translate>Report-Vorlagen</span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-mailvorlagen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('mailvorlagen')}]" href="" ng-href="#/mailvorlagen"><i class="fa fa-envelope-o"></i> <span translate>Mail-Vorlagen</span></a></li>
       <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('projektsettings')}]" href="" ng-href="#/projektsettings"><i class="fa fa-sitemap"></i> <span translate>Projekt</span></a></li>
 
     </ul>
@@ -317,12 +318,19 @@
   <script src="scripts/projekt/projekt.service.js"></script>
   <script src="scripts/projekt/settings/projektsettings.controller.js"></script>
 
-  <script src="scripts/vorlagen/vorlagen.model.js"></script>
-  <script src="scripts/vorlagen/vorlagetypen.model.js"></script>
-  <script src="scripts/vorlagen/vorlagen.service.js"></script>
-  <script src="scripts/vorlagen/vorlagen.controller.js"></script>
-  <script src="scripts/vorlagen/vorlagen.directive.js"></script>
-  <script src="scripts/vorlagen/vorlagenoverview.controller.js"></script>
+  <script src="scripts/reportvorlagen/reportvorlagen.model.js"></script>
+  <script src="scripts/reportvorlagen/reportvorlagetypen.model.js"></script>
+  <script src="scripts/reportvorlagen/reportvorlagen.service.js"></script>
+  <script src="scripts/reportvorlagen/reportvorlagen.controller.js"></script>
+  <script src="scripts/reportvorlagen/reportvorlagen.directive.js"></script>
+  <script src="scripts/reportvorlagen/reportvorlagenoverview.controller.js"></script>
+
+  <script src="scripts/mailvorlagen/mailvorlagen.model.js"></script>
+  <script src="scripts/mailvorlagen/mailvorlagetypen.model.js"></script>
+  <script src="scripts/mailvorlagen/mailvorlagen.service.js"></script>
+  <script src="scripts/mailvorlagen/mailvorlagen.controller.js"></script>
+  <script src="scripts/mailvorlagen/mailvorlagen.directive.js"></script>
+  <script src="scripts/mailvorlagen/mailvorlagenoverview.controller.js"></script>
 
   <script src="scripts/journal/overview/journaloverview.controller.js"></script>
   <script src="scripts/journal/journallist.model.js"></script>
