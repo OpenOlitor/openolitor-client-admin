@@ -37,6 +37,8 @@
 </head>
 
 <body class="white openolitor adminportal" ng-controller="OpenOlitorRootController">
+  <ngp-piwik ngp-set-js-url="https://stats.tegonal.com/piwik.js" ngp-set-tracker-url="https://stats.tegonal.com/piwik.php" ngp-set-site-id="13"> </ngp-piwik>
+
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -192,6 +194,7 @@
   <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <script src="bower_components/ng-iban/dist/ng-iban.js"></script>
+  <script src="bower_components/angular-piwik/angular-piwik.js"></script>
   <!-- endbower -->
   <!-- language specific angular file -->
   <script src="bower_components/angular-i18n/angular-locale_de-ch.js"></script>

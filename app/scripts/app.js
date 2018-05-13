@@ -83,6 +83,7 @@ angular
     'angular.css.injector',
     'angular-toArrayFilter',
     'mm.iban',
+    'piwik',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
