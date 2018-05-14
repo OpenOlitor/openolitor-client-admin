@@ -78,7 +78,7 @@ angular.module('openolitor-admin')
           });
       };
 
-        $scope.navigateToDetail = function(id) {
+      $scope.navigateToDetail = function(id) {
         DetailNavigationService.detailFromOverview(id, $scope, 'rechnungen', $location.url());
       };
 
