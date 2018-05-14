@@ -78,7 +78,7 @@ angular.module('openolitor-admin')
           });
       };
 
-      $scope.navigateToDetail = function(id) {
+        $scope.navigateToDetail = function(id) {
         DetailNavigationService.detailFromOverview(id, $scope, 'rechnungen', $location.url());
       };
 
@@ -105,6 +105,16 @@ angular.module('openolitor-admin')
         return false;
       };
 
+      var allRechnungDocumentCreated = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (!items[id].fileStoreId) {
+            return false;
+          }
+        }
+        return true;
+      };
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -219,6 +229,25 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-pencil',
+        onExecute: function() {
+          $scope.url = 'mailing/sendEmailToInvoicesSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');  
+          $scope.rechnungIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .map('id')
+            .value();
+          $scope.attachment = allRechnungDocumentCreated($scope.checkboxes.ids, $scope.checkboxes.data);
+          $scope.showCreateEMailDialog = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+        }, {
         label: gettext('Rechnungen löschen'),
         iconClass: 'fa fa-times',
         isDisabled: function() {
