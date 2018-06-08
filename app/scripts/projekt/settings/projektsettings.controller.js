@@ -19,13 +19,14 @@ angular.module('openolitor-admin')
         'FileSaver',
         'MONATE',
         'WAEHRUNG',
+        'EINSATZEINHEIT',
         'Upload',
         'msgBus',
         'cloneObj',
         'API_URL',
         function($scope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
-            ProjektService, ProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
+            ProjektService, ProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, API_URL
         ) {
             $scope.templateKundentyp = {};
@@ -56,6 +57,8 @@ angular.module('openolitor-admin')
             };
 
             $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+
+            $scope.einsatzEinheiten = EnumUtil.asArray(EINSATZEINHEIT);
 
             $scope.monate = EnumUtil.asArray(MONATE);
 

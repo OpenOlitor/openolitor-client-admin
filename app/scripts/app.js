@@ -239,6 +239,12 @@ angular
     KUNDE: gettext('Kunde'),
     ADMINISTRATOR: gettext('Administrator'),
   })
+  .constant('EINSATZEINHEIT', {
+    STUNDEN: gettext('Stunden'),
+    HALBTAGE: gettext('Halbtage'),
+    TAGE: gettext('Tage'),
+    PUNKTE: gettext('Punkte'),
+  })
   .constant('uiDatetimePickerConfig', {
       dateFormat: 'dd.MM.yyyy HH:mm',
       defaultTime: '08:00:00',
