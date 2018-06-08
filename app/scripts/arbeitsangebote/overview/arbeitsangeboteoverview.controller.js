@@ -30,11 +30,11 @@ angular.module('openolitor-admin')
           }
         });
 
-        $scope.search = {
-          query: '',
-          queryQuery: '',
-          filterQuery: ''
-        };
+      $scope.search = {
+        query: '',
+        queryQuery: '',
+        filterQuery: ''
+      };
 
       var existingQuery = $location.search().q;
       if (existingQuery) {
@@ -111,7 +111,7 @@ angular.module('openolitor-admin')
 
             $scope.filteredEntries = filteredData;
 
-            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+            //$location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
 
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());

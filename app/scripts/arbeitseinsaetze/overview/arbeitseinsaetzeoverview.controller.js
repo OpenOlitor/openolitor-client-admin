@@ -6,8 +6,9 @@ angular.module('openolitor-admin')
   .controller('ArbeitseinsaetzeOverviewController', ['$q', '$scope', '$filter',
     'ArbeitseinsaetzeModel', 'NgTableParams', 'localeSensitiveComparator',
     'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService', 'gettext',
+    'FilterQueryUtil',
     function($q, $scope, $filter, ArbeitseinsaetzeModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService, gettext) {
+      OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService, gettext, FilterQueryUtil) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -30,9 +31,16 @@ angular.module('openolitor-admin')
           }
         });
 
-      $scope.search = {
-        query: ''
-      };
+        $scope.search = {
+          query: '',
+          queryQuery: '',
+          filterQuery: ''
+        };
+
+        var existingQuery = $location.search().q;
+        if (existingQuery) {
+          $scope.search.query = existingQuery;
+        }
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -104,6 +112,8 @@ angular.module('openolitor-admin')
 
             $scope.filteredEntries = filteredData;
 
+            //$location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
@@ -128,6 +138,14 @@ angular.module('openolitor-admin')
       }
 
       search();
+
+      $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
+        search();
+      }, true);
 
       $scope.actions = [{
         label: gettext('Arbeitseinsaetzebrief'),

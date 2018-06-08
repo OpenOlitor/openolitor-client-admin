@@ -17,7 +17,7 @@ angular.module('openolitor-admin')
           id: undefined,
           arbeitskategorien: [],
           mehrPersonenOk: true,
-          status: ARBEITSEINSATZSTATUS.INVORBEREITUNG
+          status: 'neu'
         }
       };
 
@@ -30,6 +30,8 @@ angular.module('openolitor-admin')
         css: '',
         ids: []
       };
+
+      $scope.modifDelta = 1;
 
       $scope.open = {
         start: false
@@ -57,6 +59,9 @@ angular.module('openolitor-admin')
 
 
       $scope.save = function() {
+        if($scope.arbeitsangebot.status === 'neu') {
+          $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.INVORBEREITUNG;
+        }
         return $scope.arbeitsangebot.$save();
       };
 
@@ -83,6 +88,10 @@ angular.module('openolitor-admin')
         $scope.open[date] = true;
       };
 
+      $scope.modifBis = function(delta) {
+        $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitBis.setHours($scope.arbeitsangebot.zeitBis.getHours()+delta));
+      };
+
       // watch min and max dates to calculate difference
       $scope.watchMinMaxValues = function() {
         $scope.unwatchMinMaxValues = $scope.$watch(function() {
@@ -100,6 +109,11 @@ angular.module('openolitor-admin')
           // min max dates
           $scope.tpOptionsVon.maxDate = $scope.arbeitsangebot.zeitBis;
           $scope.tpOptionsBis.minDate = $scope.arbeitsangebot.zeitVon;
+
+          if ($scope.arbeitsangebot.zeitVon && !$scope.arbeitsangebot.zeitBis) {
+            //set default time, 1 hour
+            $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitVon.setHours($scope.arbeitsangebot.zeitVon.getHours()+1));
+          }
 
           if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
               var diff = $scope.arbeitsangebot.zeitBis.getTime() - $scope.arbeitsangebot.zeitVon.getTime();

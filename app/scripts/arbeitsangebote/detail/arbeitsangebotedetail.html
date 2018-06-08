@@ -18,7 +18,7 @@
                   <span translate>Die Arbeitsangebote werden nach Ablauf der Einsatzzeit auch automatisch abgeschlossen.</span>
                 </script>
 
-                <button ng-if="arbeitsangebot.status === 'InVorbereitung'" type="button" role="button" ng-click="aaFreischalten()" class="btn btn-success"><span class="fa fa-play"></span> <span translate>Freischalten</span></button>
+                <button ng-if="arbeitsangebot.status === 'InVorbereitung' && !arbeitsangebotForm.$invalid" type="button" role="button" ng-click="aaFreischalten()" class="btn btn-success"><span class="fa fa-play"></span> <span translate>Freischalten</span></button>
                 <button ng-if="arbeitsangebot.status === 'Bereit'" type="button" role="button" ng-click="aaZurueckziehen()" class="btn btn-warning"><span class="fa fa-pause"></span> <span translate>Zurückziehen</span></button>
                 <button ng-if="arbeitsangebot.status === 'Bereit'" type="button" role="button" ng-click="aaAbsagen()" class="btn btn-info"><span class="fa fa-ban"></span> <span translate>Absagen</i></span></button>
                 <button ng-if="arbeitsangebot.status === 'Bereit'" type="button" role="button" ng-click="aaAbschliessen()" class="btn btn-danger"><span class="fa fa-stop"></span> <span translate>Abschliessen <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip-template="'abschliessenTooltip.html'"></i></span></button>
@@ -95,6 +95,17 @@
                       <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="true" timepicker-options="tpOptionsBis" max-date="arbeitsangebot.zeitVon" required />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="input-group">
+                      <span class="input-group-btn">
+                        <button ng-disabled="!arbeitsangebot.zeitVon" type="button" role="button" ng-click="modifBis(modifDelta)" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate></span></button>
+                      </span>
+                      <input type="number" class="form-control" ng-model="modifDelta" step="0.1"></input>
+                      <span class="input-group-btn">
+                        <button ng-disabled="!arbeitsangebot.zeitVon" type="button" role="button" ng-click="modifBis(-modifDelta)" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span> <span translate></span></button>
                       </span>
                     </p>
                   </div>
