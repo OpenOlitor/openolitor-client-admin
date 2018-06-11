@@ -9,13 +9,13 @@ angular.module('openolitor-admin')
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'NgTableParams',
+    'API_URL', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, ZusatzAbotypenModel, ZusatzAboModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
-      alertService, NgTableParams) {
+      alertService, NgTableParams, LAUFZEITEINHEITEN) {
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
@@ -498,9 +498,15 @@ angular.module('openolitor-admin')
           'w' : 'M';
         var now = moment();
         var laufzeit = moment(abo.start);
+        var cloneLaufzeit = moment(laufzeit);
         do {
-          laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert - 1, einheit);
-        } while (laufzeit.isBefore(now));
+          if(abo.abotyp.laufzeiteinheit === LAUFZEITEINHEITEN.UNBESCHRAENKT) {
+            laufzeit = laufzeit.add(1, einheit);
+          } else {
+            laufzeit = laufzeit.add(abo.abotyp.vertragslaufzeit.wert - 1, einheit);
+          }
+          cloneLaufzeit = moment(laufzeit);
+        } while (cloneLaufzeit.subtract(abo.abotyp.kuendigungsfrist.wert, einheit).isBefore(now));
         return laufzeit.endOf(einheit).toDate();
       };
 
