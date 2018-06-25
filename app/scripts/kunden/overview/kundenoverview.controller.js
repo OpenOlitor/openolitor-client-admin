@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
       KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
-
+      
+      $scope.showCreateEMailDialog = false;
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};
-
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
         function(list) {
@@ -100,6 +100,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateReport = true;
           return true;
         },
@@ -129,6 +130,8 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-pencil',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('kunde');
           $scope.url = 'mailing/sendEmailToKunden';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{kunde.bezeichnung}} \n {{kunde.strasse}}  \n {{kunde.hausNummer}}  \n {{kunde.plz}}  \n {{kunde.ort}}');  
           $scope.kundeIdsMailing = _($scope.filteredEntries)

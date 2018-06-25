@@ -125,6 +125,8 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-pencil',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('person');
           $scope.url = 'mailing/sendEmailToPersonen';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}}');
           $scope.personIdsMailing = _($scope.filteredEntries)
