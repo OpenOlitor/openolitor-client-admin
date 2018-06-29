@@ -22,7 +22,7 @@
               <td data-title="'Bezeichnung'|translate" sortable="'name'" ng-class="[{'col-md-3': produkt.editable}]">
                 <span ng-hide="produkt.editable">{{produkt.name}}</span>
                 <span ng-show="produkt.editable">
-                <input type="text" class="form-control" name="name" ng-model="produkt.name" maxlength="140" placeholder="{{'Neue Bezeichnung'|translate}}" required>
+                <input type="text" class="form-control" ng-model="produkt.name" maxlength="140" placeholder="{{'Neue Bezeichnung'|translate}}" required>
               </span>
               </td>
               <td data-title="'Von'|translate">
@@ -83,7 +83,8 @@
                   <oo-delete-button model="produkt" entity="Produkt" on-delete="delete" condensed="true" confirm="true"></oo-delete-button>
                 </div>
                 <div ng-show="produkt.editable" class="pull-right btn-group">
-                  <oo-save-button model="produkt" form="produktForm" entity="Produkt" on-save="save" condensed="true"></oo-save-button>
+  <button ng-click="save(produkt)" ng-disabled="!produkt.name || produkt.preis === undefined" class="btn btn-sm btn-primary">
+<i class="fa fa-floppy-o"></i> </button>
                   <a role="button" class="btn btn-sm btn-default" ng-click="cancel(produkt)"><span class="glyphicon glyphicon-stop"></span></a>
                 </div>
               </td>
