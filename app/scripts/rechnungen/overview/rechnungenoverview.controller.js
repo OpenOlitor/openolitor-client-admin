@@ -15,6 +15,7 @@ angular.module('openolitor-admin')
       FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService) {
 
+      $scope.showCreateEMailDialog = false;
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
@@ -146,6 +147,7 @@ angular.module('openolitor-admin')
         label: gettext('Rechnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateRechnungReport = true;
           return true;
         },
@@ -158,6 +160,7 @@ angular.module('openolitor-admin')
         label: gettext('Mahnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateMahnungReport = true;
           return true;
         },
@@ -233,6 +236,8 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-pencil',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('rechnung');
           $scope.url = 'mailing/sendEmailToInvoicesSubscribers';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');  
           $scope.rechnungIdsMailing = _($scope.filteredEntries)
@@ -353,6 +358,14 @@ angular.module('openolitor-admin')
 
       $scope.closeMahnungBerichtFunct = function() {
         return $scope.closeMahnungBericht;
+      };
+
+      $scope.closeCreateEMailDialog = function() {
+        $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog;
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {

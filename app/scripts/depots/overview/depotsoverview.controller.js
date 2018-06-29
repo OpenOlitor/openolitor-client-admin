@@ -70,6 +70,7 @@ angular.module('openolitor-admin')
         label: gettext('Depotbrief erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateReport = true;
           return true;
         },

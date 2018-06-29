@@ -115,6 +115,7 @@ angular.module('openolitor-admin')
         label: gettext('Lieferetiketten drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'lieferetiketten';
           $scope.vorlageTyp = 'Lieferetiketten';
           $scope.showGenerateReport = true;
@@ -127,6 +128,7 @@ angular.module('openolitor-admin')
         label: gettext('Korbübersicht drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbuebersicht';
           $scope.vorlageTyp = 'Korbuebersicht';
           $scope.showGenerateReport = true;

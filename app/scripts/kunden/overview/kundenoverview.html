@@ -63,7 +63,7 @@
   </div>
 
   <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
-    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="kundeIdsMailing"></oo-email-dialog>
+    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="kundeIdsMailing" entity="entity"></oo-email-dialog>
   </oo-sliding-detail>
   <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
     <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'kunden/berichte/kundenbrief'" ids="checkboxes.ids" default-file-name="'Kundenbrief.odt'|translate"></oo-generate-report>
