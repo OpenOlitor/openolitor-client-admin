@@ -256,6 +256,7 @@ angular.module('openolitor-admin')
         label: gettext('Rechnung bezahlt'),
         iconClass: 'fa fa-usd',
         onExecute: function() {
+          $scope.rechnungForm.$setPristine();
           return $scope.rechnung.$bezahlen();
         },
         isDisabled: function() {
