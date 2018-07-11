@@ -150,20 +150,40 @@ angular.module('openolitor-admin')
         msgBus.emitMsg(msg);
       };
 
+      function load() {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+        VertriebeListModel.query({
+          abotypId: parseInt($routeParams.id)
+        }, function(list) {
+          $scope.loading = false;
+          $scope.vertriebe = list;
+
+          //preload depot and touren filter
+          list.map(function(vertrieb) {
+            adjustDepotAndTourenList(vertrieb);
+          });
+        });
+      }
+
       $scope.addDepotlieferung = function(depot, vertrieb) {
+        console.log(vertrieb);
         var model = {
+          depotId: depot.id,
           abotypId: parseInt($routeParams.id),
           vertriebId: vertrieb.id,
-          depotId: depot.id,
           depot: depot,
           typ: VERTRIEBSARTEN.DEPOTLIEFERUNG,
-          anzahlAbos: 0
+          anzahlAbos: 0,
         };
 
         var newModel = new VertriebsartenListModel(model);
         newModel.$save(function() {
+          model.id = newModel.id;
           vertrieb.depotlieferungen.push(model);
-
           adjustDepotAndTourenList(vertrieb);
         });
 
@@ -182,8 +202,8 @@ angular.module('openolitor-admin')
 
         var newModel = new VertriebsartenListModel(model);
         newModel.$save(function() {
+          model.id = newModel.id;
           vertrieb.heimlieferungen.push(model);
-
           adjustDepotAndTourenList(vertrieb);
         });
 
@@ -222,25 +242,7 @@ angular.module('openolitor-admin')
       };
 
 
-      function load() {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.loading = true;
-        VertriebeListModel.query({
-          abotypId: parseInt($routeParams.id)
-        }, function(list) {
-          $scope.loading = false;
-          $scope.vertriebe = list;
-
-          //preload depot and touren filter
-          list.map(function(vertrieb) {
-            adjustDepotAndTourenList(vertrieb);
-          });
-        });
-      }
-
+      
       load();
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if (msg.entity === 'Vertrieb') {
