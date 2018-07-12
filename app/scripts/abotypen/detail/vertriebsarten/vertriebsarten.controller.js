@@ -170,7 +170,6 @@ angular.module('openolitor-admin')
       }
 
       $scope.addDepotlieferung = function(depot, vertrieb) {
-        console.log(vertrieb);
         var model = {
           depotId: depot.id,
           abotypId: parseInt($routeParams.id),
