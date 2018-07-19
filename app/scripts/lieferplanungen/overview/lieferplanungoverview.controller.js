@@ -104,7 +104,7 @@ angular.module('openolitor-admin')
           }
         },
         {
-          label: 'Lieferplanungsbericht',
+          label: gettext('Lieferplanungsbericht'),
           noEntityText: true,
           iconClass: 'fa fa-file',
           onExecute: function() {

@@ -10,7 +10,7 @@
                 <span translate>Kunde</span> #{{kunde.id}}
               </div>
               <div class="col-md-3">
-                <input type="text" ng-model="selectedKunde" placeholder="Kunde suchen..." uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="navigateToKunde($item)" ignore-dirty>
+                  <input type="text" ng-model="selectedKunde" placeholder="{{'Kunde suchen...'|translate}}" uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="navigateToKunde($item)" ignore-dirty>
               </div>
               <div class="col-md-6">
                 <div class="btn-group pull-right" role="group">
@@ -245,8 +245,8 @@
                 </div>
               </div>
             </div>
-            <div class="panel-footer">
-              {{'Kunde erstellt '|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet '|translate}} {{kunde.modifidat | fromNow}}
+            <div class="panel-footer"><span translate>Kunde erstellt</span>
+                {{kunde.erstelldat | fromNow}}, <span translate>bearbeitet</span> {{kunde.modifidat | fromNow}}
             </div>
           </div>
         </div>
