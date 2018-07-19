@@ -17,12 +17,13 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
         $scope.getCurrentlyMatchingGJItem = undefined;
         $scope.templateObject= {};
         $scope.templateObject.showOnlyPending = true;
+        $scope.isInCurrentOrLaterGJ  = false;
         $scope.deletingAbwesenheit = {};
         $scope.template = {
           creating: 0
         };
 
-        $scope.myFilter = function(item){
+        $scope.filterIfLieferungOpen = function(item){
            if ($scope.isLieferungOpen(item))
              return item;
            else return '';
@@ -69,9 +70,18 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
           return $scope.loading || $scope.template.creating > 0;
         };
 
+        $scope.gettingCurrentAbsences = function(){
+            return $scope.isInCurrentOrLaterGJ?$scope.getCurrentlyMatchingGJItem.value:0;
+        }
+
         function updateGJValues() {
           $scope.getCurrentlyMatchingGJItem = GeschaeftsjahrUtil.getMatchingGJItem($scope.abo.anzahlAbwesenheiten, $scope.projekt);
           $scope.isInCurrentOrLaterGJ = GeschaeftsjahrUtil.isInCurrentOrLaterGJ;
+          var dateArray = $scope.getCurrentlyMatchingGJItem.key.split('/');
+          var date = new Date();
+          date.setYear(dateArray[1]);
+          date.setMonth(dateArray[0],1);
+          $scope.isInCurrentOrLaterGJ = GeschaeftsjahrUtil.isInCurrentOrLaterGJ($scope.projekt, date);
         }
 
         var unwatch = $scope.$watch('abo', function(abo) {
