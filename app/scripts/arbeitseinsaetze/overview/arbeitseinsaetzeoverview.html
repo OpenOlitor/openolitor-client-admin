@@ -32,6 +32,9 @@
               <td data-title="'Person'|translate" sortable="'kundeBezeichnung'">
                 {{arbeitseinsatz.kundeBezeichnung}}
               </td>
+              <td data-title="'# Pers.'|translate" sortable="'kundeBezeichnung'">
+                {{arbeitseinsatz.anzahlPersonen}}
+              </td>
               <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'">
                 <span ng-if="sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
                   {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'HH:mm'}}
@@ -40,7 +43,7 @@
                   {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'dd.MM.yyyy HH:mm'}}
                 </span>
               </td>
-              <td data-title="'Status'|translate" sortable="'aktiv'">
+              <td data-title="'Status'|translate" sortable="'status'">
                 <i ng-if="arbeitseinsatz.status === 'InVorbereitung'" class="fa fa-clock-o"></i>
                 <i ng-if="arbeitseinsatz.status === 'Offen'" class="fa fa-calendar-plus-o"></i>
                 <i ng-if="arbeitseinsatz.status === 'Abgesagt'" class="fa fa-times-circle-o"></i>
