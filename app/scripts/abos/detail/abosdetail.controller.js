@@ -291,6 +291,9 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         label: gettext('Speichern'),
+        isDisabled: function() {
+            return $scope.aboDetailForm.$pristine;
+        },
         noEntityText: true,
         onExecute: function() {
           return $scope.save();
@@ -339,6 +342,7 @@ angular.module('openolitor-admin')
       }];
 
       $scope.save = function() {
+        $scope.aboDetailForm.$setPristine();
         if(angular.isUndefined($scope.abo.ende) || $scope.abo.ende === null || $scope.abo.ende === '' || $scope.abo.start <= $scope.abo.ende) {
           return $scope.abo.$save();
         } else {
