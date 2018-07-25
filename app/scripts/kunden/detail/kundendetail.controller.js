@@ -55,7 +55,7 @@ angular.module('openolitor-admin')
           return $scope.save();
         }
       }, {
-        label: 'E-Mail an alle Ansprechpersonen',
+        label: gettext('E-Mail an alle Ansprechpersonen'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
