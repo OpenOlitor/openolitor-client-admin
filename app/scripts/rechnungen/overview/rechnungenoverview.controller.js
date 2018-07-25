@@ -219,6 +219,7 @@ angular.module('openolitor-admin')
             return lodash.includes($scope.checkboxes.ids, d.id);
           });
           result = lodash.map(result, 'kundeId');
+          $location.search({'tf':''});
           $location.path('/kunden').search('q', 'id=' + result.join());
         }
       }, {
