@@ -7,7 +7,7 @@
       <form name="createVorlageForm" class="navbar-form pull-right">
         <div class="form-group" ng-class="{ 'has-error' : createVorlageForm.name.$invalid && createVorlageForm.name.$touched }" >
           <input type="text" name="name" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Vorlagen Name...'|translate}}" ng-model="template.name" required>
-          <a ng-disabled="createVorlageForm.$invalid || template.creating" role="button" ng-href="" ng-click="addVorlage()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="template.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
+          <a ng-disabled="createVorlageForm.$invalid || template.creating" role="button" ng-href="" ng-click="createVorlageForm.$invalid || template.creating || addVorlage()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="template.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
         </div>
       </form>
     </h3>
