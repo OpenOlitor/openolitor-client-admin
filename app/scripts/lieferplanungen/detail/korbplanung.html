@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-7">
             <div class="pull-right" role="group">
-              <button type="button" role="button" ng-click="recalculateBestellungen(); setMode('lieferanten')" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
+              <button type="button" role="button" ng-click="recalculateBestellungen(); setMode('lieferanten')" ng-disabled="!korbForm.$pristine && planung.status !== 'Offen'" class="btn btn-default"><span class="fa fa-step-forward"></span> <span translate>Produzenten-Übersicht</span></button>
               <button role="button" ng-show="planung.status === 'Abgeschlossen' && !editNachAbgeschlossen" ng-click="setEditableNachAbgeschlossen()" class="btn btn-warning"><span class="fa fa-pencil-square-o"></span> <span translate>Planung editieren</span></button>
               <oo-save-button ng-show="valuesEditable()" model="planung" form="korbForm" entity="Lieferplanung" on-save="save" on-cancel="backToList" on-created="created"><span translate>Planung</span></oo-save-button>
               <span ng-if="korbForm.$pristine" ng-show="planung.status === 'Offen'"><oo-actions-button  model="planung" actions="abschliessenAction" confirm="true" btn-style="btn-success"></oo-actions-button></span>
@@ -48,18 +48,31 @@
         <div class="panel-heading clearfix">
           <h3 class="panel-title"><span class="navbar-brand" translate>Produkte-Angebot</span></h3>
           <span class="pull-right">
-            <span class="btn btn-default btn-sm"
+            <span class="btn btn-default btn-sm" ng-show="valuesEditable()"
               oo-draggable="true" oo-draged-type="'newProdukt'" title="{{'Sonderprodukt einfügen' | translate}}"><span class="fa fa-life-ring"></span></span>
           </span>
         </div>
         <div class="panel-body produkteliste">
-          <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
+          <table ng-show="valuesEditable()" ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'" style="cursor: move;">
-              <td><span>&#8942;</span></td>
-              <td data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
+              <td><span >&#8942;</span></td>
+              <td  data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
                 {{produkt.name}}
               </td>
-              <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
+              <td  data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
+                {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
+              </td>
+              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
+                <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
+              </td>
+            </tr>
+          </table>
+          <table ng-show="!valuesEditable()" ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
+            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" >
+              <td  data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
+                {{produkt.name}}
+              </td>
+              <td  data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
                 {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
               </td>
               <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
@@ -95,7 +108,7 @@
             </span>
             <span class="pull-right">
               <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
-              <span class="btn btn-default btn-sm"
+              <span ng-show="valuesEditable()" class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?'|translate}}"></oo-delete-button>
@@ -112,7 +125,7 @@
         <div class="panel-body collapse in" id="abotypLieferung_{{abotypLieferung.id}}">
           <table ng-table="abotypLieferung.tableParamsKorb" class="table table-striped table-small table-lieferplanung" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
             <tr ng-repeat="korbprodukt in $data | orderBy:'produktBeschrieb'" ng-class="{error: isInvalid(korbprodukt)}">
-              <td><span oo-draggable="true" oo-draged-type="'korbprod'">&#8942;</span></td>
+              <td><span ng-show="valuesEditable()" oo-draggable="true" oo-draged-type="'korbprod'">&#8942;</span></td>
               <td data-title="'Produkt'|translate">
                 <span ng-hide="valuesEditable() && isUnlisted(korbprodukt)">
                   {{korbprodukt.produktBeschrieb}}
