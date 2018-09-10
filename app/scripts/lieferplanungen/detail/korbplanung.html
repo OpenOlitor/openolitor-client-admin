@@ -53,22 +53,9 @@
           </span>
         </div>
         <div class="panel-body produkteliste">
-          <table ng-show="valuesEditable()" ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="true" oo-draged-type="'prod'" style="cursor: move;">
-              <td><span >&#8942;</span></td>
-              <td  data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
-                {{produkt.name}}
-              </td>
-              <td  data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
-                {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
-              </td>
-              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
-                <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
-              </td>
-            </tr>
-          </table>
-          <table ng-show="!valuesEditable()" ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" >
+          <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
+              <tr ng-repeat="produkt in $data | orderBy:'bezeichnung'" oo-draggable="valuesEditable()" oo-draged-type="'prod'" ng-style="valuesEditable() && {'cursor': 'move'}">
+              <td><span ng-show="valuesEditable()">&#8942;</span></td>
               <td  data-title="'Produkt'|translate" sortable="'name'" filter="{name: 'text'}">
                 {{produkt.name}}
               </td>
