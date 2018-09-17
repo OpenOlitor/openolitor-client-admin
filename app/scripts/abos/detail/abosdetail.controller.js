@@ -342,7 +342,10 @@ angular.module('openolitor-admin')
       }];
 
       $scope.save = function() {
-        $scope.aboDetailForm.$setPristine();
+        // this only applies to the edit case
+        if($scope.aboDetailForm) {
+          $scope.aboDetailForm.$setPristine();
+        }
         if(angular.isUndefined($scope.abo.ende) || $scope.abo.ende === null || $scope.abo.ende === '' || $scope.abo.start <= $scope.abo.ende) {
           return $scope.abo.$save();
         } else {
