@@ -905,10 +905,17 @@ angular
         name: 'ProjektSettings',
         access: userRoles.Administrator
       })
-      .when('/vorlagen', {
-        templateUrl: 'scripts/vorlagen/vorlagenoverview.html',
-        controller: 'VorlagenOverviewController',
-        name: 'VorlagenOverview',
+      .when('/reportvorlagen', {
+        templateUrl: 'scripts/reportvorlagen/reportvorlagenoverview.html',
+        controller: 'ReportvorlagenOverviewController',
+        name: 'ReportvorlagenOverview',
+        access: userRoles.Administrator,
+        reloadOnSearch: false
+      })
+      .when('/mailvorlagen', {
+        templateUrl: 'scripts/mailvorlagen/mailvorlagenoverview.html',
+        controller: 'MailvorlagenOverviewController',
+        name: 'MailvorlagenOverview',
         access: userRoles.Administrator,
         reloadOnSearch: false
       })

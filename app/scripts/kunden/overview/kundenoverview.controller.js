@@ -4,14 +4,14 @@
  */
 angular.module('openolitor-admin')
   .controller('KundenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext', 'DetailNavigationService',
+    'KundenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'FilterQueryUtil', 'gettext', 'DetailNavigationService',
     function($q, $scope, $filter, $location, KundenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
-
+      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, EmailUtil, _, FilterQueryUtil, gettext, DetailNavigationService) {
+      
+      $scope.showCreateEMailDialog = false;
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};
-
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
         function(list) {
@@ -28,6 +28,7 @@ angular.module('openolitor-admin')
             $scope.tableParams.reload();
           }
         });
+
 
       $scope.search = {
         query: '',
@@ -59,7 +60,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageKundenbrief');
+        return ReportvorlagenService.getVorlagen('VorlageKundenbrief');
       };
 
       // watch for data checkboxes
@@ -77,6 +78,14 @@ angular.module('openolitor-admin')
         return $scope.closeBericht;
       };
 
+      $scope.closeCreateEMailDialog = function() {
+        $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog;
+      };
+
       $scope.actions = [{
         labelFunction: function() {
           return gettext('Kunde erstellen');
@@ -91,6 +100,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateReport = true;
           return true;
         },
@@ -98,7 +108,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: gettext('Email versenden'),
+        label: gettext('E-Mail versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -110,6 +120,26 @@ angular.module('openolitor-admin')
             .value();
 
           EmailUtil.toMailToBccLink(emailAddresses);
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-pencil',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('kunde');
+          $scope.url = 'mailing/sendEmailToKunden';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{kunde.bezeichnung}} \n {{kunde.strasse}}  \n {{kunde.hausNummer}}  \n {{kunde.plz}}  \n {{kunde.ort}}');  
+          $scope.kundeIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .map('id')
+            .value();
+          $scope.showCreateEMailDialog = true;
           return true;
         },
         isDisabled: function() {

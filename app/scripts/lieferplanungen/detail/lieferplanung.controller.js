@@ -614,16 +614,7 @@ angular.module('openolitor-admin')
           }
         };
 
-        if ($scope.valuesEditable() && $scope.planung.status !== 'Offen') {
-          LieferplanungModel.sammelbestellungenErstellen({
-            id: $routeParams.id,
-            lieferplanungId: parseInt($routeParams.id)
-          }, function() {
-            recalculate(callbackFunc);
-          });
-        } else {
-          recalculate(callbackFunc);
-        }
+        recalculate(callbackFunc);
       };
 
       $scope.hasMultipleLieferungen = function(bestellung) {

@@ -55,7 +55,7 @@ angular.module('openolitor-admin')
           return $scope.save();
         }
       }, {
-        label: 'E-Mail an alle Ansprechpersonen',
+        label: gettext('E-Mail an alle Ansprechpersonen'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -263,11 +263,26 @@ angular.module('openolitor-admin')
         }
       };
 
+      $scope.isKundeFormPristine = function () {
+        var formPristine = true;
+        angular.forEach($scope.kundeForm, function (element, name) {
+            if (element && !(element.$pristine === undefined) && formPristine){
+                formPristine = element.$pristine;
+            } 
+        });
+        return formPristine;
+      }
+
       $scope.savePendenz = function(pendenz) {
         var p = lodash.extend({
           kundeId: $routeParams.id
         }, pendenz);
         new PendenzDetailModel(p).$save();
+        $scope.kundeForm.pendenzDescription.$setPristine();
+        $scope.kundeForm.pendenzDatum.$setPristine();
+        if ($scope.isKundeFormPristine()) {
+           $scope.kundeForm.$setPristine(); 
+        }
       };
 
       $scope.isExisting = function() {

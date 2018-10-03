@@ -13,6 +13,7 @@ angular.module('openolitor-admin')
         'ArbeitskategorienModel',
         'ProjektService',
         'ProjektModel',
+        'OpenProjektModel',
         'KontoDatenService',
         'KontoDatenModel',
         'EnumUtil',
@@ -26,7 +27,7 @@ angular.module('openolitor-admin')
         'API_URL',
         function($scope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
-            ProjektService, ProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
+            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, API_URL
         ) {
             $scope.templateKundentyp = {};
@@ -419,7 +420,7 @@ angular.module('openolitor-admin')
             };
 
             $scope.downloadStyle = function(style) {
-                ProjektModel.fetchStyle({
+                OpenProjektModel.fetchStyle({
                     style: style
                 }, function(file) {
                     FileSaver.saveAs(file.response, style + '.css');

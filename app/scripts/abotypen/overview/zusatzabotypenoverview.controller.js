@@ -103,6 +103,24 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
+      },{
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          $scope.url = 'mailing/sendEmailToZusatzabotypSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{zusatzabotyp.name}} \n {{zusatzabotyp.beschreibung}}  \n {{zusatzabotyp.preis}}  \n {{zusatzabotyp.preiseinheit}}  \n {{zusatzabotyp.laufzeiteinheit}}');  
+          $scope.zusatzabotypIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at($scope.checkboxes.ids)
+            .map('id')
+            .value();
+          $scope.showCreateEMailDialog = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
       }];
 
       function search() {

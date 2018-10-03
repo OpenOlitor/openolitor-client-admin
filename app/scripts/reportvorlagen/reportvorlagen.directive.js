@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openolitor-admin').directive('ooVorlagen', [
+angular.module('openolitor-admin').directive('ooReportVorlagen', [
   function() {
     return {
       restrict: 'E',
@@ -10,8 +10,8 @@ angular.module('openolitor-admin').directive('ooVorlagen', [
         typ: '='
       },
       transclude: false,
-      templateUrl: 'scripts/vorlagen/vorlagen.html',
-      controller: 'VorlagenController'
+      templateUrl: 'scripts/reportvorlagen/reportvorlagen.html',
+      controller: 'ReportvorlagenController'
     };
   }
 ]);
