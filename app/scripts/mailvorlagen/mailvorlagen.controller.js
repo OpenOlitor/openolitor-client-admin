@@ -12,7 +12,6 @@ angular.module('openolitor-admin').controller('MailvorlagenController', [
   'gettext',
   'Upload',
   'API_URL',
-  'lodash',
   'FileUtil',
   'MailvorlagenService',
 
@@ -26,7 +25,6 @@ angular.module('openolitor-admin').controller('MailvorlagenController', [
     gettext,
     Upload,
     API_URL,
-    lodash,
     FileUtil,
     MailvorlagenService
   ) {
