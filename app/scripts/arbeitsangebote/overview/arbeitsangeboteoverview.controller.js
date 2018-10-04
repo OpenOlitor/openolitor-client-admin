@@ -156,8 +156,6 @@ angular
 
               $scope.filteredEntries = filteredData;
 
-              //$location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
-
               params.total(orderedData.length);
               return orderedData.slice(
                 (params.page() - 1) * params.count(),
@@ -172,7 +170,6 @@ angular
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
         $scope.tableParams.reload();
 
         $scope.loading = true;
