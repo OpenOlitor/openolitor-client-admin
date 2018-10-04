@@ -203,7 +203,7 @@ angular
 
       $scope.actions = [
         {
-          label: gettext('Arbeitseinsaetzebrief'),
+          label: gettext('Arbeitseinsätze-Brief'),
           noEntityText: true,
           iconClass: 'fa fa-file',
           onExecute: function() {
