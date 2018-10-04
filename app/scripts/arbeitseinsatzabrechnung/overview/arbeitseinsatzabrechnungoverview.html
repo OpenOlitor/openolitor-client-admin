@@ -24,7 +24,7 @@
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="kunde in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
-                <input type="checkbox" ng-model="checkboxes.items[kunde.id]" />
+                <input type="checkbox" ng-model="checkboxes.items[kunde.kundeId]" />
               </td>
               <td data-title="'Kunde'|translate" sortable="'bezeichnung'">
                 <a ng-href="#/kunden/{{kunde.kundeId}}">{{kunde.kundeBezeichnung}}</a>
