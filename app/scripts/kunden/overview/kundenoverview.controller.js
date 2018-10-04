@@ -114,7 +114,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           var emailAddresses = _($scope.filteredEntries)
             .keyBy('id')
-            .at($scope.checkboxes.ids)
+            .at(Object.keys($scope.checkboxes.items))
             .flatMap('ansprechpersonen')
             .map('email')
             .value();
@@ -136,7 +136,7 @@ angular.module('openolitor-admin')
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{kunde.bezeichnung}} \n {{kunde.strasse}}  \n {{kunde.hausNummer}}  \n {{kunde.plz}}  \n {{kunde.ort}}');  
           $scope.kundeIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
-            .at($scope.checkboxes.ids)
+            .at(Object.keys($scope.checkboxes.items))
             .map('id')
             .value();
           $scope.showCreateEMailDialog = true;
