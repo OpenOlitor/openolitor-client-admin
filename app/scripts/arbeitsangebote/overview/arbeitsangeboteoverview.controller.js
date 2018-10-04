@@ -2,33 +2,58 @@
 
 /**
  */
-angular.module('openolitor-admin')
-  .controller('ArbeitsangeboteOverviewController', ['$q', '$scope', '$filter',
-    'ArbeitseinsaetzeModel', 'ArbeitsangeboteModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'ArbeitskategorienService', 'gettext', 'FilterQueryUtil',
-    function($q, $scope, $filter, ArbeitseinsaetzeModel, ArbeitsangeboteModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, ArbeitskategorienService, gettext, FilterQueryUtil) {
-
+angular
+  .module('openolitor-admin')
+  .controller('ArbeitsangeboteOverviewController', [
+    '$q',
+    '$scope',
+    '$filter',
+    'ArbeitseinsaetzeModel',
+    'ArbeitsangeboteModel',
+    'NgTableParams',
+    'localeSensitiveComparator',
+    'OverviewCheckboxUtil',
+    '$location',
+    'ReportvorlagenService',
+    'ArbeitskategorienService',
+    'gettext',
+    'FilterQueryUtil',
+    function(
+      $q,
+      $scope,
+      $filter,
+      ArbeitseinsaetzeModel,
+      ArbeitsangeboteModel,
+      NgTableParams,
+      localeSensitiveComparator,
+      OverviewCheckboxUtil,
+      $location,
+      ReportvorlagenService,
+      ArbeitskategorienService,
+      gettext,
+      FilterQueryUtil
+    ) {
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};
 
       //watch for set of Arbeitskategorien
       $scope.kategorienL = [];
-      $scope.$watch(ArbeitskategorienService.getArbeitskategorien,
-        function(list) {
-          if (list) {
-            angular.forEach(list, function(item) {
-              if (item.id) {
-                $scope.kategorienL.push({
-                  'id': item.beschreibung,
-                  'title': item.beschreibung
-                });
-              }
-            });
-            $scope.tableParams.reload();
-          }
-        });
+      $scope.$watch(ArbeitskategorienService.getArbeitskategorien, function(
+        list
+      ) {
+        if (list) {
+          angular.forEach(list, function(item) {
+            if (item.id) {
+              $scope.kategorienL.push({
+                id: item.beschreibung,
+                title: item.beschreibung
+              });
+            }
+          });
+          $scope.tableParams.reload();
+        }
+      });
 
       $scope.search = {
         query: '',
@@ -58,21 +83,28 @@ angular.module('openolitor-admin')
       };
 
       // watch for check all checkbox
-      $scope.$watch(function() {
-        return $scope.checkboxes.checked;
-      }, function(value) {
-        OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
-      });
+      $scope.$watch(
+        function() {
+          return $scope.checkboxes.checked;
+        },
+        function(value) {
+          OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        }
+      );
 
       // watch for data checkboxes
-      $scope.$watch(function() {
-        return $scope.checkboxes.items;
-      }, function() {
-        OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
-      }, true);
+      $scope.$watch(
+        function() {
+          return $scope.checkboxes.items;
+        },
+        function() {
+          OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
+        },
+        true
+      );
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageKundenbrief');
+        return ReportvorlagenService.getVorlagen('VorlageKundenbrief');
       };
 
       $scope.closeBericht = function() {
@@ -85,39 +117,55 @@ angular.module('openolitor-admin')
 
       if (!$scope.tableParams) {
         //use default tableParams
-        $scope.tableParams = new NgTableParams({ // jshint ignore:line
-          page: 1,
-          count: 10,
-          sorting: {
-            kurzzeichen: 'asc'
-          }
-        }, {
-          filterDelay: 0,
-          groupOptions: {
-            isExpanded: true
-          },
-          exportODSModel: ArbeitsangeboteModel,
-          getData: function(params) {
-            if (!$scope.entries) {
-              return;
+        $scope.tableParams = new NgTableParams(
+          {
+            // jshint ignore:line
+            page: 1,
+            count: 10,
+            sorting: {
+              kurzzeichen: 'asc'
             }
-            // use build-in angular filter
-            var filteredData = $filter('filter')($scope.entries,
-              $scope.search.query);
-            var orderedData = $filter('filter')(filteredData, params.filter(true));
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
-              orderedData;
+          },
+          {
+            filterDelay: 0,
+            groupOptions: {
+              isExpanded: true
+            },
+            exportODSModel: ArbeitsangeboteModel,
+            getData: function(params) {
+              if (!$scope.entries) {
+                return;
+              }
+              // use build-in angular filter
+              var filteredData = $filter('filter')(
+                $scope.entries,
+                $scope.search.query
+              );
+              var orderedData = $filter('filter')(
+                filteredData,
+                params.filter(true)
+              );
+              orderedData = params.sorting
+                ? $filter('orderBy')(
+                    orderedData,
+                    params.orderBy(),
+                    false,
+                    localeSensitiveComparator
+                  )
+                : orderedData;
 
-            $scope.filteredEntries = filteredData;
+              $scope.filteredEntries = filteredData;
 
-            //$location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+              //$location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
 
-            params.total(orderedData.length);
-            return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+              params.total(orderedData.length);
+              return orderedData.slice(
+                (params.page() - 1) * params.count(),
+                params.page() * params.count()
+              );
+            }
           }
-
-        });
+        );
       }
 
       function search() {
@@ -128,53 +176,66 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = ArbeitsangeboteModel.query({
-          q: $scope.query
-        }, function() {
-          $scope.tableParams.reload();
-          $scope.loading = false;
-        });
+        $scope.entries = ArbeitsangeboteModel.query(
+          {
+            q: $scope.query
+          },
+          function() {
+            $scope.tableParams.reload();
+            $scope.loading = false;
+          }
+        );
       }
 
       search();
 
-      $scope.$watch('search.query', function() {
-        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
-          .query);
-        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
-          .query);
-        search();
-      }, true);
+      $scope.$watch(
+        'search.query',
+        function() {
+          $scope.search.filterQuery = FilterQueryUtil.transform(
+            $scope.search.query
+          );
+          $scope.search.queryQuery = FilterQueryUtil.withoutFilters(
+            $scope.search.query
+          );
+          search();
+        },
+        true
+      );
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageArbeitseinsaetzebrief');
+        return ReportvorlagenService.getVorlagen(
+          'VorlageArbeitseinsaetzebrief'
+        );
       };
 
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
 
-      $scope.actions = [{
-        labelFunction: function() {
-          return 'Arbeitsangebot erstellen';
+      $scope.actions = [
+        {
+          labelFunction: function() {
+            return 'Arbeitsangebot erstellen';
+          },
+          noEntityText: true,
+          iconClass: 'glyphicon glyphicon-plus',
+          onExecute: function() {
+            return $location.path('/arbeitsangebote/new');
+          }
         },
-        noEntityText: true,
-        iconClass: 'glyphicon glyphicon-plus',
-        onExecute: function() {
-          return $location.path('/arbeitsangebote/new');
+        {
+          label: gettext('Arbeitseinsaetzebrief'),
+          noEntityText: true,
+          iconClass: 'fa fa-file',
+          onExecute: function() {
+            $scope.showGenerateReport = true;
+            return true;
+          },
+          isDisabled: function() {
+            return !$scope.checkboxes.checkedAny;
+          }
         }
-      }, {
-        label: gettext('Arbeitseinsaetzebrief'),
-        noEntityText: true,
-        iconClass: 'fa fa-file',
-        onExecute: function() {
-          $scope.showGenerateReport = true;
-          return true;
-        },
-        isDisabled: function() {
-          return !$scope.checkboxes.checkedAny;
-        }
-      }];
-
+      ];
     }
   ]);
