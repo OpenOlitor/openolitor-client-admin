@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext, DetailNavigationService) {
+    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
+    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
+      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, lodash, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -127,7 +127,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           var emailAddresses = _($scope.filteredEntries)
             .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
+            .at($scope.checkboxes.ids)
             .map('email')
             .value();
 
@@ -148,7 +148,7 @@ angular.module('openolitor-admin')
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}}');
           $scope.personIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
+            .at($scope.checkboxes.ids)
             .map('id')
             .value();
 
@@ -158,7 +158,21 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
-      }];
+      },{
+        label: gettext('Aboliste anzeigen'),
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'kundeId');
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+        }
+        }
+      ];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -168,6 +182,10 @@ angular.module('openolitor-admin')
           sorting: {
             name: 'asc'
           },
+          filter: {
+            kundentypen: '',
+            personentypen: ''
+          }
         }, {
           filterDelay: 0,
           groupOptions: {
@@ -184,7 +202,7 @@ angular.module('openolitor-admin')
               return;
             }
             // use build-in angular filter
-            var dataSet = $filter('filter')($scope.entries, $scope.search.query);
+            var dataSet = $filter('filter')($scope.entries, $scope.search.queryQuery);
             // also filter by ngtable filters
             dataSet = $filter('filter')(dataSet, params.filter(true));
             dataSet = params.sorting ?
