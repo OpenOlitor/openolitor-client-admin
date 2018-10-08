@@ -10,21 +10,13 @@ angular.module('openolitor-admin').factory('ZusatzabosOverviewService', [
       rechnungsPositionCreate
     ) {
       return $http.post(
-        API_URL + 'abos/aktionen/anzahllieferungenrechnungspositionen',
-        rechnungsPositionCreate
-      );
-    }
-
-    function createBisGuthabenRechnungsPositionen(rechnungsPositionCreate) {
-      return $http.post(
-        API_URL + 'abos/aktionen/bisguthabenrechnungspositionen',
+        API_URL + 'zusatzabos/aktionen/anzahllieferungenrechnungspositionen',
         rechnungsPositionCreate
       );
     }
 
     var service = {
-      createAnzahlLieferungenRechnungsPositionen: createAnzahlLieferungenRechnungsPositionen,
-      createBisGuthabenRechnungsPositionen: createBisGuthabenRechnungsPositionen
+      createAnzahlLieferungenRechnungsPositionen: createAnzahlLieferungenRechnungsPositionen
     };
 
     return service;

@@ -12,47 +12,47 @@
         <div class="col-md-12">
           <div class="btn-group">
             <label class="btn btn-primary" ng-model="form.mode" uib-btn-radio="'AnzahlLieferungen'" translate>Anzahl Lieferungen</label>
-            <label class="btn btn-primary" ng-model="form.mode" uib-btn-radio="'BisGuthaben'" translate>Bis Guthaben</label>
+            <label ng-if="aboType === 'abos'" class="btn btn-primary" ng-model="form.mode" uib-btn-radio="'BisGuthaben'" translate>Bis Guthaben</label>
           </div>
         </div>
       </div>
       <div class="row form-group" ng-if="form.mode === 'AnzahlLieferungen'">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="manuellerBetrag" translate>Manueller Betrag</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <input bs-switch ng-model="form.manuellerBetrag" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="titel" translate>Titel</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <input type="text" class="form-control" id="titel" ng-model="rechnungsPositionen.titel" required placeholder="{{'Titel'|translate}}" maxlength="100">
         </div>
       </div>
       <div class="row form-group" ng-if="form.mode === 'AnzahlLieferungen'">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="anzahlLieferungen" translate>Für Anzahl Lieferungen</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <input type="number" min="0" class="form-control" id="anzahlLieferungen" ng-model="rechnungsPositionen.anzahlLieferungen" required placeholder="{{'Anzahl Lieferungen'|translate}}">
         </div>
       </div>
       <div class="row form-group" ng-if="form.mode === 'BisGuthaben'">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="bisGuthaben" translate>Bis Guthaben</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <input type="number" min="0" class="form-control" id="bisGuthaben" ng-model="rechnungsPositionen.bisGuthaben" required placeholder="{{'Bis Guthaben'|translate}}">
         </div>
       </div>
       <div class="row form-group" ng-if="form.manuellerBetrag">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="betrag" translate>Manueller Betrag</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <input type="number" min="0" class="form-control" id="betrag" ng-model="rechnungsPositionen.betrag" placeholder="{{'Betrag'|translate}}">
         </div>
       </div>

@@ -41,7 +41,7 @@
               </td>
               <td data-title="'Abo'|translate" sortable="'aboId'">
                 <a ng-show="rechnungsPosition.typ === 'Abo'" ng-href="#/abos?q=id%3D{{rechnungsPosition.aboId}}">{{rechnungsPosition.aboId}}</a>
-                <span ng-show="rechnungsPosition.typ === 'ZusatzAbo'"> {{rechnungsPosition.aboId}}</span>
+                <a ng-show="rechnungsPosition.typ === 'ZusatzAbo'" ng-href="#/zusatzabos?q=id%3D{{rechnungsPosition.aboId}}">{{rechnungsPosition.aboId}}</a>
               </td>
               <td data-title="'Beschrieb'|translate" sortable="'titel'">
                 {{rechnungsPosition.beschrieb}}
