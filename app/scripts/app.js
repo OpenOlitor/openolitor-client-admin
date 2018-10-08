@@ -1,5 +1,36 @@
 'use strict';
 
+//require('angular'); OK?
+import angular from 'angular';
+import ngAnimate from 'angular-animate';
+import ngResource from 'angular-resource';
+import ngRoute from 'angular-route';
+import ngSanitize from 'angular-sanitize';
+import ngTouch from 'angular-touch';
+import ngTable from 'ng-table';
+import ngFileSaver from 'angular-file-saver';
+import ngCookies from 'angular-cookie';
+import ngPasswordStrength from 'ng-password-strength';
+import ngMessages from 'angular-messages';
+//import angular.filter from 'angular-';
+//import angular-toArrayFilter from 'angular-';
+//import ui.bootstrap from 'angular-';
+//import ui.bootstrap.datetimepicker from 'angular-';
+//import color.picker from 'angular-';
+//import ipCookie from 'angular-cookie';
+//import frapontillo.bootstrap-switch from 'angular-';
+import gettextL from 'angular-gettext';
+//import ngHamburger from 'angular-hamburger';
+import angularMoment from 'angular-moment';
+import ngFileUpload from 'angular-file-saver';
+import ngLodash from 'ng1-lodash';
+//import angular-sortable-view from 'angular-sortable';
+//import angular.css.injector from 'angular-css';
+//import angular-toArrayFilter from 'angular-';
+//import mm.iban from 'angular-';
+//import openolitorCore from 'openolitor-core';
+
+
 var regexIso8601 =
   /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?$/;
 // Matches YYYY-MM-ddThh:mm:ss.sssZ where .sss is optional
@@ -53,6 +84,7 @@ function gettext(string) {
   return string;
 }
 
+
 /**
  */
 angular
@@ -64,26 +96,26 @@ angular
     'ngTouch',
     'ngTable',
     'ngFileSaver',
-    'ngCookies',
+    //'ngCookies',
     'ngPasswordStrength',
     'ngMessages',
-    'angular.filter',
-    'angular-toArrayFilter',
-    'ui.bootstrap',
-    'ui.bootstrap.datetimepicker',
-    'color.picker',
+    //'angular.filter',
+    //'angular-toArrayFilter',
+    //'ui.bootstrap',
+    //'ui.bootstrap.datetimepicker',
+    //'color.picker',
     'ipCookie',
-    'frapontillo.bootstrap-switch',
+    //'frapontillo.bootstrap-switch',
     'gettext',
-    'ngHamburger',
+    //'ngHamburger',
     'angularMoment',
-    'ngFileUpload',
+    //'ngFileUpload',
     'ngLodash',
-    'angular-sortable-view',
-    'angular.css.injector',
-    'angular-toArrayFilter',
-    'mm.iban',
-    'openolitor-core'
+    //'angular-sortable-view',
+    //'angular.css.injector',
+    //'angular-toArrayFilter',
+    //'mm.iban',
+    //'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')

@@ -1,0 +1,36 @@
+
+var webpack = require('webpack');
+
+var optimization = {
+  splitChunks: {
+    cacheGroups: {
+      node_vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        chunks: "async",
+        priority: 1
+      }
+    }
+  }
+}
+
+module.exports = {
+  mode: 'development',
+  context: __dirname + '/app',
+  entry: {
+    app: './scripts/app.js',
+    vendor: ['angular']
+  },
+  output: {
+    path: __dirname + '/js',
+    filename: '[name].bundle.js'
+  },
+  optimization: optimization,
+  plugins: [
+    new webpack.DefinePlugin({
+      angular: 'angular',
+    })
+  ]
+  //plugins: [
+  //    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
+  //]
+};
