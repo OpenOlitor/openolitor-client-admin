@@ -83,6 +83,7 @@ angular
     'angular.css.injector',
     'angular-toArrayFilter',
     'mm.iban',
+    'piwik',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
@@ -169,6 +170,12 @@ angular
     LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l')),
     PORTION: addExtendedEnumValue('Portion', gettext('Portion'), gettext('Por.'))
   })
+  .constant('ARBEITSEINSATZSTATUS', {
+    INVORBEREITUNG: gettext('InVorbereitung'),
+    BEREIT: gettext('Bereit'),
+    ABGESAGT: gettext('Abgesagt'),
+    ARCHIVIERT: gettext('Archiviert')
+  })
   .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
@@ -231,6 +238,12 @@ angular
   .constant('ROLLE', {
     KUNDE: gettext('Kunde'),
     ADMINISTRATOR: gettext('Administrator'),
+  })
+  .constant('EINSATZEINHEIT', {
+    STUNDEN: gettext('Stunden'),
+    HALBTAGE: gettext('Halbtage'),
+    TAGE: gettext('Tage'),
+    PUNKTE: gettext('Punkte'),
   })
   .constant('uiDatetimePickerConfig', {
       dateFormat: 'dd.MM.yyyy HH:mm',
@@ -880,6 +893,12 @@ angular
         name: 'ProjektSettings',
         access: userRoles.Administrator
       })
+      .when('/arbeitskategorien', {
+        templateUrl: 'scripts/projekt/settings/arbeitskategorien.html',
+        controller: 'ProjektSettingsController',
+        name: 'ProjektSettings',
+        access: userRoles.Administrator
+      })
       .when('/projektsettings', {
         templateUrl: 'scripts/projekt/settings/projektsettings.html',
         controller: 'ProjektSettingsController',
@@ -930,6 +949,36 @@ angular
         templateUrl: 'scripts/reports/detail/reportsdetail.html',
         controller: 'ReportsDetailController',
         name: 'ReportsDetail',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitsangebote', {
+        templateUrl: 'scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html',
+        controller: 'ArbeitsangeboteOverviewController',
+        name: 'ArbeitsangeboteOverview',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitsangebote/new', {
+        templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+        controller: 'ArbeitsangeboteDetailController',
+        name: 'ArbeitsangeboteDetail',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitsangebote/:id', {
+        templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+        controller: 'ArbeitsangeboteDetailController',
+        name: 'ArbeitsangeboteDetail',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitseinsaetze', {
+        templateUrl: 'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
+        controller: 'ArbeitseinsaetzeOverviewController',
+        name: 'ArbeitseinsaetzeOverview',
+        access: userRoles.Administrator
+      })
+      .when('/arbeitseinsatzabrechnung', {
+        templateUrl: 'scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html',
+        controller: 'ArbeitseinsatzabrechnungOverviewController',
+        name: 'ArbeitseinsatzabrechnungOverview',
         access: userRoles.Administrator
       })
       .when('/journal', {

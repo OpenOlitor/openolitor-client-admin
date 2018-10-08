@@ -9,28 +9,33 @@ angular.module('openolitor-admin')
         'KundentypenModel',
         'ProduktekategorienService',
         'ProduktekategorienModel',
+        'ArbeitskategorienService',
+        'ArbeitskategorienModel',
         'ProjektService',
         'ProjektModel',
         'OpenProjektModel',
         'KontoDatenService',
-        'KontoDatenModel',    
+        'KontoDatenModel',
         'EnumUtil',
         'FileSaver',
         'MONATE',
         'WAEHRUNG',
+        'EINSATZEINHEIT',
         'Upload',
         'msgBus',
         'cloneObj',
         'API_URL',
         function($scope, $filter, NgTableParams, KundentypenService,
-            KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
+            KundentypenModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
+            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, API_URL
         ) {
             $scope.templateKundentyp = {};
             $scope.templateProduktekategorie = {};
+            $scope.templateArbeitskategorie = {};
             $scope.editingKundentypBool = false;
             $scope.editingProduktekategorieBool = false;
+            $scope.editingArbeitskategorienBool = false;
 
             // first fake to true to work around bs-switch bug
             $scope.projectResolved = false;
@@ -39,16 +44,22 @@ angular.module('openolitor-admin')
             var defaults = {
                 modelKundentyp: {
                     kundentyp: '',
-                    beschreibung: '', 
+                    beschreibung: '',
                     editable:true
                 },
                 modelProduktekategorie: {
-                    beschreibung: '', 
+                    beschreibung: '',
+                    editable:true
+                },
+                modelArbeitskategorie: {
+                    beschreibung: '',
                     editable:true
                 }
             };
 
             $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+
+            $scope.einsatzEinheiten = EnumUtil.asArray(EINSATZEINHEIT);
 
             $scope.monate = EnumUtil.asArray(MONATE);
 
@@ -87,6 +98,20 @@ angular.module('openolitor-admin')
                     }
                 });
 
+            //watch for set of arbeitskategorien
+            $scope.$watch(ArbeitskategorienService.getArbeitskategorien,
+                function(list) {
+                    if (list) {
+                      $scope.arbeitskategorien = [];
+                      angular.forEach(list, function(item) {
+                        if (item.id) {
+                          $scope.arbeitskategorien.push(item);
+                        }
+                      });
+                      $scope.arbeitskategorienTableParams.reload();
+                    }
+                });
+
 
             ProjektService.resolveProjekt().then(function(projekt) {
                 if (projekt) {
@@ -114,7 +139,7 @@ angular.module('openolitor-admin')
             };
 
             //functions to save, cancel, modify or delete the kundentypen
-            
+
             $scope.saveKundentyp = function(kundentyp) {
                 kundentyp.editable = false;
                 $scope.editingKundentypBool = false;
@@ -168,8 +193,8 @@ angular.module('openolitor-admin')
                 }
             };
 
-            //functions to save, cancel, modify or delete the produkteKategorie 
-            
+            //functions to save, cancel, modify or delete the produkteKategorie
+
             $scope.saveProduktekategorie = function(produktekategorie) {
                 produktekategorie.editable = false;
                 $scope.editingProduktekategorieBool = false;
@@ -204,7 +229,7 @@ angular.module('openolitor-admin')
             };
 
             $scope.deleteProduktekategorie = function(produktekategorie) {
-                produktekategorie.editable = false
+                produktekategorie.editable = false;
                 $scope.produktekategorie = new ProduktekategorienModel(produktekategorie);
                 return $scope.produktekategorie.$delete();
             };
@@ -220,6 +245,61 @@ angular.module('openolitor-admin')
                     $scope.editingProduktekategorie.isNew = true;
                     $scope.produktekategorien.unshift(newProduktekategorie);
                     $scope.produktekategorienTableParams.reload();
+                }
+            };
+
+            //functions to save, cancel, modify or delete the arbeitskategorien
+
+            $scope.saveArbeitskategorie = function(arbeitskategorie) {
+                arbeitskategorie.editable = false;
+                $scope.editingArbeitskategorieBool = false;
+                $scope.arbeitskategorie = new ArbeitskategorienModel(arbeitskategorie);
+                return $scope.arbeitskategorie.$save();
+            };
+
+            $scope.cancelArbeitskategorie = function(arbeitskategorie) {
+                if(arbeitskategorie.isNew) {
+                    var arbeitskategorieIndex = $scope.arbeitskategorien.indexOf(arbeitskategorie);
+                    $scope.arbeitskategorien.splice(arbeitskategorieIndex, 1);
+                }
+                if($scope.originalArbeitskategorie) {
+                    var isArbeitskategorieById = function (element) {
+                        return arbeitskategorie.id === element.id;
+                    };
+                    var originalArbeitskategorieIndex = $scope.arbeitskategorien.findIndex(isArbeitskategorieById);
+                    if(originalArbeitskategorieIndex >= 0) {
+                        $scope.arbeitskategorien[originalArbeitskategorieIndex] = $scope.originalArbeitskategorie;
+                    }
+                    $scope.originalArbeitskategorie= undefined;
+                }
+                arbeitskategorie.editable = false;
+                $scope.editingArbeitskategorieBool = false;
+                $scope.arbeitskategorienTableParams.reload();
+            };
+
+            $scope.editArbeitskategorie = function(arbeitskategorie) {
+                $scope.originalArbeitskategorie = cloneObj(arbeitskategorie);
+                arbeitskategorie.editable = true;
+                $scope.editingArbeitskategorieBool = true;
+            };
+
+            $scope.deleteArbeitskategorie = function(arbeitskategorie) {
+                arbeitskategorie.editable = false;
+                $scope.arbeitskategorie = new ArbeitskategorienModel(arbeitskategorie);
+                return $scope.arbeitskategorie.$delete();
+            };
+
+            $scope.addArbeitskategorie = function() {
+                if(!$scope.editingArbeitskategorieBool) {
+                    if(angular.isUndefined($scope.arbeitskategorien)) {
+                        $scope.arbeitskategorien = [];
+                    }
+                    $scope.editingArbeitskategorieBool = true;
+                    var newArbeitskategorie = cloneObj(defaults.modelArbeitskategorie);
+                    $scope.editingArbeitskategorie = newArbeitskategorie;
+                    $scope.editingArbeitskategorie.isNew = true;
+                    $scope.arbeitskategorien.unshift(newArbeitskategorie);
+                    $scope.arbeitskategorienTableParams.reload();
                 }
             };
 
@@ -273,6 +353,35 @@ angular.module('openolitor-admin')
                         var orderedData = params.sorting ?
                             $filter('orderBy')($scope.produktekategorien, params.orderBy()) :
                             $scope.produktekategorien;
+
+                        params.total(orderedData.length);
+                        return orderedData;
+                    }
+
+                });
+            }
+
+            if (!$scope.arbeitskategorienTableParams) {
+                //use default tableParams
+                $scope.arbeitskategorienTableParams = new NgTableParams({ // jshint ignore:line
+                    page: 1,
+                    count: 1000,
+                    sorting: {
+                        name: 'asc'
+                    }
+                }, {
+                    filterDelay: 0,
+                    groupOptions: {
+                        isExpanded: true
+                    },
+                    getData: function(params) {
+                        if (!$scope.arbeitskategorien) {
+                            return;
+                        }
+                        // use build-in angular filter
+                        var orderedData = params.sorting ?
+                            $filter('orderBy')($scope.arbeitskategorien, params.orderBy()) :
+                            $scope.arbeitskategorien;
 
                         params.total(orderedData.length);
                         return orderedData;

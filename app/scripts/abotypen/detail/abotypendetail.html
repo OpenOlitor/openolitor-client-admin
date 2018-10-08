@@ -156,6 +156,14 @@
               <input type="number" step="1" class="form-control" name="anzahlAbwesenheiten" ng-model="abotyp.anzahlAbwesenheiten" placeholder="{{'Anzahl'|translate}}"></input>
             </div>
           </div>
+          <div class="row form-group" ng-if="getModel() === 'abotypen'">
+            <div class="col-md-4">
+              <label for="anzahlEinsaetze" translate>Anzahl Soll-Arbeitseinsätze</label>
+            </div>
+            <div class="col-md-2">
+              <input type="number" step="1" class="form-control" name="anzahlEinsaetze" ng-model="abotyp.anzahlEinsaetze" placeholder="{{'Anzahl'|translate}}"></input>
+            </div>
+          </div>
           <div class="row form-group">
             <div class="col-md-4">
               <label for="farbCode" translate>Farbe-Code</label>

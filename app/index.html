@@ -37,6 +37,8 @@
 </head>
 
 <body class="white openolitor adminportal" ng-controller="OpenOlitorRootController">
+  <ngp-piwik ngp-set-js-url="https://stats.tegonal.com/piwik.js" ngp-set-tracker-url="https://stats.tegonal.com/piwik.php" ngp-set-document-title="{{document.domain}}/{{document.title}}" ngp-set-site-id="13"> </ngp-piwik>
+
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -84,6 +86,11 @@
       <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-tourausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('tourauslieferungen')}]" href="" ng-href="#/tourauslieferungen"><i class="fa fa-truck"></i> <span translate>Tourauslieferungen</span></a></li>
       <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-postauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferungen')}]" href="" ng-href="#/postauslieferungen"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a></li>
 
+      <li><a id="nav-mitarbeit" class="nav-item" ng-click="menushow['mitarbeit'] = !menushow['mitarbeit']"><span><i class="fa fa-paw"></i> <span translate>Mitarbeit</span><span></a></li>
+      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitsangebote" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitsangebote')}]" href="" ng-href="#/arbeitsangebote"><i class="fa fa-exchange"></i> <span translate>Arbeitsangebote</span></a></li>
+      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitseinsaetze" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitseinsaetze')}]" href="" ng-href="#/arbeitseinsaetze"><i class="fa fa-arrows"></i> <span translate>Arbeitseinsätze</span></a></li>
+      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitseinsatzabrechnung" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitseinsatzabrechnung')}]" href="" ng-href="#/arbeitseinsatzabrechnung"><i class="fa fa-calculator"></i> <span translate>Einsätze & Abos</span></a></li>
+
       <li><a id="nav-finanzen" class="nav-item" ng-click="menushow['finanzen'] = !menushow['finanzen']"><span><i class="fa fa-usd"></i> <span translate>Finanzen</span></span></a></li>
       <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungspositionen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungspositionen')}]" href="" ng-href="#/rechnungspositionen"><i class="fa fa-list"></i> <span translate>Rechnungspositionen</span></a></li>
       <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
@@ -98,6 +105,7 @@
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-produkte" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produkte')}]" href="" ng-href="#/produkte"><i class="fa fa-pagelines"></i> <span translate>Produkte</span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('kundentypen')}]" href="" ng-href="#/kundentypen"><i class="fa fa-user-md"></i> <span translate>Kundentypen</span></a></li>
       <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produktkategorien')}]" href="" ng-href="#/produktkategorien"><i class="fa fa-random"></i> <span translate>Produktekategorien</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitskategorien')}]" href="" ng-href="#/arbeitskategorien"><i class="fa fa-exchange"></i> <span translate>Arbeitskategorien</span></a></li>
 
       <li><a id="nav-administration" class="nav-item" ng-click="menushow['administration'] = !menushow['administration']"><span><i class="fa fa-cogs"></i> <span translate>Administration</span></span></a></li>
       <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reports')}]" href="" ng-href="#/reports"><i class="fa fa-bar-chart"></i> <span translate>Auswertungen</span></a></li>
@@ -183,6 +191,7 @@
   <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <script src="bower_components/ng-iban/dist/ng-iban.js"></script>
+  <script src="bower_components/angular-piwik/angular-piwik.js"></script>
   <!-- endbower -->
   <!-- language specific angular file -->
   <script src="bower_components/angular-i18n/angular-locale_de-ch.js"></script>
@@ -214,6 +223,9 @@
 
   <script src="scripts/produktekategorie/produktekategorienlist.model.js"></script>
   <script src="scripts/produktekategorie/produktekategorienlist.service.js"></script>
+
+  <script src="scripts/arbeitskategorien/arbeitskategorienlist.model.js"></script>
+  <script src="scripts/arbeitskategorien/arbeitskategorienlist.service.js"></script>
 
   <script src="scripts/kunden/overview/kundenoverview.model.js"></script>
   <script src="scripts/kunden/overview/kundenoverview.controller.js"></script>
@@ -327,6 +339,22 @@
   <script src="scripts/mailvorlagen/mailvorlagen.controller.js"></script>
   <script src="scripts/mailvorlagen/mailvorlagen.directive.js"></script>
   <script src="scripts/mailvorlagen/mailvorlagenoverview.controller.js"></script>
+
+  <script src="scripts/arbeitseinsaetze/arbeitseinsaetze.model.js"></script>
+  <script src="scripts/arbeitseinsaetze/arbeitseinsaetze.service.js"></script>
+  <script src="scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js"></script>
+
+  <script src="scripts/arbeitsangebote/arbeitsangebote.model.js"></script>
+  <script src="scripts/arbeitsangebote/arbeitsangebote.service.js"></script>
+  <script src="scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js"></script>
+  <script src="scripts/arbeitsangebote/detail/addpersontoeinsatz.directive.js"></script>
+  <script src="scripts/arbeitsangebote/detail/arbeitsangebotedetail.model.js"></script>
+  <script src="scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js"></script>
+  <script src="scripts/arbeitsangebote/detail/arbeitseinsaetzedetail.model.js"></script>
+
+  <script src="scripts/arbeitseinsatzabrechnung/arbeitseinsatzabrechnung.model.js"></script>
+  <script src="scripts/arbeitseinsatzabrechnung/arbeitseinsatzabrechnung.service.js"></script>
+  <script src="scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js"></script>
 
   <script src="scripts/journal/overview/journaloverview.controller.js"></script>
   <script src="scripts/journal/journallist.model.js"></script>
