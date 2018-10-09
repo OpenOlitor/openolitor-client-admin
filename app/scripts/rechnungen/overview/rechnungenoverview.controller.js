@@ -13,7 +13,7 @@ angular.module('openolitor-admin')
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
-      localeSensitiveComparator, gettext, DetailNavigationService) {
+      localeSensitiveComparator, gettext, DetailNavigationService, FileSaver) {
 
       $scope.showCreateEMailDialog = false;
       $scope.entries = [];

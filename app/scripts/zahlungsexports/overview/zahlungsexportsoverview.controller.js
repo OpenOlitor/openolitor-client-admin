@@ -70,7 +70,7 @@ angular.module('openolitor-admin')
               $scope.entries[index].status= status;
           $scope.entries[index].$save();
         };
-        }
+      }
         
       function search() {
         if ($scope.loading) {

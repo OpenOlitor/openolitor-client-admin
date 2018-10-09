@@ -313,8 +313,7 @@ angular.module('openolitor-admin')
           kundeId: $routeParams.id
         }, pendenz);
         new PendenzDetailModel(p).$save();
-        $scope.kundeForm.pendenzDescription.$setPristine();
-        $scope.kundeForm.pendenzDatum.$setPristine();
+        $scope.kundeForm.$setPristine();
         if ($scope.isKundeFormPristine()) {
            $scope.kundeForm.$setPristine(); 
         }
