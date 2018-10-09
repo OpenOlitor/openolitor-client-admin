@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('ZahlungsExportsOverviewController', ['$q', '$scope', '$filter', '$location',
-    'ZahlungsExportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator','FileSaver', 'ZAHLUNGSEXPORTSTATUS',
+    'ZahlungsExportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator','FileSaver', 'ZAHLUNGSEXPORTSTATUS', 'lodash',
     function($q, $scope, $filter, $location, ZahlungsExportsOverviewModel, NgTableParams,
-      localeSensitiveComparator, FileSaver, ZAHLUNGSEXPORTSTATUS) {
+      localeSensitiveComparator, FileSaver, ZAHLUNGSEXPORTSTATUS, lodash) {
 
       $scope.entries = [];
       $scope.loading = false;
@@ -66,9 +66,9 @@ angular.module('openolitor-admin')
 
       $scope.saveStatusFunc = function(zahlungExportId){
           return function (status) {
-          var index = $scope.entries.findIndex(entry => entry.id == zahlungExportId);
-              $scope.entries[index].status= status;
-          $scope.entries[index].$save();
+            var index = lodash.findIndex($scope.entries,['id',zahlungExportId]); 
+            $scope.entries[index].status = status;
+            $scope.entries[index].$save();
         };
       }
         
