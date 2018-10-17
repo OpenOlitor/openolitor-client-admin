@@ -95,7 +95,7 @@
             </span>
             <span class="pull-right">
               <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true:projekt.waehrung}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
-              <span class="btn btn-default btn-sm"
+              <span ng-show="valuesEditable()" class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?'|translate}}"></oo-delete-button>
