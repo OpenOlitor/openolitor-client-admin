@@ -82,6 +82,30 @@ module.exports = function(grunt) {
       },
       'test-prod-randebandi': {
         'm1': 'https://testprod.openolitor.ch/randebandi/'
+      },
+      'test-sunu': {
+        'm1': 'https://sunu-server-test.scapp.io/sunu/'
+      },
+      'test-prod-sunu': {
+        'm1': 'https://sunu-server-testprod.scapp.io/sunu/'
+      },
+      'test-prod-landolfshausen': {
+        'm1': 'https://sunu-server-testprod.scapp.io/landolfshausen/'
+      },
+      'test-prod-nuertingen': {
+        'm1': 'https://sunu-server-testprod.scapp.io/nuertingen/'
+      },
+      'test-prod-nordheide': {
+        'm1': 'https://sunu-server-testprod.scapp.io/nordheide/'
+      },
+      'test-prod-kassel': {
+        'm1': 'https://sunu-server-testprod.scapp.io/kassel/'
+      },
+      'test-prod-bayreuth': {
+        'm1': 'https://sunu-server-testprod.scapp.io/bayreuth/'
+      },
+      'test-prod-peetzerhof': {
+        'm1': 'https://sunu-server-testprod.scapp.io/peetzerhof/'
       }
     },
     EMAIL_TO_ADDRESS: {
@@ -91,6 +115,13 @@ module.exports = function(grunt) {
       'prod-croquterre': 'info@croquterre.ch',
       'prod-nuglar': 'info@nuglargaerten.ch',
       'prod-randebandi': 'info@randebandi.ch',
+      'prod-sunu': 'sunu@sunu.de',
+      'prod-bayreuth': 'bayreuth@sunu.de',
+      'prod-kassel': 'kassel@sunu.de',
+      'prod-landolfshausen': 'landolfshausen@sunu.de',
+      'prod-nordheide': 'nordheide@sunu.de',
+      'prod-nuertingen': 'nuertingen@sunu.de',
+      'prod-peetzerhof': 'peetzerhof@sunu.de',
     }
   };
   var env = 'dev';

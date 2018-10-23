@@ -10,7 +10,7 @@
                 <span translate>Kunde</span> #{{kunde.id}}
               </div>
               <div class="col-md-3">
-                  <input type="text" ng-model="selectedKunde" placeholder="{{'Kunde suchen...'|translate}}" uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="navigateToKunde($item)" ignore-dirty>
+                <input type="text" ng-model="selectedKunde" placeholder="{{'Kunde suchen...'|translate}}" uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="navigateToKunde($item)" ignore-dirty>
               </div>
               <div class="col-md-6">
                 <div class="btn-group pull-right" role="group">
@@ -21,7 +21,7 @@
             </h3>
             <div class="row">
               <div class="col-lg-3 col-md-3">
-                 <label for="typen" translate>Kundentypen</label>
+                <label for="typen" translate>Kundentypen</label>
               </div>
               <div class="col-lg-6 col-md-5">
                 <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
@@ -73,7 +73,7 @@
                   <label for="vorname" translate>Vorname</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="vornamePerson" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" auto-focus required>
+                  <input type="text" class="form-control" name="vorname" ng-model="person.vorname" placeholder="{{'Vorname'|translate}}" auto-focus required>
                 </div>
               </div>
               <div class="row form-group">
@@ -81,23 +81,23 @@
                   <label for="name" translate>Name</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="namePerson" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
+                  <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" required>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="email" translate>E-Mail</label>
+                  <label for="email" translate>Email</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="email" class="form-control" name="emailPerson" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" ng-required="$root.projekt.emailErforderlich">
+                  <input type="email" class="form-control" name="email" ng-model="person.email" placeholder="{{'E-Mail'|translate}}" ng-required="$root.projekt.emailErforderlich">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="emailAlternative" translate>E-Mail alt.</label>
+                  <label for="emailAlternative" translate>Email alt.</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="email" class="form-control" name="emailAlternativePerson" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
+                  <input type="email" class="form-control" name="emailAlternative" ng-model="person.emailAlternative" placeholder="{{'Alternative E-Mail-Adresse'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -105,7 +105,7 @@
                   <label for="telefonMobil" translate>Telefon Mobil</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonMobilPerson" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}">
+                  <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -113,7 +113,15 @@
                   <label for="telefonFestnetz" translate>Telefon Festnetz</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonFestnetzPerson" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
+                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
+                </div>
+              </div>
+              <div ng-show="personCategories.length > 0" class="row form-group">
+                <div class="col-md-4">
+                  <label for="personCategory" translate>PersonKategorie</label>
+                </div>
+                <div class="col-lg-6 col-md-5">
+                  <oo-person-categories person-categories-list="person.categories"></oo-person-categories>
                 </div>
               </div>
               <div class="row form-group" ng-if="kunde.anzahlPersonen > 1">
@@ -121,7 +129,7 @@
                   <label for="bemerkungen" translate>Bemerkungen</label>
                 </div>
                 <div class="col-md-8">
-                  <textarea class="form-control" name="bemerkungenPerson" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}" maxlength="512"></textarea>
+                  <textarea class="form-control" name="bemerkungen" ng-model="person.bemerkungen" placeholder="{{'Bemerkungen zu dieser Person'|translate}}" maxlength="512"></textarea>
                 </div>
               </div>
               <div class="row" ng-if="person && person.id">
@@ -137,7 +145,7 @@
                           <oo-dropdown dropdown-id="rolle" display-style="uib-dropdown" selected-prop="id" property="label" values="rollen" selected="person.rolle"></oo-dropdown>
                         </div>
                         <div class="col-md-4">
-                          <button role="button" class="btn btn-danger" ng-click="changeRolle(person)" ng-disabled="person.rolle === person.initRolle"><span translate>Rolle speichern</span></button>
+                          <a role="button" class="btn btn-danger" ng-click="changeRolle(person)"><span translate>Rolle speichern</span></a>
                         </div>
                       </div>
                       <div class="row form-group">
@@ -203,7 +211,7 @@
                   <label for="bezeichnung" translate>Bezeichnung am Briefkasten</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="bezeichnungKunde" ng-model="kunde.bezeichnung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" required>
+                  <input type="text" class="form-control" name="bezeichnung" ng-model="kunde.bezeichnung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" required>
                 </div>
               </div>
               <div class="row form-group">
@@ -211,7 +219,7 @@
                   <label for="adressZusatz" translate>Adresszusatz</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatzKunde" ng-model="kunde.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  <input type="text" class="form-control" name="adressZusatz" ng-model="kunde.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -222,7 +230,7 @@
                   <input type="text" class="form-control" id="strasse" ng-model="kunde.strasse" ng-required="!kunde.postfach" placeholder="{{'Strasse'|translate}}" maxlength="30">
                 </div>
                 <div class="col-md-2">
-                  <input type="text" name="hausNummerKunde" class="form-control" id="hausNummer" ng-model="kunde.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+                  <input type="text" class="form-control" id="hausNummer" ng-model="kunde.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
                 </div>
               </div>
               <div class="row form-group">
@@ -230,10 +238,10 @@
                   <label for="plz" translate>PLZ / Ort</label>
                 </div>
                 <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4,5}" class="form-control" name="plzKunde" id="plz" ng-model="kunde.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
+                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-model="kunde.plz" required placeholder="{{'PLZ'|translate}}" maxlength="5">
                 </div>
                 <div class="col-md-5">
-                  <input type="text" class="form-control" name="ortKunde" ng-model="kunde.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
+                  <input type="text" class="form-control" id="ort" ng-model="kunde.ort" required placeholder="{{'Ort'|translate}}" maxlength="35">
                 </div>
               </div>
               <div class="row form-group">
@@ -241,26 +249,92 @@
                   <label for="bemerkungen" translate>Bemerkungen</label>
                 </div>
                 <div class="col-md-8">
-                  <textarea class="form-control" name="bemerkungenKunde" ng-model="kunde.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..." maxlength="1000"></textarea>
+                  <textarea class="form-control" name="bemerkungen" ng-model="kunde.bemerkungen" placeholder="{{'Bemerkungen'|translate}}..." maxlength="1000"></textarea>
                 </div>
               </div>
-            </div>
-            <div class="panel-footer"><span translate>Kunde erstellt</span>
-                {{kunde.erstelldat | fromNow}}, <span translate>bearbeitet</span> {{kunde.modifidat | fromNow}}
+              <div class="panel-footer">
+                {{'Kunde erstellt '|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet '|translate}} {{kunde.modifidat | fromNow}}
+              </div>
             </div>
           </div>
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="content content-box col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <a data-toggle="collapse" data-target="#detailsPayment" class="navbar-brand">
+                <span translate>Payment Parameters</span>
+              </a>
+            </h3>
+            <div class="btn-group pull-right" role="group">
+              <a role="button" class="btn btn-default" data-toggle="collapse" data-target="#detailsPayment"><span class="glyphicon glyphicon-menu-down"></span></a>
+            </div>
+          </div>
+          <div id="detailsPayment" class="panel-collapse collapse" >
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="nameAccountHolder" translate>Name of the Account Holder</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}" ng-required="kunde.paymentType==='directDebit'">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="addressAccountHolder" translate>Address of the account holder</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="addressAccountHolder" ng-model="kunde.kontoDaten.addressAccountHolder" placeholder="{{'Address of the Account Holder'|translate}}" ng-required="kunde.paymentType==='DirectDebit'">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="iban" translate>IBAN</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="iban" ng-model="kunde.kontoDaten.iban" placeholder="{{'IBAN'|translate}}" ng-iban ng-required="kunde.paymentType==='DirectDebit'">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bankName" translate>Bank Name</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bankName" ng-model="kunde.kontoDaten.bankName" placeholder="{{'Bank Name'|translate}}" ng-required="kunde.paymentType==='DirectDebit'">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="paymentType" translate>Payment Type</label>
+                </div>
+                <div class="col-md-8">
+                  <oo-dropdown dropdown-id="paymentType" display-style="uib-dropdown" values="paymentTypes" selected="kunde.paymentType"></oo-dropdown>
+                </div>
+              </div>
+              <div class="panel-footer">
+                {{'Kunde erstellt '|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet '|translate}} {{kunde.modifidat | fromNow}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="content content-box col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <h3 class="panel-title">
               <a data-toggle="collapse" data-target="#lieferadresse" class="navbar-brand">
                 <span translate>Lieferadresse</span>
               </a>
-              <small class="navbar-text" ng-if="kunde.abweichendeLieferadresse || kunde.zusatzinfoLieferung">
-                {{kunde.bezeichnungLieferung}} {{kunde.adressZusatzLieferung}} {{kunde.strasseLieferung}} {{kunde.hausNummerLieferung}} {{kunde.plzLieferung}} {{kunde.ortLieferung}} - {{kunde.zusatzinfoLieferung | limitTo : 50}}
+              <small class="navbar-text" ng-if="kunde.abweichendeLieferadresse">
+                {{kunde.bezeichnungLieferung}} {{kunde.adressZusatzLieferung}} {{kunde.strasseLieferung}} {{kunde.hausNummerLieferung}} {{kunde.plzLieferung}} {{kunde.ortLieferung}} {{kunde.zusatzinfoLieferung | limitTo : 50}}
               </small>
-              <small class="navbar-text" ng-if="!kunde.abweichendeLieferadresse && !kunde.zusatzinfoLieferung" translate>
+              <small class="navbar-text" ng-if="!kunde.abweichendeLieferadresse" translate>
                 Keine
               </small>
             </h3>
@@ -275,7 +349,7 @@
                 <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Wird auf dem Lieferschein zur Tour aufgedruckt'|translate}}"></i>
               </div>
               <div class="col-md-8">
-                <textarea class="form-control" name="adressZusatzZusatzinfos" ng-model="kunde.zusatzinfoLieferung" placeholder="{{'Hinterlegung, Abgabe bei...'|translate}}" maxlength="200"></textarea>
+                <textarea class="form-control" name="adressZusatz" ng-model="kunde.zusatzinfoLieferung" placeholder="{{'Hinterlegung, Abgabe bei...'|translate}}" maxlength="200"></textarea>
               </div>
             </div>
             <div class="row form-group">
@@ -283,7 +357,7 @@
                 <label for="abweichende Lieferadresse" translate>Abweichende Lieferadresse</label>
               </div>
               <div class="col-md-8">
-                <input type="checkbox" class="form-control" name="abweichendeZusatzinfos" ng-model="kunde.abweichendeLieferadresse">
+                <input type="checkbox" ng-model="kunde.abweichendeLieferadresse">
               </div>
             </div>
             <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
@@ -291,7 +365,7 @@
                 <label for="bezeichnungLieferung" translate>Bezeichnung am Briefkasten</label>
               </div>
               <div class="col-md-8">
-                <input type="text" class="form-control" name="bezeichnungLieferungZusatzinfos" ng-model="kunde.bezeichnungLieferung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" max-length="50" required>
+                <input type="text" class="form-control" name="bezeichnungLieferung" ng-model="kunde.bezeichnungLieferung" placeholder="{{'Anschrift oder Bezeichnung'|translate}}" max-length="50" required>
               </div>
             </div>
             <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
@@ -299,7 +373,7 @@
                 <label for="adressZusatzLieferung" translate>Adresszusatz</label>
               </div>
               <div class="col-md-8">
-                <input type="text" class="form-control" name="adressZusatzLieferungZusatzinfos" ng-model="kunde.adressZusatzLieferung" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                <input type="text" class="form-control" name="adressZusatzLieferung" ng-model="kunde.adressZusatzLieferung" placeholder="{{'Postfach, c/o, ...'|translate}}">
               </div>
             </div>
             <div class="row form-group ooFade" ng-if="kunde.abweichendeLieferadresse">
@@ -307,7 +381,7 @@
                 <label for="strasseLieferung" translate>Strasse / Nr.</label>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" id="strasseLieferung" name="strasseLieferungZusatzinfos" ng-model="kunde.strasseLieferung" placeholder="{{'Strasse'|translate}}" maxlength="30" required>
+                <input type="text" class="form-control" id="strasseLieferung" ng-model="kunde.strasseLieferung" placeholder="{{'Strasse'|translate}}" maxlength="30" required>
               </div>
               <div class="col-md-2">
                 <input type="text" class="form-control" id="hausNummerLieferung" ng-model="kunde.hausNummerLieferung" placeholder="{{'Nr'|translate}}" maxlength="10">
@@ -318,10 +392,10 @@
                 <label for="plzLieferung" translate>PLZ / Ort</label>
               </div>
               <div class="col-md-3">
-                <input type="text" pattern="[0-9]{4,5}" class="form-control" name="plzLieferungZusatzinfos" id="plzLieferung" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5" required>
+                <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plzLieferung" ng-model="kunde.plzLieferung" placeholder="{{'PLZ'|translate}}" maxlength="5" required>
               </div>
               <div class="col-md-5">
-                <input type="text" class="form-control" id="ortLieferung" name="ortLieferungZusatzinfos" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35" required>
+                <input type="text" class="form-control" id="ortLieferung" ng-model="kunde.ortLieferung" placeholder="{{'Ort'|translate}}" maxlength="35" required>
               </div>
             </div>
           </div>
@@ -342,17 +416,17 @@
               <div class="row form-group" ng-show="pendenz.editable">
                 <div class="col-md-2">
                   <div class="input-group">
-                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" is-open="open.pendenzdatum" ng-model="pendenz.datum" name="pendenzDatum" enable-time="false" />
+                    <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" is-open="open.pendenzdatum" ng-model="pendenz.datum" enable-time="false" />
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'pendenzdatum')"><i class="fa fa-calendar"></i></button>
                     </span>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="pendenzDescription" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}">
+                  <input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}">
                 </div>
                 <div class="col-md-2">
-                  <oo-dropdown dropdown-id="pendenzstatus" name="pendenzStatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown>
                 </div>
                 <div class="col-md-2">
                   <div class="pull-right" ng-if="!pendenz.generiert">
@@ -379,8 +453,8 @@
           </div>
         </div>
       </div>
+    </div>
   </form>
-  </div>
   <div class="row">
     <div class="content content-box col-md-12">
       <div ng-if="isExisting()" ng-include="'scripts/kunden/detail/abo/abos.html'"></div>

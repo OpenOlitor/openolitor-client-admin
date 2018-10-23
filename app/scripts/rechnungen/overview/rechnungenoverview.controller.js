@@ -7,19 +7,37 @@ angular.module('openolitor-admin')
     '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
-    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
+    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
+    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','FileSaver',
     function($q, $scope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, ReportvorlagenService,
-      localeSensitiveComparator, gettext, DetailNavigationService) {
+      FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
+      localeSensitiveComparator, gettext, DetailNavigationService, FileSaver) {
 
       $scope.showCreateEMailDialog = false;
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
+        
+      function getFullName(item, index) {
+          if (index === 0){
+           var array = {
+               id : undefined,
+               title : item.label 
+           }
+           return array;
+          } else {
+          var array = {
+               id : item.id,
+               title : item.label
+           }
+           return array;
+          }
+      }
+
+      $scope.paymentTypes = EnumUtil.asArray(PAYMENT_TYPES);
       $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 
       $scope.search = {
@@ -254,6 +272,19 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
         }, {
+        label: gettext('pain.008.001.07 erstellen'),
+        iconClass: 'fa fa-download',
+        onExecute: function() {
+          return $http.post(API_URL + 'rechnungen/aktionen/pain_008_001_07', {
+            'ids': $scope.checkboxes.ids
+          }).then(function(file) {
+             var data = new Blob([file.data], { type: 'text/plain;charset=utf-8' });
+             FileSaver.saveAs(data, 'pain_008_001_07.xml');
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }},{
         label: gettext('Rechnungen löschen'),
         iconClass: 'fa fa-times',
         isDisabled: function() {

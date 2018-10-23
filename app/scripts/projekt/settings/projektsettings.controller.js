@@ -7,6 +7,8 @@ angular.module('openolitor-admin')
         'NgTableParams',
         'KundentypenService',
         'KundentypenModel',
+        'PersonCategoriesService',
+        'PersonCategoriesModel',
         'ProduktekategorienService',
         'ProduktekategorienModel',
         'ArbeitskategorienService',
@@ -26,16 +28,18 @@ angular.module('openolitor-admin')
         'cloneObj',
         'API_URL',
         function($scope, $filter, NgTableParams, KundentypenService,
-            KundentypenModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
+            KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
             ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, API_URL
         ) {
             $scope.templateKundentyp = {};
             $scope.templateProduktekategorie = {};
             $scope.templateArbeitskategorie = {};
+            $scope.templatePersonCategory = {};
             $scope.editingKundentypBool = false;
             $scope.editingProduktekategorieBool = false;
             $scope.editingArbeitskategorienBool = false;
+            $scope.editingPersonCategoriesBool = false;
 
             // first fake to true to work around bs-switch bug
             $scope.projectResolved = false;
@@ -53,6 +57,11 @@ angular.module('openolitor-admin')
                 },
                 modelArbeitskategorie: {
                     beschreibung: '',
+                    editable:true
+                },
+                modelPersonCategory: {
+                    name: '', 
+                    description: '', 
                     editable:true
                 }
             };
@@ -112,6 +121,19 @@ angular.module('openolitor-admin')
                     }
                 });
 
+            //watch for set of personCategories
+            $scope.$watch(PersonCategoriesService.getPersonCategories,
+                function(list) {
+                    if (list) {
+                        $scope.personCategories = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.personCategories.push(item);
+                            }
+                        });
+                        $scope.personCategoriesTableParams.reload();
+                    }
+                });
 
             ProjektService.resolveProjekt().then(function(projekt) {
                 if (projekt) {
@@ -248,7 +270,61 @@ angular.module('openolitor-admin')
                 }
             };
 
-            //functions to save, cancel, modify or delete the arbeitskategorien
+            //functions to save, cancel, modify or delete the PersonCategory 
+
+            $scope.savePersonCategory = function(personCategory) {
+                personCategory.editable = false;
+                $scope.editingPersonCategoryBool = false;
+                $scope.personCategory = new PersonCategoriesModel(personCategory);
+                return $scope.personCategory.$save();
+            };
+
+            $scope.cancelPersonCategory = function(personCategory) {
+                if(personCategory.isNew) {
+                    var personCategoryIndex = $scope.personCategories.indexOf(personCategory);
+                    $scope.personCategories.splice(personCategoryIndex, 1);
+                }
+                if($scope.originalPersonCategory) {
+                    var isPersonCategoryById = function (element) {
+                        return personCategory.id === element.id;
+                    };
+                    var originalPersonCategoryIndex = $scope.personCategories.findIndex(isPersonCategoryById);
+                    if(originalPersonCategoryIndex >= 0) {
+                        $scope.personCategories[originalPersonCategoryIndex] = $scope.originalPersonCategory;
+                    }
+                    $scope.originalPersonCategory = undefined;
+                }
+                personCategory.editable = false;
+                $scope.editingPersonCategoryBool = false;
+                $scope.personCategoriesTableParams.reload();
+            };
+
+            $scope.editPersonCategory = function(personCategory) {
+                $scope.originalPersonCategory = cloneObj(personCategory);
+                personCategory.editable = true;
+                $scope.editingPersonCategoryBool = true;
+            };
+
+            $scope.deletePersonCategory = function(personCategory) {
+                personCategory.editable = false;
+                $scope.personCategory = new PersonCategoriesModel(personCategory);
+                return $scope.personCategory.$delete();
+            };
+
+            $scope.addPersonCategory = function() {
+                if(!$scope.editingPersonCategoryBool) {
+                    if(angular.isUndefined($scope.personCategories)) {
+                        $scope.personCategories = [];
+                    }
+                    $scope.editingPersonCategoryBool = true;
+                    var newPersonCategory = cloneObj(defaults.modelPersonCategory);
+                    $scope.editingPersonCategory = newPersonCategory;
+                    $scope.editingPersonCategory.isNew = true;
+                    $scope.personCategories.unshift(newPersonCategory);
+                    $scope.personCategoriesTableParams.reload();
+                }
+            };
+            
 
             $scope.saveArbeitskategorie = function(arbeitskategorie) {
                 arbeitskategorie.editable = false;
@@ -390,6 +466,35 @@ angular.module('openolitor-admin')
                 });
             }
 
+            if (!$scope.personCategoriesTableParams) {
+                //use default tableParams
+                $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
+                    page: 1,
+                    count: 1000,
+                    sorting: {
+                        name: 'asc'
+                    }
+                }, {
+                    filterDelay: 0,
+                    groupOptions: {
+                        isExpanded: true
+                    },
+                    getData: function(params) {
+                        if (!$scope.personCategories) {
+                            return;
+                        }
+                        // use build-in angular filter
+                        var orderedData = params.sorting ?
+                            $filter('orderBy')($scope.personCategories, params.orderBy()) :
+                            $scope.personCategories;
+
+                        params.total(orderedData.length);
+                        return orderedData;
+                    }
+
+                });
+            }
+
             $scope.saveProjekt = function() {
                 return $scope.kontodaten.$save().then($scope.projekt.$save(function(){
                     $scope.projektForm.$setPristine();
@@ -418,6 +523,13 @@ angular.module('openolitor-admin')
             $scope.generateLogoUrl = function() {
                 return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
             };
+
+            $scope.downloadImportFile = function() {
+                OpenProjektModel.fetchImportFile({
+                }, function(file) {
+                    FileSaver.saveAs(file.response, 'importFile' + '.ods');
+                });
+            }; 
 
             $scope.downloadStyle = function(style) {
                 OpenProjektModel.fetchStyle({

@@ -4,9 +4,9 @@
  */
 angular.module('openolitor-admin')
   .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext, DetailNavigationService) {
+    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
+    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
+      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, lodash, gettext, DetailNavigationService) {
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -14,6 +14,7 @@ angular.module('openolitor-admin')
       $scope.model = {};
 
       $scope.kundentypen = [];
+      $scope.personCategories = [];
       $scope.$watch(KundentypenService.getKundentypen,
 
 
@@ -31,6 +32,22 @@ angular.module('openolitor-admin')
             $scope.tableParams.reload();
           }
         });
+
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var personCategory = (item.personCategory) ? item.personCategory:
+                item;
+              $scope.personCategories.push({
+                'id': personCategory.name,
+                'title': personCategory.name
+              });
+            });
+            $scope.tableParams.reload();
+          }
+      });
 
       $scope.search = {
         query: '',
@@ -141,7 +158,21 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
-      }];
+      },{
+        label: gettext('Aboliste anzeigen'),
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'kundeId');
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+        }
+        }
+      ];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -152,7 +183,8 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: ''
+            kundentypen: '',
+            personentypen: ''
           }
         }, {
           filterDelay: 0,

@@ -126,6 +126,11 @@ angular
     HERR: addExtendedEnumValue('Herr', gettext('Herr'), gettext('Hr.')),
     FRAU: addExtendedEnumValue('Frau', gettext('Frau'), gettext('Fr.'))
   })
+  .constant('PAYMENT_TYPES', {
+    ANDERER: gettext('Anderer'),
+    DIRECT_DEBIT: gettext('DirectDebit'),
+    TRANSFER: gettext('Transfer')
+  })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: gettext('DepotlieferungAbo'),
     HEIMLIEFERUNGABO: gettext('HeimlieferungAbo'),
@@ -299,6 +304,11 @@ angular
     AUSSTEHEND: gettext('Ausstehend'),
     ERLEDIGT: gettext('Erledigt'),
     NICHTERLEDIGT: gettext('NichtErledigt')
+  })
+  .constant('ZAHLUNGSEXPORTSTATUS', {
+    SENT: gettext('Sent'),
+    CREATED: gettext('Created'),
+    ARCHIVED: gettext('Archived')
   })
   .constant('AUSLIEFERUNGSTATUS', {
     ERFASST: gettext('Erfasst'),
@@ -1021,8 +1031,33 @@ angular
           name: 'ZahlungsImports',
           access: userRoles.Administrator
         })
+        .when('/zahlungsexports', {
+          templateUrl: 'scripts/zahlungsexports/overview/zahlungsexportsoverview.html',
+          controller: 'ZahlungsExportsOverviewController',
+          name: 'ZahlungsExportsOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/zahlungsexports/new', {
+          templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
+          controller: 'ZahlungsExportsController',
+          name: 'ZahlungsExports',
+          access: userRoles.Administrator
+        })
+        .when('/zahlungsexports/:id', {
+          templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
+          controller: 'ZahlungsExportsController',
+          name: 'ZahlungsExports',
+          access: userRoles.Administrator
+        })
         .when('/kundentypen', {
           templateUrl: 'scripts/projekt/settings/kundentypen.html',
+          controller: 'ProjektSettingsController',
+          name: 'ProjektSettings',
+          access: userRoles.Administrator
+        })
+        .when('/personCategories', {
+          templateUrl: 'scripts/projekt/settings/personCategories.html',
           controller: 'ProjektSettingsController',
           name: 'ProjektSettings',
           access: userRoles.Administrator

@@ -92,7 +92,7 @@
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
-                {{rechnung.waehrung}} {{rechnung.betrag}}
+                {{projekt.waehrung}} {{rechnung.betrag}}
               </td>
               <td data-title="'Fälligkeit'|translate" sortable="'faelligkeitsDatum'">
                 <span class="red">{{rechnung.faelligkeitsDatum | date}}</span>
