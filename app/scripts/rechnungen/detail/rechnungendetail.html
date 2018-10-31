@@ -246,6 +246,10 @@
                       <span translate>Abo:</span> <a ng-href="#/abos?q=id%3D{{position.abo.id}}">{{position.abo.id}}</a><br />
                       <span translate># Lieferungen</span>: {{position.anzahlLieferungen}}
                     </span>
+                    <span ng-show="position.typ == 'ZusatzAbo'">
+                      <span translate>Zusatz-Abo:</span> <a ng-href="#/zusatzabos?q=id%3D{{position.abo.id}}">{{position.abo.id}}</a><br />
+                      <span translate># Lieferungen</span>: {{position.anzahlLieferungen}}
+                    </span>
                   </td>
                 </tr>
               </table>
