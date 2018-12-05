@@ -266,7 +266,7 @@
           <div class="panel-heading clearfix">
             <h3 class="panel-title">
               <a data-toggle="collapse" data-target="#detailsPayment" class="navbar-brand">
-                <span translate>Payment Parameters</span>
+                <span translate>Zahlungsdetails</span>
               </a>
             </h3>
             <div class="btn-group pull-right" role="group">
@@ -277,7 +277,7 @@
             <div class="panel-body">
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="nameAccountHolder" translate>Name of the Account Holder</label>
+                  <label for="nameAccountHolder" translate>Kontoinhaber</label>
                 </div>
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}" ng-required="kunde.paymentType==='directDebit'">
@@ -285,7 +285,7 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="addressAccountHolder" translate>Address of the account holder</label>
+                  <label for="addressAccountHolder" translate>Adresse Kontoinhaber</label>
                 </div>
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="addressAccountHolder" ng-model="kunde.kontoDaten.addressAccountHolder" placeholder="{{'Address of the Account Holder'|translate}}" ng-required="kunde.paymentType==='DirectDebit'">
@@ -301,7 +301,7 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="bankName" translate>Bank Name</label>
+                  <label for="bankName" translate>Name der Bank</label>
                 </div>
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="bankName" ng-model="kunde.kontoDaten.bankName" placeholder="{{'Bank Name'|translate}}" ng-required="kunde.paymentType==='DirectDebit'">
@@ -309,7 +309,7 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="paymentType" translate>Payment Type</label>
+                  <label for="paymentType" translate>Zahlmethode</label>
                 </div>
                 <div class="col-md-8">
                   <oo-dropdown dropdown-id="paymentType" display-style="uib-dropdown" values="paymentTypes" selected="kunde.paymentType"></oo-dropdown>
