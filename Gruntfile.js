@@ -20,10 +20,10 @@ module.exports = function(grunt) {
   var emails = grunt.file.readJSON("variables.json").EMAIL_TO_ADDRESS;
   // text replace in js files used for environment specific configurations
   var config = {
-    ENV: env,
     API_URL: urls[env].m1 || "http://localhost:9003/m1/", //replace @@API_URL with value
     API_WS_URL: urls[env].m1 + "ws" || "http://localhost:9003/m1/ws", //replace @@API_WS_URL with value
     BUILD_NR: grunt.option("buildnr") || "dev",
+    ENV: env,
     VERSION: grunt.file.readJSON("package.json").version,
 
     AIRBREAK_API_KEY: "48f4d0be704fafd7ed7b4fdf2d2119d9",
