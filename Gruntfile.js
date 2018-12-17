@@ -11,158 +11,40 @@ module.exports = function(grunt) {
   require("time-grunt")(grunt);
 
   //TODO Mandantenfähigkeit fehlt (siehe var config = ...)
-  var CONFIG = {
-    API_URL: {
-      dev: {
-        m1: "http://localhost:9003/m1/",
-        m2: "http://localhost:9003/m2/"
-      },
-      test: {
-        m1: "https://test.openolitor.ch/m1/"
-      },
-      int1: {
-        m1: "https://int.openolitor.ch/int1/"
-      },
-      int2: {
-        m1: "https://int.openolitor.ch/int2/"
-      },
-      int3: {
-        m1: "https://int.openolitor.ch/int3/"
-      },
-      int4: {
-        m1: "https://int.openolitor.ch/int4/"
-      },
-      int5: {
-        m1: "https://int.openolitor.ch/int5/"
-      },
-      int6: {
-        m1: "https://int.openolitor.ch/int6/"
-      },
-      int7: {
-        m1: "https://int.openolitor.ch/int7/"
-      },
-      int8: {
-        m1: "https://int.openolitor.ch/int8/"
-      },
-      int9: {
-        m1: "https://int.openolitor.ch/int9/"
-      },
-      "prod-soliterre": {
-        m1: "https://prod.openolitor.ch/soliterre/"
-      },
-      "prod-bioabi": {
-        m1: "https://prod.openolitor.ch/bioabi/"
-      },
-      "prod-gmuesluzern": {
-        m1: "https://prod.openolitor.ch/gmuesluzern/"
-      },
-      "prod-croquterre": {
-        m1: "https://prod.openolitor.ch/croquterre/"
-      },
-      "prod-nuglar": {
-        m1: "https://prod.openolitor.ch/nuglar/"
-      },
-      "prod-randebandi": {
-        m1: "https://prod.openolitor.ch/randebandi/"
-      },
-      "prod-brunnereichhof": {
-        m1: "https://prod.openolitor.ch/brunnereichhof/"
-      },
-      "test-prod-soliterre": {
-        m1: "https://testprod.openolitor.ch/soliterre/"
-      },
-      "test-prod-bioabi": {
-        m1: "https://testprod.openolitor.ch/bioabi/"
-      },
-      "test-prod-gmuesluzern": {
-        m1: "https://testprod.openolitor.ch/gmuesluzern/"
-      },
-      "test-prod-croquterre": {
-        m1: "https://testprod.openolitor.ch/croquterre/"
-      },
-      "test-prod-nuglar": {
-        m1: "https://testprod.openolitor.ch/nuglar/"
-      },
-      "test-prod-randebandi": {
-        m1: "https://testprod.openolitor.ch/randebandi/"
-      },
-      "test-prod-brunnereichhof": {
-        m1: "https://testprod.openolitor.ch/brunnereichhof/"
-      },
-      "test-sunu": {
-        m1: "https://sunu-server-test.scapp.io/sunu/"
-      },
-      "test-prod-sunu": {
-        m1: "https://sunu-server-testprod.scapp.io/sunu/"
-      },
-      "test-prod-landolfshausen": {
-        m1: "https://sunu-server-testprod.scapp.io/landolfshausen/"
-      },
-      "test-prod-nuertingen": {
-        m1: "https://sunu-server-testprod.scapp.io/nuertingen/"
-      },
-      "test-prod-nordheide": {
-        m1: "https://sunu-server-testprod.scapp.io/nordheide/"
-      },
-      "test-prod-kassel": {
-        m1: "https://sunu-server-testprod.scapp.io/kassel/"
-      },
-      "test-prod-bayreuth": {
-        m1: "https://sunu-server-testprod.scapp.io/bayreuth/"
-      },
-      "test-prod-peetzerhof": {
-        m1: "https://sunu-server-testprod.scapp.io/peetzerhof/"
-      }
-    },
-    EMAIL_TO_ADDRESS: {
-      "prod-soliterre": "openolitor@soliterre.ch",
-      "prod-bioabi": "info@bioabi.ch",
-      "prod-gmuesluzern": "info@gmüeschorb-luzern.ch",
-      "prod-croquterre": "info@croquterre.ch",
-      "prod-nuglar": "info@nuglargaerten.ch",
-      "prod-randebandi": "info@randebandi.ch",
-      "prod-brunnereichhof": "abo@brunnereichhof.ch",
-      "prod-sunu": "sunu@sunu.de",
-      "prod-bayreuth": "bayreuth@sunu.de",
-      "prod-kassel": "kassel@sunu.de",
-      "prod-landolfshausen": "landolfshausen@sunu.de",
-      "prod-nordheide": "nordheide@sunu.de",
-      "prod-nuertingen": "nuertingen@sunu.de",
-      "prod-peetzerhof": "peetzerhof@sunu.de"
-    }
-  };
   var env = "dev";
   if (grunt.option("env") !== null && grunt.option("env") !== undefined) {
     env = grunt.option("env");
   }
 
+  var urls = grunt.file.readJSON("variables.json").ENVIRONMENTS;
+  var emails = grunt.file.readJSON("variables.json").EMAIL_TO_ADDRESS;
   // text replace in js files used for environment specific configurations
   var config = {
-    API_URL: CONFIG.API_URL[env].m1 || "http://localhost:9003/m1/", //replace @@API_URL with value
-    API_WS_URL: CONFIG.API_URL[env].m1 + "ws" || "http://localhost:9003/m1/ws", //replace @@API_WS_URL with value
-    BUILD_NR: grunt.option("buildnr") || "dev",
     ENV: env,
+    API_URL: urls[env].m1 || "http://localhost:9003/m1/", //replace @@API_URL with value
+    API_WS_URL: urls[env].m1 + "ws" || "http://localhost:9003/m1/ws", //replace @@API_WS_URL with value
+    BUILD_NR: grunt.option("buildnr") || "dev",
     VERSION: grunt.file.readJSON("package.json").version,
 
     AIRBREAK_API_KEY: "48f4d0be704fafd7ed7b4fdf2d2119d9",
     AIRBREAK_URL: "https://errbit.tegonal.com/",
 
-    EMAIL_TO_ADDRESS: CONFIG.EMAIL_TO_ADDRESS[env] || "info@openolitor.ch"
+    EMAIL_TO_ADDRESS: emails[env] || "info@openolitor.ch"
   };
 
   var mandantenConfig = {
     mandant1: {
-      API_URL: CONFIG.API_URL[env].m1 || "http://localhost:9003/m1/", //replace @@API_URL with value
+      API_URL: urls[env].m1 || "http://localhost:9003/m1/", //replace @@API_URL with value
       API_WS_URL:
-        CONFIG.API_URL[env].m1 + "ws" || "http://localhost:9003/m1/ws", //replace @@API_WS_URL with value
+        urls[env].m1 + "ws" || "http://localhost:9003/m1/ws", //replace @@API_WS_URL with value
       BUILD_NR: grunt.option("buildnr") || "dev",
       ENV: env,
       VERSION: grunt.file.readJSON("package.json").version
     },
     mandant2: {
-      API_URL: CONFIG.API_URL[env].m2 || "http://localhost:9003/m2/", //replace @@API_URL with value
+      API_URL: urls[env].m2 || "http://localhost:9003/m2/", //replace @@API_URL with value
       API_WS_URL:
-        CONFIG.API_URL[env].m2 + "ws" || "http://localhost:9003/m2/ws", //replace @@API_WS_URL with value
+        urls[env].m2 + "ws" || "http://localhost:9003/m2/ws", //replace @@API_WS_URL with value
       BUILD_NR: grunt.option("buildnr") || "dev",
       ENV: env,
       VERSION: grunt.file.readJSON("package.json").version
