@@ -6,15 +6,17 @@ angular.module('openolitor-admin')
   .controller('OpenOlitorRootController', ['$scope', '$rootScope',
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-    'ENV', 'VERSION', 'cssInjector', 'API_URL',
+    'ENV', 'VERSION', 'cssInjector', 'API_URL', '$route',
     'ooAuthService', '$cookies', 'moment', 'dialogService',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
-      $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL,
+      $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL, $route,
       ooAuthService, $cookies, moment, dialogService) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
+
+      $rootScope.viewId = 'Test';
 
       $scope.currentPathContains = function(pathJunk) {
         var currentUrl = $location.url();
@@ -23,6 +25,10 @@ angular.module('openolitor-admin')
         } else {
           return currentUrl === ('/' + pathJunk) || currentUrl.indexOf('/' + pathJunk + '/') !== -1;
         }
+      };
+
+      $scope.getCurrentViewId = function() {
+        return $rootScope.viewId;
       };
 
       $scope.loadedProjectLoggedInOnce = false;

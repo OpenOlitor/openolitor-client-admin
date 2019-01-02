@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('AbosDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'AbosDetailModel','ZusatzAbotypenModel', 'ZusatzAboModel','AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
@@ -11,11 +11,13 @@ angular.module('openolitor-admin')
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
     'API_URL', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN',
 
-    function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
+    function($scope, $rootScope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, ZusatzAbotypenModel, ZusatzAboModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
       alertService, NgTableParams, LAUFZEITEINHEITEN) {
+
+      $rootScope.viewId = 'D-Abo';
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {

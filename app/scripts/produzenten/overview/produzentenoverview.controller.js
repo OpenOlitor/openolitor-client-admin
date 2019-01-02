@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
+  .controller('ProduzentenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'ProduzentenModel', 'NgTableParams', 'localeSensitiveComparator',
     'OverviewCheckboxUtil', '$location', 'ReportvorlagenService', 'FilterQueryUtil', 'gettext',
-    function($q, $scope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
+    function($q, $scope, $rootScope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
       OverviewCheckboxUtil, $location, ReportvorlagenService, FilterQueryUtil, gettext) {
+      $rootScope.viewId = 'L-Pzt';
 
       $scope.entries = [];
       $scope.filteredEntries = [];

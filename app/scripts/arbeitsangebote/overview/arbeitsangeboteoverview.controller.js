@@ -7,6 +7,7 @@ angular
   .controller('ArbeitsangeboteOverviewController', [
     '$q',
     '$scope',
+    '$rootScope',
     '$filter',
     'ArbeitseinsaetzeModel',
     'ArbeitsangeboteModel',
@@ -21,6 +22,7 @@ angular
     function(
       $q,
       $scope,
+      $rootScope,
       $filter,
       ArbeitseinsaetzeModel,
       ArbeitsangeboteModel,
@@ -33,6 +35,8 @@ angular
       gettext,
       FilterQueryUtil
     ) {
+      $rootScope.viewId = 'L-Aban';
+
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};

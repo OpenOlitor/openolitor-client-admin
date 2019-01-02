@@ -3,17 +3,18 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('RechnungsPositionenOverviewController', ['$q', '$scope', '$filter',
+  .controller('RechnungsPositionenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     '$location',
     'RechnungsPositionenModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator',
-    function($q, $scope, $filter, $location, RechnungsPositionenModel,
+    function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator) {
+      $rootScope.viewId = 'L-Repo';
 
       $scope.entries = [];
       $scope.filteredEntries = [];

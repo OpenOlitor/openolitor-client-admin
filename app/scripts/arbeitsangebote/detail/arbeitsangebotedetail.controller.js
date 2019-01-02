@@ -12,6 +12,8 @@ angular.module('openolitor-admin')
       ArbeitseinsaetzeDetailModel, localeSensitiveComparator, NgTableParams, lodash,
       OverviewCheckboxUtil, msgBus, alertService, EINSATZEINHEIT) {
 
+      $rootScope.viewId = 'D-Aban';
+
       var defaults = {
         model: {
           id: undefined,

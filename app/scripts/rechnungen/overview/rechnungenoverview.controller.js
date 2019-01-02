@@ -3,29 +3,30 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
+  .controller('RechnungenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','FileSaver',
-    function($q, $scope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
+    function($q, $scope, $rootScope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService, FileSaver) {
+      $rootScope.viewId = 'L-Re';
 
       $scope.showCreateEMailDialog = false;
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
-        
+
       function getFullName(item, index) {
           if (index === 0){
            var array = {
                id : undefined,
-               title : item.label 
+               title : item.label
            }
            return array;
           } else {
@@ -76,7 +77,7 @@ angular.module('openolitor-admin')
         });
       };
 
-    
+
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
         FileUtil.downloadGet('rechnungen/' + rechnung.id +
@@ -258,7 +259,7 @@ angular.module('openolitor-admin')
           $scope.$broadcast("resetDirectiveEmailDialog");
           $scope.entity = gettext('rechnung');
           $scope.url = 'mailing/sendEmailToInvoicesSubscribers';
-          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');  
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');
           $scope.rechnungIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))

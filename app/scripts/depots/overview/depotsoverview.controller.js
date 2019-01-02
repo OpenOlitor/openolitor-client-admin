@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('DepotsOverviewController', ['$scope', '$filter',
+  .controller('DepotsOverviewController', ['$scope', '$rootScope', '$filter',
     'DepotsOverviewModel', 'NgTableParams', 'OverviewCheckboxUtil',
     'ReportvorlagenService', '$location', 'lodash', 'EmailUtil', 'gettext',
-    function($scope, $filter, DepotsOverviewModel, NgTableParams,
+    function($scope, $rootScope, $filter, DepotsOverviewModel, NgTableParams,
       OverviewCheckboxUtil, ReportvorlagenService, $location, _, EmailUtil, gettext) {
+      $rootScope.viewId = 'L-Dep';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -98,7 +99,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
           $scope.url = 'mailing/sendEmailToDepotSubscribers';
-          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{depot.name}} \n {{depot.kurzzeichen}}  \n {{depot.plz}}  \n {{depot.ort}}  \n {{depot.apTelefon}}');  
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{depot.name}} \n {{depot.kurzzeichen}}  \n {{depot.plz}}  \n {{depot.ort}}  \n {{depot.apTelefon}}');
           $scope.depotIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))

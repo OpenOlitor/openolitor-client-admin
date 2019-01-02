@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('JournalOverviewController', ['$q', '$scope', '$filter',
+  .controller('JournalOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'JournalModel', 'NgTableParams', 'localeSensitiveComparator',
     'OverviewCheckboxUtil', 'FilterQueryUtil', '$location',
-    function($q, $scope, $filter, JournalModel, NgTableParams, localeSensitiveComparator,
+    function($q, $scope, $rootScope, $filter, JournalModel, NgTableParams, localeSensitiveComparator,
       OverviewCheckboxUtil, FilterQueryUtil, $location) {
+      $rootScope.viewId = 'L-Jou';
 
       $scope.entries = [];
       $scope.loading = false;

@@ -15,6 +15,7 @@ angular.module('openolitor-admin')
       KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
+      $rootScope.viewId = 'D-Kun';
 
       var defaults = {
         model: {
@@ -230,7 +231,7 @@ angular.module('openolitor-admin')
         $scope.kunde.ansprechpersonen.push({
           id: undefined,
           anrede: undefined,
-          categories: [] 
+          categories: []
         });
       };
 
@@ -303,7 +304,7 @@ angular.module('openolitor-admin')
         angular.forEach($scope.kundeForm, function (element, name) {
             if (element && !(element.$pristine === undefined) && formPristine){
                 formPristine = element.$pristine;
-            } 
+            }
         });
         return formPristine;
       }
@@ -315,7 +316,7 @@ angular.module('openolitor-admin')
         new PendenzDetailModel(p).$save();
         $scope.kundeForm.$setPristine();
         if ($scope.isKundeFormPristine()) {
-           $scope.kundeForm.$setPristine(); 
+           $scope.kundeForm.$setPristine();
         }
       };
 

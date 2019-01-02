@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ProduzentenDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('ProduzentenDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', '$uibModal', 'gettext', 'ProduzentDetailModel', '$log',
-    function($scope, $filter, $routeParams, $location, $uibModal, gettext,
+    function($scope, $rootScope, $filter, $routeParams, $location, $uibModal, gettext,
       ProduzentDetailModel, $log) {
+      $rootScope.viewId = 'D-Pzt';
 
       var defaults = {
         model: {

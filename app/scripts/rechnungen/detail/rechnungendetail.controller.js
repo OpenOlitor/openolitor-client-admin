@@ -15,6 +15,7 @@ angular.module('openolitor-admin')
       RechnungenDetailModel, EnumUtil, API_URL,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
       RECHNUNGSTATUS, FileUtil, DataUtil, ReportvorlagenService, DetailNavigationService) {
+      $rootScope.viewId = 'D-Re';
 
       DetailNavigationService.cleanKundeList();
 
@@ -324,7 +325,7 @@ angular.module('openolitor-admin')
       $scope.closeRechnungBerichtFunct = function() {
         return $scope.closeRechnungBericht;
       };
-      
+
       $scope.closeMahnungBerichtFunct = function() {
         return $scope.closeMahnungBericht;
       };

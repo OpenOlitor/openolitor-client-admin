@@ -3,15 +3,16 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter',
+  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
     'ReportvorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
-    function($q, $scope, $filter, $route, DepotAuslieferungenModel,
+    function($q, $scope, $rootScope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
       AUSLIEFERUNGSTATUS, msgBus, ReportvorlagenService, localeSensitiveComparator,
       $location, FilterQueryUtil, gettext) {
+      $rootScope.viewId = 'L-Aus';
 
       $scope.entries = [];
       $scope.filteredEntries = [];

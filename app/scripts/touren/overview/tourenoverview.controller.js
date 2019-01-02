@@ -3,12 +3,13 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('TourenOverviewController', ['$scope', '$filter',
+  .controller('TourenOverviewController', ['$scope', '$rootScope', '$filter',
     'TourenService', 'TourenModel', 'NgTableParams', '$location', 'lodash', 'EmailUtil',
     'OverviewCheckboxUtil', 'gettext',
-    function($scope, $filter, TourenService, TourenModel, NgTableParams, $location, _, EmailUtil, OverviewCheckboxUtil,
+    function($scope, $rootScope, $filter, TourenService, TourenModel, NgTableParams, $location, _, EmailUtil, OverviewCheckboxUtil,
       gettext) {
-
+      $rootScope.viewId = 'L-Tou';
+      
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
@@ -138,7 +139,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
           $scope.url = 'mailing/sendEmailToTourSubscribers';
-          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{tour.name}} \n {{tour.beschreibung}}');  
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{tour.name}} \n {{tour.beschreibung}}');
           $scope.tourenIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))

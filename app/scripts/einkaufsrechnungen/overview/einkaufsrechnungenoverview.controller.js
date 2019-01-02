@@ -3,16 +3,17 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('EinkaufsrechnungenOverviewController', ['$scope', '$filter',
+  .controller('EinkaufsrechnungenOverviewController', ['$scope', '$rootScope', '$filter',
     '$location', 'EinkaufsrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
     'msgBus', 'lodash', 'localeSensitiveComparator', 'ReportvorlagenService', 'gettext',
-    function($scope, $filter, $location, EinkaufsrechnungenOverviewModel,
+    function($scope, $rootScope, $filter, $location, EinkaufsrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
       ReportvorlagenService, gettext) {
-
+      $rootScope.viewId = 'L-Eink';
+      
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;

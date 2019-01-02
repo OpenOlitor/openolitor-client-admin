@@ -3,9 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('PendenzenOverviewController', ['$q', '$scope', '$filter',
+  .controller('PendenzenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog', 'DetailNavigationService',
-    function($q, $scope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService) {
+    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService) {
+      $rootScope.viewId = 'L-Pen';
 
       DetailNavigationService.cleanKundeList();
       $scope.entries = [];

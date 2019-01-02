@@ -7,6 +7,7 @@ angular
   .controller('ArbeitseinsaetzeOverviewController', [
     '$q',
     '$scope',
+    '$rootScope',
     '$filter',
     'ArbeitseinsaetzeModel',
     'NgTableParams',
@@ -20,6 +21,7 @@ angular
     function(
       $q,
       $scope,
+      $rootScope,
       $filter,
       ArbeitseinsaetzeModel,
       NgTableParams,
@@ -31,6 +33,8 @@ angular
       gettext,
       FilterQueryUtil
     ) {
+      $rootScope.viewId = 'L-Abein';
+
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};

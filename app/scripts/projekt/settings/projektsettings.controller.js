@@ -3,7 +3,7 @@
 /**
 */
 angular.module('openolitor-admin')
-    .controller('ProjektSettingsController', ['$scope', '$filter',
+    .controller('ProjektSettingsController', ['$scope', '$rootScope', '$filter',
         'NgTableParams',
         'KundentypenService',
         'KundentypenModel',
@@ -27,11 +27,13 @@ angular.module('openolitor-admin')
         'msgBus',
         'cloneObj',
         'API_URL',
-        function($scope, $filter, NgTableParams, KundentypenService,
+        function($scope, $rootScope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
             ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, API_URL
         ) {
+            $rootScope.viewId = 'S-Proj';
+
             $scope.templateKundentyp = {};
             $scope.templateProduktekategorie = {};
             $scope.templateArbeitskategorie = {};
@@ -60,8 +62,8 @@ angular.module('openolitor-admin')
                     editable:true
                 },
                 modelPersonCategory: {
-                    name: '', 
-                    description: '', 
+                    name: '',
+                    description: '',
                     editable:true
                 }
             };
@@ -270,7 +272,7 @@ angular.module('openolitor-admin')
                 }
             };
 
-            //functions to save, cancel, modify or delete the PersonCategory 
+            //functions to save, cancel, modify or delete the PersonCategory
 
             $scope.savePersonCategory = function(personCategory) {
                 personCategory.editable = false;
@@ -324,7 +326,7 @@ angular.module('openolitor-admin')
                     $scope.personCategoriesTableParams.reload();
                 }
             };
-            
+
 
             $scope.saveArbeitskategorie = function(arbeitskategorie) {
                 arbeitskategorie.editable = false;
@@ -529,7 +531,7 @@ angular.module('openolitor-admin')
                 }, function(file) {
                     FileSaver.saveAs(file.response, 'importFile' + '.ods');
                 });
-            }; 
+            };
 
             $scope.downloadStyle = function(style) {
                 OpenProjektModel.fetchStyle({

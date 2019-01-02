@@ -7,6 +7,7 @@ angular
   .controller('ArbeitseinsatzabrechnungOverviewController', [
     '$q',
     '$scope',
+    '$rootScope',
     '$filter',
     'ArbeitseinsatzabrechnungModel',
     'NgTableParams',
@@ -20,6 +21,7 @@ angular
     function(
       $q,
       $scope,
+      $rootScope,
       $filter,
       ArbeitseinsatzabrechnungModel,
       NgTableParams,
@@ -31,6 +33,8 @@ angular
       gettext,
       FilterQueryUtil
     ) {
+      $rootScope.viewId = 'L-EiAb';
+
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};

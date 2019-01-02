@@ -3,12 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ReportvorlagenController', ['$scope', 'ReportvorlagenModel', 'msgBus',
+  .controller('ReportvorlagenController', ['$scope', '$rootScope', 'ReportvorlagenModel', 'msgBus',
     'DataUtil', 'lodash', 'NgTableParams', 'gettext', 'Upload', 'API_URL',
     'FileUtil', 'ReportvorlagenService',
 
-    function($scope, ReportvorlagenModel, msgBus, DataUtil, lodash, NgTableParams,
+    function($scope, $rootScope, ReportvorlagenModel, msgBus, DataUtil, lodash, NgTableParams,
       gettext, Upload, API_URL, FileUtil, ReportvorlagenService) {
+      $rootScope.viewId = 'S-RptT'; 
+
       $scope.template = {
         typ: $scope.typ
       };

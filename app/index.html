@@ -130,17 +130,22 @@
   </div>
 
   <footer>
-    <script type="text/ng-template" id="versionInfo.html">
-      <span><b translate>Version:</b></span><br />
-      <span><b>UI</b> v{{version}} | #{{buildNr}}</span><br />
-      <span><b>WS</b> {{serverInfo.version}} | #{{serverInfo.buildNr}} </span><br />
-      <span><b>ENV</b> {{env}}</span>
-    </script>
-    <a href="http://www.openolitor.org" target="_blank">www.openolitor.org</a>
-    <span class="pre-info">
-      <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top-right" tooltip-class="version-tooltip"></span>
-    </span>
-    <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
+    <div class="view-info" ng-class="{'offset': tgState}">
+      {{getCurrentViewId()}}
+    </div>
+    <div class="version-info">
+      <script type="text/ng-template" id="versionInfo.html">
+        <span><b translate>Version:</b></span><br />
+        <span><b>UI</b> v{{version}} | #{{buildNr}}</span><br />
+        <span><b>WS</b> {{serverInfo.version}} | #{{serverInfo.buildNr}} </span><br />
+        <span><b>ENV</b> {{env}}</span>
+      </script>
+      <a href="http://www.openolitor.org" target="_blank">www.openolitor.org</a>
+      <span class="pre-info">
+        <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top-right" tooltip-class="version-tooltip"></span>
+      </span>
+      <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
+    </div>
   </footer>
 
   <!-- build:js(.) scripts/oldieshim.js -->

@@ -3,10 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('DashboardController', ['$q', '$scope', '$filter',
+  .controller('DashboardController', ['$q', '$scope', '$rootScope', '$filter',
     'PendenzenOverviewModel', 'LieferplanungModel', 'RechnungenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'RECHNUNGSTATUS', 'EnumUtil', 'localeSensitiveComparator', 'gettextCatalog',
-    function($q, $scope, $filter, PendenzenOverviewModel, LieferplanungModel, RechnungenOverviewModel,
+    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, LieferplanungModel, RechnungenOverviewModel,
       NgTableParams, PENDENZSTATUS, RECHNUNGSTATUS, EnumUtil, localeSensitiveComparator, gettextCatalog) {
+
+      $rootScope.viewId = 'S-Dshb';
 
       $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 

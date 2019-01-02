@@ -3,14 +3,16 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('AbotypenDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel','ZusatzAbotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',
     'EnumUtil',
-    function($scope, $filter, $routeParams, $location, gettext, NgTableParams,
+    function($scope, $rootScope, $filter, $routeParams, $location, gettext, NgTableParams,
       AbotypenDetailModel, ZusatzAbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {
+
+      $rootScope.viewId: 'D-Aty';
 
       var defaults = {
         model: {
@@ -160,11 +162,11 @@ angular.module('openolitor-admin')
         $scope.selectedVertrieb = msg.vertrieb;
       });
 
-      $scope.unselectVertrieb = function() {  
+      $scope.unselectVertrieb = function() {
         $scope.showSelectedVertrieb = false;
       };
 
-      $scope.unselectVertriebFunct = function() {  
+      $scope.unselectVertriebFunct = function() {
         $scope.unselectVertrieb();
       };
     }

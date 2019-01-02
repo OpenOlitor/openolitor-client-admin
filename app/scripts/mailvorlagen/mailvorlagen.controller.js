@@ -4,6 +4,7 @@
  */
 angular.module('openolitor-admin').controller('MailvorlagenController', [
   '$scope',
+  '$rootScope',
   'MailvorlagenModel',
   'msgBus',
   'DataUtil',
@@ -17,6 +18,7 @@ angular.module('openolitor-admin').controller('MailvorlagenController', [
 
   function(
     $scope,
+    $rootScope,
     MailvorlagenModel,
     msgBus,
     DataUtil,
@@ -28,6 +30,8 @@ angular.module('openolitor-admin').controller('MailvorlagenController', [
     FileUtil,
     MailvorlagenService
   ) {
+    $rootScope.viewId = 'S-MaiT';
+
     $scope.template = {
       templateType: $scope.typ
     };

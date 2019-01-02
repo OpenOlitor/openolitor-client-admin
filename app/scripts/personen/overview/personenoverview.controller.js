@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
+  .controller('PersonenOverviewController', ['$q', '$scope', '$rootScope', '$filter', '$location',
     'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
+    function($q, $scope, $rootScope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
       KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, lodash, gettext, DetailNavigationService) {
+      $rootScope.viewId = 'L-Per';
 
       $scope.entries = [];
       $scope.filteredEntries = [];

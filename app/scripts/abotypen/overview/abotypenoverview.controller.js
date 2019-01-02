@@ -3,9 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbotypenOverviewController', ['$scope', '$filter',
+  .controller('AbotypenOverviewController', ['$scope', '$rootScope', '$filter',
     'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil','gettext',
-    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
+    function($scope, $rootScope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
+
+      $rootScope.viewId = 'L-Aty';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -133,7 +135,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
           $scope.url = 'mailing/sendEmailToAbotypSubscribers';
-          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abotyp.name}} \n {{abotyp.beschreibung}}  \n {{abotyp.preis}}  \n {{abotyp.preiseinheit}}  \n {{abotyp.laufzeiteinheit}}');  
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abotyp.name}} \n {{abotyp.beschreibung}}  \n {{abotyp.preis}}  \n {{abotyp.preiseinheit}}  \n {{abotyp.laufzeiteinheit}}');
           $scope.abotypIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))

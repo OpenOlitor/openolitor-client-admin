@@ -3,11 +3,13 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbosOverviewController', ['$scope', '$filter', '$location',
+  .controller('AbosOverviewController', ['$scope', '$rootScope', '$filter', '$location',
     'AbosOverviewModel', 'KundenOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService',
-    function($scope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
+    function($scope, $rootScope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
       AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus, DetailNavigationService) {
+
+      $rootScope.viewId = 'L-Abo';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -220,7 +222,7 @@ angular.module('openolitor-admin')
           $scope.$broadcast("resetDirectiveEmailDialog");
           $scope.entity = gettext('abo');
           $scope.url = 'mailing/sendEmailToAbosSubscribers';
-          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abo.abotypName}} \n {{abo.kunde}} \n {{abo.start}} \n {{abo.ende}}');  
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abo.abotypName}} \n {{abo.kunde}} \n {{abo.start}} \n {{abo.ende}}');
           $scope.aboIdsMailing = _($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))

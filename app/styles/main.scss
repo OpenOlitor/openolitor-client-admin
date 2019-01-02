@@ -475,13 +475,30 @@ footer,
 }
 
 .openolitor > footer {
-  text-align: right;
   background-color: rgba(255, 255, 255, 0.3);
   color: #777676;
   padding-top: 1px;
   padding-bottom: 1px;
+  padding-left: 10px;
   padding-right: 10px;
-  z-index: 0;
+  z-index: 100;
+
+  .version-info {
+    text-align: right;
+    width: 40%;
+    float: right;
+  }
+
+  .view-info {
+    text-align: left;
+    width: 20%;
+    float: left;
+    color: #1f1f1f;
+  }
+
+  .view-info.offset {
+    margin-left: 250px;
+  }
 }
 
 .openolitor > footer a:link,
