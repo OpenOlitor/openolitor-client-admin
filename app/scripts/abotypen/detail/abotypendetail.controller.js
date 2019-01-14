@@ -12,7 +12,7 @@ angular.module('openolitor-admin')
       LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {
 
-      $rootScope.viewId: 'D-Aty';
+      $rootScope.viewId = 'D-Aty';
 
       var defaults = {
         model: {
