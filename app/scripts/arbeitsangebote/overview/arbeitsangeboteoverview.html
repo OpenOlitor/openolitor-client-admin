@@ -29,7 +29,7 @@
               <td data-title="'Titel'|translate" sortable="'titel'">
                 <a ng-href="#/arbeitsangebote/{{arbeitsangebot.id}}">{{arbeitsangebot.titel}}</a>
               </td>
-              <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'">
+              <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'" filter="{zeitVonF: 'select'}" filter-data="zeitraumL">
                 <span ng-if="sameDay(arbeitsangebot.zeitVon, arbeitsangebot.zeitBis)">
                   {{arbeitsangebot.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitsangebot.zeitBis | date : 'HH:mm'}}
                 </span>
@@ -38,10 +38,9 @@
                 </span>
               </td>
               <td data-title="'Personen'|translate">
-                {{arbeitsangebot.anzahlEingeschriebene}} / <span ng-if="!arbeitsangebot.mehrPersonenOk" translate>max.</span>{{arbeitsangebot.anzahlPersonen}}<span ng-if="arbeitsangebot.mehrPersonenOk" translate>&nbsp;+</span>
+                {{arbeitsangebot.anzahlEingeschriebene}} / <span ng-if="!arbeitsangebot.mehrPersonenOk" translate>max.</span> {{arbeitsangebot.anzahlPersonen}}<span ng-if="arbeitsangebot.mehrPersonenOk" translate>&nbsp;+</span>
               </td>
-              <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{kategorien: 'select'}" filter-data="kategorienL">
-                {{}}
+              <td data-title="'Kategorien'|translate" sortable="'arbeitskategorien'" filter="{arbeitskategorien: 'select'}" filter-data="kategorienL">
                 <span ng-repeat="arbeitskategorie in arbeitsangebot.arbeitskategorien" class="badge" ng-if="arbeitskategorie !== ''">
                   {{arbeitskategorie|translate}}
                 </span>

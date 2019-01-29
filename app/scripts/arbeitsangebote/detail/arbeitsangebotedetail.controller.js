@@ -7,10 +7,12 @@ angular.module('openolitor-admin')
     '$location', 'gettext', 'ArbeitsangeboteDetailModel', 'ARBEITSEINSATZSTATUS',
     'PersonenOverviewModel', 'ArbeitseinsaetzeDetailModel', 'localeSensitiveComparator',
     'NgTableParams', 'lodash', 'OverviewCheckboxUtil', 'msgBus', 'alertService', 'EINSATZEINHEIT',
+    '$uibModal', '$log', '$http', 'API_URL',
     function($scope, $rootScope, $filter, $routeParams, $location, gettext,
       ArbeitsangeboteDetailModel, ARBEITSEINSATZSTATUS, PersonenOverviewModel,
       ArbeitseinsaetzeDetailModel, localeSensitiveComparator, NgTableParams, lodash,
-      OverviewCheckboxUtil, msgBus, alertService, EINSATZEINHEIT) {
+      OverviewCheckboxUtil, msgBus, alertService, EINSATZEINHEIT, $uibModal, $log, $http,
+      API_URL) {
 
       $rootScope.viewId = 'D-Aban';
 
@@ -64,7 +66,9 @@ angular.module('openolitor-admin')
         if($scope.arbeitsangebot.status === 'neu') {
           $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.INVORBEREITUNG;
         }
-        return $scope.arbeitsangebot.$save();
+        return $scope.arbeitsangebot.$save(function(){
+          $scope.arbeitsangebotForm.$setPristine();
+        });
       };
 
       $scope.created = function(id) {
@@ -91,7 +95,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.modifBis = function(delta) {
-        $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitBis.setHours($scope.arbeitsangebot.zeitBis.getHours()+delta));
+         $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitBis.setHours($scope.arbeitsangebot.zeitBis.getHours()+delta));
       };
 
       // watch min and max dates to calculate difference
@@ -330,6 +334,47 @@ angular.module('openolitor-admin')
         $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.ARCHIVIERT;
         $scope.save();
       };
+
+      $scope.duplicateArbeitsangebot = function(angebotDaten) {
+        var newModel = {
+          arbeitsangebotId: $scope.arbeitsangebot.id,
+          daten: angebotDaten
+        };
+        $http.post(API_URL +
+          'arbeitsangebote/' + newModel.arbeitsangebotId + '/aktionen/duplizieren',
+          newModel).then(function() {
+          $scope.template.creating = $scope.template.creating +
+            angebotDaten.length;
+        });
+      };
+
+      $scope.aaMultiplizieren = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html',
+          controller: 'ArbeitsangebotDuplicateController',
+          resolve: {
+            arbeitsangebot: function() {
+              return $scope.arbeitsangebot;
+            }
+          }
+        });
+
+        modalInstance.result.then(function(daten) {
+          $scope.duplicateArbeitsangebot(daten);
+        }, function() {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
+      msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
+        if (msg.entity === 'Arbeitsangebot') {
+          if($scope.user.id === msg.data.modifikator) {
+            alertService.addAlert('info', gettext(
+              'Arbeitsangebot eingefügt'));
+          }
+        }
+      });
 
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (msg.entity === 'Arbeitseinsatz') {

@@ -100,6 +100,13 @@ angular
     MONATLICH: gettext('Monatlich'),
     UNREGELMAESSIG: gettext('Unregelmaessig')
   })
+  .constant('RHYTHMEN', {
+    TAEGLICH: gettext('Täglich'),
+    WOECHENTLICH: gettext('Wöchentlich'),
+    ZWEIWOECHENTLICH: gettext('Zweiwöchentlich'),
+    MONATLICH: gettext('Monatlich'),
+    UNREGELMAESSIG: gettext('Unregelmaessig')
+  })
   .constant('PREISEINHEITEN', {
     //JAHR: 'Jahr',
     //QUARTAL: 'Quartal',
