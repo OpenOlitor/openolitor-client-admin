@@ -18,6 +18,7 @@ angular
     'ReportvorlagenService',
     'ArbeitskategorienService',
     'gettext',
+    'moment',
     'FilterQueryUtil',
     function(
       $q,
@@ -33,6 +34,7 @@ angular
       ReportvorlagenService,
       ArbeitskategorienService,
       gettext,
+      moment,
       FilterQueryUtil
     ) {
       $rootScope.viewId = 'L-Aban';
@@ -58,6 +60,8 @@ angular
           $scope.tableParams.reload();
         }
       });
+
+      $scope.zeitraumL = [{id: 'd', title: gettext('Heute')}, {id: 'w', title: gettext('Diese Woche')}, {id: 'M', title: gettext('Diesen Monat')}];
 
       $scope.search = {
         query: '',
@@ -140,17 +144,42 @@ angular
               if (!$scope.entries) {
                 return;
               }
+              var f = params.filter();
+              var data = $scope.entries;
+              if(f.zeitVonF && f.zeitVonF !== null) {
+                var from, to;
+                if(f.zeitVonF === 'd') {
+                  from = moment().startOf('day').toDate();
+                  to = moment().endOf('day').toDate();
+                } else if(f.zeitVonF === 'w') {
+                  from = moment().startOf('week').toDate();
+                  to = moment().endOf('week').toDate();
+                } else if(f.zeitVonF === 'M') {
+                  from = moment().startOf('month').toDate();
+                  to = moment().endOf('month').toDate();
+                } else {
+                  from =new Date(-8640000000000000);
+                  to = new Date(8640000000000000);
+                }
+                data = $filter('dateRange') (
+                    data,
+                    from,
+                    to,
+                    'zeitVon'
+                  );
+              }
               // use build-in angular filter
               var filteredData = $filter('filter')(
-                $scope.entries,
+                data,
                 $scope.search.query
               );
+              f = params.filter(true);
+              delete f.zeitVonF;
               var orderedData = $filter('filter')(
                 filteredData,
-                params.filter(true)
+                f
               );
-              orderedData = params.sorting
-                ? $filter('orderBy')(
+              orderedData = params.sorting ? $filter('orderBy')(
                     orderedData,
                     params.orderBy(),
                     false,
