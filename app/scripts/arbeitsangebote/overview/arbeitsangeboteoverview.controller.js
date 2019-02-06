@@ -279,23 +279,6 @@ angular
             return !$scope.checkboxes.checkedAny;
           }
         }, {
-          label: gettext('E-Mail versenden'),
-          noEntityText: true,
-          iconClass: 'glyphicon glyphicon-envelope',
-          onExecute: function() {
-            var emailAddresses = lodash($scope.filteredEntries)
-              .keyBy('id')
-              .at(Object.keys($scope.checkboxes.items))
-              .flatMap('email')
-              .value();
-
-            EmailUtil.toMailToBccLink(emailAddresses);
-            return true;
-          },
-          isDisabled: function() {
-            return !$scope.checkboxes.checkedAny;
-          }
-        }, {
           label: gettext('E-Mail Formular'),
           noEntityText: true,
           iconClass: 'glyphicon glyphicon-pencil',
