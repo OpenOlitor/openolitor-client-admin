@@ -35,6 +35,12 @@
               <td data-title="'# Pers.'|translate" sortable="'kundeBezeichnung'">
                 {{arbeitseinsatz.anzahlPersonen}}
               </td>
+              <td data-title="'E-Mail'|translate" sortable="'email'">
+                {{arbeitseinsatz.email}}
+              </td>
+              <td data-title="'Mobiltelefon'|translate" sortable="'telefonMobil'">
+                {{arbeitseinsatz.telefonMobil}}
+              </td>
               <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'">
                 <span ng-if="sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
                   {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'HH:mm'}}

@@ -113,7 +113,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var emailAddresses = _($scope.filteredEntries)
+          var emailAddresses = lodash($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))
             .flatMap('ansprechpersonen')
@@ -135,7 +135,7 @@ angular.module('openolitor-admin')
           $scope.entity = gettext('kunde');
           $scope.url = 'mailing/sendEmailToKunden';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{kunde.bezeichnung}} \n {{kunde.strasse}}  \n {{kunde.hausNummer}}  \n {{kunde.plz}}  \n {{kunde.ort}}');
-          $scope.kundeIdsMailing = _($scope.filteredEntries)
+          $scope.kundeIdsMailing = lodash($scope.filteredEntries)
             .keyBy('id')
             .at(Object.keys($scope.checkboxes.items))
             .map('id')

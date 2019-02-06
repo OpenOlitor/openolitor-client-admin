@@ -20,6 +20,8 @@ angular
     'gettext',
     'moment',
     'FilterQueryUtil',
+    'lodash',
+    'EmailUtil',
     function(
       $q,
       $scope,
@@ -35,13 +37,16 @@ angular
       ArbeitskategorienService,
       gettext,
       moment,
-      FilterQueryUtil
+      FilterQueryUtil,
+      lodash,
+      EmailUtil
     ) {
       $rootScope.viewId = 'L-Aban';
 
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};
+      $scope.showCreateEMailDialog = false;
 
       //watch for set of Arbeitskategorien
       $scope.kategorienL = [];
@@ -243,6 +248,14 @@ angular
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeCreateEMailDialog = function() {
+        $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog;
+      };
+
       $scope.actions = [
         {
           labelFunction: function() {
@@ -265,7 +278,44 @@ angular
           isDisabled: function() {
             return !$scope.checkboxes.checkedAny;
           }
-        }
+        }, {
+          label: gettext('E-Mail versenden'),
+          noEntityText: true,
+          iconClass: 'glyphicon glyphicon-envelope',
+          onExecute: function() {
+            var emailAddresses = lodash($scope.filteredEntries)
+              .keyBy('id')
+              .at(Object.keys($scope.checkboxes.items))
+              .flatMap('email')
+              .value();
+
+            EmailUtil.toMailToBccLink(emailAddresses);
+            return true;
+          },
+          isDisabled: function() {
+            return !$scope.checkboxes.checkedAny;
+          }
+        }, {
+          label: gettext('E-Mail Formular'),
+          noEntityText: true,
+          iconClass: 'glyphicon glyphicon-pencil',
+          onExecute: function() {
+            $scope.$broadcast("resetDirectiveEmailDialog");
+            $scope.entity = gettext('person');
+            $scope.url = 'mailing/sendEmailToArbeitsangebotPersonen';
+            $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n');
+            $scope.kundeIdsMailing = lodash($scope.filteredEntries)
+              .keyBy('id')
+              .at(Object.keys($scope.checkboxes.items))
+              .map('id')
+              .value();
+            $scope.showCreateEMailDialog = true;
+            return true;
+          },
+          isDisabled: function() {
+            return !$scope.checkboxes.checkedAny;
+          }
+        },
       ];
     }
   ]);
