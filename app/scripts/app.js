@@ -643,13 +643,13 @@ angular
     }
 
     return function(items, from, to, attribute) {
+      var result = [];
       if (!angular.isUndefined(items) && items.length > 0) {
         var toPlusOne = to;
         var momTo = moment(to);
         if (isMidnight(momTo)) {
           toPlusOne = momTo.add(1, 'days');
         }
-        var result = [];
         for (var i = 0; i < items.length; i++) {
           var itemDate = items[i][attribute];
           if (!angular.isUndefined(attribute)) {
@@ -665,8 +665,8 @@ angular
             result.push(items[i]);
           }
         }
-        return result;
       }
+      return result;
     };
   })
   .filter('lastElement', function() {

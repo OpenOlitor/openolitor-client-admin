@@ -137,7 +137,8 @@ angular
             count: 10,
             sorting: {
               zeitVon: 'asc'
-            }
+            },
+            filter:{zeitVonF:'D'}
           },
           {
             filterDelay: 0,
