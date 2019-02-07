@@ -124,8 +124,8 @@ angular.module('openolitor-admin')
           if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
               var diff = $scope.arbeitsangebot.zeitBis.getTime() - $scope.arbeitsangebot.zeitVon.getTime();
               if(diff < 0) {
-                alertService.addAlert('error', gettext(
-                  'Ende vor Start!'));
+                $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitVon.setHours($scope.arbeitsangebot.zeitVon.getHours()+1));
+                //alertService.addAlert('error', gettext('Ende vor Start!'));
               } else {
                 if($rootScope.projekt) {
                   if($rootScope.projekt.einsatzEinheit === EINSATZEINHEIT.STUNDEN) {

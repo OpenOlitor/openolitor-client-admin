@@ -66,7 +66,7 @@ angular
         }
       });
 
-      $scope.zeitraumL = [{id: 'd', title: gettext('Heute')}, {id: 'w', title: gettext('Diese Woche')}, {id: 'M', title: gettext('Diesen Monat')}];
+      $scope.zeitraumL = [{id: 'D', title: gettext('Ab Heute')}, {id: 'd', title: gettext('Nur Heute')}, {id: 'w', title: gettext('Diese Woche')}, {id: 'M', title: gettext('Diesen Monat')}];
 
       $scope.search = {
         query: '',
@@ -136,7 +136,7 @@ angular
             page: 1,
             count: 10,
             sorting: {
-              kurzzeichen: 'asc'
+              zeitVon: 'asc'
             }
           },
           {
@@ -153,7 +153,10 @@ angular
               var data = $scope.entries;
               if(f.zeitVonF && f.zeitVonF !== null) {
                 var from, to;
-                if(f.zeitVonF === 'd') {
+                if(f.zeitVonF === 'D') {
+                  from = moment().startOf('day').toDate();
+                  to = new Date(8640000000000000);
+                } else if(f.zeitVonF === 'd') {
                   from = moment().startOf('day').toDate();
                   to = moment().endOf('day').toDate();
                 } else if(f.zeitVonF === 'w') {
