@@ -85,6 +85,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
           return ($scope.isInCurrentOrLaterGJ && !angular.isUndefined($scope.currentlyMatchingGJItem) && !angular.isUndefined($scope.currentlyMatchingGJItem.value)) ? $scope.currentlyMatchingGJItem.value : 0;
         };
 
+        function updateGJValues() {
           $scope.getCurrentlyMatchingGJItem = GeschaeftsjahrUtil.getMatchingGJItem($scope.abo.anzahlAbwesenheiten, $rootScope.projekt);
           $scope.isInCurrentOrLaterGJ = GeschaeftsjahrUtil.isInCurrentOrLaterGJ;
           var dateArray = String($scope.getCurrentlyMatchingGJItem.key).split('/');
