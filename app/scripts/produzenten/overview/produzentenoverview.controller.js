@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ProduzentenOverviewController', ['$q', '$scope', '$filter',
+  .controller('ProduzentenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'ProduzentenModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'FilterQueryUtil', 'gettext',
-    function($q, $scope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, FilterQueryUtil, gettext) {
+    'OverviewCheckboxUtil', '$location', 'ReportvorlagenService', 'FilterQueryUtil', 'gettext',
+    function($q, $scope, $rootScope, $filter, ProduzentenModel, NgTableParams, localeSensitiveComparator,
+      OverviewCheckboxUtil, $location, ReportvorlagenService, FilterQueryUtil, gettext) {
+      $rootScope.viewId = 'L-Pzt';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -100,7 +101,7 @@ angular.module('openolitor-admin')
       search();
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageProduzentenbrief');
+        return ReportvorlagenService.getVorlagen('VorlageProduzentenbrief');
       };
 
       $scope.closeBericht = function() {
@@ -125,6 +126,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateReport = true;
           return true;
         },

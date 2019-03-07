@@ -3,13 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
+  .controller('LieferplanungOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'LieferplanungModel', 'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil',
     'msgBus', '$location', 'localeSensitiveComparator', 'gettext',
-    function($q, $scope, $filter, LieferplanungModel, NgTableParams,
+    function($q, $scope, $rootScope, $filter, LieferplanungModel, NgTableParams,
       FilterQueryUtil, OverviewCheckboxUtil,
       msgBus, $location, localeSensitiveComparator, gettext) {
+      $rootScope.viewId = 'L-Pla';
 
       $scope.entries = [];
       $scope.filteredEntries = [];

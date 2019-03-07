@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="content content-box col-md-12">
+    <div oo-error-overlay></div>
+    <div class="col-md-12"><h3 translate>Verwaltung der Report-Vorlagen</h3></div>
+    <div ng-hide="vorlageTypen">
+      <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+    </div>
+    <div class="col-md-12" ng-repeat="typ in vorlageTypen">
+      <oo-report-vorlagen typ="typ" vorlagen="vorlagen[typ]"></oo-report-vorlagen>
+    </div>
+  </div>
+</div>

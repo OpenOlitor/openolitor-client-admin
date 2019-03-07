@@ -46,10 +46,13 @@
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
-                {{rechnung.waehrung}} {{rechnung.betrag}}
+                {{projekt.waehrung}} {{rechnung.betrag}}
+              </td>
+              <td data-title="'Payment Type'|translate" sortable="'paymentType'" filter="{paymentType: 'select'}" filter-data="paymentTypes">
+                {{rechnung.paymentType|translate}} 
               </td>
               <td data-title="'Einbezahlter Betrag'|translate" sortable="'einbezahlterBetrag'">
-                <span ng-if="rechnung.einbezahlterBetrag">{{rechnung.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
+                <span ng-if="rechnung.einbezahlterBetrag">{{projekt.waehrung}} {{rechnung.einbezahlterBetrag}}</span>
               </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungStati">
                 {{rechnung.status|translate}}
@@ -72,7 +75,9 @@
   <oo-sliding-detail slide-in="showGenerateRechnungReport" slide-out-function="closeRechnungBerichtFunct()">
     <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
   </oo-sliding-detail>
-
+  <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" attachment="attachment" message="message" ids="rechnungIdsMailing" entity="entity"></oo-email-dialog>
+  </oo-sliding-detail>
   <oo-sliding-detail slide-in="showGenerateMahnungReport" slide-out-function="closeMahnungBerichtFunct()">
     <oo-generate-report on-close="closeMahnungBericht" on-generated="closeMahnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/mahnungen'" ids="checkboxes.ids" default-file-name="'Mahnung.ods'"></oo-generate-report>
   </oo-sliding-detail>

@@ -3,22 +3,42 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('RechnungenOverviewController', ['$q', '$scope', '$filter',
+  .controller('RechnungenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
+    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
+    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','FileSaver',
+    function($q, $scope, $rootScope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSTATUS, msgBus, lodash, VorlagenService,
-      localeSensitiveComparator, gettext, DetailNavigationService) {
+      FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
+      localeSensitiveComparator, gettext, DetailNavigationService, FileSaver) {
+      $rootScope.viewId = 'L-Re';
 
+      $scope.showCreateEMailDialog = false;
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
+
+      function getFullName(item, index) {
+          if (index === 0){
+           var array = {
+               id : undefined,
+               title : item.label
+           }
+           return array;
+          } else {
+          var array = {
+               id : item.id,
+               title : item.label
+           }
+           return array;
+          }
+      }
+
+      $scope.paymentTypes = EnumUtil.asArray(PAYMENT_TYPES);
       $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
 
       $scope.search = {
@@ -57,7 +77,7 @@ angular.module('openolitor-admin')
         });
       };
 
-    
+
       $scope.downloadRechnung = function(rechnung) {
         rechnung.isDownloading = true;
         FileUtil.downloadGet('rechnungen/' + rechnung.id +
@@ -105,6 +125,16 @@ angular.module('openolitor-admin')
         return false;
       };
 
+      var allRechnungDocumentCreated = function(selectedItems, items) {
+        var length = selectedItems.length;
+        for (var i = 0; i < length; ++i) {
+          var id = selectedItems[i];
+          if (!items[id].fileStoreId) {
+            return false;
+          }
+        }
+        return true;
+      };
       // watch for check all checkbox
       $scope.$watch(function() {
         return $scope.checkboxes.checked;
@@ -113,7 +143,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageRechnung');
+        return ReportvorlagenService.getVorlagen('VorlageRechnung');
       };
 
       // watch for data checkboxes
@@ -136,6 +166,7 @@ angular.module('openolitor-admin')
         label: gettext('Rechnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateRechnungReport = true;
           return true;
         },
@@ -148,6 +179,7 @@ angular.module('openolitor-admin')
         label: gettext('Mahnungsdokumente erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateMahnungReport = true;
           return true;
         },
@@ -210,15 +242,50 @@ angular.module('openolitor-admin')
           $location.path('/kunden').search('q', 'id=' + result.join());
         }
       }, {
-        label: gettext('Email Versand*'),
+        label: gettext('Rechungen per E-Mail verschicken'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
+          //TODO OO-762 using Mail-Service functionality on Overview
           return false;
         },
         isDisabled: function() {
           return true;
         }
       }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-pencil',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('rechnung');
+          $scope.url = 'mailing/sendEmailToInvoicesSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');
+          $scope.rechnungIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at(Object.keys($scope.checkboxes.items))
+            .map('id')
+            .value();
+          $scope.attachment = allRechnungDocumentCreated($scope.checkboxes.ids, $scope.checkboxes.data);
+          $scope.showCreateEMailDialog = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+        }, {
+        label: gettext('pain.008.001.07 erstellen'),
+        iconClass: 'fa fa-download',
+        onExecute: function() {
+          return $http.post(API_URL + 'rechnungen/aktionen/pain_008_001_07', {
+            'ids': $scope.checkboxes.ids
+          }).then(function(file) {
+             var data = new Blob([file.data], { type: 'text/plain;charset=utf-8' });
+             FileSaver.saveAs(data, 'pain_008_001_07.xml');
+          });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }},{
         label: gettext('Rechnungen löschen'),
         iconClass: 'fa fa-times',
         isDisabled: function() {
@@ -324,6 +391,14 @@ angular.module('openolitor-admin')
 
       $scope.closeMahnungBerichtFunct = function() {
         return $scope.closeMahnungBericht;
+      };
+
+      $scope.closeCreateEMailDialog = function() {
+        $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog;
       };
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {

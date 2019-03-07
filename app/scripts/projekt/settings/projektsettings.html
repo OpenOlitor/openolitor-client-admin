@@ -118,6 +118,49 @@
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Vom System generierte E-Mail versenden</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.generierteMailsSenden" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">
+                <span class="navbar-brand" translate>Arbeitseinsatz</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Personenliste übrigen Teilnehmern anzeigen</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.einsatzShowListeKunde" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="emailErforderlich" translate>Absage bis Anzahl Tage vor Einsatz</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input type="number" class="form-control" id="einsatzAbsageVorlaufTage" ng-model="projekt.einsatzAbsageVorlaufTage" ng-disabled="!editMode" placeholder="{{'Anzahl Tage'|translate}}">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="waehrung" translate>Einsatz Einheit</label>
+                </div>
+                <div class="col-md-4">
+                  <oo-dropdown dropdown-id="einsatzEinheit" disabled="!editMode" display-style="uib-dropdown" values="einsatzEinheiten" selected-prop="id" property="label" selected="projekt.einsatzEinheit" ng-required></oo-dropdown>
+                </div>
+              </div>
             </div>
             <div class="panel-heading clearfix">
               <h3 class="panel-title">
@@ -198,6 +241,14 @@
                 </div>
               </div>
 
+                <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bezeichnung" translate>Gläubiger-Identifikationsnummer</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" pattern="[A-zA-Z0-9]{0,35}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.creditorIdentifier" placeholder="{{'Gläubiger-Identifikationsnummer'|translate}}">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -253,6 +304,14 @@
                   ngf-drop="uploadStyle($file, 'style-kundenportal')">
                   CSS-Datei auswählen oder einfügen
                 </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="logo" translate>Importdatei</label>
+              </div>
+              <div class="col-md-2">
+                <a href="" ng-click="downloadImportFile()" translate>Download</a>
               </div>
             </div>
           </div>

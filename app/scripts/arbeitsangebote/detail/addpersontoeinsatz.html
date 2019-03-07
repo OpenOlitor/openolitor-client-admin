@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title">
+      <span class="navbar-brand" translate>Arbeitseinsatz erfassen für</span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <form name="addPersonForm">
+     <div class="row form-group">
+       <div class="col-md-4">
+         <label for="abotyp" translate>Person</label>
+       </div>
+       <div class="col-md-8" ng-if="!newEinsatz.person">
+         <input type="text" ng-model="selectedPerson" placeholder="Person suchen..." uib-typeahead="person as (person.id + ' ' + person.vorname + ' ' + person.name + ' ' + person.strasse + ' ' + person.hausNummer + ' ' + person.plz + ' ' + person.ort) for person in getPersonen($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingPersonen" typeahead-no-results="noResults" class="form-control" typeahead-on-select="selectPerson($item)" ignore-dirty>
+       </div>
+       <div class="col-md-8" ng-if="newEinsatz.person">
+         {{newEinsatz.person.vorname}} {{newEinsatz.person.name}}
+       </div>
+     </div>
+     <div ng-show="newEinsatz.person">
+       <div class="row form-group">
+         <div class="col-md-4">
+           <label for="abotyp" translate>Anzahl Personen</label>
+         </div>
+         <div class="col-md-8">
+           <input type="number" min="0" step="1" class="form-control" name="anzahlPersonen" ng-model="newEinsatz.entity.anzahlPersonen" placeholder="{{'Anzahl'|translate}}">
+         </div>
+       </div>
+     </div>
+     <div ng-show="newEinsatz.person">
+       <div class="row form-group">
+         <div class="col-md-4">
+           <label for="abotyp" translate>Bemerkungen</label>
+         </div>
+         <div class="col-md-8">
+           <textarea class="form-control" name="bezeichnung" ng-model="newEinsatz.entity.bemerkungen" placeholder="{{'Allfällige Bemerkungen'|translate}}..."></textarea>
+         </div>
+       </div>
+     </div>
+   </form>
+ </div>
+  <div class="panel-footer">
+      <button class="btn btn-primary" ng-disabled="addPersonForm.$invalid" ng-click="addPersonSave();" translate>Arbeitseinsatz erstellen</button>
+      <button class="btn btn-warning" ng-click="closeAddPerson();" translate>Abbrechen</button>
+  </div>
+</div>

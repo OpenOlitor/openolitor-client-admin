@@ -42,6 +42,7 @@ module.exports = function(config) {
       'app/bower_components/openolitor-core/dist/scripts/openolitor-core.js',
       'app/bower_components/angular-loading-bar/build/loading-bar.js',
       'app/bower_components/ng-iban/dist/ng-iban.js',
+      'app/bower_components/angular-piwik/angular-piwik.js',
       'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

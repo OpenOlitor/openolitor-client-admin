@@ -37,7 +37,7 @@
                                 {{zusatzAbotyp.anzahlAbonnentenAktiv}}
                             </td>
                             <td data-title="'Preis'|translate" sortable="'preis'">
-                                <span ng-bind="zusatzAbotyp|ooPreisProEinheit" />
+                                <span ng-bind="zusatzAbotyp|ooPreisProEinheit:projekt.waehrung" />
                             </td>
                             <td data-title="'Aktiv'|translate" sortable="'aktiv'">
                                 <i ng-if="zusatzAbotyp.aktiv" class="glyphicon glyphicon-ok"></i>
@@ -49,4 +49,7 @@
             </div>
         </div>
     </div>
+<oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+  <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="zusatzabotypIdsMailing"></oo-email-dialog>
+  </oo-sliding-detail>
 </div>

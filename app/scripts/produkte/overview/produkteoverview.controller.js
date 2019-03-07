@@ -3,13 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ProdukteOverviewController', ['$q', '$scope', '$filter',
+  .controller('ProdukteOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'ProdukteModel', 'ProdukteService', 'ProduzentenService', 'ProduktekategorienService',
     'NgTableParams', 'EnumUtil', 'cloneObj', 'LIEFEREINHEIT', 'MONATE', 'lodash',
     'localeSensitiveComparator',
-    function($q, $scope, $filter, ProdukteModel, ProdukteService, ProduzentenService,
+    function($q, $scope, $rootScope, $filter, ProdukteModel, ProdukteService, ProduzentenService,
       ProduktekategorienService, NgTableParams, EnumUtil, cloneObj, LIEFEREINHEIT,
       MONATE, lodash, localeSensitiveComparator) {
+      $rootScope.viewId = 'L-Pkt';
 
       $scope.entries = [];
       $scope.loading = false;

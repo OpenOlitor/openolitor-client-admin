@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('TourenDetailController', ['$scope', '$filter', 'localeSensitiveComparator',
+  .controller('TourenDetailController', ['$scope', '$rootScope', '$filter', 'localeSensitiveComparator',
     'TourenService', 'TourenDetailModel', 'KundenOverviewModel', 'NgTableParams', 'cloneObj', '$routeParams', '$location', 'DetailNavigationService',
-    function($scope, $filter, localeSensitiveComparator,TourenService, TourenDetailModel,KundenOverviewModel, NgTableParams, cloneObj, $routeParams, $location, DetailNavigationService) {
-
+    function($scope, $rootScope, $filter, localeSensitiveComparator,TourenService, TourenDetailModel,KundenOverviewModel, NgTableParams, cloneObj, $routeParams, $location, DetailNavigationService) {
+      $rootScope.viewId = 'D-Tou';
+      
       $scope.unsortedTourlieferungen = [];
       $scope.sortedTourlieferungen = [];
       $scope.loading = false;

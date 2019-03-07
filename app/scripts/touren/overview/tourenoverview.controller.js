@@ -3,11 +3,13 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('TourenOverviewController', ['$scope', '$filter',
+  .controller('TourenOverviewController', ['$scope', '$rootScope', '$filter',
     'TourenService', 'TourenModel', 'NgTableParams', '$location', 'lodash', 'EmailUtil',
-    'OverviewCheckboxUtil',
-    function($scope, $filter, TourenService, TourenModel, NgTableParams, $location, _, EmailUtil, OverviewCheckboxUtil) {
-
+    'OverviewCheckboxUtil', 'gettext',
+    function($scope, $rootScope, $filter, TourenService, TourenModel, NgTableParams, $location, _, EmailUtil, OverviewCheckboxUtil,
+      gettext) {
+      $rootScope.viewId = 'L-Tou';
+      
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
@@ -107,7 +109,7 @@ angular.module('openolitor-admin')
 
       $scope.actions = [{
         labelFunction: function() {
-          return 'Tour erstellen';
+          return gettext('Tour erstellen');
         },
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-plus',
@@ -115,7 +117,7 @@ angular.module('openolitor-admin')
           return $location.path('/touren/new');
         }
       }, {
-        label: 'Email an Kunden versenden',
+        label: gettext('E-Mail an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -126,6 +128,24 @@ angular.module('openolitor-admin')
             EmailUtil.toMailToBccLink(emailAddresses);
           });
 
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          $scope.url = 'mailing/sendEmailToTourSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{tour.name}} \n {{tour.beschreibung}}');
+          $scope.tourenIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at(Object.keys($scope.checkboxes.items))
+            .map('id')
+            .value();
+          $scope.showCreateEMailDialog = true;
           return true;
         },
         isDisabled: function() {

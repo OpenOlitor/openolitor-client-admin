@@ -7,14 +7,15 @@ angular.module('openolitor-admin')
     '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
     'PendenzDetailModel', 'KundenOverviewModel',
-    'KundentypenService', 'alertService',
-    'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'ABOTYPEN', 'API_URL',
+    'KundentypenService', 'PersonCategoriesService' ,'alertService',
+    'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'PAYMENT_TYPES', 'ABOTYPEN', 'API_URL',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
-      KundenOverviewModel, KundentypenService, alertService, EnumUtil, DataUtil,
-      PENDENZSTATUS, ANREDE, ABOTYPEN, API_URL,
+      KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
+      PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, API_URL,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
+      $rootScope.viewId = 'D-Kun';
 
       var defaults = {
         model: {
@@ -22,15 +23,19 @@ angular.module('openolitor-admin')
           typen: [],
           ansprechpersonen: [{
             id: undefined,
-            anrede: undefined
+            anrede: undefined,
+            categories: []
           }],
           pendenzen: [],
-          abweichendeLieferadresse: false
+          abweichendeLieferadresse: false,
+          paymentType: "Anderer"
         }
       };
 
       $scope.einladungSend = {};
       $scope.einladungSendFailed = {};
+
+      $scope.personCategories = [];
 
       $scope.abotypenArray = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
         return typ.id;
@@ -39,8 +44,25 @@ angular.module('openolitor-admin')
       $scope.pendenzstatus = EnumUtil.asArray(PENDENZSTATUS);
       $scope.rollen = EnumUtil.asArray(ROLLE);
       $scope.anreden = ANREDE;
+      $scope.paymentTypes = PAYMENT_TYPES;
       $scope.updatingAbo = {};
       $scope.selectedAbo = undefined;
+
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var personCategory = (item.personCategory) ? item.personCategory:
+                item;
+
+              $scope.personCategories.push({
+                'id': personCategory.id,
+                'name': personCategory.name
+              });
+            });
+          }
+      });
 
       $scope.actions = [{
         noEntityText: true,
@@ -76,6 +98,19 @@ angular.module('openolitor-admin')
           id: $routeParams.id
         }, function(result) {
           $scope.kunde = result;
+            if (!$scope.kunde.kontoDaten)
+            $scope.kunde.kontoDaten = {
+                nameAccountHolder : $scope.kunde.bezeichnung,
+                addressAccountHolder : $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort
+            }
+            else {
+                if (!$scope.kunde.kontoDaten.nameAccountHolder){
+                    $scope.kunde.kontoDaten.nameAccountHolder = $scope.kunde.bezeichnung;
+                }
+                if (!$scope.kunde.kontoDaten.addressAccountHolder){
+                    $scope.kunde.kontoDaten.addressAccountHolder = $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort;
+                }
+            }
 
           if ($routeParams.aboId) {
             var abo = lodash.filter($scope.kunde.abos,
@@ -195,7 +230,8 @@ angular.module('openolitor-admin')
       $scope.addPerson = function() {
         $scope.kunde.ansprechpersonen.push({
           id: undefined,
-          anrede: undefined
+          anrede: undefined,
+          categories: []
         });
       };
 
@@ -268,7 +304,7 @@ angular.module('openolitor-admin')
         angular.forEach($scope.kundeForm, function (element, name) {
             if (element && !(element.$pristine === undefined) && formPristine){
                 formPristine = element.$pristine;
-            } 
+            }
         });
         return formPristine;
       }
@@ -278,10 +314,9 @@ angular.module('openolitor-admin')
           kundeId: $routeParams.id
         }, pendenz);
         new PendenzDetailModel(p).$save();
-        $scope.kundeForm.pendenzDescription.$setPristine();
-        $scope.kundeForm.pendenzDatum.$setPristine();
+        $scope.kundeForm.$setPristine();
         if ($scope.isKundeFormPristine()) {
-           $scope.kundeForm.$setPristine(); 
+           $scope.kundeForm.$setPristine();
         }
       };
 

@@ -61,4 +61,8 @@
   <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
     <oo-generate-report on-close="closeBericht" on-generated="closeBericht" projekt-vorlagen="projektVorlagen()" post-path="'depots/berichte/depotbrief'" ids="checkboxes.ids" default-file-name="'Depotbrief.ods'"></oo-generate-report>
   </oo-sliding-detail>
+
+  <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="depotIdsMailing"></oo-email-dialog>
+  </oo-sliding-detail>
 </div>

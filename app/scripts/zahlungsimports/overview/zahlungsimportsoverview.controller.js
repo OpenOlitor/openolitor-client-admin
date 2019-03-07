@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ZahlungsImportsOverviewController', ['$q', '$scope', '$filter',
+  .controller('ZahlungsImportsOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'ZahlungsImportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator',
-    function($q, $scope, $filter, ZahlungsImportsOverviewModel, NgTableParams,
+    function($q, $scope, $rootScope, $filter, ZahlungsImportsOverviewModel, NgTableParams,
       localeSensitiveComparator) {
+      $rootScope.viewId = 'L-ZaEx';
 
       $scope.entries = [];
       $scope.loading = false;

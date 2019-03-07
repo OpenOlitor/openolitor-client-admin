@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('DepotsDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('DepotsDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', 'gettext', 'DepotsDetailModel', 'gettextCatalog',
-    function($scope, $filter, $routeParams, $location, gettext,
+    function($scope, $rootScope, $filter, $routeParams, $location, gettext,
       DepotsDetailModel, gettextCatalog) {
-
+      $rootScope.viewId = 'D-Dep';
+      
       var defaults = {
         model: {
           id: undefined,

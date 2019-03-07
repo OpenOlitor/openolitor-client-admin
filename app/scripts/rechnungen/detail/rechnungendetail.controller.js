@@ -8,13 +8,14 @@ angular.module('openolitor-admin')
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
     'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
-    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'VorlagenService', 'DetailNavigationService',
+    'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'ReportvorlagenService', 'DetailNavigationService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, API_URL,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
-      RECHNUNGSTATUS, FileUtil, DataUtil, VorlagenService, DetailNavigationService) {
+      RECHNUNGSTATUS, FileUtil, DataUtil, ReportvorlagenService, DetailNavigationService) {
+      $rootScope.viewId = 'D-Re';
 
       DetailNavigationService.cleanKundeList();
 
@@ -30,7 +31,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageRechnung');
+        return ReportvorlagenService.getVorlagen('VorlageRechnung');
       };
 
       $scope.loading = false;
@@ -231,9 +232,10 @@ angular.module('openolitor-admin')
         },
         noEntityText: true
       }, {
-        label: gettext('Email versand*'),
+        label: gettext('Rechung per E-Mail verschicken'),
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
+          //TODO OO-762 using Mail-Service functionality on Overview
           return false;
         },
         isDisabled: function() {
@@ -255,6 +257,7 @@ angular.module('openolitor-admin')
         label: gettext('Rechnung bezahlt'),
         iconClass: 'fa fa-usd',
         onExecute: function() {
+          $scope.rechnungForm.$setPristine();
           return $scope.rechnung.$bezahlen();
         },
         isDisabled: function() {
@@ -322,7 +325,7 @@ angular.module('openolitor-admin')
       $scope.closeRechnungBerichtFunct = function() {
         return $scope.closeRechnungBericht;
       };
-      
+
       $scope.closeMahnungBerichtFunct = function() {
         return $scope.closeMahnungBericht;
       };

@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('BestellungenAbrechnenController', ['$scope',
+  .controller('BestellungenAbrechnenController', ['$scope', '$rootScope',
     'EinkaufsrechnungenOverviewService', 'msgBus', 'lodash',
 
-    function($scope, EinkaufsrechnungenOverviewService, msgBus, lodash) {
+    function($scope, $rootScope, EinkaufsrechnungenOverviewService, msgBus, lodash) {
+      $rootScope.viewId = 'D-Eink';
 
       $scope.bestellungenAbrechnen = {
         ids: $scope.bestellungIds,

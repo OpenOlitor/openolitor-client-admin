@@ -1,7 +1,6 @@
 'use strict';
 
-var regexIso8601 =
-  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?$/;
+var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?$/;
 // Matches YYYY-MM-ddThh:mm:ss.sssZ where .sss is optional
 //var regexIso8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
 
@@ -34,7 +33,8 @@ function convertDateStringsToDates(input) {
       input[key] = convertDateStringsToDates(value);
     }
   }
-  return input; }
+  return input;
+}
 function addExtendedEnumValue(id, labelLong, labelShort, value) {
   return {
     id: id,
@@ -83,6 +83,7 @@ angular
     'angular.css.injector',
     'angular-toArrayFilter',
     'mm.iban',
+    'piwik',
     'openolitor-core'
   ])
   .constant('API_URL', '@@API_URL')
@@ -99,12 +100,19 @@ angular
     MONATLICH: gettext('Monatlich'),
     UNREGELMAESSIG: gettext('Unregelmaessig')
   })
+  .constant('RHYTHMEN', {
+    TAEGLICH: gettext('Täglich'),
+    WOECHENTLICH: gettext('Wöchentlich'),
+    ZWEIWOECHENTLICH: gettext('Zweiwöchentlich'),
+    MONATLICH: gettext('Monatlich'),
+    UNREGELMAESSIG: gettext('Unregelmaessig')
+  })
   .constant('PREISEINHEITEN', {
     //JAHR: 'Jahr',
     //QUARTAL: 'Quartal',
     //MONAT: 'Monat',
     LIEFERUNG: gettext('Lieferung')
-      //ABO: 'Aboende'
+    //ABO: 'Aboende'
   })
   .constant('VERTRIEBSARTEN', {
     DEPOTLIEFERUNG: gettext('Depotlieferung'),
@@ -124,6 +132,11 @@ angular
     KEINE: addExtendedEnumValue(undefined, gettext('Keine'), gettext('-')),
     HERR: addExtendedEnumValue('Herr', gettext('Herr'), gettext('Hr.')),
     FRAU: addExtendedEnumValue('Frau', gettext('Frau'), gettext('Fr.'))
+  })
+  .constant('PAYMENT_TYPES', {
+    ANDERER: gettext('Anderer'),
+    DIRECT_DEBIT: gettext('DirectDebit'),
+    TRANSFER: gettext('Transfer')
   })
   .constant('ABOTYPEN', {
     DEPOTLIEFERUNGABO: gettext('DepotlieferungAbo'),
@@ -151,7 +164,7 @@ angular
     OFFEN: gettext('Offen'),
     ZUGEWIESEN: gettext('Zugewiesen'),
     BEZAHLT: gettext('Bezahlt'),
-    STORNIERT: gettext('Storniert'),
+    STORNIERT: gettext('Storniert')
   })
   .constant('KORBSTATUS', {
     WIRDGELIEFERT: gettext('WirdGeliefert'),
@@ -164,160 +177,253 @@ angular
     STUECK: addExtendedEnumValue('Stueck', gettext('Stück'), gettext('St.')),
     BUND: addExtendedEnumValue('Bund', gettext('Bund'), gettext('Bu.')),
     GRAMM: addExtendedEnumValue('Gramm', gettext('Gramm'), gettext('gr')),
-    KILOGRAMM: addExtendedEnumValue('Kilogramm', gettext('Kilogramm'),
-      gettext('kg')),
+    KILOGRAMM: addExtendedEnumValue(
+      'Kilogramm',
+      gettext('Kilogramm'),
+      gettext('kg')
+    ),
     LITER: addExtendedEnumValue('Liter', gettext('Liter'), gettext('l')),
-    PORTION: addExtendedEnumValue('Portion', gettext('Portion'), gettext('Por.'))
+    PORTION: addExtendedEnumValue(
+      'Portion',
+      gettext('Portion'),
+      gettext('Por.')
+    )
   })
-  .constant('ABOTYPEN_ARRAY', ['DepotlieferungAbo', 'HeimlieferungAbo',
+  .constant('ARBEITSEINSATZSTATUS', {
+    INVORBEREITUNG: gettext('InVorbereitung'),
+    BEREIT: gettext('Bereit'),
+    ABGESAGT: gettext('Abgesagt'),
+    ARCHIVIERT: gettext('Archiviert')
+  })
+  .constant('ABOTYPEN_ARRAY', [
+    'DepotlieferungAbo',
+    'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
   .constant('WAEHRUNG', {
-    CHF: addExtendedEnumValue('CHF', gettext('Schweizer Franken'), gettext(
-      'CHF')),
+    CHF: addExtendedEnumValue(
+      'CHF',
+      gettext('Schweizer Franken'),
+      gettext('CHF')
+    ),
     EUR: addExtendedEnumValue('EUR', gettext('Euro'), gettext('EUR')),
     USD: addExtendedEnumValue('USD', gettext('US Dollar'), gettext('USD')),
-    GBP: addExtendedEnumValue('GBP', gettext('Britisches Pfund'), gettext(
-      'GBP')),
-    CAD: addExtendedEnumValue('CAD', gettext('Kanadischer Dollar'), gettext(
-      'CAD'))
+    GBP: addExtendedEnumValue(
+      'GBP',
+      gettext('Britisches Pfund'),
+      gettext('GBP')
+    ),
+    CAD: addExtendedEnumValue(
+      'CAD',
+      gettext('Kanadischer Dollar'),
+      gettext('CAD')
+    )
   })
   .constant('LIEFERZEITPUNKTE', {
-    MONTAG: addExtendedEnumValue('Montag', gettext('Montag'), gettext('MO'),
-      1),
-    DIENSTAG: addExtendedEnumValue('Dienstag', gettext('Dienstag'), gettext(
-      'DI'), 2),
-    MITTWOCH: addExtendedEnumValue('Mittwoch', gettext('Mittwoch'), gettext(
-      'MI'), 3),
-    DONNERSTAG: addExtendedEnumValue('Donnerstag', gettext('Donnerstag'),
-      gettext('DO'), 4),
-    FREITAG: addExtendedEnumValue('Freitag', gettext('Freitag'), gettext('FR'),
-      5),
-    SAMSTAG: addExtendedEnumValue('Samstag', gettext('Samstag'), gettext('SA'),
-      6),
-    SONNTAG: addExtendedEnumValue('Sonntag', gettext('Sonntag'), gettext('SO'),
-      7)
+    MONTAG: addExtendedEnumValue('Montag', gettext('Montag'), gettext('MO'), 1),
+    DIENSTAG: addExtendedEnumValue(
+      'Dienstag',
+      gettext('Dienstag'),
+      gettext('DI'),
+      2
+    ),
+    MITTWOCH: addExtendedEnumValue(
+      'Mittwoch',
+      gettext('Mittwoch'),
+      gettext('MI'),
+      3
+    ),
+    DONNERSTAG: addExtendedEnumValue(
+      'Donnerstag',
+      gettext('Donnerstag'),
+      gettext('DO'),
+      4
+    ),
+    FREITAG: addExtendedEnumValue(
+      'Freitag',
+      gettext('Freitag'),
+      gettext('FR'),
+      5
+    ),
+    SAMSTAG: addExtendedEnumValue(
+      'Samstag',
+      gettext('Samstag'),
+      gettext('SA'),
+      6
+    ),
+    SONNTAG: addExtendedEnumValue(
+      'Sonntag',
+      gettext('Sonntag'),
+      gettext('SO'),
+      7
+    )
   })
   .constant('MONATE', {
-    JANUAR: addExtendedEnumValue('Januar', gettext('Januar'), gettext('Jan'),
-      1),
-    FEBRUAR: addExtendedEnumValue('Februar', gettext('Februar'), gettext(
-      'Feb'), 2),
+    JANUAR: addExtendedEnumValue(
+      'Januar',
+      gettext('Januar'),
+      gettext('Jan'),
+      1
+    ),
+    FEBRUAR: addExtendedEnumValue(
+      'Februar',
+      gettext('Februar'),
+      gettext('Feb'),
+      2
+    ),
     MAERZ: addExtendedEnumValue('Maerz', gettext('März'), gettext('Mar'), 3),
     APRIL: addExtendedEnumValue('April', gettext('April'), gettext('Apr'), 4),
     MAI: addExtendedEnumValue('Mai', gettext('Mai'), gettext('Mai'), 5),
     JUNI: addExtendedEnumValue('Juni', gettext('Juni'), gettext('Jun'), 6),
     JULI: addExtendedEnumValue('Juli', gettext('Juli'), gettext('Jul'), 7),
-    AUGUST: addExtendedEnumValue('August', gettext('August'), gettext('Aug'),
-      8),
-    SEPTEMBER: addExtendedEnumValue('September', gettext('September'),
-      gettext('Sep'), 9),
-    OKTOBER: addExtendedEnumValue('Oktober', gettext('Oktober'), gettext(
-      'Okt'), 10),
-    NOVEMBER: addExtendedEnumValue('November', gettext('November'), gettext(
-      'Nov'), 11),
-    DEZEMBER: addExtendedEnumValue('Dezember', gettext('Dezember'), gettext(
-      'Dez'), 12)
+    AUGUST: addExtendedEnumValue(
+      'August',
+      gettext('August'),
+      gettext('Aug'),
+      8
+    ),
+    SEPTEMBER: addExtendedEnumValue(
+      'September',
+      gettext('September'),
+      gettext('Sep'),
+      9
+    ),
+    OKTOBER: addExtendedEnumValue(
+      'Oktober',
+      gettext('Oktober'),
+      gettext('Okt'),
+      10
+    ),
+    NOVEMBER: addExtendedEnumValue(
+      'November',
+      gettext('November'),
+      gettext('Nov'),
+      11
+    ),
+    DEZEMBER: addExtendedEnumValue(
+      'Dezember',
+      gettext('Dezember'),
+      gettext('Dez'),
+      12
+    )
   })
   .constant('PENDENZSTATUS', {
     AUSSTEHEND: gettext('Ausstehend'),
     ERLEDIGT: gettext('Erledigt'),
     NICHTERLEDIGT: gettext('NichtErledigt')
   })
+  .constant('ZAHLUNGSEXPORTSTATUS', {
+    SENT: gettext('Sent'),
+    CREATED: gettext('Created'),
+    ARCHIVED: gettext('Archived')
+  })
   .constant('AUSLIEFERUNGSTATUS', {
     ERFASST: gettext('Erfasst'),
-    AUSGELIEFERT: gettext('Ausgeliefert'),
+    AUSGELIEFERT: gettext('Ausgeliefert')
   })
   .constant('ROLLE', {
     KUNDE: gettext('Kunde'),
-    ADMINISTRATOR: gettext('Administrator'),
+    ADMINISTRATOR: gettext('Administrator')
+  })
+  .constant('EINSATZEINHEIT', {
+    STUNDEN: gettext('Stunden'),
+    HALBTAGE: gettext('Halbtage'),
+    TAGE: gettext('Tage'),
+    PUNKTE: gettext('Punkte')
   })
   .constant('uiDatetimePickerConfig', {
-      dateFormat: 'dd.MM.yyyy HH:mm',
-      defaultTime: '08:00:00',
-      html5Types: {
-          date: 'dd.MM.yyyy',
-          'datetime-local': 'yyyy-MM-ddTHH:mm:ss.sss',
-          'month': 'MMM yyyy'
+    dateFormat: 'dd.MM.yyyy HH:mm',
+    defaultTime: '08:00:00',
+    html5Types: {
+      date: 'dd.MM.yyyy',
+      'datetime-local': 'yyyy-MM-ddTHH:mm:ss.sss',
+      month: 'MMM yyyy'
+    },
+    initialPicker: 'date',
+    reOpenDefault: false,
+    enableDate: true,
+    enableTime: true,
+    buttonBar: {
+      show: true,
+      now: {
+        show: false,
+        text: gettext('Jetzt'),
+        cls: 'btn-sm btn-default'
       },
-      initialPicker: 'date',
-      reOpenDefault: false,
-      enableDate: true,
-      enableTime: true,
-      buttonBar: {
-          show: true,
-          now: {
-              show: false,
-              text: gettext('Jetzt'),
-              cls: 'btn-sm btn-default'
-          },
-          today: {
-              show: false,
-              text: gettext('Heute'),
-              cls: 'btn-sm btn-default'
-          },
-          clear: {
-              show: true,
-              text: gettext('Löschen'),
-              cls: 'btn-sm btn-default'
-          },
-          date: {
-              show: true,
-              text: gettext('Datum'),
-              cls: 'btn-sm btn-default'
-          },
-          time: {
-              show: true,
-              text: gettext('Zeit'),
-              cls: 'btn-sm btn-default'
-          },
-          close: {
-              show: true,
-              text: gettext('Schliessen'),
-              cls: 'btn-sm btn-default'
-          },
-          cancel: {
-              show: false,
-              text: gettext('Abbrechen'),
-              cls: 'btn-sm btn-default'
-          }
+      today: {
+        show: false,
+        text: gettext('Heute'),
+        cls: 'btn-sm btn-default'
       },
-      closeOnDateSelection: true,
-      closeOnTimeNow: true,
-      appendToBody: false,
-      altInputFormats: [],
-      ngModelOptions: { },
-      saveAs: false,
-      readAs: false,
+      clear: {
+        show: true,
+        text: gettext('Löschen'),
+        cls: 'btn-sm btn-default'
+      },
+      date: {
+        show: true,
+        text: gettext('Datum'),
+        cls: 'btn-sm btn-default'
+      },
+      time: {
+        show: true,
+        text: gettext('Zeit'),
+        cls: 'btn-sm btn-default'
+      },
+      close: {
+        show: true,
+        text: gettext('Schliessen'),
+        cls: 'btn-sm btn-default'
+      },
+      cancel: {
+        show: false,
+        text: gettext('Abbrechen'),
+        cls: 'btn-sm btn-default'
+      }
+    },
+    closeOnDateSelection: true,
+    closeOnTimeNow: true,
+    appendToBody: false,
+    altInputFormats: [],
+    ngModelOptions: {},
+    saveAs: false,
+    readAs: false
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
-  .factory('checkSize', ['$rootScope', '$window', function($rootScope, $window) {
-    return function() {
-      if ($window.innerWidth >= 1200) {
-        $rootScope.tgState = true;
-      }
-    };
-  }])
-  .factory('exportTable', ['FileSaver', function(FileSaver) {
-    return function(tableController, fileName) {
-      tableController.exportODS(function(file) {
-        FileSaver.saveAs(file.response, fileName);
-      });
-    };
-  }])
+  .factory('checkSize', [
+    '$rootScope',
+    '$window',
+    function($rootScope, $window) {
+      return function() {
+        if ($window.innerWidth >= 1200) {
+          $rootScope.tgState = true;
+        }
+      };
+    }
+  ])
+  .factory('exportTable', [
+    'FileSaver',
+    function(FileSaver) {
+      return function(tableController, fileName) {
+        tableController.exportODS(function(file) {
+          FileSaver.saveAs(file.response, fileName);
+        });
+      };
+    }
+  ])
   .factory('localeSensitiveComparator', function() {
-    var isString = function (value) {
-      return (typeof value.value === 'string');
+    var isString = function(value) {
+      return typeof value.value === 'string';
     };
 
-    var isNumber = function (value) {
-      return (typeof value.value === 'number');
+    var isNumber = function(value) {
+      return typeof value.value === 'number';
     };
 
-    var isBoolean = function (value) {
-      return (typeof value.value === 'boolean');
+    var isBoolean = function(value) {
+      return typeof value.value === 'boolean';
     };
 
     return function(v1, v2) {
@@ -329,109 +435,146 @@ angular
         return v1.value - v2.value;
       }
 
-      if(angular.isUndefined(v1.value) && !angular.isUndefined(v2.value)) {
+      if (angular.isUndefined(v1.value) && !angular.isUndefined(v2.value)) {
         return -1;
       }
 
-      if(angular.isUndefined(v2.value) && !angular.isUndefined(v1.value)) {
+      if (angular.isUndefined(v2.value) && !angular.isUndefined(v1.value)) {
         return 1;
       }
 
       // If we don't get strings, numbers or booleans, just compare by index
-      return (v1.index < v2.index) ? -1 : 1;
+      return v1.index < v2.index ? -1 : 1;
     };
   })
   .factory('exportODSModuleFunction', function() {
-      return {
-          params: {
-            exportType: '.ods',
-          },
-          method: 'GET',
-          responseType: 'arraybuffer',
-          cache: true,
-          transformResponse: function (data) {
-              var file;
-              if (data) {
-                  file = new Blob([data], {
-                      type: 'application/vnd.oasis.opendocument.spreadsheet'
-                  });
-              }
-              return {
-                  response: file
-              };
-          }
+    return {
+      params: {
+        exportType: '.ods'
+      },
+      method: 'GET',
+      responseType: 'arraybuffer',
+      cache: true,
+      transformResponse: function(data) {
+        var file;
+        if (data) {
+          file = new Blob([data], {
+            type: 'application/vnd.oasis.opendocument.spreadsheet'
+          });
+        }
+        return {
+          response: file
         };
+      }
+    };
   })
   .factory('cloneObj', function() {
     return function(obj) {
       return angular.copy(obj);
     };
   })
-  .factory('msgBus', ['$rootScope', function($rootScope) {
-    var msgBus = {};
-    msgBus.emitMsg = function(msg) {
-      $rootScope.$emit(msg.type, msg);
-    };
-    msgBus.onMsg = function(msg, scope, func) {
-      var unbind = $rootScope.$on(msg, func);
-      scope.$on('$destroy', unbind);
-    };
-    return msgBus;
-  }])
-  .run(['ooClientMessageService', function(clientMessageService) {
-    console.log('Start clientMessageService');
-    clientMessageService.start();
-  }])
-  .config(['ngTableFilterConfigProvider', function(ngTableFilterConfigProvider) {
-    ngTableFilterConfigProvider.setConfig({
-      aliasUrls: {
-        'boolean' : 'scripts/utils/ng-table/ng-table-boolean-filter.html'
-      }
-    });
-  }])
-  .config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.transformResponse.push(function(responseData) {
-      return convertDateStringsToDates(responseData);
-    });
-  }])
-  .config(['$locationProvider', function($locationProvider) {
-    $locationProvider.hashPrefix('');
-  }])
-  .config(['$qProvider', function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-  }])
-  .run(['alertService', '$rootScope', function(alertService, $rootScope) {
-    $rootScope.$removeAlert = alertService.removeAlert();
-  }])
-  .config(['$provide', function($provide) {
-    $provide.decorator('$exceptionHandler', ['$log', '$injector',
-      function($log, $injector) {
-        return function(exception) {
-          // using the injector to retrieve services, otherwise circular dependency
-          var alertService = $injector.get('alertService');
-          alertService.addAlert('error', exception.message);
-          // log error default style
-          $log.error.apply($log, arguments);
-        };
-      }
-    ]);
-  }])
-  .factory('errbitErrorInterceptor', function($q, ENV, VERSION, AIRBREAK_API_KEY, AIRBREAK_URL) {
+  .factory('msgBus', [
+    '$rootScope',
+    function($rootScope) {
+      var msgBus = {};
+      msgBus.emitMsg = function(msg) {
+        $rootScope.$emit(msg.type, msg);
+      };
+      msgBus.onMsg = function(msg, scope, func) {
+        var unbind = $rootScope.$on(msg, func);
+        scope.$on('$destroy', unbind);
+      };
+      return msgBus;
+    }
+  ])
+  .run([
+    'ooClientMessageService',
+    function(clientMessageService) {
+      console.log('Start clientMessageService');
+      clientMessageService.start();
+    }
+  ])
+  .config([
+    'ngTableFilterConfigProvider',
+    function(ngTableFilterConfigProvider) {
+      ngTableFilterConfigProvider.setConfig({
+        aliasUrls: {
+          boolean: 'scripts/utils/ng-table/ng-table-boolean-filter.html'
+        }
+      });
+    }
+  ])
+  .config([
+    '$httpProvider',
+    function($httpProvider) {
+      $httpProvider.defaults.transformResponse.push(function(responseData) {
+        return convertDateStringsToDates(responseData);
+      });
+    }
+  ])
+  .config([
+    '$locationProvider',
+    function($locationProvider) {
+      $locationProvider.hashPrefix('');
+    }
+  ])
+  .config([
+    '$qProvider',
+    function($qProvider) {
+      $qProvider.errorOnUnhandledRejections(false);
+    }
+  ])
+  .run([
+    'alertService',
+    '$rootScope',
+    function(alertService, $rootScope) {
+      $rootScope.$removeAlert = alertService.removeAlert();
+    }
+  ])
+  .config([
+    '$provide',
+    function($provide) {
+      $provide.decorator('$exceptionHandler', [
+        '$log',
+        '$injector',
+        function($log, $injector) {
+          return function(exception) {
+            // using the injector to retrieve services, otherwise circular dependency
+            var alertService = $injector.get('alertService');
+            alertService.addAlert('error', exception.message);
+            // log error default style
+            $log.error.apply($log, arguments);
+          };
+        }
+      ]);
+    }
+  ])
+  .factory('errbitErrorInterceptor', function(
+    $q,
+    ENV,
+    VERSION,
+    AIRBREAK_API_KEY,
+    AIRBREAK_URL
+  ) {
     return {
-      responseError: function (rejection) {
+      responseError: function(rejection) {
         /*jshint -W117 */
         var airbrake = new airbrakeJs.Client({
           projectId: 1,
           host: AIRBREAK_URL,
-          projectKey: AIRBREAK_API_KEY});
+          projectKey: AIRBREAK_API_KEY
+        });
         /*jshint +W117 */
-        airbrake.addFilter(function (notice) {
+        airbrake.addFilter(function(notice) {
           notice.context.environment = ENV;
           notice.context.version = VERSION;
           return notice;
         });
         var message = 'Error: ';
-        if(!angular.isUndefined(rejection.config) && !angular.isUndefined(rejection.config.url)) {
+        if (
+          !angular.isUndefined(rejection.config) &&
+          !angular.isUndefined(rejection.config.url)
+        ) {
           message += rejection.config.url;
         }
         airbrake.notify(message);
@@ -441,37 +584,44 @@ angular
   })
   .factory('loggedOutInterceptor', function($q, alertService, $window) {
     return {
-      responseError: function (rejection) {
+      responseError: function(rejection) {
         var status = rejection.status;
         if (status === 400) {
-          alertService.addAlert('error', gettext('Problem beim Aufruf einer Serverfunktion:'), rejection.data);
-        } else
-        if (status === 401) {
-            alertService.removeAllAlerts();
-            $window.location = '#/logout';
-            return;
+          alertService.addAlert(
+            'error',
+            gettext('Problem beim Aufruf einer Serverfunktion:'),
+            rejection.data
+          );
+        } else if (status === 401) {
+          alertService.removeAllAlerts();
+          $window.location = '#/logout';
+          return;
         }
         return $q.reject(rejection);
       }
     };
   })
-  .config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('loggedOutInterceptor');
-    $httpProvider.interceptors.push('errbitErrorInterceptor');
-  }])
+  .config([
+    '$httpProvider',
+    function($httpProvider) {
+      $httpProvider.interceptors.push('loggedOutInterceptor');
+      $httpProvider.interceptors.push('errbitErrorInterceptor');
+    }
+  ])
   .filter('custNumber', function($filter, LIEFEREINHEIT) {
     return function(number, einheit) {
-
-      if(LIEFEREINHEIT.KILOGRAMM.id === einheit) {
+      if (LIEFEREINHEIT.KILOGRAMM.id === einheit) {
         //return $filter.number(number, digits);
         return Number(number).toFixed(3);
-      } else if(LIEFEREINHEIT.STUECK.id === einheit ||
+      } else if (
+        LIEFEREINHEIT.STUECK.id === einheit ||
         LIEFEREINHEIT.BUND.id === einheit ||
-        LIEFEREINHEIT.PORTION.id === einheit) {
+        LIEFEREINHEIT.PORTION.id === einheit
+      ) {
         return Number(number).toFixed(1);
-      } else if(LIEFEREINHEIT.GRAMM.id === einheit) {
-      return Number(number).toFixed(0);
-      } else if(LIEFEREINHEIT.LITER.id === einheit) {
+      } else if (LIEFEREINHEIT.GRAMM.id === einheit) {
+        return Number(number).toFixed(0);
+      } else if (LIEFEREINHEIT.LITER.id === einheit) {
         return Number(number).toFixed(2);
       } else {
         return number;
@@ -493,30 +643,30 @@ angular
     }
 
     return function(items, from, to, attribute) {
-      if(!angular.isUndefined(items) && items.length > 0) {
+      var result = [];
+      if (!angular.isUndefined(items) && items.length > 0) {
         var toPlusOne = to;
         var momTo = moment(to);
-        if(isMidnight(momTo)) {
+        if (isMidnight(momTo)) {
           toPlusOne = momTo.add(1, 'days');
         }
-        var result = [];
-        for (var i=0; i<items.length; i++){
+        for (var i = 0; i < items.length; i++) {
           var itemDate = items[i][attribute];
-          if(!angular.isUndefined(attribute)) {
+          if (!angular.isUndefined(attribute)) {
             itemDate = items[i][attribute];
           }
-          if(angular.isUndefined(to) && angular.isUndefined(from)) {
+          if (angular.isUndefined(to) && angular.isUndefined(from)) {
             result.push(items[i]);
-          } else if(angular.isUndefined(to) && itemDate >= from) {
+          } else if (angular.isUndefined(to) && itemDate >= from) {
             result.push(items[i]);
-          } else if(angular.isUndefined(from) && itemDate <= toPlusOne) {
+          } else if (angular.isUndefined(from) && itemDate <= toPlusOne) {
             result.push(items[i]);
-          } else if (itemDate >= from && itemDate <= toPlusOne)  {
+          } else if (itemDate >= from && itemDate <= toPlusOne) {
             result.push(items[i]);
           }
         }
-        return result;
       }
+      return result;
     };
   })
   .filter('lastElement', function() {
@@ -585,7 +735,7 @@ angular
       }
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
-        if(!angular.isUndefined(filtered[item])) {
+        if (!angular.isUndefined(filtered[item])) {
           filtered[item] = filtered[item] + 1;
         } else {
           filtered[item] = 1;
@@ -594,342 +744,436 @@ angular
       return filtered;
     };
   })
-  .config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-      .when('/', {
-        redirectTo: '/dashboard'
-      })
-      .when('/dashboard', {
-        templateUrl: 'scripts/dashboard/dashboard.html',
-        controller: 'DashboardController',
-        name: 'Dashboard',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/abotypen', {
-        templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
-        name: 'AbotypenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/abotypen/new', {
-        templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
-        controller: 'AbotypenDetailController',
-        name: 'AbotypenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/abotypen/:id', {
-        templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
-        controller: 'AbotypenDetailController',
-        name: 'AbotypenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/zusatzAbotypen/new', {
-        templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
-        controller: 'AbotypenDetailController',
-        name: 'ZusatzabotypenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/zusatzAbotypen/:id', {
-        templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
-        controller: 'AbotypenDetailController',
-        name: 'ZusatzabotypenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/kunden', {
-        templateUrl: 'scripts/kunden/overview/kundenoverview.html',
-        controller: 'KundenOverviewController',
-        name: 'KundenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/kunden/new', {
-        templateUrl: 'scripts/kunden/detail/kundendetail.html',
-        controller: 'KundenDetailController',
-        name: 'KundeDetail',
-        access: userRoles.Administrator
-      })
-      .when('/kunden/:id', {
-        templateUrl: 'scripts/kunden/detail/kundendetail.html',
-        controller: 'KundenDetailController',
-        name: 'KundeDetail',
-        access: userRoles.Administrator
-      })
-      .when('/kunden/:kundeId/abos/:id', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail',
-        access: userRoles.Administrator
-      })
-      .when('/personen', {
-        templateUrl: 'scripts/personen/overview/personenoverview.html',
-        controller: 'PersonenOverviewController',
-        name: 'PersonenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/produzenten', {
-        templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
-        controller: 'ProduzentenOverviewController',
-        name: 'ProduzentenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/produzenten/new', {
-        templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
-        controller: 'ProduzentenDetailController',
-        name: 'ProduzentenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/produzenten/:id', {
-        templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
-        controller: 'ProduzentenDetailController',
-        name: 'ProduzentenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/produzenten/:produzentId/abos/:id', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail',
-        access: userRoles.Administrator
-      })
-      .when('/einkaufsrechnungen', {
-        templateUrl: 'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
-        controller: 'EinkaufsrechnungenOverviewController',
-        name: 'EinkaufsrechnungenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/produkte', {
-        templateUrl: 'scripts/produkte/overview/produkteoverview.html',
-        controller: 'ProdukteOverviewController',
-        name: 'ProdukteOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/depots', {
-        templateUrl: 'scripts/depots/overview/depotsoverview.html',
-        controller: 'DepotsOverviewController',
-        name: 'DepotsOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/depots/:id', {
-        templateUrl: 'scripts/depots/detail/depotsdetail.html',
-        controller: 'DepotsDetailController',
-        name: 'DepotsDetail',
-        access: userRoles.Administrator
-      })
-      .when('/abos', {
-        templateUrl: 'scripts/abos/overview/abosoverview.html',
-        controller: 'AbosOverviewController',
-        name: 'AbosOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/abos/:id', {
-        templateUrl: 'scripts/abos/detail/abosdetail.html',
-        controller: 'AbosDetailController',
-        name: 'AbosDetail',
-        access: userRoles.Administrator
-      })
-      .when('/touren', {
-        templateUrl: 'scripts/touren/overview/tourenoverview.html',
-        controller: 'TourenOverviewController',
-        name: 'TourenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/touren/:id', {
-        templateUrl: 'scripts/touren/detail/tourendetail.html',
-        controller: 'TourenDetailController',
-        name: 'TourenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/pendenzen', {
-        templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
-        controller: 'PendenzenOverviewController',
-        name: 'PendenzenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/lieferplanung', {
-        templateUrl: 'scripts/lieferplanungen/overview/lieferplanungoverview.html',
-        controller: 'LieferplanungOverviewController',
-        name: 'LieferplanungOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/lieferplanung/:id', {
-        templateUrl: 'scripts/lieferplanungen/detail/lieferplanungdetail.html',
-        controller: 'LieferplanungDetailController',
-        name: 'LieferplanungDetail',
-        access: userRoles.Administrator
-      })
-      .when('/depotauslieferungen', {
-        templateUrl: 'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
-        controller: 'AuslieferungenOverviewController',
-        name: 'DepotAuslieferungenOverview',
-        model: 'Depot',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/depotauslieferungen/:id', {
-        templateUrl: 'scripts/auslieferungen/detail/depotauslieferungdetail.html',
-        controller: 'AuslieferungDetailController',
-        name: 'DepotAuslieferungDetail',
-        model: 'Depot',
-        access: userRoles.Administrator
-      })
-      .when('/tourauslieferungen', {
-        templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
-        controller: 'AuslieferungenOverviewController',
-        name: 'TourAuslieferungenOverview',
-        model: 'Tour',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/tourauslieferungen/:id', {
-        templateUrl: 'scripts/auslieferungen/detail/tourauslieferungdetail.html',
-        controller: 'AuslieferungDetailController',
-        name: 'TourAuslieferungDetail',
-        model: 'Tour',
-        access: userRoles.Administrator
-      })
-      .when('/postauslieferungen', {
-        templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
-        controller: 'AuslieferungenOverviewController',
-        name: 'PostAuslieferungenOverview',
-        model: 'Post',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/postauslieferungen/:id', {
-        templateUrl: 'scripts/auslieferungen/detail/postauslieferungdetail.html',
-        controller: 'AuslieferungDetailController',
-        name: 'PostAuslieferungDetail',
-        model: 'Post',
-        access: userRoles.Administrator
-      })
-      .when('/rechnungen', {
-        templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
-        controller: 'RechnungenOverviewController',
-        name: 'RechnungenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/rechnungen/new', {
-        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
-        controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/rechnungen/:id', {
-        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
-        controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/rechnungspositionen', {
-        templateUrl: 'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
-        controller: 'RechnungsPositionenOverviewController',
-        name: 'RechnungsPositionenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/kunden/:kundeId/rechnungen/new', {
-        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
-        controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/kunden/:kundeId/abos/:aboId/rechnungen/new', {
-        templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
-        controller: 'RechnungenDetailController',
-        name: 'RechnungenDetail',
-        access: userRoles.Administrator
-      })
-      .when('/zahlungsimports', {
-        templateUrl: 'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
-        controller: 'ZahlungsImportsOverviewController',
-        name: 'ZahlungsImportsOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/zahlungsimports/new', {
-        templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
-        controller: 'ZahlungsImportsController',
-        name: 'ZahlungsImports',
-        access: userRoles.Administrator
-      })
-      .when('/zahlungsimports/:id', {
-        templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
-        controller: 'ZahlungsImportsController',
-        name: 'ZahlungsImports',
-        access: userRoles.Administrator
-      })
-      .when('/kundentypen', {
-        templateUrl: 'scripts/projekt/settings/kundentypen.html',
-        controller: 'ProjektSettingsController',
-        name: 'ProjektSettings',
-        access: userRoles.Administrator
-      })
-      .when('/produktkategorien', {
-        templateUrl: 'scripts/projekt/settings/produktkategorien.html',
-        controller: 'ProjektSettingsController',
-        name: 'ProjektSettings',
-        access: userRoles.Administrator
-      })
-      .when('/projektsettings', {
-        templateUrl: 'scripts/projekt/settings/projektsettings.html',
-        controller: 'ProjektSettingsController',
-        name: 'ProjektSettings',
-        access: userRoles.Administrator
-      })
-      .when('/vorlagen', {
-        templateUrl: 'scripts/vorlagen/vorlagenoverview.html',
-        controller: 'VorlagenOverviewController',
-        name: 'VorlagenOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/reports', {
-        templateUrl: 'scripts/reports/overview/reportsoverview.html',
-        controller: 'ReportsOverviewController',
-        name: 'ReportsOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/reports', {
-        templateUrl: 'scripts/reports/overview/reportsoverview.html',
-        controller: 'ReportsOverviewController',
-        name: 'ReportsOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      })
-      .when('/reports/:id/execute', {
-        templateUrl: 'scripts/reports/execute/reportsexecute.html',
-        controller: 'ReportsExecuteController',
-        name: 'ReportsExecute',
-        access: userRoles.Administrator
-      })
-      .when('/reports/:id', {
-        templateUrl: 'scripts/reports/detail/reportsdetail.html',
-        controller: 'ReportsDetailController',
-        name: 'ReportsDetail',
-        access: userRoles.Administrator
-      })
-      .when('/reports/new', {
-        templateUrl: 'scripts/reports/detail/reportsdetail.html',
-        controller: 'ReportsDetailController',
-        name: 'ReportsDetail',
-        access: userRoles.Administrator
-      })
-      .when('/journal', {
-        templateUrl: 'scripts/journal/overview/journaloverview.html',
-        controller: 'JournalOverviewController',
-        name: 'JournalOverview',
-        access: userRoles.Administrator,
-        reloadOnSearch: false
-      });
-  }]);
+  .config([
+    '$routeProvider',
+    function($routeProvider) {
+      $routeProvider
+        .when('/', {
+          redirectTo: '/dashboard'
+        })
+        .when('/dashboard', {
+          templateUrl: 'scripts/dashboard/dashboard.html',
+          controller: 'DashboardController',
+          name: 'Dashboard',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/abotypen', {
+          templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
+          name: 'AbotypenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/abotypen/new', {
+          templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
+          controller: 'AbotypenDetailController',
+          name: 'AbotypenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/abotypen/:id', {
+          templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
+          controller: 'AbotypenDetailController',
+          name: 'AbotypenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/zusatzAbotypen/new', {
+          templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
+          controller: 'AbotypenDetailController',
+          name: 'ZusatzabotypenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/zusatzAbotypen/:id', {
+          templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
+          controller: 'AbotypenDetailController',
+          name: 'ZusatzabotypenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/kunden', {
+          templateUrl: 'scripts/kunden/overview/kundenoverview.html',
+          controller: 'KundenOverviewController',
+          name: 'KundenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/kunden/new', {
+          templateUrl: 'scripts/kunden/detail/kundendetail.html',
+          controller: 'KundenDetailController',
+          name: 'KundeDetail',
+          access: userRoles.Administrator
+        })
+        .when('/kunden/:id', {
+          templateUrl: 'scripts/kunden/detail/kundendetail.html',
+          controller: 'KundenDetailController',
+          name: 'KundeDetail',
+          access: userRoles.Administrator
+        })
+        .when('/kunden/:kundeId/abos/:id', {
+          templateUrl: 'scripts/abos/detail/abosdetail.html',
+          controller: 'AbosDetailController',
+          name: 'AbosDetail',
+          access: userRoles.Administrator
+        })
+        .when('/personen', {
+          templateUrl: 'scripts/personen/overview/personenoverview.html',
+          controller: 'PersonenOverviewController',
+          name: 'PersonenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/produzenten', {
+          templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
+          controller: 'ProduzentenOverviewController',
+          name: 'ProduzentenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/produzenten/new', {
+          templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
+          controller: 'ProduzentenDetailController',
+          name: 'ProduzentenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/produzenten/:id', {
+          templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
+          controller: 'ProduzentenDetailController',
+          name: 'ProduzentenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/produzenten/:produzentId/abos/:id', {
+          templateUrl: 'scripts/abos/detail/abosdetail.html',
+          controller: 'AbosDetailController',
+          name: 'AbosDetail',
+          access: userRoles.Administrator
+        })
+        .when('/einkaufsrechnungen', {
+          templateUrl:
+            'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
+          controller: 'EinkaufsrechnungenOverviewController',
+          name: 'EinkaufsrechnungenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/produkte', {
+          templateUrl: 'scripts/produkte/overview/produkteoverview.html',
+          controller: 'ProdukteOverviewController',
+          name: 'ProdukteOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/depots', {
+          templateUrl: 'scripts/depots/overview/depotsoverview.html',
+          controller: 'DepotsOverviewController',
+          name: 'DepotsOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/depots/:id', {
+          templateUrl: 'scripts/depots/detail/depotsdetail.html',
+          controller: 'DepotsDetailController',
+          name: 'DepotsDetail',
+          access: userRoles.Administrator
+        })
+        .when('/abos', {
+          templateUrl: 'scripts/abos/overview/abosoverview.html',
+          controller: 'AbosOverviewController',
+          name: 'AbosOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/zusatzabos', {
+          templateUrl: 'scripts/abos/overview/zusatzabosoverview.html',
+          controller: 'ZusatzabosOverviewController',
+          name: 'ZusatzabosOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/abos/:id', {
+          templateUrl: 'scripts/abos/detail/abosdetail.html',
+          controller: 'AbosDetailController',
+          name: 'AbosDetail',
+          access: userRoles.Administrator
+        })
+        .when('/touren', {
+          templateUrl: 'scripts/touren/overview/tourenoverview.html',
+          controller: 'TourenOverviewController',
+          name: 'TourenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/touren/:id', {
+          templateUrl: 'scripts/touren/detail/tourendetail.html',
+          controller: 'TourenDetailController',
+          name: 'TourenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/pendenzen', {
+          templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
+          controller: 'PendenzenOverviewController',
+          name: 'PendenzenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/lieferplanung', {
+          templateUrl:
+            'scripts/lieferplanungen/overview/lieferplanungoverview.html',
+          controller: 'LieferplanungOverviewController',
+          name: 'LieferplanungOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/lieferplanung/:id', {
+          templateUrl:
+            'scripts/lieferplanungen/detail/lieferplanungdetail.html',
+          controller: 'LieferplanungDetailController',
+          name: 'LieferplanungDetail',
+          access: userRoles.Administrator
+        })
+        .when('/depotauslieferungen', {
+          templateUrl:
+            'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
+          controller: 'AuslieferungenOverviewController',
+          name: 'DepotAuslieferungenOverview',
+          model: 'Depot',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/depotauslieferungen/:id', {
+          templateUrl:
+            'scripts/auslieferungen/detail/depotauslieferungdetail.html',
+          controller: 'AuslieferungDetailController',
+          name: 'DepotAuslieferungDetail',
+          model: 'Depot',
+          access: userRoles.Administrator
+        })
+        .when('/tourauslieferungen', {
+          templateUrl:
+            'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
+          controller: 'AuslieferungenOverviewController',
+          name: 'TourAuslieferungenOverview',
+          model: 'Tour',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/tourauslieferungen/:id', {
+          templateUrl:
+            'scripts/auslieferungen/detail/tourauslieferungdetail.html',
+          controller: 'AuslieferungDetailController',
+          name: 'TourAuslieferungDetail',
+          model: 'Tour',
+          access: userRoles.Administrator
+        })
+        .when('/postauslieferungen', {
+          templateUrl:
+            'scripts/auslieferungen/overview/postauslieferungenoverview.html',
+          controller: 'AuslieferungenOverviewController',
+          name: 'PostAuslieferungenOverview',
+          model: 'Post',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/postauslieferungen/:id', {
+          templateUrl:
+            'scripts/auslieferungen/detail/postauslieferungdetail.html',
+          controller: 'AuslieferungDetailController',
+          name: 'PostAuslieferungDetail',
+          model: 'Post',
+          access: userRoles.Administrator
+        })
+        .when('/rechnungen', {
+          templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
+          controller: 'RechnungenOverviewController',
+          name: 'RechnungenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/rechnungen/new', {
+          templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+          controller: 'RechnungenDetailController',
+          name: 'RechnungenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/rechnungen/:id', {
+          templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+          controller: 'RechnungenDetailController',
+          name: 'RechnungenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/rechnungspositionen', {
+          templateUrl:
+            'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
+          controller: 'RechnungsPositionenOverviewController',
+          name: 'RechnungsPositionenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/kunden/:kundeId/rechnungen/new', {
+          templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+          controller: 'RechnungenDetailController',
+          name: 'RechnungenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/kunden/:kundeId/abos/:aboId/rechnungen/new', {
+          templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
+          controller: 'RechnungenDetailController',
+          name: 'RechnungenDetail',
+          access: userRoles.Administrator
+        })
+        .when('/zahlungsimports', {
+          templateUrl:
+            'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
+          controller: 'ZahlungsImportsOverviewController',
+          name: 'ZahlungsImportsOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/zahlungsimports/new', {
+          templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
+          controller: 'ZahlungsImportsController',
+          name: 'ZahlungsImports',
+          access: userRoles.Administrator
+        })
+        .when('/zahlungsimports/:id', {
+          templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
+          controller: 'ZahlungsImportsController',
+          name: 'ZahlungsImports',
+          access: userRoles.Administrator
+        })
+        .when('/zahlungsexports', {
+          templateUrl: 'scripts/zahlungsexports/overview/zahlungsexportsoverview.html',
+          controller: 'ZahlungsExportsOverviewController',
+          name: 'ZahlungsExportsOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/zahlungsexports/new', {
+          templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
+          controller: 'ZahlungsExportsController',
+          name: 'ZahlungsExports',
+          access: userRoles.Administrator
+        })
+        .when('/zahlungsexports/:id', {
+          templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
+          controller: 'ZahlungsExportsController',
+          name: 'ZahlungsExports',
+          access: userRoles.Administrator
+        })
+        .when('/kundentypen', {
+          templateUrl: 'scripts/projekt/settings/kundentypen.html',
+          controller: 'ProjektSettingsController',
+          name: 'ProjektSettings',
+          access: userRoles.Administrator
+        })
+        .when('/personCategories', {
+          templateUrl: 'scripts/projekt/settings/personCategories.html',
+          controller: 'ProjektSettingsController',
+          name: 'ProjektSettings',
+          access: userRoles.Administrator
+        })
+        .when('/produktkategorien', {
+          templateUrl: 'scripts/projekt/settings/produktkategorien.html',
+          controller: 'ProjektSettingsController',
+          name: 'ProjektSettings',
+          access: userRoles.Administrator
+        })
+        .when('/arbeitskategorien', {
+          templateUrl: 'scripts/projekt/settings/arbeitskategorien.html',
+          controller: 'ProjektSettingsController',
+          name: 'ProjektSettings',
+          access: userRoles.Administrator
+        })
+        .when('/projektsettings', {
+          templateUrl: 'scripts/projekt/settings/projektsettings.html',
+          controller: 'ProjektSettingsController',
+          name: 'ProjektSettings',
+          access: userRoles.Administrator
+        })
+        .when('/reportvorlagen', {
+          templateUrl: 'scripts/reportvorlagen/reportvorlagenoverview.html',
+          controller: 'ReportvorlagenOverviewController',
+          name: 'ReportvorlagenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/mailvorlagen', {
+          templateUrl: 'scripts/mailvorlagen/mailvorlagenoverview.html',
+          controller: 'MailvorlagenOverviewController',
+          name: 'MailvorlagenOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/reports', {
+          templateUrl: 'scripts/reports/overview/reportsoverview.html',
+          controller: 'ReportsOverviewController',
+          name: 'ReportsOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/reports', {
+          templateUrl: 'scripts/reports/overview/reportsoverview.html',
+          controller: 'ReportsOverviewController',
+          name: 'ReportsOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        })
+        .when('/reports/:id/execute', {
+          templateUrl: 'scripts/reports/execute/reportsexecute.html',
+          controller: 'ReportsExecuteController',
+          name: 'ReportsExecute',
+          access: userRoles.Administrator
+        })
+        .when('/reports/:id', {
+          templateUrl: 'scripts/reports/detail/reportsdetail.html',
+          controller: 'ReportsDetailController',
+          name: 'ReportsDetail',
+          access: userRoles.Administrator
+        })
+        .when('/reports/new', {
+          templateUrl: 'scripts/reports/detail/reportsdetail.html',
+          controller: 'ReportsDetailController',
+          name: 'ReportsDetail',
+          access: userRoles.Administrator
+        })
+        .when('/arbeitsangebote', {
+          templateUrl:
+            'scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html',
+          controller: 'ArbeitsangeboteOverviewController',
+          name: 'ArbeitsangeboteOverview',
+          access: userRoles.Administrator
+        })
+        .when('/arbeitsangebote/new', {
+          templateUrl:
+            'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+          controller: 'ArbeitsangeboteDetailController',
+          name: 'ArbeitsangeboteDetail',
+          access: userRoles.Administrator
+        })
+        .when('/arbeitsangebote/:id', {
+          templateUrl:
+            'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+          controller: 'ArbeitsangeboteDetailController',
+          name: 'ArbeitsangeboteDetail',
+          access: userRoles.Administrator
+        })
+        .when('/arbeitseinsaetze', {
+          templateUrl:
+            'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
+          controller: 'ArbeitseinsaetzeOverviewController',
+          name: 'ArbeitseinsaetzeOverview',
+          access: userRoles.Administrator
+        })
+        .when('/arbeitseinsatzabrechnung', {
+          templateUrl:
+            'scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html',
+          controller: 'ArbeitseinsatzabrechnungOverviewController',
+          name: 'ArbeitseinsatzabrechnungOverview',
+          access: userRoles.Administrator
+        })
+        .when('/journal', {
+          templateUrl: 'scripts/journal/overview/journaloverview.html',
+          controller: 'JournalOverviewController',
+          name: 'JournalOverview',
+          access: userRoles.Administrator,
+          reloadOnSearch: false
+        });
+    }
+  ]);
