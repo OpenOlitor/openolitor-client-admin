@@ -257,6 +257,12 @@ angular.module('openolitor-admin')
           resolve: {
             abo: function() {
               return $scope.abo;
+            },            
+            vertriebsarten: function() {
+              return $scope.lists.vertriebsarten;
+            },
+            vertriebe: function() {
+              return $scope.lists.vertriebe[$scope.abo.abotypId];
             }
           }
         });
