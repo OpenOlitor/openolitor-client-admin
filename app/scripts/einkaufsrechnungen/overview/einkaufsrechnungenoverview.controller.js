@@ -208,7 +208,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('VorlageLieferantenabrechnung');
+        return ReportvorlagenService.getVorlagen('VorlageProduzentenabrechnung');
       };
 
       $scope.$watch('search.query', function() {
