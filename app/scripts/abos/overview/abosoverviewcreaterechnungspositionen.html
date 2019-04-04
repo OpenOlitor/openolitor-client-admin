@@ -69,7 +69,7 @@
     </form>
   </div>
   <div class="panel-footer" ng-if="createHasWorked && commandIssued" >
-    {{batchCreated.ids.length}} <span translate>von</span> {{rechnungsPositionen.ids.length + batchCreated.ids.length}} <span translate> Rechnungspositionen wurden erstellt</span>
+    {{batchCreated.ids.length}} <span translate> Rechnungspositionen wurden erstellt</span>
   </div>
   <div class="panel-footer" ng-if="!createHasWorked && commandIssued">
       <span translate>Rechnungspositionen konnten nicht erstellt werden.<span/>
