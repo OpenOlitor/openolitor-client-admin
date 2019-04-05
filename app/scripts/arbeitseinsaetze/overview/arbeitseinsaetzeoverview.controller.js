@@ -106,7 +106,7 @@ angular
       );
 
       $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('VorlageKundenbrief');
+        return ReportvorlagenService.getVorlagen('VorlageArbeitseinsatz');
       };
 
       $scope.closeBericht = function() {
