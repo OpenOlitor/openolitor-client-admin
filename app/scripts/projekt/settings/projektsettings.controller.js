@@ -27,10 +27,12 @@ angular.module('openolitor-admin')
         'msgBus',
         'cloneObj',
         'API_URL',
+        'alertService',
+        'gettextCatalog',
         function($scope, $rootScope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
             ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
-            Upload, msgBus, cloneObj, API_URL
+            Upload, msgBus, cloneObj, API_URL, alertService, gettextCatalog
         ) {
             $rootScope.viewId = 'S-Proj';
 
@@ -40,8 +42,8 @@ angular.module('openolitor-admin')
             $scope.templatePersonCategory = {};
             $scope.editingKundentypBool = false;
             $scope.editingProduktekategorieBool = false;
-            $scope.editingArbeitskategorienBool = false;
-            $scope.editingPersonCategoriesBool = false;
+            $scope.editingArbeitskategorieBool = false;
+            $scope.editingPersonCategoryBool = false;
 
             // first fake to true to work around bs-switch bug
             $scope.projectResolved = false;
@@ -274,11 +276,33 @@ angular.module('openolitor-admin')
 
             //functions to save, cancel, modify or delete the PersonCategory
 
+            $scope.personCategoryExists = function(personCategory) {
+                var numOfSimilarCategories = 0;
+                angular.forEach($scope.personCategories, function(item) {
+                            if (numOfSimilarCategories < 2){
+                            if (item.name === personCategory.name) {
+                                numOfSimilarCategories++ ;
+                            }
+                       }
+                });
+                if (numOfSimilarCategories < 2){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
             $scope.savePersonCategory = function(personCategory) {
-                personCategory.editable = false;
-                $scope.editingPersonCategoryBool = false;
-                $scope.personCategory = new PersonCategoriesModel(personCategory);
-                return $scope.personCategory.$save();
+                if (!$scope.personCategoryExists(personCategory)){
+                    personCategory.editable = false;
+                    $scope.editingPersonCategoryBool = false;
+                    $scope.personCategory = new PersonCategoriesModel(personCategory);
+                    return $scope.personCategory.$save();
+                } else {
+                    alertService.addAlert('lighterror', gettextCatalog.getString(
+                    'Diese Personenkategorie existiert bereits'));
+                    return "";
+                }
             };
 
             $scope.cancelPersonCategory = function(personCategory) {
@@ -327,12 +351,33 @@ angular.module('openolitor-admin')
                 }
             };
 
+            $scope.arbeitskategorieExists = function(arbeitskategorie) {
+                var numOfSimilarCategories = 0;
+                angular.forEach($scope.arbeitskategorien, function(item) {
+                            if (numOfSimilarCategories < 2){
+                            if (item.beschreibung === arbeitskategorie.beschreibung) {
+                                numOfSimilarCategories++ ;
+                            }
+                       }
+                });
+                if (numOfSimilarCategories < 2){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
 
             $scope.saveArbeitskategorie = function(arbeitskategorie) {
-                arbeitskategorie.editable = false;
-                $scope.editingArbeitskategorieBool = false;
-                $scope.arbeitskategorie = new ArbeitskategorienModel(arbeitskategorie);
-                return $scope.arbeitskategorie.$save();
+                if (!$scope.arbeitskategorieExists(arbeitskategorie)){
+                    arbeitskategorie.editable = false;
+                    $scope.editingArbeitskategorieBool = false;
+                    $scope.arbeitskategorie = new ArbeitskategorienModel(arbeitskategorie);
+                    return $scope.arbeitskategorie.$save();
+                } else {
+                    alertService.addAlert('lighterror', gettextCatalog.getString(
+                    'Diese arbeitskategorie existiert bereits'));
+                    return "";
+                }
             };
 
             $scope.cancelArbeitskategorie = function(arbeitskategorie) {
