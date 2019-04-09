@@ -375,7 +375,7 @@ angular.module('openolitor-admin')
                     return $scope.arbeitskategorie.$save();
                 } else {
                     alertService.addAlert('lighterror', gettextCatalog.getString(
-                    'Diese arbeitskategorie existiert bereits'));
+                    'Diese Arbeitskategorie existiert bereits'));
                     return "";
                 }
             };
