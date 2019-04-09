@@ -141,7 +141,7 @@
                 </span>
                 <span ng-show="korbprodukt.menge" ng-if="valuesEditable() && (projekt.preiseEditierbar || isUnlisted(korbprodukt))">
                   <p class="input-group">
-                    <input type="number" placeholder="{{'Preis'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,2})?$/" min="0" step="0.05" class="form-control" name="preis" ng-model="korbprodukt.preisEinheit" ng-change="calculatePreis(korbprodukt)" required></input>
+                    <input type="number" placeholder="{{'Preis'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,2})?$/" min="0" step="0.01" class="form-control" name="preis" ng-model="korbprodukt.preisEinheit" ng-change="calculatePreis(korbprodukt)" required></input>
                     <span class="input-group-addon" uib-tooltip-template="'unlistedKorbproduktPreisTooltipTemplate.html'" tooltip-popup-close-delay="500" tooltip-class="preis-tooltip">
                       {{calculatePreis(korbprodukt)| ooCHF}} <i class="fa fa-info-circle"></i>
                     </span>
