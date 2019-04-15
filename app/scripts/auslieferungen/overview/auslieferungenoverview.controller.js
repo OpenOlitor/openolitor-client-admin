@@ -139,6 +139,19 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
+        label: gettext('Korbdetails drucken'),
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
+          $scope.reportType = 'korbdetails';
+          $scope.vorlageTyp = 'Korbdetails';
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
         label: gettext('Als ausgeliefert markieren'),
         iconClass: 'fa fa-bicycle',
         onExecute: function() {
