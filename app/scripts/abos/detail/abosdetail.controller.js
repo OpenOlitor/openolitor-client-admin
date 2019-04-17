@@ -39,22 +39,7 @@ angular.module('openolitor-admin')
       }; 
 
       $scope.zusatzaboPickerStartDateList = [];
-      $scope.zusatzaboPickerStartDate = {
-          zusatzaboId: undefined,
-          datepickerOptions: {
-            minDate: undefined,
-            maxDate: undefined
-        }
-      }; 
-
       $scope.zusatzaboPickerEndDateList = [];
-      $scope.zusatzaboPickerEndDate = {
-          zusatzaboId: undefined,
-          datepickerOptions: {
-            minDate: undefined,
-            maxDate: undefined
-        }
-      };
 
       var defaults = {
         model: {
@@ -130,37 +115,78 @@ angular.module('openolitor-admin')
            $scope.zusatzAbos = zusatzAbos;
            $scope.zusatzAbos.forEach(function(zusatzAbo){
                if ($scope.findIndexByZusatzaboId(zusatzAbo.id) === -1 ){
-                   $scope.zusatzaboPickerEndDate.zusatzaboId = zusatzAbo.id;
-                   $scope.zusatzaboPickerStartDate.zusatzaboId = zusatzAbo.id;
-                   $scope.zusatzaboPickerStartDate.datepickerOptions.minDate = $scope.abo.start;
-                   $scope.zusatzaboPickerStartDate.datepickerOptions.maxDate = zusatzAbo.ende;
-                   $scope.zusatzaboPickerEndDate.datepickerOptions.minDate = zusatzAbo.start;
-                   $scope.zusatzaboPickerEndDate.datepickerOptions.maxDate = $scope.abo.ende;
-                   $scope.zusatzaboPickerEndDateList.push($scope.zusatzaboPickerEndDate);
-                   $scope.zusatzaboPickerStartDateList.push($scope.zusatzaboPickerStartDate);
+                   initializeDatePickerForZusatzabo(zusatzAbo);
                }
                zusatzAbo.zusatzaboTypPrice = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
                if (!zusatzAbo.price){
                   zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
                }
            });
+           initializeDatePickerForAbo(); 
          });
+       };
+
+       var initializeDatePickerForAbo = function() {
+          if ($scope.zusatzAbos.length > 0 ){
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = ($scope.abo.ende < getSmallestMinDateZusatzabos()) ? $scope.abo.ende : getSmallestMinDateZusatzabos() ; 
+            $scope.aboPickerEndDate.datepickerOptions.minDate = ($scope.abo.start > getSmallestMaxDateZusatzabos()) ? $scope.abo.start : getSmallestMaxDateZusatzabos(); 
+          } else {
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = $scope.abo.ende;
+            $scope.aboPickerEndDate.datepickerOptions.minDate = $scope.abo.start;
+          }
+       };
+
+       var getSmallestMinDateZusatzabos = function() {
+           return $scope.zusatzAbos.reduce((min, zusatzAbo) => zusatzAbo.start < min ? zusatzAbo.start : min,$scope.zusatzAbos[0].start);
+       }
+
+       var getSmallestMaxDateZusatzabos = function() {
+           return $scope.zusatzAbos.reduce((min, zusatzAbo) => zusatzAbo.ende < min ? zusatzAbo.ende: min,$scope.zusatzAbos[0].ende);
+       }
+
+       var initializeDatePickerForZusatzabo = function(zusatzAbo) {
+           var zstart = {
+               zusatzaboId:zusatzAbo.id,
+               datepickerOptions : {
+                   minDate:$scope.abo.start,
+                   maxDate:zusatzAbo.ende
+               }
+           };
+           var zend = {
+               zusatzaboId:zusatzAbo.id,
+               datepickerOptions : { 
+                   minDate:zusatzAbo.start,
+                   maxDate:$scope.abo.ende
+               }
+           };
+           $scope.zusatzaboPickerEndDateList.push(zend);
+           $scope.zusatzaboPickerStartDateList.push(zstart);
        };
 
        var createNewZusatzAbo = function(zusatzAbotyp) {
          var zusatzAbo = new ZusatzAboModel({hauptAboId: getAboId(), kundeId:getKundeId(),abotypId:zusatzAbotyp.id});
            zusatzAbo.$save();
+           initializeDatePickerForZusatzabo(zusatzAbo);
        };
 
       $scope.updateAboDatetimePicker = function (){
           $scope.aboPickerStartDate.datepickerOptions.maxDate = $scope.abo.ende; 
           $scope.aboPickerEndDate.datepickerOptions.minDate = $scope.abo.start; 
           $scope.zusatzaboPickerStartDateList.forEach(function(zusatzAboPicker){
-            $scope.zusatzaboPickerStartDate.datepickerOptions.minDate = $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.minDate = $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.maxDate = zusatzAboPicker.datepickerOptions.maxDate < $scope.abo.ende ? zusatzAboPicker.datepickerOptions.maxDate : $scope.abo.ende;
           });
           $scope.zusatzaboPickerEndDateList.forEach(function(zusatzAboPicker){
-            $scope.zusatzaboPickerEndDate.datepickerOptions.maxDate = $scope.abo.ende;
+            zusatzAboPicker.datepickerOptions.minDate = zusatzAboPicker.datepickerOptions.minDate > $scope.abo.start? zusatzAboPicker.datepickerOptions.minDate : $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.maxDate = $scope.abo.ende;
           });
+      };
+
+      $scope.updateZusatzaboDatetimePicker = function (zusatzabo){
+          var index = $scope.findIndexByZusatzaboId(zusatzabo.id);
+          $scope.zusatzaboPickerStartDateList[index].datepickerOptions.maxDate = zusatzabo.ende; 
+          $scope.zusatzaboPickerEndDateList[index].datepickerOptions.minDate = zusatzabo.start; 
+          initializeDatePickerForAbo();
       };
 
       $scope.findIndexByZusatzaboId = function (id){
@@ -176,12 +202,6 @@ angular.module('openolitor-admin')
           });
           return result;
       }
-
-      $scope.updateZusatzaboDatetimePicker = function (zusatzabo){
-          var index = $scope.findIndexByZusatzaboId(zusatzabo.id);
-          $scope.zusatzaboPickerStartDateList[index].datepickerOptions.maxDate = zusatzabo.ende; 
-          $scope.zusatzaboPickerEndDateList[index].datepickerOptions.minDate = zusatzabo.start; 
-      };
 
       var loadAboDetail = function() {
         if ($scope.loading === getAboId()) {
@@ -209,7 +229,6 @@ angular.module('openolitor-admin')
           }, function() {
             $scope.koerbeTableParams.reload();
           });
-          
           loadZusatzAbotypen();
           loadZusatzAbos();
         });
