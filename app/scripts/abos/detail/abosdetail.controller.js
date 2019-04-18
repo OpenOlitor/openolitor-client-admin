@@ -114,7 +114,7 @@ angular.module('openolitor-admin')
          },function(zusatzAbos){
            $scope.zusatzAbos = zusatzAbos;
            $scope.zusatzAbos.forEach(function(zusatzAbo){
-               if ($scope.findIndexByZusatzaboId(zusatzAbo.id) === -1 ){
+               if ($scope.findIndexByZusatzaboId(zusatzAbo.id)){
                    initializeDatePickerForZusatzabo(zusatzAbo);
                }
                zusatzAbo.zusatzaboTypPrice = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
@@ -190,7 +190,7 @@ angular.module('openolitor-admin')
 
       $scope.findIndexByZusatzaboId = function (id){
           var found = false;
-          var result = -1;
+          var result = undefined;
           $scope.zusatzaboPickerEndDateList.forEach(function(picker, index){
               if (!found){
                   if (picker.zusatzaboId === id){
