@@ -126,6 +126,16 @@ angular.module('openolitor-admin')
          });
        };
 
+       var areAllBasketsInOpenDeliveryPlannings = function(lieferungen) {
+           var result = true ;
+           lieferungen.forEach(function(lieferung){
+               if (lieferung.lieferung.status !== 'Offen'){
+                   result = false;
+               }
+           })
+           return result;
+       }
+
        var calculateDatePickerForAbo = function() {
           if ($scope.zusatzAbos.length > 0 ){
             $scope.aboPickerStartDate.datepickerOptions.maxDate = ($scope.abo.ende < getSmallestMinDateZusatzabos()) ? $scope.abo.ende : getSmallestMinDateZusatzabos() ; 
@@ -225,8 +235,9 @@ angular.module('openolitor-admin')
           $scope.lieferungen = AboKoerbeModel.query({
             kundeId: $scope.abo.kundeId,
             id: $scope.abo.id
-          }, function() {
+          }, function(lieferungen) {
             $scope.koerbeTableParams.reload();
+            $scope.allBasketsInOpenDeliveryPlannings = areAllBasketsInOpenDeliveryPlannings(lieferungen);
           });
           loadZusatzAbotypen();
           loadZusatzAbos();
@@ -434,9 +445,9 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function() {
-          return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
-            .anzahlLieferungen.length > 0 ||
-            !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
+            
+          return !$scope.abo || $scope.abo.guthaben > 0 || !$scope.allBasketsInOpenDeliveryPlannings ||
+                !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function() {
           return $scope.abo.$delete();
