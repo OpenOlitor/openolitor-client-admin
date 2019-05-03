@@ -239,7 +239,6 @@ angular.module('openolitor-admin')
           kundeId: getKundeId()
         }, function(result) {
           $scope.abo = result;
-          loadZusatzAbotypen();
           $scope.loading = false;
           if (!$scope.kunde || $scope.kunde.id !== $scope.abo.kundeId) {
             KundenDetailModel.get({
@@ -247,7 +246,6 @@ angular.module('openolitor-admin')
             }, function(kunde) {
               $scope.kunde = kunde;
               $scope.abo.price = $scope.aboPrice($scope.abo);
-              loadZusatzAbos();
             });
           }
 
@@ -259,6 +257,8 @@ angular.module('openolitor-admin')
             $scope.allBasketsInOpenDeliveryPlanningsForMainAbo = areAllBasketsInOpenDeliveryPlanningsForMainAbo(lieferungen);
           });
         });
+        loadZusatzAbotypen();
+        loadZusatzAbos();
       };
 
 
