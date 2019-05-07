@@ -131,7 +131,8 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbuebersicht';
-          $scope.vorlageTyp = 'Korbuebersicht';
+          model = '';
+          $scope.vorlageTyp = 'KorbUebersicht';
           $scope.showGenerateReport = true;
           return true;
         },
@@ -144,7 +145,8 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbdetails';
-          $scope.vorlageTyp = 'Korbdetails';
+          model = '';
+          $scope.vorlageTyp = 'KorbDetails';
           $scope.showGenerateReport = true;
           return true;
         },
