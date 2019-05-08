@@ -42,7 +42,7 @@ angular.module('openolitor-admin')
         queryQuery: '',
         filterQuery: '',
         complexFlags: {
-          zusatzAbosAktiv: false
+          zusatzAbosAktiv: true
         }
       };
 
