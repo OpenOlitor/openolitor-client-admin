@@ -11,7 +11,7 @@ msgstr ""
 "Last-Translator: al_openolitor\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
-"PO-Revision-Date: 2019-04-24 06:32\n"
+"PO-Revision-Date: 2019-05-09 11:56\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -3252,7 +3252,12 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{person.name}} \n"
 " {{person.rolle}} \n"
 " {{person.kundeId}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}}"
 
 #: app/scripts/abos/overview/abosoverview.controller.js:225
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:298
@@ -3266,7 +3271,16 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{abo.kunde}} \n"
 " {{abo.start}} \n"
 " {{abo.ende}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{abo.abotypName}} \n"
+" {{abo.kunde}} \n"
+" {{abo.start}} \n"
+" {{abo.ende}}"
 
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:138
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
@@ -3280,7 +3294,17 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{abotyp.preis}}  \n"
 " {{abotyp.preiseinheit}}  \n"
 " {{abotyp.laufzeiteinheit}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{abotyp.name}} \n"
+" {{abotyp.beschreibung}}  \n"
+" {{abotyp.preis}}  \n"
+" {{abotyp.preiseinheit}}  \n"
+" {{abotyp.laufzeiteinheit}}"
 
 #: app/scripts/depots/overview/depotsoverview.controller.js:102
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
@@ -3294,7 +3318,17 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{depot.plz}}  \n"
 " {{depot.ort}}  \n"
 " {{depot.apTelefon}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{depot.name}} \n"
+" {{depot.kurzzeichen}}  \n"
+" {{depot.plz}}  \n"
+" {{depot.ort}}  \n"
+" {{depot.apTelefon}}"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:137
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
@@ -3308,7 +3342,17 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{kunde.hausNummer}}  \n"
 " {{kunde.plz}}  \n"
 " {{kunde.ort}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{kunde.bezeichnung}} \n"
+" {{kunde.strasse}} \n"
+" {{kunde.hausNummer}} \n"
+" {{kunde.plz}} \n"
+" {{kunde.ort}}"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:262
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
@@ -3326,7 +3370,21 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{rechnung.strasse}} \n"
 " {{rechnung.plz}} \n"
 " {{rechnung.ort}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{rechnung.titel}} \n"
+" {{rechnung.betrag}}  \n"
+" {{rechnung.rechnungsDatum}}  \n"
+" {{rechnung.faelligkeitsDatum}}  \n"
+" {{rechnung.referenzNummer} \n"
+" {{rechnung.esrNummer}} \n"
+" {{rechnung.strasse}} \n"
+" {{rechnung.plz}} \n"
+" {{rechnung.ort}}"
 
 #: app/scripts/touren/overview/tourenoverview.controller.js:142
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
@@ -3337,7 +3395,14 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{person.kundeId}} \n"
 " {{tour.name}} \n"
 " {{tour.beschreibung}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{tour.name}} \n"
+" {{tour.beschreibung}}"
 
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:112
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
@@ -3351,24 +3416,34 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{zusatzabotyp.preis}}  \n"
 " {{zusatzabotyp.preiseinheit}}  \n"
 " {{zusatzabotyp.laufzeiteinheit}}"
-msgstr ""
+msgstr "Pokud vložíte následující štítky, nahradí se odpovídající hodnotou: \n"
+" {{person.anrede}} \n"
+" {{person.vorname}} \n"
+" {{person.name}} \n"
+" {{person.rolle}} \n"
+" {{person.kundeId}} \n"
+" {{zusatzabotyp.name}} \n"
+" {{zusatzabotyp.beschreibung}}  \n"
+" {{zusatzabotyp.preis}}  \n"
+" {{zusatzabotyp.preiseinheit}}  \n"
+" {{zusatzabotyp.laufzeiteinheit}}"
 
 #: app/scripts/kunden/detail/kundendetail.html:349
 msgid "Wird auf dem Lieferschein zur Tour aufgedruckt"
-msgstr ""
+msgstr "Bude vytištěno na závozním listu"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:145
 msgid "Wird standartmässig geplant"
-msgstr ""
+msgstr "Plánováno pravidelně"
 
 #: app/scripts/abos/detail/abosdetail.html:136
 #: app/scripts/app.js:170
 msgid "WirdGeliefert"
-msgstr ""
+msgstr "Doručeno"
 
 #: app/scripts/app.js:129
 msgid "Wochen"
-msgstr ""
+msgstr "Týdny"
 
 #: app/scripts/app.js:98
 msgid "Woechentlich"
@@ -3441,19 +3516,19 @@ msgstr "Přiřazeno k"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:22
 msgid "Zurückziehen"
-msgstr ""
+msgstr "Vrátit"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:250
 msgid "Zusatz-Abo:"
-msgstr ""
+msgstr "Doplňkový podíl:"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:6
 msgid "ZusatzAbotypen"
-msgstr ""
+msgstr "Druhy doplňkových podílů"
 
 #: app/scripts/abos/detail/abosdetail.html:165
 msgid "Zusatzabo"
-msgstr ""
+msgstr "Doplňkový podíl"
 
 #: app/index.html:83
 #: app/scripts/abos/detail/abosdetail.html:149
@@ -3461,172 +3536,172 @@ msgstr ""
 #: app/scripts/abos/overview/abosoverview.html:9
 #: app/scripts/abos/overview/zusatzabosoverview.html:6
 msgid "Zusatzabos"
-msgstr ""
+msgstr "Doplňkové podíly"
 
 #: app/scripts/abos/overview/abosoverview.html:79
 msgid "Zusatzabos Ids"
-msgstr ""
+msgstr "Id doplňkových podílů"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:11
 msgid "Zusatzabotyp ' + zusatzAbotyp.name || 'Zusatzabotyp"
-msgstr ""
+msgstr "Druh doplňkového podílu' + zusatzAbotyp.name || 'Druh doplňkového podílu"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:82
 msgid "Zusatzabotyp erstellen"
-msgstr ""
+msgstr "Vytvořit druh doplňkového podílu"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:140
 #: app/scripts/depots/detail/depotsdetail.html:70
 msgid "Zusatzdaten"
-msgstr ""
+msgstr "Další údaje"
 
 #: app/scripts/kunden/detail/kundendetail.html:348
 msgid "Zusatzinfos"
-msgstr ""
+msgstr "Další informace"
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:32
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:32
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:31
 msgid "Zusatzkorb"
-msgstr ""
+msgstr "Další koš"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:147
 msgid "Zusätzliche Personen möglich"
-msgstr ""
+msgstr "Možné další osoby"
 
 #: app/scripts/app.js:99
 msgid "Zweiwoechentlich"
-msgstr ""
+msgstr "Čtrnáctidenní"
 
 #: app/scripts/app.js:106
 msgid "Zweiwöchentlich"
-msgstr ""
+msgstr "Čtrnáctidenní"
 
 #: app/scripts/abos/overview/abosoverview.controller.js:223
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:296
 msgid "abo"
-msgstr ""
+msgstr "podíl"
 
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:149
 msgid "abrechnen"
-msgstr ""
+msgstr "účet"
 
 #: app/scripts/abos/detail/abwesenheiten/abwesenheiten.html:27
 msgid "alle"
-msgstr ""
+msgstr "vše"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:104
 msgid "als ausgeliefert markieren"
-msgstr ""
+msgstr "označit jako dodané"
 
 #: app/scripts/kunden/detail/kundendetail.html:256
 #: app/scripts/kunden/detail/kundendetail.html:319
 msgid "bearbeitet"
-msgstr ""
+msgstr "zpracováno"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:554
 msgid "bezahlt"
-msgstr ""
+msgstr "zaplaceno"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:56
 msgid "bis"
-msgstr ""
+msgstr "do"
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:73
 #: app/scripts/kunden/detail/kundendetail.html:476
 msgid "erstellen"
-msgstr ""
+msgstr "vytvořit"
 
 #: app/scripts/jobqueue/result/result.html:11
 msgid "fehlerhaft"
-msgstr ""
+msgstr "chybně"
 
 #: app/scripts/app.js:179
 msgid "gr"
-msgstr ""
+msgstr "gr"
 
 #: app/scripts/app.js:183
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:135
 msgid "kunde"
-msgstr ""
+msgstr "podílník"
 
 #: app/scripts/app.js:185
 msgid "l"
-msgstr ""
+msgstr "i"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:41
 msgid "max."
-msgstr ""
+msgstr "max."
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:276
 msgid "pain.008.001.07 erstellen"
-msgstr ""
+msgstr "vytvořit pain.008.001.07"
 
 #: app/scripts/abos/detail/abwesenheiten/abwesenheiten.html:27
 msgid "pendente"
-msgstr ""
+msgstr "čeká na vyřízení"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:291
 #: app/scripts/personen/overview/personenoverview.controller.js:147
 msgid "person"
-msgstr ""
+msgstr "osoba"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:91
 msgid "pro"
-msgstr ""
+msgstr "za"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:190
 msgid "pro Lieferung"
-msgstr ""
+msgstr "za závoz"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:260
 msgid "rechnung"
-msgstr ""
+msgstr "doklad"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:68
 #: app/scripts/kunden/detail/kundendetail.controller.js:71
 msgid "speichern"
-msgstr ""
+msgstr "uložit"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:556
 msgid "total"
-msgstr ""
+msgstr "celkem"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:555
 msgid "verrechnet"
-msgstr ""
+msgstr "vyúčtováno"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:72
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:62
 msgid "von"
-msgstr ""
+msgstr "od"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:67
 msgid "{{arbeitsangebot.status}}"
-msgstr ""
+msgstr "{{arbeitsangebot.status}}"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:64
 msgid "{{batchCreated.openAboIds.length}} Rechnungspositionen mit Fehlern"
-msgstr ""
+msgstr "{{batchCreated.openAboIds.length}} Doklady s chybami"
 
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:55
 msgid "{{rechnungsPosition.status}}"
-msgstr ""
+msgstr "{{rechnungsPosition.status}}"
 
 #: app/scripts/depots/detail/depotsdetail.html:91
 #: app/scripts/depots/detail/depotsdetail.html:94
 msgid "Öffnungszeiten"
-msgstr ""
+msgstr "Otevírací doba"
 
 #: app/scripts/dashboard/dashboard.html:76
 msgid "Überfällige Rechnungen"
-msgstr ""
+msgstr "Doklady po splatnosti"
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:13
 msgid "Übersicht der Körbe"
-msgstr ""
+msgstr "Přehled košíku"
 

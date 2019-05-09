@@ -10,8 +10,8 @@ msgstr ""
 "X-Crowdin-File: /admin-portal/template.pot\n"
 "Last-Translator: al_openolitor\n"
 "Language-Team: Spanish\n"
-"Language: es_ES\n"
-"PO-Revision-Date: 2019-04-24 06:32\n"
+"Language: es\n"
+"PO-Revision-Date: 2019-05-09 11:56\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -113,7 +113,7 @@ msgstr "2.0"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:75
 msgid "<button ng-if=\"!arbeitsangebotForm.$invalid\" type=\"button\" role=\"button\" ng-click=\"aaMultiplizieren()\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> <span translate=\"\">Multiplizieren</span></button>"
-msgstr ""
+msgstr "<button ng-if=\"!arbeitsangebotForm.$invalid\" type=\"button\" role=\"button\" ng-click=\"aaMultiplizieren()\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> <span translate=\"\">Multiplicar</span></button>"
 
 #: app/scripts/abos/detail/abosdetail.html:189
 msgid "<input id=\"zusatzaboPrice\" class=\"col-md-9\" type=\"number\" step=\"0.01\" ng-model=\"zusatzAbo.price\">\n"
@@ -1355,7 +1355,7 @@ msgstr "Dirección de correo electrónico no valida"
 
 #: app/index.html:97
 msgid "Finanzen"
-msgstr "Finanzas"
+msgstr "Tesorería"
 
 #: app/scripts/app.js:134
 msgid "Fr."
@@ -2015,7 +2015,7 @@ msgstr "Lunes"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:76
 msgid "Multiplizieren"
-msgstr ""
+msgstr "Multiplicar"
 
 #: app/scripts/app.js:274
 msgid "März"
@@ -2165,7 +2165,7 @@ msgstr "Nº (Abonos principales y suplementarios)"
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:69
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:40
 msgid "Nur Heute"
-msgstr ""
+msgstr "Solo hoy"
 
 #: app/scripts/abos/detail/abosdetail.html:21
 msgid "Nächster Kündigungstermin:"
@@ -2289,7 +2289,7 @@ msgstr "Categorías de personas"
 
 #: app/scripts/projekt/settings/personCategories.html:9
 msgid "Personenkategorie Erstellen"
-msgstr ""
+msgstr "Crear una categoría de persona"
 
 #: app/index.html:111
 #: app/scripts/personen/overview/personenoverview.html:65
