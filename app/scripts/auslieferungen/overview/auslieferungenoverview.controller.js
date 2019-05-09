@@ -39,7 +39,11 @@ angular.module('openolitor-admin')
       }
 
       $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('Vorlage'+model+$scope.vorlageTyp);
+        if ($scope.vorlageTyp === 'KorbUebersicht' || $scope.vorlageTyp === 'KorbDetails'){
+          return ReportvorlagenService.getVorlagen('Vorlage'+$scope.vorlageTyp);
+        } else {
+          return ReportvorlagenService.getVorlagen('Vorlage'+model+$scope.vorlageTyp);
+        }
       };
 
       $scope.statusL = [];
@@ -131,7 +135,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbuebersicht';
-          $scope.vorlageTyp = 'Korbuebersicht';
+          $scope.vorlageTyp = 'KorbUebersicht';
           $scope.showGenerateReport = true;
           return true;
         },
@@ -144,7 +148,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbdetails';
-          $scope.vorlageTyp = 'Korbdetails';
+          $scope.vorlageTyp = 'KorbDetails';
           $scope.showGenerateReport = true;
           return true;
         },
