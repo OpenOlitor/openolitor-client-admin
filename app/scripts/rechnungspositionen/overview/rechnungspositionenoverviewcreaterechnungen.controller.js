@@ -60,9 +60,9 @@ angular.module('openolitor-admin')
         rechnungsPositionenInWrongState: []
       };
 
-      $scope.numberOfOpenRechnungPositionen = function(rechnungPositionenIds){
+      $scope.numberOfOpenRechnungPositionen = function(rechnungPositionenList){
           var result = 0;
-          lodash.forEach(rechnungPositionenIds, function(rechnungPosition){
+          lodash.forEach(rechnungPositionenList, function(rechnungPosition){
               if (rechnungPosition.status === 'Offen'){
                   result++;
               }
