@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbosDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('AbosDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'AbosDetailModel','ZusatzAbotypenModel', 'ZusatzAboModel','AbotypenOverviewModel',
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
@@ -11,16 +11,35 @@ angular.module('openolitor-admin')
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
     'API_URL', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN',
 
-    function($scope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
+    function($scope, $rootScope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, ZusatzAbotypenModel, ZusatzAboModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
       alertService, NgTableParams, LAUFZEITEINHEITEN) {
 
+      $rootScope.viewId = 'D-Abo';
+
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
         return typ.id;
       });
+
+      $scope.aboPickerStartDate = {
+          datepickerOptions: {
+            minDate: undefined,
+            maxDate: undefined 
+        }
+      }; 
+
+      $scope.aboPickerEndDate = {
+          datepickerOptions: {
+            minDate: undefined,
+            maxDate: undefined 
+        }
+      }; 
+
+      $scope.zusatzaboPickerStartDateList = [];
+      $scope.zusatzaboPickerEndDateList = [];
 
       var defaults = {
         model: {
@@ -47,7 +66,8 @@ angular.module('openolitor-admin')
 
       $scope.lists = {
         vertriebe: {},
-        vertriebsarten: {}
+        vertriebsarten: {},
+        abotypen : [] 
       };
 
       $scope.openCalendar = function(e,date) {
@@ -93,21 +113,127 @@ angular.module('openolitor-admin')
            kundeId:getKundeId()
          },function(zusatzAbos){
            $scope.zusatzAbos = zusatzAbos;
+           $scope.zusatzAbos.forEach(function(zusatzAbo){
+               if ($scope.findIndexByZusatzaboId(zusatzAbo.id)){
+                   initializeDatePickerForZusatzabo(zusatzAbo);
+               }
+               zusatzAbo.zusatzaboTypPrice = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
+               if (!zusatzAbo.price){
+                  zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
+               }
+               zusatzAbo.allBasketsInOpenDeliveryPlanning = areAllBasketsInOpenDeliveryPlanningsForZusatzAbo($scope.lieferungen, zusatzAbo.start);
+           });
+           calculateDatePickerForAbo(); 
          });
+       };
+
+       var areAllBasketsInOpenDeliveryPlanningsForMainAbo = function(lieferungen) {
+           var result = true ;
+           lieferungen.forEach(function(lieferung){
+               if (lieferung.lieferung.status !== 'Offen'){
+                   result = false;
+               }
+           })
+           return result;
+       }
+
+       var areAllBasketsInOpenDeliveryPlanningsForZusatzAbo = function(lieferungen, startDate) {
+           var result = true ;
+           lieferungen.forEach(function(lieferung){
+               if (lieferung.lieferung.status !== 'Offen' && lieferung.lieferung.datum >= startDate){
+                   result = false;
+               }
+           })
+           return result;
+       }
+
+       var calculateDatePickerForAbo = function() {
+          if ($scope.zusatzAbos.length > 0 ){
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = ($scope.abo.ende < getSmallestMinDateZusatzabos()) ? $scope.abo.ende : getSmallestMinDateZusatzabos() ; 
+            $scope.aboPickerEndDate.datepickerOptions.minDate = ($scope.abo.start > getSmallestMaxDateZusatzabos()) ? $scope.abo.start : getSmallestMaxDateZusatzabos(); 
+          } else {
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = $scope.abo.ende;
+            $scope.aboPickerEndDate.datepickerOptions.minDate = $scope.abo.start;
+          }
+       };
+
+       var getSmallestMinDateZusatzabos = function() {
+           return lodash.minBy($scope.zusatzAbos, 'start').start;
+       }
+
+       var getSmallestMaxDateZusatzabos = function() {
+           var listWithEndDate = [];
+           $scope.zusatzAbos.forEach(function(zusatzAbo){
+               if (zusatzAbo.ende){
+                   listWithEndDate.push(zusatzAbo.ende);
+               }
+           });
+           return lodash.minBy(listWithEndDate);
+       }
+
+       var initializeDatePickerForZusatzabo = function(zusatzAbo) {
+           var zstart = {
+               zusatzaboId:zusatzAbo.id,
+               datepickerOptions : {
+                   minDate:$scope.abo.start,
+                   maxDate:zusatzAbo.ende
+               }
+           };
+           var zend = {
+               zusatzaboId:zusatzAbo.id,
+               datepickerOptions : { 
+                   minDate:zusatzAbo.start,
+                   maxDate:$scope.abo.ende
+               }
+           };
+           $scope.zusatzaboPickerEndDateList.push(zend);
+           $scope.zusatzaboPickerStartDateList.push(zstart);
        };
 
        var createNewZusatzAbo = function(zusatzAbotyp) {
          var zusatzAbo = new ZusatzAboModel({hauptAboId: getAboId(), kundeId:getKundeId(),abotypId:zusatzAbotyp.id});
            zusatzAbo.$save();
+           initializeDatePickerForZusatzabo(zusatzAbo);
        };
+
+      $scope.updateAboDatetimePicker = function (){
+          calculateDatePickerForAbo();
+          $scope.zusatzaboPickerStartDateList.forEach(function(zusatzAboPicker){
+            zusatzAboPicker.datepickerOptions.minDate = $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.maxDate = zusatzAboPicker.datepickerOptions.maxDate < $scope.abo.ende ? zusatzAboPicker.datepickerOptions.maxDate : $scope.abo.ende;
+          });
+          $scope.zusatzaboPickerEndDateList.forEach(function(zusatzAboPicker){
+            zusatzAboPicker.datepickerOptions.minDate = zusatzAboPicker.datepickerOptions.minDate > $scope.abo.start? zusatzAboPicker.datepickerOptions.minDate : $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.maxDate = $scope.abo.ende;
+          });
+      };
+
+      $scope.updateZusatzaboDatetimePicker = function (zusatzabo){
+          var index = $scope.findIndexByZusatzaboId(zusatzabo.id);
+          $scope.zusatzaboPickerStartDateList[index].datepickerOptions.maxDate = zusatzabo.ende; 
+          $scope.zusatzaboPickerEndDateList[index].datepickerOptions.minDate = zusatzabo.start; 
+          calculateDatePickerForAbo();
+      };
+
+      $scope.findIndexByZusatzaboId = function (id){
+          var found = false;
+          var result = undefined;
+          $scope.zusatzaboPickerEndDateList.forEach(function(picker, index){
+              if (!found){
+                  if (picker.zusatzaboId === id){
+                      found = true;
+                      result = index;
+                  }
+              }
+          });
+          return result;
+      }
 
       var loadAboDetail = function() {
         if ($scope.loading === getAboId()) {
           return;
         }
         $scope.loading = getAboId();
-        loadZusatzAbotypen();
-        loadZusatzAbos();
         AbosDetailModel.get({
           id: getAboId(),
           kundeId: getKundeId()
@@ -119,16 +245,20 @@ angular.module('openolitor-admin')
               id: $scope.abo.kundeId
             }, function(kunde) {
               $scope.kunde = kunde;
+              $scope.abo.price = $scope.aboPrice($scope.abo);
             });
           }
 
           $scope.lieferungen = AboKoerbeModel.query({
             kundeId: $scope.abo.kundeId,
             id: $scope.abo.id
-          }, function() {
+          }, function(lieferungen) {
             $scope.koerbeTableParams.reload();
+            $scope.allBasketsInOpenDeliveryPlanningsForMainAbo = areAllBasketsInOpenDeliveryPlanningsForMainAbo(lieferungen);
           });
         });
+        loadZusatzAbotypen();
+        loadZusatzAbos();
       };
 
 
@@ -166,9 +296,14 @@ angular.module('openolitor-admin')
 
       $scope.init();
 
-      $scope.lists.abotypen = AbotypenOverviewModel.query({
-        aktiv: true
-      });
+      AbotypenOverviewModel.query({ aktiv: true}, function(abotypen){
+            abotypen.forEach(function(abotyp){
+              if (abotyp.aktiv){
+                  $scope.lists.abotypen.push(abotyp);
+              }
+            });
+        }
+      );
 
       $scope.isExisting = function() {
         return angular.isDefined($scope.abo) && angular.isDefined($scope.abo
@@ -216,6 +351,30 @@ angular.module('openolitor-admin')
         });
       };
 
+      var showChangePriceDialog = function() {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'scripts/abos/detail/abosdetail-price-anpassen.html',
+          controller: 'PriceAnpassenController',
+          resolve: {
+            abo: function() {
+              return $scope.abo;
+            }
+          }
+        });
+
+        modalInstance.result.then(function(data) {
+          $http.post(API_URL + 'kunden/' + $scope.abo.kundeId +
+            '/abos/' + $scope.abo.id + '/aktionen/priceanpassen',
+            data).then(function() {
+              alertService.addAlert('info', gettext(
+                'Preis wurde erfolgreich angepasst'));
+            });
+        }, function() {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
       var showVertriebsartAnpassenDialog = function() {
         var modalInstance = $uibModal.open({
           animation: true,
@@ -224,7 +383,7 @@ angular.module('openolitor-admin')
           resolve: {
             abo: function() {
               return $scope.abo;
-            },
+            },            
             vertriebsarten: function() {
               return $scope.lists.vertriebsarten;
             },
@@ -273,7 +432,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function(zusatzabo) {
-          return !zusatzabo || zusatzabo.anzahlLieferungen.length > 0 ||
+          return !zusatzabo || !zusatzabo.allBasketsInOpenDeliveryPlanning ||
             !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function(zusatzabo) {
@@ -303,9 +462,8 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function() {
-          return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
-            .anzahlLieferungen.length > 0 ||
-            !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
+          return !$scope.abo || $scope.abo.guthaben > 0 || !$scope.allBasketsInOpenDeliveryPlanningsForMainAbo ||
+                !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function() {
           return $scope.abo.$delete();
@@ -332,7 +490,7 @@ angular.module('openolitor-admin')
               2);
         }
       }, {
-        label: gettext('Rechnungsposition manuell erstellen'),
+        label: gettext('Manuelle Rechnung erstellen'),
         noEntityText: true,
         iconClass: 'fa fa-envelope-o',
         onExecute: function() {
@@ -465,6 +623,58 @@ angular.module('openolitor-admin')
         return (abo.guthaben + abo.guthabenInRechnung);
       };
 
+      $scope.aboPrice = function(abo) {
+        if (!abo) {
+          return;
+        }
+        else {
+            if (!abo.price){
+                return (abo.abotyp.preis);
+            } else {
+                return (abo.price);
+            }
+        }
+      };
+
+      $scope.defaultAboPrice = function() {
+        $scope.abo.price = $scope.abo.abotyp.preis;
+      };
+
+      $scope.defaultZusatzaboPrice = function(zusatzaboId) {
+        $scope.zusatzAbos.forEach(function(zusatzAbo){
+          if (zusatzAbo.id === zusatzaboId){
+            zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
+          }
+        });
+      };
+
+      $scope.getZusatzabotypPrice = function(zusatzaboTypId) {
+        var zusatzaboTypPrice;
+        if (zusatzaboTypId === null) {
+            return ;
+        } else {
+            $scope.zusatzAboTyp.forEach(function(za) {
+                if (za.id === zusatzaboTypId) {
+                    zusatzaboTypPrice = za.preis;
+                }
+            });
+            return zusatzaboTypPrice;
+        }
+      };
+
+      $scope.zusatzaboPrice = function(zusatzabo) {
+        if (!zusatzabo) {
+          return;
+        }
+        else {
+            if (!zusatzabo.price){
+                return $scope.getZusatzabotypPrice(zusatzabo.abotypId);
+            } else {
+                return (zusatzabo.price);
+            }
+        }
+      };
+
       $scope.guthabenTooltip = function(abo) {
         var vertrag = '';
         if (abo.guthabenVertraglich) {
@@ -494,6 +704,16 @@ angular.module('openolitor-admin')
         if (abo && abo.abotyp && ($scope.aboGuthaben(abo) < abo.abotyp.guthabenMindestbestand)) {
           return 'error';
         } else if (abo && ($scope.aboGuthaben(abo) < 0)) {
+          return 'warning';
+        } else {
+          return '';
+        }
+      };
+
+      $scope.priceClass = function(abo) {
+        if (abo && abo.abotyp && ($scope.abo.price < 0)) {
+          return 'error';
+        } else if (abo && ($scope.abo.price < abo.abotyp.price)) {
           return 'warning';
         } else {
           return '';
@@ -540,10 +760,7 @@ angular.module('openolitor-admin')
           if ($scope.abo && $scope.abo.id === msg.data.id) {
             DataUtil.update(msg.data, $scope.abo);
 
-            if (msg.data.vertriebId !== $scope.abo.vertriebId) {
-              //vertrieb id changes, reload whole abo
-              loadAboDetail();
-            }
+            loadAboDetail();
 
             $scope.$apply();
             return;
@@ -553,7 +770,9 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if ((msg.entity) === 'ZusatzAbo') {
-            $scope.zusatzAbos.push(new ZusatzAboModel(msg.data));
+            var newZusatzabo = new ZusatzAboModel(msg.data);
+            newZusatzabo.allBasketsInOpenDeliveryPlanning = areAllBasketsInOpenDeliveryPlanningsForZusatzAbo($scope.lieferungen, newZusatzabo.start);
+            $scope.zusatzAbos.push(newZusatzabo);
             $scope.$apply();
         }
       });

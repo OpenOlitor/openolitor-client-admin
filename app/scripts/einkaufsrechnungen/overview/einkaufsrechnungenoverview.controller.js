@@ -3,16 +3,17 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('EinkaufsrechnungenOverviewController', ['$scope', '$filter',
+  .controller('EinkaufsrechnungenOverviewController', ['$scope', '$rootScope', '$filter',
     '$location', 'EinkaufsrechnungenOverviewModel', 'ProduzentenModel',
     'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'BESTELLSTATUS', 'EnumUtil',
-    'msgBus', 'lodash', 'localeSensitiveComparator', 'VorlagenService', 'gettext',
-    function($scope, $filter, $location, EinkaufsrechnungenOverviewModel,
+    'msgBus', 'lodash', 'localeSensitiveComparator', 'ReportvorlagenService', 'gettext',
+    function($scope, $rootScope, $filter, $location, EinkaufsrechnungenOverviewModel,
       ProduzentenModel, NgTableParams, FilterQueryUtil, OverviewCheckboxUtil,
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
-      VorlagenService, gettext) {
-
+      ReportvorlagenService, gettext) {
+      $rootScope.viewId = 'L-Eink';
+      
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
@@ -163,6 +164,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateReport = true;
           return true;
         },
@@ -206,7 +208,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageLieferantenabrechnung');
+        return ReportvorlagenService.getVorlagen('VorlageProduzentenabrechnung');
       };
 
       $scope.$watch('search.query', function() {

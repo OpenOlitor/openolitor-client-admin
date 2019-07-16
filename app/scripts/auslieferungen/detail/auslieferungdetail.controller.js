@@ -3,14 +3,15 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AuslieferungDetailController', ['$q', '$scope', '$filter',
+  .controller('AuslieferungDetailController', ['$q', '$scope', '$rootScope', '$filter',
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'KundenOverviewModel', 'DetailNavigationService', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'VorlagenService', 'localeSensitiveComparator', 'gettext','$location', 
-    function($q, $scope, $filter, $route, $routeParams, DepotAuslieferungenModel,
+    'ReportvorlagenService', 'localeSensitiveComparator', 'gettext','$location',
+    function($q, $scope, $rootScope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, KundenOverviewModel, DetailNavigationService, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, VorlagenService, localeSensitiveComparator, gettext, $location) {
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, ReportvorlagenService, localeSensitiveComparator, gettext, $location) {
+      $rootScope.viewId = 'D-Aus';
 
       $scope.loading = false;
       $scope.model = {};
@@ -52,7 +53,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('Vorlage'+$scope.modelType+$scope.vorlageTyp);
+        return ReportvorlagenService.getVorlagen('Vorlage'+$scope.modelType+$scope.vorlageTyp);
       };
 
       $scope.statusL = [];

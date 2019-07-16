@@ -10,7 +10,7 @@ angular.module('openolitor-admin')
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
-      moment, EnumUtil, DataUtil, msgBus, $q, _, API_URL,
+      moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
       alertService, AbosOverviewService) {
 
       // rechnungen object with defaults and without ids
@@ -59,6 +59,16 @@ angular.module('openolitor-admin')
         rechnungsIds: [],
         rechnungsPositionenInWrongState: []
       };
+
+      $scope.numberOfOpenRechnungPositionen = function(rechnungPositionenList){
+          var result = 0;
+          lodash.forEach(rechnungPositionenList, function(rechnungPosition){
+              if (rechnungPosition.status === 'Offen'){
+                  result++;
+              }
+          });
+          return result;
+      }
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         console.log('Mod: ', msg);

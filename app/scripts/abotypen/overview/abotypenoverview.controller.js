@@ -3,13 +3,16 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbotypenOverviewController', ['$scope', '$filter',
+  .controller('AbotypenOverviewController', ['$scope', '$rootScope', '$filter',
     'AbotypenOverviewModel', 'NgTableParams', 'lodash', 'EmailUtil', 'OverviewCheckboxUtil', '$location', 'FilterQueryUtil','gettext',
-    function($scope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
+    function($scope, $rootScope, $filter, AbotypenOverviewModel, NgTableParams, _, EmailUtil, OverviewCheckboxUtil, $location, FilterQueryUtil, gettext) {
+
+      $rootScope.viewId = 'L-Aty';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
+      $scope.selectedAbotyp = undefined;
       $scope.model = {};
 
       $scope.search = {
@@ -78,6 +81,28 @@ angular.module('openolitor-admin')
         console.log($scope)
       }
 
+      $scope.selectAbotyp = function(abotyp, itemId) {
+        var allRows = angular.element('#abotypesTable table tbody tr');
+        allRows.removeClass('row-selected');
+        if ($scope.selectedAbotyp === abotyp) {
+          $scope.selectedAbotyp = undefined;
+        } else {
+          $scope.selectedAbotyp = abotyp;
+          var row = angular.element('#' + itemId);
+          row.addClass('row-selected');
+        }
+      };
+
+      $scope.unselectAbotyp = function() {
+        $scope.selectedAbotyp = undefined;
+        var allRows = angular.element('#abotypesTable table tbody tr');
+        allRows.removeClass('row-selected');
+      }
+
+      $scope.unselectAbotypFunct = function() {
+          return $scope.unselectAbotyp;
+      }
+
       $scope.actions = [{
         labelFunction: function() {
           return gettext('Abotyp erstellen');
@@ -88,7 +113,7 @@ angular.module('openolitor-admin')
           return $location.path('/abotypen/new');
         }
       }, {
-        label: gettext('Email an Kunden versenden'),
+        label: gettext('E-Mail an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -99,6 +124,24 @@ angular.module('openolitor-admin')
             EmailUtil.toMailToBccLink(emailAddresses);
           });
 
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          $scope.url = 'mailing/sendEmailToAbotypSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abotyp.name}} \n {{abotyp.beschreibung}}  \n {{abotyp.preis}}  \n {{abotyp.preiseinheit}}  \n {{abotyp.laufzeiteinheit}}');
+          $scope.abotypIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at(Object.keys($scope.checkboxes.items))
+            .map('id')
+            .value();
+          $scope.showCreateEMailDialog = true;
           return true;
         },
         isDisabled: function() {
@@ -119,6 +162,14 @@ angular.module('openolitor-admin')
           $location.search('q', $scope.search.query);
         });
       }
+
+      $scope.closeCreateEMailDialog = function() {
+        return $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog ;
+      };
 
       $scope.style = function(abotyp) {
         if (abotyp.farbCode) {

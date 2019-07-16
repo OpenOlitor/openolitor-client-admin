@@ -14,6 +14,7 @@ angular.module('openolitor-admin')
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
       LIEFEREINHEIT, KORBSTATUS, msgBus,
       cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog) {
+      $rootScope.viewId = 'D-Pla';
 
       $scope.liefereinheiten = LIEFEREINHEIT;
 

@@ -3,9 +3,10 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ReportsDetailController', ['$scope', '$filter', '$routeParams',
+  .controller('ReportsDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', '$uibModal', 'gettext', 'ReportsModel', '$log',
-    function($scope, $filter, $routeParams, $location, $uibModal, gettext, ReportsModel, $log) {
+    function($scope, $rootScope, $filter, $routeParams, $location, $uibModal, gettext, ReportsModel, $log) {
+      $rootScope.viewId = 'D-Rept';
 
       var defaults = {
         model: {

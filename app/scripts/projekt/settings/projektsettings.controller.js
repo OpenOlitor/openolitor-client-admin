@@ -3,34 +3,47 @@
 /**
 */
 angular.module('openolitor-admin')
-    .controller('ProjektSettingsController', ['$scope', '$filter',
+    .controller('ProjektSettingsController', ['$scope', '$rootScope', '$filter',
         'NgTableParams',
         'KundentypenService',
         'KundentypenModel',
+        'PersonCategoriesService',
+        'PersonCategoriesModel',
         'ProduktekategorienService',
         'ProduktekategorienModel',
+        'ArbeitskategorienService',
+        'ArbeitskategorienModel',
         'ProjektService',
         'ProjektModel',
         'OpenProjektModel',
         'KontoDatenService',
-        'KontoDatenModel',    
+        'KontoDatenModel',
         'EnumUtil',
         'FileSaver',
         'MONATE',
         'WAEHRUNG',
+        'EINSATZEINHEIT',
         'Upload',
         'msgBus',
         'cloneObj',
         'API_URL',
-        function($scope, $filter, NgTableParams, KundentypenService,
-            KundentypenModel, ProduktekategorienService, ProduktekategorienModel,
-            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG,
-            Upload, msgBus, cloneObj, API_URL
+        'alertService',
+        'gettextCatalog',
+        function($scope, $rootScope, $filter, NgTableParams, KundentypenService,
+            KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
+            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
+            Upload, msgBus, cloneObj, API_URL, alertService, gettextCatalog
         ) {
+            $rootScope.viewId = 'S-Proj';
+
             $scope.templateKundentyp = {};
             $scope.templateProduktekategorie = {};
+            $scope.templateArbeitskategorie = {};
+            $scope.templatePersonCategory = {};
             $scope.editingKundentypBool = false;
             $scope.editingProduktekategorieBool = false;
+            $scope.editingArbeitskategorieBool = false;
+            $scope.editingPersonCategoryBool = false;
 
             // first fake to true to work around bs-switch bug
             $scope.projectResolved = false;
@@ -39,16 +52,27 @@ angular.module('openolitor-admin')
             var defaults = {
                 modelKundentyp: {
                     kundentyp: '',
-                    beschreibung: '', 
+                    beschreibung: '',
                     editable:true
                 },
                 modelProduktekategorie: {
-                    beschreibung: '', 
+                    beschreibung: '',
+                    editable:true
+                },
+                modelArbeitskategorie: {
+                    beschreibung: '',
+                    editable:true
+                },
+                modelPersonCategory: {
+                    name: '',
+                    description: '',
                     editable:true
                 }
             };
 
             $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+
+            $scope.einsatzEinheiten = EnumUtil.asArray(EINSATZEINHEIT);
 
             $scope.monate = EnumUtil.asArray(MONATE);
 
@@ -87,6 +111,33 @@ angular.module('openolitor-admin')
                     }
                 });
 
+            //watch for set of arbeitskategorien
+            $scope.$watch(ArbeitskategorienService.getArbeitskategorien,
+                function(list) {
+                    if (list) {
+                      $scope.arbeitskategorien = [];
+                      angular.forEach(list, function(item) {
+                        if (item.id) {
+                          $scope.arbeitskategorien.push(item);
+                        }
+                      });
+                      $scope.arbeitskategorienTableParams.reload();
+                    }
+                });
+
+            //watch for set of personCategories
+            $scope.$watch(PersonCategoriesService.getPersonCategories,
+                function(list) {
+                    if (list) {
+                        $scope.personCategories = [];
+                        angular.forEach(list, function(item) {
+                            if (item.id) {
+                                $scope.personCategories.push(item);
+                            }
+                        });
+                        $scope.personCategoriesTableParams.reload();
+                    }
+                });
 
             ProjektService.resolveProjekt().then(function(projekt) {
                 if (projekt) {
@@ -114,7 +165,7 @@ angular.module('openolitor-admin')
             };
 
             //functions to save, cancel, modify or delete the kundentypen
-            
+
             $scope.saveKundentyp = function(kundentyp) {
                 kundentyp.editable = false;
                 $scope.editingKundentypBool = false;
@@ -168,8 +219,8 @@ angular.module('openolitor-admin')
                 }
             };
 
-            //functions to save, cancel, modify or delete the produkteKategorie 
-            
+            //functions to save, cancel, modify or delete the produkteKategorie
+
             $scope.saveProduktekategorie = function(produktekategorie) {
                 produktekategorie.editable = false;
                 $scope.editingProduktekategorieBool = false;
@@ -204,7 +255,7 @@ angular.module('openolitor-admin')
             };
 
             $scope.deleteProduktekategorie = function(produktekategorie) {
-                produktekategorie.editable = false
+                produktekategorie.editable = false;
                 $scope.produktekategorie = new ProduktekategorienModel(produktekategorie);
                 return $scope.produktekategorie.$delete();
             };
@@ -220,6 +271,158 @@ angular.module('openolitor-admin')
                     $scope.editingProduktekategorie.isNew = true;
                     $scope.produktekategorien.unshift(newProduktekategorie);
                     $scope.produktekategorienTableParams.reload();
+                }
+            };
+
+            //functions to save, cancel, modify or delete the PersonCategory
+
+            $scope.personCategoryExists = function(personCategory) {
+                var numOfSimilarCategories = 0;
+                angular.forEach($scope.personCategories, function(item) {
+                            if (numOfSimilarCategories < 2){
+                            if (item.name === personCategory.name) {
+                                numOfSimilarCategories++ ;
+                            }
+                       }
+                });
+                if (numOfSimilarCategories < 2){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            $scope.savePersonCategory = function(personCategory) {
+                if (!$scope.personCategoryExists(personCategory)){
+                    personCategory.editable = false;
+                    $scope.editingPersonCategoryBool = false;
+                    $scope.personCategory = new PersonCategoriesModel(personCategory);
+                    return $scope.personCategory.$save();
+                } else {
+                    alertService.addAlert('lighterror', gettextCatalog.getString(
+                    'Diese Personenkategorie existiert bereits'));
+                    return "";
+                }
+            };
+
+            $scope.cancelPersonCategory = function(personCategory) {
+                if(personCategory.isNew) {
+                    var personCategoryIndex = $scope.personCategories.indexOf(personCategory);
+                    $scope.personCategories.splice(personCategoryIndex, 1);
+                }
+                if($scope.originalPersonCategory) {
+                    var isPersonCategoryById = function (element) {
+                        return personCategory.id === element.id;
+                    };
+                    var originalPersonCategoryIndex = $scope.personCategories.findIndex(isPersonCategoryById);
+                    if(originalPersonCategoryIndex >= 0) {
+                        $scope.personCategories[originalPersonCategoryIndex] = $scope.originalPersonCategory;
+                    }
+                    $scope.originalPersonCategory = undefined;
+                }
+                personCategory.editable = false;
+                $scope.editingPersonCategoryBool = false;
+                $scope.personCategoriesTableParams.reload();
+            };
+
+            $scope.editPersonCategory = function(personCategory) {
+                $scope.originalPersonCategory = cloneObj(personCategory);
+                personCategory.editable = true;
+                $scope.editingPersonCategoryBool = true;
+            };
+
+            $scope.deletePersonCategory = function(personCategory) {
+                personCategory.editable = false;
+                $scope.personCategory = new PersonCategoriesModel(personCategory);
+                return $scope.personCategory.$delete();
+            };
+
+            $scope.addPersonCategory = function() {
+                if(!$scope.editingPersonCategoryBool) {
+                    if(angular.isUndefined($scope.personCategories)) {
+                        $scope.personCategories = [];
+                    }
+                    $scope.editingPersonCategoryBool = true;
+                    var newPersonCategory = cloneObj(defaults.modelPersonCategory);
+                    $scope.editingPersonCategory = newPersonCategory;
+                    $scope.editingPersonCategory.isNew = true;
+                    $scope.personCategories.unshift(newPersonCategory);
+                    $scope.personCategoriesTableParams.reload();
+                }
+            };
+
+            $scope.arbeitskategorieExists = function(arbeitskategorie) {
+                var numOfSimilarCategories = 0;
+                angular.forEach($scope.arbeitskategorien, function(item) {
+                            if (numOfSimilarCategories < 2){
+                            if (item.beschreibung === arbeitskategorie.beschreibung) {
+                                numOfSimilarCategories++ ;
+                            }
+                       }
+                });
+                if (numOfSimilarCategories < 2){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            $scope.saveArbeitskategorie = function(arbeitskategorie) {
+                if (!$scope.arbeitskategorieExists(arbeitskategorie)){
+                    arbeitskategorie.editable = false;
+                    $scope.editingArbeitskategorieBool = false;
+                    $scope.arbeitskategorie = new ArbeitskategorienModel(arbeitskategorie);
+                    return $scope.arbeitskategorie.$save();
+                } else {
+                    alertService.addAlert('lighterror', gettextCatalog.getString(
+                    'Diese Arbeitskategorie existiert bereits'));
+                    return "";
+                }
+            };
+
+            $scope.cancelArbeitskategorie = function(arbeitskategorie) {
+                if(arbeitskategorie.isNew) {
+                    var arbeitskategorieIndex = $scope.arbeitskategorien.indexOf(arbeitskategorie);
+                    $scope.arbeitskategorien.splice(arbeitskategorieIndex, 1);
+                }
+                if($scope.originalArbeitskategorie) {
+                    var isArbeitskategorieById = function (element) {
+                        return arbeitskategorie.id === element.id;
+                    };
+                    var originalArbeitskategorieIndex = $scope.arbeitskategorien.findIndex(isArbeitskategorieById);
+                    if(originalArbeitskategorieIndex >= 0) {
+                        $scope.arbeitskategorien[originalArbeitskategorieIndex] = $scope.originalArbeitskategorie;
+                    }
+                    $scope.originalArbeitskategorie= undefined;
+                }
+                arbeitskategorie.editable = false;
+                $scope.editingArbeitskategorieBool = false;
+                $scope.arbeitskategorienTableParams.reload();
+            };
+
+            $scope.editArbeitskategorie = function(arbeitskategorie) {
+                $scope.originalArbeitskategorie = cloneObj(arbeitskategorie);
+                arbeitskategorie.editable = true;
+                $scope.editingArbeitskategorieBool = true;
+            };
+
+            $scope.deleteArbeitskategorie = function(arbeitskategorie) {
+                arbeitskategorie.editable = false;
+                $scope.arbeitskategorie = new ArbeitskategorienModel(arbeitskategorie);
+                return $scope.arbeitskategorie.$delete();
+            };
+
+            $scope.addArbeitskategorie = function() {
+                if(!$scope.editingArbeitskategorieBool) {
+                    if(angular.isUndefined($scope.arbeitskategorien)) {
+                        $scope.arbeitskategorien = [];
+                    }
+                    $scope.editingArbeitskategorieBool = true;
+                    var newArbeitskategorie = cloneObj(defaults.modelArbeitskategorie);
+                    $scope.editingArbeitskategorie = newArbeitskategorie;
+                    $scope.editingArbeitskategorie.isNew = true;
+                    $scope.arbeitskategorien.unshift(newArbeitskategorie);
+                    $scope.arbeitskategorienTableParams.reload();
                 }
             };
 
@@ -281,6 +484,64 @@ angular.module('openolitor-admin')
                 });
             }
 
+            if (!$scope.arbeitskategorienTableParams) {
+                //use default tableParams
+                $scope.arbeitskategorienTableParams = new NgTableParams({ // jshint ignore:line
+                    page: 1,
+                    count: 1000,
+                    sorting: {
+                        name: 'asc'
+                    }
+                }, {
+                    filterDelay: 0,
+                    groupOptions: {
+                        isExpanded: true
+                    },
+                    getData: function(params) {
+                        if (!$scope.arbeitskategorien) {
+                            return;
+                        }
+                        // use build-in angular filter
+                        var orderedData = params.sorting ?
+                            $filter('orderBy')($scope.arbeitskategorien, params.orderBy()) :
+                            $scope.arbeitskategorien;
+
+                        params.total(orderedData.length);
+                        return orderedData;
+                    }
+
+                });
+            }
+
+            if (!$scope.personCategoriesTableParams) {
+                //use default tableParams
+                $scope.personCategoriesTableParams = new NgTableParams({ // jshint ignore:line
+                    page: 1,
+                    count: 1000,
+                    sorting: {
+                        name: 'asc'
+                    }
+                }, {
+                    filterDelay: 0,
+                    groupOptions: {
+                        isExpanded: true
+                    },
+                    getData: function(params) {
+                        if (!$scope.personCategories) {
+                            return;
+                        }
+                        // use build-in angular filter
+                        var orderedData = params.sorting ?
+                            $filter('orderBy')($scope.personCategories, params.orderBy()) :
+                            $scope.personCategories;
+
+                        params.total(orderedData.length);
+                        return orderedData;
+                    }
+
+                });
+            }
+
             $scope.saveProjekt = function() {
                 return $scope.kontodaten.$save().then($scope.projekt.$save(function(){
                     $scope.projektForm.$setPristine();
@@ -308,6 +569,13 @@ angular.module('openolitor-admin')
 
             $scope.generateLogoUrl = function() {
                 return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
+            };
+
+            $scope.downloadImportFile = function() {
+                OpenProjektModel.fetchImportFile({
+                }, function(file) {
+                    FileSaver.saveAs(file.response, 'importFile' + '.ods');
+                });
             };
 
             $scope.downloadStyle = function(style) {

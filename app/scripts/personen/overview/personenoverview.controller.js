@@ -3,10 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('PersonenOverviewController', ['$q', '$scope', '$filter', '$location',
-    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'KundentypenService', 'OverviewCheckboxUtil', 'VorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
-    function($q, $scope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams,
-      KundentypenService, OverviewCheckboxUtil, VorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, _, gettext, DetailNavigationService) {
+  .controller('PersonenOverviewController', ['$q', '$scope', '$rootScope', '$filter', '$location',
+    'KundenOverviewModel', 'PersonenOverviewModel', 'NgTableParams', 'PersonCategoriesService', 'KundentypenService', 'OverviewCheckboxUtil', 'ReportvorlagenService', 'localeSensitiveComparator', 'FilterQueryUtil', 'EmailUtil', 'lodash', 'gettext', 'DetailNavigationService',
+    function($q, $scope, $rootScope, $filter, $location, KundenOverviewModel, PersonenOverviewModel, NgTableParams, PersonCategoriesService,
+      KundentypenService, OverviewCheckboxUtil, ReportvorlagenService, localeSensitiveComparator, FilterQueryUtil, EmailUtil, lodash, gettext, DetailNavigationService) {
+      $rootScope.viewId = 'L-Per';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -14,6 +15,7 @@ angular.module('openolitor-admin')
       $scope.model = {};
 
       $scope.kundentypen = [];
+      $scope.personCategories = [];
       $scope.$watch(KundentypenService.getKundentypen,
 
 
@@ -31,6 +33,22 @@ angular.module('openolitor-admin')
             $scope.tableParams.reload();
           }
         });
+
+      $scope.$watch(PersonCategoriesService.getPersonCategories,
+        function(list) {
+          if (list) {
+            angular.forEach(list, function(item) {
+              //check if system or custom personentyp, use only id
+              var personCategory = (item.personCategory) ? item.personCategory:
+                item;
+              $scope.personCategories.push({
+                'id': personCategory.name,
+                'title': personCategory.name
+              });
+            });
+            $scope.tableParams.reload();
+          }
+      });
 
       $scope.search = {
         query: '',
@@ -77,7 +95,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlagePersonenbrief');
+        return ReportvorlagenService.getVorlagen('VorlagePersonenbrief');
       };
 
       // watch for data checkboxes
@@ -91,14 +109,26 @@ angular.module('openolitor-admin')
         $scope.showGenerateReport = false;
       };
 
+      $scope.closeBerichtFunct= function() {
+        return $scope.closeBericht;
+      };
+
+      $scope.closeCreateEMailDialog = function() {
+        $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog;
+      };
+
       $scope.actions = [{
-        label: gettext('Email versenden'),
+        label: gettext('E-Mail versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
           var emailAddresses = _($scope.filteredEntries)
             .keyBy('id')
-            .at($scope.checkboxes.ids)
+            .at(Object.keys($scope.checkboxes.items))
             .map('email')
             .value();
 
@@ -108,7 +138,42 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
-      }];
+      }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-pencil',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('person');
+          $scope.url = 'mailing/sendEmailToPersonen';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}}');
+          $scope.personIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at(Object.keys($scope.checkboxes.items))
+            .map('id')
+            .value();
+
+          $scope.showCreateEMailDialog = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      },{
+        label: gettext('Aboliste anzeigen'),
+        iconClass: 'fa fa-user',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'kundeId');
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+        }
+        }
+      ];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -119,7 +184,8 @@ angular.module('openolitor-admin')
             name: 'asc'
           },
           filter: {
-            kundentypen: ''
+            kundentypen: '',
+            personentypen: ''
           }
         }, {
           filterDelay: 0,

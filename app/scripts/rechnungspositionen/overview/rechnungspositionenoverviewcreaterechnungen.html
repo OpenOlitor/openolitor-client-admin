@@ -9,16 +9,16 @@
   <div class="panel-body">
     <form name="rechnungForm">
       <div class="row form-group">
-        <div class="col-md-4">
+        <div class="col-md-2">
           <label for="titel" translate>Titel</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
           <input type="text" class="form-control" id="titel" ng-model="rechnungen.titel" required placeholder="{{'Titel'|translate}}" maxlength="100">
         </div>
       </div>
 
       <div class="row form-group">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="rechnungsDatum" translate>Rechnungsdatum</label>
         </div>
         <div class="col-md-4">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <label for="faelligkeitsDatum" translate>Fälligkeitsdatum</label>
         </div>
         <div class="col-md-4">
@@ -55,8 +55,8 @@
       </div>
     </form>
   </div>
-  <div class="panel-footer" ng-if="(rechnungsPositionen.length - rechnungen.ids.length) > 0">
-      {{rechnungsPositionen.length - rechnungen.ids.length}} <span translate> Rechnungspositionen sind im Status 'Offen'</span>
+  <div class="panel-footer" ng-if="rechnungsPositionen.length !== numberOfOpenRechnungPositionen(rechnungsPositionen)">
+      {{rechnungsPositionen.length - numberOfOpenRechnungPositionen(rechnungsPositionen)}} <span translate> Rechnungspositionen sind nicht im Status 'Offen' und können daher nicht einer Rechnung zugewiesen werden.</span>
   </div>
   <div class="panel-footer" ng-if="commandIssued">
     {{batchCreated.ids.length}} <span translate>von</span> {{rechnungen.ids.length}} <span translate> Rechnungspositionen wurden verarbeitet</span>

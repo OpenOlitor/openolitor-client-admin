@@ -3,13 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('LieferplanungOverviewController', ['$q', '$scope', '$filter',
+  .controller('LieferplanungOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'LieferplanungModel', 'NgTableParams',
     'FilterQueryUtil', 'OverviewCheckboxUtil',
-    'msgBus', '$location', 'localeSensitiveComparator', 'gettext',
-    function($q, $scope, $filter, LieferplanungModel, NgTableParams,
+    'msgBus', '$location', 'localeSensitiveComparator', 'gettext', 'ReportvorlagenService',
+    function($q, $scope, $rootScope, $filter, LieferplanungModel, NgTableParams,
       FilterQueryUtil, OverviewCheckboxUtil,
-      msgBus, $location, localeSensitiveComparator, gettext) {
+      msgBus, $location, localeSensitiveComparator, gettext, ReportvorlagenService) {
+      $rootScope.viewId = 'L-Pla';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -47,6 +48,10 @@ angular.module('openolitor-admin')
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
+
+      $scope.projektVorlagen = function() {
+        return ReportvorlagenService.getVorlagen('VorlageLieferplanung');
+      };
 
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;
@@ -108,6 +113,7 @@ angular.module('openolitor-admin')
           noEntityText: true,
           iconClass: 'fa fa-file',
           onExecute: function() {
+            $scope.$broadcast("resetDirectiveGenerateReport");
             $scope.showGenerateReport = true;
             return true;
           },

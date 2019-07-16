@@ -3,17 +3,18 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('RechnungsPositionenOverviewController', ['$q', '$scope', '$filter',
+  .controller('RechnungsPositionenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     '$location',
     'RechnungsPositionenModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
-    'msgBus', 'lodash', 'VorlagenService', 'localeSensitiveComparator',
-    function($q, $scope, $filter, $location, RechnungsPositionenModel,
+    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator',
+    function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
-      FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, VorlagenService,
+      FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator) {
+      $rootScope.viewId = 'L-Repo';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -48,7 +49,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageRechnung');
+        return ReportvorlagenService.getVorlagen('VorlageRechnung');
       };
 
       // watch for data checkboxes

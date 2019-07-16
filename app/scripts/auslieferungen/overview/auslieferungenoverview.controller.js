@@ -3,15 +3,16 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$filter',
+  .controller('AuslieferungenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     '$route',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
-    'VorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
-    function($q, $scope, $filter, $route, DepotAuslieferungenModel,
+    'ReportvorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
+    function($q, $scope, $rootScope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, VorlagenService, localeSensitiveComparator,
+      AUSLIEFERUNGSTATUS, msgBus, ReportvorlagenService, localeSensitiveComparator,
       $location, FilterQueryUtil, gettext) {
+      $rootScope.viewId = 'L-Aus';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -38,7 +39,11 @@ angular.module('openolitor-admin')
       }
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('Vorlage'+model+$scope.vorlageTyp);
+        if ($scope.vorlageTyp === 'KorbUebersicht' || $scope.vorlageTyp === 'KorbDetails'){
+          return ReportvorlagenService.getVorlagen('Vorlage'+$scope.vorlageTyp);
+        } else {
+          return ReportvorlagenService.getVorlagen('Vorlage'+model+$scope.vorlageTyp);
+        }
       };
 
       $scope.statusL = [];
@@ -115,6 +120,7 @@ angular.module('openolitor-admin')
         label: gettext('Lieferetiketten drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'lieferetiketten';
           $scope.vorlageTyp = 'Lieferetiketten';
           $scope.showGenerateReport = true;
@@ -127,8 +133,22 @@ angular.module('openolitor-admin')
         label: gettext('Korbübersicht drucken'),
         iconClass: 'fa fa-print',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbuebersicht';
-          $scope.vorlageTyp = 'Korbuebersicht';
+          $scope.vorlageTyp = 'KorbUebersicht';
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('Korbdetails drucken'),
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
+          $scope.reportType = 'korbdetails';
+          $scope.vorlageTyp = 'KorbDetails';
           $scope.showGenerateReport = true;
           return true;
         },

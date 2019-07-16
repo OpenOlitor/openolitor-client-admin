@@ -3,14 +3,14 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('VorlagenService', ['$rootScope', 'VorlagenModel', 'msgBus', 'lodash',
+  .factory('ReportvorlagenService', ['$rootScope', 'ReportvorlagenModel', 'msgBus', 'lodash',
   'DataUtil',
-    function($rootScope, VorlagenModel, msgBus, lodash, DataUtil) {
+    function($rootScope, ReportvorlagenModel, msgBus, lodash, DataUtil) {
 
       var vorlagen;
 
       var load = function() {
-        VorlagenModel.query({}, function(result) {
+        ReportvorlagenModel.query({}, function(result) {
           vorlagen = lodash.groupBy(result, 'typ');
         });
       };
@@ -18,7 +18,7 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (msg.entity === 'ProjektVorlage') {
-          var newModel = new VorlagenModel(msg.data);
+          var newModel = new ReportvorlagenModel(msg.data);
           if (!vorlagen[msg.data.typ]) {
             vorlagen[msg.data.typ] = [];
           }

@@ -47,7 +47,7 @@
                   <label for="name" translate>Name / Betrieb</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="name" ng-model="produzent.name" placeholder="{{'Name oder Betriebsbezeichnung'|translate}}" required>
+                  <input type="text" class="form-control" name="name" maxlength="50" ng-model="produzent.name" placeholder="{{'Name oder Betriebsbezeichnung'|translate}}" required>
                 </div>
               </div>
               <div class="row form-group">
@@ -55,7 +55,7 @@
                   <label for="vorname" translate>Vorname</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="vorname" ng-model="produzent.vorname" placeholder="{{'Vorname'|translate}}">
+                  <input type="text" class="form-control" name="vorname" maxlength="50" ng-model="produzent.vorname" placeholder="{{'Vorname'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -63,7 +63,7 @@
                   <label for="iban" translate>IBAN</label>
                 </div>
                 <div class="col-md-7">
-                  <input type="text" class="form-control" name="iban" ng-model="produzent.iban" placeholder="{{'CH...'|translate}}">
+                  <input type="text" class="form-control" name="iban" ng-model="produzent.iban" placeholder="{{'CH...'|translate}}" ng-iban>
                 </div>
               </div>
               <div class="row form-group">
@@ -71,7 +71,7 @@
                   <label for="bank" translate>Bank</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="bank" ng-model="produzent.bank" placeholder="{{'Bank, PLZ Ort'|translate}}">
+                  <input type="text" class="form-control" name="bank" maxlength="50" ng-model="produzent.bank" placeholder="{{'Bank, PLZ Ort'|translate}}">
                 </div>
               </div>
               <div class="row form-group">
@@ -79,7 +79,7 @@
                   <label for="bemerkungen" translate>Bemerkungen</label>
                 </div>
                 <div class="col-md-8">
-                  <textarea class="form-control" name="bemerkungen" ng-model="produzent.bemerkungen" placeholder="{{'Bemerkungen zu diesem Produzenten'|translate}}"></textarea>
+                  <textarea class="form-control" name="bemerkungen" maxlength="1000" ng-model="produzent.bemerkungen" placeholder="{{'Bemerkungen zu diesem Produzenten'|translate}}"></textarea>
                 </div>
               </div>
               <div class="row form-group">
@@ -135,7 +135,7 @@
                   <label for="adressZusatz" translate>Adresszusatz</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatz" ng-model="produzent.adressZusatz" placeholder="{{'Postfach, Etage, c/o, ...'|translate}}">
+                  <input type="text" class="form-control" name="adressZusatz" ng-model="produzent.adressZusatz" placeholder="{{'Postfach, Etage, c/o, ...'|translate}}" maxlength="100">
                 </div>
               </div>
               <div class="row form-group">
@@ -151,7 +151,7 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="email" translate>Email</label>
+                  <label for="email" translate>E-Mail</label>
                 </div>
                 <div class="col-md-8">
                   <input type="email" class="form-control" name="email" ng-model="produzent.email" placeholder="{{'E-Mail'|translate}}" required>
@@ -162,7 +162,7 @@
                   <label for="telefonMobil" translate>Telefon Mobil</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonMobil" ng-model="produzent.telefonMobil" placeholder="{{'+41 7...'|translate}}">
+                  <input type="text" class="form-control" name="telefonMobil" ng-model="produzent.telefonMobil" placeholder="{{'+41 7...'|translate}}" maxlength="35">
                 </div>
               </div>
               <div class="row form-group">
@@ -170,7 +170,7 @@
                   <label for="telefonFestnetz" translate>Telefon Festnetz</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="produzent.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
+                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="produzent.telefonFestnetz" placeholder="{{'+41 ...'|translate}}" maxlength="35">
                 </div>
               </div>
             </div>

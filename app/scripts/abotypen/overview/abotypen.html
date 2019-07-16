@@ -18,7 +18,7 @@
                 <div ng-hide="entries">
                     <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
                 </div>
-                <div ng-show="entries">
+                <div ng-show="entries" id="abotypesTable">
                     <script type="text/ng-template" id="headerCheckbox.html">
 <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
                     </script>
@@ -42,7 +42,7 @@
                             {{abotyp.lieferrhythmus|translate}}
                         </td>
                         <td data-title="'Preis'|translate" sortable="'preis'">
-                            <span ng-bind="abotyp|ooPreisProEinheit" />
+                            <span ng-bind="abotyp|ooPreisProEinheit:projekt.waehrung" />
                         </td>
                         <td data-title="'Aktiv'|translate" sortable="'aktiv'">
                             <i ng-if="abotyp.aktiv" class="glyphicon glyphicon-ok"></i>
@@ -54,4 +54,7 @@
             </div>
         </div>
     </div>
+<oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+  <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="abotypIdsMailing"></oo-email-dialog>
+  </oo-sliding-detail>
 </div>

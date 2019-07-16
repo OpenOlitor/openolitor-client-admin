@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ReportsOverviewController', ['$q', '$scope', '$filter',
+  .controller('ReportsOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'ReportsModel', 'NgTableParams', 'localeSensitiveComparator',
-    'OverviewCheckboxUtil', '$location', 'VorlagenService', 'FilterQueryUtil', 'gettext',
-    function($q, $scope, $filter, ReportsModel, NgTableParams, localeSensitiveComparator,
-      OverviewCheckboxUtil, $location, VorlagenService, FilterQueryUtil, gettext) {
+    'OverviewCheckboxUtil', '$location', 'ReportvorlagenService', 'FilterQueryUtil', 'gettext',
+    function($q, $scope, $rootScope, $filter, ReportsModel, NgTableParams, localeSensitiveComparator,
+      OverviewCheckboxUtil, $location, ReportvorlagenService, FilterQueryUtil, gettext) {
+      $rootScope.viewId = 'L-Rept';
 
       $scope.entries = [];
       $scope.filteredEntries = [];

@@ -3,11 +3,12 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('DepotsOverviewController', ['$scope', '$filter',
+  .controller('DepotsOverviewController', ['$scope', '$rootScope', '$filter',
     'DepotsOverviewModel', 'NgTableParams', 'OverviewCheckboxUtil',
-    'VorlagenService', '$location', 'lodash', 'EmailUtil', 'gettext',
-    function($scope, $filter, DepotsOverviewModel, NgTableParams,
-      OverviewCheckboxUtil, VorlagenService, $location, _, EmailUtil, gettext) {
+    'ReportvorlagenService', '$location', 'lodash', 'EmailUtil', 'gettext',
+    function($scope, $rootScope, $filter, DepotsOverviewModel, NgTableParams,
+      OverviewCheckboxUtil, ReportvorlagenService, $location, _, EmailUtil, gettext) {
+      $rootScope.viewId = 'L-Dep';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -39,7 +40,7 @@ angular.module('openolitor-admin')
       });
 
       $scope.projektVorlagen = function() {
-        return VorlagenService.getVorlagen('VorlageDepotbrief');
+        return ReportvorlagenService.getVorlagen('VorlageDepotbrief');
       };
 
       $scope.closeBericht = function() {
@@ -70,6 +71,7 @@ angular.module('openolitor-admin')
         label: gettext('Depotbrief erstellen'),
         iconClass: 'fa fa-file',
         onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.showGenerateReport = true;
           return true;
         },
@@ -77,7 +79,7 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: gettext('Email an Kunden versenden'),
+        label: gettext('E-Mail an Kunden versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
@@ -86,6 +88,24 @@ angular.module('openolitor-admin')
             EmailUtil.toMailToBccLink(emailAddresses);
           });
 
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-envelope',
+        onExecute: function() {
+          $scope.url = 'mailing/sendEmailToDepotSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{depot.name}} \n {{depot.kurzzeichen}}  \n {{depot.plz}}  \n {{depot.ort}}  \n {{depot.apTelefon}}');
+          $scope.depotIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at(Object.keys($scope.checkboxes.items))
+            .map('id')
+            .value();
+          $scope.showCreateEMailDialog = true;
           return true;
         },
         isDisabled: function() {

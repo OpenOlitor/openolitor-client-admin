@@ -3,11 +3,13 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbosOverviewController', ['$scope', '$filter', '$location',
+  .controller('AbosOverviewController', ['$scope', '$rootScope', '$filter', '$location',
     'AbosOverviewModel', 'KundenOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
     'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService',
-    function($scope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
+    function($scope, $rootScope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
       AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus, DetailNavigationService) {
+
+      $rootScope.viewId = 'L-Abo';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
@@ -40,7 +42,7 @@ angular.module('openolitor-admin')
         queryQuery: '',
         filterQuery: '',
         complexFlags: {
-          zusatzAbosAktiv: false
+          zusatzAbosAktiv: true
         }
       };
 
@@ -188,13 +190,13 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
       }, {
-        label: gettext('Email versenden'),
+        label: gettext('E-Mail versenden'),
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
           var kundeIds = _($scope.filteredEntries)
             .keyBy('id')
-            .at($scope.checkboxes.ids)
+            .at(Object.keys($scope.checkboxes.items))
             .map('kundeId')
             .value();
 
@@ -208,6 +210,26 @@ angular.module('openolitor-admin')
             EmailUtil.toMailToBccLink(emailAddresses);
             return true;
           });
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('E-Mail Formular'),
+        noEntityText: true,
+        iconClass: 'glyphicon glyphicon-pencil',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveEmailDialog");
+          $scope.entity = gettext('abo');
+          $scope.url = 'mailing/sendEmailToAbosSubscribers';
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abo.abotypName}} \n {{abo.kunde}} \n {{abo.start}} \n {{abo.ende}}');
+          $scope.aboIdsMailing = _($scope.filteredEntries)
+            .keyBy('id')
+            .at(Object.keys($scope.checkboxes.items))
+            .map('id')
+            .value();
+          $scope.showCreateEMailDialog = true;
+          return true;
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
@@ -240,6 +262,14 @@ angular.module('openolitor-admin')
 
       $scope.closeCreateRechnungenDialogFunct = function() {
         return $scope.closeCreateRechnungenDialog;
+      };
+
+      $scope.closeCreateEMailDialog = function() {
+        $scope.showCreateEMailDialog = false;
+      };
+
+      $scope.closeCreateEMailDialogFunct = function() {
+        return $scope.closeCreateEMailDialog;
       };
 
       $scope.$watchGroup(['search.query', 'search.complexFlags.zusatzAbosAktiv'], function() {
