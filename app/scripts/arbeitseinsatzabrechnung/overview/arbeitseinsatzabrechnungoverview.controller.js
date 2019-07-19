@@ -60,7 +60,10 @@ angular
       $scope.search = {
         query: '',
         queryQuery: '',
-        filterQuery: ''
+        filterQuery: '',
+        complexFlags: {
+          kundeAktiv: true 
+        }
       };
 
       var existingQuery = $location.search().q;
@@ -175,9 +178,9 @@ angular
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = ArbeitseinsatzabrechnungModel.query(
-          {
-            q: $scope.query
+        $scope.entries = ArbeitseinsatzabrechnungModel.query({
+            q: $scope.search.query,
+            x: $scope.search.complexFlags
           },
           function() {
             $scope.tableParams.reload();
@@ -188,8 +191,7 @@ angular
 
       search();
 
-      $scope.$watch(
-        'search.query',
+      $scope.$watchGroup(['search.query', 'search.complexFlags.kundeAktiv'],
         function() {
           $scope.search.filterQuery = FilterQueryUtil.transform(
             $scope.search.query

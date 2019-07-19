@@ -24,6 +24,23 @@ angular.module('openolitor-admin')
         return typ.id;
       });
 
+      $scope.aboPickerStartDate = {
+          datepickerOptions: {
+            minDate: undefined,
+            maxDate: undefined 
+        }
+      }; 
+
+      $scope.aboPickerEndDate = {
+          datepickerOptions: {
+            minDate: undefined,
+            maxDate: undefined 
+        }
+      }; 
+
+      $scope.zusatzaboPickerStartDateList = [];
+      $scope.zusatzaboPickerEndDateList = [];
+
       var defaults = {
         model: {
           id: undefined,
@@ -49,7 +66,8 @@ angular.module('openolitor-admin')
 
       $scope.lists = {
         vertriebe: {},
-        vertriebsarten: {}
+        vertriebsarten: {},
+        abotypen : [] 
       };
 
       $scope.openCalendar = function(e,date) {
@@ -96,26 +114,126 @@ angular.module('openolitor-admin')
          },function(zusatzAbos){
            $scope.zusatzAbos = zusatzAbos;
            $scope.zusatzAbos.forEach(function(zusatzAbo){
+               if ($scope.findIndexByZusatzaboId(zusatzAbo.id)){
+                   initializeDatePickerForZusatzabo(zusatzAbo);
+               }
                zusatzAbo.zusatzaboTypPrice = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
                if (!zusatzAbo.price){
                   zusatzAbo.price = $scope.getZusatzabotypPrice(zusatzAbo.abotypId);
                }
+               zusatzAbo.allBasketsInOpenDeliveryPlanning = areAllBasketsInOpenDeliveryPlanningsForZusatzAbo($scope.lieferungen, zusatzAbo.start);
            });
+           calculateDatePickerForAbo(); 
          });
+       };
+
+       var areAllBasketsInOpenDeliveryPlanningsForMainAbo = function(lieferungen) {
+           var result = true ;
+           lieferungen.forEach(function(lieferung){
+               if (lieferung.lieferung.status !== 'Offen'){
+                   result = false;
+               }
+           })
+           return result;
+       }
+
+       var areAllBasketsInOpenDeliveryPlanningsForZusatzAbo = function(lieferungen, startDate) {
+           var result = true ;
+           lieferungen.forEach(function(lieferung){
+               if (lieferung.lieferung.status !== 'Offen' && lieferung.lieferung.datum >= startDate){
+                   result = false;
+               }
+           })
+           return result;
+       }
+
+       var calculateDatePickerForAbo = function() {
+          if ($scope.zusatzAbos.length > 0 ){
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = ($scope.abo.ende < getSmallestMinDateZusatzabos()) ? $scope.abo.ende : getSmallestMinDateZusatzabos() ; 
+            $scope.aboPickerEndDate.datepickerOptions.minDate = ($scope.abo.start > getSmallestMaxDateZusatzabos()) ? $scope.abo.start : getSmallestMaxDateZusatzabos(); 
+          } else {
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = $scope.abo.ende;
+            $scope.aboPickerEndDate.datepickerOptions.minDate = $scope.abo.start;
+          }
+       };
+
+       var getSmallestMinDateZusatzabos = function() {
+           return lodash.minBy($scope.zusatzAbos, 'start').start;
+       }
+
+       var getSmallestMaxDateZusatzabos = function() {
+           var listWithEndDate = [];
+           $scope.zusatzAbos.forEach(function(zusatzAbo){
+               if (zusatzAbo.ende){
+                   listWithEndDate.push(zusatzAbo.ende);
+               }
+           });
+           return lodash.minBy(listWithEndDate);
+       }
+
+       var initializeDatePickerForZusatzabo = function(zusatzAbo) {
+           var zstart = {
+               zusatzaboId:zusatzAbo.id,
+               datepickerOptions : {
+                   minDate:$scope.abo.start,
+                   maxDate:zusatzAbo.ende
+               }
+           };
+           var zend = {
+               zusatzaboId:zusatzAbo.id,
+               datepickerOptions : { 
+                   minDate:zusatzAbo.start,
+                   maxDate:$scope.abo.ende
+               }
+           };
+           $scope.zusatzaboPickerEndDateList.push(zend);
+           $scope.zusatzaboPickerStartDateList.push(zstart);
        };
 
        var createNewZusatzAbo = function(zusatzAbotyp) {
          var zusatzAbo = new ZusatzAboModel({hauptAboId: getAboId(), kundeId:getKundeId(),abotypId:zusatzAbotyp.id});
            zusatzAbo.$save();
+           initializeDatePickerForZusatzabo(zusatzAbo);
        };
+
+      $scope.updateAboDatetimePicker = function (){
+          calculateDatePickerForAbo();
+          $scope.zusatzaboPickerStartDateList.forEach(function(zusatzAboPicker){
+            zusatzAboPicker.datepickerOptions.minDate = $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.maxDate = zusatzAboPicker.datepickerOptions.maxDate < $scope.abo.ende ? zusatzAboPicker.datepickerOptions.maxDate : $scope.abo.ende;
+          });
+          $scope.zusatzaboPickerEndDateList.forEach(function(zusatzAboPicker){
+            zusatzAboPicker.datepickerOptions.minDate = zusatzAboPicker.datepickerOptions.minDate > $scope.abo.start? zusatzAboPicker.datepickerOptions.minDate : $scope.abo.start;
+            zusatzAboPicker.datepickerOptions.maxDate = $scope.abo.ende;
+          });
+      };
+
+      $scope.updateZusatzaboDatetimePicker = function (zusatzabo){
+          var index = $scope.findIndexByZusatzaboId(zusatzabo.id);
+          $scope.zusatzaboPickerStartDateList[index].datepickerOptions.maxDate = zusatzabo.ende; 
+          $scope.zusatzaboPickerEndDateList[index].datepickerOptions.minDate = zusatzabo.start; 
+          calculateDatePickerForAbo();
+      };
+
+      $scope.findIndexByZusatzaboId = function (id){
+          var found = false;
+          var result = undefined;
+          $scope.zusatzaboPickerEndDateList.forEach(function(picker, index){
+              if (!found){
+                  if (picker.zusatzaboId === id){
+                      found = true;
+                      result = index;
+                  }
+              }
+          });
+          return result;
+      }
 
       var loadAboDetail = function() {
         if ($scope.loading === getAboId()) {
           return;
         }
         $scope.loading = getAboId();
-        loadZusatzAbotypen();
-        loadZusatzAbos();
         AbosDetailModel.get({
           id: getAboId(),
           kundeId: getKundeId()
@@ -134,10 +252,13 @@ angular.module('openolitor-admin')
           $scope.lieferungen = AboKoerbeModel.query({
             kundeId: $scope.abo.kundeId,
             id: $scope.abo.id
-          }, function() {
+          }, function(lieferungen) {
             $scope.koerbeTableParams.reload();
+            $scope.allBasketsInOpenDeliveryPlanningsForMainAbo = areAllBasketsInOpenDeliveryPlanningsForMainAbo(lieferungen);
           });
         });
+        loadZusatzAbotypen();
+        loadZusatzAbos();
       };
 
 
@@ -175,9 +296,14 @@ angular.module('openolitor-admin')
 
       $scope.init();
 
-      $scope.lists.abotypen = AbotypenOverviewModel.query({
-        aktiv: true
-      });
+      AbotypenOverviewModel.query({ aktiv: true}, function(abotypen){
+            abotypen.forEach(function(abotyp){
+              if (abotyp.aktiv){
+                  $scope.lists.abotypen.push(abotyp);
+              }
+            });
+        }
+      );
 
       $scope.isExisting = function() {
         return angular.isDefined($scope.abo) && angular.isDefined($scope.abo
@@ -257,6 +383,12 @@ angular.module('openolitor-admin')
           resolve: {
             abo: function() {
               return $scope.abo;
+            },            
+            vertriebsarten: function() {
+              return $scope.lists.vertriebsarten;
+            },
+            vertriebe: function() {
+              return $scope.lists.vertriebe[$scope.abo.abotypId];
             }
           }
         });
@@ -300,7 +432,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function(zusatzabo) {
-          return !zusatzabo || zusatzabo.anzahlLieferungen.length > 0 ||
+          return !zusatzabo || !zusatzabo.allBasketsInOpenDeliveryPlanning ||
             !lodash.every(zusatzabo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function(zusatzabo) {
@@ -330,9 +462,8 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-remove',
         noEntityText: true,
         isDisabled: function() {
-          return !$scope.abo || $scope.abo.guthaben > 0 || $scope.abo
-            .anzahlLieferungen.length > 0 ||
-            !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
+          return !$scope.abo || $scope.abo.guthaben > 0 || !$scope.allBasketsInOpenDeliveryPlanningsForMainAbo ||
+                !lodash.every($scope.abo.anzahlAbwesenheiten, {value: 0});
         },
         onExecute: function() {
           return $scope.abo.$delete();
@@ -639,7 +770,9 @@ angular.module('openolitor-admin')
 
       msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
         if ((msg.entity) === 'ZusatzAbo') {
-            $scope.zusatzAbos.push(new ZusatzAboModel(msg.data));
+            var newZusatzabo = new ZusatzAboModel(msg.data);
+            newZusatzabo.allBasketsInOpenDeliveryPlanning = areAllBasketsInOpenDeliveryPlanningsForZusatzAbo($scope.lieferungen, newZusatzabo.start);
+            $scope.zusatzAbos.push(newZusatzabo);
             $scope.$apply();
         }
       });

@@ -55,8 +55,8 @@
       </div>
     </form>
   </div>
-  <div class="panel-footer" ng-if="(rechnungsPositionen.length - rechnungen.ids.length) > 0">
-      {{rechnungsPositionen.length - rechnungen.ids.length}} <span translate> Rechnungspositionen sind nicht im Status 'Offen' und können daher nicht einer Rechnung zugewiesen werden.</span>
+  <div class="panel-footer" ng-if="rechnungsPositionen.length !== numberOfOpenRechnungPositionen(rechnungsPositionen)">
+      {{rechnungsPositionen.length - numberOfOpenRechnungPositionen(rechnungsPositionen)}} <span translate> Rechnungspositionen sind nicht im Status 'Offen' und können daher nicht einer Rechnung zugewiesen werden.</span>
   </div>
   <div class="panel-footer" ng-if="commandIssued">
     {{batchCreated.ids.length}} <span translate>von</span> {{rechnungen.ids.length}} <span translate> Rechnungspositionen wurden verarbeitet</span>

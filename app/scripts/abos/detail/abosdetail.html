@@ -74,7 +74,7 @@
         </div>
         <div class="col-md-4">
           <p class="input-group">
-            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" enable-time="false" max-date="abo.ende" />
+            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" ng-change="updateAboDatetimePicker()" enable-time="false" datepicker-options="aboPickerStartDate.datepickerOptions" />
             <span class="input-group-btn">
               <button type="button" class="form-control btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
             </span>
@@ -84,7 +84,7 @@
       <div class="row form-group">
         <div class="col-md-offset-4 col-md-4">
           <p class="input-group">
-            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" enable-time="false" min-date="abo.start" />
+            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" ng-change="updateAboDatetimePicker()" enable-time="false" datepicker-options="aboPickerEndDate.datepickerOptions" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
             </span>
@@ -167,7 +167,7 @@
               </div>
               <div class="col-md-6 col-md-offset-4">
                 <p class="input-group">
-                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.start" is-open="openZusatzAbo.start[zusatzAbo.id]" enable-time="false" max-date="abo.ende" />
+                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.start" is-open="openZusatzAbo.start[zusatzAbo.id]" ng-change="updateZusatzaboDatetimePicker(zusatzAbo)" enable-time="false" datepicker-options="zusatzaboPickerStartDateList[findIndexByZusatzaboId(zusatzAbo.id)].datepickerOptions" />
                   <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id, 'start')"><i class="fa fa-calendar"></i></button>
                   </span>
@@ -175,7 +175,7 @@
               </div>
               <div class="col-md-6 col-md-offset-4">
                 <p class="input-group">
-                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.ende" is-open="openZusatzAbo.ende[zusatzAbo.id]" enable-time="false" max-date="abo.ende"/>
+                  <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="zusatzAbo.ende" is-open="openZusatzAbo.ende[zusatzAbo.id]" ng-change="updateZusatzaboDatetimePicker(zusatzAbo)" enable-time="false" datepicker-options="zusatzaboPickerEndDateList[findIndexByZusatzaboId(zusatzAbo.id)].datepickerOptions"/>
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="openCalendarZusatzAbo($event,zusatzAbo.id ,'ende')"><i class="fa fa-calendar"></i></button>
                   </span>
