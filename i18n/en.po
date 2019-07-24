@@ -512,6 +512,14 @@ msgstr "Duplicate work opportunity"
 msgid "Arbeitsangebot eingefügt"
 msgstr "Work opportunity added"
 
+#: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:2
+msgid "Arbeitsangebot duplizieren"
+msgstr ""
+
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:373
+msgid "Arbeitsangebot eingefügt"
+msgstr ""
+
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:10
 msgid "Arbeitsangebot erstellen"
 msgstr "Create work opportunity"
@@ -726,6 +734,8 @@ msgstr "Ready"
 #: app/scripts/reports/overview/reportsoverview.html:26
 #: app/scripts/reportvorlagen/reportvorlagen.html:28
 #: app/scripts/reportvorlagen/reportvorlagen.html:30
+#: app/scripts/surveys/biddingRound.html:26
+#: app/scripts/surveys/biddingRound.html:29
 #: app/scripts/touren/detail/tourendetail.html:41
 #: app/scripts/touren/detail/tourendetail.html:44
 msgid "Beschreibung"
@@ -805,6 +815,18 @@ msgstr "Designation"
 #: app/scripts/kunden/detail/kundendetail.html:365
 msgid "Bezeichnung am Briefkasten"
 msgstr "Label on the letter box"
+
+#: app/scripts/surveys/biddingRound.html:6
+msgid "Bidding Round"
+msgstr "Bidding Round"
+
+#: app/scripts/surveys/biddingRound.html:24
+msgid "Bidding Round Name"
+msgstr "Bidding Round Name"
+
+#: app/scripts/surveys/biddingRound.html:21
+msgid "BiddingRound"
+msgstr "BiddingRound"
 
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:16
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:25
@@ -1929,6 +1951,10 @@ msgid "Mail-Vorlagen"
 msgstr "Mail template"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:493
+msgid "Manuelle Rechnung erstellen"
+msgstr "Create invoice manually"
+
+#: app/scripts/abos/detail/abosdetail.controller.js:362
 msgid "Manuelle Rechnung erstellen"
 msgstr "Create invoice manually"
 
@@ -3488,6 +3514,10 @@ msgstr "Date & Time"
 msgid "Zeitraum"
 msgstr "Period"
 
+#: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:13
+msgid "Zeitraum"
+msgstr "Period"
+
 #: app/scripts/abotypen/detail/abotypendetail.html:178
 msgid "Zielpreis"
 msgstr "target price"
@@ -3503,6 +3533,10 @@ msgstr "Put on hold"
 #: app/scripts/rechnungen/detail/rechnungendetail.html:250
 msgid "Zusatz-Abo:"
 msgstr "Supplementary subscription:"
+
+#: app/scripts/rechnungen/detail/rechnungendetail.html:250
+msgid "Zusatz-Abo:"
+msgstr ""
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:6
 msgid "ZusatzAbotypen"
@@ -3622,6 +3656,10 @@ msgstr "max."
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:276
 msgid "pain.008.001.07 erstellen"
 msgstr "Create SEPA export file"
+
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:276
+msgid "pain.008.001.07 erstellen"
+msgstr ""
 
 #: app/scripts/abos/detail/abwesenheiten/abwesenheiten.html:27
 msgid "pendente"
