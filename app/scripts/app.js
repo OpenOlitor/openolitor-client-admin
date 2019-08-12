@@ -1115,12 +1115,6 @@ angular
           access: userRoles.Administrator,
           reloadOnSearch: false
         })
-        .when('/reports/:id/execute', {
-          templateUrl: 'scripts/reports/execute/reportsexecute.html',
-          controller: 'ReportsExecuteController',
-          name: 'ReportsExecute',
-          access: userRoles.Administrator
-        })
         .when('/reports/:id', {
           templateUrl: 'scripts/reports/detail/reportsdetail.html',
           controller: 'ReportsDetailController',
