@@ -9,12 +9,12 @@ angular.module('openolitor-admin')
     'PendenzDetailModel', 'KundenOverviewModel',
     'KundentypenService', 'PersonCategoriesService' ,'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'PAYMENT_TYPES', 'ABOTYPEN', 'API_URL',
-    'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
+    'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'dialogService', 'gettextCatalog', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
       KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, API_URL,
-      msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
+      msgBus, lodash, KundenRechnungenModel, ooAuthService, dialogService, gettextCatalog, EmailUtil) {
       $rootScope.viewId = 'D-Kun';
 
       var defaults = {
@@ -236,11 +236,16 @@ angular.module('openolitor-admin')
       };
 
       $scope.removePerson = function(index) {
-        var person = $scope.kunde.ansprechpersonen.splice(index, 1);
-        //remove as well from remote side
-        if ($routeParams.id && person[0].id) {
-          KundenDetailService.deletePerson($routeParams.id, person[0].id);
-        }
+        dialogService.displayDialogOkAbort(
+          gettextCatalog.getString('Soll diese Person wirklich gelöscht werden?'),
+          function() {
+            var person = $scope.kunde.ansprechpersonen.splice(index, 1);
+            //remove as well from remote side
+            if ($routeParams.id && person[0].id) {
+	            KundenDetailService.deletePerson($routeParams.id, person[0].id);
+            }
+          }
+         );
       };
 
       $scope.switchLogin = function(person) {
