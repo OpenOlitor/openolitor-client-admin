@@ -53,6 +53,9 @@
                     {{typ|translate}}
                   </span>
                 </td>
+                <td ng-if="showAll" data-title="'Koordinaten'|translate">
+                  <a ng-if="kunde.latLieferung && kunde.longLieferung" href="http://www.openstreetmap.org/?mlat={{kunde.latLieferung}}&mlon={{kunde.longLieferung}}&zoom=17" target="_blank">{{kunde.latLieferung}}, {{kunde.longLieferung}}</a>
+                </td>
                 <td header="'headerShowAll.html'"></td>
               </tr>
             </table>

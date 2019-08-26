@@ -157,11 +157,10 @@ angular.module('openolitor-admin')
             return lodash.includes($scope.checkboxes.ids, d.id);
           });
           result = lodash.map(result, 'id');
-            //overwritting the tf parameter with an empty abotypId filter to avoid the heritage of the current typen filter
-          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+          //overwritting the tf parameter with an empty abotypId filter to avoid the heritage of the current typen filter
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf', '{"abotypId":""}');
         }
-      }
-      ];
+      }];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -201,7 +200,10 @@ angular.module('openolitor-admin')
 
             params.total(dataSet.length);
 
-            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+            $location.search({
+              'q': $scope.search.query,
+              'tf': JSON.stringify($scope.tableParams.filter())
+            });
 
             return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }
