@@ -50,7 +50,7 @@ angular.module('openolitor-admin')
           } else if (/abotypid|abotyp_id|abotyp-id/.test(this.field.toLowerCase())) {
             return '<a href="' + '#/abotypen/' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/aboid|abo_id|abo-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/abos/q=id%3D' + row[this.field] + '">' + row[this.field] + '</a>';
+            return '<a href="' + '#/abos?q=id%3D' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/tourid|tour_id|tour-id/.test(this.field.toLowerCase())) {
             return '<a href="' + '#/touren/' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/depotid|depot_id|depot-id/.test(this.field.toLowerCase())) {
