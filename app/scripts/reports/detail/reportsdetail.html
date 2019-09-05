@@ -4,36 +4,89 @@
     <form name="reportForm" oo-confirm-on-dirty>
       <div class="row">
         <div class="col-md-12">
-          <div class="row form-group"> <h3>
-              <div class="col-md-7" translate>
+          <div class="row form-group">
+            <h3>
+              <div class="col-md-4" translate>
                 Auswertung
               </div>
-              <div class="col-md-5">
+              <div class="col-md-8">
                 <div class="pull-right" role="group">
-                  <oo-save-button ng-hide="!isModifying" model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created">Auswertung</oo-save-button>
-                  <button type="button" class="btn btn-md btn-default"  ng-hide="isModifying" ng-click="isModifying = true; result.entries.length === 0 " title="{{'Auswertung editieren'|translate}}" translate><span class="glyphicon glyphicon-edit"></span>Editieren</button>
-                  <oo-delete-button form="reportForm" ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Report" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
-<button type="button" ng-hide="isModifying || result.entries.length > 0" class="btn btn-md btn-warning" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span>Ausführen</button>
-                  <button type="button" ng-show="result.entries.length > 0" class="btn btn-md btn-success" ng-click="changeReport()" title="{{'Auswertung verändern'|translate}}"><span class="glyphicon glyphicon-pause"></span> Verändern</button>
+                  <oo-save-button
+                    ng-hide="!isModifying"
+                    model="report"
+                    form="reportForm"
+                    entity="Report"
+                    on-save="save"
+                    on-cancel="backToList"
+                    on-created="created"
+                    >Auswertung</oo-save-button
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-md btn-default"
+                    ng-hide="isModifying"
+                    ng-click="isModifying = true; result.entries.length === 0 "
+                    title="{{'Auswertung editieren'|translate}}"
+                    translate
+                  >
+                    <span class="glyphicon glyphicon-edit"></span> Editieren
+                  </button>
+                  <oo-delete-button
+                    form="reportForm"
+                    ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)"
+                    model="report"
+                    entity="Report"
+                    on-delete="delete"
+                    on-deleted="backToList"
+                    confirm="true"
+                  ></oo-delete-button>
+                  <button
+                    type="button"
+                    ng-hide="isModifying || result.entries.length > 0"
+                    class="btn btn-md btn-warning"
+                    ng-click="executeReport(report)"
+                    title="{{'Auswertung ausführen'|translate}}"
+                  >
+                    <span class="glyphicon glyphicon-play"></span> Ausführen
+                  </button>
+                  <button
+                    type="button"
+                    ng-show="result.entries.length > 0"
+                    class="btn btn-md btn-warning"
+                    ng-click="executeReport(report)"
+                    title="{{'Auswertung erneut ausführen'|translate}}"
+                  >
+                    <span class="glyphicon glyphicon-play"></span> Erneut ausführen
+                  </button>
                 </div>
               </div>
             </h3>
           </div>
         </div>
       </div>
-      <div class="row" >
+      <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title"><span class="navbar-brand" translate>Basisdaten</span></h3>
+              <h3 class="panel-title">
+                <span class="navbar-brand" translate>Basisdaten</span>
+              </h3>
             </div>
-            <div class="panel-body" >
+            <div class="panel-body">
               <div class="row form-group">
                 <div class="col-md-4">
                   <label for="name" translate>Name</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" ng-readonly="!isModifying" class="form-control" name="name" ng-model="report.name" placeholder="{{'Name'|translate}}" required>
+                  <input
+                    type="text"
+                    ng-readonly="!isModifying"
+                    class="form-control"
+                    name="name"
+                    ng-model="report.name"
+                    placeholder="{{'Name'|translate}}"
+                    required
+                  />
                 </div>
               </div>
               <div class="row form-group">
@@ -41,7 +94,14 @@
                   <label for="vorname" translate>Beschreibung</label>
                 </div>
                 <div class="col-md-8">
-                  <textarea class="form-control" ng-readonly="!isModifying" name="beschreibung" ng-model="report.beschreibung" placeholder="{{'Beschreibung'|translate}}" rows="2"></textarea>
+                  <textarea
+                    class="form-control"
+                    ng-readonly="!isModifying"
+                    name="beschreibung"
+                    ng-model="report.beschreibung"
+                    placeholder="{{'Beschreibung'|translate}}"
+                    rows="2"
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -53,12 +113,22 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title"><span class="navbar-brand" translate>Query</span></h3>
+              <h3 class="panel-title">
+                <span class="navbar-brand" translate>Query</span>
+              </h3>
             </div>
-            <div class="panel-body" >
+            <div class="panel-body">
               <div class="row form-group">
                 <div class="col-md-12">
-                  <textarea ng-hide="!isModifying" class="form-control" name="query" ng-model="report.query"  placeholder="select * from Entity where ..." rows="20" required></textarea>
+                  <textarea
+                    ng-hide="!isModifying"
+                    class="form-control"
+                    name="query"
+                    ng-model="report.query"
+                    placeholder="select * from Entity where ..."
+                    rows="20"
+                    required
+                  ></textarea>
                   <pre ng-hide="isModifying"><code>{{report.query}}</code></pre>
                 </div>
               </div>
@@ -75,29 +145,76 @@
     <div oo-error-overlay></div>
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h3 class="panel-title"><span class="navbar-brand" translate>Resultate</span>
+        <h3 class="panel-title">
+          <span class="navbar-brand" translate>Resultate</span>
           <form class="navbar-form pull-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="{{'Suche in Resultaten...'|translate}}" ng-model="search.query">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="{{'Suche in Resultaten...'|translate}}"
+                ng-model="search.query"
+              />
+              <oo-actions-button
+                model="model"
+                actions="actions"
+              ></oo-actions-button>
             </div>
           </form>
         </h3>
       </div>
       <div class="panel-body">
         <div ng-hide="result.entries">
-          <p ng-show="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></p>
+          <p ng-show="loading">
+            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+          </p>
         </div>
-        <div ng-show="result.entries" display-export="true" export-file-name="Report_{{report.name}}" class="horizontal-scroll">
-          <table ng-table-dynamic="tableParams with cols"  class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+        <div
+          ng-show="result.entries"
+          display-export="true"
+          export-file-name="Report_{{report.name}}"
+          class="horizontal-scroll"
+        >
+          <table
+            ng-table-dynamic="tableParams with cols"
+            class="table table-striped"
+            show-filter="{{showFilter && hasData()}}"
+            template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html"
+          >
             <tr>
-                <td ng-repeat="col in $columns" ng-bind-html="renderedTitles(col.field)"></td>
+              <th>
+                <input
+                  type="checkbox"
+                  ng-model="checkboxes.checked"
+                  ng-class="checkboxes.css"
+                  value=""
+                />
+              </th>
+              <th
+                ng-repeat="col in $columns"
+                ng-bind-html="renderedTitles(col.field)"
+              ></th>
             </tr>
             <tr ng-repeat="dataEntry in $data | filter: search.query.$">
-              <td ng-repeat="col in $columns" ng-bind-html="col.getValue(this, dataEntry)"></td>
+              <td>
+                <input type="checkbox" ng-model="checkboxes.items[$index]" />
+              </td>
+              <td
+                ng-repeat="col in $columns"
+                ng-bind-html="col.getValue(this, dataEntry)"
+              ></td>
             </tr>
           </table>
         </div>
       </div>
     </div>
   </div>
+
+  <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
+    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="aboIdsMailing" entity="entity"></oo-email-dialog>
+  </oo-sliding-detail>
+
+  <oo-sliding-detail slide-in="showCreateRechnungenDialog" slide-out-function="closeCreateRechnungenDialogFunct()">
+    <oo-abos-overview-create-rechnungs-positionen on-close="closeCreateRechnungenDialog" abo-ids="checkboxes.ids" filter-query="search.query" abo-type="'abos'"></oo-abos-overview-create-rechnungen>
+  </oo-sliding-detail>
 </div>

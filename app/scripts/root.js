@@ -17,10 +17,11 @@ angular.module('openolitor-admin')
       });
 
       $rootScope.viewId = 'Test';
+      $scope.welcomeDisplayed = false;
 
       $scope.currentPathContains = function(pathJunk) {
         var currentUrl = $location.url();
-        if(currentUrl.indexOf('?') !== -1) {
+        if (currentUrl.indexOf('?') !== -1) {
           return currentUrl.indexOf('/' + pathJunk + '?') !== -1;
         } else {
           return currentUrl === ('/' + pathJunk) || currentUrl.indexOf('/' + pathJunk + '/') !== -1;
@@ -146,14 +147,17 @@ angular.module('openolitor-admin')
       }
 
       $scope.checkWelcomeMessage = function() {
-        if ($scope.projekt.welcomeMessage2) {
-          dialogService.displayDialogOkAbort(
-            $scope.projekt.welcomeMessage2,
-            function() {},
-            'Mitteilung',
-            true,
-            'Schliessen'
-          );
+        if (!$scope.welcomeDisplayed) {
+          $scope.welcomeDisplayed = true;
+          if ($scope.projekt.welcomeMessage2) {
+            dialogService.displayDialogOkAbort(
+              $scope.projekt.welcomeMessage2,
+              function() {},
+              'Mitteilung',
+              true,
+              'Schliessen'
+            );
+          }
         }
       };
 
