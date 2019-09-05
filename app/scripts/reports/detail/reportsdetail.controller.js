@@ -48,13 +48,13 @@ angular.module('openolitor-admin')
           } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(this.field.toLowerCase())) {
             return row[this.field];
           } else if (/abotypid|abotyp_id|abotyp-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/abotypen/' + row[this.field] + '>' + row[this.field] + '</a>';
+            return '<a href="' + '#/abotypen/' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/aboid|abo_id|abo-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/abos/q=id%3D' + row[this.field] + '&f=%7B\'zusatzAbosAktiv\':true%7D&tf=%7B\'abotypId\':\'\',\'aktiv\':true%7D">' + row[this.field] + '</a>';
+            return '<a href="' + '#/abos/q=id%3D' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/tourid|tour_id|tour-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/touren/' + row[this.field] + '>' + row[this.field] + '</a>';
+            return '<a href="' + '#/touren/' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/depotid|depot_id|depot-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/depots/' + row[this.field] + '>' + row[this.field] + '</a>';
+            return '<a href="' + '#/depots/' + row[this.field] + '">' + row[this.field] + '</a>';
           } else if (/produzentid|produzent_id|produzent-id/.test(this.field.toLowerCase())) {
             return '<a href="' + '#/produzenten/' + row[this.field] + '">' + row[this.field] + '</a>';
           } else {
@@ -73,27 +73,27 @@ angular.module('openolitor-admin')
           } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/zusatzabos?q=id%3D' + uniqueItems + '&f=%7B\'zusatzAbosAktiv\':false%7D&tf=%7B\'abotypId\':\'\',\'aktiv\':true%7D">' + key + '</a></b>';
+            return '<b><a href="#/zusatzabos?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
           } else if (/aboid|abo_id|abo-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/abos?q=id%3D' + uniqueItems + '&f=%7B\'zusatzAbosAktiv\':true%7D&tf=%7B\'abotypId\':\'\',\'aktiv\':true%7D">' + key + '</a></b>';
+            return '<b><a href="#/abos?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
           } else if (/personid|person_id|person-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/personen?q=id%3D' + uniqueItems + '&tf=%7B%22kundentypen%22:%22%22,%22personentypen%22:%22%22%7D">' + key + '</a></b>';
+            return '<b><a href="#/personen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
           } else if (/rechnungpositionid|rechnungposition_id|rechnungposition-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/rechnungspositionen?q=id%3D' + uniqueItems + '&tf=%7B%22status%22:%22%22%7D">' + key + '</a></b>';
+            return '<b><a href="#/rechnungspositionen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
           } else if (/einkaufsrechnungid|einkaufsrechnung_id|einkaufsrechnung-id|sammelbestellungid|sammelbestellung-id|sammelbestellung_id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/einkaufsrechnungen?q=id%3D' + uniqueItems + '&tf=%7B%7D">' + key + '</a></b>';
+            return '<b><a href="#/einkaufsrechnungen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
           } else if (/rechnung_id|rechnungId|rechnung-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/rechnungen?q=id%3D' + uniqueItems + '&tf=%7B%22status%22:%22%22%7D">' + key + '</a></b>';
+            return '<b><a href="#/rechnungen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
           } else {
             return '<b>' + key + '</b>';
           }
