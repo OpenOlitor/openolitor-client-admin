@@ -50,7 +50,7 @@ angular.module('openolitor-admin')
           } else if (/abotypid|abotyp_id|abotyp-id/.test(this.field.toLowerCase())) {
             return '<a href="' + '#/abotypen/' + row[this.field] + '>' + row[this.field] + '</a>';
           } else if (/aboid|abo_id|abo-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/abos/q=id%3D' + row[this.field] + '&f=%7B\"zusatzAbosAktiv\":true%7D&tf=%7B\"abotypId\":\"\",\"aktiv\":true%7D">' + row[this.field] + '</a>';
+            return '<a href="' + '#/abos/q=id%3D' + row[this.field] + '&f=%7B\'zusatzAbosAktiv\':true%7D&tf=%7B\'abotypId\':\'\',\'aktiv\':true%7D">' + row[this.field] + '</a>';
           } else if (/tourid|tour_id|tour-id/.test(this.field.toLowerCase())) {
             return '<a href="' + '#/touren/' + row[this.field] + '>' + row[this.field] + '</a>';
           } else if (/depotid|depot_id|depot-id/.test(this.field.toLowerCase())) {
@@ -73,11 +73,11 @@ angular.module('openolitor-admin')
           } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/zusatzabos?q=id%3D' + uniqueItems + '&f=%7B\"zusatzAbosAktiv\":false%7D&tf=%7B\"abotypId\":\"\",\"aktiv\":true%7D">' + key + '</a></b>';
+            return '<b><a href="#/zusatzabos?q=id%3D' + uniqueItems + '&f=%7B\'zusatzAbosAktiv\':false%7D&tf=%7B\'abotypId\':\'\',\'aktiv\':true%7D">' + key + '</a></b>';
           } else if (/aboid|abo_id|abo-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/abos?q=id%3D' + uniqueItems + '&f=%7B"zusatzAbosAktiv":true%7D&tf=%7B"abotypId":"","aktiv":true%7D">' + key + '</a></b>';
+            return '<b><a href="#/abos?q=id%3D' + uniqueItems + '&f=%7B\'zusatzAbosAktiv\':true%7D&tf=%7B\'abotypId\':\'\',\'aktiv\':true%7D">' + key + '</a></b>';
           } else if (/personid|person_id|person-id/.test(key.toLowerCase())) {
             var items = lodash.map($scope.result.entries, key);
             var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
