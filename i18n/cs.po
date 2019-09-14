@@ -11,7 +11,7 @@ msgstr ""
 "Last-Translator: al_openolitor\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
-"PO-Revision-Date: 2019-05-09 11:56\n"
+"PO-Revision-Date: 2019-09-14 13:37\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -25,6 +25,7 @@ msgstr "Odběratelé"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:36
 #: app/scripts/depots/overview/depotsoverview.html:47
+#: app/scripts/kunden/overview/kundenoverview.html:48
 #: app/scripts/touren/overview/tourenoverview.html:37
 msgid "# Abos"
 msgstr "Odběry"
@@ -57,10 +58,6 @@ msgstr "Osoby"
 #: app/scripts/projekt/settings/kundentypen.html:31
 msgid "# Verknüpfungen"
 msgstr "# Odkazy"
-
-#: app/scripts/kunden/overview/kundenoverview.html:48
-msgid "#&nbsp;Abos"
-msgstr "#&nbsp;odběry"
 
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:66
 msgid "#&nbsp;Lieferungen"
@@ -193,7 +190,7 @@ msgstr "Zobrazit seznam odběrů"
 #: app/scripts/abos/overview/abosoverview.html:44
 #: app/scripts/abos/overview/zusatzabosoverview.html:42
 msgid "Abonnentin"
-msgstr "Odběratelka"
+msgstr "Podílníci"
 
 #: app/index.html:82
 #: app/scripts/abos/overview/abosoverview.html:6
@@ -212,27 +209,27 @@ msgstr "Odběry"
 #: app/scripts/kunden/detail/abo/abos.html:11
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
-msgstr "Druh odběru"
+msgstr "Typ podílu"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:10
 msgid "Abotyp ' + abotyp.name || 'Abotyp"
-msgstr "Druh odběru' + název.druhodběru || 'Druh odběru"
+msgstr "Typ podílu' + název.druhodběru || 'Druh odběru"
 
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:108
 msgid "Abotyp erstellen"
-msgstr "Vytvořit druh odběru"
+msgstr "Vytvořit typ podílu"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:36
 msgid "Abotyp hinzufügen:"
-msgstr "Přidat druh odběru:"
+msgstr "Přidat typ podílu:"
 
 #: app/index.html:107
 #: app/scripts/abotypen/overview/abotypen.html:6
 #: app/scripts/dashboard/dashboard.html:57
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:32
 msgid "Abotypen"
-msgstr "Druhy odběru"
+msgstr "Typy podílu"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:30
 msgid "Abrechnen"
@@ -277,11 +274,6 @@ msgstr "Nepřítomnosti"
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:8
 msgid "Achtung: Hier wird das aktuell bezahlte Guthaben neu gesetzt und nicht das berechnete Guthaben (bezahlt + verrechnet)!"
 msgstr "Pozor: aktuálně zaplacené zálohy budou zrušeny a nezapočítány do záloh (zaplaceny + započteny)!"
-
-#: app/scripts/surveys/biddingRound.html:36
-#: app/scripts/surveys/biddingRound.html:39
-msgid "Active"
-msgstr "Aktivní"
 
 #: app/scripts/kunden/detail/kundendetail.html:291
 msgid "Address of the Account Holder"
@@ -337,6 +329,7 @@ msgid "Aktiv"
 msgstr "Aktivní"
 
 #: app/scripts/abos/overview/abosoverview.html:10
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
 #: app/scripts/touren/detail/tourendetail.html:61
 msgid "Aktive"
 msgstr "Aktivní"
@@ -345,7 +338,7 @@ msgstr "Aktivní"
 msgid "Aktivität, Kurzbeschrieb, ..."
 msgstr "Činnost, krátký popis..."
 
-#: app/scripts/abos/detail/abosdetail.controller.js:553
+#: app/scripts/abos/detail/abosdetail.controller.js:684
 msgid "Aktuell"
 msgstr "Aktualni"
 
@@ -355,6 +348,7 @@ msgstr "Nejaktuálnější plán dodávek"
 
 #: app/scripts/abos/detail/abosdetail.html:120
 #: app/scripts/abos/overview/abosoverview.html:10
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
 #: app/scripts/dashboard/dashboard.html:45
 #: app/scripts/dashboard/dashboard.html:6
 #: app/scripts/dashboard/dashboard.html:76
@@ -385,7 +379,7 @@ msgstr "Zobrazit všechny sloupce"
 msgid "Allfällige Bemerkungen"
 msgstr "Všechny komentáře"
 
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:142
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:159
 msgid "Als ausgeliefert markieren"
 msgstr "Označit jako dodané"
 
@@ -557,11 +551,11 @@ msgstr "Vytvořit práci"
 msgid "Arbeitseinsatz.odt"
 msgstr "Prace.odt"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:207
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:209
 msgid "Arbeitseinsatzabrechnung-Brief"
 msgstr "Zrušení popisu dobrovolné práce"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:48
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:50
 msgid "Arbeitseinsatzabrechnung.odt"
 msgstr "Zrusenidobrovolneprace.odt"
 
@@ -576,7 +570,7 @@ msgstr "Dobrovolná práce a podíly"
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:240
 msgid "Arbeitseinsätze-Brief"
-msgstr "Dobrovolná práce dopis"
+msgstr "Popis dobrovolné práce"
 
 #: app/scripts/projekt/settings/arbeitskategorien.html:9
 msgid "Arbeitskategorie erstellen"
@@ -734,8 +728,6 @@ msgstr "Připraveno"
 #: app/scripts/reports/overview/reportsoverview.html:26
 #: app/scripts/reportvorlagen/reportvorlagen.html:28
 #: app/scripts/reportvorlagen/reportvorlagen.html:30
-#: app/scripts/surveys/biddingRound.html:26
-#: app/scripts/surveys/biddingRound.html:29
 #: app/scripts/touren/detail/tourendetail.html:41
 #: app/scripts/touren/detail/tourendetail.html:44
 msgid "Beschreibung"
@@ -816,18 +808,6 @@ msgstr "Označení"
 msgid "Bezeichnung am Briefkasten"
 msgstr "Označení na schránce"
 
-#: app/scripts/surveys/biddingRound.html:6
-msgid "Bidding Round"
-msgstr "Návrhy výše příspěvku"
-
-#: app/scripts/surveys/biddingRound.html:24
-msgid "Bidding Round Name"
-msgstr "Název kola návrhů výše příspěvků"
-
-#: app/scripts/surveys/biddingRound.html:21
-msgid "BiddingRound"
-msgstr "Návrhy výše příspěvků"
-
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:16
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:25
 #: app/scripts/produkte/overview/produkteoverview.html:34
@@ -872,10 +852,6 @@ msgstr "CHE xxx.yyy.zzz DPH"
 #: app/scripts/app.js:207
 msgid "CHF"
 msgstr "CHF"
-
-#: app/scripts/surveys/biddingRound.html:9
-msgid "Create new bidding round"
-msgstr "Vytvořit nové kolo přidávání návrhů na příspěvky"
 
 #: app/scripts/app.js:317
 msgid "Created"
@@ -932,11 +908,6 @@ msgstr "Termín pro platbu"
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:37
 msgid "Datum Versendet"
 msgstr "Datum odeslání"
-
-#: app/scripts/surveys/biddingRound.html:31
-#: app/scripts/surveys/biddingRound.html:34
-msgid "Deadline"
-msgstr "Konečný termín"
 
 #: app/scripts/abos/detail/abosdetail.html:100
 #: app/scripts/abos/detail/abosdetail.html:191
@@ -1022,6 +993,14 @@ msgstr "Dodávky již nelze změnit."
 msgid "Dienstag"
 msgstr "Úterý"
 
+#: app/scripts/projekt/settings/projektsettings.controller.js:377
+msgid "Diese Arbeitskategorie existiert bereits"
+msgstr "Tato pracovní kategorie již existuje."
+
+#: app/scripts/projekt/settings/projektsettings.controller.js:302
+msgid "Diese Personenkategorie existiert bereits"
+msgstr "Tato osobní kategorie již existuje"
+
 #: app/scripts/not-found.html:9
 msgid "Diese Seite konnte nicht gefunden werden!"
 msgstr "Tuto stránku se nepodařilo najít!"
@@ -1054,7 +1033,7 @@ msgstr "Tento produkt byl přidán ručně, a proto není dostupný v seznamu pr
 
 #: app/scripts/app.js:138
 msgid "DirectDebit"
-msgstr "Přímý odbyt"
+msgstr "Hotově"
 
 #: app/scripts/jobqueue/result/result.html:2
 msgid "Dokumente download"
@@ -1209,7 +1188,7 @@ msgstr "Použitá jednotka"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:123
 msgid "Einsatzzeit"
-msgstr "Doba používání"
+msgstr "Trvání"
 
 #: app/index.html:104
 #: app/index.html:65
@@ -1236,8 +1215,8 @@ msgstr "Další email."
 msgid "Email an Kunden versenden"
 msgstr "Odeslání e-mailu zákazníkům"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:379
-#: app/scripts/abos/detail/abosdetail.controller.js:389
+#: app/scripts/abos/detail/abosdetail.controller.js:510
+#: app/scripts/abos/detail/abosdetail.controller.js:520
 msgid "Enddatum muss vor Startdatum liegen"
 msgstr "Datum ukončení musí následovat po datu zahájení"
 
@@ -1436,7 +1415,7 @@ msgstr "Minimální stav konta"
 msgid "Guthaben Neu"
 msgstr "Nový stav konta"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:341
+#: app/scripts/abos/detail/abosdetail.controller.js:472
 msgid "Guthaben anpassen"
 msgstr "Upravit stav konta"
 
@@ -1452,7 +1431,7 @@ msgstr "Stav konta na dokladech"
 msgid "Guthaben vertraglich"
 msgstr "Stav konta dle smlouvy"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:220
+#: app/scripts/abos/detail/abosdetail.controller.js:346
 msgid "Guthaben wurde erfolgreich angepasst"
 msgstr "Stav konta byl úspěšně upraven"
 
@@ -1596,7 +1575,7 @@ msgstr "Červen"
 #: app/scripts/produzenten/detail/produzentendetail.html:42
 #: app/scripts/produzenten/overview/produzentenoverview.html:29
 msgid "KRZ"
-msgstr "KRZ"
+msgstr "Zkr."
 
 #: app/scripts/app.js:218
 msgid "Kanadischer Dollar"
@@ -1657,23 +1636,27 @@ msgstr "Informace o účtu"
 msgid "Kontoinhaber"
 msgstr "Majitel účtu"
 
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:146
+msgid "Korbdetails drucken"
+msgstr "Vytisknout detail podílu"
+
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 msgid "Korbinhalt"
 msgstr "Obsah podílu"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:95
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:129
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:133
 msgid "Korbübersicht drucken"
 msgstr "Vytisknout obsah podílu"
 
 #: app/scripts/depots/overview/depotsoverview.html:29
 msgid "Krzz."
-msgstr "Zkratka."
+msgstr "Zkr."
 
 #: app/index.html:79
 #: app/scripts/abos/detail/abosdetail.html:37
 #: app/scripts/app.js:325
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:29
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:31
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:37
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
 #: app/scripts/dashboard/dashboard.html:28
@@ -1708,6 +1691,7 @@ msgid "Kunde suchen..."
 msgstr "Hledat podílníka..."
 
 #: app/index.html:80
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
 msgstr "Podílníci"
@@ -1796,7 +1780,7 @@ msgid "Lieferdatum"
 msgstr "Datum závozu"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:86
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:116
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:120
 msgid "Lieferetiketten drucken"
 msgstr "Tisk dodacích etiket"
 
@@ -1822,7 +1806,7 @@ msgstr "Plán závozů smazán"
 msgid "Lieferplanungen"
 msgstr "Plány závozů"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:108
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:112
 msgid "Lieferplanungsbericht"
 msgstr "Zpráva plánu závozů"
 
@@ -1832,7 +1816,7 @@ msgid "Lieferrhythmus"
 msgstr "Frekvence závozů"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:77
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:104
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:108
 msgid "Lieferschein drucken"
 msgstr "Tisk listu závozu"
 
@@ -1877,8 +1861,8 @@ msgstr "Logo"
 msgid "Logo auswählen oder einfügen"
 msgstr "Vyberte nebo přidejte nové logo"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:299
-#: app/scripts/abos/detail/abosdetail.controller.js:329
+#: app/scripts/abos/detail/abosdetail.controller.js:431
+#: app/scripts/abos/detail/abosdetail.controller.js:461
 #: app/scripts/app.js:360
 msgid "Löschen"
 msgstr "Odstranit"
@@ -1927,7 +1911,7 @@ msgstr "Vytvořit dokument přípomínek"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:179
 msgid "Mahnungsdokumente erstellen"
-msgstr "Vytvořit dokmenty připomínek"
+msgstr "Vytvořit dokumenty s poznámkami"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:205
 msgid "Mahnungsdokumente herunterladen"
@@ -1946,7 +1930,7 @@ msgstr "Tělo emailu"
 msgid "Mail-Vorlagen"
 msgstr "Šablony e-mailů"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:362
+#: app/scripts/abos/detail/abosdetail.controller.js:493
 msgid "Manuelle Rechnung erstellen"
 msgstr "Vytvořit fakturu manuálně"
 
@@ -2045,7 +2029,7 @@ msgstr "N"
 #: app/scripts/touren/detail/tourendetail.html:36
 #: app/scripts/touren/overview/tourenoverview.html:31
 msgid "Name"
-msgstr "Příjmení"
+msgstr "Název / jméno"
 
 #: app/scripts/produzenten/detail/produzentendetail.html:47
 msgid "Name / Betrieb"
@@ -2089,7 +2073,7 @@ msgstr "Nový"
 msgid "Neue Bezeichnung"
 msgstr "Nové označení"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:100
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:104
 msgid "Neue Lieferplanung generieren"
 msgstr "Generovat nový plán dodávek"
 
@@ -2117,7 +2101,7 @@ msgstr "Nedokončeno"
 msgid "Noch nicht sortierte Tourlieferungen"
 msgstr "Dosud neseřazené závozy"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:38
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:40
 msgid "Noch zu leisten"
 msgstr "Stále k dokončení"
 
@@ -2276,7 +2260,7 @@ msgstr "Osoby"
 
 #: app/scripts/projekt/settings/personCategories.html:21
 msgid "PersonenKategorie"
-msgstr "KategorieOsob"
+msgstr "Kategorie osob"
 
 #: app/scripts/personen/overview/personenoverview.html:97
 msgid "Personenbrief.odt"
@@ -2285,7 +2269,7 @@ msgstr "Popisosob.odt"
 #: app/scripts/kunden/detail/kundendetail.html:121
 #: app/scripts/projekt/settings/personCategories.html:24
 msgid "Personenkategorie"
-msgstr "KategorieOsob"
+msgstr "Kategorie osob"
 
 #: app/scripts/projekt/settings/personCategories.html:9
 msgid "Personenkategorie Erstellen"
@@ -2392,7 +2376,7 @@ msgstr "Cena / jednotka"
 msgid "Preis / Packung"
 msgstr "Cena / balení"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:244
+#: app/scripts/abos/detail/abosdetail.controller.js:370
 msgid "Preis wurde erfolgreich angepasst"
 msgstr "Cena byla úspěšně upravena"
 
@@ -2456,7 +2440,7 @@ msgid "Produzent"
 msgstr "Výrobce"
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:10
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:12
 #: app/scripts/produzenten/overview/produzentenoverview.controller.js:117
 #: app/scripts/produzenten/overview/produzentenoverview.html:10
 msgid "Produzent erstellen"
@@ -2521,7 +2505,7 @@ msgstr "Zaplacený doklad"
 msgid "Rechnung erstellen"
 msgstr "Vytvořit doklad"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:310
+#: app/scripts/abos/detail/abosdetail.controller.js:442
 msgid "Rechnung manuell erstellen"
 msgstr "Ručně vytvořit doklad"
 
@@ -2762,8 +2746,8 @@ msgstr "Neděle"
 
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:35
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:42
-#: app/scripts/abos/detail/abosdetail.controller.js:293
-#: app/scripts/abos/detail/abosdetail.controller.js:320
+#: app/scripts/abos/detail/abosdetail.controller.js:425
+#: app/scripts/abos/detail/abosdetail.controller.js:452
 #: app/scripts/mailvorlagen/mailvorlagen.html:85
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.controller.js:35
 msgid "Speichern"
@@ -2899,7 +2883,7 @@ msgstr "Hledat ve výsledcích..."
 #: app/scripts/abotypen/overview/zusatzabotypen.html:10
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:9
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:9
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:11
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:9
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:9
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:9
@@ -2925,11 +2909,11 @@ msgstr "Hledat v přehledu..."
 msgid "Summe"
 msgstr "Součet"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:35
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:37
 msgid "Summe der Ist-Einsätze"
 msgstr "Součast realizovaných závozů"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:32
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:34
 msgid "Summe der Soll-Einsätze"
 msgstr "Součet plánovaných závozů"
 
@@ -3074,7 +3058,7 @@ msgstr "Pokračující závozy"
 
 #: app/scripts/app.js:139
 msgid "Transfer"
-msgstr "Přenos"
+msgstr "Převodem"
 
 #: app/scripts/projekt/settings/projektsettings.html:167
 msgid "Two-Factor-Authentisierung"
@@ -3148,7 +3132,7 @@ msgstr "Odesláno"
 msgid "Version:"
 msgstr "Verze:"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:550
+#: app/scripts/abos/detail/abosdetail.controller.js:681
 msgid "Vertraglich"
 msgstr "Smluvní"
 
@@ -3178,7 +3162,7 @@ msgstr "Druh distribuce"
 msgid "Vertriebsart anpassen für Abo Nr."
 msgstr "Upravit druh distribuce pro podílníka č."
 
-#: app/scripts/abos/detail/abosdetail.controller.js:268
+#: app/scripts/abos/detail/abosdetail.controller.js:400
 msgid "Vertriebsart wurde erfolgreich angepasst"
 msgstr "Typ distribuce byl úspěšně upraven"
 
@@ -3190,7 +3174,7 @@ msgstr "Správa šablon e-mailu"
 msgid "Verwaltung der Report-Vorlagen"
 msgstr "Správa šablon zpráv"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:348
+#: app/scripts/abos/detail/abosdetail.controller.js:479
 msgid "Vetriebsart anpassen"
 msgstr "Upravit druh distribuce"
 
@@ -3600,7 +3584,7 @@ msgstr "označit jako dodané"
 msgid "bearbeitet"
 msgstr "zpracováno"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:554
+#: app/scripts/abos/detail/abosdetail.controller.js:685
 msgid "bezahlt"
 msgstr "zaplaceno"
 
@@ -3639,7 +3623,7 @@ msgstr "max."
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:276
 msgid "pain.008.001.07 erstellen"
-msgstr "vytvořit pain.008.001.07"
+msgstr "vytvořit exportní dokument SEPA"
 
 #: app/scripts/abos/detail/abwesenheiten/abwesenheiten.html:27
 msgid "pendente"
@@ -3667,15 +3651,14 @@ msgstr "doklad"
 msgid "speichern"
 msgstr "uložit"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:556
+#: app/scripts/abos/detail/abosdetail.controller.js:687
 msgid "total"
 msgstr "celkem"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:555
+#: app/scripts/abos/detail/abosdetail.controller.js:686
 msgid "verrechnet"
 msgstr "vyúčtováno"
 
-#: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:72
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:62
 msgid "von"
 msgstr "od"
