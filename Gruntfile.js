@@ -293,6 +293,12 @@ module.exports = function(grunt) {
       }
     },
 
+    uglify: {
+      options: {
+        exceptionsFiles: [ 'uglifyExceptions.json' ]
+      }
+    },
+
     // Renames files for browser caching purposes
     rev: {
       dist: {
