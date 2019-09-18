@@ -85,7 +85,8 @@ angular
     'angular-toArrayFilter',
     'mm.iban',
     'piwik',
-    'openolitor-core'
+    'openolitor-core',
+    'ngQuill'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -524,6 +525,39 @@ angular
     '$qProvider',
     function($qProvider) {
       $qProvider.errorOnUnhandledRejections(false);
+    }
+  ])
+    .constant('NG_QUILL_CONFIG', {
+    /*
+     * @NOTE: this config/output is not localizable.
+     */
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],     // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],         // outdent/indent                    // text direction
+        [{ 'header': [1, 2, 3, 4, false] }],
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],                         // link and image, video
+        ['clean'],                                         // remove formatting button
+      ]
+    },
+    theme: 'snow',
+    debug: 'warn',
+    placeholder: '',
+    readOnly: false,
+    bounds: document.body,
+    scrollContainer: null
+  })
+  .config([
+    'ngQuillConfigProvider',
+    'NG_QUILL_CONFIG',
+
+    function (ngQuillConfigProvider, NG_QUILL_CONFIG) {
+      ngQuillConfigProvider.set(NG_QUILL_CONFIG);
     }
   ])
   .run([

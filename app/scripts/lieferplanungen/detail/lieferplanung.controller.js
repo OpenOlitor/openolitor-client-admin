@@ -756,7 +756,8 @@ angular.module('openolitor-admin')
         $scope.modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'scripts/lieferplanungen/detail/edit-bemerkungen.html',
-          scope: $scope
+          scope: $scope,
+          size: 'lg'
         });
 
         $scope.modalInstance.result.then(function() {

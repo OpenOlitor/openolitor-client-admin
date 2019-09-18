@@ -5,7 +5,8 @@
   <!-- Von bis -->
   <div class="form-group row">
    <span class="col-md-12">
-     <textarea class="form-control" rows="5" ng-model="planung.bemerkungen"></textarea>
+     <ng-quill-editor ng-model="planung.bemerkungen" bounds="self" placeholder="'Hier Text einfügen und formatieren'|translate" preserve-whitespace="false" track-changes="all">
+     </ng-quill-editor>
    </span>
  </div>
 </div>
