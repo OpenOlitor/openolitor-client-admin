@@ -58,6 +58,9 @@
   "overrides": {
     "moment": {
       "main": ["./min/moment-with-locales.min.js"]
+    },
+    "ng-quill": {
+      "dependencies": []
     }
   }
 }
