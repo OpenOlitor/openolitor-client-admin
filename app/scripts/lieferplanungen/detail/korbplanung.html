@@ -39,7 +39,10 @@
       <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
     </div>
     <div class="col-md-1" ng-show="valuesEditable()">
-        <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default" uib-tooltip="{{'Bemerkungen zu dieser Lieferung: '|translate}} {{planung.bemerkungen}}"><span class="fa fa-pencil-square-o"></span></button>
+        <button type="button" role="button" ng-click="editBemerkungen();" class="btn btn-default">
+          <span ng-if="!planung.bemerkungen" class="fa fa-pencil-square-o"></span>
+          <span ng-if="planung.bemerkungen" class="fa fa-pencil-square"></span>
+        </button>
     </div>
   </div>
   <div class="row">
