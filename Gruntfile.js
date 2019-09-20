@@ -307,6 +307,7 @@ module.exports = function(grunt) {
             '<%= openolitor.dist %>/scripts/**/*.js',
             '<%= openolitor.dist %>/styles/**/*.css',
             '<%= openolitor.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= openolitor.dist %>/third_party/**',
             '<%= openolitor.dist %>/styles/fonts/*'
           ]
         }
