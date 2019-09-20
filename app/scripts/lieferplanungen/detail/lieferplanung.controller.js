@@ -22,6 +22,8 @@ angular.module('openolitor-admin')
       $scope.anzahlAbwesenheiten = '...';
       $scope.anzahlSaldoZuTief = '...';
 
+      $scope.htmlView = false;
+
       $scope.search = {
         query: ''
       };
@@ -750,6 +752,10 @@ angular.module('openolitor-admin')
         }, function() {
 
         });
+      };
+
+      $scope.toggleHTML = function() {
+        $scope.htmlView = !$scope.htmlView;
       };
 
       $scope.editBemerkungen = function() {
