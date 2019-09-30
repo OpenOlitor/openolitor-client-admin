@@ -565,6 +565,9 @@ angular
     '$rootScope',
     function(alertService, $rootScope) {
       $rootScope.$removeAlert = alertService.removeAlert();
+      var Block = Quill.import('blots/block');
+      Block.tagName = 'DIV';
+      Quill.register(Block, true);
     }
   ])
   .config([
