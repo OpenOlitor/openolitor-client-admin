@@ -22,6 +22,8 @@ angular.module('openolitor-admin')
       $scope.anzahlAbwesenheiten = '...';
       $scope.anzahlSaldoZuTief = '...';
 
+      $scope.htmlView = false;
+
       $scope.search = {
         query: ''
       };
@@ -752,11 +754,16 @@ angular.module('openolitor-admin')
         });
       };
 
+      $scope.toggleHTML = function() {
+        $scope.htmlView = !$scope.htmlView;
+      };
+
       $scope.editBemerkungen = function() {
         $scope.modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'scripts/lieferplanungen/detail/edit-bemerkungen.html',
-          scope: $scope
+          scope: $scope,
+          size: 'lg'
         });
 
         $scope.modalInstance.result.then(function() {
