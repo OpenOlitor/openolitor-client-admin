@@ -276,7 +276,10 @@ angular.module('openolitor-admin')
           //detault value
           person.rolle = ROLLE.KUNDE;
         }
-        KundenDetailService.changeRolle($routeParams.id, person.id, person.rolle);
+        KundenDetailService.changeRolle($routeParams.id, person.id, person.rolle)
+          .then(function successCallback(response) {
+            person.initRolle = person.rolle;
+          });
       };
 
       $scope.addPendenz = function() {
