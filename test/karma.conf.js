@@ -44,6 +44,7 @@ module.exports = function(config) {
       'app/bower_components/ng-iban/dist/ng-iban.js',
       'app/bower_components/angular-piwik/angular-piwik.js',
       'app/bower_components/ng-quill/src/ng-quill.js',
+      'app/third_party/quill/quill.js',
       'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

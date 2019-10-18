@@ -145,7 +145,7 @@
                           <oo-dropdown dropdown-id="rolle" display-style="uib-dropdown" selected-prop="id" property="label" values="rollen" selected="person.rolle"></oo-dropdown>
                         </div>
                         <div class="col-md-4">
-                          <a role="button" class="btn btn-danger" ng-click="changeRolle(person)"><span translate>Rolle speichern</span></a>
+                          <a role="button" class="btn btn-danger" ng-click="changeRolle(person)" ng-disabled="person.rolle === person.initRolle"><span translate>Rolle speichern</span></a>
                         </div>
                       </div>
                       <div class="row form-group">
