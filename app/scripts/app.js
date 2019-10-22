@@ -589,38 +589,38 @@ angular
     }
   ])
   .factory('errbitErrorInterceptor', function(
-    $q,
-    ENV,
-    VERSION,
-    AIRBREAK_API_KEY,
-    AIRBREAK_URL
-  ) {
-    return {
-      responseError: function(rejection) {
-        /*jshint -W117 */
-        var airbrake = new airbrakeJs.Client({
-          projectId: 1,
-          host: AIRBREAK_URL,
-          projectKey: AIRBREAK_API_KEY
-        });
-        /*jshint +W117 */
-        airbrake.addFilter(function(notice) {
-          notice.context.environment = ENV;
-          notice.context.version = VERSION;
-          return notice;
-        });
-        var message = 'Error: ';
-        if (
-          !angular.isUndefined(rejection.config) &&
-          !angular.isUndefined(rejection.config.url)
-        ) {
-          message += rejection.config.url;
+      $q,
+      ENV,
+      VERSION,
+      AIRBREAK_API_KEY,
+      AIRBREAK_URL
+    ) {
+      return {
+        responseError: function(rejection) {
+          /*jshint -W117 */
+          var airbrake = new airbrakeJs.Client({
+            projectId: 1,
+            host: AIRBREAK_URL,
+            projectKey: AIRBREAK_API_KEY
+          });
+          /*jshint +W117 */
+          airbrake.addFilter(function(notice) {
+            notice.context.environment = ENV;
+            notice.context.version = VERSION;
+            return notice;
+          });
+          var message = 'Error: ';
+          if (
+            !angular.isUndefined(rejection.config) &&
+            !angular.isUndefined(rejection.config.url)
+          ) {
+            message += rejection.config.url;
+          }
+          airbrake.notify(message);
+          return $q.reject(rejection);
         }
-        airbrake.notify(message);
-        return $q.reject(rejection);
-      }
-    };
-  })
+      };
+    })
   .factory('loggedOutInterceptor', function($q, alertService, $window) {
     return {
       responseError: function(rejection) {

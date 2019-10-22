@@ -1,6 +1,6 @@
 {
   "name": "openolitor-admin",
-  "version": "2.4.0-SNAPSHOT",
+  "version": "2.4.1-SNAPSHOT",
   "description": "OpenOlitor Client Webapplication",
   "repository": {
     "type": "git",
@@ -8,8 +8,10 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
+    "bower": "1.8.8",
+    "bower-npm-resolver": "^0.10.0",
     "openolitor-core": "git://github.com/OpenOlitor/openolitor-client-core.git#2.4.1-SNAPSHOT",
-    "pako": "^1.0.5"
+    "pako": "^1.0.10"
   },
   "devDependencies": {
     "bower": "^1.8.8",
