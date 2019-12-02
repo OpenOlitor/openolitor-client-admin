@@ -20,32 +20,36 @@ angular.module('openolitor-admin')
 
 
         function(list) {
+          var unorderedKundenTyp = [];
           if (list) {
             angular.forEach(list, function(item) {
               //check if system or custom personentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
-              $scope.kundentypen.push({
+              unorderedKundenTyp.push({
                 'id': id,
                 'title': id
               });
             });
+            $scope.kundentypen.push(...lodash.sortBy(unorderedKundenTyp, kt => kt.id.toLowerCase()));
             $scope.tableParams.reload();
           }
         });
 
       $scope.$watch(PersonCategoriesService.getPersonCategories,
         function(list) {
+          var unorderedPersonCategory = [];
           if (list) {
             angular.forEach(list, function(item) {
               //check if system or custom personentyp, use only id
               var personCategory = (item.personCategory) ? item.personCategory:
                 item;
-              $scope.personCategories.push({
+              unorderedPersonCategory.push({
                 'id': personCategory.name,
                 'title': personCategory.name
               });
             });
+            $scope.personCategories.push(...lodash.sortBy(unorderedPersonCategory, pc => pc.id.toLowerCase()));
             $scope.tableParams.reload();
           }
       });

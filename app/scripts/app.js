@@ -334,6 +334,12 @@ angular
     TAGE: gettext('Tage'),
     PUNKTE: gettext('Punkte')
   })
+  .constant('ZEITRAUM', {
+    AB_HEUTE: addExtendedEnumValue('D', gettext('Ab Heute'), gettext('Ab Heute')),
+    NUR_HEUTE: addExtendedEnumValue('d',gettext('Nur Heute'),gettext('Nur Heute')),
+    DIESE_WOCHE: addExtendedEnumValue('w',gettext('Diese Woche'),gettext('Diese Woche')),
+    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat'))
+  })
   .constant('uiDatetimePickerConfig', {
     dateFormat: 'dd.MM.yyyy HH:mm',
     defaultTime: '08:00:00',

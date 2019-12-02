@@ -16,16 +16,18 @@ angular.module('openolitor-admin')
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
         function(list) {
+          var unorderedKundenTyp = [];
           if (list) {
             angular.forEach(list, function(item) {
               //check if system or custom kundentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
-              $scope.kundentypen.push({
+              unorderedKundenTyp.push({
                 'id': id,
                 'title': id
               });
             });
+            $scope.kundentypen.push(...lodash.sortBy(unorderedKundenTyp, kt => kt.id.toLowerCase()));
             $scope.tableParams.reload();
           }
         });
