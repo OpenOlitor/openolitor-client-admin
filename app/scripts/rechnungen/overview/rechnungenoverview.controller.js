@@ -38,8 +38,8 @@ angular.module('openolitor-admin')
           }
       }
 
-      $scope.paymentTypes = EnumUtil.asArray(PAYMENT_TYPES);
-      $scope.rechnungStati = EnumUtil.asArray(RECHNUNGSTATUS);
+      $scope.paymentTypes = lodash.sortBy(EnumUtil.asArray(PAYMENT_TYPES), pt => pt.title.toLowerCase());
+      $scope.rechnungStati = lodash.sortBy(EnumUtil.asArray(RECHNUNGSTATUS), rs => rs.title.toLowerCase());
 
       $scope.search = {
         query: '',

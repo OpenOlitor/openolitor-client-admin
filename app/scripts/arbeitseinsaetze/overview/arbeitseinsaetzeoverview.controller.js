@@ -17,8 +17,12 @@ angular
     'ReportvorlagenService',
     'ArbeitskategorienService',
     'gettext',
+    'gettextCatalog',
     'FilterQueryUtil',
     'moment',
+    'EnumUtil',
+    'ZEITRAUM',
+    'lodash',
     function(
       $q,
       $scope,
@@ -32,12 +36,23 @@ angular
       ReportvorlagenService,
       ArbeitskategorienService,
       gettext,
+      gettextCatalog,
       FilterQueryUtil,
-      moment
+      moment,
+      EnumUtil,
+      ZEITRAUM,
+      lodash
     ) {
       $rootScope.viewId = 'L-Abein';
 
-      $scope.zeitraumL = [{id: 'D', title: gettext('Ab Heute')}, {id: 'd', title: gettext('Nur Heute')}, {id: 'w', title: gettext('Diese Woche')}, {id: 'M', title: gettext('Diesen Monat')}];
+      $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
+      $scope.zeitraumL = []; 
+      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, zr => gettextCatalog.getString(zr.label).toLowerCase()), function(value, key) {
+        $scope.zeitraumL.push({
+          'id': value.id,
+          'title': gettextCatalog.getString(value.label)
+        });
+      });
 
       $scope.entries = [];
       $scope.loading = false;

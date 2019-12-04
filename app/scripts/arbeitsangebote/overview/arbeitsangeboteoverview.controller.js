@@ -17,7 +17,10 @@ angular
     '$location',
     'ReportvorlagenService',
     'ArbeitskategorienService',
+    'ZEITRAUM',
     'gettext',
+    'gettextCatalog',
+    'EnumUtil',
     'moment',
     'FilterQueryUtil',
     'lodash',
@@ -35,7 +38,10 @@ angular
       $location,
       ReportvorlagenService,
       ArbeitskategorienService,
+      ZEITRAUM,
       gettext,
+      gettextCatalog,
+      EnumUtil,
       moment,
       FilterQueryUtil,
       lodash,
@@ -54,7 +60,7 @@ angular
         list
       ) {
         if (list) {
-          angular.forEach(list, function(item) {
+          angular.forEach(lodash.sortBy(list, kl => kl.beschreibung.toLowerCase()), function(item) {
             if (item.id) {
               $scope.kategorienL.push({
                 id: item.beschreibung,
@@ -66,7 +72,14 @@ angular
         }
       });
 
-      $scope.zeitraumL = [{id: 'D', title: gettext('Ab Heute')}, {id: 'd', title: gettext('Nur Heute')}, {id: 'w', title: gettext('Diese Woche')}, {id: 'M', title: gettext('Diesen Monat')}];
+      $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
+      $scope.zeitraumL = []; 
+      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, zr => gettextCatalog.getString(zr.label).toLowerCase()), function(value, key) {
+        $scope.zeitraumL.push({
+          'id': value.id,
+          'title': gettextCatalog.getString(value.label)
+        });
+      });
 
       $scope.search = {
         query: '',
