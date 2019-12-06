@@ -5,9 +5,15 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$rootScope', '$filter', '$location',
     'AbosOverviewModel', 'KundenOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash',
+    'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService', 'ABOTYPEN', 'EnumUtil',
     function($scope, $rootScope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus, DetailNavigationService) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _,
+      PersonenOverviewModel, gettext, msgBus, DetailNavigationService, ABOTYPEN, EnumUtil) {
+
+      $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
+        return typ.id;
+      });
 
       $rootScope.viewId = 'L-Abo';
 
@@ -280,6 +286,10 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
+      var isAboEntity = function(entity) {
+        return $scope.ABOTYPEN_ARRAY.indexOf(entity) > -1;
+      };
+
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity.indexOf('Abo') >= 0) {
           $scope.entries.map(function(entry) {
@@ -288,6 +298,18 @@ angular.module('openolitor-admin')
             }
           });
           $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          _.remove($scope.entries, function(entry) {
+            return entry.id === msg.data.id;
+          });
+          $scope.tableParams.reload();
+          if($scope.selectedAbo.id === msg.data.id) {
+            $scope.unselectAbo();
+          }
         }
       });
     }
