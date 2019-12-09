@@ -54,13 +54,14 @@
                 <i ng-if="abo.aktiv" class="glyphicon glyphicon-ok"></i>
                 <i ng-if="!abo.aktiv" class="glyphicon glyphicon-remove"></i>
               </td>
-              <td data-title="'Vertrieb'|translate" sortable="'vertriebBeschrieb'">
+              <td data-title="'Vertrieb'|translate" sortable="'vertriebBeschrieb'" filter="{vertriebId: 'select'}" filter-data="vertriebL">
                 {{abo.vertriebBeschrieb}}
               </td>
-              <td data-title="'Depot/Tour'|translate" sortable="'depotTourSortBy'">
+              <td data-title="'Depot/Tour'|translate" sortable="'depotTourSortBy'" filter="{depotTourId: 'select'}" filter-data="depotTourL">
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
                 <a ng-href="#/touren/{{abo.tourId}}" ng-if="abo.tourId">{{abo.tourName}}</a>
               </td>
+
               <td ng-if="showAll" data-title="'# Abw.'|translate">
                 {{abo.anzahlAbwesenheiten | lastElement:'value'}}
               </td>
