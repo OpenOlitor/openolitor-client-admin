@@ -27,7 +27,7 @@ angular.module('openolitor-admin')
                 'title': id
               });
             });
-            $scope.kundentypen.push(...lodash.sortBy(unorderedKundenTyp, kt => kt.id.toLowerCase()));
+            lodash.sortBy(unorderedKundenTyp, kt => kt.id.toLowerCase()).forEach(e => $scope.kundentypen.push(e));
             $scope.tableParams.reload();
           }
         });
