@@ -42,7 +42,9 @@ angular.module('openolitor-admin')
       ProduzentenModel.query({
         q: ''
       }, function(list) {
-        angular.forEach(lodash.sortBy(list, pl => pl.kurzzeichen.toLowerCase()), function(produzent) {
+        angular.forEach(lodash.sortBy(list, function(pl){
+            return pl.kurzzeichen.toLowerCase();
+        }), function(produzent) {
           $scope.produzentL.push({
             'id': produzent.id,
             'title': produzent.kurzzeichen

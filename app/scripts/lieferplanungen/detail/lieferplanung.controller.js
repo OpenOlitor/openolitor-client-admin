@@ -41,7 +41,11 @@ angular.module('openolitor-admin')
       ProduktekategorienModel.query({
         q: ''
        }, function(list) {
-          $scope.kategorienL = lodash.map(lodash.sortBy(list, k => k.beschreibung.toLowerCase()), a => a.beschreibung);
+          $scope.kategorienL = lodash.map(lodash.sortBy(list, function(k) {
+              return k.beschreibung.toLowerCase();
+          }), function(a){
+              return a.beschreibung;
+          });
           $scope.kategorienL.unshift(gettextCatalog.getString('Keine'));
        });
 
@@ -204,7 +208,9 @@ angular.module('openolitor-admin')
           if ($scope.allProdukteEntries){
             if (produkteKategorie !== gettextCatalog.getString('Keine')){
               $scope.produkteKategorie = produkteKategorie;
-              $scope.produkteEntries = lodash.filter($scope.allProdukteEntries, o => o.kategorien.includes(produkteKategorie));
+              $scope.produkteEntries = lodash.filter($scope.allProdukteEntries, function(o){
+                  return o.kategorien.includes(produkteKategorie);
+              });
             } else {
               $scope.produkteKategorie = gettextCatalog.getString('Keine');
               $scope.produkteEntries = $scope.allProdukteEntries;

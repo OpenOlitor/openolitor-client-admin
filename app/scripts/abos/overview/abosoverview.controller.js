@@ -79,7 +79,9 @@ angular.module('openolitor-admin')
 
       $scope.vertriebL = [];
       VertriebeListModel.getAllVertriebe({},function(entries) {
-          angular.forEach(lodash.sortBy(entries,vl => vl.beschrieb.toLowerCase()), function(vertrieb) {
+          angular.forEach(lodash.sortBy(entries,function(vl){
+              return vl.beschrieb.toLowerCase();
+          }), function(vertrieb) {
               $scope.vertriebL.push({
                   'id': vertrieb.id,
                   'title': vertrieb.beschrieb
@@ -95,7 +97,9 @@ angular.module('openolitor-admin')
               q: ''
           }, function(tourList) {
               var depotTourList = depotList.concat(tourList);
-              angular.forEach(lodash.sortBy(depotTourList, tl => tl.name.toLowerCase()), function(item) {
+              angular.forEach(lodash.sortBy(depotTourList, function(tl){
+                  return tl.name.toLowerCase();
+              }), function(item) {
                   $scope.depotTourL.push({
                       'id': item.id,
                       'title': item.name
@@ -108,7 +112,9 @@ angular.module('openolitor-admin')
       TourenModel.query({
           q: ''
       }, function(tourList) {
-          angular.forEach(lodash.sortBy(tourList, tl => tl.name.toLowerCase()), function(item) {
+          angular.forEach(lodash.sortBy(tourList, function(tl){
+              return tl.name.toLowerCase();
+          }), function(item) {
               $scope.tourL.push({
                   'id': item.id,
                   'title': item.name
