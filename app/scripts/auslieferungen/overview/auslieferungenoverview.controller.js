@@ -48,7 +48,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.statusL = [];
-      angular.forEach(lodash.sortBy(AUSLIEFERUNGSTATUS, as => gettextCatalog.getString(as).toLowerCase()), function(value, key) {
+      angular.forEach(lodash.sortBy(AUSLIEFERUNGSTATUS, function(as){
+          return gettextCatalog.getString(as).toLowerCase();
+      }), function(value, key) {
         $scope.statusL.push({
           'id': key,
           'title': gettextCatalog.getString(value)

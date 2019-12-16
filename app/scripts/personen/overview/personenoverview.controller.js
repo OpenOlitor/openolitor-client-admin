@@ -31,7 +31,11 @@ angular.module('openolitor-admin')
                 'title': id
               });
             });
-            $scope.kundentypen.push(...lodash.sortBy(unorderedKundenTyp, kt => kt.id.toLowerCase()));
+            angular.forEach(lodash.sortBy(unorderedKundenTyp, function(kt){
+                return kt.id.toLowerCase();
+            }), function(item){
+                $scope.kundentypen.push(item);
+            });
             $scope.tableParams.reload();
           }
         });
@@ -49,7 +53,11 @@ angular.module('openolitor-admin')
                 'title': personCategory.name
               });
             });
-            $scope.personCategories.push(...lodash.sortBy(unorderedPersonCategory, pc => pc.id.toLowerCase()));
+            angular.forEach(lodash.sortBy(unorderedPersonCategory, function(pc){
+                return pc.id.toLowerCase();
+            }), function(item){
+                $scope.personCategories.push(item);
+            });
             $scope.tableParams.reload();
           }
       });

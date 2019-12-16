@@ -60,7 +60,9 @@ angular
         list
       ) {
         if (list) {
-          angular.forEach(lodash.sortBy(list, kl => kl.beschreibung.toLowerCase()), function(item) {
+          angular.forEach(lodash.sortBy(list, function(kl){
+              return kl.beschreibung.toLowerCase();
+          }), function(item) {
             if (item.id) {
               $scope.kategorienL.push({
                 id: item.beschreibung,
@@ -74,7 +76,9 @@ angular
 
       $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
       $scope.zeitraumL = []; 
-      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, zr => gettextCatalog.getString(zr.label).toLowerCase()), function(value, key) {
+      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, function(zr){
+          return gettextCatalog.getString(zr.label).toLowerCase();
+      }), function(value, key) {
         $scope.zeitraumL.push({
           'id': value.id,
           'title': gettextCatalog.getString(value.label)

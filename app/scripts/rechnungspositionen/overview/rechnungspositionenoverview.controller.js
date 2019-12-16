@@ -20,7 +20,9 @@ angular.module('openolitor-admin')
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
-      $scope.rechnungsPositionenStatus = lodash.sortBy(EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS), rps => gettextCatalog.getString(rps.label).toLowerCase());
+      $scope.rechnungsPositionenStatus = lodash.sortBy(EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS), function(rps){
+          return gettextCatalog.getString(rps.label).toLowerCase();
+      });
 
       $scope.search = {
         query: '',
