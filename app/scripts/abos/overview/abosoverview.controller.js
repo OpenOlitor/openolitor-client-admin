@@ -297,6 +297,7 @@ angular.module('openolitor-admin')
           f: $scope.search.filterQuery,
           x: $scope.search.complexFlags
         }, function(entries) {
+          $scope.entries = [];
           angular.forEach(entries, function(entry){
               if (!entry.depotId){
                   entry.depotTourId = entry.tourId;
