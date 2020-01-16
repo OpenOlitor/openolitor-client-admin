@@ -84,7 +84,7 @@ angular.module('openolitor-admin')
           }), function(vertrieb) {
               $scope.vertriebL.push({
                   'id': vertrieb.id,
-                  'title': vertrieb.beschrieb
+                  'title': lodash.find($scope.abotypL, {'id':vertrieb.abotypId}).title + ' / ' + vertrieb.beschrieb
               });
           });
       });
@@ -96,6 +96,7 @@ angular.module('openolitor-admin')
           TourenModel.query({
               q: ''
           }, function(tourList) {
+              angular.forEach(tourList,function(tl){tl.name =  tl.beschreibung;});
               var depotTourList = depotList.concat(tourList);
               angular.forEach(lodash.sortBy(depotTourList, function(tl){
                   return tl.name.toLowerCase();
