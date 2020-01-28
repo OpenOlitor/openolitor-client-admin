@@ -438,7 +438,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}">
+                  <input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}" maxlength="2000">
                 </div>
                 <div class="col-md-2">
                   <oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown>
