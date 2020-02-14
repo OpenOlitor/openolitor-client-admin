@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT',
     'KORBSTATUS', 'msgBus', 'cloneObj',
-    'gettext', '$location', 'lodash', '$uibModal', 'gettextCatalog',
+    'gettext', '$location', 'lodash', '$uibModal', 'gettextCatalog', 'ProduktekategorienModel',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
       LIEFEREINHEIT, KORBSTATUS, msgBus,
-      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog) {
+      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel) {
       $rootScope.viewId = 'D-Pla';
 
       $scope.liefereinheiten = LIEFEREINHEIT;
@@ -21,6 +21,9 @@ angular.module('openolitor-admin')
       $scope.anzahlKoerbeZuLiefern = '...';
       $scope.anzahlAbwesenheiten = '...';
       $scope.anzahlSaldoZuTief = '...';
+      $scope.produkteKategorie = gettextCatalog.getString('Keine');
+
+      $scope.htmlView = false;
 
       $scope.search = {
         query: ''
@@ -34,14 +37,28 @@ angular.module('openolitor-admin')
         });
       };
 
+      $scope.kategorienL = [];
+      ProduktekategorienModel.query({
+        q: ''
+       }, function(list) {
+          $scope.kategorienL = lodash.map(lodash.sortBy(list, function(k) {
+              return k.beschreibung.toLowerCase();
+          }), function(a){
+              return a.beschreibung;
+          });
+          $scope.kategorienL.unshift(gettextCatalog.getString('Keine'));
+       });
+
       //watch for set of produkte
       $scope.$watch(ProdukteService.getProdukte,
         function(list) {
           if (list) {
             $scope.produkteEntries = [];
+            $scope.allProdukteEntries = [];
             lodash.forEach(list, function(item) {
               if (item.id) {
                 $scope.produkteEntries.push(item);
+                $scope.allProdukteEntries.push(item);
               }
             });
 
@@ -184,6 +201,25 @@ angular.module('openolitor-admin')
 
       $scope.addAbotypToPlanungFunc = function() {
         return $scope.addAbotypToPlanung;
+      };
+
+      $scope.filterDataForCategoriesFunc = function(){
+        var filterDataForCategories = function(produkteKategorie){
+          if ($scope.allProdukteEntries){
+            if (produkteKategorie !== gettextCatalog.getString('Keine')){
+              $scope.produkteKategorie = produkteKategorie;
+              $scope.produkteEntries = lodash.filter($scope.allProdukteEntries, function(o){
+                  return o.kategorien.includes(produkteKategorie);
+              });
+            } else {
+              $scope.produkteKategorie = gettextCatalog.getString('Keine');
+              $scope.produkteEntries = $scope.allProdukteEntries;
+            }
+            $scope.tableParams.reload();
+          }; 
+          return true;
+        }
+        return filterDataForCategories;
       };
 
       $scope.addAbotypToPlanung = function(abotypLieferung) {
@@ -752,11 +788,16 @@ angular.module('openolitor-admin')
         });
       };
 
+      $scope.toggleHTML = function() {
+        $scope.htmlView = !$scope.htmlView;
+      };
+
       $scope.editBemerkungen = function() {
         $scope.modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'scripts/lieferplanungen/detail/edit-bemerkungen.html',
-          scope: $scope
+          scope: $scope,
+          size: 'lg'
         });
 
         $scope.modalInstance.result.then(function() {

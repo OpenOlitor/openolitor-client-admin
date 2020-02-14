@@ -5,9 +5,15 @@
 angular.module('openolitor-admin')
   .controller('AbosOverviewController', ['$scope', '$rootScope', '$filter', '$location',
     'AbosOverviewModel', 'KundenOverviewModel', 'NgTableParams', 'AbotypenOverviewModel',
-    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash', 'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService',
+    'FilterQueryUtil', 'OverviewCheckboxUtil', 'localeSensitiveComparator', 'EmailUtil', 'lodash',
+    'PersonenOverviewModel', 'gettext', 'msgBus', 'DetailNavigationService', 'ABOTYPEN', 'EnumUtil', 'DepotsOverviewModel', 'TourenModel', 'VertriebeListModel',
     function($scope, $rootScope, $filter, $location, AbosOverviewModel, KundenOverviewModel, NgTableParams,
-      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, _, PersonenOverviewModel, gettext, msgBus, DetailNavigationService) {
+      AbotypenOverviewModel, FilterQueryUtil, OverviewCheckboxUtil, localeSensitiveComparator, EmailUtil, lodash,
+      PersonenOverviewModel, gettext, msgBus, DetailNavigationService, ABOTYPEN, EnumUtil, DepotsOverviewModel, TourenModel, VertriebeListModel) {
+
+      $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
+        return typ.id;
+      });
 
       $rootScope.viewId = 'L-Abo';
 
@@ -16,6 +22,7 @@ angular.module('openolitor-admin')
       $scope.loading = false;
       $scope.selectedAbo = undefined;
       $scope.model = {};
+      $scope.vertriebL = [];
 
       $scope.navigateToKunde = function(id) {
           $scope.filteredEntries = [];
@@ -68,6 +75,51 @@ angular.module('openolitor-admin')
             'title': abotyp.name
           });
         });
+      });
+
+      $scope.vertriebL = [];
+      VertriebeListModel.getAllVertriebe({},function(entries) {
+          angular.forEach(lodash.sortBy(entries,function(vl){
+              return vl.beschrieb.toLowerCase();
+          }), function(vertrieb) {
+              $scope.vertriebL.push({
+                  'id': vertrieb.id,
+                  'title': vertrieb.beschrieb
+              });
+          });
+      });
+
+      $scope.depotTourL = [];
+      DepotsOverviewModel.query({
+          q: ''
+      }, function(depotList) {
+          TourenModel.query({
+              q: ''
+          }, function(tourList) {
+              var depotTourList = depotList.concat(tourList);
+              angular.forEach(lodash.sortBy(depotTourList, function(tl){
+                  return tl.name.toLowerCase();
+              }), function(item) {
+                  $scope.depotTourL.push({
+                      'id': item.id,
+                      'title': item.name
+                  });
+              });
+          });
+      });
+
+      $scope.tourL = [];
+      TourenModel.query({
+          q: ''
+      }, function(tourList) {
+          angular.forEach(lodash.sortBy(tourList, function(tl){
+              return tl.name.toLowerCase();
+          }), function(item) {
+              $scope.tourL.push({
+                  'id': item.id,
+                  'title': item.name
+              });
+          });
       });
 
       // watch for check all checkbox
@@ -245,7 +297,16 @@ angular.module('openolitor-admin')
           f: $scope.search.filterQuery,
           x: $scope.search.complexFlags
         }, function(entries) {
-          $scope.entries = entries;
+          $scope.entries = [];
+          angular.forEach(entries, function(entry){
+              if (!entry.depotId){
+                  entry.depotTourId = entry.tourId;
+              } 
+              if (!entry.tourId){
+                  entry.depotTourId = entry.depotId;
+              } 
+            $scope.entries.push(entry);
+          });
           $scope.tableParams.reload();
           $scope.loading = false;
         });
@@ -280,6 +341,10 @@ angular.module('openolitor-admin')
         search();
       }, true);
 
+      var isAboEntity = function(entity) {
+        return $scope.ABOTYPEN_ARRAY.indexOf(entity) > -1;
+      };
+
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity.indexOf('Abo') >= 0) {
           $scope.entries.map(function(entry) {
@@ -288,6 +353,18 @@ angular.module('openolitor-admin')
             }
           });
           $scope.$apply();
+        }
+      });
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (isAboEntity(msg.entity)) {
+          _.remove($scope.entries, function(entry) {
+            return entry.id === msg.data.id;
+          });
+          $scope.tableParams.reload();
+          if($scope.selectedAbo.id === msg.data.id) {
+            $scope.unselectAbo();
+          }
         }
       });
     }

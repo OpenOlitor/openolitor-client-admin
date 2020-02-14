@@ -41,14 +41,20 @@ angular.module('openolitor-admin')
       $scope.kategorienL = [];
       $scope.$watch(ProduktekategorienService.getProduktekategorien,
         function(list) {
+          var unorderedkategorienL = [];
           if (list) {
             angular.forEach(list, function(item) {
               if (item.id) {
-                $scope.kategorienL.push({
+                unorderedkategorienL.push({
                   'id': item.beschreibung,
                   'title': item.beschreibung
                 });
               }
+            });
+            angular.forEach(lodash.sortBy(unorderedkategorienL, function(kl){
+                return kl.id.toLowerCase();
+            }), function(item){
+                $scope.kategorienL.push(item);
             });
             $scope.tableParams.reload();
           }
@@ -58,14 +64,20 @@ angular.module('openolitor-admin')
       $scope.produzentenL = [];
       $scope.$watch(ProduzentenService.getProduzenten,
         function(list) {
+          var unorderedProduzentenL = [];
           if (list) {
             angular.forEach(list, function(item) {
               if (item.id) {
-                $scope.produzentenL.push({
+                unorderedProduzentenL.push({
                   'id': item.kurzzeichen,
                   'title': item.kurzzeichen
                 });
               }
+            });
+            angular.forEach(lodash.sortBy(unorderedProduzentenL, function(kl){
+                return kl.id.toLowerCase();
+            }), function(item){
+                $scope.produzentenL.push(item);
             });
             $scope.tableParams.reload();
           }

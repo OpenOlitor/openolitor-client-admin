@@ -35,6 +35,7 @@ function convertDateStringsToDates(input) {
   }
   return input;
 }
+
 function addExtendedEnumValue(id, labelLong, labelShort, value) {
   return {
     id: id,
@@ -84,7 +85,8 @@ angular
     'angular-toArrayFilter',
     'mm.iban',
     'piwik',
-    'openolitor-core'
+    'openolitor-core',
+    'ngQuill'
   ])
   .constant('API_URL', '@@API_URL')
   .constant('API_WS_URL', '@@API_WS_URL')
@@ -310,6 +312,7 @@ angular
   .constant('PENDENZSTATUS', {
     AUSSTEHEND: gettext('Ausstehend'),
     ERLEDIGT: gettext('Erledigt'),
+    LIEFERINFORMATION: gettext('Lieferinformation'),
     NICHTERLEDIGT: gettext('NichtErledigt')
   })
   .constant('ZAHLUNGSEXPORTSTATUS', {
@@ -330,6 +333,12 @@ angular
     HALBTAGE: gettext('Halbtage'),
     TAGE: gettext('Tage'),
     PUNKTE: gettext('Punkte')
+  })
+  .constant('ZEITRAUM', {
+    AB_HEUTE: addExtendedEnumValue('D', gettext('Ab Heute'), gettext('Ab Heute')),
+    NUR_HEUTE: addExtendedEnumValue('d',gettext('Nur Heute'),gettext('Nur Heute')),
+    DIESE_WOCHE: addExtendedEnumValue('w',gettext('Diese Woche'),gettext('Diese Woche')),
+    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat'))
   })
   .constant('uiDatetimePickerConfig', {
     dateFormat: 'dd.MM.yyyy HH:mm',
@@ -524,11 +533,47 @@ angular
       $qProvider.errorOnUnhandledRejections(false);
     }
   ])
+    .constant('NG_QUILL_CONFIG', {
+    /*
+     * @NOTE: this config/output is not localizable.
+     */
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],     // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],         // outdent/indent                    // text direction
+        [{ 'header': [1, 2, 3, 4, false] }],
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],                         // link and image, video
+        ['clean'],                                         // remove formatting button
+      ]
+    },
+    theme: 'snow',
+    debug: 'warn',
+    placeholder: '',
+    readOnly: false,
+    bounds: document.body,
+    scrollContainer: null
+  })
+  .config([
+    'ngQuillConfigProvider',
+    'NG_QUILL_CONFIG',
+
+    function (ngQuillConfigProvider, NG_QUILL_CONFIG) {
+      ngQuillConfigProvider.set(NG_QUILL_CONFIG);
+    }
+  ])
   .run([
     'alertService',
     '$rootScope',
     function(alertService, $rootScope) {
       $rootScope.$removeAlert = alertService.removeAlert();
+      var Block = Quill.import('blots/block');
+      Block.tagName = 'DIV';
+      Quill.register(Block, true);
     }
   ])
   .config([
@@ -846,8 +891,7 @@ angular
           access: userRoles.Administrator
         })
         .when('/einkaufsrechnungen', {
-          templateUrl:
-            'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
+          templateUrl: 'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
           controller: 'EinkaufsrechnungenOverviewController',
           name: 'EinkaufsrechnungenOverview',
           access: userRoles.Administrator,
@@ -914,23 +958,20 @@ angular
           reloadOnSearch: false
         })
         .when('/lieferplanung', {
-          templateUrl:
-            'scripts/lieferplanungen/overview/lieferplanungoverview.html',
+          templateUrl: 'scripts/lieferplanungen/overview/lieferplanungoverview.html',
           controller: 'LieferplanungOverviewController',
           name: 'LieferplanungOverview',
           access: userRoles.Administrator,
           reloadOnSearch: false
         })
         .when('/lieferplanung/:id', {
-          templateUrl:
-            'scripts/lieferplanungen/detail/lieferplanungdetail.html',
+          templateUrl: 'scripts/lieferplanungen/detail/lieferplanungdetail.html',
           controller: 'LieferplanungDetailController',
           name: 'LieferplanungDetail',
           access: userRoles.Administrator
         })
         .when('/depotauslieferungen', {
-          templateUrl:
-            'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
+          templateUrl: 'scripts/auslieferungen/overview/depotauslieferungenoverview.html',
           controller: 'AuslieferungenOverviewController',
           name: 'DepotAuslieferungenOverview',
           model: 'Depot',
@@ -938,16 +979,14 @@ angular
           reloadOnSearch: false
         })
         .when('/depotauslieferungen/:id', {
-          templateUrl:
-            'scripts/auslieferungen/detail/depotauslieferungdetail.html',
+          templateUrl: 'scripts/auslieferungen/detail/depotauslieferungdetail.html',
           controller: 'AuslieferungDetailController',
           name: 'DepotAuslieferungDetail',
           model: 'Depot',
           access: userRoles.Administrator
         })
         .when('/tourauslieferungen', {
-          templateUrl:
-            'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
+          templateUrl: 'scripts/auslieferungen/overview/tourauslieferungenoverview.html',
           controller: 'AuslieferungenOverviewController',
           name: 'TourAuslieferungenOverview',
           model: 'Tour',
@@ -955,16 +994,14 @@ angular
           reloadOnSearch: false
         })
         .when('/tourauslieferungen/:id', {
-          templateUrl:
-            'scripts/auslieferungen/detail/tourauslieferungdetail.html',
+          templateUrl: 'scripts/auslieferungen/detail/tourauslieferungdetail.html',
           controller: 'AuslieferungDetailController',
           name: 'TourAuslieferungDetail',
           model: 'Tour',
           access: userRoles.Administrator
         })
         .when('/postauslieferungen', {
-          templateUrl:
-            'scripts/auslieferungen/overview/postauslieferungenoverview.html',
+          templateUrl: 'scripts/auslieferungen/overview/postauslieferungenoverview.html',
           controller: 'AuslieferungenOverviewController',
           name: 'PostAuslieferungenOverview',
           model: 'Post',
@@ -972,8 +1009,7 @@ angular
           reloadOnSearch: false
         })
         .when('/postauslieferungen/:id', {
-          templateUrl:
-            'scripts/auslieferungen/detail/postauslieferungdetail.html',
+          templateUrl: 'scripts/auslieferungen/detail/postauslieferungdetail.html',
           controller: 'AuslieferungDetailController',
           name: 'PostAuslieferungDetail',
           model: 'Post',
@@ -999,8 +1035,7 @@ angular
           access: userRoles.Administrator
         })
         .when('/rechnungspositionen', {
-          templateUrl:
-            'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
+          templateUrl: 'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
           controller: 'RechnungsPositionenOverviewController',
           name: 'RechnungsPositionenOverview',
           access: userRoles.Administrator,
@@ -1019,8 +1054,7 @@ angular
           access: userRoles.Administrator
         })
         .when('/zahlungsimports', {
-          templateUrl:
-            'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
+          templateUrl: 'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
           controller: 'ZahlungsImportsOverviewController',
           name: 'ZahlungsImportsOverview',
           access: userRoles.Administrator,
@@ -1115,12 +1149,6 @@ angular
           access: userRoles.Administrator,
           reloadOnSearch: false
         })
-        .when('/reports/:id/execute', {
-          templateUrl: 'scripts/reports/execute/reportsexecute.html',
-          controller: 'ReportsExecuteController',
-          name: 'ReportsExecute',
-          access: userRoles.Administrator
-        })
         .when('/reports/:id', {
           templateUrl: 'scripts/reports/detail/reportsdetail.html',
           controller: 'ReportsDetailController',
@@ -1134,36 +1162,31 @@ angular
           access: userRoles.Administrator
         })
         .when('/arbeitsangebote', {
-          templateUrl:
-            'scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html',
+          templateUrl: 'scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html',
           controller: 'ArbeitsangeboteOverviewController',
           name: 'ArbeitsangeboteOverview',
           access: userRoles.Administrator
         })
         .when('/arbeitsangebote/new', {
-          templateUrl:
-            'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+          templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
           controller: 'ArbeitsangeboteDetailController',
           name: 'ArbeitsangeboteDetail',
           access: userRoles.Administrator
         })
         .when('/arbeitsangebote/:id', {
-          templateUrl:
-            'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
+          templateUrl: 'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
           controller: 'ArbeitsangeboteDetailController',
           name: 'ArbeitsangeboteDetail',
           access: userRoles.Administrator
         })
         .when('/arbeitseinsaetze', {
-          templateUrl:
-            'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
+          templateUrl: 'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
           controller: 'ArbeitseinsaetzeOverviewController',
           name: 'ArbeitseinsaetzeOverview',
           access: userRoles.Administrator
         })
         .when('/arbeitseinsatzabrechnung', {
-          templateUrl:
-            'scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html',
+          templateUrl: 'scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html',
           controller: 'ArbeitseinsatzabrechnungOverviewController',
           name: 'ArbeitseinsatzabrechnungOverview',
           access: userRoles.Administrator

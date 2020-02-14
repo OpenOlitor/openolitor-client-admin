@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
-    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog', 'DetailNavigationService',
-    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService) {
+    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog', 'DetailNavigationService', 'lodash',
+    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService, lodash) {
       $rootScope.viewId = 'L-Pen';
 
       DetailNavigationService.cleanKundeList();
@@ -17,7 +17,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.statusL = [];
-      angular.forEach(PENDENZSTATUS, function(value, key) {
+      angular.forEach(lodash.sortBy(PENDENZSTATUS, function(ps){
+          return gettextCatalog.getString(ps).toLowerCase();
+      }), function(value, key) {
         $scope.statusL.push({
           'id': value,
           'title': gettextCatalog.getString(value)

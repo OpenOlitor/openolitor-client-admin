@@ -105,7 +105,7 @@
                   <label for="telefonMobil" translate>Telefon Mobil</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}">
+                  <input type="text" class="form-control" name="telefonMobil" ng-model="person.telefonMobil" placeholder="{{'+41 7...'|translate}}" maxlength="50">
                 </div>
               </div>
               <div class="row form-group">
@@ -113,7 +113,7 @@
                   <label for="telefonFestnetz" translate>Telefon Festnetz</label>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}">
+                  <input type="text" class="form-control" name="telefonFestnetz" ng-model="person.telefonFestnetz" placeholder="{{'+41 ...'|translate}}" maxlength="50">
                 </div>
               </div>
               <div ng-show="personCategories.length > 0" class="row form-group">
@@ -145,7 +145,7 @@
                           <oo-dropdown dropdown-id="rolle" display-style="uib-dropdown" selected-prop="id" property="label" values="rollen" selected="person.rolle"></oo-dropdown>
                         </div>
                         <div class="col-md-4">
-                          <a role="button" class="btn btn-danger" ng-click="changeRolle(person)"><span translate>Rolle speichern</span></a>
+                          <a role="button" class="btn btn-danger" ng-click="changeRolle(person)" ng-disabled="person.rolle === person.initRolle"><span translate>Rolle speichern</span></a>
                         </div>
                       </div>
                       <div class="row form-group">
@@ -253,7 +253,7 @@
                 </div>
               </div>
               <div class="panel-footer">
-                {{'Kunde erstellt '|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet '|translate}} {{kunde.modifidat | fromNow}}
+                {{'Kunde erstellt'|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet'|translate}} {{kunde.modifidat | fromNow}}
               </div>
             </div>
           </div>
@@ -316,7 +316,7 @@
                 </div>
               </div>
               <div class="panel-footer">
-                {{'Kunde erstellt '|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet '|translate}} {{kunde.modifidat | fromNow}}
+                {{'Kunde erstellt'|translate}} {{kunde.erstelldat | fromNow}}, {{'bearbeitet'|translate}} {{kunde.modifidat | fromNow}}
               </div>
             </div>
           </div>
@@ -350,6 +350,21 @@
               </div>
               <div class="col-md-8">
                 <textarea class="form-control" name="adressZusatz" ng-model="kunde.zusatzinfoLieferung" placeholder="{{'Hinterlegung, Abgabe bei...'|translate}}" maxlength="200"></textarea>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="zusatzinfo" translate>Koordinaten</label>
+                <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Im Format'|translate}}"></i>
+              </div>
+              <div class="col-md-2">
+                <input type="number" class="form-control" name="adressLatLieferung" ng-model="kunde.latLieferung" placeholder="{{'46.947480'|translate}}" step="0.000001" min="-90" max="90">
+              </div>
+              <div class="col-md-2">
+                <input type="number" class="form-control" name="adressLongLieferung" ng-model="kunde.longLieferung" placeholder="{{'7.458070'|translate}}" step="0.000001" min="-180" max="180">
+              </div>
+              <div class="col-md-3">
+                <a href="http://www.openstreetmap.org/?mlat={{kunde.latLieferung}}&mlon={{kunde.longLieferung}}&zoom=17" target="_blank">Anzeigen</a>
               </div>
             </div>
             <div class="row form-group">
@@ -423,7 +438,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}">
+                  <input type="text" class="form-control" name="name" ng-model="pendenz.bemerkung" placeholder="{{'Text...'|translate}}" maxlength="2000">
                 </div>
                 <div class="col-md-2">
                   <oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus" selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown>

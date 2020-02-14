@@ -8,19 +8,21 @@ angular.module('openolitor-admin')
     'RechnungsPositionenModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
-    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator',
+    'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettextCatalog',
     function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, API_URL,
       FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
-      localeSensitiveComparator) {
+      localeSensitiveComparator, gettextCatalog) {
       $rootScope.viewId = 'L-Repo';
 
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
-      $scope.rechnungsPositionenStatus = EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS);
+      $scope.rechnungsPositionenStatus = lodash.sortBy(EnumUtil.asArray(RECHNUNGSPOSITIONSSTATUS), function(rps){
+          return gettextCatalog.getString(rps.label).toLowerCase();
+      });
 
       $scope.search = {
         query: '',

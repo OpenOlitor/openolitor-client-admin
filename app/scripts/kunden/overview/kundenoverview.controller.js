@@ -16,15 +16,21 @@ angular.module('openolitor-admin')
       $scope.kundentypen = [];
       $scope.$watch(KundentypenService.getKundentypen,
         function(list) {
+          var unorderedKundenTyp = [];
           if (list) {
             angular.forEach(list, function(item) {
               //check if system or custom kundentyp, use only id
               var id = (item.kundentyp) ? item.kundentyp :
                 item;
-              $scope.kundentypen.push({
+              unorderedKundenTyp.push({
                 'id': id,
                 'title': id
               });
+            });
+            angular.forEach(lodash.sortBy(unorderedKundenTyp, function(kt){
+                return kt.id.toLowerCase();
+            }), function(item){
+                $scope.kundentypen.push(item);
             });
             $scope.tableParams.reload();
           }
@@ -157,11 +163,10 @@ angular.module('openolitor-admin')
             return lodash.includes($scope.checkboxes.ids, d.id);
           });
           result = lodash.map(result, 'id');
-            //overwritting the tf parameter with an empty abotypId filter to avoid the heritage of the current typen filter
-          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf','{"abotypId":""}');
+          //overwritting the tf parameter with an empty abotypId filter to avoid the heritage of the current typen filter
+          $location.path('/abos').search('q', 'kundeId=' + result.join()).search('tf', '{"abotypId":""}');
         }
-      }
-      ];
+      }];
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -201,7 +206,10 @@ angular.module('openolitor-admin')
 
             params.total(dataSet.length);
 
-            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+            $location.search({
+              'q': $scope.search.query,
+              'tf': JSON.stringify($scope.tableParams.filter())
+            });
 
             return dataSet.slice((params.page() - 1) * params.count(), params.page() * params.count());
           }

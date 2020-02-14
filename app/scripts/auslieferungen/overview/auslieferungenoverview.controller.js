@@ -8,10 +8,11 @@ angular.module('openolitor-admin')
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
     'ReportvorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
+    'lodash', 'gettextCatalog',
     function($q, $scope, $rootScope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
       AUSLIEFERUNGSTATUS, msgBus, ReportvorlagenService, localeSensitiveComparator,
-      $location, FilterQueryUtil, gettext) {
+      $location, FilterQueryUtil, gettext, lodash, gettextCatalog) {
       $rootScope.viewId = 'L-Aus';
 
       $scope.entries = [];
@@ -47,10 +48,12 @@ angular.module('openolitor-admin')
       };
 
       $scope.statusL = [];
-      angular.forEach(AUSLIEFERUNGSTATUS, function(value, key) {
+      angular.forEach(lodash.sortBy(AUSLIEFERUNGSTATUS, function(as){
+          return gettextCatalog.getString(as).toLowerCase();
+      }), function(value, key) {
         $scope.statusL.push({
           'id': key,
-          'title': value
+          'title': gettextCatalog.getString(value)
         });
       });
 
