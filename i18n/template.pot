@@ -107,14 +107,6 @@ msgstr ""
 msgid "7.458070"
 msgstr ""
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:75
-msgid "<button ng-if=\"!arbeitsangebotForm.$invalid\" type=\"button\" role=\"button\" ng-click=\"aaMultiplizieren()\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> <span translate=\"\">Multiplizieren</span></button>"
-msgstr ""
-
-#: app/scripts/reports/detail/reportsdetail.html:14
-msgid "<span class=\"glyphicon glyphicon-edit\"></span>Editieren"
-msgstr ""
-
 #: app/scripts/depots/overview/depotsoverview.html:38
 msgid "AP Tel"
 msgstr ""
@@ -593,6 +585,10 @@ msgstr ""
 msgid "August"
 msgstr ""
 
+#: app/scripts/reports/detail/reportsdetail.html:16
+msgid "Ausführen"
+msgstr ""
+
 #: app/scripts/app.js:325
 msgid "Ausgeliefert"
 msgstr ""
@@ -601,6 +597,7 @@ msgstr ""
 msgid "Ausstehend"
 msgstr ""
 
+#: app/scripts/reports/detail/reportsdetail.html:13
 #: app/scripts/reports/detail/reportsdetail.html:8
 msgid "Auswertung"
 msgstr ""
@@ -1092,6 +1089,10 @@ msgstr ""
 msgid "EUR"
 msgstr ""
 
+#: app/scripts/reports/detail/reportsdetail.html:14
+msgid "Editieren"
+msgstr ""
+
 #: app/scripts/projekt/settings/projektsettings.html:275
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr ""
@@ -1429,7 +1430,7 @@ msgid "Gültig für"
 msgstr ""
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:2
-msgid "HTML / WYSIWIG"
+msgid "HTML / WYSIWYG"
 msgstr ""
 
 #: app/scripts/app.js:333
@@ -3183,6 +3184,10 @@ msgstr ""
 
 #: app/scripts/reportvorlagen/reportvorlagenoverview.html:4
 msgid "Verwaltung der Report-Vorlagen"
+msgstr ""
+
+#: app/scripts/reports/detail/reportsdetail.html:17
+msgid "Verändern"
 msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.controller.js:479

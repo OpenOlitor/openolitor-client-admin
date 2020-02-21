@@ -10,11 +10,11 @@
               </div>
               <div class="col-md-5">
                 <div class="pull-right" role="group">
-                  <oo-save-button ng-hide="!isModifying" model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created">Auswertung</oo-save-button>
-                  <button type="button" class="btn btn-md btn-default"  ng-hide="isModifying" ng-click="isModifying = true; result.entries.length === 0 " title="{{'Auswertung editieren'|translate}}" translate><span class="glyphicon glyphicon-edit"></span>Editieren</button>
-                  <oo-delete-button form="reportForm" ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Report" on-delete="delete" on-deleted="backToList" confirm="true"></oo-delete-button>
-<button type="button" ng-hide="isModifying || result.entries.length > 0" class="btn btn-md btn-warning" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span>Ausführen</button>
-                  <button type="button" ng-show="result.entries.length > 0" class="btn btn-md btn-success" ng-click="changeReport()" title="{{'Auswertung verändern'|translate}}"><span class="glyphicon glyphicon-pause"></span> Verändern</button>
+                    <oo-save-button ng-hide="!isModifying" model="report" form="reportForm" entity="Report" on-save="save" on-cancel="backToList" on-created="created"><span translate>Auswertung</span></oo-save-button>
+                    <button type="button" class="btn btn-md btn-default"  ng-hide="isModifying" ng-click="isModifying = true; result.entries.length === 0 " title="{{'Auswertung editieren'|translate}}" ><span class="glyphicon glyphicon-edit"></span><span translate>Editieren</span></button>
+                  <oo-delete-button form="reportForm" ng-if="!angular.isUndefined(report) && !angular.isUndefined(report.id)" model="report" entity="Report" on-delete="delete" on-deleted="backToList" confirm="true" translate></oo-delete-button>
+                  <button type="button" ng-hide="isModifying || result.entries.length > 0" class="btn btn-md btn-warning" ng-click="executeReport(report)" title="{{'Auswertung ausführen'|translate}}"><span class="glyphicon glyphicon-play"></span><span translate>Ausführen</span></button>
+                  <button type="button" ng-show="result.entries.length > 0" class="btn btn-md btn-success" ng-click="changeReport()" title="{{'Auswertung verändern'|translate}}"><span class="glyphicon glyphicon-pause" translate></span><span translate>Verändern</span></button>
                 </div>
               </div>
             </h3>
