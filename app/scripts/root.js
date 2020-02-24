@@ -132,25 +132,25 @@ angular.module('openolitor-admin')
 
       if (angular.isUndefined($scope.storedActiveLang())) {
         var lang = $window.navigator.language || $window.navigator.userLanguage;
-        if (lang.indexOf('de-CH') >= 0) {
+        if (lang.startsWith('de-CH')) {
           $scope.changeLang('de_CH');
-        } else if (lang.indexOf('de-DE') >= 0) {
+        } else if (lang.startsWith('de-DE')) {
           $scope.changeLang('de_DE');
-        } else if (lang.indexOf('de-') >= 0) {
+        } else if (lang.startsWith('de')) {
           $scope.changeLang('de_DE');
-        } else if (lang.indexOf('fr-BE') >= 0) {
+        } else if (lang.startsWith('fr-BE')) {
           $scope.changeLang('fr_BE');
-        } else if (lang.indexOf('fr-CH') >= 0) {
+        } else if (lang.startsWith('fr-CH')) {
           $scope.changeLang('fr_CH');
-        } else if (lang.indexOf('fr-') >= 0) {
+        } else if (lang.startsWith('fr')) {
           $scope.changeLang('fr_CH');
-        } else if (lang.indexOf('en-') >= 0) {
+        } else if (lang.startsWith('en')) {
           $scope.changeLang('en');
-        } else if (lang.indexOf('es-') >= 0) {
+        } else if (lang.startsWith('es')) {
           $scope.changeLang('es');
-        } else if (lang.indexOf('cs-') >= 0) {
+        } else if (lang.startsWith('cs')) {
           $scope.changeLang('cs');
-        } else if (lang.indexOf('hu-') >= 0) {
+        } else if (lang.startsWith('hu')) {
           $scope.changeLang('hu');
         } else {
           $scope.changeLang('en');
