@@ -54,8 +54,8 @@
                 <i ng-if="abo.aktiv" class="glyphicon glyphicon-ok"></i>
                 <i ng-if="!abo.aktiv" class="glyphicon glyphicon-remove"></i>
               </td>
-              <td data-title="'Vertrieb'|translate" sortable="'vertriebBeschrieb'" filter="{vertriebId: 'select'}" filter-data="vertriebL">
-                {{abo.vertriebBeschrieb}}
+              <td data-title="'Abotyp / Vertrieb'|translate" sortable="'vertriebBeschrieb'" filter="{vertriebId: 'select'}" filter-data="vertriebL">
+                 {{abo.abotypName}} / {{abo.vertriebBeschrieb}}
               </td>
               <td data-title="'Depot/Tour'|translate" sortable="'depotTourSortBy'" filter="{depotTourId: 'select'}" filter-data="depotTourL">
                 <a ng-href="#/depots/{{abo.depotId}}" ng-if="abo.depotId">{{abo.depotName}}</a>
