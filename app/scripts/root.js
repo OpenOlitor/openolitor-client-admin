@@ -136,21 +136,21 @@ angular.module('openolitor-admin')
           $scope.changeLang('de_CH');
         } else if (lang.indexOf('de-DE') >= 0) {
           $scope.changeLang('de_DE');
-        } else if (lang.indexOf('de-') >= 0) {
+        } else if (lang.indexOf('de') >= 0) {
           $scope.changeLang('de_DE');
         } else if (lang.indexOf('fr-BE') >= 0) {
           $scope.changeLang('fr_BE');
         } else if (lang.indexOf('fr-CH') >= 0) {
           $scope.changeLang('fr_CH');
-        } else if (lang.indexOf('fr-') >= 0) {
+        } else if (lang.indexOf('fr') >= 0) {
           $scope.changeLang('fr_CH');
-        } else if (lang.indexOf('en-') >= 0) {
+        } else if (lang.indexOf('en') >= 0) {
           $scope.changeLang('en');
-        } else if (lang.indexOf('es-') >= 0) {
+        } else if (lang.indexOf('es') >= 0) {
           $scope.changeLang('es');
-        } else if (lang.indexOf('cs-') >= 0) {
+        } else if (lang.indexOf('cs') >= 0) {
           $scope.changeLang('cs');
-        } else if (lang.indexOf('hu-') >= 0) {
+        } else if (lang.indexOf('hu') >= 0) {
           $scope.changeLang('hu');
         } else {
           $scope.changeLang('en');
