@@ -118,6 +118,20 @@ angular.module('openolitor-admin')
         gettextCatalog.setCurrentLanguage(msg.reason);
       });
 
+      $scope.displayActiveLang = function() {
+          switch(gettextCatalog.getCurrentLanguage()){
+              case 'en_US': return 'en';
+                  break;
+              case 'cs-CZ': return 'cs';
+                  break;
+              case 'es-ES': return 'es';
+                  break;
+              case 'hu-HU': return 'hu';
+                  break;
+              default: return(gettextCatalog.getCurrentLanguage());
+          }
+      };
+
       $scope.activeLang = function() {
         return gettextCatalog.getCurrentLanguage();
       };
