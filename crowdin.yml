@@ -20,15 +20,15 @@ files: [
     "source" : "template.pot",
     "translation" : "%locale_with_underscore%.po",
     "translation_replace":{
-        "en":"en",
-        "cs-CZ":"cs",
-        "es-ES":"es",
+        "en_US":"en",
+        "cs_CZ":"cs",
+        "es_ES":"es",
         "pl":"pl",
         "hu":"hu",
-        "fr-CH":"fr_CH",
-        "fr-BE":"fr_BE",
+        "fr_CH":"fr_CH",
+        "fr_BE":"fr_BE",
         "de":"de_DE",
-        "de-CH":"de_CH"
+        "de_CH":"de_CH"
     }
 
   #
