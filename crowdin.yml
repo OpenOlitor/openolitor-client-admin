@@ -16,18 +16,14 @@
 # Files configuration
 #
 files: [
- {
-  #
-  # Source files filter
-  # e.g. "/resources/en/*.json"
-  #
-  "source" : "i18n/template.pot",
-
-  #
-  # where translations live
-  # e.g. "/resources/%two_letters_code%/%original_file_name%"
-  #
-  "translation" : "i18n/en.po",
+  {
+    "source" : "i18n/template.pot",
+    "translation" : "i18n/%locale_with_underscore%.po"
+    "translation_replace":{
+        "en_US":"en",
+        "es_ES":"es",
+    }
+  }
 
   #
   # files or directories for ignore
