@@ -1,9 +1,9 @@
 project_identifier: openolitor
 api_key: 0a8dbf661866aa2f91f42fdaa43dc657
-base_path: /
+base_path: /i18n
 preserve_hierarchy: true
 files:
-  - source: /i18n/template.pot
+  - source: template.pot
     translation: '%locale_with_underscore%.po'
     translation_replace:
       en_US: en
