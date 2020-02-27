@@ -33,7 +33,7 @@
                   <label for="name" translate>Name</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" ng-readonly="!isModifying" class="form-control" name="name" ng-model="report.name" placeholder="{{'Name'|translate}}" required>
+                  <input type="text" ng-readonly="!isModifying" class="form-control" name="name" ng-model="report.name" placeholder="{{'Name'|translate}}" maxlength="200" required>
                 </div>
               </div>
               <div class="row form-group">
@@ -41,7 +41,7 @@
                   <label for="vorname" translate>Beschreibung</label>
                 </div>
                 <div class="col-md-8">
-                  <textarea class="form-control" ng-readonly="!isModifying" name="beschreibung" ng-model="report.beschreibung" placeholder="{{'Beschreibung'|translate}}" rows="2"></textarea>
+                  <textarea class="form-control" ng-readonly="!isModifying" name="beschreibung" ng-model="report.beschreibung" placeholder="{{'Beschreibung'|translate}}" rows="2" maxlength="100"></textarea>
                 </div>
               </div>
             </div>
