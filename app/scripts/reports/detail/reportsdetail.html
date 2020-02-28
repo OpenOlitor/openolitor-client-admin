@@ -58,7 +58,7 @@
             <div class="panel-body" >
               <div class="row form-group">
                 <div class="col-md-12">
-                  <textarea ng-hide="!isModifying" class="form-control" name="query" ng-model="report.query"  placeholder="select * from Entity where ..." rows="20" required></textarea>
+                  <textarea ng-hide="!isModifying" class="form-control" name="query" ng-model="report.query"  placeholder="select * from Entity where ..." rows="20" maxlength=5000 required></textarea>
                   <pre ng-hide="isModifying"><code>{{report.query}}</code></pre>
                 </div>
               </div>

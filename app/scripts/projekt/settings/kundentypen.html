@@ -21,12 +21,12 @@
                             <td data-title="'Kundentyp'|translate" sortable="'kundentyp'">
                                 <span ng-hide="kundentyp.editable">{{kundentyp.kundentyp}}</span>
                                 <span ng-show="kundentyp.editable">
-                                    <input type="text" class="form-control" name="kundentyp" ng-model="kundentyp.kundentyp" placeholder="{{'Kundentyp'|translate}}..."></input>
+                                    <input type="text" class="form-control" name="kundentyp" ng-model="kundentyp.kundentyp" placeholder="{{'Kundentyp'|translate}}..." maxlength = 50></input>
                             </td>
                             <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
                                 <span ng-hide="kundentyp.editable">{{kundentyp.beschreibung}}</span>
                                 <span ng-show="kundentyp.editable">
-                                    <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                                    <textarea class="form-control" name="beschreibung" ng-model="kundentyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength = 250></textarea>
                             </td>
                             <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
                                 {{kundentyp.anzahlVerknuepfungen}}

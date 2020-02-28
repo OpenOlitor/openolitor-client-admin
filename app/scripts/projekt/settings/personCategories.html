@@ -21,12 +21,12 @@
                             <td data-title="'PersonenKategorie'|translate" sortable="'name'" ng-class="[{'col-md-3': personCategory.editable}]">
                                 <span ng-hide="personCategory.editable">{{personCategory.name}}</span>
                                 <span ng-show="personCategory.editable">
-                                    <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Personenkategorie'|translate}}..."></input>
+                                    <input type="text" class="form-control" name="personCategory" ng-model="personCategory.name" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Personenkategorie'|translate}}..." maxlength = 50></input>
                             </td>
                             <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">
                                 <span ng-hide="personCategory.editable">{{personCategory.description}}</span>
                                 <span ng-show="personCategory.editable">
-                                    <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                                    <textarea class="form-control" name="beschreibung" ng-model="personCategory.description" placeholder="{{'Beschreibung'|translate}}..." maxlength = 250></textarea>
                             </td>
                             <td><div ng-hide="editingPersonCategoryBool" class="pull-right">
                                     <a role="button" class="btn btn-sm btn-primary" ng-click="editPersonCategory(personCategory)">

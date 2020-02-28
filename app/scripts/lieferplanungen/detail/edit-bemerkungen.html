@@ -7,7 +7,7 @@
    <span class="col-md-12">
      <ng-quill-editor ng-if="!htmlView" ng-model="planung.bemerkungen" bounds="self" placeholder="'Hier Text einfügen und formatieren'|translate" preserve-whitespace="false" track-changes="all">
      </ng-quill-editor>
-     <textarea name="bemerkungen" rows="15" ng-model="planung.bemerkungen" ng-if="htmlView" class="form-control"></textarea>
+     <textarea name="bemerkungen" rows="15" ng-model="planung.bemerkungen" ng-if="htmlView" class="form-control" maxlength=10000></textarea>
    </span>
  </div>
 </div>
