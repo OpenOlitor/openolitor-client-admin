@@ -24,7 +24,7 @@
                     <label for="name" translate>Depotname</label>
                   </div>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" name="name" ng-model="depot.name" placeholder="{{'Eindeutige Bezeichnung'|translate}}" auto-focus required>
+                    <input type="text" class="form-control" name="name" ng-model="depot.name" placeholder="{{'Eindeutige Bezeichnung'|translate}}" auto-focus maxlength=50 required>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -91,7 +91,7 @@
                     <label for="oeffnungszeiten" translate>Öffnungszeiten</label>
                   </div>
                   <div class="col-md-8">
-                    <textarea class="form-control" name="oeffnungszeiten" ng-model="depot.oeffnungszeiten" placeholder="{{'Öffnungszeiten'|translate}}..."></textarea>
+                    <textarea class="form-control" name="oeffnungszeiten" ng-model="depot.oeffnungszeiten" placeholder="{{'Öffnungszeiten'|translate}}..." maxlength=200></textarea>
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                     <label for="iban" translate>IBAN</label>
                   </div>
                   <div class="col-md-7">
-                    <input type="text" class="form-control" name="iban" ng-model="depot.iban" placeholder="{{'CH...'|translate}}">
+                    <input type="text" class="form-control" name="iban" ng-model="depot.iban" placeholder="{{'CH...'|translate}}" ng-iban>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -112,7 +112,7 @@
                     <label for="bank" translate>Bank</label>
                   </div>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" name="bank" ng-model="depot.bank" placeholder="{{'Bank, PLZ Ort'|translate}}">
+                    <input type="text" class="form-control" name="bank" ng-model="depot.bank" placeholder="{{'Bank, PLZ Ort'|translate}}" maxlength=20>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -120,7 +120,7 @@
                     <label for="beschreibung" translate>Beschreibung</label>
                   </div>
                   <div class="col-md-8">
-                    <textarea class="form-control" name="beschreibung" ng-model="depot.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                    <textarea class="form-control" name="beschreibung" ng-model="depot.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength=200></textarea>
                   </div>
                 </div>
               </div>

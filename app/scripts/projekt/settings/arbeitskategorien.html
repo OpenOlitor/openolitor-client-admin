@@ -21,7 +21,7 @@
                             <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
                                 <span ng-hide="arbeitskategorie.editable">{{arbeitskategorie.beschreibung}}</span>
                                 <span ng-show="arbeitskategorie.editable">
-                                    <textarea class="form-control" name="beschreibung" ng-model="arbeitskategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                                    <textarea class="form-control" name="beschreibung" ng-model="arbeitskategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength=200 ></textarea>
                             </td>
                             <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
                                 {{arbeitskategorie.anzahlVerknuepfungen}}

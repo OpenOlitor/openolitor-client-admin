@@ -99,7 +99,7 @@
                   </td>
                   <td>
                     <span ng-if="zahlungsEingang.status === 'Ok'">{{zahlungsEingang.bemerkung}}</span>
-                    <input ng-if="zahlungsEingang.status !== 'Ok'" type="text" class="form-control" name="bemerkung" ng-model="zahlungsEingang.bemerkung" placeholder="{{'Text...'|translate}}">
+                    <input ng-if="zahlungsEingang.status !== 'Ok'" type="text" class="form-control" name="bemerkung" ng-model="zahlungsEingang.bemerkung" placeholder="{{'Text...'|translate}}" maxlength = 2000 >
                   </td>
                   <td>
                     <a ng-if="zahlungsEingang.status === 'Ok'" role="button" class="btn btn-sm btn-success" ng-click="zahlungsEingangErledigen(zahlungsEingang)"><i class="fa fa-check"></i></a>

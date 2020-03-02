@@ -21,7 +21,7 @@
                                 <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
                                     <span ng-hide="produktekategorie.editable">{{produktekategorie.beschreibung}}</span>
                                     <span ng-show="produktekategorie.editable">
-                                        <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></input>
+                                        <input type="text" class="form-control" name="beschreibung" ng-model="produktekategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength = 50></input>
                                 </td>
                                 <td><div ng-hide="editingProduktekategorieBool" class="pull-right">
                                         <a role="button" class="btn btn-sm btn-primary" ng-click="editProduktekategorie(produktekategorie)">

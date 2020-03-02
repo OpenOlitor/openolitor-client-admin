@@ -128,7 +128,7 @@
                   </span>
                 </span>
                 <span ng-show="valuesEditable() && isUnlisted(korbprodukt)">
-                  <input type="text" class="form-control large" name="korbprodukt.name" ng-disabled="!valuesEditable()" ng-model="korbprodukt.produktBeschrieb" placeholder="{{'Produktbez.'|translate}}" required>
+                  <input type="text" class="form-control large" name="korbprodukt.name" ng-disabled="!valuesEditable()" ng-model="korbprodukt.produktBeschrieb" placeholder="{{'Produktbez.'|translate}}" maxlength=140 required>
                 </span>
               </td>
               <td data-title="'Menge'|translate">
