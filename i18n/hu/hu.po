@@ -9,7 +9,7 @@ msgstr ""
 "X-Crowdin-File: /dev.crowdin_integration/template.pot\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-03-16 09:49\n"
+"PO-Revision-Date: 2020-03-16 10:13\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -104,14 +104,6 @@ msgstr ""
 
 #: app/scripts/produzenten/detail/produzentendetail.html:99
 msgid "2.0"
-msgstr ""
-
-#: app/scripts/kunden/detail/kundendetail.html:361
-msgid "46.947480"
-msgstr ""
-
-#: app/scripts/kunden/detail/kundendetail.html:364
-msgid "7.458070"
 msgstr ""
 
 #: app/scripts/depots/overview/depotsoverview.html:38
@@ -609,6 +601,7 @@ msgid "Ausstehend"
 msgstr "Függőben"
 
 #: app/scripts/reports/detail/reportsdetail.html:13
+#: app/scripts/reports/detail/reportsdetail.html:8
 msgid "Auswertung"
 msgstr "Értékelés"
 
@@ -1053,7 +1046,7 @@ msgstr "Letöltés"
 msgid "E-Mail"
 msgstr "E-mail"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:270
+#: app/scripts/abos/overview/abosoverview.controller.js:271
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:291
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:133
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:107
@@ -1084,7 +1077,7 @@ msgstr "E-mail küldése a tagoknak"
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "E-mail az összes kapcsolatnak"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:245
+#: app/scripts/abos/overview/abosoverview.controller.js:246
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:262
 #: app/scripts/kunden/overview/kundenoverview.controller.js:118
 #: app/scripts/personen/overview/personenoverview.controller.js:137
@@ -2617,7 +2610,7 @@ msgstr "Számla tételek"
 msgid "Rechnungspositionen anzeigen"
 msgstr "Számla tételek megjelenítése"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:233
+#: app/scripts/abos/overview/abosoverview.controller.js:234
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:249
 msgid "Rechnungspositionen erstellen"
 msgstr "Számla tételek létrehozása"
@@ -3268,7 +3261,7 @@ msgstr "Ha a következő tételeket adja hozzá, azokat a megfelelő értékre c
 " {{person.rolle}} \n"
 " {{person.kundeId}}"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:277
+#: app/scripts/abos/overview/abosoverview.controller.js:278
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:298
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3587,7 +3580,7 @@ msgstr "Kétheti"
 msgid "Zweiwöchentlich"
 msgstr "Kétheti"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:275
+#: app/scripts/abos/overview/abosoverview.controller.js:276
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:296
 msgid "abo"
 msgstr "előfizetés"
