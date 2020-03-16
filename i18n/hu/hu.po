@@ -4,20 +4,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: openolitor\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: openolitor\n"
 "X-Crowdin-Language: hu\n"
-"X-Crowdin-File: /admin-portal/template.pot\n"
-"Last-Translator: al_openolitor\n"
+"X-Crowdin-File: /prod/template.pot\n"
 "Language-Team: Hungarian\n"
-"Language: hu\n"
-"PO-Revision-Date: 2019-05-09 11:56\n"
+"Language: hu_HU\n"
+"PO-Revision-Date: 2020-03-16 14:40\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:29
 msgid "#"
-msgstr "#"
+msgstr ""
 
 #: app/scripts/abotypen/overview/abotypen.html:35
 msgid "# Abonnenten"
@@ -25,11 +23,12 @@ msgstr "# Előfizetők"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:36
 #: app/scripts/depots/overview/depotsoverview.html:47
+#: app/scripts/kunden/overview/kundenoverview.html:48
 #: app/scripts/touren/overview/tourenoverview.html:37
 msgid "# Abos"
 msgstr "# Előfizetések"
 
-#: app/scripts/abos/overview/abosoverview.html:64
+#: app/scripts/abos/overview/abosoverview.html:65
 #: app/scripts/kunden/detail/abo/abos.html:17
 msgid "# Abw."
 msgstr "# Csökk."
@@ -41,7 +40,7 @@ msgstr "# Csökk."
 msgid "# Lieferungen"
 msgstr "# Átadások"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:271
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:307
 msgid "# Lieferungen bisher:"
 msgstr "# Átadások eddig:"
 
@@ -58,10 +57,6 @@ msgstr "# Személyek"
 msgid "# Verknüpfungen"
 msgstr "# Linkek"
 
-#: app/scripts/kunden/overview/kundenoverview.html:48
-msgid "#&nbsp;Abos"
-msgstr "#&nbsp;Előfizetések"
-
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:66
 msgid "#&nbsp;Lieferungen"
 msgstr "#&nbsp;Átadások"
@@ -69,7 +64,7 @@ msgstr "#&nbsp;Átadások"
 #: app/scripts/abotypen/detail/abotypendetail.html:203
 #: app/scripts/produzenten/detail/produzentendetail.html:100
 msgid "%"
-msgstr "%"
+msgstr ""
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:42
 #: app/scripts/lieferplanungen/detail/lieferanten.html:87
@@ -103,32 +98,19 @@ msgstr "+ 41 7..."
 msgid "+41..."
 msgstr "+ 41..."
 
-#: app/scripts/app.js:132
+#: app/scripts/app.js:134
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: app/scripts/produzenten/detail/produzentendetail.html:99
 msgid "2.0"
-msgstr "2.0"
-
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:75
-msgid "<button ng-if=\"!arbeitsangebotForm.$invalid\" type=\"button\" role=\"button\" ng-click=\"aaMultiplizieren()\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> <span translate=\"\">Multiplizieren</span></button>"
-msgstr "szorozva<button ng-if=\"!arbeitsangebotForm.$invalid\" type=\"button\" role=\"button\" ng-click=\"aaszorozva()\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> <span translate=\"\"></span></button>"
-
-#: app/scripts/abos/detail/abosdetail.html:189
-msgid "<input id=\"zusatzaboPrice\" class=\"col-md-9\" type=\"number\" step=\"0.01\" ng-model=\"zusatzAbo.price\">\n"
-"                    <div ng-if=\"zusatzAbo.price != zusatzAbo.zusatzaboTypPrice\" class=\"col-md-1\"><button type=\"button\" class=\"btn btn-xs\" ng-click=\"defaultZusatzaboPrice(zusatzAbo.id)\" title=\"{{'Den Standardpreis wiederherstellen'|translate}}\"><span class=\"glyphicon glyphicon-erase\"></span> </button>\n"
-"                    </div>"
-msgstr "<input id=\"zusatzaboPrice\" class=\"col-md-9\" type=\"number\" step=\"0.01\" ng-model=\"zusatzAbo.price\">\n"
-"                    <div ng-if=\"zusatzAbo.price != zusatzAbo.zusatzaboTypPrice\" class=\"col-md-1\"><button type=\"button\" class=\"btn btn-xs\" ng-click=\"defaultZusatzaboPrice(zusatzAbo.id)\" title=\"{{'Állítsa be a standard árat'|translate}}\"><span class=\"glyphicon glyphicon-erase\"></span> </button>\n"
-"                    -                    </div>"
+msgstr ""
 
 #: app/scripts/depots/overview/depotsoverview.html:38
 msgid "AP Tel"
 msgstr "Tel."
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:69
-#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:40
+#: app/scripts/app.js:338
 msgid "Ab Heute"
 msgstr "Ma"
 
@@ -136,24 +118,24 @@ msgstr "Ma"
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:43
 #: app/scripts/abos/detail/create-abo.html:57
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:38
-#: app/scripts/app.js:380
+#: app/scripts/app.js:389
 #: app/scripts/arbeitsangebote/detail/addpersontoeinsatz.html:44
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:47
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:31
 msgid "Abbrechen"
 msgstr "Mégse"
 
-#: app/scripts/app.js:195
+#: app/scripts/app.js:197
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:51
 msgid "Abgesagt"
 msgstr "Törölve"
 
-#: app/scripts/app.js:149
-#: app/scripts/app.js:153
+#: app/scripts/app.js:151
+#: app/scripts/app.js:155
 msgid "Abgeschlossen"
 msgstr "Kész"
 
-#: app/index.html:68
+#: app/index.html:72
 msgid "Abmelden"
 msgstr "Kijelentkezés"
 
@@ -177,7 +159,7 @@ msgstr "Előfizetés létrehozása"
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
 msgstr "{{kunde.bezeichnung}}-előfizetés létrehozása"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:428
+#: app/scripts/kunden/detail/kundendetail.controller.js:436
 msgid "Abo wurde erstellt"
 msgstr "Előfizetés jött létre"
 
@@ -185,8 +167,8 @@ msgstr "Előfizetés jött létre"
 msgid "Abo:"
 msgstr "Előfizetés:"
 
-#: app/scripts/kunden/overview/kundenoverview.controller.js:150
-#: app/scripts/personen/overview/personenoverview.controller.js:163
+#: app/scripts/kunden/overview/kundenoverview.controller.js:156
+#: app/scripts/personen/overview/personenoverview.controller.js:175
 msgid "Aboliste anzeigen"
 msgstr "Összes listázása"
 
@@ -195,7 +177,7 @@ msgstr "Összes listázása"
 msgid "Abonnentin"
 msgstr "Előfizető"
 
-#: app/index.html:82
+#: app/index.html:86
 #: app/scripts/abos/overview/abosoverview.html:6
 #: app/scripts/kunden/detail/abo/abos.html:4
 #: app/scripts/touren/detail/tourendetail.html:59
@@ -218,6 +200,10 @@ msgstr "Előfizetés típusok"
 msgid "Abotyp ' + abotyp.name || 'Abotyp"
 msgstr "Előfizetés típus + elnevezése <div class=\"notranslate\"> 0'</div> Előfizetés típusa"
 
+#: app/scripts/abos/overview/abosoverview.html:57
+msgid "Abotyp / Vertrieb"
+msgstr ""
+
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:108
 msgid "Abotyp erstellen"
@@ -227,7 +213,7 @@ msgstr "Előfizetés típus létrehozása"
 msgid "Abotyp hinzufügen:"
 msgstr "Előfizetés típus hozzáadása:"
 
-#: app/index.html:107
+#: app/index.html:111
 #: app/scripts/abotypen/overview/abotypen.html:6
 #: app/scripts/dashboard/dashboard.html:57
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:32
@@ -238,7 +224,7 @@ msgstr "Előfizetés típusok"
 msgid "Abrechnen"
 msgstr "Számla"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:871
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:912
 msgid "Abrechnungen anzeigen"
 msgstr "Számla nézet"
 
@@ -262,7 +248,7 @@ msgstr "Teljes <i class=\"fa fa-info-circle\" aria-hidden=\"true\" uib-tooltip-t
 msgid "Abw."
 msgstr "Csökk."
 
-#: app/scripts/kunden/detail/kundendetail.html:357
+#: app/scripts/kunden/detail/kundendetail.html:372
 msgid "Abweichende Lieferadresse"
 msgstr "Alternatív átadási címek"
 
@@ -278,16 +264,11 @@ msgstr "Távollét"
 msgid "Achtung: Hier wird das aktuell bezahlte Guthaben neu gesetzt und nicht das berechnete Guthaben (bezahlt + verrechnet)!"
 msgstr "Figyelem: itt az aktuálisan fizetett tétel törlődik, és nem az összes követelés (fizetett+számított)!"
 
-#: app/scripts/surveys/biddingRound.html:36
-#: app/scripts/surveys/biddingRound.html:39
-msgid "Active"
-msgstr "Aktív"
-
 #: app/scripts/kunden/detail/kundendetail.html:291
 msgid "Address of the Account Holder"
 msgstr "Számlatulajdonos címe"
 
-#: app/index.html:115
+#: app/index.html:119
 msgid "Administration"
 msgstr "Adminisztráció"
 
@@ -295,11 +276,11 @@ msgstr "Adminisztráció"
 msgid "Administrations-Anteil"
 msgstr "Adminisztráció aránya"
 
-#: app/index.html:48
+#: app/index.html:50
 msgid "Administrationsumgebung <span ng-if=\"projekt\">für</span>"
 msgstr "Adminisztrációs környezet <span ng-if=\"projekt\">-</span>"
 
-#: app/scripts/app.js:326
+#: app/scripts/app.js:329
 msgid "Administrator"
 msgstr "Adminisztrátor"
 
@@ -309,7 +290,7 @@ msgstr "Számlatulajdonos címe"
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:28
 #: app/scripts/kunden/detail/kundendetail.html:219
-#: app/scripts/kunden/detail/kundendetail.html:373
+#: app/scripts/kunden/detail/kundendetail.html:388
 #: app/scripts/personen/overview/personenoverview.html:57
 #: app/scripts/produzenten/detail/produzentendetail.html:135
 #: app/scripts/projekt/settings/projektsettings.html:45
@@ -337,6 +318,7 @@ msgid "Aktiv"
 msgstr "Aktív"
 
 #: app/scripts/abos/overview/abosoverview.html:10
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
 #: app/scripts/touren/detail/tourendetail.html:61
 msgid "Aktive"
 msgstr "Aktív"
@@ -345,7 +327,7 @@ msgstr "Aktív"
 msgid "Aktivität, Kurzbeschrieb, ..."
 msgstr "Aktív (rövid leírás)"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:553
+#: app/scripts/abos/detail/abosdetail.controller.js:684
 msgid "Aktuell"
 msgstr "Jelenlegi"
 
@@ -355,6 +337,7 @@ msgstr "Aktuális szállítási terv"
 
 #: app/scripts/abos/detail/abosdetail.html:120
 #: app/scripts/abos/overview/abosoverview.html:10
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
 #: app/scripts/dashboard/dashboard.html:45
 #: app/scripts/dashboard/dashboard.html:6
 #: app/scripts/dashboard/dashboard.html:76
@@ -385,7 +368,7 @@ msgstr "Minden oszlop felfedése"
 msgid "Allfällige Bemerkungen"
 msgstr "Megjegyzések"
 
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:142
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:162
 msgid "Als ausgeliefert markieren"
 msgstr "Jelölés kiszállítottként"
 
@@ -397,7 +380,7 @@ msgstr "Alternatív e-mail"
 msgid "Alternative E-Mail-Adresse"
 msgstr "Alternatív e-mail cím"
 
-#: app/scripts/app.js:137
+#: app/scripts/app.js:139
 msgid "Anderer"
 msgstr "Egyéb"
 
@@ -418,7 +401,7 @@ msgid "Anschrift"
 msgstr "Cím"
 
 #: app/scripts/kunden/detail/kundendetail.html:214
-#: app/scripts/kunden/detail/kundendetail.html:368
+#: app/scripts/kunden/detail/kundendetail.html:383
 #: app/scripts/rechnungen/detail/rechnungendetail.html:70
 msgid "Anschrift oder Bezeichnung"
 msgstr "Cím"
@@ -448,13 +431,13 @@ msgstr "Kapcsolattartó"
 msgid "Anzahl"
 msgstr "Mennyiség"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:78
-#: app/scripts/lieferplanungen/detail/korbplanung.html:83
+#: app/scripts/lieferplanungen/detail/korbplanung.html:85
+#: app/scripts/lieferplanungen/detail/korbplanung.html:90
 msgid "Anzahl <i>Saldo zu tief</i>:"
 msgstr "Szám <kiegyenlítetlen egyenleg>/i>"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:77
-#: app/scripts/lieferplanungen/detail/korbplanung.html:82
+#: app/scripts/lieferplanungen/detail/korbplanung.html:84
+#: app/scripts/lieferplanungen/detail/korbplanung.html:89
 msgid "Anzahl Abwesenheiten:"
 msgstr "Hiányzások száma:"
 
@@ -464,7 +447,7 @@ msgstr "Hiányzások száma:"
 msgid "Anzahl Körbe"
 msgstr "Kosarak száma"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:81
+#: app/scripts/lieferplanungen/detail/korbplanung.html:88
 msgid "Anzahl Körbe zu liefern:"
 msgstr "Szállítandó kosarak száma"
 
@@ -491,7 +474,7 @@ msgstr "Munkanapok száma"
 msgid "Anzahl Tage"
 msgstr "Napok száma"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:76
+#: app/scripts/lieferplanungen/detail/korbplanung.html:83
 msgid "Anzahl Zusatzabos zu liefern:"
 msgstr "Kiegészítendő előfizetések száma"
 
@@ -499,11 +482,11 @@ msgstr "Kiegészítendő előfizetések száma"
 msgid "Anzahl aktive Abonnemente"
 msgstr "Aktív előfizetések száma"
 
-#: app/scripts/app.js:275
+#: app/scripts/app.js:277
 msgid "Apr"
 msgstr "Április"
 
-#: app/scripts/app.js:275
+#: app/scripts/app.js:277
 msgid "April"
 msgstr "Április"
 
@@ -528,7 +511,7 @@ msgstr "Önkéntes munka létrehozása"
 msgid "Arbeitsangebot.odt"
 msgstr "onkentesmunka.odt"
 
-#: app/index.html:93
+#: app/index.html:97
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:6
 msgid "Arbeitsangebote"
 msgstr "Önkéntes munka"
@@ -537,7 +520,7 @@ msgstr "Önkéntes munka"
 msgid "Arbeitsangebote erstellen"
 msgstr "Önkéntes munka létrehozása"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:275
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:292
 msgid "Arbeitseinsaetzebrief"
 msgstr "Önkéntes munka leírása"
 
@@ -557,15 +540,15 @@ msgstr "Önkéntes munka létrehozása"
 msgid "Arbeitseinsatz.odt"
 msgstr "Onkentesmunka.odt"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:207
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:209
 msgid "Arbeitseinsatzabrechnung-Brief"
 msgstr "Önkéntes munka kimutatás"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:48
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:50
 msgid "Arbeitseinsatzabrechnung.odt"
 msgstr "onkentesmunkakimutatas.odt"
 
-#: app/index.html:94
+#: app/index.html:98
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:6
 msgid "Arbeitseinsätze"
 msgstr "Önkéntes munka"
@@ -574,7 +557,7 @@ msgstr "Önkéntes munka"
 msgid "Arbeitseinsätze & Abos"
 msgstr "Önkéntes munka és előfizetés"
 
-#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:240
+#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:257
 msgid "Arbeitseinsätze-Brief"
 msgstr "Jelentés önkéntességről"
 
@@ -582,49 +565,51 @@ msgstr "Jelentés önkéntességről"
 msgid "Arbeitskategorie erstellen"
 msgstr "Munkakör visszavonása"
 
-#: app/index.html:113
+#: app/index.html:117
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:12
 #: app/scripts/projekt/settings/arbeitskategorien.html:6
 msgid "Arbeitskategorien"
 msgstr "Munkakörök"
 
-#: app/scripts/app.js:318
+#: app/scripts/app.js:321
 msgid "Archived"
 msgstr "Archív"
 
-#: app/scripts/app.js:196
+#: app/scripts/app.js:198
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:52
 msgid "Archiviert"
 msgstr "Archiválva"
 
-#: app/scripts/app.js:282
+#: app/scripts/app.js:284
 msgid "Aug"
 msgstr "Aug."
 
-#: app/scripts/app.js:281
+#: app/scripts/app.js:283
 msgid "August"
 msgstr "Augusztus"
 
-#: app/scripts/app.js:322
+#: app/scripts/reports/detail/reportsdetail.html:16
+msgid "Ausführen"
+msgstr ""
+
+#: app/scripts/app.js:325
 msgid "Ausgeliefert"
 msgstr "Kiszállítva"
 
-#: app/scripts/app.js:311
+#: app/scripts/app.js:313
 msgid "Ausstehend"
 msgstr "Függőben"
 
-#: app/scripts/reports/detail/reportsdetail.html:9
-#: app/scripts/reports/execute/reportsexecute.html:9
+#: app/scripts/reports/detail/reportsdetail.html:13
+#: app/scripts/reports/detail/reportsdetail.html:8
 msgid "Auswertung"
 msgstr "Értékelés"
 
 #: app/scripts/reports/detail/reportsdetail.html:16
-#: app/scripts/reports/execute/reportsexecute.html:14
-#: app/scripts/reports/overview/reportsoverview.html:30
 msgid "Auswertung ausführen"
 msgstr "Értékelés indítása"
 
-#: app/scripts/reports/execute/reportsexecute.html:13
+#: app/scripts/reports/detail/reportsdetail.html:14
 msgid "Auswertung editieren"
 msgstr "Értékelés módosítása"
 
@@ -633,11 +618,11 @@ msgstr "Értékelés módosítása"
 msgid "Auswertung erstellen"
 msgstr "Értékelés hozzáadása"
 
-#: app/scripts/reports/execute/reportsexecute.html:15
+#: app/scripts/reports/detail/reportsdetail.html:17
 msgid "Auswertung verändern"
 msgstr "Értékelés módosítása"
 
-#: app/index.html:116
+#: app/index.html:120
 #: app/scripts/reports/overview/reportsoverview.html:6
 msgid "Auswertungen"
 msgstr "Értékelés"
@@ -649,7 +634,7 @@ msgstr "Automatikus kezelés"
 #: app/scripts/depots/detail/depotsdetail.html:112
 #: app/scripts/produzenten/detail/produzentendetail.html:71
 msgid "Bank"
-msgstr "Bank"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:307
 msgid "Bank Name"
@@ -663,7 +648,7 @@ msgstr "Bank, iránytószám, város"
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:36
 #: app/scripts/depots/detail/depotsdetail.html:19
 #: app/scripts/produzenten/detail/produzentendetail.html:26
-#: app/scripts/reports/detail/reportsdetail.html:27
+#: app/scripts/reports/detail/reportsdetail.html:28
 msgid "Basisdaten"
 msgstr "Alapadatok"
 
@@ -700,10 +685,6 @@ msgstr "Megjegyzés"
 msgid "Bemerkungen zu diesem Produzenten"
 msgstr "Megjegyzés a termelőhöz"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:42
-msgid "Bemerkungen zu dieser Lieferung:"
-msgstr "Megjegyzés ehhez a szállításhoz"
-
 #: app/scripts/kunden/detail/kundendetail.html:132
 msgid "Bemerkungen zu dieser Person"
 msgstr "Megjegyzés ehhez a személyhez"
@@ -712,7 +693,7 @@ msgstr "Megjegyzés ehhez a személyhez"
 msgid "Benötigte Anzahl Personen"
 msgstr "Szükséges személyek száma"
 
-#: app/scripts/app.js:194
+#: app/scripts/app.js:196
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:50
 msgid "Bereit"
 msgstr "Kész"
@@ -728,14 +709,11 @@ msgstr "Kész"
 #: app/scripts/projekt/settings/personCategories.html:26
 #: app/scripts/projekt/settings/personCategories.html:29
 #: app/scripts/projekt/settings/produktkategorien.html:24
-#: app/scripts/reports/detail/reportsdetail.html:40
-#: app/scripts/reports/detail/reportsdetail.html:43
-#: app/scripts/reports/execute/reportsexecute.html:31
+#: app/scripts/reports/detail/reportsdetail.html:41
+#: app/scripts/reports/detail/reportsdetail.html:44
 #: app/scripts/reports/overview/reportsoverview.html:26
 #: app/scripts/reportvorlagen/reportvorlagen.html:28
 #: app/scripts/reportvorlagen/reportvorlagen.html:30
-#: app/scripts/surveys/biddingRound.html:26
-#: app/scripts/surveys/biddingRound.html:29
 #: app/scripts/touren/detail/tourendetail.html:41
 #: app/scripts/touren/detail/tourendetail.html:44
 msgid "Beschreibung"
@@ -752,7 +730,7 @@ msgstr "Leírás"
 msgid "Bestellung abrechnen"
 msgstr "Rendelés elutasítása"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:858
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:899
 msgid "Bestellung an alle Lieferanten versenden"
 msgstr "Megrendelés küldése minden beszállítónak"
 
@@ -774,7 +752,7 @@ msgstr "Rendelés elutasítása"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:56
 #: app/scripts/dashboard/dashboard.html:94
-#: app/scripts/kunden/detail/kundendetail.html:484
+#: app/scripts/kunden/detail/kundendetail.html:499
 #: app/scripts/rechnungen/detail/rechnungendetail.html:139
 #: app/scripts/rechnungen/detail/rechnungendetail.html:144
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:48
@@ -790,8 +768,8 @@ msgstr "Összeg"
 msgid "Betreff"
 msgstr "Tárgy"
 
-#: app/scripts/app.js:159
-#: app/scripts/app.js:166
+#: app/scripts/app.js:161
+#: app/scripts/app.js:168
 msgid "Bezahlt"
 msgstr "Fizetve"
 
@@ -812,21 +790,9 @@ msgid "Bezeichnung"
 msgstr "Kijelölés"
 
 #: app/scripts/kunden/detail/kundendetail.html:211
-#: app/scripts/kunden/detail/kundendetail.html:365
+#: app/scripts/kunden/detail/kundendetail.html:380
 msgid "Bezeichnung am Briefkasten"
 msgstr "Kijelölés a postafiókban"
-
-#: app/scripts/surveys/biddingRound.html:6
-msgid "Bidding Round"
-msgstr "Ajánlattételi forduló"
-
-#: app/scripts/surveys/biddingRound.html:24
-msgid "Bidding Round Name"
-msgstr "Ajánlattételi forduló neve"
-
-#: app/scripts/surveys/biddingRound.html:21
-msgid "BiddingRound"
-msgstr "Ajánlattételi forduló"
 
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:16
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:25
@@ -844,48 +810,44 @@ msgstr "Visszatérítéseim"
 msgid "Bitte mit Vorsicht!"
 msgstr "Figyelem!"
 
-#: app/scripts/app.js:213
+#: app/scripts/app.js:215
 msgid "Britisches Pfund"
 msgstr "Angol font"
 
-#: app/scripts/app.js:178
+#: app/scripts/app.js:180
 msgid "Bu."
 msgstr "csokor"
 
-#: app/scripts/app.js:178
+#: app/scripts/app.js:180
 msgid "Bund"
 msgstr "Csokor"
 
-#: app/scripts/app.js:219
+#: app/scripts/app.js:221
 msgid "CAD"
-msgstr "CAD"
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:107
 #: app/scripts/produzenten/detail/produzentendetail.html:66
 msgid "CH..."
-msgstr "CH..."
+msgstr ""
 
 #: app/scripts/produzenten/detail/produzentendetail.html:109
 msgid "CHE-xxx.yyy.zzz MWST"
 msgstr "HU xxxxxxxx-y-zz ÁFA"
 
-#: app/scripts/app.js:207
+#: app/scripts/app.js:209
 msgid "CHF"
-msgstr "CHF"
+msgstr ""
 
-#: app/scripts/surveys/biddingRound.html:9
-msgid "Create new bidding round"
-msgstr "Ajánlattételi forduló létrehozása"
-
-#: app/scripts/app.js:317
+#: app/scripts/app.js:320
 msgid "Created"
 msgstr "Létrehozva"
 
-#: app/scripts/app.js:227
+#: app/scripts/app.js:229
 msgid "DI"
 msgstr "K."
 
-#: app/scripts/app.js:239
+#: app/scripts/app.js:241
 msgid "DO"
 msgstr "cs."
 
@@ -909,7 +871,7 @@ msgstr "Csatolmányok"
 #: app/scripts/abos/detail/abosdetail.html:132
 #: app/scripts/abos/detail/abwesenheiten/abwesenheiten.html:32
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:50
-#: app/scripts/app.js:365
+#: app/scripts/app.js:374
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:36
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:33
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:36
@@ -932,11 +894,6 @@ msgstr "Fizetési határidő"
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:37
 msgid "Datum Versendet"
 msgstr "Küldés dátuma"
-
-#: app/scripts/surveys/biddingRound.html:31
-#: app/scripts/surveys/biddingRound.html:34
-msgid "Deadline"
-msgstr "Határidő"
 
 #: app/scripts/abos/detail/abosdetail.html:100
 #: app/scripts/abos/detail/abosdetail.html:191
@@ -967,12 +924,12 @@ msgstr "Raktár:"
 msgid "Depotauslieferung"
 msgstr "Kiszállítás"
 
-#: app/index.html:88
+#: app/index.html:92
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:6
 msgid "Depotauslieferungen"
 msgstr "Kiszállítások"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:882
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:923
 msgid "Depotauslieferungen anzeigen"
 msgstr "Szállítások megtekintése"
 
@@ -980,11 +937,11 @@ msgstr "Szállítások megtekintése"
 msgid "Depotbrief erstellen"
 msgstr "Raktár-jelentés létrehozása"
 
-#: app/scripts/app.js:118
+#: app/scripts/app.js:120
 msgid "Depotlieferung"
 msgstr "Kiszállítás"
 
-#: app/scripts/app.js:142
+#: app/scripts/app.js:144
 msgid "DepotlieferungAbo"
 msgstr "Feliratkozás kiszállításra"
 
@@ -992,17 +949,17 @@ msgstr "Feliratkozás kiszállításra"
 msgid "Depotname"
 msgstr "Raktár neve"
 
-#: app/index.html:105
+#: app/index.html:109
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:17
 #: app/scripts/depots/overview/depotsoverview.html:6
 msgid "Depots"
 msgstr "Raktárak"
 
-#: app/scripts/app.js:306
+#: app/scripts/app.js:308
 msgid "Dez"
 msgstr "Dec."
 
-#: app/scripts/app.js:305
+#: app/scripts/app.js:307
 msgid "Dezember"
 msgstr "December"
 
@@ -1014,25 +971,31 @@ msgstr "Az önkéntes munka ajánlatok automatikusan lejárnak az együttműköd
 msgid "Die Kündigung muss bis spätestens am <b>{{kuendigungsfrist(abo) | date: 'EEE, dd.MM.yyyy'}}</b> eingereicht werden"
 msgstr "{{A szerződés felmondását <b>{{kuendigungsfrist(abo) | date: \"EEE, éééé.HH.nn\" előtt kell kezdeményezni}}</b>"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:322
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:358
 msgid "Die Lieferungen dürfen nicht mehr verändert werden."
 msgstr "Szállítások már nem módosíthatóak"
 
-#: app/scripts/app.js:226
+#: app/scripts/app.js:228
 msgid "Dienstag"
 msgstr "Kedd"
+
+#: app/scripts/projekt/settings/projektsettings.controller.js:377
+msgid "Diese Arbeitskategorie existiert bereits"
+msgstr ""
+
+#: app/scripts/projekt/settings/projektsettings.controller.js:302
+msgid "Diese Personenkategorie existiert bereits"
+msgstr ""
 
 #: app/scripts/not-found.html:9
 msgid "Diese Seite konnte nicht gefunden werden!"
 msgstr "A keresett oldal nem található."
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:69
-#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:40
+#: app/scripts/app.js:340
 msgid "Diese Woche"
 msgstr "Aktuális hét"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:69
-#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:40
+#: app/scripts/app.js:341
 msgid "Diesen Monat"
 msgstr "Aktuális hónap"
 
@@ -1048,11 +1011,11 @@ msgstr "Az előfizetés típus jelenleg nem módosítható"
 msgid "Dieses Abo ist inaktiv"
 msgstr "Ez az előfizetés nem aktív"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:110
+#: app/scripts/lieferplanungen/detail/korbplanung.html:117
 msgid "Dieses Produkt wurde frei hinzugefügt. Es befindet sich nicht in den Stammdaten."
 msgstr "Ezt a tételt manuálisan adták hozzá, és nem elérhető a terméklistában."
 
-#: app/scripts/app.js:138
+#: app/scripts/app.js:140
 msgid "DirectDebit"
 msgstr "Beszedési megbízás (direct debit)"
 
@@ -1060,7 +1023,7 @@ msgstr "Beszedési megbízás (direct debit)"
 msgid "Dokumente download"
 msgstr "Letölthető dokumentumok"
 
-#: app/scripts/app.js:238
+#: app/scripts/app.js:240
 msgid "Donnerstag"
 msgstr "Csütörtök"
 
@@ -1083,15 +1046,15 @@ msgstr "Letöltés"
 msgid "E-Mail"
 msgstr "E-mail"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:218
+#: app/scripts/abos/overview/abosoverview.controller.js:271
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:291
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:133
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:107
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:286
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:303
 #: app/scripts/depots/overview/depotsoverview.controller.js:97
-#: app/scripts/kunden/overview/kundenoverview.controller.js:130
-#: app/scripts/personen/overview/personenoverview.controller.js:142
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:255
+#: app/scripts/kunden/overview/kundenoverview.controller.js:136
+#: app/scripts/personen/overview/personenoverview.controller.js:154
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:260
 #: app/scripts/touren/overview/tourenoverview.controller.js:137
 msgid "E-Mail Formular"
 msgstr "E-Mail sablon"
@@ -1114,26 +1077,30 @@ msgstr "E-mail küldése a tagoknak"
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "E-mail az összes kapcsolatnak"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:193
+#: app/scripts/abos/overview/abosoverview.controller.js:246
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:262
-#: app/scripts/kunden/overview/kundenoverview.controller.js:112
-#: app/scripts/personen/overview/personenoverview.controller.js:125
+#: app/scripts/kunden/overview/kundenoverview.controller.js:118
+#: app/scripts/personen/overview/personenoverview.controller.js:137
 msgid "E-Mail versenden"
 msgstr "E-mail küldés"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:208
 msgid "ESR"
-msgstr "ESR"
+msgstr ""
 
-#: app/scripts/app.js:209
+#: app/scripts/app.js:211
 msgid "EUR"
-msgstr "EUR"
+msgstr ""
+
+#: app/scripts/reports/detail/reportsdetail.html:14
+msgid "Editieren"
+msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:275
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr "Új logó kiválasztása vagy hozzáadása"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:346
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:382
 msgid "Ein solches Produkt befindet sich schon in diesem Korb. Soll es dennoch eingefügt werden?"
 msgstr "Ez a termék már a kosárban van, hozzá akarja adni még egyszer?"
 
@@ -1147,11 +1114,11 @@ msgstr "Befizetett összeg"
 msgid "Eindeutige Bezeichnung"
 msgstr "Egyedi azonosító"
 
-#: app/scripts/kunden/detail/kundendetail.html:476
+#: app/scripts/kunden/detail/kundendetail.html:491
 msgid "Eine manuelle Rechnung für"
 msgstr "Kézi számla"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:836
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:877
 msgid "Eine oder mehrere Lieferungen aus Hauptabos haben keine Produkte eingetragen. \n"
 "Trotzdem fortfahren?"
 msgstr "Egy vagy több rendelés nem tartalmaz semmilyen terméket. \n"
@@ -1173,11 +1140,11 @@ msgstr "Érték túl rövid"
 msgid "Eingabe zu lang"
 msgstr "Érték túl hosszú"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:107
+#: app/scripts/lieferplanungen/detail/korbplanung.html:114
 msgid "Eingabe: Preis pro Einheit <br>Anzeige: Preis für gewählte Menge"
 msgstr "Érték: ár / egység <br>Jelzés: ár a kiválasztott mennyiségre"
 
-#: app/scripts/kunden/detail/kundendetail.html:488
+#: app/scripts/kunden/detail/kundendetail.html:503
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:66
 msgid "Eingang am"
 msgstr "Érték a"
@@ -1194,7 +1161,7 @@ msgstr "Regisztrált személyek"
 msgid "Einheit"
 msgstr "Egység"
 
-#: app/index.html:100
+#: app/index.html:104
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:6
 msgid "Einkaufsrechnungen"
 msgstr "Beszerzési számlák"
@@ -1211,8 +1178,8 @@ msgstr "Használt egység"
 msgid "Einsatzzeit"
 msgstr "Egységnyi idő"
 
-#: app/index.html:104
-#: app/index.html:65
+#: app/index.html:108
+#: app/index.html:69
 msgid "Einstellungen"
 msgstr "Beállítások"
 
@@ -1220,7 +1187,7 @@ msgstr "Beállítások"
 msgid "Einstellungen editieren"
 msgstr "Beállítások szerkesztése"
 
-#: app/index.html:95
+#: app/index.html:99
 msgid "Einsätze &amp; Abos"
 msgstr "Beszúrás &amp; -előfizetések"
 
@@ -1236,8 +1203,8 @@ msgstr "E-mail alt."
 msgid "Email an Kunden versenden"
 msgstr "E-mail küldése minden vevőnek"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:379
-#: app/scripts/abos/detail/abosdetail.controller.js:389
+#: app/scripts/abos/detail/abosdetail.controller.js:510
+#: app/scripts/abos/detail/abosdetail.controller.js:520
 msgid "Enddatum muss vor Startdatum liegen"
 msgstr "Győződjön meg róla, hogy a befejező dátum a kezdő dátum után legyen"
 
@@ -1252,7 +1219,7 @@ msgstr "Vége"
 msgid "Entity/Action"
 msgstr "Egység / tevékenység"
 
-#: app/scripts/app.js:321
+#: app/scripts/app.js:324
 msgid "Erfasst"
 msgstr "Rögzít"
 
@@ -1260,7 +1227,7 @@ msgstr "Rögzít"
 msgid "Erledigen"
 msgstr "Rendezni"
 
-#: app/scripts/app.js:312
+#: app/scripts/app.js:314
 msgid "Erledigt"
 msgstr "Kész"
 
@@ -1287,7 +1254,7 @@ msgstr "Hozzáadás dátuma"
 msgid "Erstellen"
 msgstr "Létrehozás"
 
-#: app/scripts/app.js:157
+#: app/scripts/app.js:159
 msgid "Erstellt"
 msgstr "Létrehozva"
 
@@ -1300,35 +1267,35 @@ msgstr "Létrehozva"
 msgid "Etiketten.zip"
 msgstr "Cimkek.zip"
 
-#: app/scripts/app.js:209
+#: app/scripts/app.js:211
 msgid "Euro"
-msgstr "Euro"
+msgstr ""
 
 #: app/scripts/journal/overview/journaloverview.html:42
 msgid "Event"
 msgstr "Esemény"
 
-#: app/scripts/app.js:245
+#: app/scripts/app.js:247
 msgid "FR"
 msgstr "P."
 
-#: app/scripts/kunden/detail/kundendetail.html:486
+#: app/scripts/kunden/detail/kundendetail.html:501
 msgid "Faelligkeitsdatum"
 msgstr "Határidő"
 
-#: app/scripts/app.js:172
+#: app/scripts/app.js:174
 msgid "FaelltAusAbwesend"
 msgstr "Törölve"
 
-#: app/scripts/app.js:174
+#: app/scripts/app.js:176
 msgid "FaelltAusGekuendigt"
 msgstr "SzerződésFelmondásTörlés"
 
-#: app/scripts/app.js:173
+#: app/scripts/app.js:175
 msgid "FaelltAusSaldoZuTief"
 msgstr "TörlésMegfelelőEgyenleg"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:101
+#: app/scripts/lieferplanungen/detail/korbplanung.html:108
 msgid "Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?"
 msgstr "Ha ezt az előfizetési típust hozzáadjuk, először eltávolítja az összes releváns típust és hozzá adja az újat. Folytatni szeretné a törlést?"
 
@@ -1337,11 +1304,11 @@ msgstr "Ha ezt az előfizetési típust hozzáadjuk, először eltávolítja az 
 msgid "Farbe-Code"
 msgstr "Színkód"
 
-#: app/scripts/app.js:271
+#: app/scripts/app.js:273
 msgid "Feb"
 msgstr "Febr."
 
-#: app/scripts/app.js:270
+#: app/scripts/app.js:272
 msgid "Februar"
 msgstr "Február"
 
@@ -1353,15 +1320,15 @@ msgstr "Hiba feltöltés közben"
 msgid "Fehlerhafte E-Mail Adresse"
 msgstr "Helytelen e-mail cím"
 
-#: app/index.html:97
+#: app/index.html:101
 msgid "Finanzen"
 msgstr "Pénzügyek"
 
-#: app/scripts/app.js:134
+#: app/scripts/app.js:136
 msgid "Fr."
 msgstr " "
 
-#: app/scripts/app.js:134
+#: app/scripts/app.js:136
 msgid "Frau"
 msgstr " "
 
@@ -1369,7 +1336,7 @@ msgstr " "
 msgid "Freischalten"
 msgstr "Publikál"
 
-#: app/scripts/app.js:244
+#: app/scripts/app.js:246
 msgid "Freitag"
 msgstr "Péntek"
 
@@ -1391,16 +1358,16 @@ msgstr "Esedékesség dátuma"
 msgid "Für Anzahl Lieferungen"
 msgstr "Kiszállítások száma"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:684
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:720
 msgid "Für jedes Produkt muss ein Produzent ausgewählt sein."
 msgstr "Kérem, válasszon termelőt minden termékhez"
 
-#: app/scripts/app.js:214
+#: app/scripts/app.js:216
 msgid "GBP"
-msgstr "GBP"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:139
-#: app/scripts/app.js:171
+#: app/scripts/app.js:173
 msgid "Geliefert"
 msgstr "Teljesítve"
 
@@ -1417,12 +1384,12 @@ msgstr "Tervezett szállítási időpontok"
 msgid "Gläubiger-Identifikationsnummer"
 msgstr "Hitelező azonosítója"
 
-#: app/scripts/app.js:179
+#: app/scripts/app.js:181
 msgid "Gramm"
 msgstr "gramm"
 
 #: app/scripts/abos/detail/abosdetail.html:105
-#: app/scripts/abos/overview/abosoverview.html:70
+#: app/scripts/abos/overview/abosoverview.html:71
 #: app/scripts/abotypen/detail/abotypendetail.html:135
 #: app/scripts/kunden/detail/abo/abos.html:14
 msgid "Guthaben"
@@ -1436,7 +1403,7 @@ msgstr "Minimális egyenlegek"
 msgid "Guthaben Neu"
 msgstr "Új egyenleg"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:341
+#: app/scripts/abos/detail/abosdetail.controller.js:472
 msgid "Guthaben anpassen"
 msgstr "Egyenleg módosítása"
 
@@ -1444,15 +1411,15 @@ msgstr "Egyenleg módosítása"
 msgid "Guthaben anpassen für Abo Nr."
 msgstr "A #. sorszámú előfizető egyenlegének módosítása"
 
-#: app/scripts/abos/overview/abosoverview.html:73
+#: app/scripts/abos/overview/abosoverview.html:74
 msgid "Guthaben in Rechnung"
 msgstr "Számlaegyenleg"
 
-#: app/scripts/abos/overview/abosoverview.html:76
+#: app/scripts/abos/overview/abosoverview.html:77
 msgid "Guthaben vertraglich"
 msgstr "Egyenleg a szerződés alapján"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:220
+#: app/scripts/abos/detail/abosdetail.controller.js:346
 msgid "Guthaben wurde erfolgreich angepasst"
 msgstr "Egyenleg sikeresen módosítva"
 
@@ -1465,31 +1432,39 @@ msgstr "Követelés dátuma"
 msgid "Gültig für"
 msgstr "Érvényes"
 
-#: app/scripts/app.js:330
+#: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:2
+msgid "HTML / WYSIWYG"
+msgstr ""
+
+#: app/scripts/app.js:333
 msgid "Halbtage"
 msgstr "Fél nap"
 
-#: app/scripts/app.js:119
+#: app/scripts/app.js:121
 msgid "Heimlieferung"
 msgstr "Házhozszállítás"
 
-#: app/scripts/app.js:143
+#: app/scripts/app.js:145
 msgid "HeimlieferungAbo"
 msgstr "Előfizetés: házhozszállítás"
 
-#: app/scripts/app.js:133
+#: app/scripts/app.js:135
 msgid "Herr"
 msgstr " "
 
-#: app/scripts/app.js:355
+#: app/scripts/app.js:364
 msgid "Heute"
 msgstr "Ma"
+
+#: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:8
+msgid "Hier Text einfügen und formatieren"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:352
 msgid "Hinterlegung, Abgabe bei..."
 msgstr "Átadási pont..."
 
-#: app/scripts/app.js:133
+#: app/scripts/app.js:135
 msgid "Hr."
 msgstr " "
 
@@ -1500,12 +1475,16 @@ msgstr " "
 #: app/scripts/projekt/settings/projektsettings.html:221
 #: app/scripts/projekt/settings/projektsettings.html:224
 msgid "IBAN"
-msgstr "IBAN"
+msgstr ""
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:122
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:72
 msgid "Id"
 msgstr "Azonosító"
+
+#: app/scripts/kunden/detail/kundendetail.html:358
+msgid "Im Format"
+msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:311
 msgid "Importdatei"
@@ -1519,7 +1498,7 @@ msgstr "Importált fájl"
 msgid "In Vorbereitung"
 msgstr "Előkészítés"
 
-#: app/scripts/app.js:193
+#: app/scripts/app.js:195
 msgid "InVorbereitung"
 msgstr "Előkészítés"
 
@@ -1551,11 +1530,11 @@ msgstr "I"
 msgid "Ja"
 msgstr "Igen"
 
-#: app/scripts/app.js:265
+#: app/scripts/app.js:267
 msgid "Jan"
 msgstr "Jan."
 
-#: app/scripts/app.js:264
+#: app/scripts/app.js:266
 msgid "Januar"
 msgstr "Január"
 
@@ -1563,32 +1542,32 @@ msgstr "Január"
 msgid "Je Vertrieb wird ein eigener Korb geplant"
 msgstr "Kosár tervezés befejezve értékesítés és előfizetés típus szerint"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:690
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:726
 msgid "Jedes Produkt muss über eine Beschreibung verfügen."
 msgstr "Minden egyes termékhez egy leírásnak kell tartoznia."
 
-#: app/scripts/app.js:350
+#: app/scripts/app.js:359
 msgid "Jetzt"
 msgstr "Most"
 
-#: app/index.html:117
+#: app/index.html:121
 #: app/scripts/journal/overview/journaloverview.html:6
 msgid "Journal"
 msgstr "Napló"
 
-#: app/scripts/app.js:278
+#: app/scripts/app.js:280
 msgid "Jul"
 msgstr "Júl."
 
-#: app/scripts/app.js:278
+#: app/scripts/app.js:280
 msgid "Juli"
 msgstr "Július"
 
-#: app/scripts/app.js:277
+#: app/scripts/app.js:279
 msgid "Jun"
 msgstr "Jún."
 
-#: app/scripts/app.js:277
+#: app/scripts/app.js:279
 msgid "Juni"
 msgstr "Június"
 
@@ -1596,9 +1575,9 @@ msgstr "Június"
 #: app/scripts/produzenten/detail/produzentendetail.html:42
 #: app/scripts/produzenten/overview/produzentenoverview.html:29
 msgid "KRZ"
-msgstr "KRZ"
+msgstr ""
 
-#: app/scripts/app.js:218
+#: app/scripts/app.js:220
 msgid "Kanadischer Dollar"
 msgstr "Kanadai dollár"
 
@@ -1615,8 +1594,12 @@ msgstr "Előfizető / Fő"
 msgid "Kein Zusatzabo vorhanden."
 msgstr "Nincs további előfizető"
 
-#: app/scripts/app.js:132
+#: app/scripts/app.js:134
 #: app/scripts/kunden/detail/kundendetail.html:337
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:209
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:215
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:24
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:49
 msgid "Keine"
 msgstr "Nem"
 
@@ -1636,9 +1619,9 @@ msgstr "Nincs több függőben lévő szállítás"
 msgid "Keine abgeschlossenen Bestellungen ausgewählt"
 msgstr "Válassza ki a lezárt megrendeléseket"
 
-#: app/scripts/app.js:182
+#: app/scripts/app.js:184
 msgid "Kilogramm"
-msgstr "Kilogramm"
+msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:85
 msgid "Konfigurationen"
@@ -1657,12 +1640,21 @@ msgstr "Fiók adatok"
 msgid "Kontoinhaber"
 msgstr "Számlatulajdonos"
 
+#: app/scripts/kunden/detail/kundendetail.html:357
+#: app/scripts/kunden/overview/kundenoverview.html:56
+msgid "Koordinaten"
+msgstr ""
+
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:149
+msgid "Korbdetails drucken"
+msgstr ""
+
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 msgid "Korbinhalt"
 msgstr "Kosár tartalma"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:95
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:129
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:136
 msgid "Korbübersicht drucken"
 msgstr "Nyomtatás: Kosár áttekintése"
 
@@ -1670,10 +1662,10 @@ msgstr "Nyomtatás: Kosár áttekintése"
 msgid "Krzz."
 msgstr "Rövidítés"
 
-#: app/index.html:79
+#: app/index.html:83
 #: app/scripts/abos/detail/abosdetail.html:37
-#: app/scripts/app.js:325
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:29
+#: app/scripts/app.js:328
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:31
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:37
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
 #: app/scripts/dashboard/dashboard.html:28
@@ -1692,7 +1684,7 @@ msgstr "Tag"
 msgid "Kunde Nr."
 msgstr "Vevő azonosító:"
 
-#: app/scripts/kunden/overview/kundenoverview.controller.js:92
+#: app/scripts/kunden/overview/kundenoverview.controller.js:98
 #: app/scripts/kunden/overview/kundenoverview.html:10
 #: app/scripts/personen/overview/personenoverview.html:10
 msgid "Kunde erstellen"
@@ -1707,7 +1699,8 @@ msgstr "Tag létrehozva"
 msgid "Kunde suchen..."
 msgstr "Tag keresése..."
 
-#: app/index.html:80
+#: app/index.html:84
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
 msgstr "Vevők"
@@ -1720,11 +1713,11 @@ msgstr "Tag e-mail szükséges"
 msgid "Kundenbemerkungen"
 msgstr "Ügyfél megjegyzések"
 
-#: app/scripts/kunden/overview/kundenoverview.controller.js:100
+#: app/scripts/kunden/overview/kundenoverview.controller.js:106
 msgid "Kundenbrief"
 msgstr "Tag vevőknek"
 
-#: app/scripts/kunden/overview/kundenoverview.html:69
+#: app/scripts/kunden/overview/kundenoverview.html:72
 msgid "Kundenbrief.odt"
 msgstr "Tagkimutatas.odt"
 
@@ -1732,7 +1725,7 @@ msgstr "Tagkimutatas.odt"
 msgid "Kundendetails"
 msgstr "Vevők adatai"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:231
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:236
 msgid "Kundenliste anzeigen"
 msgstr "Összes tag listázása"
 
@@ -1746,7 +1739,7 @@ msgstr "Tagság típus"
 msgid "Kundentyp erstellen"
 msgstr "Tag létrehozása"
 
-#: app/index.html:110
+#: app/index.html:114
 #: app/scripts/kunden/detail/kundendetail.html:24
 #: app/scripts/projekt/settings/kundentypen.html:6
 msgid "Kundentypen"
@@ -1779,7 +1772,7 @@ msgstr "Utolsó módosítás"
 msgid "Lieferadresse"
 msgstr "Szállítási cím"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:163
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:165
 msgid "Lieferantenbericht"
 msgstr "Szállítói jelentés"
 
@@ -1796,25 +1789,29 @@ msgid "Lieferdatum"
 msgstr "Szállítási dátum"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:86
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:116
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:123
 msgid "Lieferetiketten drucken"
 msgstr "Szállítási címkék nyomtatása"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:813
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:821
+#: app/scripts/app.js:315
+msgid "Lieferinformation"
+msgstr ""
+
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:854
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:862
 msgid "Lieferplanung abschliessen"
 msgstr "Szállítás tervezése kész"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:846
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:887
 msgid "Lieferplanung löschen"
 msgstr "Törölje a szállítás tervet"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:924
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:933
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:965
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:974
 msgid "Lieferplanung verrechnen"
 msgstr "Számolja ki a szállítási tervet"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:944
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:985
 msgid "Lieferplanung verrechnet"
 msgstr "Szállítási terv feltöltése törölve"
 
@@ -1822,7 +1819,7 @@ msgstr "Szállítási terv feltöltése törölve"
 msgid "Lieferplanungen"
 msgstr "Szállítás tervezése"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:108
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:112
 msgid "Lieferplanungsbericht"
 msgstr "Riport az elosztás tervezéséről"
 
@@ -1832,7 +1829,7 @@ msgid "Lieferrhythmus"
 msgstr "Szállítás gyakorisága"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:77
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:104
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:111
 msgid "Lieferschein drucken"
 msgstr "Szállítólevél megtekintése"
 
@@ -1844,7 +1841,7 @@ msgstr "Szállítás állapota"
 msgid "Liefertag"
 msgstr "Szállítás napja"
 
-#: app/scripts/app.js:114
+#: app/scripts/app.js:116
 msgid "Lieferung"
 msgstr "Szállítás"
 
@@ -1853,17 +1850,17 @@ msgstr "Szállítás"
 msgid "Lieferung vom"
 msgstr "Szállítás"
 
-#: app/index.html:86
+#: app/index.html:90
 #: app/scripts/abos/detail/abosdetail.html:127
 #: app/scripts/abos/detail/abosdetail.html:25
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:3
-#: app/scripts/app.js:124
+#: app/scripts/app.js:126
 msgid "Lieferungen"
 msgstr "Szállítások"
 
-#: app/scripts/app.js:185
+#: app/scripts/app.js:187
 msgid "Liter"
-msgstr "Liter"
+msgstr ""
 
 #: app/scripts/personen/overview/personenoverview.html:76
 msgid "Login aktiv"
@@ -1877,17 +1874,17 @@ msgstr "Logó"
 msgid "Logo auswählen oder einfügen"
 msgstr "Új logó kiválasztása vagy hozzáadása"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:299
-#: app/scripts/abos/detail/abosdetail.controller.js:329
-#: app/scripts/app.js:360
+#: app/scripts/abos/detail/abosdetail.controller.js:431
+#: app/scripts/abos/detail/abosdetail.controller.js:461
+#: app/scripts/app.js:369
 msgid "Löschen"
 msgstr "Törlés"
 
-#: app/scripts/app.js:233
+#: app/scripts/app.js:235
 msgid "MI"
 msgstr "Sze."
 
-#: app/scripts/app.js:223
+#: app/scripts/app.js:225
 msgid "MO"
 msgstr "H."
 
@@ -1917,7 +1914,7 @@ msgstr "Emlékeztető elküldve"
 msgid "Mahnung.odt"
 msgstr "Fizetesiemlekezteto.odt"
 
-#: app/scripts/app.js:160
+#: app/scripts/app.js:162
 msgid "MahnungVerschickt"
 msgstr "EmlékeztetőElküldve"
 
@@ -1925,15 +1922,15 @@ msgstr "EmlékeztetőElküldve"
 msgid "Mahnungsdokument erstellen"
 msgstr "Emlékeztető létrehozása"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:179
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:184
 msgid "Mahnungsdokumente erstellen"
 msgstr "Emlékeztető létrehozása"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:205
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:210
 msgid "Mahnungsdokumente herunterladen"
 msgstr "Emlékeztetők letöltése"
 
-#: app/scripts/app.js:276
+#: app/scripts/app.js:278
 msgid "Mai"
 msgstr "Május"
 
@@ -1942,11 +1939,11 @@ msgstr "Május"
 msgid "Mail-Body"
 msgstr "Szöveg"
 
-#: app/index.html:119
+#: app/index.html:123
 msgid "Mail-Vorlagen"
 msgstr "E-mail sablon"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:362
+#: app/scripts/abos/detail/abosdetail.controller.js:493
 msgid "Manuelle Rechnung erstellen"
 msgstr "Új számla létrehozása"
 
@@ -1955,7 +1952,7 @@ msgstr "Új számla létrehozása"
 msgid "Manueller Betrag"
 msgstr "Manuális összeg"
 
-#: app/scripts/app.js:274
+#: app/scripts/app.js:276
 msgid "Mar"
 msgstr "Márc."
 
@@ -1963,8 +1960,8 @@ msgstr "Márc."
 msgid "Maximal Abos pro Liefertag"
 msgstr "Előfizetések maximális száma szállítási naponként"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:127
-#: app/scripts/lieferplanungen/detail/korbplanung.html:128
+#: app/scripts/lieferplanungen/detail/korbplanung.html:134
+#: app/scripts/lieferplanungen/detail/korbplanung.html:135
 #: app/scripts/produkte/overview/produkteoverview.html:52
 msgid "Menge"
 msgstr "Mennyiség"
@@ -1978,7 +1975,7 @@ msgstr "Mennyiség / egység"
 msgid "Menge Total"
 msgstr "Teljes mennyiség"
 
-#: app/index.html:92
+#: app/index.html:96
 msgid "Mitarbeit"
 msgstr "Együttműködés"
 
@@ -1990,7 +1987,7 @@ msgstr "Bejelentkezés utáni üzenet"
 msgid "Mitteilung vor dem Login"
 msgstr "Bejelentkezés előtti üzenet"
 
-#: app/scripts/app.js:232
+#: app/scripts/app.js:234
 msgid "Mittwoch"
 msgstr "Szerda"
 
@@ -1999,17 +1996,17 @@ msgstr "Szerda"
 msgid "Mobiltelefon"
 msgstr "Mobil"
 
-#: app/scripts/app.js:125
-#: app/scripts/app.js:128
+#: app/scripts/app.js:127
+#: app/scripts/app.js:130
 msgid "Monate"
 msgstr "Hónapok"
 
-#: app/scripts/app.js:100
-#: app/scripts/app.js:107
+#: app/scripts/app.js:102
+#: app/scripts/app.js:109
 msgid "Monatlich"
 msgstr "Havi"
 
-#: app/scripts/app.js:223
+#: app/scripts/app.js:225
 msgid "Montag"
 msgstr "Hétfő"
 
@@ -2017,13 +2014,13 @@ msgstr "Hétfő"
 msgid "Multiplizieren"
 msgstr "Szorzás"
 
-#: app/scripts/app.js:274
+#: app/scripts/app.js:276
 msgid "März"
 msgstr "Március"
 
 #: app/scripts/utils/ng-table/ng-table-boolean-filter.html:8
 msgid "N"
-msgstr "N"
+msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
@@ -2038,8 +2035,8 @@ msgstr "N"
 #: app/scripts/kunden/detail/kundendetail.html:81
 #: app/scripts/kunden/detail/kundendetail.html:84
 #: app/scripts/personen/overview/personenoverview.html:39
-#: app/scripts/reports/detail/reportsdetail.html:32
-#: app/scripts/reports/detail/reportsdetail.html:35
+#: app/scripts/reports/detail/reportsdetail.html:33
+#: app/scripts/reports/detail/reportsdetail.html:36
 #: app/scripts/reports/overview/reportsoverview.html:23
 #: app/scripts/reportvorlagen/reportvorlagen.html:23
 #: app/scripts/touren/detail/tourendetail.html:36
@@ -2089,11 +2086,11 @@ msgstr "Új"
 msgid "Neue Bezeichnung"
 msgstr "Új kijelölés"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:100
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:104
 msgid "Neue Lieferplanung generieren"
 msgstr "Új szállítás terv létrehozása"
 
-#: app/scripts/kunden/detail/kundendetail.html:411
+#: app/scripts/kunden/detail/kundendetail.html:426
 msgid "Neue Pendenz"
 msgstr "Új ajánlat"
 
@@ -2109,7 +2106,7 @@ msgstr "Új előfizetés"
 msgid "Nicht erledigte Zahlungseingänge"
 msgstr "Nem teljesített kifizetések"
 
-#: app/scripts/app.js:313
+#: app/scripts/app.js:316
 msgid "NichtErledigt"
 msgstr "Nem teljesült"
 
@@ -2117,21 +2114,21 @@ msgstr "Nem teljesült"
 msgid "Noch nicht sortierte Tourlieferungen"
 msgstr "Még nem rendezett körök"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:38
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:40
 msgid "Noch zu leisten"
 msgstr "Ehhez"
 
-#: app/scripts/app.js:300
+#: app/scripts/app.js:302
 msgid "Nov"
 msgstr "Nov."
 
-#: app/scripts/app.js:299
+#: app/scripts/app.js:301
 msgid "November"
-msgstr "November"
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:54
 #: app/scripts/kunden/detail/kundendetail.html:233
-#: app/scripts/kunden/detail/kundendetail.html:387
+#: app/scripts/kunden/detail/kundendetail.html:402
 #: app/scripts/produzenten/detail/produzentendetail.html:130
 #: app/scripts/projekt/settings/projektsettings.html:40
 #: app/scripts/rechnungen/detail/rechnungendetail.html:81
@@ -2146,7 +2143,7 @@ msgstr "Sorszám"
 #: app/scripts/dashboard/dashboard.html:85
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:28
 #: app/scripts/kunden/detail/abo/abos.html:10
-#: app/scripts/kunden/detail/kundendetail.html:482
+#: app/scripts/kunden/detail/kundendetail.html:497
 #: app/scripts/kunden/overview/kundenoverview.html:33
 #: app/scripts/rechnungen/detail/rechnungendetail.html:123
 #: app/scripts/rechnungen/detail/rechnungendetail.html:126
@@ -2162,8 +2159,7 @@ msgstr "Sz."
 msgid "Nr. (Haupt/Zusatzabo)"
 msgstr "Sorszám (fő/kiegészítő)"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:69
-#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:40
+#: app/scripts/app.js:339
 msgid "Nur Heute"
 msgstr "Csak ma"
 
@@ -2171,8 +2167,8 @@ msgstr "Csak ma"
 msgid "Nächster Kündigungstermin:"
 msgstr "Szerződés időszaknak lezárása:"
 
-#: app/scripts/app.js:148
-#: app/scripts/app.js:164
+#: app/scripts/app.js:150
+#: app/scripts/app.js:166
 #: app/scripts/dashboard/dashboard.html:61
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:36
 msgid "Offen"
@@ -2182,18 +2178,18 @@ msgstr "Megnyitás"
 msgid "Offene Pendenzen"
 msgstr "Függőben lévő feladatok megnyitása"
 
-#: app/scripts/app.js:294
+#: app/scripts/app.js:296
 msgid "Okt"
 msgstr "Okt."
 
-#: app/scripts/app.js:293
+#: app/scripts/app.js:295
 msgid "Oktober"
 msgstr "Október"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:57
 #: app/scripts/depots/detail/depotsdetail.html:65
 #: app/scripts/kunden/detail/kundendetail.html:244
-#: app/scripts/kunden/detail/kundendetail.html:398
+#: app/scripts/kunden/detail/kundendetail.html:413
 #: app/scripts/produzenten/detail/produzentendetail.html:149
 #: app/scripts/projekt/settings/projektsettings.html:59
 #: app/scripts/rechnungen/detail/rechnungendetail.html:100
@@ -2202,7 +2198,7 @@ msgstr "Város"
 
 #: app/scripts/depots/detail/depotsdetail.html:62
 #: app/scripts/kunden/detail/kundendetail.html:241
-#: app/scripts/kunden/detail/kundendetail.html:395
+#: app/scripts/kunden/detail/kundendetail.html:410
 #: app/scripts/produzenten/detail/produzentendetail.html:146
 #: app/scripts/projekt/settings/projektsettings.html:56
 #: app/scripts/rechnungen/detail/rechnungendetail.html:97
@@ -2212,7 +2208,7 @@ msgstr "Irányítószám"
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:29
 #: app/scripts/depots/detail/depotsdetail.html:59
 #: app/scripts/kunden/detail/kundendetail.html:238
-#: app/scripts/kunden/detail/kundendetail.html:392
+#: app/scripts/kunden/detail/kundendetail.html:407
 #: app/scripts/produzenten/detail/produzentendetail.html:143
 #: app/scripts/projekt/settings/projektsettings.html:53
 #: app/scripts/rechnungen/detail/rechnungendetail.html:94
@@ -2228,7 +2224,7 @@ msgstr "Irányítószám / Város"
 msgid "PLZ Ort"
 msgstr "Irányítószám Város"
 
-#: app/index.html:67
+#: app/index.html:71
 msgid "Passwort wechseln"
 msgstr "Jelszó módosítása"
 
@@ -2245,12 +2241,12 @@ msgstr "Fizetés típusa"
 msgid "Pendenz als erledigt markieren"
 msgstr "Befejezett függő feladatok"
 
-#: app/index.html:84
+#: app/index.html:88
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:6
 msgid "Pendenzen"
 msgstr "Nyitott tételek"
 
-#: app/scripts/kunden/detail/kundendetail.html:410
+#: app/scripts/kunden/detail/kundendetail.html:425
 msgid "Pendenzen / History"
 msgstr "Nyitott tételek / történet"
 
@@ -2268,7 +2264,7 @@ msgstr "Személy"
 msgid "Person hinzufügen"
 msgstr "Személy hozzáadása"
 
-#: app/index.html:81
+#: app/index.html:85
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:40
 #: app/scripts/personen/overview/personenoverview.html:6
 msgid "Personen"
@@ -2291,7 +2287,7 @@ msgstr "SzemélyKategória"
 msgid "Personenkategorie Erstellen"
 msgstr "Személy kategória létrehozása"
 
-#: app/index.html:111
+#: app/index.html:115
 #: app/scripts/personen/overview/personenoverview.html:65
 #: app/scripts/projekt/settings/personCategories.html:6
 msgid "Personenkategorien"
@@ -2305,7 +2301,7 @@ msgstr "Összes tag listázása"
 msgid "Personenliste übrigen Teilnehmern anzeigen"
 msgstr "Más személyek listázása"
 
-#: app/index.html:87
+#: app/index.html:91
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 #: app/scripts/lieferplanungen/detail/korbplanung.html:21
 #: app/scripts/lieferplanungen/detail/lieferanten.html:14
@@ -2320,11 +2316,11 @@ msgstr "Tervezés #{{planung.id}} összesítés termelők szerint"
 msgid "Planung editieren"
 msgstr "Tervezése szerkesztése"
 
-#: app/scripts/app.js:189
+#: app/scripts/app.js:191
 msgid "Por."
 msgstr "Rész."
 
-#: app/scripts/app.js:188
+#: app/scripts/app.js:190
 msgid "Portion"
 msgstr "Részesedés"
 
@@ -2337,12 +2333,12 @@ msgstr "Pozíció"
 msgid "Postauslieferung"
 msgstr "Postai kézbesítés"
 
-#: app/index.html:90
+#: app/index.html:94
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:6
 msgid "Postauslieferungen"
 msgstr "Postai szállítás"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:908
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:949
 msgid "Postauslieferungen anzeigen"
 msgstr "Posta szállítás megtekintése"
 
@@ -2351,19 +2347,19 @@ msgid "Postfach, Etage, c/o, ..."
 msgstr "Postafiók, emelet, személy ..."
 
 #: app/scripts/kunden/detail/kundendetail.html:222
-#: app/scripts/kunden/detail/kundendetail.html:376
+#: app/scripts/kunden/detail/kundendetail.html:391
 #: app/scripts/projekt/settings/projektsettings.html:48
 #: app/scripts/rechnungen/detail/rechnungendetail.html:89
 msgid "Postfach, c/o, ..."
 msgstr "Postafiók"
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:21
-#: app/scripts/app.js:120
+#: app/scripts/app.js:122
 #: app/scripts/kunden/detail/abo/abos.html:47
 msgid "Postlieferung"
 msgstr "Postai szállítás"
 
-#: app/scripts/app.js:144
+#: app/scripts/app.js:146
 msgid "PostlieferungAbo"
 msgstr "Feliratkozás postai szállításra"
 
@@ -2376,9 +2372,9 @@ msgstr "Feliratkozás postai szállításra"
 #: app/scripts/abotypen/overview/abotypen.html:44
 #: app/scripts/abotypen/overview/zusatzabotypen.html:39
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:13
-#: app/scripts/lieferplanungen/detail/korbplanung.html:138
-#: app/scripts/lieferplanungen/detail/korbplanung.html:144
-#: app/scripts/lieferplanungen/detail/korbplanung.html:62
+#: app/scripts/lieferplanungen/detail/korbplanung.html:145
+#: app/scripts/lieferplanungen/detail/korbplanung.html:151
+#: app/scripts/lieferplanungen/detail/korbplanung.html:69
 #: app/scripts/produkte/overview/produkteoverview.html:40
 #: app/scripts/produkte/overview/produkteoverview.html:45
 msgid "Preis"
@@ -2392,7 +2388,7 @@ msgstr "Ár / egység"
 msgid "Preis / Packung"
 msgstr "Ár / csomag"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:244
+#: app/scripts/abos/detail/abosdetail.controller.js:370
 msgid "Preis wurde erfolgreich angepasst"
 msgstr "Ár sikeresen módosítva"
 
@@ -2408,18 +2404,18 @@ msgstr "Ár szerkeszthető"
 msgid "Preise sichtbar / relevant"
 msgstr "Árak látható / releváns"
 
-#: app/scripts/app.js:592
+#: app/scripts/app.js:637
 msgid "Problem beim Aufruf einer Serverfunktion:"
 msgstr "A szerver elérésekor probléma merült fel:"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:154
-#: app/scripts/lieferplanungen/detail/korbplanung.html:65
+#: app/scripts/lieferplanungen/detail/korbplanung.html:161
+#: app/scripts/lieferplanungen/detail/korbplanung.html:72
 msgid "Prod."
 msgstr "Termék"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:12
-#: app/scripts/lieferplanungen/detail/korbplanung.html:116
-#: app/scripts/lieferplanungen/detail/korbplanung.html:59
+#: app/scripts/lieferplanungen/detail/korbplanung.html:123
+#: app/scripts/lieferplanungen/detail/korbplanung.html:66
 #: app/scripts/lieferplanungen/detail/lieferanten.html:42
 msgid "Produkt"
 msgstr "Termék"
@@ -2428,16 +2424,16 @@ msgstr "Termék"
 msgid "Produkt erstellen"
 msgstr "Új termék létrehozása"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:124
+#: app/scripts/lieferplanungen/detail/korbplanung.html:131
 msgid "Produktbez."
 msgstr "Termék kijel."
 
-#: app/index.html:109
+#: app/index.html:113
 #: app/scripts/produkte/overview/produkteoverview.html:6
 msgid "Produkte"
 msgstr "Termékek"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:49
+#: app/scripts/lieferplanungen/detail/korbplanung.html:52
 msgid "Produkte-Angebot"
 msgstr "Termék ajánlat"
 
@@ -2445,7 +2441,7 @@ msgstr "Termék ajánlat"
 msgid "Produktekategorie erstellen"
 msgstr "Termékkategóriák létrehozása"
 
-#: app/index.html:112
+#: app/index.html:116
 #: app/scripts/projekt/settings/produktkategorien.html:6
 msgid "Produktekategorien"
 msgstr "Termék kategóriák"
@@ -2456,13 +2452,13 @@ msgid "Produzent"
 msgstr "Termelő"
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:10
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:12
 #: app/scripts/produzenten/overview/produzentenoverview.controller.js:117
 #: app/scripts/produzenten/overview/produzentenoverview.html:10
 msgid "Produzent erstellen"
 msgstr "Termelő létrehozása"
 
-#: app/index.html:108
+#: app/index.html:112
 #: app/scripts/produkte/overview/produkteoverview.html:70
 #: app/scripts/produzenten/overview/produzentenoverview.html:6
 msgid "Produzenten"
@@ -2484,9 +2480,9 @@ msgstr "Termelő összesítés"
 msgid "Produzentenbrief.odt"
 msgstr "Termelo_level.odt"
 
-#: app/index.html:120
+#: app/index.html:124
 msgid "Projekt"
-msgstr "Projekt"
+msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:4
 msgid "Projekteinstellungen"
@@ -2496,12 +2492,11 @@ msgstr "Projekt beállítások"
 msgid "Prägnanter Betreff"
 msgstr "Téma"
 
-#: app/scripts/app.js:332
+#: app/scripts/app.js:335
 msgid "Punkte"
 msgstr "Pontok"
 
-#: app/scripts/reports/detail/reportsdetail.html:55
-#: app/scripts/reports/execute/reportsexecute.html:26
+#: app/scripts/reports/detail/reportsdetail.html:56
 msgid "Query"
 msgstr "Keresés"
 
@@ -2515,13 +2510,13 @@ msgid "Rechnung bezahlt"
 msgstr "Fizetett számla"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.controller.js:210
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:158
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:163
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:10
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:10
 msgid "Rechnung erstellen"
 msgstr "Számla létrehozása"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:310
+#: app/scripts/abos/detail/abosdetail.controller.js:442
 msgid "Rechnung manuell erstellen"
 msgstr "Számla létrehozása manuálisan"
 
@@ -2541,8 +2536,8 @@ msgstr "Számla elküldve"
 msgid "Rechnung.odt"
 msgstr "Szamla.odt"
 
-#: app/index.html:99
-#: app/scripts/kunden/detail/kundendetail.html:475
+#: app/index.html:103
+#: app/scripts/kunden/detail/kundendetail.html:490
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:6
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:28
 msgid "Rechnungen"
@@ -2557,11 +2552,11 @@ msgstr "Számla megtekintése"
 msgid "Rechnungen erstellen"
 msgstr "Számlák létrehozása"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:289
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:294
 msgid "Rechnungen löschen"
 msgstr "Számla törlése"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:218
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:223
 msgid "Rechnungen verschickt"
 msgstr "Megküldött számlák"
 
@@ -2577,7 +2572,7 @@ msgstr "Számlázási cím"
 msgid "Rechnungsdaten"
 msgstr "Számlázási adatok"
 
-#: app/scripts/kunden/detail/kundendetail.html:485
+#: app/scripts/kunden/detail/kundendetail.html:500
 #: app/scripts/rechnungen/detail/rechnungendetail.html:150
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:60
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:22
@@ -2588,11 +2583,11 @@ msgstr "Számla dátuma"
 msgid "Rechnungsdokument erstellen"
 msgstr "Számla létrehozása"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:166
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:171
 msgid "Rechnungsdokumente erstellen"
 msgstr "Számlák létrehozása"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:192
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:197
 msgid "Rechnungsdokumente herunterladen"
 msgstr "Számlák letöltése"
 
@@ -2605,7 +2600,7 @@ msgstr "Számla száma"
 msgid "Rechnungsposition"
 msgstr "Számla tétel"
 
-#: app/index.html:98
+#: app/index.html:102
 #: app/scripts/rechnungen/detail/rechnungendetail.html:220
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:6
 msgid "Rechnungspositionen"
@@ -2615,7 +2610,7 @@ msgstr "Számla tételek"
 msgid "Rechnungspositionen anzeigen"
 msgstr "Számla tételek megjelenítése"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:181
+#: app/scripts/abos/overview/abosoverview.controller.js:234
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:249
 msgid "Rechnungspositionen erstellen"
 msgstr "Számla tételek létrehozása"
@@ -2650,7 +2645,7 @@ msgstr "Számla típus"
 msgid "Rechung per E-Mail verschicken"
 msgstr "Számla küldése e-mailben"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:245
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:250
 msgid "Rechungen per E-Mail verschicken"
 msgstr "Számlák küldése e-mailben"
 
@@ -2665,11 +2660,11 @@ msgstr "Hivatkozási szám"
 msgid "Referenznummer Präfix"
 msgstr "Hivatkozási szám előtag"
 
-#: app/index.html:118
+#: app/index.html:122
 msgid "Report-Vorlagen"
 msgstr "Jelentéssablonok"
 
-#: app/scripts/reports/execute/reportsexecute.html:54
+#: app/scripts/reports/detail/reportsdetail.html:78
 msgid "Resultate"
 msgstr "Eredmények"
 
@@ -2686,11 +2681,11 @@ msgstr "Szerepkör mentése"
 msgid "Rythmus"
 msgstr "Gyakoriság"
 
-#: app/scripts/app.js:251
+#: app/scripts/app.js:253
 msgid "SA"
 msgstr "Szo."
 
-#: app/scripts/app.js:257
+#: app/scripts/app.js:259
 msgid "SO"
 msgstr "V."
 
@@ -2698,7 +2693,7 @@ msgstr "V."
 msgid "Saldo zu tief"
 msgstr "Fedezetlen egyenleg"
 
-#: app/scripts/app.js:250
+#: app/scripts/app.js:252
 msgid "Samstag"
 msgstr "Szombat"
 
@@ -2708,27 +2703,27 @@ msgid "Satz"
 msgstr "Arány"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:65
-#: app/scripts/app.js:375
+#: app/scripts/app.js:384
 #: app/scripts/jobqueue/result/result.html:20
-#: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:13
+#: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:15
 #: app/scripts/mailvorlagen/mailvorlagen.html:86
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:52
 msgid "Schliessen"
 msgstr "Bezárás"
 
-#: app/scripts/app.js:206
+#: app/scripts/app.js:208
 msgid "Schweizer Franken"
 msgstr "Svájci frank"
 
-#: app/scripts/app.js:316
+#: app/scripts/app.js:319
 msgid "Sent"
 msgstr "Elküldve"
 
-#: app/scripts/app.js:288
+#: app/scripts/app.js:290
 msgid "Sep"
 msgstr "Szept."
 
-#: app/scripts/app.js:287
+#: app/scripts/app.js:289
 msgid "September"
 msgstr "Szeptember"
 
@@ -2736,34 +2731,38 @@ msgstr "Szeptember"
 msgid "Sequence-Nr"
 msgstr "Sorszám"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:822
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:863
 msgid "Soll die Lieferplanung abgeschlossen werden?"
 msgstr "Szeretné bezárni a szállítás tervezését?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:848
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:889
 msgid "Soll die Lieferplanung gelöscht werden?"
 msgstr "Szeretné törölni a szállítás tervet?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:935
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:976
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr "Szeretné eltávolítani a szállítás tervet?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:859
+#: app/scripts/kunden/detail/kundendetail.controller.js:240
+msgid "Soll diese Person wirklich gelöscht werden?"
+msgstr ""
+
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:900
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
 msgstr "Valóban küldeni szeretne e-mailt minden beszállítónak?"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:52
+#: app/scripts/lieferplanungen/detail/korbplanung.html:55
 msgid "Sonderprodukt einfügen"
 msgstr "Speciális termék beszúrása"
 
-#: app/scripts/app.js:256
+#: app/scripts/app.js:258
 msgid "Sonntag"
 msgstr "Sunday"
 
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:35
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:42
-#: app/scripts/abos/detail/abosdetail.controller.js:293
-#: app/scripts/abos/detail/abosdetail.controller.js:320
+#: app/scripts/abos/detail/abosdetail.controller.js:425
+#: app/scripts/abos/detail/abosdetail.controller.js:452
 #: app/scripts/mailvorlagen/mailvorlagen.html:85
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.controller.js:35
 msgid "Speichern"
@@ -2773,7 +2772,7 @@ msgstr "Mentés"
 msgid "Sprache"
 msgstr "Nyelv"
 
-#: app/scripts/app.js:177
+#: app/scripts/app.js:179
 msgid "St."
 msgstr "Db."
 
@@ -2818,7 +2817,7 @@ msgstr "Pénzügyi év kezdete"
 #: app/scripts/dashboard/dashboard.html:60
 #: app/scripts/depots/detail/depotsdetail.html:40
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:40
-#: app/scripts/kunden/detail/kundendetail.html:487
+#: app/scripts/kunden/detail/kundendetail.html:502
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:35
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:27
 #: app/scripts/rechnungen/detail/rechnungendetail.html:114
@@ -2831,14 +2830,14 @@ msgstr "Pénzügyi év kezdete"
 msgid "Status"
 msgstr "Állapot"
 
-#: app/scripts/app.js:161
-#: app/scripts/app.js:167
+#: app/scripts/app.js:163
+#: app/scripts/app.js:169
 msgid "Storniert"
 msgstr "Törölve"
 
 #: app/scripts/depots/detail/depotsdetail.html:51
 #: app/scripts/kunden/detail/kundendetail.html:230
-#: app/scripts/kunden/detail/kundendetail.html:384
+#: app/scripts/kunden/detail/kundendetail.html:399
 #: app/scripts/kunden/overview/kundenoverview.html:42
 #: app/scripts/personen/overview/personenoverview.html:51
 #: app/scripts/produzenten/detail/produzentendetail.html:127
@@ -2851,7 +2850,7 @@ msgstr "Utca"
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:27
 #: app/scripts/depots/detail/depotsdetail.html:48
 #: app/scripts/kunden/detail/kundendetail.html:227
-#: app/scripts/kunden/detail/kundendetail.html:381
+#: app/scripts/kunden/detail/kundendetail.html:396
 #: app/scripts/produzenten/detail/produzentendetail.html:124
 #: app/scripts/projekt/settings/projektsettings.html:34
 #: app/scripts/rechnungen/detail/rechnungendetail.html:75
@@ -2859,7 +2858,7 @@ msgstr "Utca"
 msgid "Strasse / Nr."
 msgstr "Utca / Házszám"
 
-#: app/scripts/app.js:329
+#: app/scripts/app.js:332
 msgid "Stunden"
 msgstr "Óra"
 
@@ -2871,7 +2870,7 @@ msgstr "Stílus<br>(Admin oldal)"
 msgid "Style<br>(Kundenportal)"
 msgstr "Stílus<br>(tagok oldala)"
 
-#: app/scripts/app.js:177
+#: app/scripts/app.js:179
 msgid "Stück"
 msgstr "Darab"
 
@@ -2889,7 +2888,7 @@ msgstr "Keresés kosarakban..."
 msgid "Suche in Pendenzen..."
 msgstr "Keresés függő tételekben"
 
-#: app/scripts/reports/execute/reportsexecute.html:57
+#: app/scripts/reports/detail/reportsdetail.html:81
 msgid "Suche in Resultaten..."
 msgstr "Keresés találatokban"
 
@@ -2899,7 +2898,7 @@ msgstr "Keresés találatokban"
 #: app/scripts/abotypen/overview/zusatzabotypen.html:10
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:9
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:9
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:11
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:9
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:9
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:9
@@ -2925,11 +2924,11 @@ msgstr "Keresés ..."
 msgid "Summe"
 msgstr "Összesen"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:35
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:37
 msgid "Summe der Ist-Einsätze"
 msgstr "Megvalósított szállítások összesen"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:32
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:34
 msgid "Summe der Soll-Einsätze"
 msgstr "Megvalósítandó szállítások összesen"
 
@@ -2937,7 +2936,7 @@ msgstr "Megvalósítandó szállítások összesen"
 msgid "Summe jeweils ohne Zusatzabos!"
 msgstr "Összesen, további előfizetés nélkül!"
 
-#: app/scripts/app.js:331
+#: app/scripts/app.js:334
 msgid "Tage"
 msgstr "Napok"
 
@@ -2949,7 +2948,7 @@ msgstr "Telefonszám"
 #: app/scripts/depots/detail/depotsdetail.html:161
 #: app/scripts/depots/detail/depotsdetail.html:201
 msgid "Telefon"
-msgstr "Telefon"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:113
 #: app/scripts/produzenten/detail/produzentendetail.html:170
@@ -2966,7 +2965,7 @@ msgstr "Mobil telefon"
 msgid "Text mit [Platzhalter]"
 msgstr "Szöveg [Platzhalter]"
 
-#: app/scripts/kunden/detail/kundendetail.html:426
+#: app/scripts/kunden/detail/kundendetail.html:441
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:102
 msgid "Text..."
 msgstr "Szöveg..."
@@ -2976,7 +2975,7 @@ msgstr "Szöveg..."
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:41
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:29
 #: app/scripts/dashboard/dashboard.html:91
-#: app/scripts/kunden/detail/kundendetail.html:483
+#: app/scripts/kunden/detail/kundendetail.html:498
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
 #: app/scripts/rechnungen/detail/rechnungendetail.html:134
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:45
@@ -2987,7 +2986,7 @@ msgstr "Cím"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:32
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:46
-#: app/scripts/lieferplanungen/detail/korbplanung.html:169
+#: app/scripts/lieferplanungen/detail/korbplanung.html:176
 #: app/scripts/lieferplanungen/detail/lieferanten.html:105
 #: app/scripts/lieferplanungen/detail/lieferanten.html:77
 msgid "Total"
@@ -3049,16 +3048,16 @@ msgstr "Kör vége"
 msgid "Tourauslieferung"
 msgstr "Kör teljesítése"
 
-#: app/index.html:89
+#: app/index.html:93
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:6
 msgid "Tourauslieferungen"
 msgstr "Körök teljesítése"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:895
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:936
 msgid "Tourauslieferungen anzeigen"
 msgstr "Szállítási kör megtekintése"
 
-#: app/index.html:106
+#: app/index.html:110
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:19
 #: app/scripts/touren/overview/tourenoverview.html:6
 msgid "Touren"
@@ -3072,7 +3071,7 @@ msgstr "Kör nformáció"
 msgid "Tourlieferungen"
 msgstr "Szállítási kör"
 
-#: app/scripts/app.js:139
+#: app/scripts/app.js:141
 msgid "Transfer"
 msgstr "Transzfer"
 
@@ -3086,28 +3085,28 @@ msgstr "Kétfaktoros hitelesítés"
 msgid "Typ"
 msgstr "Típus"
 
-#: app/scripts/app.js:104
+#: app/scripts/app.js:106
 msgid "Täglich"
 msgstr "Napi"
 
-#: app/scripts/app.js:210
+#: app/scripts/app.js:212
 msgid "US Dollar"
 msgstr "USA dollár"
 
-#: app/scripts/app.js:210
+#: app/scripts/app.js:212
 msgid "USD"
-msgstr "USD"
+msgstr ""
 
-#: app/scripts/app.js:123
+#: app/scripts/app.js:125
 msgid "Unbeschraenkt"
 msgstr "Korlátlan"
 
-#: app/scripts/app.js:147
+#: app/scripts/app.js:149
 msgid "Ungeplant"
 msgstr "Nem tervezett"
 
-#: app/scripts/app.js:101
-#: app/scripts/app.js:108
+#: app/scripts/app.js:103
+#: app/scripts/app.js:110
 msgid "Unregelmaessig"
 msgstr "Szabálytalan"
 
@@ -3135,20 +3134,20 @@ msgstr "Felelős személy"
 msgid "Verantwortliche_r"
 msgstr "Felelős"
 
-#: app/scripts/app.js:150
-#: app/scripts/app.js:154
+#: app/scripts/app.js:152
+#: app/scripts/app.js:156
 msgid "Verrechnet"
 msgstr "Kiszámol"
 
-#: app/scripts/app.js:158
+#: app/scripts/app.js:160
 msgid "Verschickt"
 msgstr "Elküldött"
 
-#: app/index.html:138
+#: app/index.html:142
 msgid "Version:"
 msgstr "Verzió:"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:550
+#: app/scripts/abos/detail/abosdetail.controller.js:681
 msgid "Vertraglich"
 msgstr "Szerződéses"
 
@@ -3159,12 +3158,11 @@ msgstr "Szerződés időtartam"
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:9
 #: app/scripts/abos/detail/abosdetail.html:49
 #: app/scripts/abos/detail/create-abo.html:21
-#: app/scripts/abos/overview/abosoverview.html:57
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:3
 msgid "Vertrieb"
 msgstr "Értékesítés"
 
-#: app/scripts/lieferplanungen/detail/korbplanung.html:93
+#: app/scripts/lieferplanungen/detail/korbplanung.html:100
 msgid "Vertrieb:"
 msgstr "Értékesítés:"
 
@@ -3178,7 +3176,7 @@ msgstr "Értékesítés típusa"
 msgid "Vertriebsart anpassen für Abo Nr."
 msgstr "#. előfizetőhöz kapcsolódó értékesítés módosítása"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:268
+#: app/scripts/abos/detail/abosdetail.controller.js:400
 msgid "Vertriebsart wurde erfolgreich angepasst"
 msgstr "Értékesítés típusa sikeresen módosítva"
 
@@ -3190,7 +3188,11 @@ msgstr "E-mail sablonok kezelése"
 msgid "Verwaltung der Report-Vorlagen"
 msgstr "Jelentés sablonok kezelése"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:348
+#: app/scripts/reports/detail/reportsdetail.html:17
+msgid "Verändern"
+msgstr ""
+
+#: app/scripts/abos/detail/abosdetail.controller.js:479
 msgid "Vetriebsart anpassen"
 msgstr "Értékesítés típusának módosítása"
 
@@ -3198,7 +3200,7 @@ msgstr "Értékesítés típusának módosítása"
 msgid "Vom System generierte E-Mail versenden"
 msgstr "Rendszer által létrehozott e-mailek küldése"
 
-#: app/scripts/kunden/detail/kundendetail.html:448
+#: app/scripts/kunden/detail/kundendetail.html:463
 msgid "Vom System generierter Eintrag"
 msgstr "Rendszer által létrehozott tétel"
 
@@ -3209,7 +3211,7 @@ msgid "Von"
 msgstr "-tól"
 
 #: app/scripts/abos/detail/abosdetail.html:114
-#: app/scripts/abos/overview/abosoverview.html:67
+#: app/scripts/abos/overview/abosoverview.html:68
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:10
 #: app/scripts/abotypen/overview/abotypen.html:38
 #: app/scripts/kunden/detail/abo/abos.html:16
@@ -3244,8 +3246,8 @@ msgstr "Bejelentkezés"
 msgid "Weblogin Einladung"
 msgstr "Meghívás bejelentkezésre"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:293
-#: app/scripts/personen/overview/personenoverview.controller.js:149
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:310
+#: app/scripts/personen/overview/personenoverview.controller.js:161
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3259,7 +3261,7 @@ msgstr "Ha a következő tételeket adja hozzá, azokat a megfelelő értékre c
 " {{person.rolle}} \n"
 " {{person.kundeId}}"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:225
+#: app/scripts/abos/overview/abosoverview.controller.js:278
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:298
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3330,7 +3332,7 @@ msgstr "Ha a következő tételeket adja hozzá, azokat a megfelelő értékre c
 " {{depot.ort}}  \n"
 " {{depot.apTelefon}}"
 
-#: app/scripts/kunden/overview/kundenoverview.controller.js:137
+#: app/scripts/kunden/overview/kundenoverview.controller.js:143
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3354,7 +3356,7 @@ msgstr "Ha a következő tételeket adja hozzá, azokat a megfelelő értékre c
 " {{kunde.plz}}  \n"
 " {{kunde.ort}}"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:262
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:267
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3437,15 +3439,15 @@ msgid "Wird standartmässig geplant"
 msgstr "Rendszeres tagság"
 
 #: app/scripts/abos/detail/abosdetail.html:136
-#: app/scripts/app.js:170
+#: app/scripts/app.js:172
 msgid "WirdGeliefert"
 msgstr "Kiszállítva"
 
-#: app/scripts/app.js:129
+#: app/scripts/app.js:131
 msgid "Wochen"
 msgstr "Hetek"
 
-#: app/scripts/app.js:98
+#: app/scripts/app.js:100
 msgid "Woechentlich"
 msgstr "Heti"
 
@@ -3453,7 +3455,7 @@ msgstr "Heti"
 msgid "Währung"
 msgstr "Pénznem"
 
-#: app/scripts/app.js:105
+#: app/scripts/app.js:107
 msgid "Wöchentlich"
 msgstr "Heti"
 
@@ -3473,12 +3475,12 @@ msgstr "Import: Fizetések"
 msgid "Zahlungs-Import-Datei"
 msgstr "Import File: Fizetések"
 
-#: app/index.html:101
+#: app/index.html:105
 #: app/scripts/zahlungsimports/overview/zahlungsimportsoverview.html:6
 msgid "Zahlungs-Imports"
 msgstr "Importálások: Fizetések "
 
-#: app/index.html:102
+#: app/index.html:106
 msgid "Zahlungsauftrag-Exports"
 msgstr "Exportálások: Fizetési megbízás"
 
@@ -3490,7 +3492,7 @@ msgstr "Fizetések részletei"
 msgid "Zahlungseingänge"
 msgstr "Bejövő fizetés"
 
-#: app/scripts/app.js:370
+#: app/scripts/app.js:379
 msgid "Zeit"
 msgstr "Idő"
 
@@ -3510,7 +3512,7 @@ msgstr "Időszak"
 msgid "Zielpreis"
 msgstr "Irányár"
 
-#: app/scripts/app.js:165
+#: app/scripts/app.js:167
 msgid "Zugewiesen"
 msgstr "Rendelt"
 
@@ -3530,15 +3532,15 @@ msgstr "További előfizetési típus"
 msgid "Zusatzabo"
 msgstr "Kiegészítő"
 
-#: app/index.html:83
+#: app/index.html:87
 #: app/scripts/abos/detail/abosdetail.html:149
-#: app/scripts/abos/overview/abosoverview.html:86
+#: app/scripts/abos/overview/abosoverview.html:87
 #: app/scripts/abos/overview/abosoverview.html:9
 #: app/scripts/abos/overview/zusatzabosoverview.html:6
 msgid "Zusatzabos"
 msgstr "Kiegészítő"
 
-#: app/scripts/abos/overview/abosoverview.html:79
+#: app/scripts/abos/overview/abosoverview.html:80
 msgid "Zusatzabos Ids"
 msgstr "Kiegészítő lds"
 
@@ -3570,20 +3572,20 @@ msgstr "Kiegészítő tagság"
 msgid "Zusätzliche Personen möglich"
 msgstr "Lehetséges további személyek"
 
-#: app/scripts/app.js:99
+#: app/scripts/app.js:101
 msgid "Zweiwoechentlich"
 msgstr "Kétheti"
 
-#: app/scripts/app.js:106
+#: app/scripts/app.js:108
 msgid "Zweiwöchentlich"
 msgstr "Kétheti"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:223
+#: app/scripts/abos/overview/abosoverview.controller.js:276
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:296
 msgid "abo"
 msgstr "előfizetés"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:149
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:151
 msgid "abrechnen"
 msgstr "számla"
 
@@ -3600,7 +3602,7 @@ msgstr "jelölés kiszállítottként"
 msgid "bearbeitet"
 msgstr "feldolgozott"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:554
+#: app/scripts/abos/detail/abosdetail.controller.js:685
 msgid "bezahlt"
 msgstr "fizetve"
 
@@ -3609,7 +3611,7 @@ msgid "bis"
 msgstr "-ig"
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:73
-#: app/scripts/kunden/detail/kundendetail.html:476
+#: app/scripts/kunden/detail/kundendetail.html:491
 msgid "erstellen"
 msgstr "létrehozása"
 
@@ -3617,27 +3619,27 @@ msgstr "létrehozása"
 msgid "fehlerhaft"
 msgstr "hibás"
 
-#: app/scripts/app.js:179
+#: app/scripts/app.js:181
 msgid "gr"
-msgstr "gr"
+msgstr ""
 
-#: app/scripts/app.js:183
+#: app/scripts/app.js:185
 msgid "kg"
-msgstr "kg"
+msgstr ""
 
-#: app/scripts/kunden/overview/kundenoverview.controller.js:135
+#: app/scripts/kunden/overview/kundenoverview.controller.js:141
 msgid "kunde"
 msgstr "tag"
 
-#: app/scripts/app.js:185
+#: app/scripts/app.js:187
 msgid "l"
-msgstr "l"
+msgstr ""
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:41
 msgid "max."
-msgstr "max."
+msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:276
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:281
 msgid "pain.008.001.07 erstellen"
 msgstr "pain.008.001.07 létrehozása"
 
@@ -3645,8 +3647,8 @@ msgstr "pain.008.001.07 létrehozása"
 msgid "pendente"
 msgstr "függőben lévő"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:291
-#: app/scripts/personen/overview/personenoverview.controller.js:147
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:308
+#: app/scripts/personen/overview/personenoverview.controller.js:159
 msgid "person"
 msgstr "személy"
 
@@ -3658,7 +3660,7 @@ msgstr "per"
 msgid "pro Lieferung"
 msgstr "per szállítás"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:260
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:265
 msgid "rechnung"
 msgstr "számla"
 
@@ -3667,22 +3669,17 @@ msgstr "számla"
 msgid "speichern"
 msgstr "mentés"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:556
+#: app/scripts/abos/detail/abosdetail.controller.js:687
 msgid "total"
 msgstr "összesen"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:555
+#: app/scripts/abos/detail/abosdetail.controller.js:686
 msgid "verrechnet"
 msgstr "elszámolva"
 
-#: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:72
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:62
 msgid "von"
 msgstr "által"
-
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:67
-msgid "{{arbeitsangebot.status}}"
-msgstr "{{arbeitsangebot.status}}"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:64
 msgid "{{batchCreated.openAboIds.length}} Rechnungspositionen mit Fehlern"
@@ -3690,7 +3687,7 @@ msgstr "{{batchCreated.openAboIds.length}} hibás számlázási tételek"
 
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:55
 msgid "{{rechnungsPosition.status}}"
-msgstr "{{rechnungsPosition.status}}"
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:91
 #: app/scripts/depots/detail/depotsdetail.html:94
