@@ -9,7 +9,7 @@ msgstr ""
 "X-Crowdin-File: /prod/template.pot\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-03-26 17:09\n"
+"PO-Revision-Date: 2020-03-26 17:14\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -202,7 +202,7 @@ msgstr "Tipo de abono' + abotyp.name || 'Tipo de abono"
 
 #: app/scripts/abos/overview/abosoverview.html:57
 msgid "Abotyp / Vertrieb"
-msgstr ""
+msgstr "Tipo de subscr./Distr."
 
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:108
@@ -590,7 +590,7 @@ msgstr "Agosto"
 
 #: app/scripts/reports/detail/reportsdetail.html:16
 msgid "Ausführen"
-msgstr ""
+msgstr "Ejecutar"
 
 #: app/scripts/app.js:325
 msgid "Ausgeliefert"
@@ -981,11 +981,11 @@ msgstr "Martes"
 
 #: app/scripts/projekt/settings/projektsettings.controller.js:377
 msgid "Diese Arbeitskategorie existiert bereits"
-msgstr ""
+msgstr "Esta categoría de colaboración ya existe"
 
 #: app/scripts/projekt/settings/projektsettings.controller.js:302
 msgid "Diese Personenkategorie existiert bereits"
-msgstr ""
+msgstr "Esta categoría de persona ya existe"
 
 #: app/scripts/not-found.html:9
 msgid "Diese Seite konnte nicht gefunden werden!"
@@ -1094,7 +1094,7 @@ msgstr "EUR"
 
 #: app/scripts/reports/detail/reportsdetail.html:14
 msgid "Editieren"
-msgstr ""
+msgstr "Editar"
 
 #: app/scripts/projekt/settings/projektsettings.html:275
 msgid "Ein neues Logo auswählen oder einfügen"
@@ -1434,7 +1434,7 @@ msgstr "Valido para"
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:2
 msgid "HTML / WYSIWYG"
-msgstr ""
+msgstr "HTML / WYSIWYG"
 
 #: app/scripts/app.js:333
 msgid "Halbtage"
@@ -1458,7 +1458,7 @@ msgstr "Hoy"
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:8
 msgid "Hier Text einfügen und formatieren"
-msgstr ""
+msgstr "Insertar y editar el formato del texto aquí"
 
 #: app/scripts/kunden/detail/kundendetail.html:352
 msgid "Hinterlegung, Abgabe bei..."
@@ -1484,7 +1484,7 @@ msgstr "Id"
 
 #: app/scripts/kunden/detail/kundendetail.html:358
 msgid "Im Format"
-msgstr ""
+msgstr "En formato"
 
 #: app/scripts/projekt/settings/projektsettings.html:311
 msgid "Importdatei"
@@ -1643,11 +1643,11 @@ msgstr "Titular de la cuenta"
 #: app/scripts/kunden/detail/kundendetail.html:357
 #: app/scripts/kunden/overview/kundenoverview.html:56
 msgid "Koordinaten"
-msgstr ""
+msgstr "Coordenadas"
 
 #: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:149
 msgid "Korbdetails drucken"
-msgstr ""
+msgstr "Mostrar los detalles de la cesta"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 msgid "Korbinhalt"
@@ -1795,7 +1795,7 @@ msgstr "Imprimir las etiquetas de entrega"
 
 #: app/scripts/app.js:315
 msgid "Lieferinformation"
-msgstr ""
+msgstr "Información de entrega"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:854
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:862
@@ -2744,7 +2744,7 @@ msgstr "¿Quieres borrar la planificación de distribución?"
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:240
 msgid "Soll diese Person wirklich gelöscht werden?"
-msgstr ""
+msgstr "¿Seguro que desea eliminar esta persona?"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:900
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
@@ -3189,7 +3189,7 @@ msgstr "Gestión de plantillas de informes"
 
 #: app/scripts/reports/detail/reportsdetail.html:17
 msgid "Verändern"
-msgstr ""
+msgstr "Pausar"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:479
 msgid "Vetriebsart anpassen"
