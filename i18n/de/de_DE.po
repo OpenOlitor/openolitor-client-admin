@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: openolitor\n"
+"Project-Id-Version: openolitor-client-admin\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: openolitor\n"
+"X-Crowdin-Project: openolitor-client-admin\n"
 "X-Crowdin-Language: de\n"
-"X-Crowdin-File: /admin-portal/template.pot\n"
+"X-Crowdin-File: /prod/template.pot\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-02-21 15:28\n"
+"PO-Revision-Date: 2020-03-26 17:09\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -106,14 +106,6 @@ msgstr ""
 msgid "2.0"
 msgstr "2.0"
 
-#: app/scripts/kunden/detail/kundendetail.html:361
-msgid "46.947480"
-msgstr ""
-
-#: app/scripts/kunden/detail/kundendetail.html:364
-msgid "7.458070"
-msgstr ""
-
 #: app/scripts/depots/overview/depotsoverview.html:38
 msgid "AP Tel"
 msgstr ""
@@ -207,6 +199,10 @@ msgstr "Anteilstyp"
 #: app/scripts/abotypen/detail/abotypendetail.html:10
 msgid "Abotyp ' + abotyp.name || 'Abotyp"
 msgstr "Anteilstyp ' + abotyp.name || 'Anteilstyp"
+
+#: app/scripts/abos/overview/abosoverview.html:57
+msgid "Abotyp / Vertrieb"
+msgstr ""
 
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:108
@@ -1050,7 +1046,7 @@ msgstr ""
 msgid "E-Mail"
 msgstr ""
 
-#: app/scripts/abos/overview/abosoverview.controller.js:270
+#: app/scripts/abos/overview/abosoverview.controller.js:271
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:291
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:133
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:107
@@ -1081,7 +1077,7 @@ msgstr ""
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr ""
 
-#: app/scripts/abos/overview/abosoverview.controller.js:245
+#: app/scripts/abos/overview/abosoverview.controller.js:246
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:262
 #: app/scripts/kunden/overview/kundenoverview.controller.js:118
 #: app/scripts/personen/overview/personenoverview.controller.js:137
@@ -2613,7 +2609,7 @@ msgstr ""
 msgid "Rechnungspositionen anzeigen"
 msgstr ""
 
-#: app/scripts/abos/overview/abosoverview.controller.js:233
+#: app/scripts/abos/overview/abosoverview.controller.js:234
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:249
 msgid "Rechnungspositionen erstellen"
 msgstr ""
@@ -3160,7 +3156,6 @@ msgstr ""
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:9
 #: app/scripts/abos/detail/abosdetail.html:49
 #: app/scripts/abos/detail/create-abo.html:21
-#: app/scripts/abos/overview/abosoverview.html:57
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:3
 msgid "Vertrieb"
 msgstr ""
@@ -3259,7 +3254,7 @@ msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden We
 " {{person.kundeId}}"
 msgstr ""
 
-#: app/scripts/abos/overview/abosoverview.controller.js:277
+#: app/scripts/abos/overview/abosoverview.controller.js:278
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:298
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3508,7 +3503,7 @@ msgstr ""
 msgid "Zweiwöchentlich"
 msgstr ""
 
-#: app/scripts/abos/overview/abosoverview.controller.js:275
+#: app/scripts/abos/overview/abosoverview.controller.js:276
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:296
 msgid "abo"
 msgstr "anteil"
