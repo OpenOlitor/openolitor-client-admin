@@ -56,11 +56,11 @@ angular.module('openolitor-admin')
         var listOfNicknames = lodash.map($scope.produzenten, 'kurzzeichen');
         //new producer
         if (isNew && lodash.filter(listOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen}).length > 0){
-            alertService.addAlert('error', gettext('Diese produzent existiert bereits'));
+            alertService.addAlert('error', gettext('Dieser Produzent existiert bereits'));
             return "";
         //existing producer
         } else if (!isNew && originalNickname !== $scope.produzent.kurzzeichen && lodash.filter(listOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen}).length > 0) { 
-            alertService.addAlert('error', gettext('Diese produzent existiert bereits'));
+            alertService.addAlert('error', gettext('Dieser Produzent existiert bereits'));
             return "";
         } else {
             return $scope.produzent.$save(function() {
