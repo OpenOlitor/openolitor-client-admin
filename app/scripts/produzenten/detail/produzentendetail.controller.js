@@ -4,9 +4,10 @@
  */
 angular.module('openolitor-admin')
   .controller('ProduzentenDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
-    '$location', '$uibModal', 'gettext', 'ProduzentDetailModel', '$log',
+    '$location', '$uibModal', 'gettext', 'ProduzentDetailModel', '$log', 
+      'ProduzentenModel','lodash','alertService',
     function($scope, $rootScope, $filter, $routeParams, $location, $uibModal, gettext,
-      ProduzentDetailModel, $log) {
+      ProduzentDetailModel, $log, ProduzentenModel, lodash, alertService) {
       $rootScope.viewId = 'D-Pzt';
 
       var defaults = {
@@ -17,14 +18,21 @@ angular.module('openolitor-admin')
         }
       };
 
+      var isNew = false;
+      var originalNickname = null; 
+      $scope.produzenten = ProduzentenModel.query({},function(){ });
+
       if (!$routeParams.id) {
         $scope.produzent = new ProduzentDetailModel(defaults.model);
+        isNew = true;
       } else {
         ProduzentDetailModel.get({
           id: $routeParams.id
         }, function(result) {
           $scope.produzent = result;
           $scope.produzentForm.$setPristine();
+          isNew = false;
+          originalNickname = $scope.produzent.kurzzeichen;
         });
       }
 
@@ -45,9 +53,20 @@ angular.module('openolitor-admin')
       };
 
       $scope.save = function() {
-        return $scope.produzent.$save(function() {
-          $scope.produzentForm.$setPristine();
-        });
+        var listOfNicknames = lodash.map($scope.produzenten, 'kurzzeichen');
+        //new producer
+        if (isNew && lodash.filter(listOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen}).length > 0){
+            alertService.addAlert('error', gettext('Dieser Produzent existiert bereits'));
+            return "";
+        //existing producer
+        } else if (!isNew && originalNickname !== $scope.produzent.kurzzeichen && lodash.filter(listOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen}).length > 0) { 
+            alertService.addAlert('error', gettext('Dieser Produzent existiert bereits'));
+            return "";
+        } else {
+            return $scope.produzent.$save(function() {
+              $scope.produzentForm.$setPristine();
+            });
+        };
       };
 
       $scope.created = function(id) {
@@ -61,6 +80,5 @@ angular.module('openolitor-admin')
       $scope.delete = function() {
         return $scope.produzent.$delete();
       };
-
     }
   ]);
