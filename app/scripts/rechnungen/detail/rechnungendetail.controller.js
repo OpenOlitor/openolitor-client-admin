@@ -185,7 +185,7 @@ angular.module('openolitor-admin')
       $scope.downloadRechnung = function() {
         $scope.isDownloading = true;
         FileUtil.downloadGet('rechnungen/' + $scope.rechnung.id +
-          '/aktionen/download', 'Rechnung ' + $scope.rechnung.id,
+          '/aktionen/downloadrechnung', 'Rechnung ' + $scope.rechnung.id,
           'application/pdf',
           function() {
             $scope.isDownloading = false;
