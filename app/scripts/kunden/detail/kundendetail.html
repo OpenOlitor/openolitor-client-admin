@@ -301,6 +301,14 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="bic" translate>BIC</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bic" ng-model="kunde.kontoDaten.bic" placeholder="{{'BIC'|translate}}" ng-required="kunde.paymentType==='DirectDebit'" maxlength=11>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="bankName" translate>Name der Bank</label>
                 </div>
                 <div class="col-md-8">
