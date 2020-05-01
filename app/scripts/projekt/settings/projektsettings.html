@@ -233,6 +233,14 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="bezeichnung" translate>BIC</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.bic" placeholder="{{'BIC'|translate}}"  maxlength=11>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="bezeichnung" translate>Teilnehmernummer</label>
                 </div>
                 <div class="col-md-8">
