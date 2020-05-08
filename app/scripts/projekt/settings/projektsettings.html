@@ -1,7 +1,7 @@
 <div class="row">
   <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
-      <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
+     <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
 
       <form name="projektForm" oo-confirm-on-dirty>
         <div class="col-md-6">
@@ -118,13 +118,20 @@
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
-
               <div class="row form-group">
                 <div class="col-md-8">
                   <label for="emailErforderlich" translate>Vom System generierte E-Mail versenden</label>
                 </div>
                 <div class="col-md-4" ng-if="projectResolved">
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.generierteMailsSenden" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="bccAddEmail" translate>Beim Senden von E-Mail bcc hinzufügen</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.sendEmailToBcc" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
             </div>
