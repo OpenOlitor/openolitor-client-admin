@@ -216,7 +216,7 @@ angular.module('openolitor-admin')
               $scope.produkteEntries = $scope.allProdukteEntries;
             }
             $scope.tableParams.reload();
-          }; 
+          };
           return true;
         }
         return filterDataForCategories;
@@ -747,11 +747,15 @@ angular.module('openolitor-admin')
         $scope.editNachAbgeschlossen = true;
       };
 
-      $scope.valuesEditable = function() {
+      $scope.valuesEditable = function(onlyOnOffen) {
         if (angular.isUndefined($scope.planung)) {
           return false;
         } else {
-          return $scope.planung.status === LIEFERSTATUS.OFFEN || $scope.editNachAbgeschlossen;
+          if(onlyOnOffen || onlyOnOffen === true) {
+            return $scope.planung.status === LIEFERSTATUS.OFFEN;
+          } else {
+            return $scope.planung.status === LIEFERSTATUS.OFFEN || $scope.editNachAbgeschlossen;
+          }
         }
       };
 
