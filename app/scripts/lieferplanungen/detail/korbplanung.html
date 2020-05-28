@@ -32,10 +32,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-2" ng-show="valuesEditable()">
+    <div class="col-md-2" ng-show="valuesEditable(true) ">
       <label for="addAbotyp" translate>Abotyp hinzufügen:</label>
     </div>
-    <div class="col-md-1" ng-show="valuesEditable()">
+    <div class="col-md-1" ng-show="valuesEditable(true)">
       <oo-dropdown dropdown-id="addAbotyp" display-style="uib-dropdown" values="verfuegbareLieferungen" selected-prop="id" display-function="lieferung2add" selected-function="addAbotypToPlanungFunc()"></oo-dropdown>
     </div>
     <div class="col-md-1" ng-show="valuesEditable()">
