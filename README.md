@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/OpenOlitor/openolitor-client-admin.svg?branch=prod)](https://travis-ci.org/OpenOlitor/openolitor-client-admin)
+[![Build Status](https://travis-ci.com/OpenOlitor/openolitor-client-admin.svg?branch=prod)](https://travis-ci.com/OpenOlitor/openolitor-client-admin)
 [![Code Climate](https://codeclimate.com/github/OpenOlitor/openolitor-client-admin/badges/gpa.svg)](https://codeclimate.com/github/OpenOlitor/openolitor-client-admin)
 
 # openolitor-client-admin
