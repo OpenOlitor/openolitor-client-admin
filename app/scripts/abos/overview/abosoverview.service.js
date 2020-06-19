@@ -3,17 +3,17 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('AbosOverviewService', ['$http', 'API_URL',
-    function($http, API_URL) {
+  .factory('AbosOverviewService', ['$http', 'appConfig',
+    function($http, appConfig) {
 
       function createAnzahlLieferungenRechnungsPositionen(rechnungsPositionCreate) {
-        return $http.post(API_URL +
+        return $http.post(appConfig.get().API_URL +
           'abos/aktionen/anzahllieferungenrechnungspositionen',
           rechnungsPositionCreate);
       }
 
       function createBisGuthabenRechnungsPositionen(rechnungsPositionCreate) {
-        return $http.post(API_URL + 'abos/aktionen/bisguthabenrechnungspositionen',
+        return $http.post(appConfig.get().API_URL + 'abos/aktionen/bisguthabenrechnungspositionen',
           rechnungsPositionCreate);
       }
 
@@ -25,4 +25,3 @@ angular.module('openolitor-admin')
       return service;
     }
   ]);
-

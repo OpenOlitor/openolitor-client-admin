@@ -6,13 +6,13 @@ angular.module('openolitor-admin')
   .controller('RechnungenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', '$http',
     '$location', '$uibModal', 'gettext', 'RechnungenDetailModel',
-    'EnumUtil', 'API_URL', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
+    'EnumUtil', 'appConfig', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
     'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'ReportvorlagenService', 'DetailNavigationService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
-      RechnungenDetailModel, EnumUtil, API_URL,
+      RechnungenDetailModel, EnumUtil, appConfig,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
       RECHNUNGSTATUS, FileUtil, DataUtil, ReportvorlagenService, DetailNavigationService) {
       $rootScope.viewId = 'D-Re';

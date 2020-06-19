@@ -1,0 +1,23 @@
+name: Build and Publish Docker Image
+
+on:
+  release:
+    types: [prereleased, released]
+
+jobs:
+  docker:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set env
+      run: echo ::set-env name=VERSION::node -p "require('./package.json').version"
+    - name: Docker Login
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build Docker Image
+      run: docker build . -t openolitor/openolitor-client-kundenportal:${VERSION}
+    - name: Publish Docker Image
+      run: docker push openolitor/openolitor-client-kundenportal:${VERSION}
+      env:
+        VERSION

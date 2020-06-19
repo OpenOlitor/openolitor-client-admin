@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('RechnungenDetailModel', function($resource, API_URL) {
-    return $resource(API_URL + 'rechnungen/:id/:extendedPath/:aktion', {
+  .factory('RechnungenDetailModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'rechnungen/:id/:extendedPath/:aktion', {
       id: '@id'
     }, {
       verschicken: {

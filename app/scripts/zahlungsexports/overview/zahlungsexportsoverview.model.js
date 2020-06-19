@@ -3,13 +3,13 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ZahlungsExportsOverviewModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'zahlungsexports/:id', {
+  .factory('ZahlungsExportsOverviewModel', ['$resource', 'appConfig', 'exportODSModuleFunction', function($resource, appConfig, exportODSModuleFunction) {
+    return $resource(appConfig.get().API_URL + 'zahlungsexports/:id', {
       id: '@id'
     }, {
       'exportODS': exportODSModuleFunction,
       'fetchFile': {
-        url: API_URL + 'zahlungsexports/:id/download',
+        url: appConfig.get().API_URL + 'zahlungsexports/:id/download',
         method: 'GET',
         responseType: 'arraybuffer',
         transformResponse: function (data) {

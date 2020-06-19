@@ -3,11 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('EinkaufsrechnungenOverviewService', ['$http', 'API_URL',
-    function($http, API_URL) {
+  .factory('EinkaufsrechnungenOverviewService', ['$http', 'appConfig',
+    function($http, appConfig) {
 
       function alsAbgerechnetMarkieren(data) {
-        return $http.post(API_URL +
+        return $http.post(appConfig.get().API_URL +
           'lieferanten/sammelbestellungen/aktionen/abgerechnet',
           data);
       }

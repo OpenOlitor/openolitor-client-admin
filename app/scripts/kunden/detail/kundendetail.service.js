@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('KundenDetailService', ['$http', 'API_URL',
-    function($http, API_URL) {
+  .factory('KundenDetailService', ['$http', 'appConfig',
+    function($http, appConfig) {
       var service = {
         deletePerson: deletePerson,
         disableLogin: disableLogin,
@@ -16,23 +16,23 @@ angular.module('openolitor-admin')
       return service;
 
       function deletePerson(kundeId, personId) {
-        return $http.delete(API_URL + 'kunden/' + kundeId + '/personen/' + personId);
+        return $http.delete(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId);
       };
 
       function disableLogin(kundeId, personId) {
-        return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/logindeaktivieren');
+        return $http.post(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/logindeaktivieren');
       };
 
       function enableLogin(kundeId, personId) {
-        return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/loginaktivieren');
+        return $http.post(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/loginaktivieren');
       };
 
       function sendEinladung(kundeId, personId) {
-        return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/einladungsenden');
+        return $http.post(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/einladungsenden');
       };
 
       function changeRolle(kundeId, personId, rolle) {
-        return $http.post(API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/rollewechseln', '"' + rolle + '"');
+        return $http.post(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/rollewechseln', '"' + rolle + '"');
       };
     }
   ]);

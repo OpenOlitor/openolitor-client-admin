@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ZahlungsImportsModel', function($resource, API_URL) {
-    return $resource(API_URL + 'zahlungsimports/:id/:extendedPath/:aktion', {
+  .factory('ZahlungsImportsModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'zahlungsimports/:id/:extendedPath/:aktion', {
       id: '@id'
     }, {
       importieren: {

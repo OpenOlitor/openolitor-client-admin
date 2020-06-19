@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
+    'OverviewCheckboxUtil', 'appConfig', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','FileSaver',
     function($q, $scope, $rootScope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
-      OverviewCheckboxUtil, API_URL,
+      OverviewCheckboxUtil, appConfig,
       FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService, FileSaver) {
       $rootScope.viewId = 'L-Re';
@@ -218,7 +218,7 @@ angular.module('openolitor-admin')
         label: gettext('Rechnungen verschickt'),
         iconClass: 'fa fa-exchange',
         onExecute: function() {
-          return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
+          return $http.post(appConfig.get().API_URL + 'rechnungen/aktionen/verschicken', {
             'ids': $scope.checkboxes.ids
           }).then(function() {
             $scope.model.actionInProgress = undefined;
@@ -276,7 +276,7 @@ angular.module('openolitor-admin')
         label: gettext('pain.008.001.07 erstellen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return $http.post(API_URL + 'rechnungen/aktionen/pain_008_001_07', {
+          return $http.post(appConfig.get().API_URL + 'rechnungen/aktionen/pain_008_001_07', {
             'ids': $scope.checkboxes.ids
           }).then(function(file) {
              var data = new Blob([file.data], { type: 'text/plain;charset=utf-8' });

@@ -8,12 +8,12 @@ angular.module('openolitor-admin')
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
     'PendenzDetailModel', 'KundenOverviewModel',
     'KundentypenService', 'PersonCategoriesService' ,'alertService',
-    'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'PAYMENT_TYPES', 'ABOTYPEN', 'API_URL',
+    'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'PAYMENT_TYPES', 'ABOTYPEN', 'appConfig',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
       KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
-      PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, API_URL,
+      PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, appConfig,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, EmailUtil) {
       $rootScope.viewId = 'D-Kun';
 

@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('KontoDatenModel', ['$resource', 'API_URL', function ($resource, API_URL) {
-    return $resource(API_URL + 'kontodaten/:id', {
+  .factory('KontoDatenModel', ['$resource', 'appConfig', function ($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'kontodaten/:id', {
       id: '@id'
     }, {
         'query': {

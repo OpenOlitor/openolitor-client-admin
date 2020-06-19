@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('TourenDetailModel', function($resource, API_URL) {
-    return $resource(API_URL + 'touren/:id', {
+  .factory('TourenDetailModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'touren/:id', {
       id: '@id'
     });
   });

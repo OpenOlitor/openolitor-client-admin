@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     '$location',
     'RechnungsPositionenModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
+    'OverviewCheckboxUtil', 'appConfig', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator',
     function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
-      OverviewCheckboxUtil, API_URL,
+      OverviewCheckboxUtil, appConfig,
       FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator) {
       $rootScope.viewId = 'L-Repo';

@@ -73,7 +73,7 @@
     </div>
   </div>
 
-  <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
+  <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn" ng-if="loaded">
     <ul class="sidebar-nav" ng-init="menushow = []">
 
       <li><a id="nav-kunden" class="nav-item" ng-click="menushow['kunden'] = !menushow['kunden']"><span><i class="fa fa-user-circle"></i> <span translate>Kunde</span></span></a></li>
@@ -122,14 +122,22 @@
     </ul>
   </div>
 
-  <div class="master-content content" ng-class="{'sidenav-open': tgState}">
+  <div class="master-content content" ng-class="{'sidenav-open': tgState}" ng-if="loaded">
     <!--[if lt IE 9]>
           <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
       <![endif]-->
     <div ng-view="" ng-cloak class="container-fluid"></div>
   </div>
 
-  <footer>
+  <div class="master-content content" ng-if="!loaded">
+    <div ng-cloak class="container">
+      <div class="jumbotron">
+        <h3 translate>Wir sind gleich bereit...</h3>
+      </div>
+    </div>
+  </div>
+
+  <footer ng-if="loaded">
     <div class="view-info" ng-class="{'offset': tgState}">
       {{getCurrentViewId()}}
     </div>
@@ -197,7 +205,7 @@
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
   <script src="bower_components/angular-css-injector/angular-css-injector.js"></script>
-  <script src="bower_components/airbrake-js/dist/client.js"></script>
+  <script src="bower_components/airbrake-js/lib/client.js"></script>
   <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <script src="bower_components/ng-iban/dist/ng-iban.js"></script>

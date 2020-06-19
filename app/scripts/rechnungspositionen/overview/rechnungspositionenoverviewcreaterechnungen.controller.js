@@ -6,11 +6,11 @@ angular.module('openolitor-admin')
   .controller('RechnungsPositionenOverviewCreateRechnungenController', ['$scope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'AbosOverviewService',
+    'appConfig', 'alertService', 'AbosOverviewService',
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
-      moment, EnumUtil, DataUtil, msgBus, $q, _, API_URL,
+      moment, EnumUtil, DataUtil, msgBus, $q, _, appConfig,
       alertService, AbosOverviewService) {
 
       // rechnungen object with defaults and without ids
@@ -45,7 +45,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.batchCreate = function() {
-        $http.post(API_URL + 'rechnungspositionen/aktionen/createrechnungen', $scope.getRechnungen()).then(function() {
+        $http.post(appConfig.get().API_URL + 'rechnungspositionen/aktionen/createrechnungen', $scope.getRechnungen()).then(function() {
           $scope.commandIssued = true;
         });
       };

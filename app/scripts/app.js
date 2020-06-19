@@ -4,11 +4,6 @@ var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z
 // Matches YYYY-MM-ddThh:mm:ss.sssZ where .sss is optional
 //var regexIso8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
 
-var userRoles = {
-  Guest: 'Guest',
-  Administrator: 'Administrator'
-};
-
 function convertDateStringsToDates(input) {
   // Ignore things that aren't objects.
   if (typeof input !== 'object') {
@@ -86,14 +81,7 @@ angular
     'piwik',
     'openolitor-core'
   ])
-  .constant('API_URL', '@@API_URL')
-  .constant('API_WS_URL', '@@API_WS_URL')
   .constant('BUILD_NR', '@@BUILD_NR')
-  .constant('ENV', '@@ENV')
-  .constant('VERSION', '@@VERSION')
-  .constant('AIRBREAK_API_KEY', '@@AIRBREAK_API_KEY')
-  .constant('AIRBREAK_URL', '@@AIRBREAK_URL')
-  .constant('EMAIL_TO_ADDRESS', '@@EMAIL_TO_ADDRESS')
   .constant('LIEFERRHYTHMEN', {
     WOECHENTLICH: gettext('Woechentlich'),
     ZWEIWOECHENTLICH: gettext('Zweiwoechentlich'),
@@ -331,6 +319,11 @@ angular
     TAGE: gettext('Tage'),
     PUNKTE: gettext('Punkte')
   })
+  .constant('USER_ROLES', {
+    Guest: 'Guest',
+    Administrator: 'Administrator',
+    Kunde:'Kunde'
+  })
   .constant('uiDatetimePickerConfig', {
     dateFormat: 'dd.MM.yyyy HH:mm',
     defaultTime: '08:00:00',
@@ -391,6 +384,27 @@ angular
   })
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
+  })
+  .service('appConfig', ['$http', function($http) {
+    var loaded = false;
+    var configData = {
+    };
+    $http.get('environments/config.json').then(function(payload) {
+      configData = payload.data;
+      loaded = true;
+    }, function(error) {
+    });
+    return {
+      get: function() {
+        return configData;
+      },
+      isLoaded: function() {
+        return loaded;
+      }
+    };
+  }])
+  .run(function(appConfig) {
+    appConfig.get();
   })
   .factory('checkSize', [
     '$rootScope',
@@ -551,23 +565,21 @@ angular
   ])
   .factory('errbitErrorInterceptor', function(
     $q,
-    ENV,
-    VERSION,
-    AIRBREAK_API_KEY,
-    AIRBREAK_URL
+    $injector
   ) {
     return {
       responseError: function(rejection) {
+        var appConfig = $injector.get('appConfig');
         /*jshint -W117 */
         var airbrake = new airbrakeJs.Client({
           projectId: 1,
-          host: AIRBREAK_URL,
-          projectKey: AIRBREAK_API_KEY
+          host: appConfig.get().AIRBREAK_URL,
+          projectKey: appConfig.get().AIRBREAK_API_KEY
         });
         /*jshint +W117 */
         airbrake.addFilter(function(notice) {
-          notice.context.environment = ENV;
-          notice.context.version = VERSION;
+          notice.context.environment = appConfig.get().ENV;
+          notice.context.version = appConfig.get().VERSION;
           return notice;
         });
         var message = 'Error: ';
@@ -745,8 +757,8 @@ angular
     };
   })
   .config([
-    '$routeProvider',
-    function($routeProvider) {
+    '$routeProvider', 'USER_ROLES',
+    function($routeProvider, USER_ROLES) {
       $routeProvider
         .when('/', {
           redirectTo: '/dashboard'
@@ -755,162 +767,162 @@ angular
           templateUrl: 'scripts/dashboard/dashboard.html',
           controller: 'DashboardController',
           name: 'Dashboard',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/abotypen', {
           templateUrl: 'scripts/abotypen/overview/abotypenoverview.html',
           name: 'AbotypenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/abotypen/new', {
           templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
           controller: 'AbotypenDetailController',
           name: 'AbotypenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/abotypen/:id', {
           templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
           controller: 'AbotypenDetailController',
           name: 'AbotypenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/zusatzAbotypen/new', {
           templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
           controller: 'AbotypenDetailController',
           name: 'ZusatzabotypenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/zusatzAbotypen/:id', {
           templateUrl: 'scripts/abotypen/detail/abotypendetail.html',
           controller: 'AbotypenDetailController',
           name: 'ZusatzabotypenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/kunden', {
           templateUrl: 'scripts/kunden/overview/kundenoverview.html',
           controller: 'KundenOverviewController',
           name: 'KundenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/kunden/new', {
           templateUrl: 'scripts/kunden/detail/kundendetail.html',
           controller: 'KundenDetailController',
           name: 'KundeDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/kunden/:id', {
           templateUrl: 'scripts/kunden/detail/kundendetail.html',
           controller: 'KundenDetailController',
           name: 'KundeDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/kunden/:kundeId/abos/:id', {
           templateUrl: 'scripts/abos/detail/abosdetail.html',
           controller: 'AbosDetailController',
           name: 'AbosDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/personen', {
           templateUrl: 'scripts/personen/overview/personenoverview.html',
           controller: 'PersonenOverviewController',
           name: 'PersonenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/produzenten', {
           templateUrl: 'scripts/produzenten/overview/produzentenoverview.html',
           controller: 'ProduzentenOverviewController',
           name: 'ProduzentenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/produzenten/new', {
           templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
           controller: 'ProduzentenDetailController',
           name: 'ProduzentenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/produzenten/:id', {
           templateUrl: 'scripts/produzenten/detail/produzentendetail.html',
           controller: 'ProduzentenDetailController',
           name: 'ProduzentenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/produzenten/:produzentId/abos/:id', {
           templateUrl: 'scripts/abos/detail/abosdetail.html',
           controller: 'AbosDetailController',
           name: 'AbosDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/einkaufsrechnungen', {
           templateUrl:
             'scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html',
           controller: 'EinkaufsrechnungenOverviewController',
           name: 'EinkaufsrechnungenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/produkte', {
           templateUrl: 'scripts/produkte/overview/produkteoverview.html',
           controller: 'ProdukteOverviewController',
           name: 'ProdukteOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/depots', {
           templateUrl: 'scripts/depots/overview/depotsoverview.html',
           controller: 'DepotsOverviewController',
           name: 'DepotsOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/depots/:id', {
           templateUrl: 'scripts/depots/detail/depotsdetail.html',
           controller: 'DepotsDetailController',
           name: 'DepotsDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/abos', {
           templateUrl: 'scripts/abos/overview/abosoverview.html',
           controller: 'AbosOverviewController',
           name: 'AbosOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/zusatzabos', {
           templateUrl: 'scripts/abos/overview/zusatzabosoverview.html',
           controller: 'ZusatzabosOverviewController',
           name: 'ZusatzabosOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/abos/:id', {
           templateUrl: 'scripts/abos/detail/abosdetail.html',
           controller: 'AbosDetailController',
           name: 'AbosDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/touren', {
           templateUrl: 'scripts/touren/overview/tourenoverview.html',
           controller: 'TourenOverviewController',
           name: 'TourenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/touren/:id', {
           templateUrl: 'scripts/touren/detail/tourendetail.html',
           controller: 'TourenDetailController',
           name: 'TourenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/pendenzen', {
           templateUrl: 'scripts/pendenzen/overview/pendenzenoverview.html',
           controller: 'PendenzenOverviewController',
           name: 'PendenzenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/lieferplanung', {
@@ -918,7 +930,7 @@ angular
             'scripts/lieferplanungen/overview/lieferplanungoverview.html',
           controller: 'LieferplanungOverviewController',
           name: 'LieferplanungOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/lieferplanung/:id', {
@@ -926,7 +938,7 @@ angular
             'scripts/lieferplanungen/detail/lieferplanungdetail.html',
           controller: 'LieferplanungDetailController',
           name: 'LieferplanungDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/depotauslieferungen', {
           templateUrl:
@@ -934,7 +946,7 @@ angular
           controller: 'AuslieferungenOverviewController',
           name: 'DepotAuslieferungenOverview',
           model: 'Depot',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/depotauslieferungen/:id', {
@@ -943,7 +955,7 @@ angular
           controller: 'AuslieferungDetailController',
           name: 'DepotAuslieferungDetail',
           model: 'Depot',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/tourauslieferungen', {
           templateUrl:
@@ -951,7 +963,7 @@ angular
           controller: 'AuslieferungenOverviewController',
           name: 'TourAuslieferungenOverview',
           model: 'Tour',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/tourauslieferungen/:id', {
@@ -960,7 +972,7 @@ angular
           controller: 'AuslieferungDetailController',
           name: 'TourAuslieferungDetail',
           model: 'Tour',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/postauslieferungen', {
           templateUrl:
@@ -968,7 +980,7 @@ angular
           controller: 'AuslieferungenOverviewController',
           name: 'PostAuslieferungenOverview',
           model: 'Post',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/postauslieferungen/:id', {
@@ -977,202 +989,202 @@ angular
           controller: 'AuslieferungDetailController',
           name: 'PostAuslieferungDetail',
           model: 'Post',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/rechnungen', {
           templateUrl: 'scripts/rechnungen/overview/rechnungenoverview.html',
           controller: 'RechnungenOverviewController',
           name: 'RechnungenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/rechnungen/new', {
           templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
           controller: 'RechnungenDetailController',
           name: 'RechnungenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/rechnungen/:id', {
           templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
           controller: 'RechnungenDetailController',
           name: 'RechnungenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/rechnungspositionen', {
           templateUrl:
             'scripts/rechnungspositionen/overview/rechnungspositionenoverview.html',
           controller: 'RechnungsPositionenOverviewController',
           name: 'RechnungsPositionenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/kunden/:kundeId/rechnungen/new', {
           templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
           controller: 'RechnungenDetailController',
           name: 'RechnungenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/kunden/:kundeId/abos/:aboId/rechnungen/new', {
           templateUrl: 'scripts/rechnungen/detail/rechnungendetail.html',
           controller: 'RechnungenDetailController',
           name: 'RechnungenDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/zahlungsimports', {
           templateUrl:
             'scripts/zahlungsimports/overview/zahlungsimportsoverview.html',
           controller: 'ZahlungsImportsOverviewController',
           name: 'ZahlungsImportsOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/zahlungsimports/new', {
           templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
           controller: 'ZahlungsImportsController',
           name: 'ZahlungsImports',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/zahlungsimports/:id', {
           templateUrl: 'scripts/zahlungsimports/import/zahlungsimports.html',
           controller: 'ZahlungsImportsController',
           name: 'ZahlungsImports',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/zahlungsexports', {
           templateUrl: 'scripts/zahlungsexports/overview/zahlungsexportsoverview.html',
           controller: 'ZahlungsExportsOverviewController',
           name: 'ZahlungsExportsOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/zahlungsexports/new', {
           templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
           controller: 'ZahlungsExportsController',
           name: 'ZahlungsExports',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/zahlungsexports/:id', {
           templateUrl: 'scripts/zahlungsexports/import/zahlungsexports.html',
           controller: 'ZahlungsExportsController',
           name: 'ZahlungsExports',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/kundentypen', {
           templateUrl: 'scripts/projekt/settings/kundentypen.html',
           controller: 'ProjektSettingsController',
           name: 'ProjektSettings',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/personCategories', {
           templateUrl: 'scripts/projekt/settings/personCategories.html',
           controller: 'ProjektSettingsController',
           name: 'ProjektSettings',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/produktkategorien', {
           templateUrl: 'scripts/projekt/settings/produktkategorien.html',
           controller: 'ProjektSettingsController',
           name: 'ProjektSettings',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/arbeitskategorien', {
           templateUrl: 'scripts/projekt/settings/arbeitskategorien.html',
           controller: 'ProjektSettingsController',
           name: 'ProjektSettings',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/projektsettings', {
           templateUrl: 'scripts/projekt/settings/projektsettings.html',
           controller: 'ProjektSettingsController',
           name: 'ProjektSettings',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/reportvorlagen', {
           templateUrl: 'scripts/reportvorlagen/reportvorlagenoverview.html',
           controller: 'ReportvorlagenOverviewController',
           name: 'ReportvorlagenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/mailvorlagen', {
           templateUrl: 'scripts/mailvorlagen/mailvorlagenoverview.html',
           controller: 'MailvorlagenOverviewController',
           name: 'MailvorlagenOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/reports', {
           templateUrl: 'scripts/reports/overview/reportsoverview.html',
           controller: 'ReportsOverviewController',
           name: 'ReportsOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/reports', {
           templateUrl: 'scripts/reports/overview/reportsoverview.html',
           controller: 'ReportsOverviewController',
           name: 'ReportsOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         })
         .when('/reports/:id/execute', {
           templateUrl: 'scripts/reports/execute/reportsexecute.html',
           controller: 'ReportsExecuteController',
           name: 'ReportsExecute',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/reports/:id', {
           templateUrl: 'scripts/reports/detail/reportsdetail.html',
           controller: 'ReportsDetailController',
           name: 'ReportsDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/reports/new', {
           templateUrl: 'scripts/reports/detail/reportsdetail.html',
           controller: 'ReportsDetailController',
           name: 'ReportsDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/arbeitsangebote', {
           templateUrl:
             'scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html',
           controller: 'ArbeitsangeboteOverviewController',
           name: 'ArbeitsangeboteOverview',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/arbeitsangebote/new', {
           templateUrl:
             'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
           controller: 'ArbeitsangeboteDetailController',
           name: 'ArbeitsangeboteDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/arbeitsangebote/:id', {
           templateUrl:
             'scripts/arbeitsangebote/detail/arbeitsangebotedetail.html',
           controller: 'ArbeitsangeboteDetailController',
           name: 'ArbeitsangeboteDetail',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/arbeitseinsaetze', {
           templateUrl:
             'scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html',
           controller: 'ArbeitseinsaetzeOverviewController',
           name: 'ArbeitseinsaetzeOverview',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/arbeitseinsatzabrechnung', {
           templateUrl:
             'scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html',
           controller: 'ArbeitseinsatzabrechnungOverviewController',
           name: 'ArbeitseinsatzabrechnungOverview',
-          access: userRoles.Administrator
+          access: USER_ROLES.Administrator
         })
         .when('/journal', {
           templateUrl: 'scripts/journal/overview/journaloverview.html',
           controller: 'JournalOverviewController',
           name: 'JournalOverview',
-          access: userRoles.Administrator,
+          access: USER_ROLES.Administrator,
           reloadOnSearch: false
         });
     }

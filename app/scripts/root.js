@@ -6,11 +6,11 @@ angular.module('openolitor-admin')
   .controller('OpenOlitorRootController', ['$scope', '$rootScope',
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
-    'ENV', 'VERSION', 'cssInjector', 'API_URL', '$route',
+    'appConfig', 'cssInjector', '$route',
     'ooAuthService', '$cookies', 'moment', 'dialogService',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
-      $timeout, BUILD_NR, ENV, VERSION, cssInjector, API_URL, $route,
+      $timeout, BUILD_NR, appConfig, cssInjector, $route,
       ooAuthService, $cookies, moment, dialogService) {
       angular.element($window).bind('resize', function() {
         checkSize();
@@ -32,6 +32,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.loadedProjectLoggedInOnce = false;
+      $scope.loaded = false;
 
       //initial launch
       checkSize();
@@ -74,8 +75,23 @@ angular.module('openolitor-admin')
         });
 
       $scope.buildNr = BUILD_NR;
-      $scope.env = ENV;
-      $scope.version = VERSION;
+
+      $scope.loadAppConfig = function(count) {
+        if(appConfig.isLoaded()) {
+          $scope.env = appConfig.get().ENV;
+          $scope.version = appConfig.get().version;
+          $scope.API_URL = appConfig.get().API_URL;
+          $scope.loaded = true;
+        } else {
+          if(count < 100) {
+            $timeout(function() {
+              $scope.loadAppConfig(count++);
+            }, 100);
+          }
+        }
+      };
+
+      $scope.loadAppConfig(0);
 
       msgBus.onMsg('WebSocketClosed', $rootScope, function(event, msg) {
         $scope.connected = false;

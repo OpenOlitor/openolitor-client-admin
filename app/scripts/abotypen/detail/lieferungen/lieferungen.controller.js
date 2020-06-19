@@ -6,11 +6,11 @@ angular.module('openolitor-admin')
   .controller('LieferungenListController', ['$scope', '$routeParams',
     '$location', '$uibModal', '$log', '$http', 'gettext', 'NgTableParams',
     'msgBus', 'lodash', '$filter',
-    'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'API_URL',
+    'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'appConfig',
 
     function($scope, $routeParams, $location, $uibModal, $log, $http, gettext,
       NgTableParams, msgBus, lodash, $filter,
-      LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN, API_URL) {
+      LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN, appConfig) {
 
       $scope.now = new Date();
       $scope.template = {
@@ -97,7 +97,7 @@ angular.module('openolitor-admin')
           abotypId: parseInt($routeParams.id),
           vertriebId: $scope.selectedVertrieb.id
         };
-        $http.post(API_URL +
+        $http.post(appConfig.get().API_URL +
           'abotypen/' + newModel.abotypId + '/vertriebe/' + newModel.vertriebId +
           '/lieferungen/aktionen/generieren',
           newModel).then(function() {

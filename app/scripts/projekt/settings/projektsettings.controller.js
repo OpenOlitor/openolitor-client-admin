@@ -26,11 +26,11 @@ angular.module('openolitor-admin')
         'Upload',
         'msgBus',
         'cloneObj',
-        'API_URL',
+        'appConfig',
         function($scope, $rootScope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
             ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
-            Upload, msgBus, cloneObj, API_URL
+            Upload, msgBus, cloneObj, appConfig
         ) {
             $rootScope.viewId = 'S-Proj';
 
@@ -523,7 +523,7 @@ angular.module('openolitor-admin')
             };
 
             $scope.generateLogoUrl = function() {
-                return API_URL + 'projekt/' + $scope.projekt.id + '/logo';
+                return appConfig.get().API_URL + 'projekt/' + $scope.projekt.id + '/logo';
             };
 
             $scope.downloadImportFile = function() {
@@ -546,7 +546,7 @@ angular.module('openolitor-admin')
                     return;
                 }
                 Upload.upload({
-                    url: API_URL + 'projekt/' + $scope.projekt.id + '/' + style,
+                    url: appConfig.get().API_URL + 'projekt/' + $scope.projekt.id + '/' + style,
                     data: {
                         file: file
                     }

@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ProduzentDetailModel', function($resource, API_URL) {
-    return $resource(API_URL + 'produzenten/:id', {
+  .factory('ProduzentDetailModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'produzenten/:id', {
       id: '@id'
     });
   });

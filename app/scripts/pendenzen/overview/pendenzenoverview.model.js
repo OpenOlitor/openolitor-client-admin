@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('PendenzenOverviewModel', function($resource, API_URL) {
-    return $resource(API_URL + 'pendenzen/:id', {
+  .factory('PendenzenOverviewModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'pendenzen/:id', {
       id: '@id'
     });
   });
