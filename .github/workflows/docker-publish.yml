@@ -51,7 +51,7 @@ jobs:
       with:
         name: client-admin-dist
     - name: Set env
-      run: echo ::set-env name=VERSION::node -p "require('./package.json').version"
+      run: echo ::set-env name=VERSION::$(node -p "require('./package.json').version")
     - name: Docker Login
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build Docker Image
