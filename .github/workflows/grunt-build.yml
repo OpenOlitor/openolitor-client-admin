@@ -28,7 +28,7 @@ jobs:
     - name: Fetch bower
       run: npm install -g bower grunt-cli
     - name: npm ci
-      run: npm ci --prefer-offline
+      run: npm ci
     - name: bower install
       run: bower install --allow-root
     - name: Run Build
