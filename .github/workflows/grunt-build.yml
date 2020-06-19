@@ -36,5 +36,5 @@ jobs:
     - name: Upload build artifact
       uses: actions/upload-artifact@v1
       with:
-        name: client-admin-build
-        path: build
+        name: client-admin-dist
+        path: dist
