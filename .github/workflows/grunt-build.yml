@@ -25,6 +25,8 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - name: use node v10
+      run: nvm use 10
     - name: Fetch bower
       run: npm install -g bower grunt-cli
     - name: npm install
