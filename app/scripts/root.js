@@ -64,7 +64,7 @@ angular.module('openolitor-admin')
         $scope.menushow[angular.element('.sidebar-nav .active').parent()
           .attr(
             'activate-id')] = true;
-      }, 0);
+      }, 1);
 
       var unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
         function(info) {
@@ -178,6 +178,6 @@ angular.module('openolitor-admin')
         unwatchStaticServerInfo();
       });
 
-      cssInjector.add(API_URL + 'ressource/style/admin');
+      cssInjector.add(appConfig.get().API_URL + 'ressource/style/admin');
     }
   ]);

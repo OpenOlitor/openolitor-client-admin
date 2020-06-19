@@ -73,8 +73,8 @@
     </div>
   </div>
 
-  <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn" ng-if="loaded">
-    <ul class="sidebar-nav" ng-init="menushow = []">
+  <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn" ng-init="menushow = []">
+    <ul class="sidebar-nav" ng-if="loaded">
 
       <li><a id="nav-kunden" class="nav-item" ng-click="menushow['kunden'] = !menushow['kunden']"><span><i class="fa fa-user-circle"></i> <span translate>Kunde</span></span></a></li>
       <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-kunden" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>

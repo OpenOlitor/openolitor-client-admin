@@ -16,8 +16,6 @@ module.exports = function(grunt) {
     env = grunt.option('env');
   }
 
-  var urls = grunt.file.readJSON('variables.json').ENVIRONMENTS;
-  var emails = grunt.file.readJSON('variables.json').EMAIL_TO_ADDRESS;
   // text replace in js files used for environment specific configurations
   var config = {
     BUILD_NR: grunt.option('buildnr') || 'dev',

@@ -501,13 +501,12 @@ angular
       return msgBus;
     }
   ])
-  .run([
-    'ooClientMessageService',
-    function(clientMessageService) {
+  .run(['ooClientMessageService', '$timeout', function(clientMessageService, $timeout) {
+    $timeout(function() {
       console.log('Start clientMessageService');
       clientMessageService.start();
-    }
-  ])
+    }, 1000);
+  }])
   .config([
     'ngTableFilterConfigProvider',
     function(ngTableFilterConfigProvider) {
