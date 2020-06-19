@@ -33,3 +33,8 @@ jobs:
       run: bower install --allow-root
     - name: Run Build
       run: grunt build --buildnr=$GITHUB_RUN_ID
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: client-admin-build
+        path: build
