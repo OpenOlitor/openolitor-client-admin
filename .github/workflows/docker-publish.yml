@@ -6,15 +6,13 @@ on:
 
 jobs:
   docker:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Download build artifact
-        uses: actions/download-artifact@v1
-        with:
-          name: client-client-build
+      uses: actions/download-artifact@v1
+      with:
+        name: client-client-build
     - name: Set env
       run: echo ::set-env name=VERSION::node -p "require('./package.json').version"
     - name: Docker Login
