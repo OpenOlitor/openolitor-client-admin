@@ -21,5 +21,3 @@ jobs:
       run: docker build . -t openolitor/openolitor-client-admin:${VERSION}
     - name: Publish Docker Image
       run: docker push openolitor/openolitor-client-admin:${VERSION}
-      env:
-        VERSION
