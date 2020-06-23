@@ -3,7 +3,7 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ZusatzAbotypenModel', function($resource, API_URL) {
-    return $resource(API_URL + 'zusatzAbotypen/'
+  .factory('ZusatzAbotypenModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'zusatzAbotypen/'
     );
   });

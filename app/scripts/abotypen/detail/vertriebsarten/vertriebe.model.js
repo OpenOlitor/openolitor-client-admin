@@ -11,7 +11,7 @@ angular.module('openolitor-admin')
       'getAllVertriebe' : {
       method: 'GET',
       isArray: true,
-      url: API_URL + 'vertriebe'
+      url: appConfig.get().API_URL + 'vertriebe'
       },
     });
   });
