@@ -398,11 +398,8 @@ angular
     var loaded = false;
     var configData = {
     };
-    $http.get('environments/config.json').then(function(payload) {
-      configData = payload.data;
-      loaded = true;
-    }, function(error) {
-    });
+    configData = getConfig();
+    loaded = true;
     return {
       get: function() {
         return configData;
