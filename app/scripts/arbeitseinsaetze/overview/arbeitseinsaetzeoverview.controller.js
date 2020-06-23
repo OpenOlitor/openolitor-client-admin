@@ -17,7 +17,12 @@ angular
     'ReportvorlagenService',
     'ArbeitskategorienService',
     'gettext',
+    'gettextCatalog',
     'FilterQueryUtil',
+    'moment',
+    'EnumUtil',
+    'ZEITRAUM',
+    'lodash',
     function(
       $q,
       $scope,
@@ -31,9 +36,25 @@ angular
       ReportvorlagenService,
       ArbeitskategorienService,
       gettext,
-      FilterQueryUtil
+      gettextCatalog,
+      FilterQueryUtil,
+      moment,
+      EnumUtil,
+      ZEITRAUM,
+      lodash
     ) {
       $rootScope.viewId = 'L-Abein';
+
+      $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
+      $scope.zeitraumL = []; 
+      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, function(zr){ 
+          return gettextCatalog.getString(zr.label).toLowerCase();
+      }), function(value, key) {
+        $scope.zeitraumL.push({
+          'id': value.id,
+          'title': gettextCatalog.getString(value.label)
+        });
+      });
 
       $scope.entries = [];
       $scope.loading = false;
@@ -102,7 +123,7 @@ angular
       );
 
       $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('VorlageKundenbrief');
+        return ReportvorlagenService.getVorlagen('VorlageArbeitseinsatz');
       };
 
       $scope.closeBericht = function() {
@@ -125,8 +146,9 @@ angular
             page: 1,
             count: 10,
             sorting: {
-              kurzzeichen: 'asc'
-            }
+              zeitVon: 'asc'
+            },
+            filter:{zeitVonF:'D'}
           },
           {
             filterDelay: 0,
@@ -138,17 +160,45 @@ angular
               if (!$scope.entries) {
                 return;
               }
+              var f = params.filter();
+              var data = $scope.entries;
+              if(f.zeitVonF && f.zeitVonF !== null) {
+                var from, to;
+                if(f.zeitVonF === 'D') {
+                  from = moment().startOf('day').toDate();
+                  to = new Date(8640000000000000);
+                } else if(f.zeitVonF === 'd') {
+                  from = moment().startOf('day').toDate();
+                  to = moment().endOf('day').toDate();
+                } else if(f.zeitVonF === 'w') {
+                  from = moment().startOf('week').toDate();
+                  to = moment().endOf('week').toDate();
+                } else if(f.zeitVonF === 'M') {
+                  from = moment().startOf('month').toDate();
+                  to = moment().endOf('month').toDate();
+                } else {
+                  from =new Date(-8640000000000000);
+                  to = new Date(8640000000000000);
+                }
+                data = $filter('dateRange') (
+                    data,
+                    from,
+                    to,
+                    'zeitVon'
+                  );
+              }
               // use build-in angular filter
               var filteredData = $filter('filter')(
-                $scope.entries,
+                data,
                 $scope.search.query
               );
+              f = params.filter(true);
+              delete f.zeitVonF;
               var orderedData = $filter('filter')(
                 filteredData,
-                params.filter()
+                f
               );
-              orderedData = params.sorting
-                ? $filter('orderBy')(
+              orderedData = params.sorting ? $filter('orderBy')(
                     orderedData,
                     params.orderBy(),
                     false,

@@ -41,7 +41,7 @@
               <td data-title="'Mobiltelefon'|translate" sortable="'telefonMobil'">
                 {{arbeitseinsatz.telefonMobil}}
               </td>
-              <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'">
+              <td data-title="'Datum & Zeit'|translate" sortable="'zeitVon'" filter="{zeitVonF: 'select'}" filter-data="zeitraumL">
                 <span ng-if="sameDay(arbeitseinsatz.zeitVon, arbeitseinsatz.zeitBis)">
                   {{arbeitseinsatz.zeitVon | date : 'dd.MM.yyyy HH:mm'}} - {{arbeitseinsatz.zeitBis | date : 'HH:mm'}}
                 </span>

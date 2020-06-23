@@ -6,7 +6,7 @@
                 <h3 class="panel-title"><span class="navbar-brand" translate>Arbeitskategorien</span>
                     <form name="createArbeitskategorieForm" class="navbar-form pull-right">
                         <div class="form-group">
-                            <a role="button" ng-click="addArbeitskategorie()" ng-disabled="editingArbeitskategorienBool" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Arbeitskategorie erstellen</span></a>
+                            <a role="button" ng-click="addArbeitskategorie()" ng-disabled="editingArbeitskategorieBool" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span translate>Arbeitskategorie erstellen</span></a>
                         </div>
                     </form>
                 </h3>
@@ -21,7 +21,7 @@
                             <td data-title="'Bezeichnung'|translate" sortable="'beschreibung'">
                                 <span ng-hide="arbeitskategorie.editable">{{arbeitskategorie.beschreibung}}</span>
                                 <span ng-show="arbeitskategorie.editable">
-                                    <textarea class="form-control" name="beschreibung" ng-model="arbeitskategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                                    <textarea class="form-control" name="beschreibung" ng-model="arbeitskategorie.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength=200 ></textarea>
                             </td>
                             <td data-title="'# Verknüpfungen'|translate" sortable="'anzahlVerknuepfungen'">
                                 {{arbeitskategorie.anzahlVerknuepfungen}}

@@ -10,6 +10,7 @@ angular.module('openolitor-admin')
       lodash) {
       $scope.abo = abo;
       $scope.vertriebe = vertriebe;
+      $scope.vertriebsarten = vertriebsarten;
 
       var findWithId = function(array, id) {
         var found;
@@ -21,7 +22,6 @@ angular.module('openolitor-admin')
         return found;
       };
 
-      $scope.vertriebsarten = vertriebsarten;
       $scope.formDaten = {
         vertriebIdNeu: findWithId(vertriebe, abo.vertriebId),
         vertriebsartIdNeu: findWithId(vertriebsarten[abo.vertriebId], abo.vertriebsartId),

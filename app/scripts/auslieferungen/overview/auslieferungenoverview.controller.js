@@ -8,10 +8,11 @@ angular.module('openolitor-admin')
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus',
     'ReportvorlagenService', 'localeSensitiveComparator', '$location', 'FilterQueryUtil', 'gettext',
+    'lodash', 'gettextCatalog',
     function($q, $scope, $rootScope, $filter, $route, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, NgTableParams,
       AUSLIEFERUNGSTATUS, msgBus, ReportvorlagenService, localeSensitiveComparator,
-      $location, FilterQueryUtil, gettext) {
+      $location, FilterQueryUtil, gettext, lodash, gettextCatalog) {
       $rootScope.viewId = 'L-Aus';
 
       $scope.entries = [];
@@ -39,14 +40,20 @@ angular.module('openolitor-admin')
       }
 
       $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('Vorlage'+model+$scope.vorlageTyp);
+        if ($scope.vorlageTyp === 'KorbUebersicht' || $scope.vorlageTyp === 'KorbDetails'){
+          return ReportvorlagenService.getVorlagen('Vorlage'+$scope.vorlageTyp);
+        } else {
+          return ReportvorlagenService.getVorlagen('Vorlage'+model+$scope.vorlageTyp);
+        }
       };
 
       $scope.statusL = [];
-      angular.forEach(AUSLIEFERUNGSTATUS, function(value, key) {
+      angular.forEach(lodash.sortBy(AUSLIEFERUNGSTATUS, function(as){
+          return gettextCatalog.getString(as).toLowerCase();
+      }), function(value, key) {
         $scope.statusL.push({
           'id': key,
-          'title': value
+          'title': gettextCatalog.getString(value)
         });
       });
 
@@ -131,7 +138,20 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.$broadcast("resetDirectiveGenerateReport");
           $scope.reportType = 'korbuebersicht';
-          $scope.vorlageTyp = 'Korbuebersicht';
+          $scope.vorlageTyp = 'KorbUebersicht';
+          $scope.showGenerateReport = true;
+          return true;
+        },
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        }
+      }, {
+        label: gettext('Korbdetails drucken'),
+        iconClass: 'fa fa-print',
+        onExecute: function() {
+          $scope.$broadcast("resetDirectiveGenerateReport");
+          $scope.reportType = 'korbdetails';
+          $scope.vorlageTyp = 'KorbDetails';
           $scope.showGenerateReport = true;
           return true;
         },

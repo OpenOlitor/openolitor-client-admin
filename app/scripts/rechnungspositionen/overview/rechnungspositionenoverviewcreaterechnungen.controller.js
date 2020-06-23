@@ -10,7 +10,7 @@ angular.module('openolitor-admin')
 
     function($scope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
-      moment, EnumUtil, DataUtil, msgBus, $q, _, appConfig,
+      moment, EnumUtil, DataUtil, msgBus, $q, lodash, appConfig,
       alertService, AbosOverviewService) {
 
       // rechnungen object with defaults and without ids
@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.getRechnungen = function() {
-        $scope.rechnungen.ids = _.map(_.filter($scope.rechnungsPositionen, ['status', 'Offen']), 'id');
+        $scope.rechnungen.ids = lodash.map(lodash.filter($scope.rechnungsPositionen, ['status', 'Offen']), 'id');
         return $scope.rechnungen;
       };
 
@@ -60,16 +60,26 @@ angular.module('openolitor-admin')
         rechnungsPositionenInWrongState: []
       };
 
+      $scope.numberOfOpenRechnungPositionen = function(rechnungPositionenList){
+          var result = 0;
+          lodash.forEach(rechnungPositionenList, function(rechnungPosition){
+              if (rechnungPosition.status === 'Offen'){
+                  result++;
+              }
+          });
+          return result;
+      }
+
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         console.log('Mod: ', msg);
         if (msg.entity === 'RechnungsPosition') {
           console.log('RP', msg);
           console.log('$scope.rechnungen.ids', $scope.rechnungen.ids);
           console.log('msg.data.id', msg.data.id);
-          if (_.includes($scope.rechnungen.ids, msg.data.id)) {
+          if (lodash.includes($scope.rechnungen.ids, msg.data.id)) {
             console.log('includes', msg.data.id);
             $scope.batchCreated.ids.push(msg.data.id);
-            if (!_.includes($scope.batchCreated.rechnungsIds, msg.data.rechnungId)) {
+            if (!lodash.includes($scope.batchCreated.rechnungsIds, msg.data.rechnungId)) {
               $scope.batchCreated.rechnungsIds.push(msg.data.rechnungId);
             }
             $scope.$apply();

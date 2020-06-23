@@ -42,7 +42,9 @@ angular.module('openolitor-admin')
       ProduzentenModel.query({
         q: ''
       }, function(list) {
-        angular.forEach(list, function(produzent) {
+        angular.forEach(lodash.sortBy(list, function(pl){
+            return pl.kurzzeichen.toLowerCase();
+        }), function(produzent) {
           $scope.produzentL.push({
             'id': produzent.id,
             'title': produzent.kurzzeichen
@@ -208,7 +210,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('VorlageLieferantenabrechnung');
+        return ReportvorlagenService.getVorlagen('VorlageProduzentenabrechnung');
       };
 
       $scope.$watch('search.query', function() {

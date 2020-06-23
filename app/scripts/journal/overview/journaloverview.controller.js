@@ -66,7 +66,7 @@ angular.module('openolitor-admin')
       function initSearch() {
         $scope.entries = JournalModel.query({
           f: $scope.search.filterQuery,
-          limit: 100000
+          limit: 5000
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;

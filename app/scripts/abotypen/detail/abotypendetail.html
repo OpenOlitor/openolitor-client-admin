@@ -25,8 +25,8 @@
                 <label for="name" translate>Name</label>
               </div>
               <div class="col-md-8">
-                <input type="text" ng-if="getModel() === 'abotypen'" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
-                <input type="text" ng-if="getModel() === 'zusatzAbotypen'" class="form-control" name="name" ng-model="zusatzAbotyp.name" placeholder="{{'Name'|translate}}" auto-focus required>
+                <input type="text" ng-if="getModel() === 'abotypen'" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus maxlength = 50 required>
+                <input type="text" ng-if="getModel() === 'zusatzAbotypen'" class="form-control" name="name" ng-model="zusatzAbotyp.name" placeholder="{{'Name'|translate}}" auto-focus maxlength = 50 required>
               </div>
             </div>
             <div class="row form-group">
@@ -34,8 +34,8 @@
                 <label for="beschreibung" translate>Beschreibung</label>
               </div>
               <div class="col-md-8">
-                <textarea class="form-control" ng-if="getModel() === 'abotypen'" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
-                <textarea class="form-control" ng-if="getModel() === 'zusatzAbotypen'" name="beschreibung" ng-model="zusatzAbotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..."></textarea>
+                <textarea class="form-control" ng-if="getModel() === 'abotypen'" name="beschreibung" ng-model="abotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength=256></textarea>
+                <textarea class="form-control" ng-if="getModel() === 'zusatzAbotypen'" name="beschreibung" ng-model="zusatzAbotyp.beschreibung" placeholder="{{'Beschreibung'|translate}}..." maxlength=256></textarea>
               </div>
             </div>
             <div class="row form-group">
@@ -111,7 +111,7 @@
                 <input type="number"  step="1" class="form-control" name="vertragslaufzeit.wert" ng-model="abotyp.vertragslaufzeit.wert" placeholder="{{'Vertragslaufzeit'|translate}}" required></input>
               </div>
               <div class="col-md-1">
-                <input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden required />
+                <input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden maxlength = 50 required />
                 <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
               </div>
             </div>
@@ -123,7 +123,7 @@
                 <input type="number" step="1" class="form-control" name="kuendigungsfrist.wert" ng-model="abotyp.kuendigungsfrist.wert" placeholder="{{'Frist'|translate}}" ng-required="abotyp.laufzeiteinheit === unbeschraenkt"></input>
               </div>
               <div class="col-md-1">
-                <input type="text" name="kuendigungsfristeinheit" ng-model="abotyp.kuendigungsfrist.einheit" hidden required />
+                <input type="text" name="kuendigungsfristeinheit" ng-model="abotyp.kuendigungsfrist.einheit" hidden maxlength = 50 required/>
                 <oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
               </div>
             </div>

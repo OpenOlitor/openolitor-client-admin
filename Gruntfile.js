@@ -227,6 +227,12 @@ module.exports = function(grunt) {
       }
     },
 
+    uglify: {
+      options: {
+        exceptionsFiles: [ 'uglifyExceptions.json' ]
+      }
+    },
+
     // Renames files for browser caching purposes
     rev: {
       dist: {
@@ -235,7 +241,7 @@ module.exports = function(grunt) {
             '<%= openolitor.dist %>/scripts/**/*.js',
             '<%= openolitor.dist %>/styles/**/*.css',
             '<%= openolitor.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= openolitor.dist %>/styles/fonts/*'
+            '<%= openolitor.dist %>/styles/fonts/*',
           ]
         }
       }
@@ -353,6 +359,7 @@ module.exports = function(grunt) {
               '*.html',
               'scripts/**/*.html',
               'images/**/*.{webp,png,jpg}',
+              'third_party/**',
               'fonts/*'
             ]
           },
@@ -484,7 +491,7 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         files: {
-          '<%= openolitor.app %>/scripts/i18n/translations.js': ['i18n/*.po']
+          '<%= openolitor.app %>/scripts/i18n/translations.js': ['i18n/*/*.po']
         }
       }
     }

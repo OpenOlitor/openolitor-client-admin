@@ -1,11 +1,13 @@
 <div class="modal-header">
-  <h3 translate>Info-Text</h3>
+  <h3><span translate>Info-Text</span> <button type="button" role="button" ng-click="toggleHTML();" class="btn btn-default" uib-tooltip="{{'HTML / WYSIWYG'|translate}}"><span class="fa fa-edit"></span></button></h3>
 </div>'
 <div class="modal-body">
   <!-- Von bis -->
   <div class="form-group row">
    <span class="col-md-12">
-     <textarea class="form-control" rows="5" ng-model="planung.bemerkungen"></textarea>
+     <ng-quill-editor ng-if="!htmlView" ng-model="planung.bemerkungen" bounds="self" placeholder="'Hier Text einfügen und formatieren'|translate" preserve-whitespace="false" track-changes="all">
+     </ng-quill-editor>
+     <textarea name="bemerkungen" rows="15" ng-model="planung.bemerkungen" ng-if="htmlView" class="form-control" maxlength=10000></textarea>
    </span>
  </div>
 </div>

@@ -134,6 +134,20 @@ angular.module('openolitor-admin')
         gettextCatalog.setCurrentLanguage(msg.reason);
       });
 
+      $scope.displayActiveLang = function() {
+        switch(gettextCatalog.getCurrentLanguage()){
+          case 'en_US': return 'en';
+            break;
+          case 'cs-CZ': return 'cs';
+            break;
+          case 'es-ES': return 'es';
+            break;
+          case 'hu-HU': return 'hu';
+            break;
+          default: return(gettextCatalog.getCurrentLanguage());
+        }
+      };
+
       $scope.activeLang = function() {
         return gettextCatalog.getCurrentLanguage();
       };
@@ -148,14 +162,28 @@ angular.module('openolitor-admin')
 
       if (angular.isUndefined($scope.storedActiveLang())) {
         var lang = $window.navigator.language || $window.navigator.userLanguage;
-        if (lang.indexOf('de-') > 0) {
-          $scope.changeLang('de');
-        } else if (lang.indexOf('fr-') > 0) {
-          $scope.changeLang('fr');
-        } else if (lang.indexOf('en-') > 0) {
+        if (lang.startsWith('de-CH')) {
+          $scope.changeLang('de_CH');
+        } else if (lang.startsWith('de-DE')) {
+          $scope.changeLang('de_DE');
+        } else if (lang.startsWith('de')) {
+          $scope.changeLang('de_DE');
+        } else if (lang.startsWith('fr-BE')) {
+          $scope.changeLang('fr_BE');
+        } else if (lang.startsWith('fr-CH')) {
+          $scope.changeLang('fr_CH');
+        } else if (lang.startsWith('fr')) {
+          $scope.changeLang('fr_CH');
+        } else if (lang.startsWith('en')) {
           $scope.changeLang('en');
+        } else if (lang.startsWith('es')) {
+          $scope.changeLang('es');
+        } else if (lang.startsWith('cs')) {
+          $scope.changeLang('cs');
+        } else if (lang.startsWith('hu')) {
+          $scope.changeLang('hu');
         } else {
-          $scope.changeLang('de');
+          $scope.changeLang('en');
         }
       } else {
         $scope.changeLang($scope.storedActiveLang());

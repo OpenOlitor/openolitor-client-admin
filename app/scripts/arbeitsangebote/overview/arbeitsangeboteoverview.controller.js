@@ -17,7 +17,10 @@ angular
     '$location',
     'ReportvorlagenService',
     'ArbeitskategorienService',
+    'ZEITRAUM',
     'gettext',
+    'gettextCatalog',
+    'EnumUtil',
     'moment',
     'FilterQueryUtil',
     'lodash',
@@ -35,7 +38,10 @@ angular
       $location,
       ReportvorlagenService,
       ArbeitskategorienService,
+      ZEITRAUM,
       gettext,
+      gettextCatalog,
+      EnumUtil,
       moment,
       FilterQueryUtil,
       lodash,
@@ -54,7 +60,9 @@ angular
         list
       ) {
         if (list) {
-          angular.forEach(list, function(item) {
+          angular.forEach(lodash.sortBy(list, function(kl){
+              return kl.beschreibung.toLowerCase();
+          }), function(item) {
             if (item.id) {
               $scope.kategorienL.push({
                 id: item.beschreibung,
@@ -66,7 +74,16 @@ angular
         }
       });
 
-      $scope.zeitraumL = [{id: 'd', title: gettext('Heute')}, {id: 'w', title: gettext('Diese Woche')}, {id: 'M', title: gettext('Diesen Monat')}];
+      $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
+      $scope.zeitraumL = []; 
+      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, function(zr){
+          return gettextCatalog.getString(zr.label).toLowerCase();
+      }), function(value, key) {
+        $scope.zeitraumL.push({
+          'id': value.id,
+          'title': gettextCatalog.getString(value.label)
+        });
+      });
 
       $scope.search = {
         query: '',
@@ -136,8 +153,9 @@ angular
             page: 1,
             count: 10,
             sorting: {
-              kurzzeichen: 'asc'
-            }
+              zeitVon: 'asc'
+            },
+            filter:{zeitVonF:'D'}
           },
           {
             filterDelay: 0,
@@ -153,7 +171,10 @@ angular
               var data = $scope.entries;
               if(f.zeitVonF && f.zeitVonF !== null) {
                 var from, to;
-                if(f.zeitVonF === 'd') {
+                if(f.zeitVonF === 'D') {
+                  from = moment().startOf('day').toDate();
+                  to = new Date(8640000000000000);
+                } else if(f.zeitVonF === 'd') {
                   from = moment().startOf('day').toDate();
                   to = moment().endOf('day').toDate();
                 } else if(f.zeitVonF === 'w') {

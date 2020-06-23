@@ -1,7 +1,7 @@
 <div class="row">
   <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
-      <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
+     <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
 
       <form name="projektForm" oo-confirm-on-dirty>
         <div class="col-md-6">
@@ -26,7 +26,7 @@
                   <label for="bezeichnung" translate>Bezeichnung</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" required>
+                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" maxlength = 50 required>
                 </div>
               </div>
               <div class="row form-group">
@@ -45,7 +45,7 @@
                   <label for="adressZusatz" translate>Adresszusatz</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatz" ng-disabled="!editMode" ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}">
+                  <input type="text" class="form-control" name="adressZusatz" ng-disabled="!editMode" ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}" maxlength = 100>
                 </div>
               </div>
               <div class="row form-group">
@@ -91,7 +91,7 @@
                   <label for="sprache" translate>Sprache</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" id="sprache" ng-model="projekt.sprache" ng-disabled="!editMode" placeholder="{{'Beispiel: de-CH'|translate}}" ng-pattern="localeBCP47Pattern">
+                  <input type="text" class="form-control" id="sprache" ng-model="projekt.sprache" ng-disabled="!editMode" placeholder="{{'Beispiel: de-CH'|translate}}" ng-pattern="localeBCP47Pattern" maxlength = 10>
                 </div>
               </div>
               <div class="row form-group">
@@ -118,13 +118,20 @@
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
-
               <div class="row form-group">
                 <div class="col-md-8">
                   <label for="emailErforderlich" translate>Vom System generierte E-Mail versenden</label>
                 </div>
                 <div class="col-md-4" ng-if="projectResolved">
                   <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.generierteMailsSenden" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-8">
+                  <label for="bccAddEmail" translate>Beim Senden von E-Mail bcc hinzufügen</label>
+                </div>
+                <div class="col-md-4" ng-if="projectResolved">
+                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.sendEmailToBcc" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
                 </div>
               </div>
             </div>
@@ -189,7 +196,7 @@
                   <label for="bezeichnung" translate>Mitteilung vor dem Login</label>
                 </div>
                 <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage1TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage1" placeholder=" {{projekt.welcomeMessage1 || 'Write message'|translate}}..."></textarea>
+                      <textarea class="form-control" name="welcomeMessage1TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage1" placeholder=" {{projekt.welcomeMessage1 || 'Write message'|translate}}..." maxlength = 2000></textarea>
                 </div>
               </div>
               <div class="row form-group">
@@ -197,7 +204,7 @@
                   <label for="welcomeMessage2Label" translate>Mitteilung nach dem Login</label>
                 </div>
                 <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage2TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage2" placeholder="{{projekt.welcomeMessage2 || 'Write message'|translate}}..."></textarea>
+                      <textarea class="form-control" name="welcomeMessage2TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage2" placeholder="{{projekt.welcomeMessage2 || 'Write message'|translate}}..." maxlength = 2000></textarea>
                 </div>
               </div>
               <div class="row form-group">
@@ -226,10 +233,18 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="bezeichnung" translate>BIC</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.bic" placeholder="{{'BIC'|translate}}"  maxlength=11>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="bezeichnung" translate>Teilnehmernummer</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" pattern="[0-9]{0,9}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.teilnehmerNummer" placeholder="{{'Teilnehmernummer'|translate}}">
+                  <input type="text" pattern="[0-9]{9}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.teilnehmerNummer" placeholder="{{'Teilnehmernummer'|translate}}">
                 </div>
               </div>
               <div class="row form-group">

@@ -6,7 +6,7 @@
       </div>
       <form name="createVorlageForm" class="navbar-form pull-right">
         <div class="form-group" ng-class="{ 'has-error' : createVorlageForm.name.$invalid && createVorlageForm.name.$touched }" >
-          <input type="text" name="name" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Vorlagen Name...'|translate}}" ng-model="template.name" required>
+          <input type="text" name="name" class="form-control" ng-pattern="/^((?![,.;]).)*$/" placeholder="{{'Vorlagen Name...'|translate}}" ng-model="template.name" maxlength=50 required>
           <a ng-disabled="createVorlageForm.$invalid || template.creating" role="button" ng-href="" ng-click="createVorlageForm.$invalid || template.creating || addVorlage()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Erstellen</span><i ng-show="template.creating" ng-cloak class="fa fa-circle-o-notch fa-spin"></i></a>
         </div>
       </form>
@@ -23,11 +23,11 @@
         <td data-title="'Name'|translate">
           <span ng-hide="vorlage.editing || vorlage.default">{{vorlage.name}}</span>
           <span ng-show="vorlage.default"><b>{{vorlage.name}}</b></span>
-          <input type="text" name="name" ng-model="vorlage.name" ng-show="vorlage.editing">
+          <input type="text" name="name" ng-model="vorlage.name" ng-show="vorlage.editing" maxlength=50>
         </td>
         <td data-title="'Beschreibung'|translate">
           <span ng-hide="vorlage.editing">{{vorlage.beschreibung}}</span>
-          <textarea class="form-control" name="beschreibung" ng-show="vorlage.editing" ng-model="vorlage.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)"></textarea>
+          <textarea class="form-control" name="beschreibung" ng-show="vorlage.editing" ng-model="vorlage.beschreibung" placeholder="{{'Beschreibung'|translate}}..."  ng-change="modelChangedKundentyp(kundentyp)" maxlength=256></textarea>
         </td>
         <td>
           <div class="pull-right">

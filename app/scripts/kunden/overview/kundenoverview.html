@@ -45,13 +45,16 @@
                 <td data-title="'PLZ Ort'|translate" sortable="'plz'">
                   {{kunde.plz}} {{kunde.ort}}
                 </td>
-                <td data-title="'#&nbsp;Abos'|translate" sortable="'anzahlAbosAktiv'" align=right>
+                <td data-title="'# Abos'|translate" sortable="'anzahlAbosAktiv'" align=right>
                   {{kunde.anzahlAbosAktiv}}
                 </td>
                 <td data-title="'Typ'|translate" sortable="'typen'" filter="{typen: 'select'}" filter-data="kundentypen">
                   <span ng-repeat="typ in kunde.typen" class="badge" ng-if="typ !== ''">
                     {{typ|translate}}
                   </span>
+                </td>
+                <td ng-if="showAll" data-title="'Koordinaten'|translate">
+                  <a ng-if="kunde.latLieferung && kunde.longLieferung" href="http://www.openstreetmap.org/?mlat={{kunde.latLieferung}}&mlon={{kunde.longLieferung}}&zoom=17" target="_blank">{{kunde.latLieferung}}, {{kunde.longLieferung}}</a>
                 </td>
                 <td header="'headerShowAll.html'"></td>
               </tr>

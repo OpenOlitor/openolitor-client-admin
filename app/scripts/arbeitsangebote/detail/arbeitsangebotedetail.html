@@ -41,7 +41,7 @@
                     <label for="titel" translate>Titel</label>
                   </div>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" name="titel" ng-model="arbeitsangebot.titel" placeholder="{{'Aktivität, Kurzbeschrieb, ...'|translate}}" auto-focus required>
+                    <input type="text" class="form-control" name="titel" ng-model="arbeitsangebot.titel" placeholder="{{'Aktivität, Kurzbeschrieb, ...'|translate}}" maxlength="200" auto-focus required>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -49,7 +49,7 @@
                     <label for="bezeichnung" translate>Bezeichnung</label>
                   </div>
                   <div class="col-md-8">
-                    <textarea class="form-control" name="bezeichnung" ng-model="arbeitsangebot.bezeichnung" placeholder="{{'Genauerer Beschrieb'|translate}}..."></textarea>
+                    <textarea class="form-control" name="bezeichnung" ng-model="arbeitsangebot.bezeichnung" placeholder="{{'Genauerer Beschrieb'|translate}}..."  maxlength="200"></textarea>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -57,22 +57,22 @@
                     <label for="ort" translate>Ort</label>
                   </div>
                   <div class="col-md-8">
-                    <textarea class="form-control" name="ort" ng-model="arbeitsangebot.ort" placeholder="{{'Angaben zum Ort, zur Anfahrt, etc.'|translate}}..."></textarea>
+                    <textarea class="form-control" name="ort" ng-model="arbeitsangebot.ort" placeholder="{{'Angaben zum Ort, zur Anfahrt, etc.'|translate}}..." maxlength="500"></textarea>
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="ort" translate>Status</label>
                   </div>
-                  <div class="col-md-8" translate>
-                    {{arbeitsangebot.status}}
+                  <div class="col-md-8">
+                    {{arbeitsangebot.status|translate}}
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="aktionen" translate>Aktionen</label>
                   </div>
-                  <div class="col-md-8" translate>
+                  <div class="col-md-8">
                     <button ng-if="!arbeitsangebotForm.$invalid" type="button" role="button" ng-click="aaMultiplizieren()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Multiplizieren</span></button>
                   </div>
                 </div>
