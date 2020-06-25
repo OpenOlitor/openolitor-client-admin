@@ -66,22 +66,24 @@ angular.module('openolitor-admin')
             'activate-id')] = true;
       }, 1);
 
-      var unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
-        function(info) {
-          if (!angular.isUndefined(info)) {
-            $scope.serverInfo = info;
-            $scope.connected = true;
-          }
-        });
-
       $scope.buildNr = BUILD_NR;
+      $scope.sendStats = false;
 
       $scope.loadAppConfig = function(count) {
         if(appConfig.isLoaded()) {
           $scope.env = appConfig.get().ENV;
           $scope.version = appConfig.get().version;
           $scope.API_URL = appConfig.get().API_URL;
+          $scope.sendStats = appConfig.get().sendStats;
           $scope.loaded = true;
+
+          $scope.unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
+            function(info) {
+              if (!angular.isUndefined(info)) {
+                $scope.serverInfo = info;
+                $scope.connected = true;
+              }
+            });
         } else {
           if(count < 100) {
             $timeout(function() {
@@ -203,7 +205,9 @@ angular.module('openolitor-admin')
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();
-        unwatchStaticServerInfo();
+        if($scope.unwatchStaticServerInfo) {
+          $scope.unwatchStaticServerInfo();
+        }
       });
 
       cssInjector.add(appConfig.get().API_URL + 'ressource/style/admin');
