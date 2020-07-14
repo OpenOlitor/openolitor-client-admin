@@ -35,6 +35,7 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
 
       // watch for data checkboxes
@@ -43,6 +44,17 @@ angular.module('openolitor-admin')
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = _.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.zusatzabotypIdsMailing = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+      };
 
       if (!$scope.zusatzAbosTableParams) {
         //use default zusatzAbosTableParams
@@ -91,6 +103,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
+          debugger;
           ZusatzAbotypenOverviewModel.personen({
             f: 'id=' + $scope.checkboxes.ids + ';'
           }, function(personen) {
@@ -109,12 +122,7 @@ angular.module('openolitor-admin')
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
           $scope.url = 'mailing/sendEmailToZusatzabotypSubscribers';
-          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{zusatzabotyp.name}} \n {{zusatzabotyp.beschreibung}}  \n {{zusatzabotyp.preis}}  \n {{zusatzabotyp.preiseinheit}}  \n {{zusatzabotyp.laufzeiteinheit}}');  
-          $scope.zusatzabotypIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
+          $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{zusatzabotyp.name}} \n {{zusatzabotyp.beschreibung}}  \n {{zusatzabotyp.preis}}  \n {{zusatzabotyp.preiseinheit}}  \n {{zusatzabotyp.laufzeiteinheit}}');
           $scope.showCreateEMailDialog = true;
           return true;
         },

@@ -75,7 +75,7 @@ angular
       });
 
       $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
-      $scope.zeitraumL = []; 
+      $scope.zeitraumL = [];
       angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, function(zr){
           return gettextCatalog.getString(zr.label).toLowerCase();
       }), function(value, key) {
@@ -119,6 +119,7 @@ angular
         },
         function(value) {
           OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+          $scope.updateChecked();
         }
       );
 
@@ -132,6 +133,17 @@ angular
         },
         true
       );
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.kundeIdsMailing = lodash($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+      };
 
       $scope.projektVorlagen = function() {
         return ReportvorlagenService.getVorlagen('VorlageKundenbrief');
@@ -305,14 +317,9 @@ angular
           iconClass: 'glyphicon glyphicon-pencil',
           onExecute: function() {
             $scope.$broadcast("resetDirectiveEmailDialog");
-            $scope.entity = gettext('person');
+            $scope.entity = gettext('Arbeitsangebote (alle eingeschriebenen Personen)');
             $scope.url = 'mailing/sendEmailToArbeitsangebotPersonen';
             $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n');
-            $scope.kundeIdsMailing = lodash($scope.filteredEntries)
-              .keyBy('id')
-              .at(Object.keys($scope.checkboxes.items))
-              .map('id')
-              .value();
             $scope.showCreateEMailDialog = true;
             return true;
           },

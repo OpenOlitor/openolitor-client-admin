@@ -9,7 +9,7 @@ angular.module('openolitor-admin')
     function($scope, $rootScope, $filter, TourenService, TourenModel, NgTableParams, $location, _, EmailUtil, OverviewCheckboxUtil,
       gettext) {
       $rootScope.viewId = 'L-Tou';
-      
+
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
@@ -37,6 +37,7 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
 
       // watch for data checkboxes
@@ -45,6 +46,17 @@ angular.module('openolitor-admin')
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = _.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.tourenIdsMailing = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+      };
 
       if (!$scope.tableParams) {
         //use default tableParams
@@ -140,11 +152,6 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.url = 'mailing/sendEmailToTourSubscribers';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{tour.name}} \n {{tour.beschreibung}}');
-          $scope.tourenIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.showCreateEMailDialog = true;
           return true;
         },

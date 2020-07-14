@@ -145,7 +145,19 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.rechnungIdsMailing = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+      };
 
       $scope.projektVorlagen = function() {
         return ReportvorlagenService.getVorlagen('VorlageRechnung');
@@ -265,11 +277,6 @@ angular.module('openolitor-admin')
           $scope.entity = gettext('rechnung');
           $scope.url = 'mailing/sendEmailToInvoicesSubscribers';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');
-          $scope.rechnungIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.attachment = allRechnungDocumentCreated($scope.checkboxes.ids, $scope.checkboxes.data);
           $scope.showCreateEMailDialog = true;
           return true;
