@@ -45,6 +45,13 @@ angular.module('openolitor-admin')
       }, function(user) {
         $scope.loggedIn = ooAuthService.isUserLoggedIn(user);
         $scope.user = user;
+        $scope.unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
+          function(info) {
+            if (!angular.isUndefined(info)) {
+              $scope.serverInfo = info;
+              $scope.connected = true;
+            }
+          });
         if ($scope.loggedIn) {
           ProjektService.resolveProjekt(false, !$scope.loadedProjectLoggedInOnce).then(function(projekt) {
             $scope.loadedProjectLoggedInOnce = true;
@@ -65,14 +72,6 @@ angular.module('openolitor-admin')
           .attr(
             'activate-id')] = true;
       }, 1);
-
-      var unwatchStaticServerInfo = $scope.$watch(ServerService.getStaticServerInfo,
-        function(info) {
-          if (!angular.isUndefined(info)) {
-            $scope.serverInfo = info;
-            $scope.connected = true;
-          }
-        });
 
       $scope.buildNr = BUILD_NR;
       $scope.sendStats = false;
@@ -204,7 +203,9 @@ angular.module('openolitor-admin')
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();
-        unwatchStaticServerInfo();
+        if($scope.unwatchStaticServerInfo) {
+          $scope.unwatchStaticServerInfo();
+        }
       });
 
       cssInjector.add(appConfig.get().API_URL + 'ressource/style/admin');
