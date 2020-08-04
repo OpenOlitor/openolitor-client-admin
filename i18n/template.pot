@@ -181,16 +181,13 @@ msgstr ""
 #: app/scripts/abos/detail/create-abo.html:11
 #: app/scripts/abos/overview/abosoverview.html:36
 #: app/scripts/abos/overview/zusatzabosoverview.html:34
+#: app/scripts/abotypen/detail/abotypendetail.html:10
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:29
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:29
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:30
 #: app/scripts/kunden/detail/abo/abos.html:11
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
-msgstr ""
-
-#: app/scripts/abotypen/detail/abotypendetail.html:10
-msgid "Abotyp ' + abotyp.name || 'Abotyp"
 msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:57
@@ -217,7 +214,7 @@ msgstr ""
 msgid "Abrechnen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:912
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:916
 msgid "Abrechnungen anzeigen"
 msgstr ""
 
@@ -241,7 +238,7 @@ msgstr ""
 msgid "Abw."
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:372
+#: app/scripts/kunden/detail/kundendetail.html:380
 msgid "Abweichende Lieferadresse"
 msgstr ""
 
@@ -283,7 +280,7 @@ msgstr ""
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:28
 #: app/scripts/kunden/detail/kundendetail.html:219
-#: app/scripts/kunden/detail/kundendetail.html:388
+#: app/scripts/kunden/detail/kundendetail.html:396
 #: app/scripts/personen/overview/personenoverview.html:57
 #: app/scripts/produzenten/detail/produzentendetail.html:135
 #: app/scripts/projekt/settings/projektsettings.html:45
@@ -394,7 +391,7 @@ msgid "Anschrift"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:214
-#: app/scripts/kunden/detail/kundendetail.html:383
+#: app/scripts/kunden/detail/kundendetail.html:391
 #: app/scripts/rechnungen/detail/rechnungendetail.html:70
 msgid "Anschrift oder Bezeichnung"
 msgstr ""
@@ -624,12 +621,19 @@ msgstr ""
 msgid "Automatisch erledigen"
 msgstr ""
 
+#: app/scripts/kunden/detail/kundendetail.html:304
+#: app/scripts/kunden/detail/kundendetail.html:307
+#: app/scripts/projekt/settings/projektsettings.html:236
+#: app/scripts/projekt/settings/projektsettings.html:239
+msgid "BIC"
+msgstr ""
+
 #: app/scripts/depots/detail/depotsdetail.html:112
 #: app/scripts/produzenten/detail/produzentendetail.html:71
 msgid "Bank"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:307
+#: app/scripts/kunden/detail/kundendetail.html:315
 msgid "Bank Name"
 msgstr ""
 
@@ -727,7 +731,7 @@ msgstr ""
 msgid "Bestellung abrechnen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:899
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:903
 msgid "Bestellung an alle Lieferanten versenden"
 msgstr ""
 
@@ -749,7 +753,7 @@ msgstr ""
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:56
 #: app/scripts/dashboard/dashboard.html:94
-#: app/scripts/kunden/detail/kundendetail.html:499
+#: app/scripts/kunden/detail/kundendetail.html:507
 #: app/scripts/rechnungen/detail/rechnungendetail.html:139
 #: app/scripts/rechnungen/detail/rechnungendetail.html:144
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:48
@@ -787,7 +791,7 @@ msgid "Bezeichnung"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:211
-#: app/scripts/kunden/detail/kundendetail.html:380
+#: app/scripts/kunden/detail/kundendetail.html:388
 msgid "Bezeichnung am Briefkasten"
 msgstr ""
 
@@ -861,7 +865,7 @@ msgstr ""
 msgid "Datei importieren"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:267
+#: app/scripts/projekt/settings/projektsettings.html:275
 msgid "Dateien"
 msgstr ""
 
@@ -926,7 +930,7 @@ msgstr ""
 msgid "Depotauslieferungen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:923
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:927
 msgid "Depotauslieferungen anzeigen"
 msgstr ""
 
@@ -1029,9 +1033,9 @@ msgstr ""
 msgid "Donnerstag"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:291
-#: app/scripts/projekt/settings/projektsettings.html:306
-#: app/scripts/projekt/settings/projektsettings.html:321
+#: app/scripts/projekt/settings/projektsettings.html:299
+#: app/scripts/projekt/settings/projektsettings.html:314
+#: app/scripts/projekt/settings/projektsettings.html:329
 msgid "Download"
 msgstr ""
 
@@ -1098,7 +1102,7 @@ msgstr ""
 msgid "Editieren"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:282
+#: app/scripts/projekt/settings/projektsettings.html:290
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr ""
 
@@ -1116,11 +1120,11 @@ msgstr ""
 msgid "Eindeutige Bezeichnung"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:491
+#: app/scripts/kunden/detail/kundendetail.html:499
 msgid "Eine manuelle Rechnung für"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:877
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:881
 msgid ""
 "Eine oder mehrere Lieferungen aus Hauptabos haben keine Produkte eingetragen. \n"
 "Trotzdem fortfahren?"
@@ -1146,7 +1150,7 @@ msgstr ""
 msgid "Eingabe: Preis pro Einheit <br>Anzeige: Preis für gewählte Menge"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:503
+#: app/scripts/kunden/detail/kundendetail.html:511
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:66
 msgid "Eingang am"
 msgstr ""
@@ -1281,7 +1285,7 @@ msgstr ""
 msgid "FR"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:501
+#: app/scripts/kunden/detail/kundendetail.html:509
 msgid "Faelligkeitsdatum"
 msgstr ""
 
@@ -1381,8 +1385,8 @@ msgstr ""
 msgid "Geplante Lieferdaten"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:253
-#: app/scripts/projekt/settings/projektsettings.html:256
+#: app/scripts/projekt/settings/projektsettings.html:261
+#: app/scripts/projekt/settings/projektsettings.html:264
 msgid "Gläubiger-Identifikationsnummer"
 msgstr ""
 
@@ -1462,7 +1466,7 @@ msgstr ""
 msgid "Hier Text einfügen und formatieren"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:352
+#: app/scripts/kunden/detail/kundendetail.html:360
 msgid "Hinterlegung, Abgabe bei..."
 msgstr ""
 
@@ -1484,11 +1488,11 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:358
+#: app/scripts/kunden/detail/kundendetail.html:366
 msgid "Im Format"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:318
+#: app/scripts/projekt/settings/projektsettings.html:326
 msgid "Importdatei"
 msgstr ""
 
@@ -1598,7 +1602,7 @@ msgid "Kein Zusatzabo vorhanden."
 msgstr ""
 
 #: app/scripts/app.js:134
-#: app/scripts/kunden/detail/kundendetail.html:337
+#: app/scripts/kunden/detail/kundendetail.html:345
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:209
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:215
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:24
@@ -1643,7 +1647,7 @@ msgstr ""
 msgid "Kontoinhaber"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:357
+#: app/scripts/kunden/detail/kundendetail.html:365
 #: app/scripts/kunden/overview/kundenoverview.html:56
 msgid "Koordinaten"
 msgstr ""
@@ -1694,7 +1698,7 @@ msgid "Kunde erstellen"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:256
-#: app/scripts/kunden/detail/kundendetail.html:319
+#: app/scripts/kunden/detail/kundendetail.html:327
 msgid "Kunde erstellt"
 msgstr ""
 
@@ -1771,7 +1775,7 @@ msgstr ""
 msgid "Letzte Bearbeitung"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:332
+#: app/scripts/kunden/detail/kundendetail.html:340
 msgid "Lieferadresse"
 msgstr ""
 
@@ -1800,21 +1804,21 @@ msgstr ""
 msgid "Lieferinformation"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:854
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:862
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:858
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:866
 msgid "Lieferplanung abschliessen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:887
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:891
 msgid "Lieferplanung löschen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:965
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:974
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:969
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:978
 msgid "Lieferplanung verrechnen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:985
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:989
 msgid "Lieferplanung verrechnet"
 msgstr ""
 
@@ -1869,11 +1873,11 @@ msgstr ""
 msgid "Login aktiv"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:272
+#: app/scripts/projekt/settings/projektsettings.html:280
 msgid "Logo"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:281
+#: app/scripts/projekt/settings/projektsettings.html:289
 msgid "Logo auswählen oder einfügen"
 msgstr ""
 
@@ -2051,7 +2055,7 @@ msgstr ""
 msgid "Name / Betrieb"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:304
+#: app/scripts/kunden/detail/kundendetail.html:312
 msgid "Name der Bank"
 msgstr ""
 
@@ -2094,7 +2098,7 @@ msgstr ""
 msgid "Neue Lieferplanung generieren"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:426
+#: app/scripts/kunden/detail/kundendetail.html:434
 msgid "Neue Pendenz"
 msgstr ""
 
@@ -2132,7 +2136,7 @@ msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:54
 #: app/scripts/kunden/detail/kundendetail.html:233
-#: app/scripts/kunden/detail/kundendetail.html:402
+#: app/scripts/kunden/detail/kundendetail.html:410
 #: app/scripts/produzenten/detail/produzentendetail.html:130
 #: app/scripts/projekt/settings/projektsettings.html:40
 #: app/scripts/rechnungen/detail/rechnungendetail.html:81
@@ -2147,7 +2151,7 @@ msgstr ""
 #: app/scripts/dashboard/dashboard.html:85
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:28
 #: app/scripts/kunden/detail/abo/abos.html:10
-#: app/scripts/kunden/detail/kundendetail.html:497
+#: app/scripts/kunden/detail/kundendetail.html:505
 #: app/scripts/kunden/overview/kundenoverview.html:33
 #: app/scripts/rechnungen/detail/rechnungendetail.html:123
 #: app/scripts/rechnungen/detail/rechnungendetail.html:126
@@ -2193,7 +2197,7 @@ msgstr ""
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:57
 #: app/scripts/depots/detail/depotsdetail.html:65
 #: app/scripts/kunden/detail/kundendetail.html:244
-#: app/scripts/kunden/detail/kundendetail.html:413
+#: app/scripts/kunden/detail/kundendetail.html:421
 #: app/scripts/produzenten/detail/produzentendetail.html:149
 #: app/scripts/projekt/settings/projektsettings.html:59
 #: app/scripts/rechnungen/detail/rechnungendetail.html:100
@@ -2202,7 +2206,7 @@ msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:62
 #: app/scripts/kunden/detail/kundendetail.html:241
-#: app/scripts/kunden/detail/kundendetail.html:410
+#: app/scripts/kunden/detail/kundendetail.html:418
 #: app/scripts/produzenten/detail/produzentendetail.html:146
 #: app/scripts/projekt/settings/projektsettings.html:56
 #: app/scripts/rechnungen/detail/rechnungendetail.html:97
@@ -2212,7 +2216,7 @@ msgstr ""
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:29
 #: app/scripts/depots/detail/depotsdetail.html:59
 #: app/scripts/kunden/detail/kundendetail.html:238
-#: app/scripts/kunden/detail/kundendetail.html:407
+#: app/scripts/kunden/detail/kundendetail.html:415
 #: app/scripts/produzenten/detail/produzentendetail.html:143
 #: app/scripts/projekt/settings/projektsettings.html:53
 #: app/scripts/rechnungen/detail/rechnungendetail.html:94
@@ -2250,7 +2254,7 @@ msgstr ""
 msgid "Pendenzen"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:425
+#: app/scripts/kunden/detail/kundendetail.html:433
 msgid "Pendenzen / History"
 msgstr ""
 
@@ -2342,7 +2346,7 @@ msgstr ""
 msgid "Postauslieferungen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:949
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:953
 msgid "Postauslieferungen anzeigen"
 msgstr ""
 
@@ -2351,7 +2355,7 @@ msgid "Postfach, Etage, c/o, ..."
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:222
-#: app/scripts/kunden/detail/kundendetail.html:391
+#: app/scripts/kunden/detail/kundendetail.html:399
 #: app/scripts/projekt/settings/projektsettings.html:48
 #: app/scripts/rechnungen/detail/rechnungendetail.html:89
 msgid "Postfach, c/o, ..."
@@ -2541,7 +2545,7 @@ msgid "Rechnung.odt"
 msgstr ""
 
 #: app/index.html:103
-#: app/scripts/kunden/detail/kundendetail.html:490
+#: app/scripts/kunden/detail/kundendetail.html:498
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:6
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:28
 msgid "Rechnungen"
@@ -2576,7 +2580,7 @@ msgstr ""
 msgid "Rechnungsdaten"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:500
+#: app/scripts/kunden/detail/kundendetail.html:508
 #: app/scripts/rechnungen/detail/rechnungendetail.html:150
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:60
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:22
@@ -2659,8 +2663,8 @@ msgstr ""
 msgid "Referenznummer"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:244
-#: app/scripts/projekt/settings/projektsettings.html:247
+#: app/scripts/projekt/settings/projektsettings.html:252
+#: app/scripts/projekt/settings/projektsettings.html:255
 msgid "Referenznummer Präfix"
 msgstr ""
 
@@ -2735,15 +2739,15 @@ msgstr ""
 msgid "Sequence-Nr"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:863
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:867
 msgid "Soll die Lieferplanung abgeschlossen werden?"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:889
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:893
 msgid "Soll die Lieferplanung gelöscht werden?"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:976
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:980
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr ""
 
@@ -2751,7 +2755,7 @@ msgstr ""
 msgid "Soll diese Person wirklich gelöscht werden?"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:900
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:904
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
 msgstr ""
 
@@ -2821,7 +2825,7 @@ msgstr ""
 #: app/scripts/dashboard/dashboard.html:60
 #: app/scripts/depots/detail/depotsdetail.html:40
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:40
-#: app/scripts/kunden/detail/kundendetail.html:502
+#: app/scripts/kunden/detail/kundendetail.html:510
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:35
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:27
 #: app/scripts/rechnungen/detail/rechnungendetail.html:114
@@ -2841,7 +2845,7 @@ msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:51
 #: app/scripts/kunden/detail/kundendetail.html:230
-#: app/scripts/kunden/detail/kundendetail.html:399
+#: app/scripts/kunden/detail/kundendetail.html:407
 #: app/scripts/kunden/overview/kundenoverview.html:42
 #: app/scripts/personen/overview/personenoverview.html:51
 #: app/scripts/produzenten/detail/produzentendetail.html:127
@@ -2854,7 +2858,7 @@ msgstr ""
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:27
 #: app/scripts/depots/detail/depotsdetail.html:48
 #: app/scripts/kunden/detail/kundendetail.html:227
-#: app/scripts/kunden/detail/kundendetail.html:396
+#: app/scripts/kunden/detail/kundendetail.html:404
 #: app/scripts/produzenten/detail/produzentendetail.html:124
 #: app/scripts/projekt/settings/projektsettings.html:34
 #: app/scripts/rechnungen/detail/rechnungendetail.html:75
@@ -2866,11 +2870,11 @@ msgstr ""
 msgid "Stunden"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:288
+#: app/scripts/projekt/settings/projektsettings.html:296
 msgid "Style<br>(Admin-Seite)"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:303
+#: app/scripts/projekt/settings/projektsettings.html:311
 msgid "Style<br>(Kundenportal)"
 msgstr ""
 
@@ -2944,8 +2948,8 @@ msgstr ""
 msgid "Tage"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:236
-#: app/scripts/projekt/settings/projektsettings.html:239
+#: app/scripts/projekt/settings/projektsettings.html:244
+#: app/scripts/projekt/settings/projektsettings.html:247
 msgid "Teilnehmernummer"
 msgstr ""
 
@@ -2969,7 +2973,7 @@ msgstr ""
 msgid "Text mit [Platzhalter]"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:441
+#: app/scripts/kunden/detail/kundendetail.html:449
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:102
 msgid "Text..."
 msgstr ""
@@ -2979,7 +2983,7 @@ msgstr ""
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:41
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:29
 #: app/scripts/dashboard/dashboard.html:91
-#: app/scripts/kunden/detail/kundendetail.html:498
+#: app/scripts/kunden/detail/kundendetail.html:506
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
 #: app/scripts/rechnungen/detail/rechnungendetail.html:134
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:45
@@ -3057,7 +3061,7 @@ msgstr ""
 msgid "Tourauslieferungen"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:936
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:940
 msgid "Tourauslieferungen anzeigen"
 msgstr ""
 
@@ -3204,7 +3208,7 @@ msgstr ""
 msgid "Vom System generierte E-Mail versenden"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:463
+#: app/scripts/kunden/detail/kundendetail.html:471
 msgid "Vom System generierter Eintrag"
 msgstr ""
 
@@ -3367,7 +3371,7 @@ msgid ""
 " {{zusatzabotyp.laufzeiteinheit}}"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:349
+#: app/scripts/kunden/detail/kundendetail.html:357
 msgid "Wird auf dem Lieferschein zur Tour aufgedruckt"
 msgstr ""
 
@@ -3396,7 +3400,7 @@ msgstr ""
 msgid "Wöchentlich"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:312
+#: app/scripts/kunden/detail/kundendetail.html:320
 msgid "Zahlmethode"
 msgstr ""
 
@@ -3482,7 +3486,7 @@ msgid "Zusatzabos Ids"
 msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:11
-msgid "Zusatzabotyp ' + zusatzAbotyp.name || 'Zusatzabotyp"
+msgid "Zusatzabotyp"
 msgstr ""
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
@@ -3495,7 +3499,7 @@ msgstr ""
 msgid "Zusatzdaten"
 msgstr ""
 
-#: app/scripts/kunden/detail/kundendetail.html:348
+#: app/scripts/kunden/detail/kundendetail.html:356
 msgid "Zusatzinfos"
 msgstr ""
 
@@ -3535,7 +3539,7 @@ msgid "als ausgeliefert markieren"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:256
-#: app/scripts/kunden/detail/kundendetail.html:319
+#: app/scripts/kunden/detail/kundendetail.html:327
 msgid "bearbeitet"
 msgstr ""
 
@@ -3548,7 +3552,7 @@ msgid "bis"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:73
-#: app/scripts/kunden/detail/kundendetail.html:491
+#: app/scripts/kunden/detail/kundendetail.html:499
 msgid "erstellen"
 msgstr ""
 
