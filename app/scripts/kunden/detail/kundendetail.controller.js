@@ -68,7 +68,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         labelFunction: function() {
           if ($scope.isExisting()) {
-            return $scope.kundeBezeichnung() + ' ' + gettext('speichern');
+            return $scope.kundeBezeichnung() + ' ' + gettextCatalog.getString('speichern');
           } else {
             return ($scope.kundeBezeichnung() || gettext('Kunde')) + ' ' + gettext('erstellen');
           }
