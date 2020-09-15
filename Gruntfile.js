@@ -241,7 +241,7 @@ module.exports = function(grunt) {
             '<%= openolitor.dist %>/scripts/**/*.js',
             '<%= openolitor.dist %>/styles/**/*.css',
             '<%= openolitor.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= openolitor.dist %>/styles/fonts/*',
+            '<%= openolitor.dist %>/styles/fonts/**/*.woff2',
           ]
         }
       }
@@ -360,7 +360,7 @@ module.exports = function(grunt) {
               'scripts/**/*.html',
               'images/**/*.{webp,png,jpg}',
               'third_party/**',
-              'fonts/*'
+              'fonts/**/*.woff2'
             ]
           },
           {
