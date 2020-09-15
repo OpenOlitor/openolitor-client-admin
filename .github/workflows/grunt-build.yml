@@ -32,7 +32,7 @@ jobs:
     - name: bower install
       run: bower install --allow-root
     - name: Run Build
-      run: grunt build --buildnr=$GITHUB_RUN_ID
+      run: buildDate=`date +%Y%m%d` && grunt build --buildnr=$buildDate
     - name: Upload build artifact
       uses: actions/upload-artifact@v1
       with:
