@@ -122,11 +122,11 @@ angular.module('openolitor-admin')
         switch(gettextCatalog.getCurrentLanguage()){
           case 'en_US': return 'en';
             break;
-          case 'cs-CZ': return 'cs';
+          case 'cs_CZ': return 'cs';
             break;
-          case 'es-ES': return 'es';
+          case 'es_ES': return 'es';
             break;
-          case 'hu-HU': return 'hu';
+          case 'hu_HU': return 'hu';
             break;
           default: return(gettextCatalog.getCurrentLanguage());
         }
