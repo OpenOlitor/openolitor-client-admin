@@ -141,9 +141,9 @@ angular.module('openolitor-admin')
       $scope.displayActiveLang = function() {
         switch(gettextCatalog.getCurrentLanguage()){
           case 'en_US': return 'en';
-          case 'cs-CZ': return 'cs';
-          case 'es-ES': return 'es';
-          case 'hu-HU': return 'hu';
+          case 'cs_CZ': return 'cs';
+          case 'es_ES': return 'es';
+          case 'hu_HU': return 'hu';
           default: return(gettextCatalog.getCurrentLanguage());
         }
       };
