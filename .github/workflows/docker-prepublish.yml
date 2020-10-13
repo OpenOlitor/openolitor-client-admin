@@ -2,7 +2,7 @@ name: Build and Publish Docker Image
 
 on:
   release:
-    types: [released]
+    types: [prereleased]
 
 jobs:
   build:
@@ -58,5 +58,3 @@ jobs:
       run: docker build . -t openolitor/openolitor-client-admin:$VERSION
     - name: Publish Docker Image (versioned)
       run: docker push openolitor/openolitor-client-admin:$VERSION
-    - name: Publish Docker Image (latest)
-      run: docker push openolitor/openolitor-client-admin:latest
