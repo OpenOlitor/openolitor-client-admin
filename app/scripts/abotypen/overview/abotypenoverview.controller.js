@@ -38,6 +38,7 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
 
       // watch for data checkboxes
@@ -46,6 +47,18 @@ angular.module('openolitor-admin')
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = _.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+
+        $scope.emailAddresses = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('email')
+          .value();
+      };
 
       if (!$scope.abosTableParams) {
         //use default abostableParams
@@ -136,11 +149,6 @@ angular.module('openolitor-admin')
         onExecute: function() {
           $scope.url = 'mailing/sendEmailToAbotypSubscribers';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abotyp.name}} \n {{abotyp.beschreibung}}  \n {{abotyp.preis}}  \n {{abotyp.preiseinheit}}  \n {{abotyp.laufzeiteinheit}}');
-          $scope.abotypIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.showCreateEMailDialog = true;
           return true;
         },

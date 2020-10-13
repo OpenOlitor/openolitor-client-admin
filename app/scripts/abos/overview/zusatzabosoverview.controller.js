@@ -113,6 +113,23 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       }
     );
 
+    $scope.updateChecked = function() {
+      var activeCheckboxes = _.pickBy($scope.checkboxes.items, function(value, key) {
+        return value;
+      });
+      $scope.aboIdsMailing = _($scope.filteredEntries)
+        .keyBy('id')
+        .at(Object.keys(activeCheckboxes))
+        .map('id')
+        .value();
+
+      $scope.kundeIds = _($scope.filteredEntries)
+        .keyBy('id')
+        .at(Object.keys(activeCheckboxes))
+        .map('kundeId')
+        .value();
+    };
+
     // watch for check all checkbox
     $scope.$watch(
       function() {
@@ -120,6 +137,7 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       },
       function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       }
     );
 
@@ -263,15 +281,9 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var kundeIds = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('kundeId')
-            .value();
-
           PersonenOverviewModel.query(
             {
-              f: 'kundeId=' + kundeIds + ';'
+              f: 'kundeId=' + $scope.kundeIds + ';'
             },
             function(personen) {
               var emailAddresses = _(personen)
@@ -298,11 +310,6 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
           $scope.message = gettext(
             'Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abo.abotypName}} \n {{abo.kunde}} \n {{abo.start}} \n {{abo.ende}}'
           );
-          $scope.aboIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.showCreateEMailDialog = true;
           return true;
         },

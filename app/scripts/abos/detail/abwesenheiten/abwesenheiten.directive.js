@@ -101,7 +101,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
         }
 
         var unwatch = $scope.$watch('abo', function(abo) {
-          if (abo) {
+          if (abo && !angular.isUndefined($scope.abo.abwesenheiten)) {
             $scope.abwesenheiten = $scope.abo.abwesenheiten.map(function(abw) {
               abw.kundeId = $scope.abo.kundeId;
               return new AbwesenheitenListModel(abw);

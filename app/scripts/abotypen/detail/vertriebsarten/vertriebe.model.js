@@ -3,15 +3,15 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('VertriebeListModel', function($resource, API_URL) {
-    return $resource(API_URL + 'abotypen/:abotypId/vertriebe/:id', {
+  .factory('VertriebeListModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'abotypen/:abotypId/vertriebe/:id', {
       id: '@id',
       abotypId: '@abotypId'
     },{
       'getAllVertriebe' : {
       method: 'GET',
       isArray: true,
-      url: API_URL + 'vertriebe'
+      url: appConfig.get().API_URL + 'vertriebe'
       },
     });
   });

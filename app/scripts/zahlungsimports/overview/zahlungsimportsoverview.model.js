@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ZahlungsImportsOverviewModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'zahlungsimports/:id', {
+  .factory('ZahlungsImportsOverviewModel', ['$resource', 'appConfig', 'exportODSModuleFunction', function($resource, appConfig, exportODSModuleFunction) {
+    return $resource(appConfig.get().API_URL + 'zahlungsimports/:id', {
       id: '@id'
     }, {
       'exportODS': exportODSModuleFunction

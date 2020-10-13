@@ -77,6 +77,23 @@ angular.module('openolitor-admin')
         });
       });
 
+      $scope.updateChecked = function() {
+        var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.aboIdsMailing = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+
+        $scope.kundeIds = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('kundeId')
+          .value();
+      };
+
       $scope.vertriebL = [];
       VertriebeListModel.getAllVertriebe({},function(entries) {
           angular.forEach(lodash.sortBy(entries,function(vl){
@@ -128,6 +145,7 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
 
       // watch for data checkboxes
@@ -247,14 +265,8 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var kundeIds = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('kundeId')
-            .value();
-
           PersonenOverviewModel.query({
-            f: 'kundeId=' + kundeIds + ';'
+            f: 'kundeId=' + $scope.kundeIds + ';'
           }, function(personen) {
             var emailAddresses = _(personen)
               .map('email')
@@ -276,11 +288,6 @@ angular.module('openolitor-admin')
           $scope.entity = gettext('abo');
           $scope.url = 'mailing/sendEmailToAbosSubscribers';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{abo.abotypName}} \n {{abo.kunde}} \n {{abo.start}} \n {{abo.ende}}');
-          $scope.aboIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.showCreateEMailDialog = true;
           return true;
         },
@@ -302,10 +309,10 @@ angular.module('openolitor-admin')
           angular.forEach(entries, function(entry){
               if (!entry.depotId){
                   entry.depotTourId = entry.tourId;
-              } 
+              }
               if (!entry.tourId){
                   entry.depotTourId = entry.depotId;
-              } 
+              }
             $scope.entries.push(entry);
           });
           $scope.tableParams.reload();

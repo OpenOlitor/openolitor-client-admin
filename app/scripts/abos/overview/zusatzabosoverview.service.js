@@ -4,13 +4,13 @@
  */
 angular.module('openolitor-admin').factory('ZusatzabosOverviewService', [
   '$http',
-  'API_URL',
-  function($http, API_URL) {
+  'appConfig',
+  function($http, appConfig) {
     function createAnzahlLieferungenRechnungsPositionen(
       rechnungsPositionCreate
     ) {
       return $http.post(
-        API_URL + 'zusatzabos/aktionen/anzahllieferungenrechnungspositionen',
+        appConfig.get().API_URL + 'zusatzabos/aktionen/anzahllieferungenrechnungspositionen',
         rechnungsPositionCreate
       );
     }

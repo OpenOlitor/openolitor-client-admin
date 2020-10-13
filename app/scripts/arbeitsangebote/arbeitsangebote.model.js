@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ArbeitsangeboteModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'arbeitsangebote/:id:exportType', {
+  .factory('ArbeitsangeboteModel', ['$resource', 'appConfig', 'exportODSModuleFunction', function($resource, appConfig, exportODSModuleFunction) {
+    return $resource(appConfig.get().API_URL + 'arbeitsangebote/:id:exportType', {
       id: '@id'
     }, {
       'exportODS': exportODSModuleFunction

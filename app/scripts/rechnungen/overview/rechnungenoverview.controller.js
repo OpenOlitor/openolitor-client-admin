@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     '$location','KundenOverviewModel',
     'RechnungenOverviewModel', 'NgTableParams', '$http', 'FileUtil',
     'DataUtil', 'EnumUtil',
-    'OverviewCheckboxUtil', 'API_URL', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
+    'OverviewCheckboxUtil', 'appConfig', 'FilterQueryUtil', 'RECHNUNGSTATUS', 'PAYMENT_TYPES',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettext', 'DetailNavigationService','FileSaver',
     function($q, $scope, $rootScope, $filter, $location, KundenOverviewModel, RechnungenOverviewModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
-      OverviewCheckboxUtil, API_URL,
+      OverviewCheckboxUtil, appConfig,
       FilterQueryUtil, RECHNUNGSTATUS, PAYMENT_TYPES, msgBus, lodash, ReportvorlagenService,
       localeSensitiveComparator, gettext, DetailNavigationService, FileSaver) {
       $rootScope.viewId = 'L-Re';
@@ -145,7 +145,19 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.rechnungIdsMailing = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+      };
 
       $scope.projektVorlagen = function() {
         return ReportvorlagenService.getVorlagen('VorlageRechnung');
@@ -223,7 +235,7 @@ angular.module('openolitor-admin')
         label: gettext('Rechnungen verschickt'),
         iconClass: 'fa fa-exchange',
         onExecute: function() {
-          return $http.post(API_URL + 'rechnungen/aktionen/verschicken', {
+          return $http.post(appConfig.get().API_URL + 'rechnungen/aktionen/verschicken', {
             'ids': $scope.checkboxes.ids
           }).then(function() {
             $scope.model.actionInProgress = undefined;
@@ -265,11 +277,6 @@ angular.module('openolitor-admin')
           $scope.entity = gettext('rechnung');
           $scope.url = 'mailing/sendEmailToInvoicesSubscribers';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{rechnung.titel}} \n {{rechnung.betrag}}  \n {{rechnung.rechnungsDatum}}  \n {{rechnung.faelligkeitsDatum}}  \n {{rechnung.referenzNummer} \n {{rechnung.esrNummer}} \n {{rechnung.strasse}} \n {{rechnung.plz}} \n {{rechnung.ort}}');
-          $scope.rechnungIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.attachment = allRechnungDocumentCreated($scope.checkboxes.ids, $scope.checkboxes.data);
           $scope.showCreateEMailDialog = true;
           return true;
@@ -281,7 +288,7 @@ angular.module('openolitor-admin')
         label: gettext('pain.008.001.07 erstellen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return $http.post(API_URL + 'rechnungen/aktionen/pain_008_001_07', {
+          return $http.post(appConfig.get().API_URL + 'rechnungen/aktionen/pain_008_001_07', {
             'ids': $scope.checkboxes.ids
           }).then(function(file) {
              var data = new Blob([file.data], { type: 'text/plain;charset=utf-8' });

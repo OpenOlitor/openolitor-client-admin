@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('ZahlungsEingaengeModel', function($resource, API_URL) {
-    return $resource(API_URL + 'zahlungsimports/:zahlungsImportId/zahlungseingaenge/:id/:extendedPath/:aktion', {
+  .factory('ZahlungsEingaengeModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'zahlungsimports/:zahlungsImportId/zahlungseingaenge/:id/:extendedPath/:aktion', {
       zahlungsImportId: '@zahlungsImportId',
       id: '@id'
     }, {

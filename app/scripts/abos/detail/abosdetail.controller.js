@@ -9,12 +9,12 @@ angular.module('openolitor-admin')
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'API_URL', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN',
+    'appConfig', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN',
 
     function($scope, $rootScope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, ZusatzAbotypenModel, ZusatzAboModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
-      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, API_URL,
+      ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, appConfig,
       alertService, NgTableParams, LAUFZEITEINHEITEN) {
 
       $rootScope.viewId = 'D-Abo';
@@ -340,7 +340,7 @@ angular.module('openolitor-admin')
         });
 
         modalInstance.result.then(function(data) {
-          $http.post(API_URL + 'kunden/' + $scope.abo.kundeId +
+          $http.post(appConfig.get().API_URL + 'kunden/' + $scope.abo.kundeId +
             '/abos/' + $scope.abo.id + '/aktionen/guthabenanpassen',
             data).then(function() {
             alertService.addAlert('info', gettext(
@@ -364,7 +364,7 @@ angular.module('openolitor-admin')
         });
 
         modalInstance.result.then(function(data) {
-          $http.post(API_URL + 'kunden/' + $scope.abo.kundeId +
+          $http.post(appConfig.get().API_URL + 'kunden/' + $scope.abo.kundeId +
             '/abos/' + $scope.abo.id + '/aktionen/priceanpassen',
             data).then(function() {
               alertService.addAlert('info', gettext(
@@ -394,7 +394,7 @@ angular.module('openolitor-admin')
         });
 
         modalInstance.result.then(function(data) {
-          $http.post(API_URL + 'kunden/' + $scope.abo.kundeId +
+          $http.post(appConfig.get().API_URL + 'kunden/' + $scope.abo.kundeId +
             '/abos/' + $scope.abo.id +
             '/aktionen/vertriebsartanpassen', data).then(function() {
             alertService.addAlert('info', gettext(

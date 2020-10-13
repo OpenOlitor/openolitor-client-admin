@@ -12,7 +12,7 @@ angular.module('openolitor-admin').controller('MailvorlagenController', [
   'NgTableParams',
   'gettext',
   'Upload',
-  'API_URL',
+  'appConfig',
   'FileUtil',
   'MailvorlagenService',
 
@@ -26,7 +26,7 @@ angular.module('openolitor-admin').controller('MailvorlagenController', [
     NgTableParams,
     gettext,
     Upload,
-    API_URL,
+    appConfig,
     FileUtil,
     MailvorlagenService
   ) {

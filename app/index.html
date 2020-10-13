@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" />
   <!-- endbuild -->
 
-  <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='fonts/droid-sans.css' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="third_party/quill/quill.snow.css">
 
   <!-- build:css(.tmp) styles/main.css -->
@@ -39,7 +39,7 @@
 </head>
 
 <body class="white openolitor adminportal" ng-controller="OpenOlitorRootController">
-  <ngp-piwik ngp-set-js-url="https://stats.tegonal.com/piwik.js" ngp-set-tracker-url="https://stats.tegonal.com/piwik.php" ngp-set-document-title="{{document.domain}}/{{document.title}}" ngp-set-site-id="13"> </ngp-piwik>
+  <ngp-piwik ng-if="loaded && sendStats" ngp-set-js-url="https://stats.openolitor.ch/piwik.js" ngp-set-tracker-url="https://stats.openolitor.ch/piwik.php" ngp-set-document-title="{{document.domain}}/{{document.title}}" ngp-set-site-id="32"> </ngp-piwik>
 
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,8 +77,8 @@
     </div>
   </div>
 
-  <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn">
-    <ul class="sidebar-nav" ng-init="menushow = []">
+  <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn" ng-init="menushow = []">
+    <ul class="sidebar-nav" ng-if="loaded">
 
       <li><a id="nav-kunden" class="nav-item" ng-click="menushow['kunden'] = !menushow['kunden']"><span><i class="fa fa-user-circle"></i> <span translate>Kunde</span></span></a></li>
       <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-kunden" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
@@ -126,14 +126,22 @@
     </ul>
   </div>
 
-  <div class="master-content content" ng-class="{'sidenav-open': tgState}">
+  <div class="master-content content" ng-class="{'sidenav-open': tgState}" ng-if="loaded">
     <!--[if lt IE 9]>
           <p class="browsehappy" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href="http://browsehappy.com/">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>
       <![endif]-->
     <div ng-view="" ng-cloak class="container-fluid"></div>
   </div>
 
-  <footer>
+  <div class="master-content content" ng-if="!loaded">
+    <div ng-cloak class="container">
+      <div class="jumbotron">
+        <h3 translate>Wir sind gleich bereit...</h3>
+      </div>
+    </div>
+  </div>
+
+  <footer ng-if="loaded">
     <div class="view-info" ng-class="{'offset': tgState}">
       {{getCurrentViewId()}}
     </div>
@@ -151,6 +159,8 @@
       <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
     </div>
   </footer>
+
+  <script src="environments/config.js" type="text/javascript"></script>
 
   <!-- build:js(.) scripts/oldieshim.js -->
   <!--[if lt IE 9]>

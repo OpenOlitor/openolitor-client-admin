@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('AbosOverviewModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'abos/:id:exportType', {
+  .factory('AbosOverviewModel', ['$resource', 'appConfig', 'exportODSModuleFunction', function($resource, appConfig, exportODSModuleFunction) {
+    return $resource(appConfig.get().API_URL + 'abos/:id:exportType', {
       id: '@id'
     }, {
       'exportODS': exportODSModuleFunction

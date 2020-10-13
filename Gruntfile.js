@@ -16,39 +16,9 @@ module.exports = function(grunt) {
     env = grunt.option('env');
   }
 
-  var urls = grunt.file.readJSON('variables.json').ENVIRONMENTS;
-  var emails = grunt.file.readJSON('variables.json').EMAIL_TO_ADDRESS;
   // text replace in js files used for environment specific configurations
   var config = {
-    API_URL: urls[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-    API_WS_URL: urls[env].m1 + 'ws' || 'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
     BUILD_NR: grunt.option('buildnr') || 'dev',
-    ENV: env,
-    VERSION: grunt.file.readJSON('package.json').version,
-
-    AIRBREAK_API_KEY: '48f4d0be704fafd7ed7b4fdf2d2119d9',
-    AIRBREAK_URL: 'https://errbit.tegonal.com/',
-
-    EMAIL_TO_ADDRESS: emails[env] || 'info@openolitor.ch'
-  };
-
-  var mandantenConfig = {
-    mandant1: {
-      API_URL: urls[env].m1 || 'http://localhost:9003/m1/', //replace @@API_URL with value
-      API_WS_URL:
-        urls[env].m1 + 'ws' || 'http://localhost:9003/m1/ws', //replace @@API_WS_URL with value
-      BUILD_NR: grunt.option('buildnr') || 'dev',
-      ENV: env,
-      VERSION: grunt.file.readJSON('package.json').version
-    },
-    mandant2: {
-      API_URL: urls[env].m2 || 'http://localhost:9003/m2/', //replace @@API_URL with value
-      API_WS_URL:
-        urls[env].m2 + 'ws' || 'http://localhost:9003/m2/ws', //replace @@API_WS_URL with value
-      BUILD_NR: grunt.option('buildnr') || 'dev',
-      ENV: env,
-      VERSION: grunt.file.readJSON('package.json').version
-    }
   };
 
   // Define the configuration for all the tasks
@@ -57,8 +27,7 @@ module.exports = function(grunt) {
     openolitor: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist',
-      mandanten: 'mandanten'
+      dist: 'dist'
     },
 
     // task used to replace config values in js files
@@ -87,40 +56,6 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['.tmp/concat/scripts/scripts.js'],
             dest: '.tmp/concat/scripts'
-          }
-        ]
-      },
-      mandant1: {
-        options: {
-          patterns: [
-            {
-              json: mandantenConfig.mandant1
-            }
-          ]
-        },
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['<%= openolitor.mandanten %>/mandant1/scripts/*.scripts.js'],
-            dest: '<%= openolitor.mandanten %>/mandant1/scripts/'
-          }
-        ]
-      },
-      mandant2: {
-        options: {
-          patterns: [
-            {
-              json: mandantenConfig.mandant2
-            }
-          ]
-        },
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['<%= openolitor.mandanten %>/mandant2/scripts/*.scripts.js'],
-            dest: '<%= openolitor.mandanten %>/mandant2/scripts/'
           }
         ]
       }
@@ -222,7 +157,6 @@ module.exports = function(grunt) {
               '.tmp',
               '<%= openolitor.dist %>/*',
               '!<%= openolitor.dist %>/.git*',
-              '<%= openolitor.mandanten %>',
               '!<%= openolitor.dist %>/index.php'
             ]
           }
@@ -307,7 +241,7 @@ module.exports = function(grunt) {
             '<%= openolitor.dist %>/scripts/**/*.js',
             '<%= openolitor.dist %>/styles/**/*.css',
             '<%= openolitor.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= openolitor.dist %>/styles/fonts/*',
+            '<%= openolitor.dist %>/styles/fonts/**/*',
           ]
         }
       }
@@ -426,8 +360,14 @@ module.exports = function(grunt) {
               'scripts/**/*.html',
               'images/**/*.{webp,png,jpg}',
               'third_party/**',
-              'fonts/*'
+              'fonts/**/*'
             ]
+          },
+          {
+            expand: true,
+            cwd: '<%= openolitor.app %>',
+            dest: '<%= openolitor.dist %>',
+            src: ['environments/*']
           },
           {
             expand: true,
@@ -464,18 +404,6 @@ module.exports = function(grunt) {
         cwd: '<%= openolitor.app %>/styles',
         dest: '.tmp/styles/',
         src: '**/*.css'
-      },
-      mandant1: {
-        expand: true,
-        cwd: '<%= openolitor.dist %>',
-        src: '**',
-        dest: '<%= openolitor.mandanten %>/mandant1'
-      },
-      mandant2: {
-        expand: true,
-        cwd: '<%= openolitor.dist %>',
-        src: '**',
-        dest: '<%= openolitor.mandanten %>/mandant2'
       }
     },
 
@@ -566,35 +494,6 @@ module.exports = function(grunt) {
           '<%= openolitor.app %>/scripts/i18n/translations.js': ['i18n/*/*.po']
         }
       }
-    },
-
-    compress: {
-      main: {
-        options: {
-          archive: 'dist/openolitor-client.zip'
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'dist/',
-            src: ['**/*'],
-            dest: '/'
-          }
-        ]
-      },
-      mandanten: {
-        options: {
-          archive: 'mandanten/openolitor-client-mandanten.zip'
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'mandanten/',
-            src: ['**/*'],
-            dest: '/'
-          }
-        ]
-      }
     }
   });
 
@@ -650,12 +549,6 @@ module.exports = function(grunt) {
     'rev',
     'usemin',
     'htmlmin',
-    'copy:mandant1',
-    'copy:mandant2',
-    'replace:mandant1',
-    'replace:mandant2',
-    'compress:main',
-    'compress:mandanten'
   ]);
 
   grunt.registerTask('i18nextract', ['nggettext_extract']);

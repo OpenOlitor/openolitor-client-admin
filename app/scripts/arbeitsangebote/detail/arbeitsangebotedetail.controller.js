@@ -7,12 +7,12 @@ angular.module('openolitor-admin')
     '$location', 'gettext', 'ArbeitsangeboteDetailModel', 'ARBEITSEINSATZSTATUS',
     'PersonenOverviewModel', 'ArbeitseinsaetzeDetailModel', 'localeSensitiveComparator',
     'NgTableParams', 'lodash', 'OverviewCheckboxUtil', 'msgBus', 'alertService', 'EINSATZEINHEIT',
-    '$uibModal', '$log', '$http', 'API_URL',
+    '$uibModal', '$log', '$http', 'appConfig',
     function($scope, $rootScope, $filter, $routeParams, $location, gettext,
       ArbeitsangeboteDetailModel, ARBEITSEINSATZSTATUS, PersonenOverviewModel,
       ArbeitseinsaetzeDetailModel, localeSensitiveComparator, NgTableParams, lodash,
       OverviewCheckboxUtil, msgBus, alertService, EINSATZEINHEIT, $uibModal, $log, $http,
-      API_URL) {
+      appConfig) {
 
       $rootScope.viewId = 'D-Aban';
 
@@ -340,7 +340,7 @@ angular.module('openolitor-admin')
           arbeitsangebotId: $scope.arbeitsangebot.id,
           daten: angebotDaten
         };
-        $http.post(API_URL +
+        $http.post(appConfig.get().API_URL +
           'arbeitsangebote/' + newModel.arbeitsangebotId + '/aktionen/duplizieren',
           newModel).then(function() {
           $scope.template.creating = $scope.template.creating +

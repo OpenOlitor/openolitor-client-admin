@@ -4,11 +4,11 @@
  */
 angular.module('openolitor-admin').factory('ArbeitseinsatzabrechnungModel', [
   '$resource',
-  'API_URL',
+  'appConfig',
   'exportODSModuleFunction',
-  function($resource, API_URL, exportODSModuleFunction) {
+  function($resource, appConfig, exportODSModuleFunction) {
     return $resource(
-      API_URL + 'arbeitseinsatzabrechnung/:id:exportType',
+      appConfig.get().API_URL + 'arbeitseinsatzabrechnung/:id:exportType',
       {
         id: '@id'
       },

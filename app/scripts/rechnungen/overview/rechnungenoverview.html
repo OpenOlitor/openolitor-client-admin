@@ -19,12 +19,12 @@
         </div>
         <div ng-show="entries" id="rechnungenTable" display-export="true" export-file-name="Rechnungen" class="horizontal-scroll">
           <script type="text/ng-template" id="headerCheckbox.html">
-            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" ng-change="updateChecked()" />
           </script>
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="rechnung in $data | filter: search.query.$">
               <td header="'headerCheckbox.html'">
-                <input type="checkbox" ng-model="checkboxes.items[rechnung.id]" />
+                <input type="checkbox" ng-model="checkboxes.items[rechnung.id]" ng-change="updateChecked()" />
               </td>
               <td>
                 <span role="button" ng-if="rechnung.fileStoreId">
@@ -49,7 +49,7 @@
                 {{projekt.waehrung}} {{rechnung.betrag}}
               </td>
               <td data-title="'Payment Type'|translate" sortable="'paymentType'" filter="{paymentType: 'select'}" filter-data="paymentTypes">
-                {{rechnung.paymentType|translate}} 
+                {{rechnung.paymentType|translate}}
               </td>
               <td data-title="'Einbezahlter Betrag'|translate" sortable="'einbezahlterBetrag'">
                 <span ng-if="rechnung.einbezahlterBetrag">{{projekt.waehrung}} {{rechnung.einbezahlterBetrag}}</span>

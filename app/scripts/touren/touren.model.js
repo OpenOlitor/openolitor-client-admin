@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('TourenModel', ['$resource', 'API_URL', 'exportODSModuleFunction', function($resource, API_URL, exportODSModuleFunction) {
-    return $resource(API_URL + 'touren/:id/:extendedPath/:extendedPathPlus', {
+  .factory('TourenModel', ['$resource', 'appConfig', 'exportODSModuleFunction', function($resource, appConfig, exportODSModuleFunction) {
+    return $resource(appConfig.get().API_URL + 'touren/:id/:extendedPath/:extendedPathPlus', {
       id: '@id'
     }, {
       'exportODS': exportODSModuleFunction,

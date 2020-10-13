@@ -64,6 +64,7 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
 
       $scope.projektVorlagen = function() {
@@ -76,6 +77,24 @@ angular.module('openolitor-admin')
       }, function() {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope);
       }, true);
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.kundeIdsMailing = lodash($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+
+        $scope.emailAddresses = lodash($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .flatMap('ansprechpersonen')
+          .map('email')
+          .value();
+      };
 
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
@@ -119,14 +138,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var emailAddresses = lodash($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .flatMap('ansprechpersonen')
-            .map('email')
-            .value();
-
-          EmailUtil.toMailToBccLink(emailAddresses);
+          EmailUtil.toMailToBccLink($scope.emailAddresses);
           return true;
         },
         isDisabled: function() {
@@ -141,11 +153,6 @@ angular.module('openolitor-admin')
           $scope.entity = gettext('kunde');
           $scope.url = 'mailing/sendEmailToKunden';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}} \n {{kunde.bezeichnung}} \n {{kunde.strasse}}  \n {{kunde.hausNummer}}  \n {{kunde.plz}}  \n {{kunde.ort}}');
-          $scope.kundeIdsMailing = lodash($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
           $scope.showCreateEMailDialog = true;
           return true;
         },

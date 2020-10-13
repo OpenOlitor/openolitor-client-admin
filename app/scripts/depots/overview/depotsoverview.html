@@ -19,12 +19,12 @@
         </div>
         <div ng-show="entries">
           <script type="text/ng-template" id="headerCheckbox.html">
-            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+            <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" ng-change="updateChecked()" />
           </script>
           <table ng-table="tableParams" class="table table-striped" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="depot in $data | filter: search.query.$ ">
               <td header="'headerCheckbox.html'">
-                <input type="checkbox" ng-model="checkboxes.items[depot.id]" />
+                <input type="checkbox" ng-model="checkboxes.items[depot.id]" ng-change="updateChecked()" />
               </td>
               <td data-title="'Krzz.'|translate" sortable="'kurzzeichen'">
                 <a ng-href="#/depots/{{depot.id}}">{{depot.kurzzeichen}}</a>
@@ -63,6 +63,6 @@
   </oo-sliding-detail>
 
   <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
-    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="depotIdsMailing"></oo-email-dialog>
+    <oo-email-dialog on-close="closeCreateEMailDialog" url="url" message="message" ids="depotIdsMailing" entity="entity"></oo-email-dialog>
   </oo-sliding-detail>
 </div>

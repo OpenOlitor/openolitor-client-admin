@@ -104,11 +104,8 @@ angular.module('openolitor-admin')
         return $scope.checkboxes.checked;
       }, function(value) {
         OverviewCheckboxUtil.checkboxWatchCallback($scope, value);
+        $scope.updateChecked();
       });
-
-      $scope.projektVorlagen = function() {
-        return ReportvorlagenService.getVorlagen('VorlagePersonenbrief');
-      };
 
       // watch for data checkboxes
       $scope.$watch(function() {
@@ -116,6 +113,27 @@ angular.module('openolitor-admin')
       }, function(value) {
         OverviewCheckboxUtil.dataCheckboxWatchCallback($scope, value);
       }, true);
+
+      $scope.updateChecked = function() {
+        var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
+          return value;
+        });
+        $scope.personIdsMailing = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('id')
+          .value();
+
+        $scope.emailAddresses = _($scope.filteredEntries)
+          .keyBy('id')
+          .at(Object.keys(activeCheckboxes))
+          .map('email')
+          .value();
+      };
+
+      $scope.projektVorlagen = function() {
+        return ReportvorlagenService.getVorlagen('VorlagePersonenbrief');
+      };
 
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
@@ -138,13 +156,7 @@ angular.module('openolitor-admin')
         noEntityText: true,
         iconClass: 'glyphicon glyphicon-envelope',
         onExecute: function() {
-          var emailAddresses = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('email')
-            .value();
-
-          EmailUtil.toMailToBccLink(emailAddresses);
+          EmailUtil.toMailToBccLink($scope.emailAddresses);
           return true;
         },
         isDisabled: function() {
@@ -159,11 +171,6 @@ angular.module('openolitor-admin')
           $scope.entity = gettext('person');
           $scope.url = 'mailing/sendEmailToPersonen';
           $scope.message = gettext('Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n {{person.anrede}} \n {{person.vorname}} \n {{person.name}} \n {{person.rolle}} \n {{person.kundeId}}');
-          $scope.personIdsMailing = _($scope.filteredEntries)
-            .keyBy('id')
-            .at(Object.keys($scope.checkboxes.items))
-            .map('id')
-            .value();
 
           $scope.showCreateEMailDialog = true;
           return true;

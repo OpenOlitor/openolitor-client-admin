@@ -4,11 +4,11 @@
  */
 angular.module('openolitor-admin').factory('ZusatzabosOverviewModel', [
   '$resource',
-  'API_URL',
+  'appConfig',
   'exportODSModuleFunction',
-  function($resource, API_URL, exportODSModuleFunction) {
+  function($resource, appConfig, exportODSModuleFunction) {
     return $resource(
-      API_URL + 'zusatzabos/:id:exportType',
+      appConfig.get().API_URL + 'zusatzabos/:id:exportType',
       {
         id: '@id'
       },

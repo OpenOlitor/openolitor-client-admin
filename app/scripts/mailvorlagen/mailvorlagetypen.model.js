@@ -3,8 +3,8 @@
 /**
  */
 angular.module('openolitor-admin')
-  .factory('MailvorlageTypenModel', function($resource, API_URL) {
-    return $resource(API_URL + 'mailtemplatetypes', {
+  .factory('MailvorlageTypenModel', function($resource, appConfig) {
+    return $resource(appConfig.get().API_URL + 'mailtemplatetypes', {
       id: '@id'
     });
   });

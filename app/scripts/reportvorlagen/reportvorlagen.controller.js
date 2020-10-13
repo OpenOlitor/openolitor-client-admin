@@ -4,12 +4,12 @@
  */
 angular.module('openolitor-admin')
   .controller('ReportvorlagenController', ['$scope', '$rootScope', 'ReportvorlagenModel', 'msgBus',
-    'DataUtil', 'lodash', 'NgTableParams', 'gettext', 'Upload', 'API_URL',
+    'DataUtil', 'lodash', 'NgTableParams', 'gettext', 'Upload', 'appConfig',
     'FileUtil', 'ReportvorlagenService',
 
     function($scope, $rootScope, ReportvorlagenModel, msgBus, DataUtil, lodash, NgTableParams,
-      gettext, Upload, API_URL, FileUtil, ReportvorlagenService) {
-      $rootScope.viewId = 'S-RptT'; 
+      gettext, Upload, appConfig, FileUtil, ReportvorlagenService) {
+      $rootScope.viewId = 'S-RptT';
 
       $scope.template = {
         typ: $scope.typ
@@ -103,7 +103,7 @@ angular.module('openolitor-admin')
         }
         vorlage.uploading = true;
         Upload.upload({
-          url: API_URL + vorlageUrl(vorlage),
+          url: appConfig.get().API_URL + vorlageUrl(vorlage),
           data: {
             file: file
           }

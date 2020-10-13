@@ -12,13 +12,13 @@ angular.module('openolitor-admin')
     'ZahlungsImportsModel',
     'ZahlungsEingaengeModel',
     'EnumUtil',
-    'API_URL',
+    'appConfig',
     'msgBus',
     'Upload',
     'lodash',
     'alertService',
     function($scope, $rootScope, $filter, $routeParams, $http, $location, $uibModal,
-      gettext, ZahlungsImportsModel, ZahlungsEingaengeModel, EnumUtil, API_URL, msgBus, Upload, _, alertService) {
+      gettext, ZahlungsImportsModel, ZahlungsEingaengeModel, EnumUtil, appConfig, msgBus, Upload, _, alertService) {
       $scope.loading = false;
 
       msgBus.onMsg('EntityModified', $rootScope, function(event, msg) {
@@ -40,7 +40,7 @@ angular.module('openolitor-admin')
           return;
         }
         Upload.upload({
-          url: API_URL + 'zahlungsimports',
+          url: appConfig.get().API_URL + 'zahlungsimports',
           data: {
             file: file
           }
