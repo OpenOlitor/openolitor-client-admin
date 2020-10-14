@@ -54,9 +54,11 @@ jobs:
       run: echo ::set-env name=VERSION::$(node -p "require('./package.json').version")
     - name: Docker Login
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-    - name: Build Docker Image
+    - name: Build Docker Image (versioned)
       run: docker build . -t openolitor/openolitor-client-admin:$VERSION
     - name: Publish Docker Image (versioned)
       run: docker push openolitor/openolitor-client-admin:$VERSION
+    - name: Build Docker Image (latest)
+      run: docker build . -t openolitor/openolitor-client-admin:latest
     - name: Publish Docker Image (latest)
       run: docker push openolitor/openolitor-client-admin:latest
