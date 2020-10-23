@@ -256,12 +256,20 @@
                 </div>
               </div>
 
-                <div class="row form-group">
+              <div class="row form-group">
                 <div class="col-md-4">
                   <label for="bezeichnung" translate>Gläubiger-Identifikationsnummer</label>
                 </div>
                 <div class="col-md-8">
                   <input type="text" pattern="[A-zA-Z0-9]{0,35}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.creditorIdentifier" placeholder="{{'Gläubiger-Identifikationsnummer'|translate}}">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="paymentMethod" translate>Payment Method</label>
+                </div>
+                <div class="col-md-7">
+                  <oo-dropdown dropdown-id="paymentType"  disabled="!editMode" display-style="uib-dropdown" values="paymentTypes" selected-prop="id" property="label" selected="projekt.paymentType" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>

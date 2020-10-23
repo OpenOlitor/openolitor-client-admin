@@ -22,6 +22,7 @@ angular.module('openolitor-admin')
         'FileSaver',
         'MONATE',
         'WAEHRUNG',
+        'PAYMENT_TYPES',
         'EINSATZEINHEIT',
         'Upload',
         'msgBus',
@@ -31,7 +32,7 @@ angular.module('openolitor-admin')
         'gettextCatalog',
         function($scope, $rootScope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
-            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
+            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, PAYMENT_TYPES, EINSATZEINHEIT,
             Upload, msgBus, cloneObj, appConfig, alertService, gettextCatalog
         ) {
             $rootScope.viewId = 'S-Proj';
@@ -71,6 +72,8 @@ angular.module('openolitor-admin')
             };
 
             $scope.waehrungen = EnumUtil.asArray(WAEHRUNG);
+
+            $scope.paymentTypes = EnumUtil.asArray(PAYMENT_TYPES);
 
             $scope.einsatzEinheiten = EnumUtil.asArray(EINSATZEINHEIT);
 
