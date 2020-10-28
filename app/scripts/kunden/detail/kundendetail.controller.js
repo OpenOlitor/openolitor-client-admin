@@ -101,14 +101,14 @@ angular.module('openolitor-admin')
             if (!$scope.kunde.kontoDaten)
             $scope.kunde.kontoDaten = {
                 nameAccountHolder : $scope.kunde.bezeichnung,
-                addressAccountHolder : $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort
+                addressAccountHolder : $scope.kunde.strasse + " " + $scope.kunde.hausNummer + ", " + $scope.kunde.plz + " " + $scope.kunde.ort
             }
             else {
                 if (!$scope.kunde.kontoDaten.nameAccountHolder){
                     $scope.kunde.kontoDaten.nameAccountHolder = $scope.kunde.bezeichnung;
                 }
                 if (!$scope.kunde.kontoDaten.addressAccountHolder){
-                    $scope.kunde.kontoDaten.addressAccountHolder = $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort;
+                    $scope.kunde.kontoDaten.addressAccountHolder = $scope.kunde.strasse + " " + $scope.kunde.hausNummer + ", " + $scope.kunde.plz + " " + $scope.kunde.ort;
                 }
             }
 
