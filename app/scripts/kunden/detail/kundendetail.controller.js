@@ -101,7 +101,8 @@ angular.module('openolitor-admin')
             if (!$scope.kunde.kontoDaten)
             $scope.kunde.kontoDaten = {
                 nameAccountHolder : $scope.kunde.bezeichnung,
-                addressAccountHolder : $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort
+                addressAccountHolder : $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort,
+                dateOfSignature:  moment().startOf('day').toDate()
             }
             else {
                 if (!$scope.kunde.kontoDaten.nameAccountHolder){
@@ -109,6 +110,9 @@ angular.module('openolitor-admin')
                 }
                 if (!$scope.kunde.kontoDaten.addressAccountHolder){
                     $scope.kunde.kontoDaten.addressAccountHolder = $scope.kunde.hausNummer + " " + $scope.kunde.strasse + ", " + $scope.kunde.plz + " " + $scope.kunde.ort;
+                }
+                if (!$scope.kunde.kontoDaten.dateOfSignature){
+                    $scope.kunde.kontoDaten.dateOfSignature =  moment().startOf('day').toDate();
                 }
             }
 

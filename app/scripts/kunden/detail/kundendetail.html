@@ -277,10 +277,18 @@
             <div class="panel-body">
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="paymentType" translate>Zahlmethode</label>
+                </div>
+                <div class="col-md-8">
+                  <oo-dropdown dropdown-id="paymentType" display-style="uib-dropdown" values="paymentTypes" selected="kunde.paymentType"></oo-dropdown>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="nameAccountHolder" translate>Kontoinhaber</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}" ng-required="kunde.paymentType==='directDebit'" maxlength=100>
+                  <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}" ng-required="kunde.paymentType==='DirectDebit'" maxlength=100>
                 </div>
               </div>
               <div class="row form-group">
@@ -291,7 +299,7 @@
                   <input type="text" class="form-control" name="addressAccountHolder" ng-model="kunde.kontoDaten.addressAccountHolder" placeholder="{{'Address of the Account Holder'|translate}}" ng-required="kunde.paymentType==='DirectDebit'" maxlength=100>
                 </div>
               </div>
-              <div class="row form-group">
+              <div class="row form-group" ng-show="kunde.paymentType==='DirectDebit'">
                 <div class="col-md-4">
                   <label for="iban" translate>IBAN</label>
                 </div>
@@ -299,7 +307,7 @@
                   <input type="text" class="form-control" name="iban" ng-model="kunde.kontoDaten.iban" placeholder="{{'IBAN'|translate}}" ng-iban ng-required="kunde.paymentType==='DirectDebit'">
                 </div>
               </div>
-              <div class="row form-group">
+              <div class="row form-group" ng-show="kunde.paymentType==='DirectDebit'">
                 <div class="col-md-4">
                   <label for="bic" translate>BIC</label>
                 </div>
@@ -307,7 +315,7 @@
                   <input type="text" class="form-control" name="bic" ng-model="kunde.kontoDaten.bic" placeholder="{{'BIC'|translate}}" maxlength=11>
                 </div>
               </div>
-              <div class="row form-group">
+              <div class="row form-group" ng-show="kunde.paymentType==='DirectDebit'">
                 <div class="col-md-4">
                   <label for="bankName" translate>Name der Bank</label>
                 </div>
@@ -315,12 +323,25 @@
                   <input type="text" class="form-control" name="bankName" ng-model="kunde.kontoDaten.bankName" placeholder="{{'Bank Name'|translate}}" maxlength=100 ng-required="kunde.paymentType==='DirectDebit'">
                 </div>
               </div>
-              <div class="row form-group">
+              <div class="row form-group" ng-show="kunde.paymentType==='DirectDebit'">
+                  <div class="col-md-4">
+                      <label for="dateOfSignature" translate>Date of Signature</label>
+                  </div>
+                  <div class="col-md-3">
+                      <p class="input-group">
+                      <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="kunde.kontoDaten.dateOfSignature" is-open="open.start" enable-time="false" ng-required="kunde.paymentType==='DirectDebit'"/>
+                      <span class="input-group-btn">
+                          <button type="button" class="form-control btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+                      </span>
+                      </p>
+                  </div>
+              </div>
+              <div class="row form-group" ng-show="kunde.paymentType==='DirectDebit'">
                 <div class="col-md-4">
-                  <label for="paymentType" translate>Zahlmethode</label>
+                  <label for="mandateId" translate>Mandate Id</label>
                 </div>
                 <div class="col-md-8">
-                  <oo-dropdown dropdown-id="paymentType" display-style="uib-dropdown" values="paymentTypes" selected="kunde.paymentType"></oo-dropdown>
+                  <input type="text" class="form-control" name="mandateId" ng-model="kunde.kontoDaten.mandateId" placeholder="{{'Mandate Id'|translate}}" maxlength=35 ng-required="kunde.paymentType==='DirectDebit'">
                 </div>
               </div>
               <div class="panel-footer">
