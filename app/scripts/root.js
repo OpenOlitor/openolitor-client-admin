@@ -16,7 +16,7 @@ angular.module('openolitor-admin')
         checkSize();
       });
 
-      $rootScope.viewId = 'Test';
+      $rootScope.viewId = 'Init';
 
       $scope.currentPathContains = function(pathJunk) {
         var currentUrl = $location.url();
