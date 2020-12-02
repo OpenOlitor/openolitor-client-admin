@@ -787,3 +787,19 @@ hr.light {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+a.env-warning .env-message {
+  display: none;
+}
+
+a.env-warning.dev,
+a.env-warning.testprod {
+  color: red;
+
+  .env-message {
+    display: inline;
+    text-transform: uppercase;
+    font-size: 120%;
+    font-weight: bold;
+  }
+}
