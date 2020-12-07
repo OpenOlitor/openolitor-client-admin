@@ -527,7 +527,9 @@ footer,
   padding: 10px;
 }
 
-[ng-quill-editor] { display: block; }
+[ng-quill-editor] {
+  display: block;
+}
 
 @media (max-width: 940px) {
   .adsbygoogle {
@@ -831,4 +833,10 @@ a.env-warning.testprod {
 
 .de_DO_menu{
   display:none; 
+}
+
+.qrcode-container {
+  display: grid;
+  justify-content: center;
+  padding: 20px;
 }
