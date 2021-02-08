@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "Language-Team: Dollinger\n"
 "Language: de_DO\n"
-"PO-Revision-Date: 2021-02-07 11:13\n"
+"PO-Revision-Date: 2021-02-08 21:48\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -28,7 +28,7 @@ msgstr ""
 #: app/scripts/kunden/overview/kundenoverview.html:48
 #: app/scripts/touren/overview/tourenoverview.html:37
 msgid "# Abos"
-msgstr ""
+msgstr "# Anteile"
 
 #: app/scripts/abos/overview/abosoverview.html:65
 #: app/scripts/kunden/detail/abo/abos.html:17
@@ -88,17 +88,17 @@ msgstr ""
 #: app/scripts/kunden/detail/kundendetail.html:116
 #: app/scripts/produzenten/detail/produzentendetail.html:173
 msgid "+41 ..."
-msgstr ""
+msgstr "+ 49 ..."
 
 #: app/scripts/kunden/detail/kundendetail.html:108
 #: app/scripts/produzenten/detail/produzentendetail.html:165
 msgid "+41 7..."
-msgstr ""
+msgstr "+ 49..."
 
 #: app/scripts/depots/detail/depotsdetail.html:164
 #: app/scripts/depots/detail/depotsdetail.html:204
 msgid "+41..."
-msgstr ""
+msgstr "+ 49 ..."
 
 #: app/scripts/app.js:134
 msgid "-"
@@ -146,33 +146,33 @@ msgstr ""
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:28
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:42
 msgid "Abo"
-msgstr ""
+msgstr "Anteil"
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:23
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:23
 msgid "Abo Nr."
-msgstr ""
+msgstr "Anteil Nr."
 
 #: app/scripts/abos/detail/create-abo.html:56
 msgid "Abo erstellen"
-msgstr ""
+msgstr "Anteil erstellen"
 
 #: app/scripts/abos/detail/create-abo.html:4
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
-msgstr ""
+msgstr "Anteil erstellen für {{kunde.bezeichnung}}"
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:436
 msgid "Abo wurde erstellt"
-msgstr ""
+msgstr "Anteil wurde erstellt"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:246
 msgid "Abo:"
-msgstr ""
+msgstr "Anteil:"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:156
 #: app/scripts/personen/overview/personenoverview.controller.js:175
 msgid "Aboliste anzeigen"
-msgstr ""
+msgstr "Anteilsliste anzeigen"
 
 #: app/scripts/abos/overview/abosoverview.html:44
 #: app/scripts/abos/overview/zusatzabosoverview.html:42
@@ -184,7 +184,7 @@ msgstr ""
 #: app/scripts/kunden/detail/abo/abos.html:4
 #: app/scripts/touren/detail/tourendetail.html:59
 msgid "Abos"
-msgstr ""
+msgstr "Anteile"
 
 #: app/scripts/abos/detail/abosdetail.html:43
 #: app/scripts/abos/detail/create-abo.html:11
@@ -197,11 +197,11 @@ msgstr ""
 #: app/scripts/kunden/detail/abo/abos.html:11
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
-msgstr ""
+msgstr "Anteilstyp"
 
 #: app/scripts/abos/overview/abosoverview.html:57
 msgid "Abotyp / Vertrieb"
-msgstr ""
+msgstr "Anteilstyp / Vertrieb"
 
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:108
