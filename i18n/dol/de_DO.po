@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "Language-Team: Dollinger\n"
 "Language: de_DO\n"
-"PO-Revision-Date: 2021-02-12 14:26\n"
+"PO-Revision-Date: 2021-02-12 14:37\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -265,7 +265,7 @@ msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:291
 msgid "Address of the Account Holder"
-msgstr "Adresse des Kontobesitzers"
+msgstr "Name des Kontoinhabers"
 
 #: app/index.html:119
 msgid "Administration"
@@ -1424,7 +1424,7 @@ msgstr ""
 
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:2
 msgid "Guthaben anpassen für Abo Nr."
-msgstr ""
+msgstr "Guthaben anpassen für Anteil Nr."
 
 #: app/scripts/abos/overview/abosoverview.html:74
 msgid "Guthaben in Rechnung"
@@ -2378,7 +2378,7 @@ msgstr ""
 
 #: app/scripts/app.js:146
 msgid "PostlieferungAbo"
-msgstr ""
+msgstr "PostlieferungAnteil"
 
 #: app/scripts/abos/detail/abosdetail.html:96
 #: app/scripts/abotypen/detail/abotypendetail.html:185
@@ -2435,11 +2435,11 @@ msgstr ""
 #: app/scripts/lieferplanungen/detail/korbplanung.html:66
 #: app/scripts/lieferplanungen/detail/lieferanten.html:42
 msgid "Produkt"
-msgstr ""
+msgstr "Lebensmittel"
 
 #: app/scripts/produkte/overview/produkteoverview.html:10
 msgid "Produkt erstellen"
-msgstr ""
+msgstr "Lebensmittel erstellen"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:131
 msgid "Produktbez."
@@ -2769,7 +2769,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:55
 msgid "Sonderprodukt einfügen"
-msgstr ""
+msgstr "Sonderlebensmittel einfügen"
 
 #: app/scripts/app.js:258
 msgid "Sonntag"
@@ -3492,7 +3492,7 @@ msgstr "Zusatzanteilstyp"
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:82
 msgid "Zusatzabotyp erstellen"
-msgstr ""
+msgstr "Zusatzanteilstyp erstellen"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:140
 #: app/scripts/depots/detail/depotsdetail.html:70
@@ -3524,7 +3524,7 @@ msgstr ""
 #: app/scripts/abos/overview/abosoverview.controller.js:276
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:296
 msgid "abo"
-msgstr ""
+msgstr "anteil"
 
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:151
 msgid "abrechnen"
@@ -3570,7 +3570,7 @@ msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:141
 msgid "kunde"
-msgstr ""
+msgstr "mitglied"
 
 #: app/scripts/app.js:187
 msgid "l"
