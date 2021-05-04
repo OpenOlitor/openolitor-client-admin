@@ -168,6 +168,8 @@ angular.module('openolitor-admin')
           $scope.changeLang('de_CH');
         } else if (lang.startsWith('de-DE')) {
           $scope.changeLang('de_DE');
+        } else if (lang.startsWith('de-DO')) {
+          $scope.changeLang('de_DO');
         } else if (lang.startsWith('de')) {
           $scope.changeLang('de_DE');
         } else if (lang.startsWith('fr-BE')) {
