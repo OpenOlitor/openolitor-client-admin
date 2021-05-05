@@ -339,9 +339,10 @@
               <div class="row form-group" ng-show="kunde.paymentType==='DirectDebit'">
                 <div class="col-md-4">
                   <label for="mandateId" translate>Mandate Id</label>
+                  <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Gültige Zeichen: Buchstaben, Zahlen, Leerzeichen und +?/-:().,' |translate}}"></i>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="mandateId" ng-model="kunde.kontoDaten.mandateId" placeholder="{{'Mandate Id'|translate}}" maxlength=35 ng-required="kunde.paymentType==='DirectDebit'">
+                  <input type="text" class="form-control" name="mandateId" pattern="[A-Za-z0-9|+|?|/|-|:|(|)|.|,|'| ]{1,35}" ng-model="kunde.kontoDaten.mandateId" placeholder="{{'Mandate Id'|translate}}" maxlength=35 ng-required="kunde.paymentType==='DirectDebit'">
                 </div>
               </div>
               <div class="panel-footer">
