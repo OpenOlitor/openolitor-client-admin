@@ -310,6 +310,7 @@ angular.module('openolitor-admin')
                 $scope.tableParams.reload();
               });
           }
+          $scope.arbeitsangebotForm.$setPristine();
           $scope.arbeitsangebotInit = true;
           $scope.watchMinMaxValues();
         });
