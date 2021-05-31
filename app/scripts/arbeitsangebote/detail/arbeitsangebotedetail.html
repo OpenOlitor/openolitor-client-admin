@@ -173,12 +173,12 @@
                 <div class="row">
                   <div class="col-md-12">
                     <script type="text/ng-template" id="headerCheckbox.html">
-                      <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+                      <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" ignore-dirty />
                     </script>
                     <table ng-table="tableParams" class="table table-striped" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
                       <tr ng-repeat="arbeitseinsatz in $data | filter: search.query.$">
                         <td header="'headerCheckbox.html'">
-                          <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" />
+                          <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" ignore-dirty/>
                         </td>
                         <td data-title="'Person'|translate" sortable="'titel'">
                         {{arbeitseinsatz.personName}}</a>
