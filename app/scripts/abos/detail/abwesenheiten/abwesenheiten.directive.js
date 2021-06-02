@@ -67,7 +67,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
             return l.id === abw.lieferungId;
           });
           return (
-            lieferung && lieferung.length === 1 && !lieferung[0].lieferplaningId
+            lieferung && lieferung.length === 1 && !lieferung[0].lieferplanungId
           );
         };
 
