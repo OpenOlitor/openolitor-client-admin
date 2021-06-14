@@ -87,7 +87,7 @@
                   </div>
                   <div class="col-md-4">
                     <p class="input-group">
-                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="true" timepicker-options="tpOptionsVon" min-date="arbeitsangebot.zeitBis" required />
+                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="true" timepicker-options="tpOptionsVon" max-date="arbeitsangebot.zeitBis" required />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
                       </span>
@@ -100,7 +100,7 @@
                   </div>
                   <div class="col-md-4">
                     <p class="input-group">
-                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="true" timepicker-options="tpOptionsBis" max-date="arbeitsangebot.zeitVon" required />
+                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="true" timepicker-options="tpOptionsBis" min-date="arbeitsangebot.zeitVon" required />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
                       </span>
