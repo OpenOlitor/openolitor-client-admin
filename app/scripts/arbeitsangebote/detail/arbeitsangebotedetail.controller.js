@@ -118,13 +118,13 @@ angular.module('openolitor-admin')
 
           if ($scope.arbeitsangebot.zeitVon && !$scope.arbeitsangebot.zeitBis) {
             //set default time, 1 hour
-            $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitVon.setHours($scope.arbeitsangebot.zeitVon.getHours()+1));
+            $scope.arbeitsangebot.zeitBis = new Date(new Date($scope.arbeitsangebot.zeitVon).setHours($scope.arbeitsangebot.zeitVon.getHours() + 1 ));
           }
 
           if ($scope.arbeitsangebot.zeitVon && $scope.arbeitsangebot.zeitBis) {
               var diff = $scope.arbeitsangebot.zeitBis.getTime() - $scope.arbeitsangebot.zeitVon.getTime();
               if(diff < 0) {
-                $scope.arbeitsangebot.zeitBis = new Date($scope.arbeitsangebot.zeitVon.setHours($scope.arbeitsangebot.zeitVon.getHours()+1));
+                $scope.arbeitsangebot.zeitBis = new Date(new Date($scope.arbeitsangebot.zeitVon).setHours($scope.arbeitsangebot.zeitVon.getHours() + 1 ));
                 //alertService.addAlert('error', gettext('Ende vor Start!'));
               } else {
                 if($rootScope.projekt) {
