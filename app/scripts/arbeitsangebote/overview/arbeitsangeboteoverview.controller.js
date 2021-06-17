@@ -303,7 +303,7 @@ angular
           }
         },
         {
-          label: gettext('Arbeitsangeboten löschen'),
+          label: gettext('Arbeitsangebote löschen'),
           iconClass: 'fa fa-times',
           isDisabled: function() {
             return !$scope.checkboxes.checkedAny;
