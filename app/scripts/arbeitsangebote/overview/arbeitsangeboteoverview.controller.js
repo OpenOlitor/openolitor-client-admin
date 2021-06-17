@@ -25,6 +25,7 @@ angular
     'FilterQueryUtil',
     'lodash',
     'EmailUtil',
+    'msgBus',
     function(
       $q,
       $scope,
@@ -45,7 +46,8 @@ angular
       moment,
       FilterQueryUtil,
       lodash,
-      EmailUtil
+      EmailUtil,
+      msgBus
     ) {
       $rootScope.viewId = 'L-Aban';
 
@@ -301,6 +303,20 @@ angular
           }
         },
         {
+          label: gettext('Arbeitsangebote löschen'),
+          iconClass: 'fa fa-times',
+          isDisabled: function() {
+            return !$scope.checkboxes.checkedAny;
+          },
+          onExecute: function() {
+            var result = lodash.filter($scope.checkboxes.data, function(d) {
+              return lodash.includes($scope.checkboxes.ids, d.id);
+            });
+            angular.forEach(result, function(r) {
+              r.$delete();
+            });
+          },
+        }, {
           label: gettext('Arbeitseinsaetzebrief'),
           noEntityText: true,
           iconClass: 'fa fa-file',
@@ -328,5 +344,18 @@ angular
           }
         },
       ];
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Arbeitsangebot') {
+          var removed = lodash.remove($scope.entries, function(r) {
+            return r.id === msg.data.id;
+          });
+          if (removed !== []) {
+            $scope.tableParams.reload();
+
+            $scope.$apply();
+          }
+        }
+      });
     }
   ]);
