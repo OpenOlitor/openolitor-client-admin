@@ -362,6 +362,11 @@ angular.module('openolitor-admin')
         });
 
         modalInstance.result.then(function(daten) {
+          //start date is already created. It needs to be removed from duplication
+          lodash.remove(daten, function(date){
+            return (date.getTime() === $scope.arbeitsangebot.zeitVon.getTime());
+          })
+          
           $scope.duplicateArbeitsangebot(daten);
         }, function() {
           $log.info('Modal dismissed at: ' + new Date());
