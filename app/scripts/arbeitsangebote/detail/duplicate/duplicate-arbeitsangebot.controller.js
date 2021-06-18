@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('ArbeitsangebotDuplicateController', ['$scope', '$uibModalInstance',
-    '$log', 'arbeitsangebot', 'moment', 'RHYTHMEN', 'EnumUtil',
-    function($scope, $uibModalInstance, $log, arbeitsangebot, moment, RHYTHMEN, EnumUtil) {
+    '$log', 'arbeitsangebot', 'moment', 'RHYTHMEN', 'EnumUtil','lodash',
+    function($scope, $uibModalInstance, $log, arbeitsangebot, moment, RHYTHMEN, EnumUtil, lodash) {
       $scope.initVon = arbeitsangebot.zeitVon;
       $scope.von = arbeitsangebot.zeitVon;
       $scope.arbeitsangebot = arbeitsangebot;
@@ -20,6 +20,14 @@ angular.module('openolitor-admin')
 
       $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
+      };
+
+      $scope.isNotIrregular = function() {
+        if ($scope.rhythmus === RHYTHMEN.UNREGELMAESSIG){
+          return false;
+        } else {
+          return true;
+        }
       };
 
       $scope.deleteDatum = function(datum) {
@@ -78,6 +86,11 @@ angular.module('openolitor-admin')
         }
       };
 
+      var addDaten = function(value) {
+        var date = new Date(value.valueOf());
+        $scope.daten.push(date);
+      }
+
       $scope.$watch('von', function(value) {
         if (value) {
           generateDaten();
@@ -90,9 +103,26 @@ angular.module('openolitor-admin')
         }
       });
 
+
+      $scope.$watch('irregular', function(value) {
+        if (value) {
+          var alreadyPlanned = false;
+          lodash.forEach($scope.daten, function(date){
+            if (date.getTime() === value.getTime()) {
+              alreadyPlanned = true;
+            }
+          });
+
+          if (!alreadyPlanned){
+            addDaten(value);
+          }
+        }
+      });
+
       $scope.open = {
         von: false,
-        vis: false
+        bis: false,
+        irregular: false
       };
       $scope.openCalendar = function(e, date) {
         e.preventDefault();
