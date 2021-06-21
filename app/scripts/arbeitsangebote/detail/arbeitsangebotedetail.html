@@ -68,14 +68,6 @@
                     {{arbeitsangebot.status|translate}}
                   </div>
                 </div>
-                <div class="row form-group">
-                  <div class="col-md-4">
-                    <label for="aktionen" translate>Aktionen</label>
-                  </div>
-                  <div class="col-md-8">
-                    <button ng-if="!arbeitsangebotForm.$invalid" type="button" role="button" ng-click="aaMultiplizieren()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Multiplizieren</span></button>
-                  </div>
-                </div>
               </div>
               <div class="panel-heading clearfix">
                 <h3 class="panel-title" translate>Zeitpunkt</h3>
@@ -127,6 +119,14 @@
                       <input type="number" class="form-control" name="einsatzzeit" ng-model="arbeitsangebot.einsatzZeit" step="0.01" placeholder="{{'Zeit in Stunden'|translate}}">
                       <div class="input-group-addon">{{projekt.einsatzEinheit}}</div>
                     </div>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-4">
+                    <label for="aktionen" translate>Aktionen</label>
+                  </div>
+                  <div class="col-md-8">
+                    <button ng-if="!arbeitsangebotForm.$invalid" type="button" role="button" ng-click="aaMultiplizieren()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Multiplizieren</span></button>
                   </div>
                 </div>
               </div>
