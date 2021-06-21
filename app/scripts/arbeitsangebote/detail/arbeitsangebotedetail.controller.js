@@ -350,6 +350,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.aaMultiplizieren = function() {
+        $scope.save();
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html',
@@ -404,6 +405,5 @@ angular.module('openolitor-admin')
           }
         }
       });
-
     }
   ]);
