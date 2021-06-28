@@ -286,6 +286,7 @@
               <div class="row form-group">
                 <div class="col-md-4">
                   <label for="nameAccountHolder" translate>Kontoinhaber</label>
+                  <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Sonderzeichen werden beim Sepa-Export entfernt' |translate}}"></i>
                 </div>
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="nameAccountHolder" ng-model="kunde.kontoDaten.nameAccountHolder" placeholder="{{'Name of the Account Holder'|translate}}" ng-required="kunde.paymentType==='DirectDebit'" maxlength=100>
