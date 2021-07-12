@@ -48,21 +48,19 @@ angular.module('openolitor-admin')
       };
 
       $scope.isExisting = function() {
-        return angular.isDefined($scope.produzent) && angular.isDefined($scope.produzent
-          .id);
+        return angular.isDefined($scope.produzent) && angular.isDefined($scope.produzent.id);
       };
 
       $scope.save = function() {
         var listOfNicknames = lodash.map($scope.produzenten, 'kurzzeichen');
-        var normalizedListOfNicknames = listOfNicknames.map(nickname => nickname.normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
+        var listOfNicknamesWithoutAccents = listOfNicknames.map(nickname => $scope.removeAccents(nickname));
+
         //new producer
-        //normalization in order to remove the accents. https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript/37511463#37511463
-        if (isNew && lodash.filter(normalizedListOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen.normalize('NFD').replace(/[\u0300-\u036f]/g, "")}).length > 0){
+        if (isNew && lodash.filter(listOfNicknamesWithoutAccents,function(n){ return n === $scope.removeAccents($scope.produzent.kurzzeichen)}).length > 0){
             alertService.addAlert('error', gettext('Dieser Produzent existiert bereits'));
             return "";
         //existing producer
-        //normalization in order to remove the accents. https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript/37511463#37511463
-        } else if (!isNew && originalNickname !== $scope.produzent.kurzzeichen && lodash.filter(normalizedListOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen.normalize('NFD').replace(/[\u0300-\u036f]/g, "")}).length > 0) { 
+        } else if (!isNew && originalNickname !== $scope.produzent.kurzzeichen && lodash.filter(listOfNicknamesWithoutAccents, function(n){ return n === $scope.removeAccents($scope.produzent)}).length > 0) { 
             alertService.addAlert('error', gettext('Dieser Produzent existiert bereits'));
             return "";
         } else {
@@ -71,6 +69,11 @@ angular.module('openolitor-admin')
             });
         };
       };
+
+      //normalization in order to remove the accents. https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript/37511463#37511463
+      $scope.removeAccents = function(string) {
+        return string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+      }
 
       $scope.created = function(id) {
         $location.path('/produzenten/' + id);
