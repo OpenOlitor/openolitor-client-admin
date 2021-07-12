@@ -73,7 +73,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.created = function(id) {
-        $location.path('/roduzenten/' + id);
+        $location.path('/produzenten/' + id);
       };
 
       $scope.backToList = function() {
