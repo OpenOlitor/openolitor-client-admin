@@ -54,7 +54,7 @@ angular.module('openolitor-admin')
 
       $scope.save = function() {
         var listOfNicknames = lodash.map($scope.produzenten, 'kurzzeichen');
-        var normalizedListOfNicknames =listOfNicknames.map(nickname => nickname.normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
+        var normalizedListOfNicknames = listOfNicknames.map(nickname => nickname.normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
         //new producer
         //normalization in order to remove the accents. https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript/37511463#37511463
         if (isNew && lodash.filter(normalizedListOfNicknames, function(n){ return n === $scope.produzent.kurzzeichen.normalize('NFD').replace(/[\u0300-\u036f]/g, "")}).length > 0){
