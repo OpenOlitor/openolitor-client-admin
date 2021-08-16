@@ -10,7 +10,7 @@
           <div uib-dropdown class="btn-group pull-right" role="group" ng-show="abo.lieferdaten.length > 0">
             <a uib-dropdown-toggle role="button" ng-href="" class="btn btn-default"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> </a>
             <ul uib-dropdown-menu role="menu" class="dropdown-form">
-              <li role="menuitem" ng-repeat="lieferdat in abo.lieferdaten | notIn:'id':abwesenheitsDaten() | dateRange:abo.start:abo.ende:'datum'"><a href="" ng-click="addAbwesenheit(lieferdat)">{{lieferdat.datum | date: 'EEE, dd.MM.yyyy'}}</a></li>
+              <li role="menuitem" ng-repeat="lieferdat in abo.lieferdaten | notIn:'id':abwesenheitsDaten() | dateRange:date:abo.ende:'datum'"><a href="" ng-click="addAbwesenheit(lieferdat)">{{lieferdat.datum | date: 'EEE, dd.MM.yyyy'}}</a></li>
             </ul>
           </div>
         </div>

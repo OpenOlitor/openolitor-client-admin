@@ -24,6 +24,7 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
         $scope.templateObject.showOnlyPending = true;
         $scope.isInCurrentOrLaterGJ = false;
         $scope.deletingAbwesenheit = {};
+        $scope.date = new Date();
         $scope.template = {
           creating: 0
         };
