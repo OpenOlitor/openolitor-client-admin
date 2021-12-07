@@ -99,420 +99,6 @@ msgstr ""
 msgid "2.0"
 msgstr ""
 
-#: app/index.html:2
-msgid ""
-"<head>\n"
-"  <meta charset=\"utf-8\">\n"
-"  <title>OpenOlitor</title>\n"
-"  <meta name=\"description\" content=\"\">\n"
-"  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">\n"
-"  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-"\n"
-"  <link rel=\"icon\" href=\"images/favicon_16.ico\">\n"
-"  <link rel=\"icon\" type=\"image/png\" href=\"/images/favicon_16.png\" sizes=\"16x16\">\n"
-"  <link rel=\"icon\" type=\"image/png\" href=\"/images/favicon_32.png\" sizes=\"32x32\">\n"
-"  <link rel=\"icon\" type=\"image/png\" href=\"/images/favicon_96.png\" sizes=\"96x96\">\n"
-"  <link rel=\"icon\" type=\"image/png\" href=\"/images/favicon_192.png\" sizes=\"192x192\">\n"
-"\n"
-"  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->\n"
-"  <!-- build:css(app) styles/vendor.css -->\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/bootstrap/dist/css/bootstrap.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/font-awsome/css/font-awesome.css\">\n"
-"  <!-- bower:css -->\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/ng-table/dist/ng-table.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/angular-color-picker/dist/angularjs-color-picker.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.css\">\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/angular-loading-bar/build/loading-bar.css\">\n"
-"  <!-- endbower -->\n"
-"  <link rel=\"stylesheet\" href=\"bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css\">\n"
-"  <!-- endbuild -->\n"
-"\n"
-"  <link href=\"fonts/droid-sans.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-"  <link rel=\"stylesheet\" href=\"third_party/quill/quill.snow.css\">\n"
-"\n"
-"  <!-- build:css(.tmp) styles/main.css -->\n"
-"  <link rel=\"stylesheet\" href=\"styles/main.css\">\n"
-"  <!-- endbuild -->\n"
-"</head>\n"
-"\n"
-"<body class=\"white openolitor adminportal\" ng-controller=\"OpenOlitorRootController\">\n"
-"  <ngp-piwik ng-if=\"loaded && sendStats\" ngp-set-js-url=\"https://stats.openolitor.ch/piwik.js\" ngp-set-tracker-url=\"https://stats.openolitor.ch/piwik.php\" ngp-set-document-title=\"{{document.domain}}/{{document.title}}\" ngp-set-site-id=\"32\"> </ngp-piwik>\n"
-"\n"
-"  <!-- top navbar -->\n"
-"  <div class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\n"
-"    <div class=\"container-fluid\">\n"
-"      <div>\n"
-"        <hamburger-toggle state=\"tgState\" class=\"hamburger-toggle\" ng-show=\"loggedIn\"></hamburger-toggle>\n"
-"        <a class=\"navbar-brand env-warning\" ng-class=\"env\" ng-href=\"#/\">OpenOlitor <span class=\"env-message\">{{env}}</span></a>\n"
-"        <p class=\"navbar-text\"><span translate=\"\">Administrationsumgebung <span ng-if=\"projekt\">für</span></span> <span>{{projekt.bezeichnung}}</span></p>\n"
-"        <ul class=\"nav navbar-nav pull-right\">\n"
-"          <li><oo-jobqueue></oo-jobqueue></li>\n"
-"          <li class=\"dropdown\">\n"
-"            <a href=\"\" class=\"dropdown-toggle uppercase\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{displayActiveLang()}} <span class=\"caret\"></span></a>\n"
-"            <ul class=\"dropdown-menu\">\n"
-"              <li class=\"de_CH_menu\" ng-hide=\"activeLang() === 'de_CH'\"><a role=\"button\" ng-click=\"changeLang('de_CH')\" title=\"Deutsch (Schweiz)\"><span>Deutsch (Schweiz)</span></a></li>\n"
-"              <li class=\"fr_CH_menu\" ng-hide=\"activeLang() === 'fr_CH'\"><a role=\"button\" ng-click=\"changeLang('fr_CH')\" title=\"Français\"><span>Français (Suisse)</span></a></li>\n"
-"              <li class=\"fr_BE_menu\" ng-hide=\"activeLang() === 'fr_BE'\"><a role=\"button\" ng-click=\"changeLang('fr_BE')\" title=\"Français\"><span>Français (Belgique)</span></a></li>\n"
-"              <li class=\"en_US_menu\" ng-hide=\"activeLang() === 'en_US'\"><a role=\"button\" ng-click=\"changeLang('en_US')\" title=\"English\"><span>English</span></a></li>\n"
-"              <li class=\"de_DE_menu\" ng-hide=\"activeLang() === 'de_DE'\"><a role=\"button\" ng-click=\"changeLang('de_DE')\" title=\"Deutsch_deutschland\"><span>Deutsch (Deutschland)</span></a></li>\n"
-"              <li class=\"de_DO_menu\" ng-hide=\"activeLang() === 'de_DO'\"><a role=\"button\" ng-click=\"changeLang('de_DO')\" title=\"Deutsch_dollinger\"><span>Deutsch (Dollinger)</span></a></li>\n"
-"              <li class=\"es_ES_menu\" ng-hide=\"activeLang() === 'es_ES'\"><a role=\"button\" ng-click=\"changeLang('es_ES')\" title=\"Castellano\"><span>Castellano</span></a></li>\n"
-"              <li class=\"cs_CZ_menu\" ng-hide=\"activeLang() === 'cs_CZ'\"><a role=\"button\" ng-click=\"changeLang('cs_CZ')\" title=\"Czech\"><span>Čeština</span></a></li>\n"
-"              <li class=\"hu_HU_menu\" ng-hide=\"activeLang() === 'hu_HU'\"><a role=\"button\" ng-click=\"changeLang('hu_HU')\" title=\"Hungarian\"><span>Magyar</span></a></li>\n"
-"            </ul>\n"
-"          </li>\n"
-"          <li class=\"dropdown\" ng-show=\"loggedIn\">\n"
-"            <a href=\"\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{user.vorname}} {{user.name}} <span class=\"caret\"></span></a>\n"
-"            <ul class=\"dropdown-menu dropdown-menu-right\">\n"
-"              <li><a href=\"#\" translate=\"\">Einstellungen</a></li>\n"
-"              <li role=\"separator\" class=\"divider\"></li>\n"
-"              <li ng-if=\"env !== 'test'\"><a href=\"#/passwd\" translate=\"\">Passwort wechseln</a></li>\n"
-"              <li><a href=\"#/logout\" translate=\"\">Abmelden</a></li>\n"
-"            </ul>\n"
-"          </li>\n"
-"        </ul>\n"
-"      </div>\n"
-"    </div>\n"
-"  </div>\n"
-"\n"
-"  <div class=\"sidenav\" ng-class=\"{open: tgState}\" ng-show=\"loggedIn\" ng-init=\"menushow = []\">\n"
-"    <ul class=\"sidebar-nav\" ng-if=\"loaded\">\n"
-"\n"
-"      <li><a id=\"nav-kunden\" class=\"nav-item\" ng-click=\"menushow['kunden'] = !menushow['kunden']\"><span><i class=\"fa fa-user-circle\"></i> <span translate=\"\">Kunde</span></span></a></li>\n"
-"      <li activate-id=\"kunden\" ng-show=\"menushow['kunden']\"><a id=\"nav-kunden\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('kunden')}]\" href=\"\" ng-href=\"#/kunden\"><i class=\"fa fa-user\"></i> <span translate=\"\">Kunden</span></a></li>\n"
-"      <li activate-id=\"kunden\" ng-show=\"menushow['kunden']\"><a id=\"nav-personen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('personen')}]\" href=\"\" ng-href=\"#/personen\"><i class=\"fa fa-users\"></i> <span translate=\"\">Personen</span></a></li>\n"
-"      <li activate-id=\"kunden\" ng-show=\"menushow['kunden']\"><a id=\"nav-abos\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('abos')}]\" href=\"\" ng-href=\"#/abos\"><i class=\"fa fa-shopping-cart\"></i> <span translate=\"\">Abos</span></a></li>\n"
-"      <li activate-id=\"kunden\" ng-show=\"menushow['kunden']\"><a id=\"nav-zusatzabos\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('zusatzabos')}]\" href=\"\" ng-href=\"#/zusatzabos\"><i class=\"fa fa-cart-arrow-down\"></i> <span translate=\"\">Zusatzabos</span></a></li>\n"
-"      <li activate-id=\"kunden\" ng-show=\"menushow['kunden']\"><a id=\"nav-pendenzen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('pendenzen')}]\" href=\"\" ng-href=\"#/pendenzen\"><i class=\"fa fa-sticky-note\"></i> <span translate=\"\">Pendenzen</span></a></li>\n"
-"\n"
-"      <li><a id=\"nav-lieferungen\" class=\"nav-item\" ng-click=\"menushow['lieferungen'] = !menushow['lieferungen']\"><span><i class=\"fa fa-bicycle\"></i> <span translate=\"\">Lieferungen</span></span></a></li>\n"
-"      <li activate-id=\"lieferungen\" ng-show=\"menushow['lieferungen']\"><a id=\"nav-lieferplanung\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('lieferplanung')}]\" href=\"\" ng-href=\"#/lieferplanung\"><i class=\"fa fa-shopping-basket\"></i> <span translate=\"\">Planung</span></a></li>\n"
-"      <li activate-id=\"lieferungen\" ng-show=\"menushow['lieferungen']\"><a id=\"nav-depotausauslieferungen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('depotauslieferungen')}]\" href=\"\" ng-href=\"#/depotauslieferungen\"><i class=\"fa fa-building-o\"></i> <span translate=\"\">Depotauslieferungen</span></a></li>\n"
-"      <li activate-id=\"lieferungen\" ng-show=\"menushow['lieferungen']\"><a id=\"nav-tourausauslieferungen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('tourauslieferungen')}]\" href=\"\" ng-href=\"#/tourauslieferungen\"><i class=\"fa fa-truck\"></i> <span translate=\"\">Tourauslieferungen</span></a></li>\n"
-"      <li activate-id=\"lieferungen\" ng-show=\"menushow['lieferungen']\"><a id=\"nav-postauslieferungen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('postauslieferungen')}]\" href=\"\" ng-href=\"#/postauslieferungen\"><i class=\"fa fa-envelope\"></i> <span translate=\"\">Postauslieferungen</span></a></li>\n"
-"\n"
-"      <li><a id=\"nav-mitarbeit\" class=\"nav-item\" ng-click=\"menushow['mitarbeit'] = !menushow['mitarbeit']\"><span><i class=\"fa fa-paw\"></i> <span translate=\"\">Mitarbeit</span><span></span></span></a></li>\n"
-"      <li activate-id=\"mitarbeit\" ng-show=\"menushow['mitarbeit']\"><a id=\"nav-arbeitsangebote\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('arbeitsangebote')}]\" href=\"\" ng-href=\"#/arbeitsangebote\"><i class=\"fa fa-exchange\"></i> <span translate=\"\">Arbeitsangebote</span></a></li>\n"
-"      <li activate-id=\"mitarbeit\" ng-show=\"menushow['mitarbeit']\"><a id=\"nav-arbeitseinsaetze\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('arbeitseinsaetze')}]\" href=\"\" ng-href=\"#/arbeitseinsaetze\"><i class=\"fa fa-arrows\"></i> <span translate=\"\">Arbeitseinsätze</span></a></li>\n"
-"      <li activate-id=\"mitarbeit\" ng-show=\"menushow['mitarbeit']\"><a id=\"nav-arbeitseinsatzabrechnung\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('arbeitseinsatzabrechnung')}]\" href=\"\" ng-href=\"#/arbeitseinsatzabrechnung\"><i class=\"fa fa-calculator\"></i> <span translate=\"\">Einsätze &amp; Abos</span></a></li>\n"
-"\n"
-"      <li><a id=\"nav-finanzen\" class=\"nav-item\" ng-click=\"menushow['finanzen'] = !menushow['finanzen']\"><span><i class=\"fa fa-usd\"></i> <span translate=\"\">Finanzen</span></span></a></li>\n"
-"      <li activate-id=\"finanzen\" ng-show=\"menushow['finanzen']\"><a id=\"nav-rechnungspositionen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('rechnungspositionen')}]\" href=\"\" ng-href=\"#/rechnungspositionen\"><i class=\"fa fa-list\"></i> <span translate=\"\">Rechnungspositionen</span></a></li>\n"
-"      <li activate-id=\"finanzen\" ng-show=\"menushow['finanzen']\"><a id=\"nav-rechnungen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('rechnungen')}]\" href=\"\" ng-href=\"#/rechnungen\"><i class=\"fa fa-envelope-o\"></i> <span translate=\"\">Rechnungen</span></a></li>\n"
-"      <li activate-id=\"finanzen\" ng-show=\"menushow['finanzen']\"><a id=\"nav-einkaufsrechnungen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('einkaufsrechnungen')}]\" href=\"\" ng-href=\"#/einkaufsrechnungen\"><i class=\"fa fa-calculator\"></i> <span translate=\"\">Einkaufsrechnungen</span></a></li>\n"
-"      <li activate-id=\"finanzen\" ng-show=\"menushow['finanzen']\"><a id=\"nav-zahlungsimports\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('zahlungsimports')}]\" href=\"\" ng-href=\"#/zahlungsimports\"><i class=\"fa fa-credit-card\"></i> <span translate=\"\">Zahlungs-Imports</span></a></li>\n"
-"      <li activate-id=\"finanzen\" ng-show=\"menushow['finanzen']\"><a id=\"nav-zahlungsexports\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('zahlungsexports')}]\" href=\"\" ng-href=\"#/zahlungsexports\"><i class=\"fa fa-credit-card\"></i> <span translate=\"\">Zahlungsauftrag-Exports</span></a></li>\n"
-"\n"
-"      <li><a id=\"nav-einstellungen\" class=\"nav-item\" ng-click=\"menushow['einstellungen'] = !menushow['einstellungen']\"><span><i class=\"fa fa-database\"></i> <span translate=\"\">Einstellungen</span></span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-depots\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('depots')}]\" href=\"\" ng-href=\"#/depots\"><i class=\"fa fa-building-o\"></i> <span translate=\"\">Depots</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-touren\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('touren')}]\" href=\"\" ng-href=\"#/touren\"><i class=\"fa fa-map-signs\"></i> <span translate=\"\">Touren</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-abotypen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('abotypen')}]\" href=\"\" ng-href=\"#/abotypen\"><i class=\"fa fa-clone\"></i> <span translate=\"\">Abotypen</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-produzenten\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('produzenten')}]\" href=\"\" ng-href=\"#/produzenten\"><i class=\"fa fa-leaf\"></i> <span translate=\"\">Produzenten</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-produkte\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('produkte')}]\" href=\"\" ng-href=\"#/produkte\"><i class=\"fa fa-pagelines\"></i> <span translate=\"\">Produkte</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-settings\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('kundentypen')}]\" href=\"\" ng-href=\"#/kundentypen\"><i class=\"fa fa-user-md\"></i> <span translate=\"\">Kundentypen</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-settings\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('personCategories')}]\" href=\"\" ng-href=\"#/personCategories\"><i class=\"fa fa-user-md\"></i> <span translate=\"\">Personenkategorien</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-settings\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('produktkategorien')}]\" href=\"\" ng-href=\"#/produktkategorien\"><i class=\"fa fa-random\"></i> <span translate=\"\">Produktekategorien</span></a></li>\n"
-"      <li activate-id=\"einstellungen\" ng-show=\"menushow['einstellungen']\"><a id=\"nav-settings\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('arbeitskategorien')}]\" href=\"\" ng-href=\"#/arbeitskategorien\"><i class=\"fa fa-exchange\"></i> <span translate=\"\">Arbeitskategorien</span></a></li>\n"
-"\n"
-"      <li><a id=\"nav-administration\" class=\"nav-item\" ng-click=\"menushow['administration'] = !menushow['administration']\"><span><i class=\"fa fa-cogs\"></i> <span translate=\"\">Administration</span></span></a></li>\n"
-"      <li activate-id=\"administration\" ng-show=\"menushow['administration']\"><a id=\"nav-reports\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('reports')}]\" href=\"\" ng-href=\"#/reports\"><i class=\"fa fa-bar-chart\"></i> <span translate=\"\">Auswertungen</span></a></li>\n"
-"      <li activate-id=\"administration\" ng-show=\"menushow['administration']\"><a id=\"nav-journal\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('journal')}]\" href=\"\" ng-href=\"#/journal\"><i class=\"fa fa-list-ul\"></i> <span translate=\"\">Journal</span></a></li>\n"
-"      <li activate-id=\"administration\" ng-show=\"menushow['administration']\"><a id=\"nav-reportvorlagen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('reportvorlagen')}]\" href=\"\" ng-href=\"#/reportvorlagen\"><i class=\"fa fa-file-text-o\"></i> <span translate=\"\">Report-Vorlagen</span></a></li>\n"
-"      <li activate-id=\"administration\" ng-show=\"menushow['administration']\"><a id=\"nav-mailvorlagen\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('mailvorlagen')}]\" href=\"\" ng-href=\"#/mailvorlagen\"><i class=\"fa fa-envelope-o\"></i> <span translate=\"\">Mail-Vorlagen</span></a></li>\n"
-"      <li activate-id=\"administration\" ng-show=\"menushow['administration']\"><a id=\"nav-settings\" class=\"nav-item sublevel-1\" ng-class=\"[{active:currentPathContains('projektsettings')}]\" href=\"\" ng-href=\"#/projektsettings\"><i class=\"fa fa-sitemap\"></i> <span translate=\"\">Projekt</span></a></li>\n"
-"\n"
-"    </ul>\n"
-"  </div>\n"
-"\n"
-"  <div class=\"master-content content\" ng-class=\"{'sidenav-open': tgState}\" ng-if=\"loaded\">\n"
-"    <!--[if lt IE 9]>\n"
-"          <p class=\"browsehappy\" translate>Sie nutzen einen <strong>alten</strong> Browser. Bitte <a href=\"http://browsehappy.com/\">installieren</a> Sie einen aktuelle Brwoser. So stellen Sie sicher, dass dies Webseite wie beabsichtigt funktioniert.</p>\n"
-"      <![endif]-->\n"
-"    <div ng-view=\"\" ng-cloak=\"\" class=\"container-fluid\"></div>\n"
-"  </div>\n"
-"\n"
-"  <div class=\"master-content content\" ng-if=\"!loaded\">\n"
-"    <div ng-cloak=\"\" class=\"container\">\n"
-"      <div class=\"jumbotron\">\n"
-"        <h3 translate=\"\">Wir sind gleich bereit...</h3>\n"
-"      </div>\n"
-"    </div>\n"
-"  </div>\n"
-"\n"
-"  <footer ng-if=\"loaded\">\n"
-"    <div class=\"view-info\" ng-class=\"{'offset': tgState}\">\n"
-"      {{getCurrentViewId()}}\n"
-"    </div>\n"
-"    <div class=\"version-info\">\n"
-"      <script type=\"text/ng-template\" id=\"versionInfo.html\">\n"
-"        <span><b translate>Version:</b></span><br />\n"
-"        <span><b>UI</b> v{{version}} | #{{buildNr}}</span><br />\n"
-"        <span><b>WS</b> {{serverInfo.version}} | #{{serverInfo.buildNr}} </span><br />\n"
-"        <span><b>ENV</b> {{env}}</span>\n"
-"      </script>\n"
-"      <a href=\"https://openolitor.org\" target=\"_blank\">openolitor.org</a>\n"
-"      <span class=\"pre-info\">\n"
-"        <span class=\"glyphicon glyphicon-info-sign\" uib-tooltip-template=\"'versionInfo.html'\" tooltip-popup-close-delay=\"3000\" tooltip-placement=\"top-right\" tooltip-class=\"version-tooltip\"></span>\n"
-"      </span>\n"
-"      <span ng-class=\"[{disconnected:!connected, connected:connected}]\"><i class=\"fa fa-wifi\" ng-attr-title=\"{{messagingSocketClosedReason}}\"></i></span>\n"
-"    </div>\n"
-"  </footer>\n"
-"\n"
-"  <script src=\"environments/config.js\" type=\"text/javascript\"></script>\n"
-"\n"
-"  <!-- build:js(.) scripts/oldieshim.js -->\n"
-"  <!--[if lt IE 9]>\n"
-"    <script src=\"vendor/es5-shim/es5-shim.js\"></script>\n"
-"    <script src=\"vendor/json3/lib/json3.min.js\"></script>\n"
-"    <![endif]-->\n"
-"  <!-- endbuild -->\n"
-"\n"
-"  <script type=\"text/javascript\" src=\"third_party/quill/quill.js\"></script>\n"
-"\n"
-"  <!-- build:js(app) scripts/vendor.js -->\n"
-"  <!-- bower:js -->\n"
-"  <script src=\"bower_components/jquery/dist/jquery.js\"></script>\n"
-"  <script src=\"bower_components/angular/angular.js\"></script>\n"
-"  <script src=\"bower_components/angular-animate/angular-animate.js\"></script>\n"
-"  <script src=\"bower_components/angular-base64/angular-base64.js\"></script>\n"
-"  <script src=\"bower_components/angular-bootstrap/ui-bootstrap-tpls.js\"></script>\n"
-"  <script src=\"bower_components/bootstrap/dist/js/bootstrap.js\"></script>\n"
-"  <script src=\"bower_components/bootstrap-switch/dist/js/bootstrap-switch.js\"></script>\n"
-"  <script src=\"bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js\"></script>\n"
-"  <script src=\"bower_components/angular-cookie/angular-cookie.js\"></script>\n"
-"  <script src=\"bower_components/angular-cookies/angular-cookies.js\"></script>\n"
-"  <script src=\"bower_components/angular-gettext/dist/angular-gettext.js\"></script>\n"
-"  <script src=\"bower_components/angular-loader/angular-loader.js\"></script>\n"
-"  <script src=\"bower_components/angular-resource/angular-resource.js\"></script>\n"
-"  <script src=\"bower_components/angular-route/angular-route.js\"></script>\n"
-"  <script src=\"bower_components/angular-sanitize/angular-sanitize.js\"></script>\n"
-"  <script src=\"bower_components/angular-touch/angular-touch.js\"></script>\n"
-"  <script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js\"></script>\n"
-"  <script src=\"bower_components/es5-shim/es5-shim.js\"></script>\n"
-"  <script src=\"bower_components/json3/lib/json3.js\"></script>\n"
-"  <script src=\"bower_components/ng-table/dist/ng-table.js\"></script>\n"
-"  <script src=\"bower_components/ng-table-export/ng-table-export.js\"></script>\n"
-"  <script src=\"bower_components/angular-toArrayFilter/toArrayFilter.js\"></script>\n"
-"  <script src=\"bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js\"></script>\n"
-"  <script src=\"bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js\"></script>\n"
-"  <script src=\"bower_components/tinycolor/tinycolor.js\"></script>\n"
-"  <script src=\"bower_components/angular-color-picker/dist/angularjs-color-picker.js\"></script>\n"
-"  <script src=\"bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js\"></script>\n"
-"  <script src=\"bower_components/moment/min/moment-with-locales.min.js\"></script>\n"
-"  <script src=\"bower_components/angular-moment/angular-moment.js\"></script>\n"
-"  <script src=\"bower_components/blob-polyfill/Blob.js\"></script>\n"
-"  <script src=\"bower_components/file-saver.js/FileSaver.js\"></script>\n"
-"  <script src=\"bower_components/angular-file-saver/dist/angular-file-saver.bundle.js\"></script>\n"
-"  <script src=\"bower_components/ng-file-upload/ng-file-upload.js\"></script>\n"
-"  <script src=\"bower_components/ng-lodash/build/ng-lodash.js\"></script>\n"
-"  <script src=\"bower_components/angular-filter/dist/angular-filter.js\"></script>\n"
-"  <script src=\"bower_components/lodash/lodash.js\"></script>\n"
-"  <script src=\"bower_components/ng-password-strength/dist/scripts/ng-password-strength.js\"></script>\n"
-"  <script src=\"bower_components/angular-messages/angular-messages.js\"></script>\n"
-"  <script src=\"bower_components/angular-sortable-view/src/angular-sortable-view.js\"></script>\n"
-"  <script src=\"bower_components/angular-css-injector/angular-css-injector.js\"></script>\n"
-"  <script src=\"bower_components/angular-loading-bar/build/loading-bar.js\"></script>\n"
-"  <script src=\"bower_components/openolitor-core/dist/scripts/openolitor-core.js\"></script>\n"
-"  <script src=\"bower_components/ng-iban/dist/ng-iban.js\"></script>\n"
-"  <script src=\"bower_components/angular-piwik/angular-piwik.js\"></script>\n"
-"  <script src=\"bower_components/sql-formatter/dist/sql-formatter.min.js\"></script>\n"
-"  <script src=\"bower_components/ng-quill/src/ng-quill.js\"></script>\n"
-"  <!-- endbower -->\n"
-"  <!-- language specific angular file -->\n"
-"  <script src=\"bower_components/angular-i18n/angular-locale_de-ch.js\"></script>\n"
-"  <!-- endbuild -->\n"
-"\n"
-"  <!-- build:js({.tmp,app}) scripts/scripts.js -->\n"
-"  <script src=\"scripts/app.js\"></script>\n"
-"  <script src=\"scripts/root.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/dashboard/dashboard.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/abotypen/overview/abotypenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/overview/abotypenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/abotypen/overview/zusatzabotypenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/overview/zusatzabotypenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/vertriebsarten/vertriebsarten.controller.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/vertriebsarten/vertriebe.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/vertriebsarten/vertriebsarten.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/abotypendetail.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/abotypendetail.controller.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/zusatzabotypendetail.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/lieferungen/lieferungen.controller.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/lieferungen/lieferungen.model.js\"></script>\n"
-"  <script src=\"scripts/abotypen/detail/lieferungen/generate-lieferungen.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/kundentypen/kundentypenlist.model.js\"></script>\n"
-"  <script src=\"scripts/kundentypen/kundentypenlist.service.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/personCategories/personCategoriesList.model.js\"></script>\n"
-"  <script src=\"scripts/personCategories/personCategoriesList.service.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/produktekategorie/produktekategorienlist.model.js\"></script>\n"
-"  <script src=\"scripts/produktekategorie/produktekategorienlist.service.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/arbeitskategorien/arbeitskategorienlist.model.js\"></script>\n"
-"  <script src=\"scripts/arbeitskategorien/arbeitskategorienlist.service.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/kunden/overview/kundenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/kunden/overview/kundenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/kunden/detail/kundendetail.model.js\"></script>\n"
-"  <script src=\"scripts/kunden/detail/kundendetail.service.js\"></script>\n"
-"  <script src=\"scripts/kunden/detail/pendenzdetail.model.js\"></script>\n"
-"  <script src=\"scripts/kunden/detail/kundendetail.controller.js\"></script>\n"
-"  <script src=\"scripts/kunden/detail/rechnungen/kundenrechnungen.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/personen/util/emailutil.js\"></script>\n"
-"  <script src=\"scripts/personen/overview/personenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/personen/overview/personenoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/produzenten/produzenten.model.js\"></script>\n"
-"  <script src=\"scripts/produzenten/produzentenlist.service.js\"></script>\n"
-"  <script src=\"scripts/produzenten/overview/produzentenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/produzenten/detail/produzentendetail.model.js\"></script>\n"
-"  <script src=\"scripts/produzenten/detail/produzentendetail.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/einkaufsrechnungen/overview/einkaufsrechnungen.model.js\"></script>\n"
-"  <script src=\"scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.service.js\"></script>\n"
-"  <script src=\"scripts/einkaufsrechnungen/detail/bestellung.controller.js\"></script>\n"
-"  <script src=\"scripts/einkaufsrechnungen/detail/bestellung.directive.js\"></script>\n"
-"  <script src=\"scripts/einkaufsrechnungen/detail/bestellungenabrechnen.controller.js\"></script>\n"
-"  <script src=\"scripts/einkaufsrechnungen/detail/bestellungenabrechnen.directive.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/produkte/produkte.model.js\"></script>\n"
-"  <script src=\"scripts/produkte/produktelist.service.js\"></script>\n"
-"  <script src=\"scripts/produkte/overview/produkteoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/depots/overview/depotsoverview.model.js\"></script>\n"
-"  <script src=\"scripts/depots/overview/depotsoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/depots/detail/depotsdetail.model.js\"></script>\n"
-"  <script src=\"scripts/depots/detail/depotsdetail.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/touren/touren.model.js\"></script>\n"
-"  <script src=\"scripts/touren/tourenlist.service.js\"></script>\n"
-"  <script src=\"scripts/touren/overview/tourenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/touren/detail/tourendetail.model.js\"></script>\n"
-"  <script src=\"scripts/touren/detail/tourlieferungen.directive.js\"></script>\n"
-"  <script src=\"scripts/touren/detail/tourendetail.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/abos/overview/abosoverview.model.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/abosoverview.service.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/abosoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/zusatzabosoverview.model.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/zusatzabosoverview.service.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/zusatzabosoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/abosoverviewcreaterechnungspositionen.controller.js\"></script>\n"
-"  <script src=\"scripts/abos/overview/abosoverviewcreaterechnungspositionen.directive.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abosdetail.model.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abokoerbe.model.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abosdetail.controller.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abosdetail.directive.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abosdetail-guthaben-anpassen.controller.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abosdetail-vertriebsart-anpassen.controller.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abosnew.directive.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/abos/detail/abwesenheiten/abwesenheiten.directive.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/abwesenheiten/abwesenheiten.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/abos/detail/zusatzabotyp.model.js\"></script>\n"
-"  <script src=\"scripts/abos/detail/zusatzabo.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/pendenzen/overview/pendenzenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/pendenzen/overview/pendenzenoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/lieferplanungen/overview/lieferplanungoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/lieferplanungen/detail/lieferplanung.controller.js\"></script>\n"
-"  <script src=\"scripts/lieferplanungen/lieferplanung.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/auslieferungen/overview/auslieferungenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/auslieferungen/detail/auslieferungdetail.controller.js\"></script>\n"
-"  <script src=\"scripts/auslieferungen/depotauslieferungen.model.js\"></script>\n"
-"  <script src=\"scripts/auslieferungen/tourauslieferungen.model.js\"></script>\n"
-"  <script src=\"scripts/auslieferungen/postauslieferungen.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/rechnungen/overview/rechnungenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/rechnungen/overview/rechnungenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/rechnungen/detail/rechnungendetail.model.js\"></script>\n"
-"  <script src=\"scripts/rechnungen/detail/rechnungendetail.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/rechnungspositionen/overview/rechnungspositionenoverview.model.js\"></script>\n"
-"  <script src=\"scripts/rechnungspositionen/overview/rechnungspositionenoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.controller.js\"></script>\n"
-"  <script src=\"scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.directive.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/rechnungspositionen/detail/rechnungspositionendetail.directive.js\"></script>\n"
-"  <script src=\"scripts/rechnungspositionen/detail/rechnungspositionendetail.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/zahlungsimports/overview/zahlungsimportsoverview.model.js\"></script>\n"
-"  <script src=\"scripts/zahlungsimports/overview/zahlungsimportsoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/zahlungsimports/import/zahlungsimports.model.js\"></script>\n"
-"  <script src=\"scripts/zahlungsimports/import/zahlungsimports.controller.js\"></script>\n"
-"  <script src=\"scripts/zahlungsimports/import/zahlungseingaenge.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/zahlungsexports/overview/zahlungsexportsoverview.model.js\"></script>\n"
-"  <script src=\"scripts/zahlungsexports/overview/zahlungsexportsoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/projekt/kontodaten.model.js\"></script>\n"
-"  <script src=\"scripts/projekt/kontodaten.service.js\"></script>\n"
-"  <script src=\"scripts/projekt/projekt.model.js\"></script>\n"
-"  <script src=\"scripts/projekt/projekt.service.js\"></script>\n"
-"  <script src=\"scripts/projekt/settings/projektsettings.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/reportvorlagen/reportvorlagen.model.js\"></script>\n"
-"  <script src=\"scripts/reportvorlagen/reportvorlagetypen.model.js\"></script>\n"
-"  <script src=\"scripts/reportvorlagen/reportvorlagen.service.js\"></script>\n"
-"  <script src=\"scripts/reportvorlagen/reportvorlagen.controller.js\"></script>\n"
-"  <script src=\"scripts/reportvorlagen/reportvorlagen.directive.js\"></script>\n"
-"  <script src=\"scripts/reportvorlagen/reportvorlagenoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/mailvorlagen/mailvorlagen.model.js\"></script>\n"
-"  <script src=\"scripts/mailvorlagen/mailvorlagetypen.model.js\"></script>\n"
-"  <script src=\"scripts/mailvorlagen/mailvorlagen.service.js\"></script>\n"
-"  <script src=\"scripts/mailvorlagen/mailvorlagen.controller.js\"></script>\n"
-"  <script src=\"scripts/mailvorlagen/mailvorlagen.directive.js\"></script>\n"
-"  <script src=\"scripts/mailvorlagen/mailvorlagenoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/arbeitseinsaetze/arbeitseinsaetze.model.js\"></script>\n"
-"  <script src=\"scripts/arbeitseinsaetze/arbeitseinsaetze.service.js\"></script>\n"
-"  <script src=\"scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/arbeitsangebote/arbeitsangebote.model.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/arbeitsangebote.service.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/detail/addpersontoeinsatz.directive.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/detail/arbeitsangebotedetail.model.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/detail/arbeitseinsaetzedetail.model.js\"></script>\n"
-"  <script src=\"scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/arbeitseinsatzabrechnung/arbeitseinsatzabrechnung.model.js\"></script>\n"
-"  <script src=\"scripts/arbeitseinsatzabrechnung/arbeitseinsatzabrechnung.service.js\"></script>\n"
-"  <script src=\"scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/journal/overview/journaloverview.controller.js\"></script>\n"
-"  <script src=\"scripts/journal/journallist.model.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/reports/reports.model.js\"></script>\n"
-"  <script src=\"scripts/reports/reportslist.service.js\"></script>\n"
-"  <script src=\"scripts/reports/overview/reportsoverview.controller.js\"></script>\n"
-"  <script src=\"scripts/reports/detail/reportsdetail.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/jobqueue/jobqueue.service.js\"></script>\n"
-"  <script src=\"scripts/jobqueue/jobqueue.controller.js\"></script>\n"
-"  <script src=\"scripts/jobqueue/jobqueue.directive.js\"></script>\n"
-"  <script src=\"scripts/jobqueue/result/result.controller.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/utils/helper.directives.js\"></script>\n"
-"\n"
-"  <script src=\"scripts/i18n/translations.js\"></script>\n"
-"  <!-- endbuild -->\n"
-"</body>"
-msgstr ""
-
 #: app/scripts/depots/overview/depotsoverview.html:38
 msgid "AP Tel"
 msgstr ""
@@ -542,7 +128,7 @@ msgstr ""
 msgid "Abgeschlossen"
 msgstr ""
 
-#: app/index.html:73
+#: app/index.html:74
 msgid "Abmelden"
 msgstr ""
 
@@ -584,7 +170,7 @@ msgstr ""
 msgid "Abonnentin"
 msgstr ""
 
-#: app/index.html:87
+#: app/index.html:88
 #: app/scripts/abos/overview/abosoverview.html:6
 #: app/scripts/kunden/detail/abo/abos.html:4
 #: app/scripts/touren/detail/tourendetail.html:59
@@ -617,7 +203,7 @@ msgstr ""
 msgid "Abotyp hinzufügen:"
 msgstr ""
 
-#: app/index.html:112
+#: app/index.html:113
 #: app/scripts/abotypen/overview/abotypen.html:6
 #: app/scripts/dashboard/dashboard.html:57
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:32
@@ -672,7 +258,7 @@ msgstr ""
 msgid "Address of the Account Holder"
 msgstr ""
 
-#: app/index.html:120
+#: app/index.html:121
 msgid "Administration"
 msgstr ""
 
@@ -680,7 +266,7 @@ msgstr ""
 msgid "Administrations-Anteil"
 msgstr ""
 
-#: app/index.html:50
+#: app/index.html:51
 msgid "Administrationsumgebung <span ng-if=\"projekt\">für</span>"
 msgstr ""
 
@@ -919,7 +505,7 @@ msgstr ""
 msgid "Arbeitsangebot.odt"
 msgstr ""
 
-#: app/index.html:98
+#: app/index.html:99
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:6
 msgid "Arbeitsangebote"
 msgstr ""
@@ -964,7 +550,7 @@ msgstr ""
 msgid "Arbeitseinsatzabrechnung.odt"
 msgstr ""
 
-#: app/index.html:99
+#: app/index.html:100
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:6
 msgid "Arbeitseinsätze"
 msgstr ""
@@ -981,7 +567,7 @@ msgstr ""
 msgid "Arbeitskategorie erstellen"
 msgstr ""
 
-#: app/index.html:118
+#: app/index.html:119
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:12
 #: app/scripts/projekt/settings/arbeitskategorien.html:6
 msgid "Arbeitskategorien"
@@ -1038,7 +624,7 @@ msgstr ""
 msgid "Auswertung verändern"
 msgstr ""
 
-#: app/index.html:121
+#: app/index.html:122
 #: app/scripts/reports/overview/reportsoverview.html:6
 msgid "Auswertungen"
 msgstr ""
@@ -1364,7 +950,7 @@ msgstr ""
 msgid "Depotauslieferung"
 msgstr ""
 
-#: app/index.html:93
+#: app/index.html:94
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:6
 msgid "Depotauslieferungen"
 msgstr ""
@@ -1389,7 +975,7 @@ msgstr ""
 msgid "Depotname"
 msgstr ""
 
-#: app/index.html:110
+#: app/index.html:111
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:17
 #: app/scripts/depots/overview/depotsoverview.html:6
 msgid "Depots"
@@ -1610,7 +1196,7 @@ msgstr ""
 msgid "Einheit"
 msgstr ""
 
-#: app/index.html:105
+#: app/index.html:106
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:6
 msgid "Einkaufsrechnungen"
 msgstr ""
@@ -1627,8 +1213,8 @@ msgstr ""
 msgid "Einsatzzeit"
 msgstr ""
 
-#: app/index.html:109
-#: app/index.html:70
+#: app/index.html:110
+#: app/index.html:71
 msgid "Einstellungen"
 msgstr ""
 
@@ -1636,7 +1222,7 @@ msgstr ""
 msgid "Einstellungen editieren"
 msgstr ""
 
-#: app/index.html:100
+#: app/index.html:101
 msgid "Einsätze &amp; Abos"
 msgstr ""
 
@@ -1769,7 +1355,7 @@ msgstr ""
 msgid "Fehlerhafte E-Mail Adresse"
 msgstr ""
 
-#: app/index.html:102
+#: app/index.html:103
 msgid "Finanzen"
 msgstr ""
 
@@ -2003,7 +1589,7 @@ msgstr ""
 msgid "Jetzt"
 msgstr ""
 
-#: app/index.html:122
+#: app/index.html:123
 #: app/scripts/journal/overview/journaloverview.html:6
 msgid "Journal"
 msgstr ""
@@ -2115,7 +1701,7 @@ msgstr ""
 msgid "Krzz."
 msgstr ""
 
-#: app/index.html:84
+#: app/index.html:85
 #: app/scripts/abos/detail/abosdetail.html:37
 #: app/scripts/app.js:316
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:31
@@ -2152,7 +1738,7 @@ msgstr ""
 msgid "Kunde suchen..."
 msgstr ""
 
-#: app/index.html:85
+#: app/index.html:86
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
@@ -2192,7 +1778,7 @@ msgstr ""
 msgid "Kundentyp erstellen"
 msgstr ""
 
-#: app/index.html:115
+#: app/index.html:116
 #: app/scripts/kunden/detail/kundendetail.html:24
 #: app/scripts/projekt/settings/kundentypen.html:6
 msgid "Kundentypen"
@@ -2303,7 +1889,7 @@ msgstr ""
 msgid "Lieferung vom"
 msgstr ""
 
-#: app/index.html:91
+#: app/index.html:92
 #: app/scripts/abos/detail/abosdetail.html:127
 #: app/scripts/abos/detail/abosdetail.html:25
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:3
@@ -2392,7 +1978,7 @@ msgstr ""
 msgid "Mail-Body"
 msgstr ""
 
-#: app/index.html:124
+#: app/index.html:125
 msgid "Mail-Vorlagen"
 msgstr ""
 
@@ -2433,7 +2019,7 @@ msgstr ""
 msgid "Menge Total"
 msgstr ""
 
-#: app/index.html:97
+#: app/index.html:98
 msgid "Mitarbeit"
 msgstr ""
 
@@ -2691,7 +2277,7 @@ msgstr ""
 msgid "PLZ Ort"
 msgstr ""
 
-#: app/index.html:72
+#: app/index.html:73
 msgid "Passwort wechseln"
 msgstr ""
 
@@ -2708,7 +2294,7 @@ msgstr ""
 msgid "Pendenz als erledigt markieren"
 msgstr ""
 
-#: app/index.html:89
+#: app/index.html:90
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:6
 msgid "Pendenzen"
 msgstr ""
@@ -2731,7 +2317,7 @@ msgstr ""
 msgid "Person hinzufügen"
 msgstr ""
 
-#: app/index.html:86
+#: app/index.html:87
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:40
 #: app/scripts/personen/overview/personenoverview.html:6
 msgid "Personen"
@@ -2754,7 +2340,7 @@ msgstr ""
 msgid "Personenkategorie Erstellen"
 msgstr ""
 
-#: app/index.html:116
+#: app/index.html:117
 #: app/scripts/personen/overview/personenoverview.html:65
 #: app/scripts/projekt/settings/personCategories.html:6
 msgid "Personenkategorien"
@@ -2768,7 +2354,7 @@ msgstr ""
 msgid "Personenliste übrigen Teilnehmern anzeigen"
 msgstr ""
 
-#: app/index.html:92
+#: app/index.html:93
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 #: app/scripts/lieferplanungen/detail/korbplanung.html:21
 #: app/scripts/lieferplanungen/detail/lieferanten.html:14
@@ -2800,7 +2386,7 @@ msgstr ""
 msgid "Postauslieferung"
 msgstr ""
 
-#: app/index.html:95
+#: app/index.html:96
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:6
 msgid "Postauslieferungen"
 msgstr ""
@@ -2895,7 +2481,7 @@ msgstr ""
 msgid "Produktbez."
 msgstr ""
 
-#: app/index.html:114
+#: app/index.html:115
 #: app/scripts/produkte/overview/produkteoverview.html:6
 msgid "Produkte"
 msgstr ""
@@ -2908,7 +2494,7 @@ msgstr ""
 msgid "Produktekategorie erstellen"
 msgstr ""
 
-#: app/index.html:117
+#: app/index.html:118
 #: app/scripts/projekt/settings/produktkategorien.html:6
 msgid "Produktekategorien"
 msgstr ""
@@ -2925,7 +2511,7 @@ msgstr ""
 msgid "Produzent erstellen"
 msgstr ""
 
-#: app/index.html:113
+#: app/index.html:114
 #: app/scripts/produkte/overview/produkteoverview.html:70
 #: app/scripts/produzenten/overview/produzentenoverview.html:6
 msgid "Produzenten"
@@ -2947,7 +2533,7 @@ msgstr ""
 msgid "Produzentenbrief.odt"
 msgstr ""
 
-#: app/index.html:125
+#: app/index.html:126
 msgid "Projekt"
 msgstr ""
 
@@ -3007,7 +2593,7 @@ msgstr ""
 msgid "Rechnung.odt"
 msgstr ""
 
-#: app/index.html:104
+#: app/index.html:105
 #: app/scripts/kunden/detail/kundendetail.html:521
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:6
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:28
@@ -3076,7 +2662,7 @@ msgstr ""
 msgid "Rechnungsposition löschen"
 msgstr ""
 
-#: app/index.html:103
+#: app/index.html:104
 #: app/scripts/rechnungen/detail/rechnungendetail.html:220
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:6
 msgid "Rechnungspositionen"
@@ -3136,7 +2722,7 @@ msgstr ""
 msgid "Referenznummer Präfix"
 msgstr ""
 
-#: app/index.html:123
+#: app/index.html:124
 msgid "Report-Vorlagen"
 msgstr ""
 
@@ -3528,7 +3114,7 @@ msgstr ""
 msgid "Tourauslieferung"
 msgstr ""
 
-#: app/index.html:94
+#: app/index.html:95
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:6
 msgid "Tourauslieferungen"
 msgstr ""
@@ -3537,7 +3123,7 @@ msgstr ""
 msgid "Tourauslieferungen anzeigen"
 msgstr ""
 
-#: app/index.html:111
+#: app/index.html:112
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:19
 #: app/scripts/touren/overview/tourenoverview.html:6
 msgid "Touren"
@@ -3623,7 +3209,7 @@ msgstr ""
 msgid "Verschickt"
 msgstr ""
 
-#: app/index.html:151
+#: app/index.html:152
 msgid "Version:"
 msgstr ""
 
@@ -3843,7 +3429,7 @@ msgid ""
 " {{zusatzabotyp.laufzeiteinheit}}"
 msgstr ""
 
-#: app/index.html:140
+#: app/index.html:141
 msgid "Wir sind gleich bereit..."
 msgstr ""
 
@@ -3892,12 +3478,12 @@ msgstr ""
 msgid "Zahlungs-Import-Datei"
 msgstr ""
 
-#: app/index.html:106
+#: app/index.html:107
 #: app/scripts/zahlungsimports/overview/zahlungsimportsoverview.html:6
 msgid "Zahlungs-Imports"
 msgstr ""
 
-#: app/index.html:107
+#: app/index.html:108
 msgid "Zahlungsauftrag-Exports"
 msgstr ""
 
@@ -3949,7 +3535,7 @@ msgstr ""
 msgid "Zusatzabo"
 msgstr ""
 
-#: app/index.html:88
+#: app/index.html:89
 #: app/scripts/abos/detail/abosdetail.html:149
 #: app/scripts/abos/overview/abosoverview.html:87
 #: app/scripts/abos/overview/abosoverview.html:9
