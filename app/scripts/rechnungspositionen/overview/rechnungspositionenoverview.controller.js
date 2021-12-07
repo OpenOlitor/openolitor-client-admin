@@ -9,11 +9,12 @@ angular.module('openolitor-admin')
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'appConfig', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettextCatalog',
+    'gettext',
     function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, appConfig,
       FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
-      localeSensitiveComparator, gettextCatalog) {
+      localeSensitiveComparator, gettextCatalog, gettext) {
       $rootScope.viewId = 'L-Repo';
 
       $scope.entries = [];
@@ -93,7 +94,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.actions = [{
-        label: 'Rechnungen erstellen',
+        label: gettext('Rechnungen erstellen'),
         iconClass: 'glyphicon glyphicon-plus',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
@@ -103,7 +104,7 @@ angular.module('openolitor-admin')
           return true;
         }
       }, {
-        label: 'Rechnungsposition löschen',
+        label: gettext('Rechnungsposition löschen'),
         iconClass: 'fa fa-times',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
