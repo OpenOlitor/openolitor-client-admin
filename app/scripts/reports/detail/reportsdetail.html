@@ -92,8 +92,8 @@
             <tr>
                 <td ng-repeat="col in $columns" ng-bind-html="renderedTitles(col.field)"></td>
             </tr>
-            <tr ng-repeat="dataEntry in $data | filter: search.query.$">
-              <td ng-repeat="col in $columns" ng-bind-html="col.getValue(this, dataEntry)"></td>
+            <tr ng-repeat="dataEntry in result.entries | filter: search.query.$">
+              <td ng-repeat="col in $columns" ng-bind-html="getValue(col.field,dataEntry, result.entries)"></td>
             </tr>
           </table>
         </div>
