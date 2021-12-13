@@ -42,7 +42,7 @@ angular.module('openolitor-admin')
       };
 
       $scope.renderedInput = function(key, value) {
-        if (value !== null) {
+        if (value !== null && value !== 'null') {
           if (/kundeid|kunde_id|kunde-id/.test(key.toLowerCase())) {
             return '<a href="' + '#/kunden/' + value + '">' + value + '</a>';
           } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(key.toLowerCase())) {
@@ -60,40 +60,30 @@ angular.module('openolitor-admin')
           } else {
             return value;
           }
+        } else {
+          return '';
         }
-        return value;
       };
 
       $scope.renderedTitles = function(key) {
         if (key !== null) {
+          var items = lodash.map($scope.result.entries, key);
+          var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
+          var validItems = lodash.reject(uniqueItems, a => a === 'null');
           if (/kundeid|kunde_id|kunde-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/kunden?q=id%3D' + uniqueItems + '&tf=%7B%22typen%22:%22%22%7D">' + key + '</a></b>';
+            return '<b><a href="#/kunden?q=id%3D' + validItems + '&tf=%7B%22typen%22:%22%22%7D">' + key + '</a></b>';
           } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/zusatzabos?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/zusatzabos?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/aboid|abo_id|abo-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/abos?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/abos?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/personid|person_id|person-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/personen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/personen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/rechnungpositionid|rechnungposition_id|rechnungposition-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/rechnungspositionen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/rechnungspositionen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/einkaufsrechnungid|einkaufsrechnung_id|einkaufsrechnung-id|sammelbestellungid|sammelbestellung-id|sammelbestellung_id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/einkaufsrechnungen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/einkaufsrechnungen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/rechnung_id|rechnungId|rechnung-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/rechnungen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/rechnungen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else {
             return '<b>' + key + '</b>';
           }
@@ -111,38 +101,33 @@ angular.module('openolitor-admin')
             $scope.cols = [];
             for (var key in data[0]) {
               if (key.indexOf('$') !== 0 && key !== 'toJSON') {
-                var a = data[0][key].replace(/[()]/g,'').split(',');
+                var parameter = data[0][key].replace(/[()]/g,'').split(',');
                 $scope.cols.push({
-                  field: a[0],
-                  getValue: $scope.renderedInput(a[0],a[1])
+                  field: parameter[0],
+                  getValue: $scope.renderedInput(parameter[0],parameter[1])
                 });
               }
             }
           }
           if (!$scope.result || !$scope.result.entries) {
-            $scope.result.entries = lodash.map(data,function getvalues(a) {
-              var r = '{';
-              for (var b in a) {
-                if (b.indexOf('$') !== 0 && b !=='toJSON'){
-                  if (r !== '{'){
-                    r = r + ',"' +  a[b].replace('(','')
-                                        .replace(')','')
-                                        .replace(',','":"')
-                                        .replace('\n',' ') + '"';
-                  } else{
-                    r = r + '"' + a[b].replace('(','')
-                                      .replace(')','')
-                                      .replace(',','":"')
-                                      .replace('/\n',' ') + '"';
+            $scope.result.entries = lodash.map(data,function getValues(entry){
+              var newJSONString = '';
+              for (var parameter in entry) {
+                if (parameter.indexOf('$') !== 0 && parameter !=='toJSON'){
+                  var jsonElement = '"' + $scope.replaceJsonNotAllowedCharacters(entry[parameter].replace(/[()]/g,'').replace(',','":"') +  '"');
+                  if (newJSONString !== ''){
+                    newJSONString = newJSONString + ',' + jsonElement;
+                  } else {
+                    newJSONString = newJSONString + jsonElement;
                   }
-
                 }
               }
-              r = r + '}';
-              return JSON.parse(r);
+              try {
+                return (JSON.parse('{' + newJSONString + '}'));
+              } catch (e){
+                  console.log(e, newJSONString);
               }
-            );
-
+            });
             $scope.tableParams.reload();
           }
         });
@@ -150,7 +135,16 @@ angular.module('openolitor-admin')
 
       $scope.getValue = function(col, dataEntry) {
         return $scope.renderedInput(col,dataEntry[col]);
+      }
 
+      $scope.replaceJsonNotAllowedCharacters = function (jsonString) {
+         return jsonString.replace('\n',' ') 
+                    .replace('\b',' ') 
+                    .replace('\f',' ') 
+                    .replace('\r',' ') 
+                    .replace('\t',' ') 
+                    .replace('"','\"') 
+                    .replace('\\','\\\\')
       }
 
       if (!$scope.tableParams) {
