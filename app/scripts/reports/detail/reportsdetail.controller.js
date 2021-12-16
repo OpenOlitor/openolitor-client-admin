@@ -114,7 +114,8 @@ angular.module('openolitor-admin')
               var newJSONString = '';
               for (var parameter in entry) {
                 if (parameter.indexOf('$') !== 0 && parameter !=='toJSON'){
-                  var jsonElement = '"' + $scope.replaceJsonNotAllowedCharacters(entry[parameter].replace(/[()]/g,'').replace(',','":"') +  '"');
+                  var entryWithLegalJSON = $scope.replaceIllegalJSONCharacters(entry[parameter]);
+                  var jsonElement = '"' + entryWithLegalJSON.replace(/[()]/g,'').replace(',','":"') +  '"';
                   if (newJSONString !== ''){
                     newJSONString = newJSONString + ',' + jsonElement;
                   } else {
@@ -137,14 +138,8 @@ angular.module('openolitor-admin')
         return $scope.renderedInput(col,dataEntry[col]);
       }
 
-      $scope.replaceJsonNotAllowedCharacters = function (jsonString) {
-         return jsonString.replace('\n',' ') 
-                    .replace('\b',' ') 
-                    .replace('\f',' ') 
-                    .replace('\r',' ') 
-                    .replace('\t',' ') 
-                    .replace('"','\"') 
-                    .replace('\\','\\\\')
+      $scope.replaceIllegalJSONCharacters = function (jsonString) {
+        return jsonString.replace(/[\n\b\f\r\t/"]/g,' ');
       }
 
       if (!$scope.tableParams) {
