@@ -627,7 +627,6 @@ angular
     '$httpProvider',
     function($httpProvider) {
       $httpProvider.interceptors.push('loggedOutInterceptor');
-      $httpProvider.interceptors.push('errbitErrorInterceptor');
     }
   ])
   .filter('custNumber', function($filter, LIEFEREINHEIT) {
