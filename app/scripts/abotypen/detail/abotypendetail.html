@@ -22,11 +22,11 @@
         <div class="panel-body">
             <div class="row form-group">
               <div class="col-md-4">
-                <label for="name" translate>Name</label>
+                <label for="name" translate-context="notPerson" translate>Name</label>
               </div>
               <div class="col-md-8">
-                <input type="text" ng-if="getModel() === 'abotypen'" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate}}" auto-focus maxlength = 50 required>
-                <input type="text" ng-if="getModel() === 'zusatzAbotypen'" class="form-control" name="name" ng-model="zusatzAbotyp.name" placeholder="{{'Name'|translate}}" auto-focus maxlength = 50 required>
+                <input type="text" ng-if="getModel() === 'abotypen'" class="form-control" name="name" ng-model="abotyp.name" placeholder="{{'Name'|translate:'notPerson'}}" auto-focus maxlength = 50 required>
+                <input type="text" ng-if="getModel() === 'zusatzAbotypen'" class="form-control" name="name" ng-model="zusatzAbotyp.name" placeholder="{{'Name'|translate:'notPerson'}}" auto-focus maxlength = 50 required>
               </div>
             </div>
             <div class="row form-group">
