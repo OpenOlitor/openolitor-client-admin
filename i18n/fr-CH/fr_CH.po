@@ -11,13 +11,13 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: French, Switzerland\n"
 "Language: fr_CH\n"
-"PO-Revision-Date: 2021-12-08 13:32\n"
+"PO-Revision-Date: 2021-12-08 17:15\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:29
 msgid "#"
-msgstr ""
+msgstr "Nº"
 
 #: app/scripts/abotypen/overview/abotypen.html:35
 msgid "# Abonnenten"
@@ -48,7 +48,7 @@ msgstr "# Livraisons à ce jour:"
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:35
 msgid "# Pers."
-msgstr ""
+msgstr "Nº Pers."
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:186
 msgid "# Personen"
@@ -66,16 +66,12 @@ msgstr "#&nbsp;Livraisons"
 #: app/scripts/abotypen/detail/abotypendetail.html:203
 #: app/scripts/produzenten/detail/produzentendetail.html:100
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:42
 #: app/scripts/lieferplanungen/detail/lieferanten.html:87
 msgid "% Adminanteil"
 msgstr "% Pourcentage d'administration producteurs"
-
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:41
-msgid "&nbsp;+"
-msgstr ""
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:107
 msgid "(abz. Adminanteil)"
@@ -98,15 +94,15 @@ msgstr "+ 41 7..."
 #: app/scripts/depots/detail/depotsdetail.html:164
 #: app/scripts/depots/detail/depotsdetail.html:204
 msgid "+41..."
-msgstr ""
+msgstr "+41..."
 
 #: app/scripts/app.js:122
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #: app/scripts/produzenten/detail/produzentendetail.html:99
 msgid "2.0"
-msgstr ""
+msgstr "2.0"
 
 #: app/scripts/depots/overview/depotsoverview.html:38
 msgid "AP Tel"
@@ -114,7 +110,7 @@ msgstr "Num. de téléphone de la personne de contact"
 
 #: app/scripts/app.js:326
 msgid "Ab Heute"
-msgstr ""
+msgstr "À partir d'aujourd'hui"
 
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:36
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:43
@@ -269,7 +265,7 @@ msgstr "Addresse du propritaire du compte"
 
 #: app/index.html:121
 msgid "Administration"
-msgstr ""
+msgstr "Administration"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:196
 msgid "Administrations-Anteil"
@@ -483,7 +479,7 @@ msgstr "Nombre d'abonnements actifs"
 
 #: app/scripts/kunden/detail/kundendetail.html:398
 msgid "Anzeigen"
-msgstr ""
+msgstr "Afficher"
 
 #: app/scripts/app.js:265
 msgid "Apr"
@@ -647,7 +643,7 @@ msgstr "Traiter automatiquement"
 #: app/scripts/projekt/settings/projektsettings.html:236
 #: app/scripts/projekt/settings/projektsettings.html:239
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 #: app/scripts/depots/detail/depotsdetail.html:112
 #: app/scripts/produzenten/detail/produzentendetail.html:71
@@ -846,12 +842,12 @@ msgstr "Bouquet"
 
 #: app/scripts/app.js:209
 msgid "CAD"
-msgstr ""
+msgstr "CAD"
 
 #: app/scripts/depots/detail/depotsdetail.html:107
 #: app/scripts/produzenten/detail/produzentendetail.html:66
 msgid "CH..."
-msgstr ""
+msgstr "CH..."
 
 #: app/scripts/produzenten/detail/produzentendetail.html:109
 msgid "CHE-xxx.yyy.zzz MWST"
@@ -859,7 +855,7 @@ msgstr "CHE-xxx.yyy.zzz TVA"
 
 #: app/scripts/app.js:197
 msgid "CHF"
-msgstr ""
+msgstr "CHF"
 
 #: app/scripts/projekt/settings/projektsettings.html:305
 #: app/scripts/projekt/settings/projektsettings.html:320
@@ -880,7 +876,7 @@ msgstr "JEU"
 
 #: app/scripts/kunden/detail/kundendetail.html:329
 msgid "Date of Signature"
-msgstr ""
+msgstr "Date de la signature"
 
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:25
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:31
@@ -1032,11 +1028,11 @@ msgstr "La page demandée n’a pas été trouvée"
 
 #: app/scripts/app.js:328
 msgid "Diese Woche"
-msgstr ""
+msgstr "Cette semaine"
 
 #: app/scripts/app.js:329
 msgid "Diesen Monat"
-msgstr ""
+msgstr "Ce mois"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:5
 msgid "Dieser Abotyp ist derzeit nicht aktiv"
@@ -1061,7 +1057,7 @@ msgstr "Ce produit a été ajouté librement, il ne figure pas dans la liste des
 
 #: app/scripts/app.js:128
 msgid "DirectDebit"
-msgstr ""
+msgstr "DirectDebit"
 
 #: app/scripts/jobqueue/result/result.html:2
 msgid "Dokumente download"
@@ -1134,11 +1130,11 @@ msgstr "BVR"
 
 #: app/scripts/app.js:199
 msgid "EUR"
-msgstr ""
+msgstr "EUR"
 
 #: app/scripts/reports/detail/reportsdetail.html:14
 msgid "Editieren"
-msgstr ""
+msgstr "Éditer"
 
 #: app/scripts/projekt/settings/projektsettings.html:290
 msgid "Ein neues Logo auswählen oder einfügen"
@@ -1313,7 +1309,7 @@ msgstr "Etiquettes.zip"
 
 #: app/scripts/app.js:199
 msgid "Euro"
-msgstr ""
+msgstr "Euro"
 
 #: app/scripts/journal/overview/journaloverview.html:42
 msgid "Event"
@@ -1321,7 +1317,7 @@ msgstr "Evénement"
 
 #: app/scripts/app.js:235
 msgid "FR"
-msgstr ""
+msgstr "FR"
 
 #: app/scripts/kunden/detail/kundendetail.html:532
 msgid "Faelligkeitsdatum"
@@ -1370,7 +1366,7 @@ msgstr "Finances"
 
 #: app/scripts/app.js:124
 msgid "Fr."
-msgstr ""
+msgstr "Fr."
 
 #: app/scripts/app.js:124
 msgid "Frau"
@@ -1408,7 +1404,7 @@ msgstr "Veuillez sélectionner un producteur pour chaque produit."
 
 #: app/scripts/app.js:204
 msgid "GBP"
-msgstr ""
+msgstr "GBP"
 
 #: app/scripts/abos/detail/abosdetail.html:139
 #: app/scripts/app.js:161
@@ -1482,7 +1478,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:2
 msgid "HTML / WYSIWYG"
-msgstr ""
+msgstr "HTML / WYSIWYG"
 
 #: app/scripts/app.js:321
 msgid "Halbtage"
@@ -1522,12 +1518,12 @@ msgstr "M."
 #: app/scripts/produzenten/detail/produzentendetail.html:63
 #: app/scripts/projekt/settings/projektsettings.html:231
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:122
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:72
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: app/scripts/kunden/detail/kundendetail.html:389
 msgid "Im Format"
@@ -1916,7 +1912,7 @@ msgstr "Connexion active"
 
 #: app/scripts/projekt/settings/projektsettings.html:280
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: app/scripts/projekt/settings/projektsettings.html:289
 msgid "Logo auswählen oder einfügen"
@@ -1980,7 +1976,7 @@ msgstr "Télécharger des documents de rappel"
 
 #: app/scripts/app.js:266
 msgid "Mai"
-msgstr ""
+msgstr "Mai"
 
 #: app/scripts/mailvorlagen/mailvorlagen.html:27
 #: app/scripts/mailvorlagen/mailvorlagen.html:76
@@ -2073,7 +2069,7 @@ msgstr "Lundi"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:129
 msgid "Multiplizieren"
-msgstr ""
+msgstr "Multiplier"
 
 #: app/scripts/app.js:264
 msgid "März"
@@ -2182,7 +2178,7 @@ msgstr "A faire"
 
 #: app/scripts/app.js:290
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 #: app/scripts/app.js:289
 msgid "November"
@@ -2223,7 +2219,7 @@ msgstr "Nº (principales et supplémentaires)"
 
 #: app/scripts/app.js:327
 msgid "Nur Heute"
-msgstr ""
+msgstr "Aujourd'hui seulement"
 
 #: app/scripts/abos/detail/abosdetail.html:21
 msgid "Nächster Kündigungstermin:"
@@ -2384,7 +2380,7 @@ msgstr ""
 
 #: app/scripts/app.js:178
 msgid "Portion"
-msgstr ""
+msgstr "Portion"
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:25
 #: app/scripts/touren/detail/tourlieferungen.html:4
@@ -2560,7 +2556,7 @@ msgstr "Points"
 
 #: app/scripts/projekt/settings/projektsettings.html:228
 msgid "QR-IBAN"
-msgstr ""
+msgstr "IBAN QR"
 
 #: app/scripts/reports/detail/reportsdetail.html:56
 msgid "Query"
@@ -2669,7 +2665,7 @@ msgstr "Position de facture"
 
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.controller.js:107
 msgid "Rechnungsposition löschen"
-msgstr ""
+msgstr "Effacer les positions de facture"
 
 #: app/index.html:104
 #: app/scripts/rechnungen/detail/rechnungendetail.html:220
@@ -2754,11 +2750,11 @@ msgstr "Rythme"
 
 #: app/scripts/app.js:241
 msgid "SA"
-msgstr ""
+msgstr "Sa"
 
 #: app/scripts/app.js:247
 msgid "SO"
-msgstr ""
+msgstr "DI"
 
 #: app/scripts/abos/detail/abosdetail.html:137
 msgid "Saldo zu tief"
@@ -3065,7 +3061,7 @@ msgstr "Titre"
 #: app/scripts/lieferplanungen/detail/lieferanten.html:105
 #: app/scripts/lieferplanungen/detail/lieferanten.html:77
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:61
 msgid "Total (abz. Adminanteil)"
@@ -3170,7 +3166,7 @@ msgstr "Dollar des Etats-Unis"
 
 #: app/scripts/app.js:200
 msgid "USD"
-msgstr ""
+msgstr "USD"
 
 #: app/scripts/app.js:113
 msgid "Unbeschraenkt"
@@ -3220,7 +3216,7 @@ msgstr "Envoyé"
 
 #: app/index.html:152
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:681
 msgid "Vertraglich"
@@ -3507,7 +3503,7 @@ msgstr "Si vous ajoutez les valeurs suivantes, elles sont remplacées par la val
 
 #: app/index.html:141
 msgid "Wir sind gleich bereit..."
-msgstr ""
+msgstr "Nous serons prêts bientôt ..."
 
 #: app/scripts/kunden/detail/kundendetail.html:380
 msgid "Wird auf dem Lieferschein zur Tour aufgedruckt"
@@ -3657,12 +3653,12 @@ msgstr "Quinzomadaire"
 
 #: app/scripts/app.js:96
 msgid "Zweiwöchentlich"
-msgstr ""
+msgstr "Quinzomadaire"
 
 #: app/scripts/abos/overview/abosoverview.controller.js:288
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:308
 msgid "abo"
-msgstr ""
+msgstr "abonnement"
 
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:151
 msgid "abrechnen"
@@ -3700,11 +3696,11 @@ msgstr "incorrect"
 
 #: app/scripts/app.js:169
 msgid "gr"
-msgstr ""
+msgstr "gr"
 
 #: app/scripts/app.js:173
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:153
 msgid "kunde"
@@ -3712,11 +3708,11 @@ msgstr "membre"
 
 #: app/scripts/app.js:175
 msgid "l"
-msgstr ""
+msgstr "l"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:41
 msgid "max."
-msgstr ""
+msgstr "max."
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:288
 msgid "pain.008.001.07 erstellen"
@@ -3749,7 +3745,7 @@ msgstr "sauvegarder"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:687
 msgid "total"
-msgstr ""
+msgstr "total"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:686
 msgid "verrechnet"
@@ -3762,10 +3758,6 @@ msgstr "depuis le"
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:64
 msgid "{{batchCreated.openAboIds.length}} Rechnungspositionen mit Fehlern"
 msgstr "{{batchCreated.openAboIds.length}} positions de facture incorrectes"
-
-#: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:55
-msgid "{{rechnungsPosition.status}}"
-msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:91
 #: app/scripts/depots/detail/depotsdetail.html:94
