@@ -11,7 +11,34 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-12-08 16:23\n"
+"PO-Revision-Date: 2022-01-16 18:02\n"
+
+#: app/scripts/abotypen/detail/abotypendetail.html:25
+#: app/scripts/abotypen/detail/abotypendetail.html:28
+#: app/scripts/abotypen/detail/abotypendetail.html:29
+#: app/scripts/abotypen/overview/abotypen.html:32
+#: app/scripts/abotypen/overview/zusatzabotypen.html:33
+#: app/scripts/depots/detail/depotsdetail.html:145
+#: app/scripts/depots/detail/depotsdetail.html:148
+#: app/scripts/depots/detail/depotsdetail.html:185
+#: app/scripts/depots/detail/depotsdetail.html:188
+#: app/scripts/depots/overview/depotsoverview.html:32
+#: app/scripts/reports/detail/reportsdetail.html:33
+#: app/scripts/reports/detail/reportsdetail.html:36
+#: app/scripts/reports/overview/reportsoverview.html:23
+#: app/scripts/reportvorlagen/reportvorlagen.html:23
+#: app/scripts/touren/detail/tourendetail.html:36
+#: app/scripts/touren/overview/tourenoverview.html:31
+msgctxt "notPerson"
+msgid "Name"
+msgstr ""
+
+#: app/scripts/kunden/detail/kundendetail.html:81
+#: app/scripts/kunden/detail/kundendetail.html:84
+#: app/scripts/personen/overview/personenoverview.html:39
+msgctxt "person"
+msgid "Name"
+msgstr ""
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -2078,28 +2105,6 @@ msgstr "Březen"
 #: app/scripts/utils/ng-table/ng-table-boolean-filter.html:8
 msgid "N"
 msgstr ""
-
-#: app/scripts/abotypen/detail/abotypendetail.html:25
-#: app/scripts/abotypen/detail/abotypendetail.html:28
-#: app/scripts/abotypen/detail/abotypendetail.html:29
-#: app/scripts/abotypen/overview/abotypen.html:32
-#: app/scripts/abotypen/overview/zusatzabotypen.html:33
-#: app/scripts/depots/detail/depotsdetail.html:145
-#: app/scripts/depots/detail/depotsdetail.html:148
-#: app/scripts/depots/detail/depotsdetail.html:185
-#: app/scripts/depots/detail/depotsdetail.html:188
-#: app/scripts/depots/overview/depotsoverview.html:32
-#: app/scripts/kunden/detail/kundendetail.html:81
-#: app/scripts/kunden/detail/kundendetail.html:84
-#: app/scripts/personen/overview/personenoverview.html:39
-#: app/scripts/reports/detail/reportsdetail.html:33
-#: app/scripts/reports/detail/reportsdetail.html:36
-#: app/scripts/reports/overview/reportsoverview.html:23
-#: app/scripts/reportvorlagen/reportvorlagen.html:23
-#: app/scripts/touren/detail/tourendetail.html:36
-#: app/scripts/touren/overview/tourenoverview.html:31
-msgid "Name"
-msgstr "Název / jméno"
 
 #: app/scripts/produzenten/detail/produzentendetail.html:47
 msgid "Name / Betrieb"
