@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: French, Switzerland\n"
 "Language: fr_CH\n"
-"PO-Revision-Date: 2022-01-16 18:02\n"
+"PO-Revision-Date: 2022-01-24 13:16\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
@@ -31,14 +31,14 @@ msgstr ""
 #: app/scripts/touren/overview/tourenoverview.html:31
 msgctxt "notPerson"
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: app/scripts/kunden/detail/kundendetail.html:81
 #: app/scripts/kunden/detail/kundendetail.html:84
 #: app/scripts/personen/overview/personenoverview.html:39
 msgctxt "person"
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -523,11 +523,11 @@ msgstr "Offre d'activité"
 
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:2
 msgid "Arbeitsangebot duplizieren"
-msgstr ""
+msgstr "Offre de collaboration en double"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:380
 msgid "Arbeitsangebot eingefügt"
-msgstr ""
+msgstr "Offre de collaboration ajoutée"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:10
 msgid "Arbeitsangebot erstellen"
@@ -544,15 +544,15 @@ msgstr "Offres d'activité"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:336
 msgid "Arbeitsangebote (alle eingeschriebenen Personen)"
-msgstr ""
+msgstr "Offres de collaboration (toutes personnes inscrites)"
 
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:60
 msgid "Arbeitsangebote erstellen"
-msgstr ""
+msgstr "Créer des offres de collaboration"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:306
 msgid "Arbeitsangebote löschen"
-msgstr ""
+msgstr "Supprimer les offres de collaboration"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:320
 msgid "Arbeitseinsaetzebrief"
@@ -624,7 +624,7 @@ msgstr "Août"
 
 #: app/scripts/reports/detail/reportsdetail.html:16
 msgid "Ausführen"
-msgstr ""
+msgstr "Exécuter"
 
 #: app/scripts/app.js:313
 msgid "Ausgeliefert"
@@ -695,7 +695,7 @@ msgstr "Données de base"
 
 #: app/scripts/projekt/settings/projektsettings.html:131
 msgid "Beim Senden von E-Mail bcc hinzufügen"
-msgstr ""
+msgstr "Ajouter BCC lors de l'envoi d'un e-mail"
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:39
 msgid "Beim auswählen einer Datei wird die Datei eingelesen. Die daraus resultierenden Zahlungseingänge werden danach aufgelistet."
@@ -887,7 +887,7 @@ msgstr "CHF"
 #: app/scripts/projekt/settings/projektsettings.html:305
 #: app/scripts/projekt/settings/projektsettings.html:320
 msgid "CSS-Datei auswählen oder einfügen"
-msgstr ""
+msgstr "Sélectionnez ou insérez un fichier CSS"
 
 #: app/scripts/app.js:308
 msgid "Created"
@@ -951,7 +951,7 @@ msgstr "Date d'envoi"
 
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:39
 msgid "Datum wählen"
-msgstr ""
+msgstr "Choisissez la date"
 
 #: app/scripts/abos/detail/abosdetail.html:100
 #: app/scripts/abos/detail/abosdetail.html:191
@@ -1015,7 +1015,7 @@ msgstr "Dépôts"
 
 #: app/scripts/depots/overview/depotsoverview.controller.js:114
 msgid "Depots (alle betroffenen Personen)"
-msgstr ""
+msgstr "Dépôts (toutes les personnes concernées)"
 
 #: app/scripts/app.js:296
 msgid "Dez"
@@ -1043,11 +1043,11 @@ msgstr "Mardi"
 
 #: app/scripts/projekt/settings/projektsettings.controller.js:377
 msgid "Diese Arbeitskategorie existiert bereits"
-msgstr ""
+msgstr "Cette catégorie de collaboration existe déjà"
 
 #: app/scripts/projekt/settings/projektsettings.controller.js:302
 msgid "Diese Personenkategorie existiert bereits"
-msgstr ""
+msgstr "Cette catégorie de personne existe déjà"
 
 #: app/scripts/not-found.html:9
 msgid "Diese Seite konnte nicht gefunden werden!"
@@ -1068,7 +1068,7 @@ msgstr "Ce type d'abonnement n'est pas actif actuellement"
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:60
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:64
 msgid "Dieser Produzent existiert bereits"
-msgstr ""
+msgstr "Ce producteur existe déjà"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:6
 msgid "Dieser Zusatzabotyp ist derzeit nicht aktiv"
@@ -1501,7 +1501,7 @@ msgstr "Valable pour"
 
 #: app/scripts/kunden/detail/kundendetail.html:343
 msgid "Gültige Zeichen: Buchstaben, Zahlen, Leerzeichen und +?/-:().,"
-msgstr ""
+msgstr "Caractères valides : lettres, chiffres, espaces et +?/-:().,"
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:2
 msgid "HTML / WYSIWYG"
@@ -1529,7 +1529,7 @@ msgstr "Aujourd'hui"
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:8
 msgid "Hier Text einfügen und formatieren"
-msgstr ""
+msgstr "Collez et formatez le texte ici"
 
 #: app/scripts/kunden/detail/kundendetail.html:383
 msgid "Hinterlegung, Abgabe bei..."
@@ -1554,7 +1554,7 @@ msgstr "Id"
 
 #: app/scripts/kunden/detail/kundendetail.html:389
 msgid "Im Format"
-msgstr ""
+msgstr "Au format"
 
 #: app/scripts/projekt/settings/projektsettings.html:326
 msgid "Importdatei"
@@ -1624,7 +1624,7 @@ msgstr "Maintenant"
 #: app/index.html:123
 #: app/scripts/journal/overview/journaloverview.html:6
 msgid "Journal"
-msgstr ""
+msgstr "Historique d'événements"
 
 #: app/scripts/app.js:268
 msgid "Jul"
@@ -1718,7 +1718,7 @@ msgstr "Coordonnées"
 
 #: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:149
 msgid "Korbdetails drucken"
-msgstr ""
+msgstr "Imprimer les détails du panier"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 msgid "Korbinhalt"
@@ -2017,7 +2017,7 @@ msgstr "Modèles de courrier électronique"
 #: app/scripts/kunden/detail/kundendetail.html:342
 #: app/scripts/kunden/detail/kundendetail.html:346
 msgid "Mandate Id"
-msgstr ""
+msgstr "Id mandats"
 
 #: app/scripts/abos/detail/abosdetail.controller.js:493
 msgid "Manuelle Rechnung erstellen"
@@ -2065,11 +2065,11 @@ msgstr "Message avant connexion"
 
 #: app/scripts/projekt/settings/projektsettings.html:199
 msgid "Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird"
-msgstr ""
+msgstr "Message qui s'affiche pour tous les utilisateurs avant de se connecter"
 
 #: app/scripts/projekt/settings/projektsettings.html:207
 msgid "Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird"
-msgstr ""
+msgstr "Message qui s'affiche pour l'utilisateur une fois qu'il s'est connecté avec succès"
 
 #: app/scripts/app.js:222
 msgid "Mittwoch"
@@ -2293,7 +2293,7 @@ msgstr "Changer le mot de passe"
 
 #: app/scripts/journal/overview/journaloverview.html:45
 msgid "Payload"
-msgstr ""
+msgstr "Payload"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:51
 msgid "Payment Type"
@@ -2344,11 +2344,11 @@ msgstr "CourrierPersonne.ODT"
 #: app/scripts/kunden/detail/kundendetail.html:121
 #: app/scripts/projekt/settings/personCategories.html:24
 msgid "Personenkategorie"
-msgstr ""
+msgstr "Catégorie de personne"
 
 #: app/scripts/projekt/settings/personCategories.html:9
 msgid "Personenkategorie Erstellen"
-msgstr ""
+msgstr "Créer une catégorie de personne"
 
 #: app/index.html:117
 #: app/scripts/personen/overview/personenoverview.html:65
@@ -2381,7 +2381,7 @@ msgstr "Modifier la planification"
 
 #: app/scripts/app.js:179
 msgid "Por."
-msgstr ""
+msgstr "Por."
 
 #: app/scripts/app.js:178
 msgid "Portion"
@@ -2390,7 +2390,7 @@ msgstr "Portion"
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:25
 #: app/scripts/touren/detail/tourlieferungen.html:4
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:6
 msgid "Postauslieferung"
@@ -2817,7 +2817,7 @@ msgstr "Souhaitez-vous décompter la planification de livraison?"
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:244
 msgid "Soll diese Person wirklich gelöscht werden?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer cette personne?"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:904
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
@@ -2829,7 +2829,7 @@ msgstr "Ajouter un produit libre"
 
 #: app/scripts/kunden/detail/kundendetail.html:289
 msgid "Sonderzeichen werden beim Sepa-Export entfernt"
-msgstr ""
+msgstr "Les caractères spéciaux sont supprimés lors de l'export SEPA"
 
 #: app/scripts/app.js:246
 msgid "Sonntag"
