@@ -241,6 +241,23 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
+                  <label for="nameAccountHolder" translate>Kontoinhaber</label>
+                  <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Sonderzeichen werden beim Sepa-Export entfernt' | translate}}"></i>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="nameAccountHolder" ng-model="kontodaten.nameAccountHolder" placeholder="{{'Kontoinhaber'|translate}}" ng-disabled="!editMode" maxlength=100>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bankName" translate>Name der Bank</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bankName" ng-model="kontodaten.bankName" ng-disabled="!editMode" placeholder="{{'Name der Bank'|translate}}" maxlength=100>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
                   <label for="bezeichnung" translate>Teilnehmernummer</label>
                 </div>
                 <div class="col-md-8">
