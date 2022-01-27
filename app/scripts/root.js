@@ -17,6 +17,7 @@ angular.module('openolitor-admin')
       });
 
       $rootScope.viewId = 'Init';
+      $scope.welcomeMessageDisplayed = false;
 
       $scope.currentPathContains = function(pathJunk) {
         var currentUrl = $location.url();
@@ -194,7 +195,8 @@ angular.module('openolitor-admin')
       }
 
       $scope.checkWelcomeMessage = function() {
-        if ($scope.projekt.welcomeMessage2) {
+        if ($scope.projekt.welcomeMessage2 && !$scope.welcomeMessageDisplayed) {
+          $scope.welcomeMessageDisplayed = true;
           dialogService.displayDialogOkAbort(
             $scope.projekt.welcomeMessage2,
             function() {},
