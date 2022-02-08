@@ -266,6 +266,7 @@ angular.module('openolitor-admin')
             zeitVon: $scope.arbeitsangebot.zeitVon,
             zeitBis: $scope.arbeitsangebot.zeitBis,
             kundeId: person.kundeId,
+            contactPermission: person.contactPermission,
             kundeBezeichnung: person.kundeBezeichnung,
             personId: person.id,
             personName: person.vorname + ' ' + person.name,
