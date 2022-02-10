@@ -24,7 +24,8 @@ angular.module('openolitor-admin')
           ansprechpersonen: [{
             id: undefined,
             anrede: undefined,
-            categories: []
+            categories: [],
+            contactPermission:false
           }],
           pendenzen: [],
           abweichendeLieferadresse: false,
@@ -235,7 +236,8 @@ angular.module('openolitor-admin')
         $scope.kunde.ansprechpersonen.push({
           id: undefined,
           anrede: undefined,
-          categories: []
+          categories: [],
+          contactPermission: false
         });
       };
 
