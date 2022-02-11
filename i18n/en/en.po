@@ -11,31 +11,19 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2022-01-31 13:50\n"
+"PO-Revision-Date: 2022-02-11 15:11\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
-#: app/scripts/abotypen/detail/abotypendetail.html:28
-#: app/scripts/abotypen/detail/abotypendetail.html:29
-#: app/scripts/abotypen/overview/abotypen.html:32
-#: app/scripts/abotypen/overview/zusatzabotypen.html:33
 #: app/scripts/depots/detail/depotsdetail.html:145
-#: app/scripts/depots/detail/depotsdetail.html:148
 #: app/scripts/depots/detail/depotsdetail.html:185
 #: app/scripts/depots/detail/depotsdetail.html:188
-#: app/scripts/depots/overview/depotsoverview.html:32
 #: app/scripts/reports/detail/reportsdetail.html:33
-#: app/scripts/reports/detail/reportsdetail.html:36
-#: app/scripts/reports/overview/reportsoverview.html:23
-#: app/scripts/reportvorlagen/reportvorlagen.html:23
-#: app/scripts/touren/detail/tourendetail.html:36
-#: app/scripts/touren/overview/tourenoverview.html:31
 msgctxt "notPerson"
 msgid "Name"
 msgstr "Name"
 
 #: app/scripts/kunden/detail/kundendetail.html:81
 #: app/scripts/kunden/detail/kundendetail.html:84
-#: app/scripts/personen/overview/personenoverview.html:39
 msgctxt "person"
 msgid "Name"
 msgstr "Last Name"
@@ -184,7 +172,7 @@ msgstr "Create subscription"
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
 msgstr "Create a subscription for {{}} kunde.bezeichnung"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:440
+#: app/scripts/kunden/detail/kundendetail.controller.js:442
 msgid "Abo wurde erstellt"
 msgstr "Subscription was created"
 
@@ -525,7 +513,7 @@ msgstr "Work opportunity"
 msgid "Arbeitsangebot duplizieren"
 msgstr "Duplicate work opportunity"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:380
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:381
 msgid "Arbeitsangebot eingefügt"
 msgstr "Work opportunity added"
 
@@ -884,8 +872,8 @@ msgstr "CHE xxx.yyy.zzz VAT"
 msgid "CHF"
 msgstr "CHF"
 
-#: app/scripts/projekt/settings/projektsettings.html:305
-#: app/scripts/projekt/settings/projektsettings.html:320
+#: app/scripts/projekt/settings/projektsettings.html:322
+#: app/scripts/projekt/settings/projektsettings.html:337
 msgid "CSS-Datei auswählen oder einfügen"
 msgstr "Select or insert a CSS"
 
@@ -918,7 +906,7 @@ msgstr "Pick a file"
 msgid "Datei importieren"
 msgstr "Import file"
 
-#: app/scripts/projekt/settings/projektsettings.html:275
+#: app/scripts/projekt/settings/projektsettings.html:292
 msgid "Dateien"
 msgstr "Files"
 
@@ -1094,9 +1082,9 @@ msgstr "Document Download"
 msgid "Donnerstag"
 msgstr "Thursday"
 
-#: app/scripts/projekt/settings/projektsettings.html:299
-#: app/scripts/projekt/settings/projektsettings.html:314
-#: app/scripts/projekt/settings/projektsettings.html:329
+#: app/scripts/projekt/settings/projektsettings.html:316
+#: app/scripts/projekt/settings/projektsettings.html:331
+#: app/scripts/projekt/settings/projektsettings.html:346
 msgid "Download"
 msgstr "Download"
 
@@ -1140,7 +1128,7 @@ msgstr "New email template"
 msgid "E-Mail an Kunden versenden"
 msgstr "Send an e-mail to member"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:80
+#: app/scripts/kunden/detail/kundendetail.controller.js:81
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "Send an email to all contacts"
 
@@ -1163,7 +1151,7 @@ msgstr "EUR"
 msgid "Editieren"
 msgstr "Edit"
 
-#: app/scripts/projekt/settings/projektsettings.html:290
+#: app/scripts/projekt/settings/projektsettings.html:307
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr "Select or add a new logo"
 
@@ -1446,8 +1434,8 @@ msgstr "Detailed description"
 msgid "Geplante Lieferdaten"
 msgstr "Planned Delivery Dates"
 
-#: app/scripts/projekt/settings/projektsettings.html:261
-#: app/scripts/projekt/settings/projektsettings.html:264
+#: app/scripts/projekt/settings/projektsettings.html:278
+#: app/scripts/projekt/settings/projektsettings.html:281
 msgid "Gläubiger-Identifikationsnummer"
 msgstr "Creditor identification number"
 
@@ -1556,7 +1544,7 @@ msgstr "Id"
 msgid "Im Format"
 msgstr "Formatted"
 
-#: app/scripts/projekt/settings/projektsettings.html:326
+#: app/scripts/projekt/settings/projektsettings.html:343
 msgid "Importdatei"
 msgstr "File to import"
 
@@ -1708,6 +1696,8 @@ msgid "Kontodaten"
 msgstr "Account data"
 
 #: app/scripts/kunden/detail/kundendetail.html:288
+#: app/scripts/projekt/settings/projektsettings.html:244
+#: app/scripts/projekt/settings/projektsettings.html:248
 msgid "Kontoinhaber"
 msgstr "Name of account owner"
 
@@ -1741,7 +1731,7 @@ msgstr "Abridging"
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
 #: app/scripts/dashboard/dashboard.html:28
 #: app/scripts/dashboard/dashboard.html:88
-#: app/scripts/kunden/detail/kundendetail.controller.js:73
+#: app/scripts/kunden/detail/kundendetail.controller.js:74
 #: app/scripts/kunden/detail/kundendetail.html:10
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:30
 #: app/scripts/rechnungen/detail/rechnungendetail.html:44
@@ -1937,11 +1927,11 @@ msgstr "Liter"
 msgid "Login aktiv"
 msgstr "Active login"
 
-#: app/scripts/projekt/settings/projektsettings.html:280
+#: app/scripts/projekt/settings/projektsettings.html:297
 msgid "Logo"
 msgstr "Logo"
 
-#: app/scripts/projekt/settings/projektsettings.html:289
+#: app/scripts/projekt/settings/projektsettings.html:306
 msgid "Logo auswählen oder einfügen"
 msgstr "Select or insert Logo"
 
@@ -2106,11 +2096,28 @@ msgstr "March"
 msgid "N"
 msgstr "N"
 
+#: app/scripts/abotypen/detail/abotypendetail.html:28
+#: app/scripts/abotypen/detail/abotypendetail.html:29
+#: app/scripts/abotypen/overview/abotypen.html:32
+#: app/scripts/abotypen/overview/zusatzabotypen.html:33
+#: app/scripts/depots/detail/depotsdetail.html:148
+#: app/scripts/depots/overview/depotsoverview.html:32
+#: app/scripts/personen/overview/personenoverview.html:39
+#: app/scripts/reports/detail/reportsdetail.html:36
+#: app/scripts/reports/overview/reportsoverview.html:23
+#: app/scripts/reportvorlagen/reportvorlagen.html:23
+#: app/scripts/touren/detail/tourendetail.html:36
+#: app/scripts/touren/overview/tourenoverview.html:31
+msgid "Name"
+msgstr ""
+
 #: app/scripts/produzenten/detail/produzentendetail.html:47
 msgid "Name / Betrieb"
 msgstr "Name / farm"
 
 #: app/scripts/kunden/detail/kundendetail.html:321
+#: app/scripts/projekt/settings/projektsettings.html:253
+#: app/scripts/projekt/settings/projektsettings.html:256
 msgid "Name der Bank"
 msgstr "Bank name"
 
@@ -2727,8 +2734,8 @@ msgstr "E-mail Invoices"
 msgid "Referenznummer"
 msgstr "Reference No."
 
-#: app/scripts/projekt/settings/projektsettings.html:252
-#: app/scripts/projekt/settings/projektsettings.html:255
+#: app/scripts/projekt/settings/projektsettings.html:269
+#: app/scripts/projekt/settings/projektsettings.html:272
 msgid "Referenznummer Präfix"
 msgstr "Reference number prefix"
 
@@ -2815,7 +2822,7 @@ msgstr "Do you want to delete the delivery planning?"
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr "Do you want to delete the delivery planning?"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:244
+#: app/scripts/kunden/detail/kundendetail.controller.js:246
 msgid "Soll diese Person wirklich gelöscht werden?"
 msgstr "Are you sure you want to delete this person?"
 
@@ -2828,6 +2835,7 @@ msgid "Sonderprodukt einfügen"
 msgstr "Insert a special product"
 
 #: app/scripts/kunden/detail/kundendetail.html:289
+#: app/scripts/projekt/settings/projektsettings.html:245
 msgid "Sonderzeichen werden beim Sepa-Export entfernt"
 msgstr "Special characters will be deleted during SEPA export"
 
@@ -2938,11 +2946,11 @@ msgstr "Street/no."
 msgid "Stunden"
 msgstr "Hours"
 
-#: app/scripts/projekt/settings/projektsettings.html:296
+#: app/scripts/projekt/settings/projektsettings.html:313
 msgid "Style<br>(Admin-Seite)"
 msgstr "Style<br> (admin portal)"
 
-#: app/scripts/projekt/settings/projektsettings.html:311
+#: app/scripts/projekt/settings/projektsettings.html:328
 msgid "Style<br>(Kundenportal)"
 msgstr "Style <br>(Subscriber portal)"
 
@@ -3016,8 +3024,8 @@ msgstr "Sum without supplementary subscriptions!"
 msgid "Tage"
 msgstr "Days"
 
-#: app/scripts/projekt/settings/projektsettings.html:244
-#: app/scripts/projekt/settings/projektsettings.html:247
+#: app/scripts/projekt/settings/projektsettings.html:261
+#: app/scripts/projekt/settings/projektsettings.html:264
 msgid "Teilnehmernummer"
 msgstr "Subscriber number"
 
@@ -3609,6 +3617,7 @@ msgid "ZusatzAbotypen"
 msgstr "Additional Subscription Types"
 
 #: app/scripts/abos/detail/abosdetail.html:165
+#: app/scripts/lieferplanungen/detail/korbplanung.html:109
 msgid "Zusatzabo"
 msgstr "Supplementary subscription"
 
@@ -3690,7 +3699,7 @@ msgstr "paid"
 msgid "bis"
 msgstr "until"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:73
+#: app/scripts/kunden/detail/kundendetail.controller.js:74
 #: app/scripts/kunden/detail/kundendetail.html:522
 msgid "erstellen"
 msgstr "create"
@@ -3744,7 +3753,7 @@ msgid "rechnung"
 msgstr "Invoice"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:68
-#: app/scripts/kunden/detail/kundendetail.controller.js:71
+#: app/scripts/kunden/detail/kundendetail.controller.js:72
 msgid "speichern"
 msgstr "save"
 
