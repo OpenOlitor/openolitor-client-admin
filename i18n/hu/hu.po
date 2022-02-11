@@ -11,31 +11,19 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-01-16 18:02\n"
+"PO-Revision-Date: 2022-02-11 15:11\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
-#: app/scripts/abotypen/detail/abotypendetail.html:28
-#: app/scripts/abotypen/detail/abotypendetail.html:29
-#: app/scripts/abotypen/overview/abotypen.html:32
-#: app/scripts/abotypen/overview/zusatzabotypen.html:33
 #: app/scripts/depots/detail/depotsdetail.html:145
-#: app/scripts/depots/detail/depotsdetail.html:148
 #: app/scripts/depots/detail/depotsdetail.html:185
 #: app/scripts/depots/detail/depotsdetail.html:188
-#: app/scripts/depots/overview/depotsoverview.html:32
 #: app/scripts/reports/detail/reportsdetail.html:33
-#: app/scripts/reports/detail/reportsdetail.html:36
-#: app/scripts/reports/overview/reportsoverview.html:23
-#: app/scripts/reportvorlagen/reportvorlagen.html:23
-#: app/scripts/touren/detail/tourendetail.html:36
-#: app/scripts/touren/overview/tourenoverview.html:31
 msgctxt "notPerson"
 msgid "Name"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:81
 #: app/scripts/kunden/detail/kundendetail.html:84
-#: app/scripts/personen/overview/personenoverview.html:39
 msgctxt "person"
 msgid "Name"
 msgstr ""
@@ -184,7 +172,7 @@ msgstr "Előfizetés létrehozása"
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
 msgstr "{{kunde.bezeichnung}}-előfizetés létrehozása"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:440
+#: app/scripts/kunden/detail/kundendetail.controller.js:442
 msgid "Abo wurde erstellt"
 msgstr "Előfizetés jött létre"
 
@@ -525,7 +513,7 @@ msgstr "Felajánlás önkéntes munkára"
 msgid "Arbeitsangebot duplizieren"
 msgstr "Önkéntes felajánlás ismétlése"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:380
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:381
 msgid "Arbeitsangebot eingefügt"
 msgstr "Önkéntes munka létrehozása"
 
@@ -884,8 +872,8 @@ msgstr "HU xxxxxxxx-y-zz ÁFA"
 msgid "CHF"
 msgstr "CHF"
 
-#: app/scripts/projekt/settings/projektsettings.html:305
-#: app/scripts/projekt/settings/projektsettings.html:320
+#: app/scripts/projekt/settings/projektsettings.html:322
+#: app/scripts/projekt/settings/projektsettings.html:337
 msgid "CSS-Datei auswählen oder einfügen"
 msgstr ""
 
@@ -918,7 +906,7 @@ msgstr "Csatolmány kiválasztása"
 msgid "Datei importieren"
 msgstr "Importálás"
 
-#: app/scripts/projekt/settings/projektsettings.html:275
+#: app/scripts/projekt/settings/projektsettings.html:292
 msgid "Dateien"
 msgstr "Csatolmányok"
 
@@ -1094,9 +1082,9 @@ msgstr "Letölthető dokumentumok"
 msgid "Donnerstag"
 msgstr "Csütörtök"
 
-#: app/scripts/projekt/settings/projektsettings.html:299
-#: app/scripts/projekt/settings/projektsettings.html:314
-#: app/scripts/projekt/settings/projektsettings.html:329
+#: app/scripts/projekt/settings/projektsettings.html:316
+#: app/scripts/projekt/settings/projektsettings.html:331
+#: app/scripts/projekt/settings/projektsettings.html:346
 msgid "Download"
 msgstr "Letöltés"
 
@@ -1140,7 +1128,7 @@ msgstr "E-mail sablon létrehozása"
 msgid "E-Mail an Kunden versenden"
 msgstr "E-mail küldése a tagoknak"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:80
+#: app/scripts/kunden/detail/kundendetail.controller.js:81
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "E-mail az összes kapcsolatnak"
 
@@ -1163,7 +1151,7 @@ msgstr "EUR"
 msgid "Editieren"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:290
+#: app/scripts/projekt/settings/projektsettings.html:307
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr "Új logó kiválasztása vagy hozzáadása"
 
@@ -1446,8 +1434,8 @@ msgstr "Pontosabb leírás"
 msgid "Geplante Lieferdaten"
 msgstr "Tervezett szállítási időpontok"
 
-#: app/scripts/projekt/settings/projektsettings.html:261
-#: app/scripts/projekt/settings/projektsettings.html:264
+#: app/scripts/projekt/settings/projektsettings.html:278
+#: app/scripts/projekt/settings/projektsettings.html:281
 msgid "Gläubiger-Identifikationsnummer"
 msgstr "Hitelező azonosítója"
 
@@ -1556,7 +1544,7 @@ msgstr "Azonosító"
 msgid "Im Format"
 msgstr ""
 
-#: app/scripts/projekt/settings/projektsettings.html:326
+#: app/scripts/projekt/settings/projektsettings.html:343
 msgid "Importdatei"
 msgstr "Fájl importálása"
 
@@ -1708,6 +1696,8 @@ msgid "Kontodaten"
 msgstr "Fiók adatok"
 
 #: app/scripts/kunden/detail/kundendetail.html:288
+#: app/scripts/projekt/settings/projektsettings.html:244
+#: app/scripts/projekt/settings/projektsettings.html:248
 msgid "Kontoinhaber"
 msgstr "Számlatulajdonos"
 
@@ -1741,7 +1731,7 @@ msgstr "Rövidítés"
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
 #: app/scripts/dashboard/dashboard.html:28
 #: app/scripts/dashboard/dashboard.html:88
-#: app/scripts/kunden/detail/kundendetail.controller.js:73
+#: app/scripts/kunden/detail/kundendetail.controller.js:74
 #: app/scripts/kunden/detail/kundendetail.html:10
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:30
 #: app/scripts/rechnungen/detail/rechnungendetail.html:44
@@ -1937,11 +1927,11 @@ msgstr ""
 msgid "Login aktiv"
 msgstr "Aktív bejelentkezés"
 
-#: app/scripts/projekt/settings/projektsettings.html:280
+#: app/scripts/projekt/settings/projektsettings.html:297
 msgid "Logo"
 msgstr "Logó"
 
-#: app/scripts/projekt/settings/projektsettings.html:289
+#: app/scripts/projekt/settings/projektsettings.html:306
 msgid "Logo auswählen oder einfügen"
 msgstr "Új logó kiválasztása vagy hozzáadása"
 
@@ -2106,11 +2096,28 @@ msgstr "Március"
 msgid "N"
 msgstr ""
 
+#: app/scripts/abotypen/detail/abotypendetail.html:28
+#: app/scripts/abotypen/detail/abotypendetail.html:29
+#: app/scripts/abotypen/overview/abotypen.html:32
+#: app/scripts/abotypen/overview/zusatzabotypen.html:33
+#: app/scripts/depots/detail/depotsdetail.html:148
+#: app/scripts/depots/overview/depotsoverview.html:32
+#: app/scripts/personen/overview/personenoverview.html:39
+#: app/scripts/reports/detail/reportsdetail.html:36
+#: app/scripts/reports/overview/reportsoverview.html:23
+#: app/scripts/reportvorlagen/reportvorlagen.html:23
+#: app/scripts/touren/detail/tourendetail.html:36
+#: app/scripts/touren/overview/tourenoverview.html:31
+msgid "Name"
+msgstr ""
+
 #: app/scripts/produzenten/detail/produzentendetail.html:47
 msgid "Name / Betrieb"
 msgstr "Név / cég"
 
 #: app/scripts/kunden/detail/kundendetail.html:321
+#: app/scripts/projekt/settings/projektsettings.html:253
+#: app/scripts/projekt/settings/projektsettings.html:256
 msgid "Name der Bank"
 msgstr "Bank neve"
 
@@ -2727,8 +2734,8 @@ msgstr "Számlák küldése e-mailben"
 msgid "Referenznummer"
 msgstr "Hivatkozási szám"
 
-#: app/scripts/projekt/settings/projektsettings.html:252
-#: app/scripts/projekt/settings/projektsettings.html:255
+#: app/scripts/projekt/settings/projektsettings.html:269
+#: app/scripts/projekt/settings/projektsettings.html:272
 msgid "Referenznummer Präfix"
 msgstr "Hivatkozási szám előtag"
 
@@ -2815,7 +2822,7 @@ msgstr "Szeretné törölni a szállítás tervet?"
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr "Szeretné eltávolítani a szállítás tervet?"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:244
+#: app/scripts/kunden/detail/kundendetail.controller.js:246
 msgid "Soll diese Person wirklich gelöscht werden?"
 msgstr ""
 
@@ -2828,6 +2835,7 @@ msgid "Sonderprodukt einfügen"
 msgstr "Speciális termék beszúrása"
 
 #: app/scripts/kunden/detail/kundendetail.html:289
+#: app/scripts/projekt/settings/projektsettings.html:245
 msgid "Sonderzeichen werden beim Sepa-Export entfernt"
 msgstr ""
 
@@ -2938,11 +2946,11 @@ msgstr "Utca / Házszám"
 msgid "Stunden"
 msgstr "Óra"
 
-#: app/scripts/projekt/settings/projektsettings.html:296
+#: app/scripts/projekt/settings/projektsettings.html:313
 msgid "Style<br>(Admin-Seite)"
 msgstr "Stílus<br>(Admin oldal)"
 
-#: app/scripts/projekt/settings/projektsettings.html:311
+#: app/scripts/projekt/settings/projektsettings.html:328
 msgid "Style<br>(Kundenportal)"
 msgstr "Stílus<br>(tagok oldala)"
 
@@ -3016,8 +3024,8 @@ msgstr "Összesen, további előfizetés nélkül!"
 msgid "Tage"
 msgstr "Napok"
 
-#: app/scripts/projekt/settings/projektsettings.html:244
-#: app/scripts/projekt/settings/projektsettings.html:247
+#: app/scripts/projekt/settings/projektsettings.html:261
+#: app/scripts/projekt/settings/projektsettings.html:264
 msgid "Teilnehmernummer"
 msgstr "Telefonszám"
 
@@ -3609,6 +3617,7 @@ msgid "ZusatzAbotypen"
 msgstr "További előfizetési típus"
 
 #: app/scripts/abos/detail/abosdetail.html:165
+#: app/scripts/lieferplanungen/detail/korbplanung.html:109
 msgid "Zusatzabo"
 msgstr "Kiegészítő"
 
@@ -3690,7 +3699,7 @@ msgstr "fizetve"
 msgid "bis"
 msgstr "-ig"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:73
+#: app/scripts/kunden/detail/kundendetail.controller.js:74
 #: app/scripts/kunden/detail/kundendetail.html:522
 msgid "erstellen"
 msgstr "létrehozása"
@@ -3744,7 +3753,7 @@ msgid "rechnung"
 msgstr "számla"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:68
-#: app/scripts/kunden/detail/kundendetail.controller.js:71
+#: app/scripts/kunden/detail/kundendetail.controller.js:72
 msgid "speichern"
 msgstr "mentés"
 
