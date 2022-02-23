@@ -20,12 +20,12 @@
                 </div>
                 <div ng-show="entries">
                     <script type="text/ng-template" id="headerCheckbox.html">
-<input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
+                      <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" ng-change="updateChecked()/>
                     </script>
                     <table ng-table="zusatzAbosTableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
                         <tr ng-repeat="zusatzAbotyp in $data | filter: search.query.$">
                             <td header="'headerCheckbox.html'">
-                                <input type="checkbox" ng-model="checkboxes.items[zusatzAbotyp.id]" />
+                                <input type="checkbox" ng-model="checkboxes.items[zusatzAbotyp.id]" ng-change="updateChecked()" />
                             </td>
                             <td>
                                 <span class="color-box" ng-style="style(zusatzAbotyp)"></span>
