@@ -808,6 +808,19 @@ a.env-warning.testprod {
   }
 }
 
+.welcomeMessage1TextArea{
+  height: 250px;
+  .ql-editor {
+    height: 150px;
+  }
+}
+
+.welcomeMessage2TextArea{
+  height: 250px;
+  .ql-editor {
+    height: 150px;
+  }
+}
 /*Languages specific to a CSA*/
 
 .de_DO_menu{

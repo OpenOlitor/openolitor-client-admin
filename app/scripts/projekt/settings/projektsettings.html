@@ -196,7 +196,9 @@
                   <label for="bezeichnung" translate>Mitteilung vor dem Login</label>
                 </div>
                 <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage1TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage1" placeholder=" {{'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
+                  <textarea class="form-control" name="welcomeMessage1TextArea" ng-if="!editMode" ng-disabled="!editMode" ng-model="projekt.welcomeMessage1" placeholder=" {{'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
+                  <ng-quill-editor class="form-control welcomeMessage1TextArea" name="welcomeMessage1TextArea" ng-if="editMode" ng-model="projekt.welcomeMessage1" bounds="self" placeholder="'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate" preserve-whitespace="false" track-changes="all" maxlength = 2000>
+                  </ng-quill-editor>
                 </div>
               </div>
               <div class="row form-group">
@@ -204,7 +206,8 @@
                   <label for="welcomeMessage2Label" translate>Mitteilung nach dem Login</label>
                 </div>
                 <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage2TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage2" placeholder="{{'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
+                  <textarea class="form-control" name="welcomeMessage2TextArea" ng-if="!editMode" ng-disabled="!editMode" ng-model="projekt.welcomeMessage2" placeholder="{{'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
+                  <ng-quill-editor class="form-control welcomeMessage2TextArea" name="welcomeMessage2TextArea" ng-if="editMode" ng-model="projekt.welcomeMessage2" bounds="self" placeholder="'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate" preserve-whitespace="false" track-changes="all" maxlength = 2000>
                 </div>
               </div>
               <div class="row form-group">
