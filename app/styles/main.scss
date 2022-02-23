@@ -822,6 +822,14 @@ a.env-warning.testprod {
     height: 150px;
   }
 }
+
+.messageForMembersQuillEditor{
+  height: 250px;
+  .ql-editor {
+    height: 150px;
+  }
+}
+
 /*Languages specific to a CSA*/
 
 .de_DO_menu{

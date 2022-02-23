@@ -211,6 +211,15 @@
                 </div>
               </div>
               <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="messageForMembers" translate>Benachrichtigung der Kunden</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="welcomeMessageBorder" ng-if="!editMode" ng-bind-html="projekt.messageForMembers"></div>
+                  <ng-quill-editor class="form-control messageForMembersQuillEditor" name="messageForMembersTextArea" ng-if="editMode" ng-model="projekt.messageForMembers" bounds="self" placeholder="'Nachricht, die den Benutzern mit einem Benachrichtigungssymbol in der Kopfzeile des Kundenportals angezeigt wird'|translate" preserve-whitespace="false" track-changes="all" maxlength = 65000>
+                </div>
+              </div>
+              <div class="row form-group">
                 <div class="col-md-8">
                   <label for="maintenanceModeLabel" translate>Unterhaltsmodus (Login auf Kundenportal blockiert)</label>
                 </div>
