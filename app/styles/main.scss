@@ -807,15 +807,23 @@ a.env-warning.testprod {
     font-weight: bold;
   }
 }
+.welcomeMessageBorder{
+  padding: 0.01em 16px;
+  padding: 0.01em 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 35px;
+  background-color: #eee;
+}
 
-.welcomeMessage1TextArea{
+.welcomeMessage1QuillEditor{
   height: 250px;
   .ql-editor {
     height: 150px;
   }
 }
 
-.welcomeMessage2TextArea{
+.welcomeMessage2QuillEditor{
   height: 250px;
   .ql-editor {
     height: 150px;
