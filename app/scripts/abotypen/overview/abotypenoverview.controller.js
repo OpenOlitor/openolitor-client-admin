@@ -53,10 +53,10 @@ angular.module('openolitor-admin')
           return value;
         });
 
-        $scope.emailAddresses = _($scope.filteredEntries)
+        $scope.abotypIdsMailing = _($scope.filteredEntries)
           .keyBy('id')
           .at(Object.keys(activeCheckboxes))
-          .map('email')
+          .map('id')
           .value();
       };
 
