@@ -807,7 +807,21 @@ a.env-warning.testprod {
     font-weight: bold;
   }
 }
+.welcomeMessageBorder{
+  padding: 0.01em 16px;
+  padding: 0.01em 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 35px;
+  background-color: #eee;
+}
 
+.welcomeMessageQuillEditor{
+  height: 250px;
+  .ql-editor {
+    height: 150px;
+  }
+}
 /*Languages specific to a CSA*/
 
 .de_DO_menu{
