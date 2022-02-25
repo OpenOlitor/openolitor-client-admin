@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: French, Switzerland\n"
 "Language: fr_CH\n"
-"PO-Revision-Date: 2022-02-24 08:21\n"
+"PO-Revision-Date: 2022-02-25 12:53\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -655,8 +655,8 @@ msgstr "Traiter automatiquement"
 
 #: app/scripts/kunden/detail/kundendetail.html:313
 #: app/scripts/kunden/detail/kundendetail.html:316
-#: app/scripts/projekt/settings/projektsettings.html:236
-#: app/scripts/projekt/settings/projektsettings.html:239
+#: app/scripts/projekt/settings/projektsettings.html:248
+#: app/scripts/projekt/settings/projektsettings.html:251
 msgid "BIC"
 msgstr "BIC"
 
@@ -721,6 +721,10 @@ msgstr "Remarques à propos de ce producteur"
 #: app/scripts/kunden/detail/kundendetail.html:132
 msgid "Bemerkungen zu dieser Person"
 msgstr "Remarques à propos de cette personne"
+
+#: app/scripts/projekt/settings/projektsettings.html:215
+msgid "Benachrichtigung der Kunden"
+msgstr ""
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:139
 msgid "Benötigte Anzahl Personen"
@@ -872,8 +876,8 @@ msgstr "CHE-xxx.yyy.zzz TVA"
 msgid "CHF"
 msgstr "CHF"
 
-#: app/scripts/projekt/settings/projektsettings.html:322
-#: app/scripts/projekt/settings/projektsettings.html:337
+#: app/scripts/projekt/settings/projektsettings.html:334
+#: app/scripts/projekt/settings/projektsettings.html:349
 msgid "CSS-Datei auswählen oder einfügen"
 msgstr "Sélectionnez ou insérez un fichier CSS"
 
@@ -906,7 +910,7 @@ msgstr "Sélectionnez le fichier (téléverser ou glisser-déposer)"
 msgid "Datei importieren"
 msgstr "Importer le fichier"
 
-#: app/scripts/projekt/settings/projektsettings.html:292
+#: app/scripts/projekt/settings/projektsettings.html:304
 msgid "Dateien"
 msgstr "Fichiers"
 
@@ -1082,9 +1086,9 @@ msgstr "Téléchargement de documents"
 msgid "Donnerstag"
 msgstr "Jeudi"
 
-#: app/scripts/projekt/settings/projektsettings.html:316
-#: app/scripts/projekt/settings/projektsettings.html:331
-#: app/scripts/projekt/settings/projektsettings.html:346
+#: app/scripts/projekt/settings/projektsettings.html:328
+#: app/scripts/projekt/settings/projektsettings.html:343
+#: app/scripts/projekt/settings/projektsettings.html:358
 msgid "Download"
 msgstr "Téléchargement"
 
@@ -1151,7 +1155,7 @@ msgstr "EUR"
 msgid "Editieren"
 msgstr "Éditer"
 
-#: app/scripts/projekt/settings/projektsettings.html:307
+#: app/scripts/projekt/settings/projektsettings.html:319
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr "Sélectionnez un nouveau logo (importer ou glisser-déposer)"
 
@@ -1434,8 +1438,8 @@ msgstr "Description detaillée"
 msgid "Geplante Lieferdaten"
 msgstr "Dates de livraison prévues"
 
-#: app/scripts/projekt/settings/projektsettings.html:278
-#: app/scripts/projekt/settings/projektsettings.html:281
+#: app/scripts/projekt/settings/projektsettings.html:290
+#: app/scripts/projekt/settings/projektsettings.html:293
 msgid "Gläubiger-Identifikationsnummer"
 msgstr "Numéro d'identification du créancier"
 
@@ -1531,7 +1535,7 @@ msgstr "M."
 #: app/scripts/kunden/detail/kundendetail.html:305
 #: app/scripts/kunden/detail/kundendetail.html:308
 #: app/scripts/produzenten/detail/produzentendetail.html:63
-#: app/scripts/projekt/settings/projektsettings.html:231
+#: app/scripts/projekt/settings/projektsettings.html:243
 msgid "IBAN"
 msgstr "IBAN"
 
@@ -1544,7 +1548,7 @@ msgstr "Id"
 msgid "Im Format"
 msgstr "Au format"
 
-#: app/scripts/projekt/settings/projektsettings.html:343
+#: app/scripts/projekt/settings/projektsettings.html:355
 msgid "Importdatei"
 msgstr "Fichier d'importation"
 
@@ -1585,7 +1589,7 @@ msgstr "Oui"
 #: app/scripts/projekt/settings/projektsettings.html:134
 #: app/scripts/projekt/settings/projektsettings.html:150
 #: app/scripts/projekt/settings/projektsettings.html:183
-#: app/scripts/projekt/settings/projektsettings.html:215
+#: app/scripts/projekt/settings/projektsettings.html:227
 msgid "Ja"
 msgstr "Oui"
 
@@ -1691,13 +1695,13 @@ msgid "Kontaktdaten"
 msgstr "Coordonnées"
 
 #: app/scripts/depots/detail/depotsdetail.html:99
-#: app/scripts/projekt/settings/projektsettings.html:222
+#: app/scripts/projekt/settings/projektsettings.html:234
 msgid "Kontodaten"
 msgstr "Coordonnées bancaires"
 
 #: app/scripts/kunden/detail/kundendetail.html:288
-#: app/scripts/projekt/settings/projektsettings.html:244
-#: app/scripts/projekt/settings/projektsettings.html:248
+#: app/scripts/projekt/settings/projektsettings.html:256
+#: app/scripts/projekt/settings/projektsettings.html:260
 msgid "Kontoinhaber"
 msgstr "Titulaire du compte"
 
@@ -1928,11 +1932,11 @@ msgstr "Litre"
 msgid "Login aktiv"
 msgstr "Connexion active"
 
-#: app/scripts/projekt/settings/projektsettings.html:297
+#: app/scripts/projekt/settings/projektsettings.html:309
 msgid "Logo"
 msgstr "Logo"
 
-#: app/scripts/projekt/settings/projektsettings.html:306
+#: app/scripts/projekt/settings/projektsettings.html:318
 msgid "Logo auswählen oder einfügen"
 msgstr "Sélectionnez ou insérez le Logo"
 
@@ -2046,7 +2050,7 @@ msgstr "Quantité (total)"
 msgid "Mitarbeit"
 msgstr "Intervention de travail"
 
-#: app/scripts/projekt/settings/projektsettings.html:204
+#: app/scripts/projekt/settings/projektsettings.html:206
 msgid "Mitteilung nach dem Login"
 msgstr "Message après connexion"
 
@@ -2054,11 +2058,11 @@ msgstr "Message après connexion"
 msgid "Mitteilung vor dem Login"
 msgstr "Message avant connexion"
 
-#: app/scripts/projekt/settings/projektsettings.html:199
+#: app/scripts/projekt/settings/projektsettings.html:200
 msgid "Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird"
 msgstr "Message qui s'affiche pour tous les utilisateurs avant de se connecter"
 
-#: app/scripts/projekt/settings/projektsettings.html:207
+#: app/scripts/projekt/settings/projektsettings.html:210
 msgid "Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird"
 msgstr "Message qui s'affiche pour l'utilisateur une fois qu'il s'est connecté avec succès"
 
@@ -2097,6 +2101,10 @@ msgstr "Mars"
 msgid "N"
 msgstr "Non"
 
+#: app/scripts/projekt/settings/projektsettings.html:219
+msgid "Nachricht, die den Benutzern mit einem Benachrichtigungssymbol in der Kopfzeile des Kundenportals angezeigt wird"
+msgstr ""
+
 #: app/scripts/abotypen/detail/abotypendetail.html:28
 #: app/scripts/abotypen/detail/abotypendetail.html:29
 #: app/scripts/abotypen/overview/abotypen.html:32
@@ -2117,8 +2125,8 @@ msgid "Name / Betrieb"
 msgstr "Nom, exploitation"
 
 #: app/scripts/kunden/detail/kundendetail.html:321
-#: app/scripts/projekt/settings/projektsettings.html:253
-#: app/scripts/projekt/settings/projektsettings.html:256
+#: app/scripts/projekt/settings/projektsettings.html:265
+#: app/scripts/projekt/settings/projektsettings.html:268
 msgid "Name der Bank"
 msgstr "Nom de la Banque"
 
@@ -2145,7 +2153,7 @@ msgstr "Nom du propriétaire du compte"
 #: app/scripts/projekt/settings/projektsettings.html:134
 #: app/scripts/projekt/settings/projektsettings.html:150
 #: app/scripts/projekt/settings/projektsettings.html:183
-#: app/scripts/projekt/settings/projektsettings.html:215
+#: app/scripts/projekt/settings/projektsettings.html:227
 msgid "Nein"
 msgstr "Non"
 
@@ -2567,7 +2575,7 @@ msgstr "Sujet"
 msgid "Punkte"
 msgstr "Points"
 
-#: app/scripts/projekt/settings/projektsettings.html:228
+#: app/scripts/projekt/settings/projektsettings.html:240
 msgid "QR-IBAN"
 msgstr "IBAN QR"
 
@@ -2735,8 +2743,8 @@ msgstr "Envoyer des factures par courriel"
 msgid "Referenznummer"
 msgstr "Numéro de référence"
 
-#: app/scripts/projekt/settings/projektsettings.html:269
-#: app/scripts/projekt/settings/projektsettings.html:272
+#: app/scripts/projekt/settings/projektsettings.html:281
+#: app/scripts/projekt/settings/projektsettings.html:284
 msgid "Referenznummer Präfix"
 msgstr "Préfix du numéro de référence"
 
@@ -2836,7 +2844,7 @@ msgid "Sonderprodukt einfügen"
 msgstr "Ajouter un produit libre"
 
 #: app/scripts/kunden/detail/kundendetail.html:289
-#: app/scripts/projekt/settings/projektsettings.html:245
+#: app/scripts/projekt/settings/projektsettings.html:257
 msgid "Sonderzeichen werden beim Sepa-Export entfernt"
 msgstr "Les caractères spéciaux sont supprimés lors de l'export SEPA"
 
@@ -2947,11 +2955,11 @@ msgstr "Rue, n°"
 msgid "Stunden"
 msgstr "Heures"
 
-#: app/scripts/projekt/settings/projektsettings.html:313
+#: app/scripts/projekt/settings/projektsettings.html:325
 msgid "Style<br>(Admin-Seite)"
 msgstr "Style<br> (frontend de l'administrateur)"
 
-#: app/scripts/projekt/settings/projektsettings.html:328
+#: app/scripts/projekt/settings/projektsettings.html:340
 msgid "Style<br>(Kundenportal)"
 msgstr "Style <br>(portail des membres)"
 
@@ -3025,8 +3033,8 @@ msgstr "Total sans abonnements complémentaires!"
 msgid "Tage"
 msgstr "Jours"
 
-#: app/scripts/projekt/settings/projektsettings.html:261
-#: app/scripts/projekt/settings/projektsettings.html:264
+#: app/scripts/projekt/settings/projektsettings.html:273
+#: app/scripts/projekt/settings/projektsettings.html:276
 msgid "Teilnehmernummer"
 msgstr "Numéro de téléphone"
 
@@ -3199,7 +3207,7 @@ msgstr "irrégulièrement"
 msgid "Unterhalt"
 msgstr "Entretien"
 
-#: app/scripts/projekt/settings/projektsettings.html:212
+#: app/scripts/projekt/settings/projektsettings.html:224
 msgid "Unterhaltsmodus (Login auf Kundenportal blockiert)"
 msgstr "Mode maintenance (se connecter sur le portail des membres)"
 
