@@ -83,10 +83,10 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    {{zahlungsEingang.rechnungId || '-'}}
+                    <a ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId || '-'}}</a>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag}}
+                    {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}
@@ -134,10 +134,10 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    {{zahlungsEingang.rechnungId || '-'}}
+                    <a ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId || '-'}}</a>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag}}
+                    {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}
