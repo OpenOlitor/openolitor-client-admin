@@ -71,6 +71,7 @@
                 <tr>
                   <th translate>Id</th>
                   <th translate>Rechnungsnummer</th>
+                  <th translate>Kunde</th>
                   <th translate>Betrag</th>
                   <th translate>Referenznummer</th>
                   <th translate>Gutschriftsdatum</th>
@@ -84,6 +85,9 @@
                   </td>
                   <td>
                     <a ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId || '-'}}</a>
+                  </td>
+                  <td>
+                    <a ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
                   </td>
                   <td>
                     {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
@@ -121,6 +125,7 @@
                 <tr>
                   <th translate>Id</th>
                   <th translate>Rechnungsnummer</th>
+                  <th translate>Kunde</th>
                   <th translate>Betrag</th>
                   <th translate>Referenznummer</th>
                   <th translate>Gutschriftsdatum</th>
@@ -133,6 +138,9 @@
                   </td>
                   <td>
                     <a ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId || '-'}}</a>
+                  </td>
+                  <td>
+                    <a ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
                   </td>
                   <td>
                     {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
