@@ -84,10 +84,12 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    <a ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId || '-'}}</a>
+                    <a ng-show="zahlungsEingang.rechnungId" ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId}}</a>
+                    <span ng-show="!zahlungsEingang.rechnungId">-</span>
                   </td>
                   <td>
-                    <a ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <a ng-show="zahlungsEingang.kundeId" ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <span ng-show="!zahlungsEingang.kundeId">-</span>
                   </td>
                   <td>
                     {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
@@ -137,10 +139,12 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    <a ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId || '-'}}</a>
+                    <a ng-show="zahlungsEingang.rechnungId" ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId}}</a>
+                    <span ng-show="!zahlungsEingang.rechnungId">-</span>
                   </td>
                   <td>
-                    <a ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <a ng-show="zahlungsEingang.kundeId" ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <span ng-show="!zahlungsEingang.kundeId">-</span>
                   </td>
                   <td>
                     {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
