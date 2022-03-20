@@ -247,6 +247,13 @@ angular.module('openolitor-admin')
         }
       }
 
+      $scope.selectedGeschaeftsjahr = function(gj) {
+        if(angular.isDefined(gj)) {
+          $scope.geschaeftsjahr = gj.jahr;
+          search();
+        }
+      }
+
       $scope.actions = [{
         labelFunction: function() {
           return gettext('Rechnungspositionen erstellen');
@@ -303,7 +310,8 @@ angular.module('openolitor-admin')
         $scope.loading = true;
         AbosOverviewModel.query({
           f: $scope.search.filterQuery,
-          x: $scope.search.complexFlags
+          x: $scope.search.complexFlags,
+          g: $scope.geschaeftsjahr
         }, function(entries) {
           $scope.entries = [];
           angular.forEach(entries, function(entry){

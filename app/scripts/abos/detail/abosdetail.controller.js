@@ -9,13 +9,13 @@ angular.module('openolitor-admin')
     'AbotypenDetailModel', 'KundenDetailModel', 'VertriebeListModel',
     'VERTRIEBSARTEN', 'AboKoerbeModel',
     'ABOTYPEN', 'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
-    'appConfig', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN',
+    'appConfig', 'alertService', 'NgTableParams', 'LAUFZEITEINHEITEN', 'ProjektService',
 
     function($scope, $rootScope, $filter, $routeParams, $location, $route, $uibModal, $log, $http, gettext,
       AbosDetailModel, ZusatzAbotypenModel, ZusatzAboModel, AbotypenOverviewModel, AbotypenDetailModel,
       KundenDetailModel, VertriebeListModel, VERTRIEBSARTEN, AboKoerbeModel,
       ABOTYPEN, moment, EnumUtil, DataUtil, msgBus, $q, lodash, appConfig,
-      alertService, NgTableParams, LAUFZEITEINHEITEN) {
+      alertService, NgTableParams, LAUFZEITEINHEITEN, ProjektService) {
 
       $rootScope.viewId = 'D-Abo';
 
@@ -24,19 +24,25 @@ angular.module('openolitor-admin')
         return typ.id;
       });
 
+      ProjektService.resolveProjekt().then(function(projekt) {
+          if (projekt) {
+              $scope.projekt = projekt;
+          }
+      });
+
       $scope.aboPickerStartDate = {
           datepickerOptions: {
             minDate: undefined,
-            maxDate: undefined 
+            maxDate: undefined
         }
-      }; 
+      };
 
       $scope.aboPickerEndDate = {
           datepickerOptions: {
             minDate: undefined,
-            maxDate: undefined 
+            maxDate: undefined
         }
-      }; 
+      };
 
       $scope.zusatzaboPickerStartDateList = [];
       $scope.zusatzaboPickerEndDateList = [];
@@ -67,7 +73,7 @@ angular.module('openolitor-admin')
       $scope.lists = {
         vertriebe: {},
         vertriebsarten: {},
-        abotypen : [] 
+        abotypen : []
       };
 
       $scope.openCalendar = function(e,date) {
@@ -123,7 +129,7 @@ angular.module('openolitor-admin')
                }
                zusatzAbo.allBasketsInOpenDeliveryPlanning = areAllBasketsInOpenDeliveryPlanningsForZusatzAbo($scope.lieferungen, zusatzAbo.start);
            });
-           calculateDatePickerForAbo(); 
+           calculateDatePickerForAbo();
          });
        };
 
@@ -149,8 +155,8 @@ angular.module('openolitor-admin')
 
        var calculateDatePickerForAbo = function() {
           if ($scope.zusatzAbos.length > 0 ){
-            $scope.aboPickerStartDate.datepickerOptions.maxDate = ($scope.abo.ende < getSmallestMinDateZusatzabos()) ? $scope.abo.ende : getSmallestMinDateZusatzabos() ; 
-            $scope.aboPickerEndDate.datepickerOptions.minDate = ($scope.abo.start > getSmallestMaxDateZusatzabos()) ? $scope.abo.start : getSmallestMaxDateZusatzabos(); 
+            $scope.aboPickerStartDate.datepickerOptions.maxDate = ($scope.abo.ende < getSmallestMinDateZusatzabos()) ? $scope.abo.ende : getSmallestMinDateZusatzabos() ;
+            $scope.aboPickerEndDate.datepickerOptions.minDate = ($scope.abo.start > getSmallestMaxDateZusatzabos()) ? $scope.abo.start : getSmallestMaxDateZusatzabos();
           } else {
             $scope.aboPickerStartDate.datepickerOptions.maxDate = $scope.abo.ende;
             $scope.aboPickerEndDate.datepickerOptions.minDate = $scope.abo.start;
@@ -181,7 +187,7 @@ angular.module('openolitor-admin')
            };
            var zend = {
                zusatzaboId:zusatzAbo.id,
-               datepickerOptions : { 
+               datepickerOptions : {
                    minDate:zusatzAbo.start,
                    maxDate:$scope.abo.ende
                }
@@ -210,8 +216,8 @@ angular.module('openolitor-admin')
 
       $scope.updateZusatzaboDatetimePicker = function (zusatzabo){
           var index = $scope.findIndexByZusatzaboId(zusatzabo.id);
-          $scope.zusatzaboPickerStartDateList[index].datepickerOptions.maxDate = zusatzabo.ende; 
-          $scope.zusatzaboPickerEndDateList[index].datepickerOptions.minDate = zusatzabo.start; 
+          $scope.zusatzaboPickerStartDateList[index].datepickerOptions.maxDate = zusatzabo.ende;
+          $scope.zusatzaboPickerEndDateList[index].datepickerOptions.minDate = zusatzabo.start;
           calculateDatePickerForAbo();
       };
 
@@ -383,7 +389,7 @@ angular.module('openolitor-admin')
           resolve: {
             abo: function() {
               return $scope.abo;
-            },            
+            },
             vertriebsarten: function() {
               return $scope.lists.vertriebsarten;
             },

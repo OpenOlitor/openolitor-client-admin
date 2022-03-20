@@ -95,9 +95,16 @@
         <div class="col-md-4">
           <label translate>Preis</label>
         </div>
-        <div class="col-md-8">
-            <input class="col-md-6" type="number" step="0.01" ng-model="abo.price">
-            <div ng-if="abo.price != abo.abotyp.preis" class="col-md-1"><button type="button" class="btn btn-xs" ng-click="defaultAboPrice()" title="{{'Den Standardpreis wiederherstellen'|translate}}"><span class="glyphicon glyphicon-erase"></span> </button></div>
+        <div class="col-md-6">
+          <p class="input-group">
+            <span class="input-group-addon">
+              {{projekt.waehrung}}
+            </span>
+            <input class="form-control" type="number" step="0.01" ng-model="abo.price">
+            <span ng-if="abo.price != abo.abotyp.preis" class="input-group-addon">
+              <span class="glyphicon glyphicon-erase" ng-click="defaultAboPrice()" title="{{'Den Standardpreis wiederherstellen'|translate}}"></span>
+            </span>
+          </p>
         </div>
       </div>
       <div class="row form-group">

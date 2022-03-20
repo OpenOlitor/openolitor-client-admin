@@ -42,6 +42,13 @@ angular.module('openolitor-admin')
   .factory('ProjektModel', ['$resource', 'appConfig', function($resource, appConfig) {
     return $resource(appConfig.get().API_URL + 'projekt/:id', {
     id: '@id'
-    }, {'query': {method:'GET', isArray: false}
-  });
+    }, {
+    'query': {method:'GET', isArray: false},
+    'geschaeftsjahre': {
+        url: appConfig.get().API_URL + 'projekt/:id/geschaeftsjahre',
+        method:'GET',
+        isArray: true
+      }
+    }
+  );
   }]);
