@@ -66,6 +66,14 @@ angular.module('openolitor-admin')
         }, function() {});
       };
 
+      $scope.zahlungsEingangIgnore = function(zahlungsEingang) {
+        ZahlungsEingaengeModel.ignore({
+          zahlungsImportId: $scope.zahlungsImport.id,
+          id: zahlungsEingang.id,
+          bemerkung: zahlungsEingang.bemerkung
+        }, function() {});
+      };
+
       $scope.automatischErledigen = function() {
         var entities = $scope.zahlungsImport.zahlungsEingaenge.filter(function(z) {
           return z.status === 'Ok';
