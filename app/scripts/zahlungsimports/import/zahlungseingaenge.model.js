@@ -15,6 +15,13 @@ angular.module('openolitor-admin')
           aktion: 'erledigen'
         }
       },
+      ignore: {
+        method: 'POST',
+        params: {
+          extendedPath: 'aktionen',
+          aktion: 'ignore'
+        }
+      },
       automatischErledigen: {
         method: 'POST',
         params: {
