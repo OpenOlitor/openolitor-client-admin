@@ -769,6 +769,10 @@ tr.error {
   }
 }
 
+.panel-title .filter-geschaeftsjahre {
+  display: inline;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sliding-detail {
@@ -832,7 +836,7 @@ a.env-warning.testprod {
 /*Languages specific to a CSA*/
 
 .de_DO_menu{
-  display:none; 
+  display:none;
 }
 
 .qrcode-container {

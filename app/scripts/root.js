@@ -54,7 +54,7 @@ angular.module('openolitor-admin')
             }
           });
         if ($scope.loggedIn) {
-          $scope.secondFactorType = ooAuthService.getSecondFactorType();
+          //$scope.secondFactorType = ooAuthService.getSecondFactorType();
           ProjektService.resolveProjekt(false, !$scope.loadedProjectLoggedInOnce).then(function(projekt) {
             $scope.loadedProjectLoggedInOnce = true;
             $scope.projekt = projekt;
