@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 60\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2022-03-11 13:33\n"
+"PO-Revision-Date: 2022-03-21 13:35\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -699,7 +699,7 @@ msgstr "e.g. de-CH"
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:36
 #: app/scripts/dashboard/dashboard.html:25
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:24
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:128
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:130
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:78
 msgid "Bemerkung"
 msgstr "Comment"
@@ -796,7 +796,7 @@ msgstr "Deny orders"
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:40
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:45
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:49
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:124
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:126
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:74
 msgid "Betrag"
 msgstr "Amount"
@@ -1285,8 +1285,13 @@ msgid "Erfasst"
 msgstr "Captures"
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:79
-msgid "Erledigen"
-msgstr "To do"
+msgid "Erledigen/Ignorieren"
+msgstr ""
+
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:105
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:106
+msgid "Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren"
+msgstr ""
 
 #: app/scripts/app.js:302
 msgid "Erledigt"
@@ -1296,7 +1301,7 @@ msgstr "Done"
 msgid "Erledigte Eingänge"
 msgstr "Payment reception accepted"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:117
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:119
 msgid "Erledigte Zahlungseingänge"
 msgstr "Completed payments"
 
@@ -1484,7 +1489,7 @@ msgstr "Positive balance"
 msgid "Guthaben wurde erfolgreich angepasst"
 msgstr "Balanced modified successfully"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:126
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:128
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:76
 msgid "Gutschriftsdatum"
 msgstr "Credit invoice date"
@@ -1541,10 +1546,15 @@ msgstr "Mr."
 msgid "IBAN"
 msgstr "IBAN"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:122
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:124
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:72
 msgid "Id"
 msgstr "Id"
+
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:107
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:108
+msgid "Ignorieren: Beendigung des Zahlungseingangs und die Rechnung bleibt unbezahlt"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:455
 msgid "Im Format"
@@ -2685,7 +2695,7 @@ msgstr "Create invoice documents"
 msgid "Rechnungsdokumente herunterladen"
 msgstr "Download invoice documents"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:123
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:125
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:73
 msgid "Rechnungsnummer"
 msgstr "Invoice number"
@@ -2748,7 +2758,7 @@ msgid "Rechungen per E-Mail verschicken"
 msgstr "E-mail Invoices"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:200
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:125
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:127
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:75
 msgid "Referenznummer"
 msgstr "Reference No."
@@ -2932,7 +2942,7 @@ msgstr "Start of the accounting year"
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:52
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:52
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:30
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:127
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:129
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:77
 msgid "Status"
 msgstr "Status"
