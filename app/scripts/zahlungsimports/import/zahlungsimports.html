@@ -71,6 +71,7 @@
                 <tr>
                   <th translate>Id</th>
                   <th translate>Rechnungsnummer</th>
+                  <th translate>Kunde</th>
                   <th translate>Betrag</th>
                   <th translate>Referenznummer</th>
                   <th translate>Gutschriftsdatum</th>
@@ -83,10 +84,15 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    {{zahlungsEingang.rechnungId || '-'}}
+                    <a ng-show="zahlungsEingang.rechnungId" ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId}}</a>
+                    <span ng-show="!zahlungsEingang.rechnungId">-</span>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag}}
+                    <a ng-show="zahlungsEingang.kundeId" ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <span ng-show="!zahlungsEingang.kundeId">-</span>
+                  </td>
+                  <td>
+                    {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}
@@ -123,6 +129,7 @@
                 <tr>
                   <th translate>Id</th>
                   <th translate>Rechnungsnummer</th>
+                  <th translate>Kunde</th>
                   <th translate>Betrag</th>
                   <th translate>Referenznummer</th>
                   <th translate>Gutschriftsdatum</th>
@@ -134,10 +141,15 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    {{zahlungsEingang.rechnungId || '-'}}
+                    <a ng-show="zahlungsEingang.rechnungId" ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId}}</a>
+                    <span ng-show="!zahlungsEingang.rechnungId">-</span>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag}}
+                    <a ng-show="zahlungsEingang.kundeId" ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <span ng-show="!zahlungsEingang.kundeId">-</span>
+                  </td>
+                  <td>
+                    {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}
