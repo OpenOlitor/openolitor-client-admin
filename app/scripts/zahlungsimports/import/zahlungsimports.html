@@ -109,7 +109,7 @@
                   </td>
                   <td>
                     <a ng-show="zahlungsEingang.status === 'Ok'" role="button" class="btn btn-sm btn-success" ng-click="zahlungsEingangErledigen(zahlungsEingang)" uib-tooltip="{{'Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren' | translate}}"><i class="fa fa-check" ></i></a>
-                    <a ng-show="zahlungsEingang.status !== 'Ok'" role="button" class="btn btn-sm btn-default" ng-click="zahlungsEingangErledigen(zahlungsEingang)" uib-tooltip="{{'Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren' | translate}}"><i class="fa fa-check"}"></i></a>
+                    <a ng-show="zahlungsEingang.status !== 'Ok'" role="button" class="btn btn-sm btn-default" ng-click="zahlungsEingangErledigen(zahlungsEingang)" uib-tooltip="{{'Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren' | translate}}"><i class="fa fa-check"></i></a>
                     <a ng-show="zahlungsEingang.status === 'Ok'" role="button" class="btn btn-sm btn-success" ng-click="zahlungsEingangIgnore(zahlungsEingang)" uib-tooltip="{{'Ignorieren: Beendigung des Zahlungseingangs und die Rechnung bleibt unbezahlt' | translate}}"><i class="fa fa-close"></i></a>
                     <a ng-show="zahlungsEingang.status !== 'Ok'" role="button" class="btn btn-sm btn-default" ng-click="zahlungsEingangIgnore(zahlungsEingang)" uib-tooltip="{{'Ignorieren: Beendigung des Zahlungseingangs und die Rechnung bleibt unbezahlt' | translate}}"><i class="fa fa-close"></i></a>
                   </td>
