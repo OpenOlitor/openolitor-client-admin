@@ -45,6 +45,10 @@
                 <td data-title="'PLZ Ort'|translate" sortable="'plz'">
                   {{kunde.plz}} {{kunde.ort}}
                 </td>
+                <td data-title="'Aktiv'|translate" sortable="'aktiv'" filter="{aktiv: 'boolean'}">
+                  <i ng-if="kunde.aktiv" class="glyphicon glyphicon-ok"></i>
+                  <i ng-if="!kunde.aktiv" class="glyphicon glyphicon-remove"></i>
+                </td>
                 <td data-title="'# Abos'|translate" sortable="'anzahlAbosAktiv'" align=right>
                   {{kunde.anzahlAbosAktiv}}
                 </td>
