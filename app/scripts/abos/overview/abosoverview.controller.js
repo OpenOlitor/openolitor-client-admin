@@ -336,9 +336,20 @@ angular.module('openolitor-admin')
         });
       }
 
+      var existingGJ = $location.search().g;
+      if (existingGJ) {
+        $scope.geschaeftsjahr = existingGJ;
+      }
+
       var existingQuery = $location.search().q;
       if (existingQuery) {
         $scope.search.query = existingQuery;
+      }
+
+
+      var existingFilterQuery = $location.search().f;
+      if (existingFilterQuery) {
+        $scope.search.complexFlags = JSON.parse(existingFilterQuery);
       }
 
       $scope.closeCreateRechnungenDialog = function() {
