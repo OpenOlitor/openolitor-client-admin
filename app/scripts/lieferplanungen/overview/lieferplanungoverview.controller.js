@@ -53,6 +53,16 @@ angular.module('openolitor-admin')
         return ReportvorlagenService.getVorlagen('VorlageLieferplanung');
       };
 
+      $scope.selectedGeschaeftsjahr = function(gj) {
+        if(angular.isDefined(gj)) {
+          $scope.geschaeftsjahr = gj.jahr;
+        } else {
+          $scope.geschaeftsjahr = undefined;
+        }
+        search();
+        return false;
+      }
+
       $scope.toggleShowAll = function() {
         $scope.showAll = !$scope.showAll;
         $scope.tableParams.reload();
@@ -74,7 +84,8 @@ angular.module('openolitor-admin')
           exportODSModel: LieferplanungModel,
           exportODSFilter: function() {
             return {
-              f: $scope.search.filterQuery
+              f: $scope.search.filterQuery,
+              g: $scope.geschaeftsjahr
             };
           },
           getData: function(params) {
@@ -138,17 +149,23 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = LieferplanungModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          g: $scope.geschaeftsjahr
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
           $location.search('q', $scope.search.query);
+          $location.search('g', $scope.geschaeftsjahr);
         });
       }
 
       var existingQuery = $location.search().q;
       if (existingQuery) {
         $scope.search.query = existingQuery;
+      }
+      var existingGJ = $location.search().g;
+      if (existingGJ) {
+        $scope.geschaeftsjahr = existingGJ;
       }
 
       $scope.$watch('search.query', function() {

@@ -204,7 +204,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
           exportODSFilter: function() {
             return {
               f: $scope.search.filterQuery,
-              x: $scope.search.complexFlags
+              x: $scope.search.complexFlags,
+              g: $scope.geschaeftsjahr,
             };
           },
           getData: function(params) {
@@ -243,6 +244,7 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
 
             $location.search({
               q: $scope.search.query,
+              g: $scope.geschaeftsjahr,
               f: JSON.stringify($scope.search.complexFlags),
               tf: JSON.stringify($scope.tableParams.filter())
             });
@@ -259,6 +261,16 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       if (existingFilter) {
         $scope.tableParams.filter(JSON.parse(existingFilter));
       }
+    }
+
+    $scope.selectedGeschaeftsjahr = function(gj) {
+      if(angular.isDefined(gj)) {
+        $scope.geschaeftsjahr = gj.jahr;
+      } else {
+        $scope.geschaeftsjahr = undefined;
+      }
+      search();
+      return false;
     }
 
     $scope.actions = [
@@ -327,7 +339,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       ZusatzabosOverviewModel.query(
         {
           f: $scope.search.filterQuery,
-          x: $scope.search.complexFlags
+          x: $scope.search.complexFlags,
+          g: $scope.geschaeftsjahr
         },
         function(entries) {
           $scope.entries = entries;
