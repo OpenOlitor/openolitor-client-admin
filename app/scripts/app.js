@@ -398,7 +398,7 @@ angular
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
-  .service('appConfig', ['$http', function($http) {
+  .service('appConfig', function() {
     var loaded = false;
     var configData = {
     };
@@ -412,7 +412,7 @@ angular
         return loaded;
       }
     };
-  }])
+  })
   .run(function(appConfig) {
     appConfig.get();
   })

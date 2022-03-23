@@ -6,7 +6,7 @@
         <h3 class="panel-title"><span class="navbar-brand" translate>Abos</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
-            <oo-overviewfilter-geschaeftsjahre selected-function="selectedGeschaeftsjahr">
+            <oo-overviewfilter-geschaeftsjahre selected-funct="selectedGeschaeftsjahr" disabled="search.complexFlags.zusatzAbosAktiv">
             </oo-overviewfilter-geschaeftsjahre>
             <span translate>Zusatzabos</span>
             <input bs-switch ng-model="search.complexFlags.zusatzAbosAktiv" ng-change="switchLogin(person)" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Aktive'|translate}}" switch-off-text="{{'Alle'|translate}}" switch-on-color="success" switch-off-color="warning" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
