@@ -222,9 +222,9 @@ angular.module('openolitor-admin')
         label: gettext('Mahnungsdokumente herunterladen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
-            'ids': $scope.checkboxes.ids
-          });
+          $scope.$broadcast("resetDirectiveDownloadReport");
+          $scope.showDownloadMahnungReport = true;
+          return true;
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny ||
@@ -401,8 +401,16 @@ angular.module('openolitor-admin')
         $scope.showGenerateMahnungReport = false;
       };
 
+      $scope.closeMahnungDownload = function() {
+        $scope.showDownloadMahnungReport = false;
+      };
+
       $scope.closeMahnungBerichtFunct = function() {
         return $scope.closeMahnungBericht;
+      };
+
+      $scope.closeMahnungDownloadFunct = function() {
+        return $scope.closeMahnungDownload;
       };
 
       $scope.closeRechnungDownload = function() {
