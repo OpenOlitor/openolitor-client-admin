@@ -184,7 +184,8 @@ angular.module('openolitor-admin')
             bezeichnung: 'asc'
           },
           filter: {
-            typen: ''
+            typen: '',
+            aktiv: true
           }
         }, {
           filterDelay: 0,
