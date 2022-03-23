@@ -75,6 +75,10 @@
   <oo-sliding-detail slide-in="showGenerateRechnungReport" slide-out-function="closeRechnungBerichtFunct()">
     <oo-generate-report on-close="closeRechnungBericht" on-generated="closeRechnungBericht" projekt-vorlagen="projektVorlagen()" post-path="'rechnungen/berichte/rechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-generate-report>
   </oo-sliding-detail>
+  <oo-sliding-detail slide-in="showDownloadRechnungReport" slide-out-function="closeRechnungDownloadFunct()">
+    <oo-download-report on-close="closeRechnungDownload" on-downloaded="closeRechnungDownload" post-path="'rechnungen/aktionen/downloadrechnungen'" ids="checkboxes.ids" default-file-name="'Rechnung.ods'"></oo-download-report>
+  </oo-sliding-detail>
+
   <oo-sliding-detail slide-in="showCreateEMailDialog" slide-out-function="closeCreateEMailDialogFunct()" >
     <oo-email-dialog on-close="closeCreateEMailDialog" url="url" attachment="attachment" message="message" ids="rechnungIdsMailing" entity="entity"></oo-email-dialog>
   </oo-sliding-detail>

@@ -209,9 +209,9 @@ angular.module('openolitor-admin')
         label: gettext('Rechnungsdokumente herunterladen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
-            'ids': $scope.checkboxes.ids
-          });
+          $scope.$broadcast("resetDirectiveDownloadReport");
+          $scope.showDownloadRechnungReport = true;
+          return true;
         },
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny ||
@@ -403,6 +403,14 @@ angular.module('openolitor-admin')
 
       $scope.closeMahnungBerichtFunct = function() {
         return $scope.closeMahnungBericht;
+      };
+
+      $scope.closeRechnungDownload = function() {
+        $scope.showDownloadRechnungReport = false;
+      };
+
+      $scope.closeRechnungDownloadFunct = function() {
+        return $scope.closeRechnungDownload;
       };
 
       $scope.closeCreateEMailDialog = function() {
