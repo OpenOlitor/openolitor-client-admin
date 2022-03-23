@@ -7,8 +7,9 @@ angular.module('openolitor-admin').directive('ooOverviewfilterGeschaeftsjahre', 
       replace: true,
       scope: {
         selectedFunct: '&',
-        select: '=',
-        disabled: '='
+        select: '=?',
+        disabled: '=',
+        selectCurrent: '=?'
       },
       transclude: true,
       templateUrl: 'scripts/utils/overview/overviewfiltergeschaeftsjahre.controller.html',

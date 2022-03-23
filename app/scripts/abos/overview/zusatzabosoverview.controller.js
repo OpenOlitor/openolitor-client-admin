@@ -368,6 +368,11 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       );
     }
 
+    var existingGJ = $location.search().g;
+    if (existingGJ) {
+      $scope.geschaeftsjahr = existingGJ;
+    }
+
     var existingQuery = $location.search().q;
     if (existingQuery) {
       $scope.search.query = existingQuery;

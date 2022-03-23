@@ -53,9 +53,9 @@ angular.module('openolitor-admin')
         return ReportvorlagenService.getVorlagen('VorlageLieferplanung');
       };
 
-      $scope.selectedGeschaeftsjahr = function(gj) {
+      $scope.selectGeschaeftsjahr = function(gj) {
         if(angular.isDefined(gj)) {
-          $scope.geschaeftsjahr = gj.jahr;
+          $scope.geschaeftsjahr = gj;
         } else {
           $scope.geschaeftsjahr = undefined;
         }
