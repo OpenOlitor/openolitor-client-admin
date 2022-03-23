@@ -71,22 +71,28 @@
                 <tr>
                   <th translate>Id</th>
                   <th translate>Rechnungsnummer</th>
+                  <th translate>Kunde</th>
                   <th translate>Betrag</th>
                   <th translate>Referenznummer</th>
                   <th translate>Gutschriftsdatum</th>
                   <th translate>Status</th>
                   <th translate>Bemerkung</th>
-                  <th translate>Erledigen</th>
+                  <th translate>Erledigen/Ignorieren</th>
                 </tr>
                 <tr ng-repeat="zahlungsEingang in zahlungsImport.zahlungsEingaenge | filter:{ erledigt: false }">
                   <td>
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    {{zahlungsEingang.rechnungId || '-'}}
+                    <a ng-show="zahlungsEingang.rechnungId" ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId}}</a>
+                    <span ng-show="!zahlungsEingang.rechnungId">-</span>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag}}
+                    <a ng-show="zahlungsEingang.kundeId" ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <span ng-show="!zahlungsEingang.kundeId">-</span>
+                  </td>
+                  <td>
+                    {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}
@@ -102,8 +108,10 @@
                     <input ng-if="zahlungsEingang.status !== 'Ok'" type="text" class="form-control" name="bemerkung" ng-model="zahlungsEingang.bemerkung" placeholder="{{'Text...'|translate}}" maxlength = 2000 >
                   </td>
                   <td>
-                    <a ng-if="zahlungsEingang.status === 'Ok'" role="button" class="btn btn-sm btn-success" ng-click="zahlungsEingangErledigen(zahlungsEingang)"><i class="fa fa-check"></i></a>
-                    <a ng-if="zahlungsEingang.status !== 'Ok'" role="button" class="btn btn-sm btn-default" ng-click="zahlungsEingangErledigen(zahlungsEingang)"><i class="fa fa-check"></i></a>
+                    <a ng-show="zahlungsEingang.status === 'Ok'" role="button" class="btn btn-sm btn-success" ng-click="zahlungsEingangErledigen(zahlungsEingang)" uib-tooltip="{{'Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren' | translate}}"><i class="fa fa-check" ></i></a>
+                    <a ng-show="zahlungsEingang.status !== 'Ok'" role="button" class="btn btn-sm btn-default" ng-click="zahlungsEingangErledigen(zahlungsEingang)" uib-tooltip="{{'Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren' | translate}}"><i class="fa fa-check"></i></a>
+                    <a ng-show="zahlungsEingang.status === 'Ok'" role="button" class="btn btn-sm btn-success" ng-click="zahlungsEingangIgnore(zahlungsEingang)" uib-tooltip="{{'Ignorieren: Beendigung des Zahlungseingangs und die Rechnung bleibt unbezahlt' | translate}}"><i class="fa fa-close"></i></a>
+                    <a ng-show="zahlungsEingang.status !== 'Ok'" role="button" class="btn btn-sm btn-default" ng-click="zahlungsEingangIgnore(zahlungsEingang)" uib-tooltip="{{'Ignorieren: Beendigung des Zahlungseingangs und die Rechnung bleibt unbezahlt' | translate}}"><i class="fa fa-close"></i></a>
                   </td>
                 </tr>
               </table>
@@ -121,6 +129,7 @@
                 <tr>
                   <th translate>Id</th>
                   <th translate>Rechnungsnummer</th>
+                  <th translate>Kunde</th>
                   <th translate>Betrag</th>
                   <th translate>Referenznummer</th>
                   <th translate>Gutschriftsdatum</th>
@@ -132,10 +141,15 @@
                     #{{zahlungsEingang.id}}
                   </td>
                   <td>
-                    {{zahlungsEingang.rechnungId || '-'}}
+                    <a ng-show="zahlungsEingang.rechnungId" ng-href="#/rechnungen/{{zahlungsEingang.rechnungId}}"> {{zahlungsEingang.rechnungId}}</a>
+                    <span ng-show="!zahlungsEingang.rechnungId">-</span>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag}}
+                    <a ng-show="zahlungsEingang.kundeId" ng-href="#/kunden/{{zahlungsEingang.kundeId}}"> {{zahlungsEingang.kundeId}} - {{zahlungsEingang.kundeBezeichnung}}</a>
+                    <span ng-show="!zahlungsEingang.kundeId">-</span>
+                  </td>
+                  <td>
+                    {{projekt.waehrung}} {{zahlungsEingang.betrag | ooCHF}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}

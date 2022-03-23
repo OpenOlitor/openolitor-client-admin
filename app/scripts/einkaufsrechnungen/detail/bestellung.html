@@ -22,7 +22,7 @@
               {{position.produktBeschrieb}}
             </td>
             <td ng-show="projekt.preiseSichtbar">
-              {{position.preis | ooCHF}}
+              {{projekt.waehrung}} {{position.preis | ooCHF}}
             </td>
           </tr>
         </tbody>
@@ -33,7 +33,7 @@
               Total
             </td>
             <td>
-              {{bestellung.preisTotal | ooCHF}}
+              {{projekt.waehrung}} {{bestellung.preisTotal | ooCHF}}
             </td>
           </tr>
           <tr>
@@ -42,7 +42,7 @@
               {{bestellung.adminProzente}} <span translate>% Adminanteil</span>
             </td>
             <td>
-              {{bestellung.adminProzenteAbzug | ooCHF}}
+              {{projekt.waehrung}} {{bestellung.adminProzenteAbzug | ooCHF}}
             </td>
           </tr>
           <tr ng-if="produzentIstBesteuert(sammelbestellung.produzentId)">
@@ -51,7 +51,7 @@
               <span translate>MWST</span> {{produzentSteuersatz(sammelbestellung.produzentId)}}%
             </td>
             <td>
-              {{bestellung.steuer | ooCHF}}
+              {{projekt.waehrung}} {{bestellung.steuer | ooCHF}}
             </td>
           </tr>
           <tr>
@@ -61,7 +61,7 @@
               <span ng-if="!produzentIstBesteuert(sammelbestellung.produzentId)" translate>Total (abz. Adminanteil)</span>
             </td>
             <td>
-              {{bestellung.totalSteuer | ooCHF}}
+              {{projekt.waehrung}} {{bestellung.totalSteuer | ooCHF}}
             </td>
           </tr>
         </tfoot>
