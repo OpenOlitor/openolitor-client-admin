@@ -1,5 +1,5 @@
-<div class="panel panel-default">
-  <div class="panel-heading panel-heading-detail clearfix">
+<div class="panel panel-default abo-detail">
+  <div class="panel-heading panel-heading-detail panel-heading-fixed clearfix">
     <h3 class="panel-title">
       <span class="navbar-brand noLeftSpace"><span translate>Abo</span> #{{abo.id}}</span>
       <span class="pull-right">
@@ -72,17 +72,17 @@
         <div class="col-md-4">
           <label translate>Laufzeit</label>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <p class="input-group">
             <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="abo.start" is-open="open.start" ng-change="updateAboDatetimePicker()" enable-time="false" datepicker-options="aboPickerStartDate.datepickerOptions" />
             <span class="input-group-btn">
-              <button type="button" class="form-control btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+              <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
             </span>
           </p>
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-md-offset-4 col-md-4">
+        <div class="col-md-offset-4 col-md-5">
           <p class="input-group">
             <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="abo.ende" is-open="open.ende" ng-change="updateAboDatetimePicker()" enable-time="false" datepicker-options="aboPickerEndDate.datepickerOptions" />
             <span class="input-group-btn">
@@ -96,7 +96,7 @@
           <label translate>Preis</label>
         </div>
         <div class="col-md-6">
-          <p class="input-group">
+          <p class="input-group" ng-class="priceClass(abo)">
             <span class="input-group-addon">
               {{projekt.waehrung}}
             </span>

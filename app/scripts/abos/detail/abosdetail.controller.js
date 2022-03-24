@@ -245,13 +245,13 @@ angular.module('openolitor-admin')
           kundeId: getKundeId()
         }, function(result) {
           $scope.abo = result;
+          $scope.abo.price = $scope.aboPrice($scope.abo);
           $scope.loading = false;
           if (!$scope.kunde || $scope.kunde.id !== $scope.abo.kundeId) {
             KundenDetailModel.get({
               id: $scope.abo.kundeId
             }, function(kunde) {
               $scope.kunde = kunde;
-              $scope.abo.price = $scope.aboPrice($scope.abo);
             });
           }
 
@@ -511,6 +511,9 @@ angular.module('openolitor-admin')
           $scope.aboDetailForm.$setPristine();
         }
         if(angular.isUndefined($scope.abo.ende) || $scope.abo.ende === null || $scope.abo.ende === '' || $scope.abo.start <= $scope.abo.ende) {
+          if($scope.abo.price == $scope.abo.abotyp.preis) {
+            $scope.abo.price = undefined;
+          }
           return $scope.abo.$save();
         } else {
           alertService.addAlert('error', gettext(
@@ -644,6 +647,7 @@ angular.module('openolitor-admin')
 
       $scope.defaultAboPrice = function() {
         $scope.abo.price = $scope.abo.abotyp.preis;
+        $scope.aboDetailForm.$setDirty();
       };
 
       $scope.defaultZusatzaboPrice = function(zusatzaboId) {
@@ -718,9 +722,9 @@ angular.module('openolitor-admin')
 
       $scope.priceClass = function(abo) {
         if (abo && abo.abotyp && ($scope.abo.price < 0)) {
-          return 'error';
-        } else if (abo && ($scope.abo.price < abo.abotyp.price)) {
-          return 'warning';
+          return 'has-error';
+        } else if (abo && ($scope.abo.price != abo.abotyp.preis)) {
+          return 'has-warning';
         } else {
           return '';
         }

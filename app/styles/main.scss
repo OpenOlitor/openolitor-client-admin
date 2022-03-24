@@ -329,6 +329,16 @@ textarea.ng-invalid {
   background-color: #fff3dc;
 }
 
+.panel-heading-fixed
+ {
+  position: sticky;
+}
+
+.abo-detail .panel-heading-fixed {
+  top: -10px;
+  z-index: 10;
+}
+
 /* Special Lieferplanung */
 #lieferplanung .lieferplanung-title .navbar-brand {
   margin-left: 0px !important;
