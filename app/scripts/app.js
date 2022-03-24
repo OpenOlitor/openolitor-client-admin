@@ -628,10 +628,21 @@ angular
       }
     };
   })
+  .factory('removeAlertInterceptor', function($q, alertService) {
+    return {
+      request: function(config) {
+        if(config.method === 'POST') {
+          alertService.clearAll();
+        }
+        return config;
+      }
+    };
+  })
   .config([
     '$httpProvider',
     function($httpProvider) {
       $httpProvider.interceptors.push('loggedOutInterceptor');
+      $httpProvider.interceptors.push('removeAlertInterceptor');
     }
   ])
   .filter('custNumber', function($filter, LIEFEREINHEIT) {
