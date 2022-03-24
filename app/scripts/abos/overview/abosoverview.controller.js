@@ -23,6 +23,7 @@ angular.module('openolitor-admin')
       $scope.selectedAbo = undefined;
       $scope.model = {};
       $scope.vertriebL = [];
+      $scope.initGJ = false;
 
       $scope.navigateToKunde = function(id) {
           $scope.filteredEntries = [];
@@ -254,10 +255,11 @@ angular.module('openolitor-admin')
 
       $scope.selectedGeschaeftsjahr = function(gj) {
         if(angular.isDefined(gj)) {
-          $scope.geschaeftsjahr = gj.jahr;
+          $scope.geschaeftsjahr = gj;
         } else {
           $scope.geschaeftsjahr = undefined;
         }
+        $scope.initGJ = true;
         search();
         return false;
       }
@@ -312,7 +314,7 @@ angular.module('openolitor-admin')
       }];
 
       function search() {
-        if ($scope.loading) {
+        if ($scope.loading || !$scope.initGJ) {
           return;
         }
         $scope.loading = true;

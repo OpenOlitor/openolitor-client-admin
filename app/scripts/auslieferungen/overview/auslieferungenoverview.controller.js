@@ -19,6 +19,7 @@ angular.module('openolitor-admin')
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
+      $scope.initGJ = false;
 
       $scope.search = {
         query: ''
@@ -53,6 +54,7 @@ angular.module('openolitor-admin')
         } else {
           $scope.geschaeftsjahr = undefined;
         }
+        $scope.initGJ = true;
         search();
         return false;
       }
@@ -237,7 +239,7 @@ angular.module('openolitor-admin')
       }
 
       function search() {
-        if ($scope.loading) {
+        if ($scope.loading || !$scope.initGJ) {
           return;
         }
         $scope.tableParams.reload();
