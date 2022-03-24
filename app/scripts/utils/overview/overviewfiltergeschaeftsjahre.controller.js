@@ -29,12 +29,12 @@ angular.module('openolitor-admin')
             if(angular.isDefined($scope.select)) {
               $scope.geschaeftsjahre.forEach((item) => {
                 if($scope.select == item.jahr) {
-                  $scope.selectedGJ = $scope.select;
+                  $scope.selectGJ($scope.select);
                 }
               });
             } else {
                 //by default 'ALLE' is selected
-                $scope.selectedGJ = ALLE.jahr;
+                $scope.selectGJ(ALLE.jahr);
             }
         });
       });
