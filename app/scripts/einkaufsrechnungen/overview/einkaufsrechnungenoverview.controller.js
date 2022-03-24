@@ -13,12 +13,13 @@ angular.module('openolitor-admin')
       BESTELLSTATUS, EnumUtil, msgBus, lodash, localeSensitiveComparator,
       ReportvorlagenService, gettext) {
       $rootScope.viewId = 'L-Eink';
-      
+
       $scope.entries = [];
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
       $scope.bestellstatusL = EnumUtil.asArray(BESTELLSTATUS);
+      $scope.initGJ = false;
 
       $scope.search = {
         query: '',
@@ -33,6 +34,17 @@ angular.module('openolitor-admin')
         css: '',
         ids: []
       };
+
+      $scope.selectGeschaeftsjahr = function(gj) {
+        if(angular.isDefined(gj)) {
+          $scope.geschaeftsjahr = gj;
+        } else {
+          $scope.geschaeftsjahr = undefined;
+        }
+        $scope.initGJ = true;
+        search();
+        return false;
+      }
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -120,7 +132,11 @@ angular.module('openolitor-admin')
 
             params.total(dataSet.length);
 
-            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+            $location.search({
+              'q': $scope.search.query,
+              'g': $scope.geschaeftsjahr,
+              'tf': JSON.stringify($scope.tableParams.filter())
+            });
 
             return dataSet.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
@@ -184,12 +200,13 @@ angular.module('openolitor-admin')
       };
 
       function search() {
-        if ($scope.loading) {
+        if ($scope.loading || !$scope.initGJ) {
           return;
         }
         $scope.loading = true;
         $scope.entries = EinkaufsrechnungenOverviewModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          g: $scope.geschaeftsjahr
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
@@ -199,6 +216,10 @@ angular.module('openolitor-admin')
       var existingQuery = $location.search().q;
       if (existingQuery) {
         $scope.search.query = existingQuery;
+      }
+      var existingGJ = $location.search().g;
+      if (existingGJ) {
+        $scope.geschaeftsjahr = existingGJ;
       }
 
       $scope.closeAbrechnungDialog = function() {
