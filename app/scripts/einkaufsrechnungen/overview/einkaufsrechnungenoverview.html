@@ -44,7 +44,7 @@
                 {{bestellung.datumAbrechnung|date:'dd.MM.yyyy'}}
               </td>
               <td data-title="'Total'|translate" sortable="'totalSteuer'">
-                {{projekt.waehrung}} {{bestellung.totalSteuer|ooCHF}}
+                {{bestellung.totalSteuer|ooCurrency:projekt.waehrung:true}}
               </td>
             </tr>
           </table>

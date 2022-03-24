@@ -67,7 +67,7 @@
                 {{produkt.name}}
               </td>
               <td  data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
-                {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
+                {{produkt.preis | ooCurrency:projekt.waehrung:true}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
               </td>
               <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
                 <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
@@ -101,7 +101,7 @@
               </div>
             </span>
             <span class="pull-right">
-              <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCHF:true:projekt.waehrung}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
+              <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCurrency:projekt.waehrung:true}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
               <span ng-show="valuesEditable()" class="btn btn-default btn-sm"
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
@@ -144,18 +144,18 @@
               </td>
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
                 <span ng-show="korbprodukt.menge" ng-if="!valuesEditable() || (!projekt.preiseEditierbar && !isUnlisted(korbprodukt))">
-                  {{calculatePreis(korbprodukt)| ooCHF}}
+                  {{calculatePreis(korbprodukt)| ooCurrency:projekt.waehrung:true}}
                 </span>
                 <span ng-show="korbprodukt.menge" ng-if="valuesEditable() && (projekt.preiseEditierbar || isUnlisted(korbprodukt))">
                   <p class="input-group">
                     <input type="number" placeholder="{{'Preis'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,2})?$/" min="0" step="0.01" class="form-control" name="preis" ng-model="korbprodukt.preisEinheit" ng-change="calculatePreis(korbprodukt)" required></input>
                     <span class="input-group-addon" uib-tooltip-template="'unlistedKorbproduktPreisTooltipTemplate.html'" tooltip-popup-close-delay="500" tooltip-class="preis-tooltip">
-                      {{calculatePreis(korbprodukt)| ooCHF}} <i class="fa fa-info-circle"></i>
+                      {{calculatePreis(korbprodukt)| ooCurrency:projekt.waehrung:true}} <i class="fa fa-info-circle"></i>
                     </span>
                   </p>
                 </span>
                 <span ng-hide="korbprodukt.menge" class="base-preis">
-                  {{korbprodukt.preisEinheit | ooCHF}}
+                  {{korbprodukt.preisEinheit | ooCurrency:projekt.waehrung:true}}
                 </span>
               </td>
               <td data-title="'Prod.'|translate">
@@ -174,8 +174,8 @@
               <tr>
                 <td colspan="2"></td>
                 <td colspan="2" translate>Total</td>
-                <td>{{getTotal(abotypLieferung.lieferpositionen, abotypLieferung)| ooCHF}}</td>
-                <td colspan="2"><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCHF)">&#916;&nbsp;{{getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen)| ooCHF}}</span></td>
+                <td>{{getTotal(abotypLieferung.lieferpositionen, abotypLieferung)| ooCurrency:projekt.waehrung:true}}</td>
+                <td colspan="2"><span class="liefersumme" ng-class="{'red':getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen) < 0}" aria-hidden="true" tooltip-popup-close-delay="500" uib-tooltip-html="('Zielpreis: '|translate) + (abotypLieferung.zielpreis | ooCurrency:projekt.waehrung:true)">&#916;&nbsp;{{getDiff(abotypLieferung.zielpreis, abotypLieferung.lieferpositionen)| ooCurrency:projekt.waehrung:true}}</span></td>
               </tr>
             </tfoot>
           </table>
