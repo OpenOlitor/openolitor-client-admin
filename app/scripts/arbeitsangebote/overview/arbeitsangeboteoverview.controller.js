@@ -197,6 +197,9 @@ angular
                 } else if(f.zeitVonF === 'M') {
                   from = moment().startOf('month').toDate();
                   to = moment().endOf('month').toDate();
+                } else if(f.zeitVonF === 'V') {
+                  from =new Date(-8640000000000000);
+                  to = moment().startOf('day').toDate();
                 } else {
                   from =new Date(-8640000000000000);
                   to = new Date(8640000000000000);

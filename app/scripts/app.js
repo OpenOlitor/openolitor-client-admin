@@ -326,7 +326,8 @@ angular
     AB_HEUTE: addExtendedEnumValue('D', gettext('Ab Heute'), gettext('Ab Heute')),
     NUR_HEUTE: addExtendedEnumValue('d',gettext('Nur Heute'),gettext('Nur Heute')),
     DIESE_WOCHE: addExtendedEnumValue('w',gettext('Diese Woche'),gettext('Diese Woche')),
-    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat'))
+    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat')),
+    VERGANGENE: addExtendedEnumValue('V',gettext('Vergangene'),gettext('Vergangene'))
   })
   .constant('USER_ROLES', {
     Guest: 'Guest',
