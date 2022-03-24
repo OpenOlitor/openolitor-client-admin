@@ -11,7 +11,7 @@
                 <span translate>Total Anzahl Abwesenheiten:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSABWESEND)"><b>{{anzahlAbwesenheiten}}</b></a><br />
                 <span translate>Total Anzahl <i>Saldo zu tief</i>:</span> <a href="" ng-click="displayAbosTotal(KORBSTATUS.FAELLTAUSSALDOZUTIEF)"><b>{{anzahlSaldoZuTief}}</b></a>
               </script>
-              <li class="navbar-brand"><span translate>Planung</span> <span uib-tooltip-template="'anzahlOverallTooltipTemplate.html'" tooltip-popup-close-delay="3000">#{{planung.id}}</span>: <span translate>Korbinhalt</span></li>
+              <span translate>Planung</span> <span uib-tooltip-template="'anzahlOverallTooltipTemplate.html'" tooltip-popup-close-delay="3000" tooltip-placement="bottom">#{{planung.id}}</span>: <span translate>Korbinhalt</span>
             </ul>
           </div>
           <div class="col-md-7">
@@ -69,7 +69,7 @@
               <td  data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
                 {{produkt.preis | ooCHF}}&nbsp;/&nbsp;{{liefereinheiten[produkt.einheit.toUpperCase()].label.short|translate}}
               </td>
-              <td data-title="'Prod.'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
+              <td data-title="'Produzent'|translate" filter="{produzenten: 'select'}" filter-data="extractProduzentenFilter(undefined, true)">
                 <span ng-repeat="produzent in produkt.produzenten">{{produzent}}&nbsp;</span>
               </td>
             </tr>

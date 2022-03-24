@@ -3,16 +3,12 @@
     <div oo-error-overlay></div>
     <form name="arbeitsangebotForm" oo-confirm-on-dirty>
       <div class="row form-group">
-        <div class="col-md-12">
+        <div class="col-md-12 row">
           <h3>
             <div class="col-md-4" translate>
               Arbeitsangebot
             </div>
-            <div class="col-md-2">
-               <small><label for="typen" translate>Arbeitskategorien</label></small>
-            </div>
-            <div class="col-md-6">
-              <oo-arbeitskategorien arbeitskategorien-list="arbeitsangebot.arbeitskategorien"></oo-arbeitskategorien>
+            <div class="col-md-8">
               <div class="pull-right" role="group">
                 <script type="text/ng-template" id="abschliessenTooltip.html">
                   <span translate>Die Arbeitsangebote werden nach Ablauf der Einsatzzeit auch automatisch abgeschlossen.</span>
@@ -27,6 +23,14 @@
               </div>
             </div>
           </h3>
+        </div>
+        <div class="col-md-12 row">
+          <div class="col-md-3">
+             <label for="typen" translate>Arbeitskategorien</label>
+          </div>
+          <div class="col-md-9">
+            <oo-arbeitskategorien arbeitskategorien-list="arbeitsangebot.arbeitskategorien"></oo-arbeitskategorien>
+          </div>
         </div>
       </div>
       <div class="row">
