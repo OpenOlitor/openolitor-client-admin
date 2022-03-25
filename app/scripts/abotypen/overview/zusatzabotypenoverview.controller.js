@@ -63,6 +63,9 @@ angular.module('openolitor-admin')
           count: 10,
           sorting: {
             name: 'asc'
+          },
+          filter: {
+            aktiv: true
           }
         }, {
           filterDelay: 0,

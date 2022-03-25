@@ -20,6 +20,7 @@ angular.module('openolitor-admin')
       var defaults = {
         model: {
           id: undefined,
+          aktiv: true,
           typen: [],
           ansprechpersonen: [{
             id: undefined,

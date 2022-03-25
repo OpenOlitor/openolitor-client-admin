@@ -237,6 +237,10 @@ textarea.ng-invalid {
   margin-right: 10px;
 }
 
+.table .ng-table-header span {
+  white-space: nowrap;
+}
+
 .openolitor .ng-table td {
   padding-left: 4px;
   padding-right: 4px;
@@ -295,6 +299,11 @@ textarea.ng-invalid {
   cursor: pointer;
 }
 
+.openolitor .close {
+   color: #5c2929;
+   opacity: inherit;
+}
+
 .nonboxed-title .navbar-brand {
   margin-left: 0px !important;
   padding-top: 5px;
@@ -323,6 +332,16 @@ textarea.ng-invalid {
 
 .panel-default > .panel-heading.panel-heading-detail {
   background-color: #fff3dc;
+}
+
+.panel-heading-fixed
+ {
+  position: sticky;
+}
+
+.abo-detail .panel-heading-fixed {
+  top: -10px;
+  z-index: 10;
 }
 
 /* Special Lieferplanung */
@@ -734,6 +753,14 @@ tr.error {
   color: grey;
 }
 
+.geschaeftsjahre-dropdown {
+  display: inline;
+}
+
+.table-boolean-filter {
+  white-space: nowrap;
+}
+
 /* The navigation menu links */
 .sliding-detail {
   height: 100%; /* 100% Full-height */
@@ -767,6 +794,10 @@ tr.error {
   .panel-default {
     margin-top: 10px;
   }
+}
+
+.panel-title .filter-geschaeftsjahre {
+  display: inline;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -832,7 +863,7 @@ a.env-warning.testprod {
 /*Languages specific to a CSA*/
 
 .de_DO_menu{
-  display:none; 
+  display:none;
 }
 
 .qrcode-container {

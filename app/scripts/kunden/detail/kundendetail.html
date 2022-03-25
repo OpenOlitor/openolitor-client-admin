@@ -28,10 +28,13 @@
               <div class="col-lg-3 col-md-3">
                 <label for="typen" translate>Kundentypen</label>
               </div>
-              <div class="col-lg-6 col-md-5">
+              <div class="col-lg-5 col-md-5">
                 <oo-kundentypen kundentypen-list="kunde.typen"></oo-kundentypen>
               </div>
-              <div class="col-lg-3 col-md-4">
+              <div class="col-lg-1 col-md-1">
+                <input bs-switch ng-model="kunde.aktiv" type="checkbox" switch-size="small" switch-animate="true" switch-on-text="{{'Aktiv'|translate}}" switch-off-text="{{'Inaktiv'|translate}}" switch-on-color="success" switch-off-color="warning" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+              <div class="col-lg-3 col-md-3">
                 <oo-detail-navigation class="pull-right"></oo-detail-navigation>
               </div>
             </div>
