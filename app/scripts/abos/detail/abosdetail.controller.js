@@ -723,7 +723,7 @@ angular.module('openolitor-admin')
       $scope.priceClass = function(abo) {
         if (abo && abo.abotyp && (abo.price < 0)) {
           return 'has-error';
-        } else if (abo && (abo.price != abo.abotyp.preis)) {
+        } else if (abo && abo.abotyp && (abo.price != abo.abotyp.preis)) {
           return 'has-warning';
         } else {
           return '';
