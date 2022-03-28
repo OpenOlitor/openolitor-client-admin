@@ -62,10 +62,10 @@
         <div class="col-md-8">{{rechnungsPosition.typ}}</div>
       </div>
       <div class="row form-group">
-        <div class="col-md-6">
-          <label translate>#&nbsp;Lieferungen</label>
+        <div class="col-md-4">
+          <label><span translate>#</span>&nbsp;<span>Lieferungen</span></label>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <input ng-show="rechnungsPosition.status == 'Offen'" type="number" placeholder="{{'# Lieferungen'|translate}}" class="form-control" name="anzahlLieferunge" ng-model="rechnungsPosition.anzahlLieferungen" min="0" required></input>
             <span ng-show="rechnungsPosition.status != 'Offen'">{{rechnungsPosition.anzahlLieferungen}}</span>
         </div>

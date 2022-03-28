@@ -3,15 +3,16 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('LieferungenListController', ['$scope', '$routeParams',
+  .controller('LieferungenListController', ['$scope', '$rootScope', '$routeParams',
     '$location', '$uibModal', '$log', '$http', 'gettext', 'NgTableParams',
     'msgBus', 'lodash', '$filter',
     'LieferungenListModel', 'LIEFERSTATUS', 'LIEFERRHYTHMEN', 'appConfig',
 
-    function($scope, $routeParams, $location, $uibModal, $log, $http, gettext,
+    function($scope, $rootScope, $routeParams, $location, $uibModal, $log, $http, gettext,
       NgTableParams, msgBus, lodash, $filter,
       LieferungenListModel, LIEFERSTATUS, LIEFERRHYTHMEN, appConfig) {
 
+      $rootScope.translateCalendar();
       $scope.now = new Date();
       $scope.template = {
         creating: 0

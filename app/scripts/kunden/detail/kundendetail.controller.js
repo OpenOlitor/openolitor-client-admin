@@ -16,6 +16,7 @@ angular.module('openolitor-admin')
       PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, appConfig,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, dialogService, gettextCatalog, EmailUtil) {
       $rootScope.viewId = 'D-Kun';
+      $rootScope.translateCalendar();
 
       var defaults = {
         model: {

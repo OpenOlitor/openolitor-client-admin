@@ -81,7 +81,8 @@ angular
     'mm.iban',
     'piwik',
     'openolitor-core',
-    'ngQuill'
+    'ngQuill',
+    'tmh.dynamicLocale'
   ])
   .constant('BUILD_NR', '@@BUILD_NR')
   .constant('LIEFERRHYTHMEN', {
@@ -180,11 +181,14 @@ angular
     )
   })
   .constant('ARBEITSEINSATZSTATUS', {
+    NEU: gettext('Neu'),
+    CANCELED: gettext('Canceled'),
     INVORBEREITUNG: gettext('InVorbereitung'),
     BEREIT: gettext('Bereit'),
     ABGESAGT: gettext('Abgesagt'),
     ARCHIVIERT: gettext('Archiviert')
   })
+
   .constant('ABOTYPEN_ARRAY', [
     'DepotlieferungAbo',
     'HeimlieferungAbo',
@@ -546,6 +550,12 @@ angular
     '$qProvider',
     function($qProvider) {
       $qProvider.errorOnUnhandledRejections(false);
+    }
+  ])
+  .config([
+    'tmhDynamicLocaleProvider',
+    function (tmhDynamicLocaleProvider) {
+        tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale.toLowerCase().replace(\'_\',\'-\')}}.js');
     }
   ])
     .constant('NG_QUILL_CONFIG', {

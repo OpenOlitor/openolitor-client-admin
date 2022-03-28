@@ -15,13 +15,14 @@ angular.module('openolitor-admin')
       appConfig) {
 
       $rootScope.viewId = 'D-Aban';
+      $rootScope.translateCalendar();
 
       var defaults = {
         model: {
           id: undefined,
           arbeitskategorien: [],
           mehrPersonenOk: true,
-          status: 'neu'
+          status: 'Neu'
         }
       };
 
