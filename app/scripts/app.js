@@ -326,7 +326,8 @@ angular
     AB_HEUTE: addExtendedEnumValue('D', gettext('Ab Heute'), gettext('Ab Heute')),
     NUR_HEUTE: addExtendedEnumValue('d',gettext('Nur Heute'),gettext('Nur Heute')),
     DIESE_WOCHE: addExtendedEnumValue('w',gettext('Diese Woche'),gettext('Diese Woche')),
-    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat'))
+    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat')),
+    VERGANGENE: addExtendedEnumValue('V',gettext('Vergangene'),gettext('Vergangene'))
   })
   .constant('USER_ROLES', {
     Guest: 'Guest',
@@ -398,7 +399,7 @@ angular
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
-  .service('appConfig', ['$http', function($http) {
+  .service('appConfig', function() {
     var loaded = false;
     var configData = {
     };
@@ -412,7 +413,7 @@ angular
         return loaded;
       }
     };
-  }])
+  })
   .run(function(appConfig) {
     appConfig.get();
   })
@@ -627,10 +628,21 @@ angular
       }
     };
   })
+  .factory('removeAlertInterceptor', function($q, alertService) {
+    return {
+      request: function(config) {
+        if(config.method === 'POST') {
+          alertService.clearAll();
+        }
+        return config;
+      }
+    };
+  })
   .config([
     '$httpProvider',
     function($httpProvider) {
       $httpProvider.interceptors.push('loggedOutInterceptor');
+      $httpProvider.interceptors.push('removeAlertInterceptor');
     }
   ])
   .filter('custNumber', function($filter, LIEFEREINHEIT) {

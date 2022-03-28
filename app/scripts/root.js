@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
     'appConfig', 'cssInjector', '$route',
-    'ooAuthService', '$cookies', 'moment', 'dialogService',
+    'ooAuthService', '$cookies', 'moment', 'dialogService', 'alertService',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
       $timeout, BUILD_NR, appConfig, cssInjector, $route,
-      ooAuthService, $cookies, moment, dialogService) {
+      ooAuthService, $cookies, moment, dialogService, alertService) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
@@ -54,7 +54,7 @@ angular.module('openolitor-admin')
             }
           });
         if ($scope.loggedIn) {
-          $scope.secondFactorType = ooAuthService.getSecondFactorType();
+          //$scope.secondFactorType = ooAuthService.getSecondFactorType();
           ProjektService.resolveProjekt(false, !$scope.loadedProjectLoggedInOnce).then(function(projekt) {
             $scope.loadedProjectLoggedInOnce = true;
             $scope.projekt = projekt;
@@ -207,6 +207,10 @@ angular.module('openolitor-admin')
           );
         }
       };
+
+      $rootScope.$on('$routeChangeStart', function (event, next, prev) {
+        alertService.clearAll();
+      });
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();

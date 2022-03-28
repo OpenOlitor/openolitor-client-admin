@@ -255,7 +255,9 @@ angular.module('openolitor-admin')
             return lodash.includes($scope.checkboxes.ids, d.id);
           });
           result = lodash.map(result, 'kundeId');
-          $location.search({'tf':''});
+          $location.search({
+            'tf':'',
+            'g': ''});
           $location.path('/kunden').search('q', 'id=' + result.join());
         }
       }, {
@@ -330,6 +332,12 @@ angular.module('openolitor-admin')
             isExpanded: true
           },
           exportODSModel: RechnungenOverviewModel,
+          exportODSFilter: function() {
+            return {
+              f: $scope.search.filterQuery,
+              g: $scope.geschaeftsjahr
+            };
+          },
           getData: function(params) {
             if (!$scope.entries) {
               return;
@@ -346,7 +354,11 @@ angular.module('openolitor-admin')
 
             params.total(dataSet.length);
 
-            $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
+            $location.search({
+              'q': $scope.search.query,
+              'g': $scope.geschaeftsjahr,
+              'tf': JSON.stringify($scope.tableParams.filter())
+            });
 
             return dataSet.slice((params.page() - 1) *
               params.count(), params.page() * params.count());
@@ -360,16 +372,25 @@ angular.module('openolitor-admin')
         }
       }
 
+      $scope.selectGeschaeftsjahr = function(gj) {
+        if(angular.isDefined(gj)) {
+          $scope.geschaeftsjahr = gj;
+        } else {
+          $scope.geschaeftsjahr = undefined;
+        }
+        search();
+        return false;
+      }
+
       function search() {
         if ($scope.loading) {
           return;
         }
-        //  $scope.entries = $scope.dummyEntries;
-        $scope.tableParams.reload();
 
         $scope.loading = true;
         $scope.entries = RechnungenOverviewModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          g: $scope.geschaeftsjahr
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
@@ -379,6 +400,10 @@ angular.module('openolitor-admin')
       var existingQuery = $location.search().q;
       if (existingQuery) {
         $scope.search.query = existingQuery;
+      }
+      var existingGJ = $location.search().g;
+      if (existingGJ) {
+        $scope.geschaeftsjahr = existingGJ;
       }
 
       $scope.$watch('search.query', function() {

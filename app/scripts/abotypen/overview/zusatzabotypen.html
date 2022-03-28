@@ -39,7 +39,7 @@
                             <td data-title="'Preis'|translate" sortable="'preis'">
                                 <span ng-bind="zusatzAbotyp|ooPreisProEinheit:projekt.waehrung" />
                             </td>
-                            <td data-title="'Aktiv'|translate" sortable="'aktiv'">
+                            <td data-title="'Aktiv'|translate" sortable="'aktiv'" filter="{aktiv: 'boolean'}">
                                 <i ng-if="zusatzAbotyp.aktiv" class="glyphicon glyphicon-ok"></i>
                                 <i ng-if="!zusatzAbotyp.aktiv" class="glyphicon glyphicon-remove"></i>
                             </td>

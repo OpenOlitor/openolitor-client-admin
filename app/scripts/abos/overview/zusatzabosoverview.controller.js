@@ -42,6 +42,7 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
     $scope.loading = false;
     $scope.selectedAbo = undefined;
     $scope.model = {};
+    $scope.initGJ = false;
 
     $scope.navigateToKunde = function(id) {
       $scope.filteredEntries = [];
@@ -204,7 +205,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
           exportODSFilter: function() {
             return {
               f: $scope.search.filterQuery,
-              x: $scope.search.complexFlags
+              x: $scope.search.complexFlags,
+              g: $scope.geschaeftsjahr,
             };
           },
           getData: function(params) {
@@ -244,6 +246,7 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
 
             $location.search({
               q: $scope.search.query,
+              g: $scope.geschaeftsjahr,
               f: JSON.stringify($scope.search.complexFlags),
               tf: JSON.stringify($scope.tableParams.filter())
             });
@@ -277,6 +280,17 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       $scope.checkboxes.ids = ids;
       $scope.checkboxes.checkedItems = checkedItems;
       $scope.checkboxes.items = Object.fromEntries(items);
+    }
+      
+    $scope.selectedGeschaeftsjahr = function(gj) {
+      if(angular.isDefined(gj)) {
+        $scope.geschaeftsjahr = gj;
+      } else {
+        $scope.geschaeftsjahr = undefined;
+      }
+      $scope.initGJ = true;
+      search();
+      return false;
     }
 
     $scope.actions = [
@@ -338,14 +352,15 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
     ];
 
     function search() {
-      if ($scope.loading) {
+      if ($scope.loading || !$scope.initGJ) {
         return;
       }
       $scope.loading = true;
       ZusatzabosOverviewModel.query(
         {
           f: $scope.search.filterQuery,
-          x: $scope.search.complexFlags
+          x: $scope.search.complexFlags,
+          g: $scope.geschaeftsjahr
         },
         function(entries) {
           $scope.entries = entries;
@@ -353,6 +368,11 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
           $scope.loading = false;
         }
       );
+    }
+
+    var existingGJ = $location.search().g;
+    if (existingGJ) {
+      $scope.geschaeftsjahr = existingGJ;
     }
 
     var existingQuery = $location.search().q;
