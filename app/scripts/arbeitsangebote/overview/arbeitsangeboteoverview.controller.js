@@ -231,6 +231,7 @@ angular
                 : orderedData;
 
               $scope.filteredEntries = filteredData;
+              updateIds($scope.filteredEntries)
 
               params.total(orderedData.length);
               return orderedData.slice(
@@ -240,6 +241,23 @@ angular
             }
           }
         );
+      }
+
+      function updateIds(listOfEntries) {
+        var ids = [];
+        var checkedItems = [];
+        var items = [];
+        angular.forEach($scope.checkboxes.checkedItems, function(i){
+          if (lodash.filter(listOfEntries, i).length > 0){
+            ids.push(i.id);
+            checkedItems.push(i);
+            items.push([i.id,true]);
+          }
+        })
+
+        $scope.checkboxes.ids = ids;
+        $scope.checkboxes.checkedItems = checkedItems;
+        $scope.checkboxes.items = Object.fromEntries(items);
       }
 
       function search() {
