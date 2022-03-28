@@ -3,16 +3,17 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('RechnungsPositionenOverviewCreateRechnungenController', ['$scope', '$filter', '$routeParams',
+  .controller('RechnungsPositionenOverviewCreateRechnungenController', ['$scope', '$rootScope', '$filter', '$routeParams',
     '$location', '$route', '$uibModal', '$log', '$http', 'gettext',
     'moment', 'EnumUtil', 'DataUtil', 'msgBus', '$q', 'lodash',
     'appConfig', 'alertService', 'AbosOverviewService',
 
-    function($scope, $filter, $routeParams, $location, $route, $uibModal,
+    function($scope, $rootScope, $filter, $routeParams, $location, $route, $uibModal,
       $log, $http, gettext,
       moment, EnumUtil, DataUtil, msgBus, $q, lodash, appConfig,
       alertService, AbosOverviewService) {
 
+      $rootScope.translateCalendar();
       // rechnungen object with defaults and without ids
       $scope.rechnungen = {
         titel: '',

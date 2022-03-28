@@ -13,6 +13,7 @@ angular.module('openolitor-admin')
       EnumUtil) {
 
       $rootScope.viewId = 'D-Aty';
+      $rootScope.translateCalendar();
 
       var defaults = {
         model: {

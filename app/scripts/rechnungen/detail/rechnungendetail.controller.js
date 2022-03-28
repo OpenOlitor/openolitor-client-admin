@@ -17,6 +17,7 @@ angular.module('openolitor-admin')
       RECHNUNGSTATUS, FileUtil, DataUtil, ReportvorlagenService, DetailNavigationService) {
       $rootScope.viewId = 'D-Re';
 
+      $rootScope.translateCalendar();
       DetailNavigationService.cleanKundeList();
 
       var defaults = {
