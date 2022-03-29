@@ -628,7 +628,7 @@
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
               </td>
               <td>
-                {{rechnung.betrag | ooCurrency:projekt.waehrung:true}}
+                {{rechnung.betrag | ooCurrency:true}}
               </td>
               <td>
                 {{rechnung.rechnungsDatum | date}}
