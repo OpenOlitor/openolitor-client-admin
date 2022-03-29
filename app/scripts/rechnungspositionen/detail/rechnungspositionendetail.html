@@ -41,9 +41,8 @@
         </div>
         <div class="col-md-8">
           <div class="input-group">
-            <div ng-show="rechnungsPosition.status == 'Offen'" class="input-group-addon">{{projekt.waehrung}}</div>
             <input ng-show="rechnungsPosition.status == 'Offen'" type="number" placeholder="{{'Betrag'|translate}}" ng-pattern="/^[-+]?[0-9]+([\.,][0-9]{1,3})?$/" step="0.01" class="form-control" name="betrag" ng-model="rechnungsPosition.betrag" required></input>
-            <span ng-show="rechnungsPosition.status != 'Offen'"><span>{{rechnungsPosition.betrag | ooCHF}}</span>
+            <span ng-show="rechnungsPosition.status != 'Offen'"><span>{{rechnungsPosition.betrag | ooCurrency:true}}</span>
           </div>
         </div>
         </div>

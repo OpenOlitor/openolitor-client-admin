@@ -247,6 +247,5 @@ angular.module('openolitor-admin')
           }
         }
       );
-
     }
   ]);

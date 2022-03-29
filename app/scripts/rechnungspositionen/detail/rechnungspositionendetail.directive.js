@@ -6,7 +6,8 @@ angular.module('openolitor-admin').directive('ooRechnungsPositionDetail', [
       restrict: 'E',
       replace: true,
       scope: {
-        rechnungsPosition: '='
+        rechnungsPosition: '=',
+        projekt: '='
       },
       transclude: true,
       templateUrl: 'scripts/rechnungspositionen/detail/rechnungspositionendetail.html',

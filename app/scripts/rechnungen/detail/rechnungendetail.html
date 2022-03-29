@@ -239,7 +239,7 @@
                     {{position.beschrieb}}
                   </td>
                   <td>
-                    {{position.betrag || ooCHF}}
+                    {{position.betrag | ooCurrency:true}}
                   </td>
                   <td>
                     <span ng-show="position.typ == 'Abo'">
