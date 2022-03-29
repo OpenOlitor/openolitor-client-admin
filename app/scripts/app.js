@@ -81,7 +81,8 @@ angular
     'mm.iban',
     'piwik',
     'openolitor-core',
-    'ngQuill'
+    'ngQuill',
+    'tmh.dynamicLocale'
   ])
   .constant('BUILD_NR', '@@BUILD_NR')
   .constant('LIEFERRHYTHMEN', {
@@ -180,11 +181,14 @@ angular
     )
   })
   .constant('ARBEITSEINSATZSTATUS', {
+    NEU: gettext('Neu'),
+    CANCELED: gettext('Canceled'),
     INVORBEREITUNG: gettext('InVorbereitung'),
     BEREIT: gettext('Bereit'),
     ABGESAGT: gettext('Abgesagt'),
     ARCHIVIERT: gettext('Archiviert')
   })
+
   .constant('ABOTYPEN_ARRAY', [
     'DepotlieferungAbo',
     'HeimlieferungAbo',
@@ -325,6 +329,15 @@ angular
   .constant('SECOND_FACTOR_TYPES', {
     OTP: addExtendedEnumValue('otp', gettext('One-Time-Password (OTP)'), gettext('OTP')),
     EMAIL: addExtendedEnumValue('email', gettext('E-Mail'), gettext('E-Mail'))
+  })
+  .constant('dateTimePickerValues', {
+     now: gettext('Jetzt'),
+     close: gettext('Schliessen'),
+     clear: gettext('Löschen'),
+     today: gettext('Heute'),
+     date: gettext('Datum'),
+     time: gettext('Zeit'),
+     cancel: gettext('Abbrechen')
   })
   .constant('uiDatetimePickerConfig', {
     dateFormat: 'dd.MM.yyyy HH:mm',
@@ -534,6 +547,12 @@ angular
     '$qProvider',
     function($qProvider) {
       $qProvider.errorOnUnhandledRejections(false);
+    }
+  ])
+  .config([
+    'tmhDynamicLocaleProvider',
+    function (tmhDynamicLocaleProvider) {
+        tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale.toLowerCase().replace(\'_\',\'-\')}}.js');
     }
   ])
     .constant('NG_QUILL_CONFIG', {

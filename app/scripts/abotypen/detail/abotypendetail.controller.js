@@ -3,11 +3,11 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('AbotypenDetailController', ['$scope', '$rootScope', '$filter', '$routeParams',
+  .controller('AbotypenDetailController', ['$scope', '$filter', '$routeParams',
     '$location', 'gettext', 'NgTableParams', 'AbotypenDetailModel','ZusatzAbotypenDetailModel', 'msgBus',
     'LIEFERRHYTHMEN', 'PREISEINHEITEN', 'LAUFZEITEINHEITEN', 'FRISTEINHEITEN',
     'EnumUtil',
-    function($scope, $rootScope, $filter, $routeParams, $location, gettext, NgTableParams,
+    function($scope, $filter, $routeParams, $location, gettext, NgTableParams,
       AbotypenDetailModel, ZusatzAbotypenDetailModel, msgBus, LIEFERRHYTHMEN, PREISEINHEITEN,
       LAUFZEITEINHEITEN, FRISTEINHEITEN,
       EnumUtil) {

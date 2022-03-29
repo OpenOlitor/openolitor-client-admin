@@ -21,7 +21,7 @@ angular.module('openolitor-admin')
           id: undefined,
           arbeitskategorien: [],
           mehrPersonenOk: true,
-          status: 'neu'
+          status: 'Neu'
         }
       };
 

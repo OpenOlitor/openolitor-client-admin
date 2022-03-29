@@ -11,6 +11,7 @@ angular.module('openolitor-admin')
     function($scope, $uibModalInstance, $log, abotyp, vertrieb, von, moment,
       lieferungen,
       LIEFERZEITPUNKTE, LIEFERRHYTHMEN) {
+
       $scope.von = von;
       $scope.initVon = von;
       $scope.abotyp = abotyp;

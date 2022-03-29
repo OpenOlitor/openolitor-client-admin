@@ -20,6 +20,7 @@ angular.module('openolitor-admin')
       $rootScope.viewId = 'D-Abo';
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
+
       $scope.ABOTYPEN_ARRAY = EnumUtil.asArray(ABOTYPEN).map(function(typ) {
         return typ.id;
       });

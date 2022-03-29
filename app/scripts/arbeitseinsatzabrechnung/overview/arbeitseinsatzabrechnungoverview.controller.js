@@ -38,6 +38,8 @@ angular
       $scope.entries = [];
       $scope.loading = false;
       $scope.model = {};
+      //gettext has troubles with the ampersand and the translate label on the html. Workaround
+      $scope.getPageTitle = 'Arbeitseinsätze & Abos';
 
       //watch for set of Arbeitskategorien
       $scope.kategorienL = [];
