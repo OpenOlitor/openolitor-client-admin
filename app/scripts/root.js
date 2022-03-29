@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
     'appConfig', 'cssInjector', '$route',
-    'ooAuthService', '$cookies', 'moment', 'dialogService', 'alertService','tmhDynamicLocale','uiDatetimePickerConfig',
+    'ooAuthService', '$cookies', 'moment', 'dialogService', 'alertService','tmhDynamicLocale','uiDatetimePickerConfig', 'dateTimePickerValues',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
       $timeout, BUILD_NR, appConfig, cssInjector, $route,
-      ooAuthService, $cookies, moment, dialogService, alertService, tmhDynamicLocale,uiDatetimePickerConfig) {
+      ooAuthService, $cookies, moment, dialogService, alertService, tmhDynamicLocale,uiDatetimePickerConfig, dateTimePickerValues) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
@@ -37,6 +37,16 @@ angular.module('openolitor-admin')
 
       //initial launch
       checkSize();
+
+      $rootScope.translateCalendar = function(){
+        uiDatetimePickerConfig.buttonBar.close.text = gettextCatalog.getString(dateTimePickerValues.close);
+        uiDatetimePickerConfig.buttonBar.clear.text = gettextCatalog.getString(dateTimePickerValues.clear);
+        uiDatetimePickerConfig.buttonBar.now.text = gettextCatalog.getString(dateTimePickerValues.now);
+        uiDatetimePickerConfig.buttonBar.today.text = gettextCatalog.getString(dateTimePickerValues.today);
+        uiDatetimePickerConfig.buttonBar.date.text = gettextCatalog.getString(dateTimePickerValues.date);
+        uiDatetimePickerConfig.buttonBar.time.text = gettextCatalog.getString(dateTimePickerValues.time);
+        uiDatetimePickerConfig.buttonBar.cancel.text = gettextCatalog.getString(dateTimePickerValues.cancel);
+      }
 
       $scope.connected = false;
       $scope.showConnectionErrorMessage = false;
@@ -134,6 +144,7 @@ angular.module('openolitor-admin')
           tmhDynamicLocale.set(lang);
           $scope.$emit('languageChanged');
           moment.locale(lang);
+          $rootScope.translateCalendar();
         }
       };
 
@@ -208,16 +219,6 @@ angular.module('openolitor-admin')
           );
         }
       };
-
-      $rootScope.translateCalendar = function(){
-        uiDatetimePickerConfig.buttonBar.close.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.close.text);
-        uiDatetimePickerConfig.buttonBar.clear.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.clear.text);
-        uiDatetimePickerConfig.buttonBar.now.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.now.text);
-        uiDatetimePickerConfig.buttonBar.today.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.today.text);
-        uiDatetimePickerConfig.buttonBar.date.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.date.text);
-        uiDatetimePickerConfig.buttonBar.time.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.time.text);
-        uiDatetimePickerConfig.buttonBar.cancel.text = gettextCatalog.getString(uiDatetimePickerConfig.buttonBar.cancel.text);
-      }
 
       $rootScope.$on('$routeChangeStart', function (event, next, prev) {
         alertService.clearAll();

@@ -342,6 +342,15 @@ angular
     OTP: addExtendedEnumValue('otp', gettext('One-Time-Password (OTP)'), gettext('OTP')),
     EMAIL: addExtendedEnumValue('email', gettext('E-Mail'), gettext('E-Mail'))
   })
+  .constant('dateTimePickerValues', {
+     now: gettext('Jetzt'),
+     close: gettext('Schliessen'),
+     clear: gettext('Löschen'),
+     today: gettext('Heute'),
+     date: gettext('Datum'),
+     time: gettext('Zeit'),
+     cancel: gettext('Abbrechen')
+  })
   .constant('uiDatetimePickerConfig', {
     dateFormat: 'dd.MM.yyyy HH:mm',
     defaultTime: '08:00:00',

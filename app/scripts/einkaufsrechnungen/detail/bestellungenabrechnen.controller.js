@@ -8,7 +8,6 @@ angular.module('openolitor-admin')
 
     function($scope, $rootScope, EinkaufsrechnungenOverviewService, msgBus, lodash) {
       $rootScope.viewId = 'D-Eink';
-      $rootScope.translateCalendar();
 
       $scope.bestellungenAbrechnen = {
         ids: $scope.bestellungIds,

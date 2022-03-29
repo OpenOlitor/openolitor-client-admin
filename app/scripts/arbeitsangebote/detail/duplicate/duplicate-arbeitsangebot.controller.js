@@ -3,10 +3,9 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('ArbeitsangebotDuplicateController', ['$scope', '$rootScope', '$uibModalInstance',
+  .controller('ArbeitsangebotDuplicateController', ['$scope', '$uibModalInstance',
     '$log', 'arbeitsangebot', 'moment', 'RHYTHMEN', 'EnumUtil','lodash',
-    function($scope, $rootScope, $uibModalInstance, $log, arbeitsangebot, moment, RHYTHMEN, EnumUtil, lodash) {
-      $rootScope.translateCalendar();
+    function($scope, $uibModalInstance, $log, arbeitsangebot, moment, RHYTHMEN, EnumUtil, lodash) {
       $scope.initVon = arbeitsangebot.zeitVon;
       $scope.von = arbeitsangebot.zeitVon;
       $scope.arbeitsangebot = arbeitsangebot;
