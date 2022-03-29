@@ -18,7 +18,6 @@ angular.module('openolitor-admin')
       alertService, NgTableParams, LAUFZEITEINHEITEN, ProjektService) {
 
       $rootScope.viewId = 'D-Abo';
-      $rootScope.translateCalendar();
 
       $scope.VERTRIEBSARTEN = VERTRIEBSARTEN;
 

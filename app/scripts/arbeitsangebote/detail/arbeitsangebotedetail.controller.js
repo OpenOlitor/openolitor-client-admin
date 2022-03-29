@@ -15,7 +15,6 @@ angular.module('openolitor-admin')
       appConfig) {
 
       $rootScope.viewId = 'D-Aban';
-      $rootScope.translateCalendar();
 
       var defaults = {
         model: {

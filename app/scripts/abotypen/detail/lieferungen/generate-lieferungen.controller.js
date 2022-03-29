@@ -3,16 +3,15 @@
 /**
  */
 angular.module('openolitor-admin')
-  .controller('GenerateLieferungenController', ['$scope', '$rootScope', '$uibModalInstance',
+  .controller('GenerateLieferungenController', ['$scope', '$uibModalInstance',
     '$log', 'abotyp', 'vertrieb', 'von', 'moment', 'lieferungen',
     'LIEFERZEITPUNKTE',
     'LIEFERRHYTHMEN',
 
-    function($scope, $rootScope, $uibModalInstance, $log, abotyp, vertrieb, von, moment,
+    function($scope, $uibModalInstance, $log, abotyp, vertrieb, von, moment,
       lieferungen,
       LIEFERZEITPUNKTE, LIEFERRHYTHMEN) {
 
-      $rootScope.translateCalendar();
       $scope.von = von;
       $scope.initVon = von;
       $scope.abotyp = abotyp;
