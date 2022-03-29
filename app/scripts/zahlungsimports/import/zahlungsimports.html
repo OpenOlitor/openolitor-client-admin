@@ -92,7 +92,7 @@
                     <span ng-show="!zahlungsEingang.kundeId">-</span>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag | ooCurrency:projekt.waehrung:true}}
+                    {{zahlungsEingang.betrag | ooCurrency:true}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}
@@ -149,7 +149,7 @@
                     <span ng-show="!zahlungsEingang.kundeId">-</span>
                   </td>
                   <td>
-                    {{zahlungsEingang.betrag | ooCurrency:projekt.waehrung:true}}
+                    {{zahlungsEingang.betrag | ooCurrency:true}}
                   </td>
                   <td>
                     {{zahlungsEingang.referenzNummer}}

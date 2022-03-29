@@ -47,7 +47,7 @@
                 {{rechnungsPosition.beschrieb}}
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
-                {{rechnungsPosition.betrag | ooCurrency:projekt.waehrung:true}}
+                {{rechnungsPosition.betrag | ooCurrency:true}}
               </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="rechnungsPositionenStatus">
                 {{rechnungsPosition.status}}
