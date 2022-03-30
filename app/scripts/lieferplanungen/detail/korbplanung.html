@@ -47,17 +47,15 @@
   </div>
   <div class="row">
     <div class="col-md-4 lieferplanung-produkte">
-      <div class="panel panel-default panel-fixed-height-full">
+      <div class="panel panel-default panel-fixed-height-full list-of-products">
         <div class="panel-heading clearfix">
           <h3 class="panel-title"><span class="navbar-brand" translate>Produkte-Angebot</span></h3>
-          <span class="pull-right">
-            <span class="btn btn-default btn-sm" ng-show="valuesEditable()"
+          <span class="product-list pull-right">
+            <span class="fa fa-filter fa-2x filter_planning_symbol"></span>
+            <oo-dropdown class="filter_planning_dropdown" alignment="right" dropdown-id="kategorien" display-style="uib-dropdown" values="kategorienL" selected-value="produkteKategorie" selected-function="filterDataForCategoriesFunc()"></oo-dropdown>
+            <span class="btn btn-default btn-sm special-products" ng-show="valuesEditable()"
               oo-draggable="true" oo-draged-type="'newProdukt'" title="{{'Sonderprodukt einfügen' | translate}}"><span class="fa fa-life-ring"></span></span>
           </span>
-          <div class="col-md-12">
-            <span class="fa fa-filter"></span>
-            <oo-dropdown dropdown-id="kategorien" display-style="uib-dropdown" values="kategorienL" selected-value="produkteKategorie" selected-function="filterDataForCategoriesFunc()"></oo-dropdown>
-          </div>
         </div>
         <div class="panel-body produkteliste">
           <table ng-table="tableParams" class="table table-striped" show-filter="true" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
