@@ -92,7 +92,7 @@
       </script>
       <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
         <div class="panel-heading clearfix" ng-style="abotypLieferung.abotyp.typ === 'ZusatzAbotyp' &&
-                                           {'background': 'linear-gradient({{abotypLieferung.abotyp.farbCode}} 50%, #ffffff 50%)','background-size':'100% 2px'} 
+                                           {'background': 'linear-gradient(to right, {{abotypLieferung.abotyp.farbCode}} 10%, #ffffff 90%)'} 
                                            || {'background': '{{abotypLieferung.abotyp.farbCode}}'}">
           <h3 class="panel-title lieferplanung-title">
             <span class="navbar-brand" data-toggle="collapse" data-target="#abotypLieferung_{{abotypLieferung.id}}" aria-expanded="true">

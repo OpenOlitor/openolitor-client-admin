@@ -44,10 +44,11 @@
                 <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.id}}</a>
               </td>
               <td data-title="'Kunde'|translate" sortable="'kundeId'">
-                <a ng-click="navigateToKunde(rechnung.id)" ng-href="#/kunden/{{rechnung.kundeId}}">{{rechnung.kundeId}}</a>
+                {{rechnung.kundeId}} &nbsp; 
+                <a target="_blank" rel="noopener noreferrer" ng-click="navigateToKunde(rechnung.id)" ng-href="#/kunden/{{rechnung.kundeId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Titel'|translate" sortable="'titel'">
-                <a ng-href="#/rechnungen/{{rechnung.id}}">{{rechnung.titel}}</a>
+                {{rechnung.titel}}
               </td>
               <td data-title="'Betrag'|translate" sortable="'betrag'">
                 {{rechnung.betrag | ooCurrency:true}}

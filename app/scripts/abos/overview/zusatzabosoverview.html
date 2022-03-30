@@ -33,16 +33,11 @@
               <td data-title="'Nr. (Haupt/Zusatzabo)'|translate" sortable="'id'" filter="{id: 'number'}">
                 <a ng-click="selectZusatzAbo(abo, 'selectedRow_' + abo.id)">{{abo.hauptAboId}} / {{abo.id}}&nbsp;<i class="fa fa-chevron-right"></i></a>
               </td>
-              <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
-                <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
-                <span ng-if="abo.zusatzAboIds.length > 0">
-                  <span ng-repeat="(name, occ) in abo.zusatzAbotypNames | countOcc " class="badge">
-                    <span ng-if="occ > 1">{{occ}}x </span>{{name|translate}}
-                  </span>
-                </span>
+              <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">{{abo.abotypName}} &nbsp;
+                <a ng-href="#/abotypen/{{abo.abotypId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Abonnentin'|translate" sortable="'kunde'">
-                <a  ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
+               {{abo.kunde}} &nbsp;<a target="_blank" rel="noopener noreferrer" ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Start'|translate" sortable="'start'">
                 {{abo.start | date:'dd.MM.yyyy'}}
