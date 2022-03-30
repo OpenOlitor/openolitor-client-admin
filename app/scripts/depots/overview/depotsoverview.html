@@ -30,13 +30,14 @@
                 <a ng-href="#/depots/{{depot.id}}">{{depot.kurzzeichen}}</a>
               </td>
               <td data-title="'Name'|translate:'notPerson'" sortable="'name'">
-                <a ng-href="#/depots/{{depot.id}}">{{depot.name}}</a>
+                {{depot.name}}
               </td>
               <td data-title="'Ansprechpartner'|translate" sortable="'apName+apVorname'">
                 {{depot.apName}} {{depot.apVorname}}
               </td>
               <td data-title="'AP Tel'|translate" sortable="'apTelefon'">
-                <a href="tel:{{depot.apTelefon}}">{{depot.apTelefon}}</a>
+                {{depot.apTelefon}} &nbsp; 
+                <a ng-if=depot.apTelefon href="tel:{{depot.apTelefon}}"><i class="glyphicon glyphicon-earphone"></i></a>
               </td>
               <td data-title="'Verantwortliche_r'|translate" sortable="'vName+vVorname'">
                 {{depot.vName}} {{depot.vVorname}}
