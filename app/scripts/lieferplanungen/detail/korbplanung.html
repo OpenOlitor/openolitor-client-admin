@@ -91,7 +91,9 @@
         </div>
       </script>
       <div class="panel panel-default panel-lieferplanung" oo-drop-target="true" on-drop="dropProdukt(dragEl, dropEl, type)">
-        <div class="panel-heading clearfix" ng-style="{'background-color':abotypLieferung.abotyp.farbCode}">
+        <div class="panel-heading clearfix" ng-style="abotypLieferung.abotyp.typ === 'ZusatzAbotyp' &&
+                                           {'background': 'linear-gradient(to right, {{abotypLieferung.abotyp.farbCode}} 10%, #ffffff 90%)'} 
+                                           || {'background': '{{abotypLieferung.abotyp.farbCode}}'}">
           <h3 class="panel-title lieferplanung-title">
             <span class="navbar-brand" data-toggle="collapse" data-target="#abotypLieferung_{{abotypLieferung.id}}" aria-expanded="true">
               <span class="pre-info" uib-tooltip-template="'anzahlTooltipTemplate.html'" tooltip-popup-close-delay="3000">{{abotypLieferung.anzahlKoerbeZuLiefern}}x</span>
@@ -102,10 +104,8 @@
             </span>
             <span class="pull-right">
               <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCurrency:true}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
-              <span ng-show="valuesEditable()" class="btn btn-default btn-sm"
-                oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
-              <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
-              <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?'|translate}}"></oo-delete-button>
+              <span ng-show="valuesEditable()" class="btn btn-default btn-sm" oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
+              <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Die Löschung wird sofort wirksam. Soll der Löschvorgang fortgesetzt werden' | translate}}"></oo-delete-button>
               <div ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" translate> Zusatzabo</div>
             </span>
           </h3>

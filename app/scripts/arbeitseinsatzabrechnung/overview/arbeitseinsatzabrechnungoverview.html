@@ -29,7 +29,8 @@
                 <input type="checkbox" ng-model="checkboxes.items[kunde.kundeId]" />
               </td>
               <td data-title="'Kunde'|translate" sortable="'bezeichnung'">
-                <a ng-href="#/kunden/{{kunde.kundeId}}">{{kunde.kundeBezeichnung}}</a>
+                {{kunde.kundeBezeichnung}} &nbsp; 
+                <a target="_blank" rel="noopener noreferrer" ng-href="#/kunden/{{kunde.kundeId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Summe der Soll-Einsätze'|translate" sortable="'summeEinsaetzeSoll'">
                 {{kunde.summeEinsaetzeSoll}}
