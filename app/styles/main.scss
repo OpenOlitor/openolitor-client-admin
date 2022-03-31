@@ -334,6 +334,11 @@ textarea.ng-invalid {
   background-color: #fff3dc;
 }
 
+.list-of-products{
+  position: sticky;
+  top: 70px;
+}
+
 .panel-heading-fixed
  {
   position: sticky;
@@ -880,4 +885,19 @@ a.env-warning.testprod {
     margin-bottom: 0px;
     padding: 1.5em;
   }
+}
+
+.pull-right .filter_planning_symbol{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.pull-right .filter_planning_dropdown{
+  padding-left: 10px;
+  vertical-align: super;
+}
+
+.pull-right .special-products{
+  margin-left: 30px;
+  vertical-align: super;
 }
