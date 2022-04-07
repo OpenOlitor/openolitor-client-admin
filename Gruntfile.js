@@ -113,6 +113,7 @@ module.exports = function(grunt) {
           port: 9003,
           https: false,
           xforward: false,
+          ws: true, 
           rewrite: {
             '^/api-(.*)$': '/$1',
             '^/api-(.*/ws)$': '/$1'
