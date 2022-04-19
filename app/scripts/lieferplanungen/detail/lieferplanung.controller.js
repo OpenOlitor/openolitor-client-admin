@@ -9,11 +9,13 @@ angular.module('openolitor-admin')
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT',
     'KORBSTATUS', 'msgBus', 'cloneObj',
     'gettext', '$location', 'lodash', '$uibModal', 'gettextCatalog', 'ProduktekategorienModel',
+    '$interval',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
       LIEFEREINHEIT, KORBSTATUS, msgBus,
-      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel) {
+      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel,
+      $interval) {
       $rootScope.viewId = 'D-Pla';
 
       $scope.liefereinheiten = LIEFEREINHEIT;
@@ -28,6 +30,9 @@ angular.module('openolitor-admin')
       $scope.search = {
         query: ''
       };
+
+      var interval = $interval(refreshLieferung, 5000);
+      var changesInLieferungen = false; 
 
       var load = function() {
         LieferplanungModel.get({
@@ -101,13 +106,16 @@ angular.module('openolitor-admin')
         }
       );
 
-      LieferplanungModel.getLieferungen({
+      $scope.loadLieferungen = function(){LieferplanungModel.getLieferungen({
         id: $routeParams.id
-      }, function(result) {
-        $scope.abotypenLieferungen = result;
-        $scope.recalculateProduzentListen(true);
-        $scope.recalculateTotalAnzahl();
-      });
+        }, function(result) {
+          $scope.abotypenLieferungen = result;
+          $scope.recalculateProduzentListen(true);
+          $scope.recalculateTotalAnzahl();
+        });
+      }
+
+      $scope.loadLieferungen();
 
       $scope.recalculateTotalAnzahl = function() {
         $scope.anzahlKoerbeZuLiefern = 0;
@@ -992,6 +1000,31 @@ angular.module('openolitor-admin')
         isDisabled: function() { return true; },
         onExecute: function() { }
       } ].concat($scope.getPostAbschliessenAktionen());
+
+      function refreshLieferung(){
+        if (changesInLieferungen) {
+          $scope.loadLieferungen();
+          changesInLieferungen = false;
+        }
+      }
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferung' ){
+          changesInLieferungen = true;
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferung' ){
+          changesInLieferungen = true;
+        }
+      });
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferung'){
+          changesInLieferungen = true;
+        }
+      });
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === 'Lieferplanung' && msg.entity
