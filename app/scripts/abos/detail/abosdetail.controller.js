@@ -512,7 +512,7 @@ angular.module('openolitor-admin')
           $scope.aboDetailForm.$setPristine();
         }
         if(angular.isUndefined($scope.abo.ende) || $scope.abo.ende === null || $scope.abo.ende === '' || $scope.abo.start <= $scope.abo.ende) {
-          if($scope.abo.price == $scope.abo.abotyp.preis) {
+          if($scope.abo.price == $scope.abotyp.preis) {
             $scope.abo.price = undefined;
           }
           return $scope.abo.$save();
