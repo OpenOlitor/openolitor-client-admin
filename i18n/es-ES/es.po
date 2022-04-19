@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 60\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-04-19 17:50\n"
+"PO-Revision-Date: 2022-04-19 19:07\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -2439,7 +2439,7 @@ msgstr "Porción"
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:25
 #: app/scripts/touren/detail/tourlieferungen.html:4
 msgid "Position"
-msgstr "Posición"
+msgstr "Artículo"
 
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:6
 msgid "Postauslieferung"
@@ -2747,11 +2747,11 @@ msgstr "El artículo de factura no ha podido ser creado"
 
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:59
 msgid "Rechnungspositionen sind nicht im Status 'Offen' und können daher nicht einer Rechnung zugewiesen werden."
-msgstr "La factura no está en el estado \"abierta\" y no puede ser atribuida a una factura."
+msgstr "El artículo no está \"abierto\" y por lo tanto, no puede ser asignado a una factura."
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:72
 msgid "Rechnungspositionen wurden erstellt"
-msgstr "Los artículos de factura han sido creados"
+msgstr "Los artículos han sido creados"
 
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:62
 msgid "Rechnungspositionen wurden verarbeitet"
