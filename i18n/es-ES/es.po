@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 60\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-03-29 17:55\n"
+"PO-Revision-Date: 2022-04-19 17:37\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -880,7 +880,7 @@ msgstr "Elegir o insertar un nuevo fichero CSS"
 
 #: app/scripts/app.js:185
 msgid "Canceled"
-msgstr ""
+msgstr "Cancelado"
 
 #: app/scripts/app.js:312
 msgid "Created"
@@ -1250,7 +1250,7 @@ msgstr "Modificar los parámetros"
 
 #: app/index.html:136
 msgid "Einsätze &amp; Abos"
-msgstr ""
+msgstr "Colaboraciones y abonos"
 
 #: app/scripts/kunden/detail/kundendetail.html:104
 msgid "Email"
@@ -1447,11 +1447,11 @@ msgstr "Fechas de entrega previstas"
 
 #: app/scripts/utils/overview/overviewfiltergeschaeftsjahre.controller.html:2
 msgid "Geschäftsjahr"
-msgstr ""
+msgstr "Año fiscal"
 
 #: app/scripts/utils/overview/overviewfiltergeschaeftsjahre.controller.html:3
 msgid "Geschäftsjahre"
-msgstr ""
+msgstr "Años fiscales"
 
 #: app/scripts/projekt/settings/projektsettings.html:299
 #: app/scripts/projekt/settings/projektsettings.html:302
@@ -1776,35 +1776,35 @@ msgstr "Número de cliente"
 #: app/scripts/kunden/overview/kundenoverview.html:10
 #: app/scripts/personen/overview/personenoverview.html:10
 msgid "Kunde erstellen"
-msgstr "Crear abonado"
+msgstr "Crear abonad@"
 
 #: app/scripts/kunden/detail/kundendetail.html:303
 #: app/scripts/kunden/detail/kundendetail.html:413
 msgid "Kunde erstellt"
-msgstr "Abonado creado"
+msgstr "Abonad@ cread@"
 
 #: app/scripts/kunden/detail/kundendetail.html:13
 #: app/scripts/rechnungen/detail/rechnungendetail.html:50
 msgid "Kunde suchen..."
-msgstr "Buscar abonado..."
+msgstr "Buscar abonad@..."
 
 #: app/index.html:94
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
-msgstr "Abonados"
+msgstr "Abonad@s"
 
 #: app/scripts/projekt/settings/projektsettings.html:115
 msgid "Kunden E-Mail erforderlich"
-msgstr "Correo electrónico del abonado requerido"
+msgstr "Correo electrónico del abonad@ obligatorio"
 
 #: app/scripts/personen/overview/personenoverview.html:73
 msgid "Kundenbemerkungen"
-msgstr "Comentarios de los abonados"
+msgstr "Comentarios de l@s abonad@s"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:125
 msgid "Kundenbrief"
-msgstr "Resumen del abonado"
+msgstr "Resumen de abonad@"
 
 #: app/scripts/kunden/overview/kundenoverview.html:75
 msgid "Kundenbrief.odt"
@@ -1812,21 +1812,21 @@ msgstr "resumenAbonado.ODT"
 
 #: app/scripts/kunden/detail/kundendetail.html:228
 msgid "Kundendetails"
-msgstr "Detalles del abonado"
+msgstr "Detalles de abonad@"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:248
 msgid "Kundenliste anzeigen"
-msgstr "Mostrar la lista de abonados"
+msgstr "Mostrar la lista de abonad@s"
 
 #: app/scripts/personen/overview/personenoverview.html:60
 #: app/scripts/projekt/settings/kundentypen.html:21
 #: app/scripts/projekt/settings/kundentypen.html:24
 msgid "Kundentyp"
-msgstr "Tipo de abonado"
+msgstr "Tipo de abonad@"
 
 #: app/scripts/projekt/settings/kundentypen.html:9
 msgid "Kundentyp erstellen"
-msgstr "Crear un tipo de abonado"
+msgstr "Crear un tipo de abonad@"
 
 #: app/index.html:176
 #: app/scripts/kunden/detail/kundendetail.html:29
@@ -2993,11 +2993,11 @@ msgstr "Horas"
 
 #: app/scripts/projekt/settings/projektsettings.html:334
 msgid "Style<br>(Admin-Seite)"
-msgstr "Estilo<br>(Portal del administrador)"
+msgstr "Estilo<br>(Portal de administrador(a))"
 
 #: app/scripts/projekt/settings/projektsettings.html:349
 msgid "Style<br>(Kundenportal)"
-msgstr "Estilo<br>(portal del abonado)"
+msgstr "Estilo<br>(Portal de abonad@)"
 
 #: app/scripts/app.js:168
 msgid "Stück"
@@ -3072,7 +3072,7 @@ msgstr "Días"
 #: app/scripts/projekt/settings/projektsettings.html:282
 #: app/scripts/projekt/settings/projektsettings.html:285
 msgid "Teilnehmernummer"
-msgstr "Número de abonado"
+msgstr "Número de abonad@ (sólo necesario en Suiza)"
 
 #: app/scripts/depots/detail/depotsdetail.html:161
 #: app/scripts/depots/detail/depotsdetail.html:201
@@ -3242,7 +3242,7 @@ msgstr "Mantenimiento"
 
 #: app/scripts/projekt/settings/projektsettings.html:233
 msgid "Unterhaltsmodus (Login auf Kundenportal blockiert)"
-msgstr "Modo mantenimiento (inicio de sesión en el portal de abonado bloqueado)"
+msgstr "Modo mantenimiento (inicio de sesión en el portal de abonad@ bloqueado)"
 
 #: app/scripts/journal/overview/journaloverview.html:34
 msgid "User"
@@ -3262,7 +3262,7 @@ msgstr "Persona responsable"
 
 #: app/scripts/app.js:334
 msgid "Vergangene"
-msgstr ""
+msgstr "Pasado"
 
 #: app/scripts/app.js:141
 #: app/scripts/app.js:145
@@ -3389,7 +3389,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre\n"
 " {{person.name}} Apellidos {{person.rolle}} Rol \n"
 " \n"
-" {{person.kundeId}} Nº de abonado"
+" {{person.kundeId}} Nº de abonad@"
 
 #: app/scripts/abos/overview/abosoverview.controller.js:325
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:342
@@ -3430,9 +3430,9 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.anrede}} Formula de cortesía \n"
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
-" {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
-" {{abotyp.name}} Nombre del tipo de abono \n"
+" {{person.rolle}} Rol\n"
+" {{person.kundeId}} Nº de abonad@\n"
+" {{abotyp.name}} Nombre del tipo de abono\n"
 " {{abotyp.beschreibung}} Descripción del tipo de abono \n"
 " {{abotyp.preis}} Precio \n"
 " {{abotyp.preiseinheit}} Precio por unidad \n"
@@ -3455,7 +3455,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre\n"
 " {{person.name}} Apellido \n"
 " {{person.rolle}} Rol de la persona \n"
-" {{person.kundeId}} Id del abonado \n"
+" {{person.kundeId}} Id de abonad@\n"
 " {{depot.name}} nombre del punto de recogida \n"
 " {{depot.kurzzeichen}} \n"
 " {{depot.plz}} Dirección del punto de recogida \n"
@@ -3479,9 +3479,9 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Número de abonado \n"
-" {{kunde.bezeichnung}} Descripción de abonado \n"
-" {{kunde.strasse}} Calle de abonado \n"
+" {{person.kundeId}} Número de abonad@\n"
+" {{kunde.bezeichnung}} Descripción de abonad@ \n"
+" {{kunde.strasse}} Calle de abonad@\n"
 " {{kunde.hausNummer}} Número de calle \n"
 " {{kunde.plz}} Código postal \n"
 " {{kunde.ort}} Municipio"
@@ -3507,7 +3507,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{rechnung.titel}} Título de factura \n"
 " {{rechnung.betrag}} Precio de factura \n"
 " {{rechnung.rechnungsDatum}} Fecha de factura \n"
@@ -3532,7 +3532,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{tour.name}} Nombre de la ronda \n"
 " {{tour.beschreibung}} Descripción de la ronda"
 
@@ -3553,7 +3553,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{zusatzabotyp.name}} Nombre del abono suplementario \n"
 " {{zusatzabotyp.beschreibung}} Descripción del abono suplementario \n"
 " {{zusatzabotyp.preis}} Precio \n"
@@ -3768,7 +3768,7 @@ msgstr "kg"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:153
 msgid "kunde"
-msgstr "abonado"
+msgstr "abonad@"
 
 #: app/scripts/app.js:176
 msgid "l"
