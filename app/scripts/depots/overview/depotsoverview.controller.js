@@ -63,7 +63,7 @@ angular.module('openolitor-admin')
         var activeCheckboxes = _.pickBy($scope.checkboxes.items, function(value, key) {
           return value;
         });
-        $scope.depotIdsMailing = _($scope.filteredEntries)
+        $scope.depotIdsMailing = _($scope.entries)
           .keyBy('id')
           .at(Object.keys(activeCheckboxes))
           .map('id')
@@ -148,7 +148,7 @@ angular.module('openolitor-admin')
             dataSet = $filter('filter')(dataSet, params.filter());
 
             $scope.filteredEntries = dataSet;
-            updateIds($scope.filteredEntries)
+            updateIds();
 
             params.total(dataSet.length);
             return dataSet.slice((params.page() - 1) * params.count(),
@@ -158,21 +158,20 @@ angular.module('openolitor-admin')
         });
       }
 
-      function updateIds(listOfEntries) {
+      function updateIds() {
         var ids = [];
         var checkedItems = [];
         var items = [];
         angular.forEach($scope.checkboxes.checkedItems, function(i){
-          if (lodash.filter(listOfEntries, i).length > 0){
-            ids.push(i.id);
-            checkedItems.push(i);
-            items.push([i.id,true]);
-          }
+          ids.push(i.id);
+          checkedItems.push(i);
+          items.push([i.id,true]);
         })
 
         $scope.checkboxes.ids = ids;
         $scope.checkboxes.checkedItems = checkedItems;
         $scope.checkboxes.items = Object.fromEntries(items);
+        $scope.updateChecked();
       }
 
       function search() {
