@@ -210,7 +210,7 @@ angular
                 : orderedData;
 
               $scope.filteredEntries = filteredData;
-              updateIds($scope.filteredEntries)
+              updateIds();
 
               params.total(orderedData.length);
               return orderedData.slice(
@@ -222,16 +222,14 @@ angular
         );
       }
 
-      function updateIds(listOfEntries) {
+      function updateIds() {
         var ids = [];
         var checkedItems = [];
         var items = [];
         angular.forEach($scope.checkboxes.checkedItems, function(i){
-          if (lodash.filter(listOfEntries, i).length > 0){
-            ids.push(i.id);
-            checkedItems.push(i);
-            items.push([i.id,true]);
-          }
+          ids.push(i.id);
+          checkedItems.push(i);
+          items.push([i.id,true]);
         })
 
         $scope.checkboxes.ids = ids;
