@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 60\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-05-04 18:38\n"
+"PO-Revision-Date: 2022-05-20 15:12\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -205,7 +205,7 @@ msgstr "Abonos"
 #: app/scripts/kunden/detail/abo/abos.html:11
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
-msgstr "Tipo de abono"
+msgstr "Tipo de subscripción"
 
 #: app/scripts/abos/overview/abosoverview.html:59
 msgid "Abotyp / Vertrieb"
@@ -214,18 +214,18 @@ msgstr "Tipo de subscr./Distr."
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:124
 msgid "Abotyp erstellen"
-msgstr "Crear un tipo de abono"
+msgstr "Crear un tipo de subscripción"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:36
 msgid "Abotyp hinzufügen:"
-msgstr "Añadir nuevo tipo de abono:"
+msgstr "Añadir nuevo tipo de subscripción:"
 
 #: app/index.html:167
 #: app/scripts/abotypen/overview/abotypen.html:6
 #: app/scripts/dashboard/dashboard.html:57
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:36
 msgid "Abotypen"
-msgstr "Tipo de abono"
+msgstr "Tipos de subscripciones"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:30
 msgid "Abrechnen"
@@ -1056,7 +1056,7 @@ msgstr "Este mes"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:5
 msgid "Dieser Abotyp ist derzeit nicht aktiv"
-msgstr "Este tipo de abono no está activo en este momento"
+msgstr "Este tipo de subscripción no está activo en este momento"
 
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:60
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:64
@@ -1065,7 +1065,7 @@ msgstr "Este/a productor/a ya existe"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:6
 msgid "Dieser Zusatzabotyp ist derzeit nicht aktiv"
-msgstr "Este tipo de abono suplementario no está activo"
+msgstr "Este tipo de subscripción suplementaria no está activo"
 
 #: app/scripts/abos/detail/abosdetail.html:30
 msgid "Dieses Abo ist inaktiv"
@@ -1363,7 +1363,7 @@ msgstr "Anulado crédito muy bajo"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:108
 msgid "Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?"
-msgstr "Si deseas añadir un nuevo tipo de abono suplementario, se tienen que borrar todos los tipos de abono concernientes previamente y crearlos de nuevo. ¿Aun así quieres borrarlos?"
+msgstr "Si deseas añadir un nuevo tipo de subscripción suplementaria, se tienen que borrar todos los tipos de abono concernientes previamente y crearlos de nuevo. ¿Aun así quieres borrarlos?"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:169
 #: app/scripts/depots/detail/depotsdetail.html:83
@@ -1624,7 +1624,7 @@ msgstr "Enero"
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:3
 msgid "Je Vertrieb wird ein eigener Korb geplant"
-msgstr "La planificación de las cestas se hacer por distribución y por tipo de abono"
+msgstr "La planificación de las cestas se hacer por distribución y por tipo de subscripción"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:726
 msgid "Jedes Produkt muss über eine Beschreibung verfügen."
@@ -3409,7 +3409,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
 " {{person.kundeId}} Nº de abonado \n"
-" {{abo.abotypName}} Nombre de tipo de abono \n"
+" {{abo.abotypName}} Nombre de tipo de subscripción \n"
 " {{abo.kunde}} Abonado \n"
 " {{abo.start}} Fecha de inicio de abono \n"
 " {{abo.ende}} Fecha de finalización de abono"
@@ -3433,7 +3433,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.rolle}} Rol\n"
 " {{person.kundeId}} Nº de abonad@\n"
 " {{abotyp.name}} Nombre del tipo de abono\n"
-" {{abotyp.beschreibung}} Descripción del tipo de abono \n"
+" {{abotyp.beschreibung}} Descripción del tipo de subscripción \n"
 " {{abotyp.preis}} Precio \n"
 " {{abotyp.preiseinheit}} Precio por unidad \n"
 " {{abotyp.laufzeiteinheit}} Unidad"
@@ -3660,7 +3660,7 @@ msgstr "Abono suplementario:"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:6
 msgid "ZusatzAbotypen"
-msgstr "Tipos de abonos suplementarios"
+msgstr "Tipos de subscripciones suplementarias"
 
 #: app/scripts/abos/detail/abosdetail.html:172
 #: app/scripts/lieferplanungen/detail/korbplanung.html:109
@@ -3681,12 +3681,12 @@ msgstr "Ids de abonos suplementarios"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:11
 msgid "Zusatzabotyp"
-msgstr "Tipo de abono suplementario"
+msgstr "Tipo de subscripción suplementaria"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:97
 msgid "Zusatzabotyp erstellen"
-msgstr "Crear un tipo de abono suplementario"
+msgstr "Crear un tipo de subscripción suplementaria"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:140
 #: app/scripts/depots/detail/depotsdetail.html:70
