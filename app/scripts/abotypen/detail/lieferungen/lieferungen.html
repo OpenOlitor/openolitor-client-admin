@@ -51,7 +51,7 @@
                 {{lieferung.datum|date:"EEE, dd.MM.yyyy"}}
               </td>
               <td data-title="'Abw.'|translate">
-                <i ng-if="lieferung.anzahlAbwesenheiten > 0" class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
+                <i class="badge">{{lieferung.anzahlAbwesenheiten}}</i>
               </td>
               <td>
                 <a href="" ng-hide="deletingLieferung(lieferung)" ng-click="deleteLieferung(lieferung)" ng-if="!lieferung.lieferplanungId && lieferung.anzahlAbwesenheiten < 1"><i class="glyphicon glyphicon-remove"></i></a>
