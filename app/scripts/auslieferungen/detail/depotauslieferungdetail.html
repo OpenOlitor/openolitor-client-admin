@@ -48,7 +48,7 @@
   </div>
 
   <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
-    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'depotauslieferungen/berichte/'+reportType" ids="[model.id]" pdf_generation_options="'false'" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'depotauslieferungen/berichte/'+reportType" ids="[model.id]" pdf-generation-options="false" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
   </oo-sliding-detail>
   <oo-sliding-detail slide-in="selectedAbo" slide-out-function="unselectAboFunct()">
     <oo-abos-detail kunde-id="selectedAbo.kundeId" abo-id="selectedAbo.id"></oo-abos-detail>
