@@ -73,10 +73,15 @@ angular.module('openolitor-admin')
         angular.forEach(list, function(abotyp) {
           $scope.abotypL.push({
             'id': abotyp.id,
-            'title': abotyp.name
+            'title': abotyp.name,
+            'price': abotyp.preis
           });
         });
       });
+
+      $scope.getAbotypPriceById = function(abotypId) {
+        return $scope.abotypL.find(x => x.id === abotypId).price;
+      }
 
       $scope.updateChecked = function() {
         var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {

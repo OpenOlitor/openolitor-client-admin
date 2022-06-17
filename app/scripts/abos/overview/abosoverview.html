@@ -94,6 +94,15 @@
                   </span>
                 </span>
               </td>
+              <td ng-if="showAll" data-title="'Preis'|translate" sortable="'preis'">
+                <span ng-if="abo.price">
+                  {{abo.price | ooCurrency:true}}
+                </span>
+                <span ng-if="!abo.price">
+                  {{getAbotypPriceById(abo.abotypId) | ooCurrency:true}}
+                </span>
+              </td>
+
               <td header="'headerShowAll.html'"></td>
             </tr>
           </table>
