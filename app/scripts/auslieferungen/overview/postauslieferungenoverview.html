@@ -52,6 +52,6 @@
   </div>
 
   <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
-    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'postauslieferungen/berichte/'+reportType" ids="checkboxes.ids" pdf-generation-options="false" default-file-name="'Etiketten.zip'|translate"></oo-generate-report>
   </oo-sliding-detail>
 </div>
