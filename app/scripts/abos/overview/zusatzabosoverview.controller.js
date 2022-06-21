@@ -78,6 +78,10 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       );
     };
 
+    $scope.getAbotypPriceById = function(abotypId) {
+      return $scope.abotypL.find(x => x.id === abotypId).price;
+    }
+
     $scope.search = {
       query: '',
       queryQuery: '',
@@ -108,7 +112,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
         angular.forEach(list, function(abotyp) {
           $scope.abotypL.push({
             id: abotyp.id,
-            title: abotyp.name
+            title: abotyp.name,
+            price: abotyp.preis
           });
         });
       }
