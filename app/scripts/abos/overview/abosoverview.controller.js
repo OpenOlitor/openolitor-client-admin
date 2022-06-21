@@ -73,7 +73,8 @@ angular.module('openolitor-admin')
         angular.forEach(list, function(abotyp) {
           $scope.abotypL.push({
             'id': abotyp.id,
-            'title': abotyp.name
+            'title': abotyp.name,
+            'price': abotyp.preis
           });
         });
       });
@@ -342,12 +343,15 @@ angular.module('openolitor-admin')
         }, function(entries) {
           $scope.entries = [];
           angular.forEach(entries, function(entry){
-              if (!entry.depotId){
-                  entry.depotTourId = entry.tourId;
-              }
-              if (!entry.tourId){
-                  entry.depotTourId = entry.depotId;
-              }
+            if (!entry.depotId){
+              entry.depotTourId = entry.tourId;
+            }
+            if (!entry.tourId){
+              entry.depotTourId = entry.depotId;
+            }
+            if (!entry.price){
+              entry.price = $scope.abotypL.find(x => x.id === entry.abotypId).price;
+            }
             $scope.entries.push(entry);
           });
           $scope.tableParams.reload();

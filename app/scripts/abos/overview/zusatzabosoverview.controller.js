@@ -108,7 +108,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
         angular.forEach(list, function(abotyp) {
           $scope.abotypL.push({
             id: abotyp.id,
-            title: abotyp.name
+            title: abotyp.name,
+            price: abotyp.preis
           });
         });
       }
@@ -363,6 +364,11 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
         },
         function(entries) {
           $scope.entries = entries;
+          angular.forEach($scope.entries, function(entry) {
+            if (!entry.price){
+              entry.price = $scope.abotypL.find(x => x.id === entry.abotypId).price;
+            }
+          });
           $scope.tableParams.reload();
           $scope.loading = false;
         }

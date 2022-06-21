@@ -27,7 +27,7 @@
           <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Standardansicht' | translate}}"></i>
         </script>
         <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
-          <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
+          <table ng-table="tableParams" class="table table-striped abostable" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$" id="selectedRow_{{abo.id}}">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[abo.id]" ng-change="updateChecked()" />
@@ -93,6 +93,9 @@
                     <span ng-if="occ > 1">{{occ}}x </span>{{name|translate}}
                   </span>
                 </span>
+              </td>
+              <td ng-if="showAll" data-title="'Preis'|translate" sortable="'price'">
+                  {{abo.price | ooCurrency:true}}
               </td>
               <td header="'headerShowAll.html'"></td>
             </tr>

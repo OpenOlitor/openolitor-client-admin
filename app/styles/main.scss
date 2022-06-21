@@ -246,6 +246,21 @@ textarea.ng-invalid {
   padding-right: 4px;
 }
 
+.openolitor .abostable td:nth-child(2),
+.openolitor .abostable th:nth-child(2){
+    min-width: 70px;
+}
+
+.openolitor .abostable td:nth-child(3),
+.openolitor .abostable th:nth-child(3){
+    min-width: 120px;
+}
+
+.openolitor .abostable td:nth-child(17),
+.openolitor .abostable th:nth-child(17){
+    min-width: 90px;
+}
+
 .openolitor .ng-table th {
   text-align: left;
 }
