@@ -78,10 +78,6 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       );
     };
 
-    $scope.getAbotypPriceById = function(abotypId) {
-      return $scope.abotypL.find(x => x.id === abotypId).price;
-    }
-
     $scope.search = {
       query: '',
       queryQuery: '',
@@ -368,6 +364,11 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
         },
         function(entries) {
           $scope.entries = entries;
+          angular.forEach($scope.entries, function(entry) {
+            if (!entry.price){
+              entry.price = $scope.abotypL.find(x => x.id === entry.abotypId).price;
+            }
+          });
           $scope.tableParams.reload();
           $scope.loading = false;
         }

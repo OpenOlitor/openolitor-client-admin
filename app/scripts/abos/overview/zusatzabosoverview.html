@@ -24,7 +24,7 @@
           <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
           <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Standardansicht' | translate}}"></i>
         </script>
-        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
+        <div ng-show="entries" id="zusatzabosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$" id="selectedRow_{{abo.id}}">
               <td header="'headerCheckbox.html'">
@@ -49,15 +49,9 @@
                 <i ng-if="abo.aktiv" class="glyphicon glyphicon-ok"></i>
                 <i ng-if="!abo.aktiv" class="glyphicon glyphicon-remove"></i>
               </td>
-              <td data-title="'Preis'|translate" sortable="'preis'">
-                <span ng-if="abo.price !== undefined">
-                  {{abo.price | ooCurrency:true}}
-                </span>
-                <span ng-if="abo.price === undefined">
-                  {{getAbotypPriceById(abo.abotypId) | ooCurrency:true}}
-                </span>
+              <td data-title="'Preis'|translate" sortable="'price'">
+                {{abo.price | ooCurrency:true}}
               </td>
-
             </tr>
           </table>
         </div>

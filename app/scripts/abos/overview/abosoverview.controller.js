@@ -79,10 +79,6 @@ angular.module('openolitor-admin')
         });
       });
 
-      $scope.getAbotypPriceById = function(abotypId) {
-        return $scope.abotypL.find(x => x.id === abotypId).price;
-      }
-
       $scope.updateChecked = function() {
         var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
           return value;
@@ -347,12 +343,15 @@ angular.module('openolitor-admin')
         }, function(entries) {
           $scope.entries = [];
           angular.forEach(entries, function(entry){
-              if (!entry.depotId){
-                  entry.depotTourId = entry.tourId;
-              }
-              if (!entry.tourId){
-                  entry.depotTourId = entry.depotId;
-              }
+            if (!entry.depotId){
+              entry.depotTourId = entry.tourId;
+            }
+            if (!entry.tourId){
+              entry.depotTourId = entry.depotId;
+            }
+            if (!entry.price){
+              entry.price = $scope.abotypL.find(x => x.id === entry.abotypId).price;
+            }
             $scope.entries.push(entry);
           });
           $scope.tableParams.reload();
