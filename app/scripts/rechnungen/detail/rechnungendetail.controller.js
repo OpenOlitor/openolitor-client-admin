@@ -9,12 +9,13 @@ angular.module('openolitor-admin')
     'EnumUtil', 'appConfig', 'msgBus', '$log', 'moment', 'KundenOverviewModel',
     'KundenDetailModel',
     'RECHNUNGSTATUS', 'FileUtil', 'DataUtil', 'ReportvorlagenService', 'DetailNavigationService',
+    'lodash',
     function($scope, $rootScope, $filter, $routeParams, $http, $location,
       $uibModal,
       gettext,
       RechnungenDetailModel, EnumUtil, appConfig,
       msgBus, $log, moment, KundenOverviewModel, KundenDetailModel,
-      RECHNUNGSTATUS, FileUtil, DataUtil, ReportvorlagenService, DetailNavigationService) {
+      RECHNUNGSTATUS, FileUtil, DataUtil, ReportvorlagenService, DetailNavigationService, lodash) {
       $rootScope.viewId = 'D-Re';
 
       DetailNavigationService.cleanKundeList();
@@ -35,6 +36,20 @@ angular.module('openolitor-admin')
       };
 
       $scope.loading = false;
+
+      $scope.kunden = [];
+
+      if (!$scope.isExisting){
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.loading = true;
+
+        $scope.kunden = KundenOverviewModel.query(function() {
+          $scope.loading = false;
+        });
+      };
 
       function getAboEntry(abo) {
         return {
@@ -61,24 +76,25 @@ angular.module('openolitor-admin')
           $scope.abos = kunde.abos.map(getAboEntry);
         }).$promise;
       }
+      
+      function isValueInPersonInfo(kunde, filter) {
+        var memberContainsValue = false;
+        lodash.forEach(kunde.ansprechpersonen, function(person){
+          if (person.name.toLowerCase().contains(filter.toLowerCase()) || 
+              person.vorname.toLowerCase().contains(filter.toLowerCase())){
+            memberContainsValue = true;
+          }
+        });
+        return memberContainsValue;
+      }
 
+      function isValueInKunde(kunde,filter) {
+        return kunde.bezeichnung.toLowerCase().contains(filter.toLowerCase());
+      }
 
       $scope.getKunden = function(filter) {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.loading = true;
-
-        return KundenOverviewModel.query({
-          q: filter
-        }, function() {
-          $scope.loading = false;
-        }).$promise.then(function(kunden) {
-          var filtered = $filter('filter')(kunden, filter);
-          console.log('Filtered: ', filtered, ' with filter ', filter);
-          return filtered;
-        });
+        var values = lodash.filter($scope.kunden, kunde => (isValueInPersonInfo(kunde,filter) || isValueInKunde(kunde,filter)));
+        return values;
       };
 
       $scope.loadKunde = function(selected) {
