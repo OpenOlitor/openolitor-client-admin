@@ -22,11 +22,14 @@
           </script>
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="journalEntry in $data">
+              <td data-title="'Version'|translate">
+                {{journalEntry.journalVersion}}
+              </td>
               <td data-title="'Sequence-Nr'|translate">
                 {{journalEntry.sequenceNr}}
               </td>
               <td data-title="'Persistence Id'|translate">
-                {{journalEntry.message.persistenceId}}
+                {{journalEntry.persistenceId}}
               </td>
               <td data-title="'Datum'|translate">
                   {{getFirstEntry(journalEntry.message.payload).meta.timestamp | date:'dd.MM.yyyy HH:mm'}}
