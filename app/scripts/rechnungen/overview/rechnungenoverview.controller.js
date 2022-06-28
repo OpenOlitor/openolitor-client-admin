@@ -287,14 +287,14 @@ angular.module('openolitor-admin')
           return !$scope.checkboxes.checkedAny;
         }
         }, {
-        label: gettext('pain.008.001.07 erstellen'),
+        label: gettext('pain.008.001.02 erstellen'),
         iconClass: 'fa fa-download',
         onExecute: function() {
-          return $http.post(appConfig.get().API_URL + 'rechnungen/aktionen/pain_008_001_07', {
+          return $http.post(appConfig.get().API_URL + 'rechnungen/aktionen/pain_008_001_02', {
             'ids': $scope.checkboxes.ids
           }).then(function(file) {
              var data = new Blob([file.data], { type: 'text/plain;charset=utf-8' });
-             FileSaver.saveAs(data, 'pain_008_001_07.xml');
+             FileSaver.saveAs(data, 'pain_008_001_02.xml');
           });
         },
         isDisabled: function() {
