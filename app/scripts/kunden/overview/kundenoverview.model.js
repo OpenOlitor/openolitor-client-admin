@@ -7,6 +7,11 @@ angular.module('openolitor-admin')
     return $resource(appConfig.get().API_URL + 'kunden/:id:exportType', {
       id: '@id'
     }, {
-      'exportODS': exportODSModuleFunction
+      'exportODS': exportODSModuleFunction,
+      'kundenSearch': {
+        method: 'GET',
+        isArray: true,
+        url: appConfig.get().API_URL + 'kundenSearch'
+      }
     });
   }]);
