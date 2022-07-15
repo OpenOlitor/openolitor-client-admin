@@ -247,7 +247,8 @@ angular.module('openolitor-admin')
         $scope.loading = true;
         $scope.entries = overviewModel.query({
           f: $scope.search.filterQuery,
-          g: $scope.geschaeftsjahr
+          g: $scope.geschaeftsjahr,
+          q: $scope.search.queryQuery
         }, function(result) {
           $scope.entries = result;
           $scope.tableParams.reload();
