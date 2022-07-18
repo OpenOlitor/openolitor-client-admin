@@ -47,7 +47,7 @@
                   <input type="text" class="form-control" id="kunde" disabled="true" value="{{rechnung.kunde.bezeichnung}}" maxlength = 50>
                 </div>
                 <div ng-if="!isExisting()" class="col-md-8">
-                  <input type="text" ng-model="kunde" placeholder="{{'Kunde suchen...'|translate}}" uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="1000" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="loadKunde($item)" maxlength = 50 required>
+                  <input type="text" ng-model="kunde" placeholder="{{'Kunde suchen...'|translate}}" uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100" typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control" typeahead-on-select="loadKunde($item)" maxlength = 50 required>
                   <i ng-show="loadingKunden" class="glyphicon glyphicon-refresh"></i>
                   <div ng-show="noResults">
                     <i class="glyphicon glyphicon-remove"></i> <span translate>Keine Kunden</span>

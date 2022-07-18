@@ -246,7 +246,7 @@ angular
         $scope.loading = true;
         $scope.entries = ArbeitseinsaetzeModel.query(
           {
-            q: $scope.query
+            q: $scope.search.queryQuery
           },
           function() {
             $scope.tableParams.reload();

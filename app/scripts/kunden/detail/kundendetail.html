@@ -11,7 +11,7 @@
               </div>
               <div class="col-md-3">
                 <input type="text" ng-model="selectedKunde" placeholder="{{'Kunde suchen...'|translate}}"
-                  uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)"
+                  uib-typeahead="kunde as kunde.bezeichnung for kunde in getKunden($viewValue)" typeahead-wait-ms="100"
                   typeahead-loading="loadingKunden" typeahead-no-results="noResults" class="form-control"
                   typeahead-on-select="navigateToKunde($item)" ignore-dirty>
               </div>
