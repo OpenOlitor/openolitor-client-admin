@@ -152,7 +152,8 @@ angular.module('openolitor-admin')
         $scope.loading = true;
         $scope.entries = LieferplanungModel.query({
           f: $scope.search.filterQuery,
-          g: $scope.geschaeftsjahr
+          g: $scope.geschaeftsjahr,
+          q: $scope.search.queryQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;

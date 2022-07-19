@@ -90,11 +90,11 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = ProduzentenModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 

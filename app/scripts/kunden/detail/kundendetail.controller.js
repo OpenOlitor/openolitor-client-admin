@@ -152,21 +152,19 @@ angular.module('openolitor-admin')
         $location.path('/kunden/'+item.id);
       };
 
-      $scope.getKunden = function(filter) {
+      $scope.getKunden = function(queryFilter) {
         if ($scope.loading) {
           return;
         }
 
         $scope.loading = true;
 
-        return KundenOverviewModel.query({
-          q: filter
+        return KundenOverviewModel.kundenSearch({
+          q: queryFilter
         }, function() {
           $scope.loading = false;
         }).$promise.then(function(kunden) {
-          var filtered = $filter('filter')(kunden, filter);
-          console.log('Filtered: ', filtered, ' with filter ', filter);
-          return filtered;
+          return kunden;
         });
       };
 

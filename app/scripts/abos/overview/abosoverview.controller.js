@@ -336,8 +336,10 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.loading = true;
+
         AbosOverviewModel.query({
           f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery, 
           x: $scope.search.complexFlags,
           g: $scope.geschaeftsjahr
         }, function(entries) {
