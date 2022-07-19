@@ -138,6 +138,7 @@ angular.module('openolitor-admin')
           $scope.rechnungen = KundenRechnungenModel.query({
             kundeId: $scope.kunde.id
           });
+          $scope.kundeForm.$setPristine();
         });
       };
 
