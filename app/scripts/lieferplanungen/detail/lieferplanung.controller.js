@@ -786,10 +786,15 @@ angular.module('openolitor-admin')
       };
 
       $scope.sammelbestellungVersenden = function(bestellung) {
-        LieferplanungModel.sammelbestellungVersenden({
-          id: $routeParams.id,
-          bestellungId: bestellung.id
-        }, bestellung);
+        dialogService.displayDialogOkAbort(gettextCatalog.getString(
+          'Bist du sicher, dass du diese E-Mail and Produzent versenden möchtest'
+              ),
+              function() {
+                LieferplanungModel.sammelbestellungVersenden({
+                  id: $routeParams.id,
+                  bestellungId: bestellung.id
+                }, bestellung);
+              });
       };
 
       $scope.sammelbestellungenErstellen = function() {
@@ -1042,3 +1047,4 @@ angular.module('openolitor-admin')
       load();
     }
   ]);
+
