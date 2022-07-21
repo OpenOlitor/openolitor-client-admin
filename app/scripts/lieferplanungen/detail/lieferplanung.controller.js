@@ -845,7 +845,8 @@ angular.module('openolitor-admin')
         }, function(result) {
           $location.path('/abos').search({
             'q': 'id=' + result.join(),
-            'g': 'Alle'
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
           });
         });
       };
@@ -858,7 +859,8 @@ angular.module('openolitor-admin')
         }, function(result) {
           $location.path('/abos').search({
             'q': 'id=' + result.join(),
-            'g': 'Alle'
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
           });
         });
       };
@@ -871,7 +873,8 @@ angular.module('openolitor-admin')
         }, function(result) {
           $location.path('/abos').search({
             'q': 'id=' + result.join(),
-            'g': 'Alle'
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
           });
         });
       };
@@ -944,7 +947,7 @@ angular.module('openolitor-admin')
               var result = lodash.map($scope.sammelbestellungen, 'id');
               $location.path('/einkaufsrechnungen').search({
                 'q': 'id=' + result.join(),
-                'g': 'Alle'
+                'gjDisabled': 'true'
               });
             });
           }
@@ -960,7 +963,7 @@ angular.module('openolitor-admin')
               var res = lodash.map(result, 'id');
               $location.path('/depotauslieferungen').search({
                 'q': 'id=' + res.join(),
-                'g': 'Alle'
+                'gjDisabled': 'true'
               });
             });
           }
@@ -976,7 +979,7 @@ angular.module('openolitor-admin')
               var res = lodash.map(result, 'id');
               $location.path('/tourauslieferungen').search({
                 'q': 'id=' + res.join(),
-                'g': 'Alle'
+                'gjDisabled': 'true'
               });
             });
           }
@@ -992,7 +995,7 @@ angular.module('openolitor-admin')
               var res = lodash.map(result, 'id');
               $location.path('/postauslieferungen').search({
                 'q': 'id=' + res.join(),
-                'g': 'Alle'
+                'gjDisabled': 'true'
               });
             });
           }

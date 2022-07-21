@@ -4,10 +4,17 @@
  */
 angular.module('openolitor-admin')
   .controller('OverviewfilterGeschaeftsjahreController', ['$scope', '$rootScope',
-    'ProjektModel', 'moment', '$cookies',
-    function($scope, $rootScope, ProjektModel, moment, $cookies) {
+    'ProjektModel', 'moment', '$cookies', '$location',
+    function($scope, $rootScope, ProjektModel, moment, $cookies, $location) {
 
       const ALLE = {jahr:'Alle'};
+
+      $scope.showFilter = true;
+
+      var gjDisabled = $location.search().gjDisabled;
+      if (gjDisabled) {
+        $scope.showFilter = false;
+      }
 
       var storeSelected = function(selected) {
         var expireDate = new Date();
@@ -22,11 +29,11 @@ angular.module('openolitor-admin')
       ProjektModel.query({}, function(result) {
         $scope.projekt = result;
         ProjektModel.geschaeftsjahre({id: result.id}, function(gjL) {
-            $scope.geschaeftsjahre = gjL;
+            $scope.geschaeftsjahre = gjL.reverse();
             $scope.geschaeftsjahre.unshift(ALLE);
             if(angular.isUndefined($scope.select)) {
               //if no preselected value, check if
-              if(angular.isDefined($scope.selectCurrent) && !angular.isDefined(fetchSelected())) {
+              if(angular.isDefined($scope.selectCurrent) && false && !angular.isDefined(fetchSelected())) {
                 var thisYearsGJstart = moment().date($scope.projekt.geschaeftsjahrTag).month($scope.projekt.geschaeftsjahrMonat - 1);
                 if(moment().isBefore(thisYearsGJstart)) {
                   $scope.select = moment().year() - 1;
@@ -67,6 +74,10 @@ angular.module('openolitor-admin')
       };
 
       $scope.selectGJ = function(gj, init) {
+        if(!$scope.showFilter) {
+          $scope.selectedFunct()();
+          return;
+        }
         if(angular.isUndefined(init)) {
           init = false;
         }
