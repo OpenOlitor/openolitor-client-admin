@@ -66,7 +66,10 @@ angular.module('openolitor-admin')
         }
       };
 
-      $scope.selectGJ = function(gj, init = false) {
+      $scope.selectGJ = function(gj, init) {
+        if(angular.isUndefined(init)) {
+          init = false;
+        }
         $scope.selectedGJ = gj;
         if(gj && gj != ALLE.jahr && (angular.isUndefined(gj.jahr) || gj.jahr != ALLE.jahr)) {
           $scope.selectedFunct()((gj.jahr) ? gj.jahr : gj);
