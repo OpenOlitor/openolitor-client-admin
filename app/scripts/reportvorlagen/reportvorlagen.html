@@ -20,7 +20,7 @@
             <i  ng-hide="vorlage.downloading" class="fa fa-download" aria-hidden="true"></i> <i ng-show="vorlage.downloading" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
           </span>
         </td>
-        <td data-title="'Name'|translate">
+        <td data-title="'Name'|translate:'notPerson'">
           <span ng-hide="vorlage.editing || vorlage.default">{{vorlage.name}}</span>
           <span ng-show="vorlage.default"><b>{{vorlage.name}}</b></span>
           <input type="text" name="name" ng-model="vorlage.name" ng-show="vorlage.editing" maxlength=50>

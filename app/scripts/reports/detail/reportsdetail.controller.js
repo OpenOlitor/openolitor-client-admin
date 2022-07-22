@@ -41,59 +41,49 @@ angular.module('openolitor-admin')
         return angular.isDefined($scope.report) && angular.isDefined($scope.report.id);
       };
 
-      $scope.renderedInput = function($scope, row) {
-        if (row[this.field] !== null) {
-          if (/kundeid|kunde_id|kunde-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/kunden/' + row[this.field] + '">' + row[this.field] + '</a>';
-          } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(this.field.toLowerCase())) {
-            return row[this.field];
-          } else if (/abotypid|abotyp_id|abotyp-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/abotypen/' + row[this.field] + '">' + row[this.field] + '</a>';
-          } else if (/aboid|abo_id|abo-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/abos?q=id%3D' + row[this.field] + '">' + row[this.field] + '</a>';
-          } else if (/tourid|tour_id|tour-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/touren/' + row[this.field] + '">' + row[this.field] + '</a>';
-          } else if (/depotid|depot_id|depot-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/depots/' + row[this.field] + '">' + row[this.field] + '</a>';
-          } else if (/produzentid|produzent_id|produzent-id/.test(this.field.toLowerCase())) {
-            return '<a href="' + '#/produzenten/' + row[this.field] + '">' + row[this.field] + '</a>';
+      $scope.renderedInput = function(key, value) {
+        if (value !== null && value !== 'null') {
+          if (/kundeid|kunde_id|kunde-id/.test(key.toLowerCase())) {
+            return '<a href="' + '#/kunden/' + value + '">' + value + '</a>';
+          } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(key.toLowerCase())) {
+            return value;
+          } else if (/abotypid|abotyp_id|abotyp-id/.test(key.toLowerCase())) {
+            return '<a href="' + '#/abotypen/' + value + '">' + value + '</a>';
+          } else if (/aboid|abo_id|abo-id/.test(key.toLowerCase())) {
+            return '<a href="' + '#/abos?q=id%3D' + value + '">' + value + '</a>';
+          } else if (/tourid|tour_id|tour-id/.test(key.toLowerCase())) {
+            return '<a href="' + '#/touren/' + value + '">' + value + '</a>';
+          } else if (/depotid|depot_id|depot-id/.test(key.toLowerCase())) {
+            return '<a href="' + '#/depots/' + value + '">' + value + '</a>';
+          } else if (/produzentid|produzent_id|produzent-id/.test(key.toLowerCase())) {
+            return '<a href="' + '#/produzenten/' + value + '">' + value + '</a>';
           } else {
-            return row[this.field];
+            return value;
           }
+        } else {
+          return '';
         }
-        return row[this.field];
       };
 
       $scope.renderedTitles = function(key) {
         if (key !== null) {
+          var items = lodash.map($scope.result.entries, key);
+          var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
+          var validItems = lodash.reject(uniqueItems, a => a === 'null');
           if (/kundeid|kunde_id|kunde-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/kunden?q=id%3D' + uniqueItems + '&tf=%7B%22typen%22:%22%22%7D">' + key + '</a></b>';
+            return '<b><a href="#/kunden?q=id%3D' + validItems + '&tf=%7B%22typen%22:%22%22%7D">' + key + '</a></b>';
           } else if (/zusatz-abo-id|zusatz_abo_id|zusatzaboid|zusatzabo_id|zusatzabo-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/zusatzabos?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/zusatzabos?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/aboid|abo_id|abo-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/abos?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/abos?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/personid|person_id|person-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/personen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/personen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/rechnungpositionid|rechnungposition_id|rechnungposition-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/rechnungspositionen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/rechnungspositionen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/einkaufsrechnungid|einkaufsrechnung_id|einkaufsrechnung-id|sammelbestellungid|sammelbestellung-id|sammelbestellung_id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/einkaufsrechnungen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/einkaufsrechnungen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else if (/rechnung_id|rechnungId|rechnung-id/.test(key.toLowerCase())) {
-            var items = lodash.map($scope.result.entries, key);
-            var uniqueItems = lodash.reject(lodash.uniq(items), _.isEmpty);
-            return '<b><a href="#/rechnungen?q=id%3D' + uniqueItems + '">' + key + '</a></b>';
+            return '<b><a href="#/rechnungen?q=id%3D' + validItems + '">' + key + '</a></b>';
           } else {
             return '<b>' + key + '</b>';
           }
@@ -111,19 +101,46 @@ angular.module('openolitor-admin')
             $scope.cols = [];
             for (var key in data[0]) {
               if (key.indexOf('$') !== 0 && key !== 'toJSON') {
+                var parameter = data[0][key].replace(/[()]/g,'').split(',');
                 $scope.cols.push({
-                  field: key,
-                  getValue: $scope.renderedInput
+                  field: parameter[0],
+                  getValue: $scope.renderedInput(parameter[0],parameter[1])
                 });
               }
             }
           }
           if (!$scope.result || !$scope.result.entries) {
-            $scope.result.entries = data;
+            $scope.result.entries = lodash.map(data,function getValues(entry){
+              var newJSONString = '';
+              for (var parameter in entry) {
+                if (parameter.indexOf('$') !== 0 && parameter !=='toJSON'){
+                  var entryWithLegalJSON = $scope.replaceIllegalJSONCharacters(entry[parameter]);
+                  var jsonElement = '"' + entryWithLegalJSON.replace(/[()]/g,'').replace(',','":"') +  '"';
+                  if (newJSONString !== ''){
+                    newJSONString = newJSONString + ',' + jsonElement;
+                  } else {
+                    newJSONString = newJSONString + jsonElement;
+                  }
+                }
+              }
+              try {
+                return (JSON.parse('{' + newJSONString + '}'));
+              } catch (e){
+                  console.log(e, newJSONString);
+              }
+            });
             $scope.tableParams.reload();
           }
         });
       };
+
+      $scope.getValue = function(col, dataEntry) {
+        return $scope.renderedInput(col,dataEntry[col]);
+      }
+
+      $scope.replaceIllegalJSONCharacters = function (jsonString) {
+        return jsonString.replace(/[\n\b\f\r\t/"]/g,' ');
+      }
 
       if (!$scope.tableParams) {
         //use default tableParams

@@ -196,7 +196,9 @@
                   <label for="bezeichnung" translate>Mitteilung vor dem Login</label>
                 </div>
                 <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage1TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage1" placeholder=" {{'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
+                  <div class="welcomeMessageBorder" ng-if="!editMode" ng-bind-html="projekt.welcomeMessage1"></div>
+                  <ng-quill-editor class="form-control projectMessageQuillEditor" name="welcomeMessage1TextArea" ng-if="editMode" ng-model="projekt.welcomeMessage1" bounds="self" placeholder="'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate" preserve-whitespace="false" track-changes="all" maxlength = 65000>
+                  </ng-quill-editor>
                 </div>
               </div>
               <div class="row form-group">
@@ -204,7 +206,17 @@
                   <label for="welcomeMessage2Label" translate>Mitteilung nach dem Login</label>
                 </div>
                 <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage2TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage2" placeholder="{{'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
+                  <div class="welcomeMessageBorder" ng-if="!editMode" ng-bind-html="projekt.welcomeMessage2"></div>
+                  <ng-quill-editor class="form-control projectMessageQuillEditor" name="welcomeMessage2TextArea" ng-if="editMode" ng-model="projekt.welcomeMessage2" bounds="self" placeholder="'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate" preserve-whitespace="false" track-changes="all" maxlength = 65000>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="messageForMembers" translate>Benachrichtigung der Kunden</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="welcomeMessageBorder" ng-if="!editMode" ng-bind-html="projekt.messageForMembers"></div>
+                  <ng-quill-editor class="form-control projectMessageQuillEditor" name="messageForMembersTextArea" ng-if="editMode" ng-model="projekt.messageForMembers" bounds="self" placeholder="'Nachricht, die den Benutzern mit einem Benachrichtigungssymbol in der Kopfzeile des Kundenportals angezeigt wird'|translate" preserve-whitespace="false" track-changes="all" maxlength = 65000>
                 </div>
               </div>
               <div class="row form-group">
@@ -237,6 +249,23 @@
                 </div>
                 <div class="col-md-8">
                   <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.bic" placeholder="{{'BIC'|translate}}"  maxlength=11>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="nameAccountHolder" translate>Kontoinhaber</label>
+                  <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'Sonderzeichen werden beim Sepa-Export entfernt' | translate}}"></i>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="nameAccountHolder" ng-model="kontodaten.nameAccountHolder" placeholder="{{'Kontoinhaber'|translate}}" ng-disabled="!editMode" maxlength=100>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-4">
+                  <label for="bankName" translate>Name der Bank</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="bankName" ng-model="kontodaten.bankName" ng-disabled="!editMode" placeholder="{{'Name der Bank'|translate}}" maxlength=100>
                 </div>
               </div>
               <div class="row form-group">

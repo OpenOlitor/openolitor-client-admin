@@ -604,37 +604,6 @@ angular
       ]);
     }
   ])
-  .factory('errbitErrorInterceptor', function(
-    $q,
-    $injector
-  ) {
-    return {
-      responseError: function(rejection) {
-        var appConfig = $injector.get('appConfig');
-        /*jshint -W117 */
-        var airbrake = new airbrakeJs.Client({
-          projectId: 1,
-          host: appConfig.get().AIRBREAK_URL,
-          projectKey: appConfig.get().AIRBREAK_API_KEY
-        });
-        /*jshint +W117 */
-        airbrake.addFilter(function(notice) {
-          notice.context.environment = appConfig.get().ENV;
-          notice.context.version = appConfig.get().VERSION;
-          return notice;
-        });
-        var message = 'Error: ';
-        if (
-          !angular.isUndefined(rejection.config) &&
-          !angular.isUndefined(rejection.config.url)
-        ) {
-          message += rejection.config.url;
-        }
-        airbrake.notify(message);
-        return $q.reject(rejection);
-      }
-    };
-  })
   .factory('loggedOutInterceptor', function($q, alertService, $window) {
     return {
       responseError: function(rejection) {
@@ -658,7 +627,6 @@ angular
     '$httpProvider',
     function($httpProvider) {
       $httpProvider.interceptors.push('loggedOutInterceptor');
-      $httpProvider.interceptors.push('errbitErrorInterceptor');
     }
   ])
   .filter('custNumber', function($filter, LIEFEREINHEIT) {

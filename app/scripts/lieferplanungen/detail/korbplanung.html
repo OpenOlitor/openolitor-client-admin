@@ -106,7 +106,7 @@
                 oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true"></oo-delete-button>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?'|translate}}"></oo-delete-button>
-              <div ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" > Zusatzabo</div>
+              <div ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" translate> Zusatzabo</div>
             </span>
           </h3>
         </div>
@@ -132,7 +132,7 @@
                 </span>
               </td>
               <td data-title="'Menge'|translate">
-                <input type="number" placeholder="{{'Menge'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" min="0" step="0.001" class="form-control" name="menge" ng-model="korbprodukt.menge" required></input>
+                <input type="number" placeholder="{{'Menge'|translate}}" ng-disabled="!valuesEditable()" ng-pattern="/^[0-9]+([\.,][0-9]{1,3})?$/" min="0" step="0.001" class="form-control medium" name="menge" ng-model="korbprodukt.menge" required></input>
               </td>
               <td>
                 <span ng-if="!valuesEditable() || !isUnlisted(korbprodukt)">

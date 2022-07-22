@@ -81,7 +81,7 @@ angular.module('openolitor-admin')
       $scope.loadTour = function() {
         TourenDetailModel.get({
           id: $routeParams.id,
-          aktiveOnly: $scope.query.aktiveAbos
+          aktiveOrPlanned: $scope.query.aktiveAbos
         }, function(result) {
           $scope.tour = result;
           $scope.unsortedTourlieferungen = [];

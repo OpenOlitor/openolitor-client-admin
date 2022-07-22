@@ -78,10 +78,10 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-4">
-                  <label for="name" translate>Name</label>
+                  <label for="name" translate-context="person" translate>Name</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate}}" maxlength=50 required>
+                  <input type="text" class="form-control" name="name" ng-model="person.name" placeholder="{{'Name'|translate:'person'}}" maxlength=50 required>
                 </div>
               </div>
               <div class="row form-group">
@@ -395,7 +395,7 @@
                 <input type="number" class="form-control" name="adressLongLieferung" ng-model="kunde.longLieferung" placeholder="{{'7.458070'}}" step="0.000001" min="-180" max="180">
               </div>
               <div class="col-md-3">
-                <a href="http://www.openstreetmap.org/?mlat={{kunde.latLieferung}}&mlon={{kunde.longLieferung}}&zoom=17" target="_blank">Anzeigen</a>
+                <a href="http://www.openstreetmap.org/?mlat={{kunde.latLieferung}}&mlon={{kunde.longLieferung}}&zoom=17" target="_blank" translate>Anzeigen</a>
               </div>
             </div>
             <div class="row form-group">

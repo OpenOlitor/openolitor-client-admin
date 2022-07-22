@@ -365,6 +365,10 @@ small.lieferplanung {
   width: 4.5em;
 }
 
+#lieferplanung .table-lieferplanung input.medium {
+  width: 5.5em;
+}
+
 #lieferplanung .table-lieferplanung input.large {
   width: 8em;
 }
@@ -774,6 +778,10 @@ tr.error {
   white-space: pre;
 }
 
+.white-space-pre-wrap {
+  white-space: pre-wrap;
+}
+
 .row .zusatzabo {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -801,6 +809,21 @@ a.env-warning.testprod {
     text-transform: uppercase;
     font-size: 120%;
     font-weight: bold;
+  }
+}
+.welcomeMessageBorder{
+  padding: 0.01em 16px;
+  padding: 0.01em 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 35px;
+  background-color: #eee;
+}
+
+.projectMessageQuillEditor{
+  height: 250px;
+  .ql-editor {
+    height: 150px;
   }
 }
 

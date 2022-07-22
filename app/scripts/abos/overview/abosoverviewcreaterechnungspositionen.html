@@ -53,7 +53,7 @@
           <label for="betrag" translate>Manueller Betrag</label>
         </div>
         <div class="col-md-7">
-          <input type="number" min="0" class="form-control" id="betrag" ng-model="rechnungsPositionen.betrag" placeholder="{{'Betrag'|translate}}">
+          <input type="number" class="form-control" id="betrag" ng-model="rechnungsPositionen.betrag" ng-pattern="/^[-+]?[0-9]+([\.,][0-9]{1,3})?$/" placeholder="{{'Betrag'|translate}}">
         </div>
       </div>
       <div class="row form-group">

@@ -20,7 +20,7 @@
         <div ng-show="entries" id="auswertungTable" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="report in $data | filter: search.query.$">
-              <td data-title="'Name'|translate" sortable="'name'">
+              <td data-title="'Name'|translate:'notPerson'" sortable="'name'">
                 <a ng-href="#/reports/{{report.id}}">{{report.name}}</a>
               </td>
               <td data-title="'Beschreibung'|translate" sortable="'beschreibung'">

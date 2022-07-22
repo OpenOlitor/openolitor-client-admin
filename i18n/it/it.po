@@ -6,11 +6,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: openolitor-client-admin\n"
 "X-Crowdin-Project-ID: 393649\n"
-"X-Crowdin-Language: dol\n"
+"X-Crowdin-Language: it\n"
 "X-Crowdin-File: /prod/template.pot\n"
 "X-Crowdin-File-ID: 53\n"
-"Language-Team: Dollinger\n"
-"Language: de_DO\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
 "PO-Revision-Date: 2022-02-25 12:53\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
@@ -36,14 +36,14 @@ msgstr ""
 
 #: app/scripts/abotypen/overview/abotypen.html:35
 msgid "# Abonnenten"
-msgstr "# Mitglieder"
+msgstr ""
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:36
 #: app/scripts/depots/overview/depotsoverview.html:47
 #: app/scripts/kunden/overview/kundenoverview.html:48
 #: app/scripts/touren/overview/tourenoverview.html:37
 msgid "# Abos"
-msgstr "# Anteile"
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:65
 #: app/scripts/kunden/detail/abo/abos.html:17
@@ -99,17 +99,17 @@ msgstr ""
 #: app/scripts/kunden/detail/kundendetail.html:116
 #: app/scripts/produzenten/detail/produzentendetail.html:173
 msgid "+41 ..."
-msgstr "+ 49 ..."
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:108
 #: app/scripts/produzenten/detail/produzentendetail.html:165
 msgid "+41 7..."
-msgstr "+ 49..."
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:164
 #: app/scripts/depots/detail/depotsdetail.html:204
 msgid "+41..."
-msgstr "+ 49 ..."
+msgstr ""
 
 #: app/scripts/app.js:122
 msgid "-"
@@ -157,45 +157,45 @@ msgstr ""
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:28
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:42
 msgid "Abo"
-msgstr "Anteil"
+msgstr ""
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:23
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:23
 msgid "Abo Nr."
-msgstr "Anteil Nr."
+msgstr ""
 
 #: app/scripts/abos/detail/create-abo.html:56
 msgid "Abo erstellen"
-msgstr "Anteil erstellen"
+msgstr ""
 
 #: app/scripts/abos/detail/create-abo.html:4
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
-msgstr "Anteil erstellen für {{kunde.bezeichnung}}"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:442
 msgid "Abo wurde erstellt"
-msgstr "Anteil wurde erstellt"
+msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:246
 msgid "Abo:"
-msgstr "Anteil:"
+msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:163
 #: app/scripts/personen/overview/personenoverview.controller.js:182
 msgid "Aboliste anzeigen"
-msgstr "Anteilsliste anzeigen"
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:44
 #: app/scripts/abos/overview/zusatzabosoverview.html:42
 msgid "Abonnentin"
-msgstr "Mitglied"
+msgstr ""
 
 #: app/index.html:88
 #: app/scripts/abos/overview/abosoverview.html:6
 #: app/scripts/kunden/detail/abo/abos.html:4
 #: app/scripts/touren/detail/tourendetail.html:59
 msgid "Abos"
-msgstr "Anteile"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:43
 #: app/scripts/abos/detail/create-abo.html:11
@@ -208,27 +208,27 @@ msgstr "Anteile"
 #: app/scripts/kunden/detail/abo/abos.html:11
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
-msgstr "Anteilstyp"
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:57
 msgid "Abotyp / Vertrieb"
-msgstr "Anteilstyp / Vertrieb"
+msgstr ""
 
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:121
 msgid "Abotyp erstellen"
-msgstr "Anteilstyp erstellen"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:36
 msgid "Abotyp hinzufügen:"
-msgstr "Anteilstyp hinzufügen:"
+msgstr ""
 
 #: app/index.html:113
 #: app/scripts/abotypen/overview/abotypen.html:6
 #: app/scripts/dashboard/dashboard.html:57
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:32
 msgid "Abotypen"
-msgstr "Anteilstypen"
+msgstr ""
 
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:30
 msgid "Abrechnen"
@@ -276,7 +276,7 @@ msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:300
 msgid "Address of the Account Holder"
-msgstr "Name des Kontoinhabers"
+msgstr ""
 
 #: app/index.html:121
 msgid "Administration"
@@ -486,11 +486,11 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:83
 msgid "Anzahl Zusatzabos zu liefern:"
-msgstr "Anzahl Zusatzanteile zu liefern:"
+msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:210
 msgid "Anzahl aktive Abonnemente"
-msgstr "Anzahl aktiver Anteile"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:398
 msgid "Anzeigen"
@@ -577,7 +577,7 @@ msgstr ""
 
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:6
 msgid "Arbeitseinsätze & Abos"
-msgstr "Arbeitseinsätze & Anteile"
+msgstr ""
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:257
 msgid "Arbeitseinsätze-Brief"
@@ -595,7 +595,7 @@ msgstr ""
 
 #: app/scripts/app.js:309
 msgid "Archived"
-msgstr "Archiviert"
+msgstr ""
 
 #: app/scripts/app.js:186
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:52
@@ -761,7 +761,7 @@ msgstr ""
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:46
 #: app/scripts/touren/overview/tourenoverview.html:34
 msgid "Beschrieb"
-msgstr "Beschreibung"
+msgstr ""
 
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:6
 msgid "Bestellung abrechnen"
@@ -866,7 +866,7 @@ msgstr ""
 #: app/scripts/depots/detail/depotsdetail.html:107
 #: app/scripts/produzenten/detail/produzentendetail.html:66
 msgid "CH..."
-msgstr "DE..."
+msgstr ""
 
 #: app/scripts/produzenten/detail/produzentendetail.html:109
 msgid "CHE-xxx.yyy.zzz MWST"
@@ -883,7 +883,7 @@ msgstr ""
 
 #: app/scripts/app.js:308
 msgid "Created"
-msgstr "Erstellt"
+msgstr ""
 
 #: app/scripts/app.js:217
 msgid "DI"
@@ -948,62 +948,62 @@ msgstr ""
 #: app/scripts/abos/detail/abosdetail.html:100
 #: app/scripts/abos/detail/abosdetail.html:191
 msgid "Den Standardpreis wiederherstellen"
-msgstr "Den Richtwert wiederherstellen"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:61
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:33
 msgid "Depot"
-msgstr "Abholstation"
+msgstr ""
 
 #: app/scripts/depots/overview/depotsoverview.controller.js:75
 #: app/scripts/depots/overview/depotsoverview.html:10
 msgid "Depot erstellen"
-msgstr "Abholstation erstellen"
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:60
 #: app/scripts/kunden/detail/abo/abos.html:15
 msgid "Depot/Tour"
-msgstr "Abholstation/Tour"
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.controller.js:49
 #: app/scripts/kunden/detail/abo/abos.html:39
 msgid "Depot:"
-msgstr "Abholstation:"
+msgstr ""
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:6
 msgid "Depotauslieferung"
-msgstr "Lieferung an Abholstation"
+msgstr ""
 
 #: app/index.html:94
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:6
 msgid "Depotauslieferungen"
-msgstr "Lieferungen an Abholstationen"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:927
 msgid "Depotauslieferungen anzeigen"
-msgstr "Lieferungen an Abholstationen anzeigen"
+msgstr ""
 
 #: app/scripts/depots/overview/depotsoverview.controller.js:83
 msgid "Depotbrief erstellen"
-msgstr "Abholstationsbrief erstellen"
+msgstr ""
 
 #: app/scripts/app.js:108
 msgid "Depotlieferung"
-msgstr "Lieferung an Abholstation"
+msgstr ""
 
 #: app/scripts/app.js:132
 msgid "DepotlieferungAbo"
-msgstr "DepotlieferungAnteil"
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:24
 msgid "Depotname"
-msgstr "Name der Abholstation"
+msgstr ""
 
 #: app/index.html:111
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:17
 #: app/scripts/depots/overview/depotsoverview.html:6
 msgid "Depots"
-msgstr "Abholstationen"
+msgstr ""
 
 #: app/scripts/depots/overview/depotsoverview.controller.js:114
 msgid "Depots (alle betroffenen Personen)"
@@ -1055,7 +1055,7 @@ msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:5
 msgid "Dieser Abotyp ist derzeit nicht aktiv"
-msgstr "Dieser Anteilstyp ist derzeit nicht aktiv"
+msgstr ""
 
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:60
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:64
@@ -1064,19 +1064,19 @@ msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:6
 msgid "Dieser Zusatzabotyp ist derzeit nicht aktiv"
-msgstr "Dieser Zusatzanteilstyp ist derzeit nicht aktiv"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:30
 msgid "Dieses Abo ist inaktiv"
-msgstr "Dieser Anteil ist inaktiv"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:117
 msgid "Dieses Produkt wurde frei hinzugefügt. Es befindet sich nicht in den Stammdaten."
-msgstr "Dieses Lebensmittel wurde frei hinzugefügt. Es befindet sich nicht in den Stammdaten."
+msgstr ""
 
 #: app/scripts/app.js:128
 msgid "DirectDebit"
-msgstr "Lastschrift"
+msgstr ""
 
 #: app/scripts/jobqueue/result/result.html:2
 msgid "Dokumente download"
@@ -1130,7 +1130,7 @@ msgstr ""
 #: app/scripts/depots/overview/depotsoverview.controller.js:94
 #: app/scripts/touren/overview/tourenoverview.controller.js:132
 msgid "E-Mail an Kunden versenden"
-msgstr "E-Mail an Mitglieder versenden"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.controller.js:81
 msgid "E-Mail an alle Ansprechpersonen"
@@ -1161,7 +1161,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:382
 msgid "Ein solches Produkt befindet sich schon in diesem Korb. Soll es dennoch eingefügt werden?"
-msgstr "Ein solches Lebensmittel befindet sich schon in diesem Korb. Soll es dennoch eingefügt werden?"
+msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:176
 #: app/scripts/rechnungen/detail/rechnungendetail.html:181
@@ -1180,8 +1180,7 @@ msgstr ""
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:881
 msgid "Eine oder mehrere Lieferungen aus Hauptabos haben keine Produkte eingetragen. \n"
 "Trotzdem fortfahren?"
-msgstr "Eine oder mehrere Lieferungen aus Hauptanteile haben keine Lebensmittel eingetragen. \n"
-"Trotzdem fortfahren?"
+msgstr ""
 
 #: app/messages.html:2
 msgid "Eingabe erforderlich"
@@ -1248,7 +1247,7 @@ msgstr ""
 
 #: app/index.html:101
 msgid "Einsätze &amp; Abos"
-msgstr "Einsätze &amp; Anteile"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:89
 msgid "Email"
@@ -1260,7 +1259,7 @@ msgstr ""
 
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:102
 msgid "Email an Kunden versenden"
-msgstr "E-Mail an Mitglieder versenden"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.controller.js:510
 #: app/scripts/abos/detail/abosdetail.controller.js:520
@@ -1356,7 +1355,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:108
 msgid "Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?"
-msgstr "Falls dieser Zusatzanteilstyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptanteilstypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?"
+msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:169
 #: app/scripts/depots/detail/depotsdetail.html:83
@@ -1419,7 +1418,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:720
 msgid "Für jedes Produkt muss ein Produzent ausgewählt sein."
-msgstr "Für jedes Lebensmittel mus ein Produzent ausgewählt sein."
+msgstr ""
 
 #: app/scripts/app.js:204
 msgid "GBP"
@@ -1432,7 +1431,7 @@ msgstr ""
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:52
 msgid "Genauerer Beschrieb"
-msgstr "Genauere Beschreibung"
+msgstr ""
 
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:18
 msgid "Geplante Lieferdaten"
@@ -1468,7 +1467,7 @@ msgstr ""
 
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:2
 msgid "Guthaben anpassen für Abo Nr."
-msgstr "Guthaben anpassen für Anteil Nr."
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:74
 msgid "Guthaben in Rechnung"
@@ -1509,7 +1508,7 @@ msgstr ""
 
 #: app/scripts/app.js:133
 msgid "HeimlieferungAbo"
-msgstr "HeimlieferungAnteil"
+msgstr ""
 
 #: app/scripts/app.js:123
 msgid "Herr"
@@ -1607,7 +1606,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:726
 msgid "Jedes Produkt muss über eine Beschreibung verfügen."
-msgstr "Jedes Lebensmittel muss über eine Beschreibung verfügen."
+msgstr ""
 
 #: app/scripts/app.js:352
 msgid "Jetzt"
@@ -1651,11 +1650,11 @@ msgstr ""
 
 #: app/scripts/personen/overview/personenoverview.html:33
 msgid "Kdn / Pers"
-msgstr "Mtg / Pers"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:156
 msgid "Kein Zusatzabo vorhanden."
-msgstr "Kein Zusatzanteil vorhanden."
+msgstr ""
 
 #: app/scripts/app.js:122
 #: app/scripts/kunden/detail/kundendetail.html:368
@@ -1672,7 +1671,7 @@ msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:53
 msgid "Keine Kunden"
-msgstr "Keine Mitglieder"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:27
 msgid "Keine Lieferungen mehr ausstehend"
@@ -1742,74 +1741,74 @@ msgstr ""
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:42
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:22
 msgid "Kunde"
-msgstr "Mitglied"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:203
 #: app/scripts/rechnungen/detail/rechnungendetail.html:59
 msgid "Kunde Nr."
-msgstr "Mitglied Nr."
+msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:117
 #: app/scripts/kunden/overview/kundenoverview.html:10
 #: app/scripts/personen/overview/personenoverview.html:10
 msgid "Kunde erstellen"
-msgstr "Mitglied erstellen"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:256
 #: app/scripts/kunden/detail/kundendetail.html:350
 msgid "Kunde erstellt"
-msgstr "Mitglied erstellt"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:13
 #: app/scripts/rechnungen/detail/rechnungendetail.html:50
 msgid "Kunde suchen..."
-msgstr "Mitglied suchen..."
+msgstr ""
 
 #: app/index.html:86
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
-msgstr "Mitglieder"
+msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:115
 msgid "Kunden E-Mail erforderlich"
-msgstr "Mitglieder E-Mail erforderlich"
+msgstr ""
 
 #: app/scripts/personen/overview/personenoverview.html:73
 msgid "Kundenbemerkungen"
-msgstr "Mitgliederbemerkungen"
+msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:125
 msgid "Kundenbrief"
-msgstr "Mitgliedsbrief"
+msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.html:72
 msgid "Kundenbrief.odt"
-msgstr "Mitgliedsbrief.odt"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:189
 msgid "Kundendetails"
-msgstr "Mitgliederdetails"
+msgstr ""
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:248
 msgid "Kundenliste anzeigen"
-msgstr "Mitgliederliste anzeigen"
+msgstr ""
 
 #: app/scripts/personen/overview/personenoverview.html:60
 #: app/scripts/projekt/settings/kundentypen.html:21
 #: app/scripts/projekt/settings/kundentypen.html:24
 msgid "Kundentyp"
-msgstr "Mitgliedstyp"
+msgstr ""
 
 #: app/scripts/projekt/settings/kundentypen.html:9
 msgid "Kundentyp erstellen"
-msgstr "Mitgliedstyp erstellen"
+msgstr ""
 
 #: app/index.html:116
 #: app/scripts/kunden/detail/kundendetail.html:24
 #: app/scripts/projekt/settings/kundentypen.html:6
 msgid "Kundentypen"
-msgstr "Mitgliedstypen"
+msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:32
 #: app/scripts/produzenten/detail/produzentendetail.html:39
@@ -2029,7 +2028,7 @@ msgstr ""
 
 #: app/scripts/depots/detail/depotsdetail.html:75
 msgid "Maximal Abos pro Liefertag"
-msgstr "Maximal Anteile pro Liefertag"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:134
 #: app/scripts/lieferplanungen/detail/korbplanung.html:135
@@ -2140,7 +2139,7 @@ msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:292
 msgid "Name of the Account Holder"
-msgstr "Name des Kontoinhabers"
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:24
 #: app/scripts/abotypen/detail/abotypendetail.html:148
@@ -2171,7 +2170,7 @@ msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:457
 msgid "Neue Pendenz"
-msgstr "Neue Aufgabe"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:20
 msgid "Neue Vertriebsart"
@@ -2179,7 +2178,7 @@ msgstr ""
 
 #: app/scripts/kunden/detail/abo/abos.html:5
 msgid "Neues Abo"
-msgstr "Neues Anteil"
+msgstr ""
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:66
 msgid "Nicht erledigte Zahlungseingänge"
@@ -2236,7 +2235,7 @@ msgstr ""
 
 #: app/scripts/abos/overview/zusatzabosoverview.html:31
 msgid "Nr. (Haupt/Zusatzabo)"
-msgstr "Nr. (Haupt/Zusatzanteil)"
+msgstr ""
 
 #: app/scripts/app.js:327
 msgid "Nur Heute"
@@ -2255,7 +2254,7 @@ msgstr ""
 
 #: app/scripts/dashboard/dashboard.html:6
 msgid "Offene Pendenzen"
-msgstr "Offene Aufgaben"
+msgstr ""
 
 #: app/scripts/app.js:284
 msgid "Okt"
@@ -2318,16 +2317,16 @@ msgstr ""
 #: app/scripts/dashboard/dashboard.html:32
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:34
 msgid "Pendenz als erledigt markieren"
-msgstr "Aufgabe als erledigt markieren"
+msgstr ""
 
 #: app/index.html:90
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:6
 msgid "Pendenzen"
-msgstr "Aufgaben"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:456
 msgid "Pendenzen / History"
-msgstr "Aufgaben / History"
+msgstr ""
 
 #: app/scripts/journal/overview/journaloverview.html:28
 msgid "Persistence Id"
@@ -2440,7 +2439,7 @@ msgstr ""
 
 #: app/scripts/app.js:134
 msgid "PostlieferungAbo"
-msgstr "PostlieferungAnteil"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:96
 #: app/scripts/abotypen/detail/abotypendetail.html:185
@@ -2457,7 +2456,7 @@ msgstr "PostlieferungAnteil"
 #: app/scripts/produkte/overview/produkteoverview.html:40
 #: app/scripts/produkte/overview/produkteoverview.html:45
 msgid "Preis"
-msgstr "Beitrag"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:44
 msgid "Preis / Einheit"
@@ -2469,11 +2468,11 @@ msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.controller.js:370
 msgid "Preis wurde erfolgreich angepasst"
-msgstr "Beitrag wurde erfolgreich angepasst"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:186
 msgid "Preis:"
-msgstr "Beitrag:"
+msgstr ""
 
 #: app/scripts/projekt/settings/projektsettings.html:107
 msgid "Preise editierbar"
@@ -2497,33 +2496,33 @@ msgstr ""
 #: app/scripts/lieferplanungen/detail/korbplanung.html:66
 #: app/scripts/lieferplanungen/detail/lieferanten.html:42
 msgid "Produkt"
-msgstr "Lebensmittel"
+msgstr ""
 
 #: app/scripts/produkte/overview/produkteoverview.html:10
 msgid "Produkt erstellen"
-msgstr "Lebensmittel erstellen"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:131
 msgid "Produktbez."
-msgstr "Lebensmittelbez."
+msgstr ""
 
 #: app/index.html:115
 #: app/scripts/produkte/overview/produkteoverview.html:6
 msgid "Produkte"
-msgstr "Lebensmittel"
+msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:52
 msgid "Produkte-Angebot"
-msgstr "Lebensmittel-Angebot"
+msgstr ""
 
 #: app/scripts/projekt/settings/produktkategorien.html:9
 msgid "Produktekategorie erstellen"
-msgstr "Lebensmittelkategorie erstellen"
+msgstr ""
 
 #: app/index.html:118
 #: app/scripts/projekt/settings/produktkategorien.html:6
 msgid "Produktekategorien"
-msgstr "Lebensmittelkategorien"
+msgstr ""
 
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:34
 #: app/scripts/produzenten/detail/produzentendetail.html:9
@@ -2840,7 +2839,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:55
 msgid "Sonderprodukt einfügen"
-msgstr "Sonderlebensmittel einfügen"
+msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:289
 #: app/scripts/projekt/settings/projektsettings.html:257
@@ -2978,7 +2977,7 @@ msgstr ""
 
 #: app/scripts/dashboard/dashboard.html:9
 msgid "Suche in Pendenzen..."
-msgstr "Suche in Aufgaben..."
+msgstr ""
 
 #: app/scripts/reports/detail/reportsdetail.html:81
 msgid "Suche in Resultaten..."
@@ -3026,7 +3025,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:9
 msgid "Summe jeweils ohne Zusatzabos!"
-msgstr "Summe jeweils ohne Zusatzanteile!"
+msgstr ""
 
 #: app/scripts/app.js:322
 msgid "Tage"
@@ -3266,7 +3265,7 @@ msgstr ""
 
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:2
 msgid "Vertriebsart anpassen für Abo Nr."
-msgstr "Vertriebsart apassen für Anteil Nr."
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.controller.js:400
 msgid "Vertriebsart wurde erfolgreich angepasst"
@@ -3543,16 +3542,16 @@ msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:250
 msgid "Zusatz-Abo:"
-msgstr "Zusatz-Anteil:"
+msgstr ""
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:6
 msgid "ZusatzAbotypen"
-msgstr "ZusatzAnteilstypen"
+msgstr ""
 
 #: app/scripts/abos/detail/abosdetail.html:165
 #: app/scripts/lieferplanungen/detail/korbplanung.html:109
 msgid "Zusatzabo"
-msgstr "Zusatzanteil"
+msgstr ""
 
 #: app/index.html:89
 #: app/scripts/abos/detail/abosdetail.html:149
@@ -3560,20 +3559,20 @@ msgstr "Zusatzanteil"
 #: app/scripts/abos/overview/abosoverview.html:9
 #: app/scripts/abos/overview/zusatzabosoverview.html:6
 msgid "Zusatzabos"
-msgstr "Zusatzanteile"
+msgstr ""
 
 #: app/scripts/abos/overview/abosoverview.html:80
 msgid "Zusatzabos Ids"
-msgstr "Zusatzanteile Ids"
+msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:11
 msgid "Zusatzabotyp"
-msgstr "Zusatzanteilstyp"
+msgstr ""
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:94
 msgid "Zusatzabotyp erstellen"
-msgstr "Zusatzanteilstyp erstellen"
+msgstr ""
 
 #: app/scripts/abotypen/detail/abotypendetail.html:140
 #: app/scripts/depots/detail/depotsdetail.html:70
@@ -3605,7 +3604,7 @@ msgstr ""
 #: app/scripts/abos/overview/abosoverview.controller.js:288
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:308
 msgid "abo"
-msgstr "anteil"
+msgstr ""
 
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:151
 msgid "abrechnen"
@@ -3651,7 +3650,7 @@ msgstr ""
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:153
 msgid "kunde"
-msgstr "mitglied"
+msgstr ""
 
 #: app/scripts/app.js:175
 msgid "l"
