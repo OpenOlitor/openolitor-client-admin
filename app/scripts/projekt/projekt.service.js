@@ -6,6 +6,7 @@ angular.module('openolitor-admin')
     function($rootScope, OpenProjektModel, ProjektModel, msgBus, ooAuthService, $q) {
 
       var projekt;
+      var geschaeftsjahre;
 
       var loadProjekt = function(openProjekt, reload) {
         var deferred = $q.defer();
@@ -34,6 +35,24 @@ angular.module('openolitor-admin')
           return deferred.promise;
         };
 
+      var loadGeschaeftsjahre = function(reload) {
+        var deferred = $q.defer();
+
+        ooAuthService.resolveUser().then(function() {
+            if (!reload && geschaeftsjahre) {
+              deferred.resolve(geschaeftsjahre);
+            } else {
+              ProjektModel.geschaeftsjahre({id: projekt.id}, function(result) {
+                geschaeftsjahre = result;
+                deferred.resolve(geschaeftsjahre);
+              }, function(error) {
+                deferred.reject(error);
+              });
+            }
+          });
+          return deferred.promise;
+        };
+
       msgBus.onMsg('EntityCreated', $rootScope, function(event, msg) {
         if (msg.entity === 'Projekt') {
           $rootScope.$apply();
@@ -53,7 +72,8 @@ angular.module('openolitor-admin')
       });
 
       return {
-        resolveProjekt: loadProjekt
+        resolveProjekt: loadProjekt,
+        resolveGeschaeftsjahre: loadGeschaeftsjahre
       };
     }
   ]);

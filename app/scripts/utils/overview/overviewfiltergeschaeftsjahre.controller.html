@@ -1,0 +1,14 @@
+<div class="geschaeftsjahre-dropdown" ng-show="showFilter">
+  <span ng-if="selectedGJ != 'Alle' && selectedGJ.jahr != 'Alle'" translate>Geschäftsjahr</span>
+  <span ng-if="selectedGJ === 'Alle' || selectedGJ.jahr === 'Alle'" translate>Geschäftsjahre</span>
+  <oo-dropdown
+    dropdown-id="geschaeftsjahre"
+    display-style="uib-dropdown"
+    values="geschaeftsjahre"
+    display-function="displayGeschaeftsjahre"
+    selected-function="selectGJ"
+    selected-prop="jahr"
+    selected-value="selectedGJ"
+    disabled="disabled">
+  </oo-dropdown>
+</div>

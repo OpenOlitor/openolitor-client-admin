@@ -63,6 +63,9 @@ angular.module('openolitor-admin')
           count: 10,
           sorting: {
             name: 'asc'
+          },
+          filter: {
+            aktiv: true
           }
         }, {
           filterDelay: 0,
@@ -137,11 +140,11 @@ angular.module('openolitor-admin')
         }
         $scope.loading = true;
         $scope.entries = ZusatzAbotypenOverviewModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery 
         }, function() {
           $scope.zusatzAbosTableParams.reload();
           $scope.loading = false;
-          $location.search('q', $scope.search.query);
         });
       }
 

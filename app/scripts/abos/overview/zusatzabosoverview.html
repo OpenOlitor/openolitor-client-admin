@@ -6,6 +6,8 @@
         <h3 class="panel-title"><span class="navbar-brand" translate>Zusatzabos</span>
         <form class="navbar-form pull-right" role="search">
           <div class="form-group">
+            <oo-overviewfilter-geschaeftsjahre selected-funct="selectedGeschaeftsjahr" select="geschaeftsjahr">
+            </oo-overviewfilter-geschaeftsjahre>
             <input type="text" class="form-control" placeholder="{{'Suche in Übersicht...'|translate}}" ng-model="search.query">
             <oo-actions-button model="model" actions="actions"></oo-actions-button>
           </div>
@@ -22,25 +24,20 @@
           <i class="fa fa-eye" aria-hidden="true" ng-hide="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Alle Spalten einblenden' | translate}}"></i>
           <i class="fa fa-eye-slash" aria-hidden="true" ng-show="showAll" style="cursor: pointer;" ng-click="toggleShowAll()" tooltip-placement="left" uib-tooltip="{{'Standardansicht' | translate}}"></i>
         </script>
-        <div ng-show="entries" id="abosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
+        <div ng-show="entries" id="zusatzabosTable" display-export="true" export-file-name="Abos" class="horizontal-scroll">
           <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
             <tr ng-repeat="abo in $data | filter: search.query.$" id="selectedRow_{{abo.id}}">
               <td header="'headerCheckbox.html'">
                 <input type="checkbox" ng-model="checkboxes.items[abo.id]" ng-change="updateChecked()" />
               </td>
-              <td data-title="'Nr. (Haupt/Zusatzabo)'|translate" sortable="'id'" filter="{id: 'number'}">
+              <td data-title="'Nr. (Haupt/Zusatzabo)'|translate" sortable="'id'" filter="{id: 'text'}">
                 <a ng-click="selectZusatzAbo(abo, 'selectedRow_' + abo.id)">{{abo.hauptAboId}} / {{abo.id}}&nbsp;<i class="fa fa-chevron-right"></i></a>
               </td>
-              <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
-                <a ng-href="#/abotypen/{{abo.abotypId}}">{{abo.abotypName}}</a>
-                <span ng-if="abo.zusatzAboIds.length > 0">
-                  <span ng-repeat="(name, occ) in abo.zusatzAbotypNames | countOcc " class="badge">
-                    <span ng-if="occ > 1">{{occ}}x </span>{{name|translate}}
-                  </span>
-                </span>
+              <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">{{abo.abotypName}} &nbsp;
+                <a ng-href="#/abotypen/{{abo.abotypId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Abonnentin'|translate" sortable="'kunde'">
-                <a  ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}">{{abo.kunde}}</a>
+               {{abo.kunde}} &nbsp;<a target="_blank" rel="noopener noreferrer" ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Start'|translate" sortable="'start'">
                 {{abo.start | date:'dd.MM.yyyy'}}
@@ -51,6 +48,9 @@
               <td data-title="'Aktiv'|translate" sortable="'aktiv'" filter="{aktiv: 'boolean'}">
                 <i ng-if="abo.aktiv" class="glyphicon glyphicon-ok"></i>
                 <i ng-if="!abo.aktiv" class="glyphicon glyphicon-remove"></i>
+              </td>
+              <td data-title="'Preis'|translate" sortable="'price'">
+                {{abo.price | ooCurrency:true}}
               </td>
             </tr>
           </table>

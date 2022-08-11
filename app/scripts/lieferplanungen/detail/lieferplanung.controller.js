@@ -9,11 +9,13 @@ angular.module('openolitor-admin')
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT',
     'KORBSTATUS', 'msgBus', 'cloneObj',
     'gettext', '$location', 'lodash', '$uibModal', 'gettextCatalog', 'ProduktekategorienModel',
+    '$interval',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
       LIEFEREINHEIT, KORBSTATUS, msgBus,
-      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel) {
+      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel,
+      $interval) {
       $rootScope.viewId = 'D-Pla';
 
       $scope.liefereinheiten = LIEFEREINHEIT;
@@ -28,6 +30,9 @@ angular.module('openolitor-admin')
       $scope.search = {
         query: ''
       };
+
+      var interval = $interval(refreshLieferung, 5000);
+      var changesInLieferungen = false;
 
       var load = function() {
         LieferplanungModel.get({
@@ -101,13 +106,16 @@ angular.module('openolitor-admin')
         }
       );
 
-      LieferplanungModel.getLieferungen({
+      $scope.loadLieferungen = function(){LieferplanungModel.getLieferungen({
         id: $routeParams.id
-      }, function(result) {
-        $scope.abotypenLieferungen = result;
-        $scope.recalculateProduzentListen(true);
-        $scope.recalculateTotalAnzahl();
-      });
+        }, function(result) {
+          $scope.abotypenLieferungen = result;
+          $scope.recalculateProduzentListen(true);
+          $scope.recalculateTotalAnzahl();
+        });
+      }
+
+      $scope.loadLieferungen();
 
       $scope.recalculateTotalAnzahl = function() {
         $scope.anzahlKoerbeZuLiefern = 0;
@@ -778,10 +786,15 @@ angular.module('openolitor-admin')
       };
 
       $scope.sammelbestellungVersenden = function(bestellung) {
-        LieferplanungModel.sammelbestellungVersenden({
-          id: $routeParams.id,
-          bestellungId: bestellung.id
-        }, bestellung);
+        dialogService.displayDialogOkAbort(gettextCatalog.getString(
+          'Bist du sicher, dass du diese E-Mail and Produzent versenden möchtest'
+              ),
+              function() {
+                LieferplanungModel.sammelbestellungVersenden({
+                  id: $routeParams.id,
+                  bestellungId: bestellung.id
+                }, bestellung);
+              });
       };
 
       $scope.sammelbestellungenErstellen = function() {
@@ -830,7 +843,11 @@ angular.module('openolitor-admin')
           id: $routeParams.id,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search({'q': 'id=' + result.join()});
+          $location.path('/abos').search({
+            'q': 'id=' + result.join(),
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
+          });
         });
       };
 
@@ -840,7 +857,11 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search({'q': 'id=' + result.join()});
+          $location.path('/abos').search({
+            'q': 'id=' + result.join(),
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
+          });
         });
       };
 
@@ -850,7 +871,11 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search({'q': 'id=' + result.join()});
+          $location.path('/abos').search({
+            'q': 'id=' + result.join(),
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
+          });
         });
       };
 
@@ -920,7 +945,10 @@ angular.module('openolitor-admin')
           onExecute: function() {
             $scope.recalculateBestellungen(function() {
               var result = lodash.map($scope.sammelbestellungen, 'id');
-              $location.path('/einkaufsrechnungen').search({'q': 'id=' + result.join()});
+              $location.path('/einkaufsrechnungen').search({
+                'q': 'id=' + result.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         },{
@@ -933,7 +961,10 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/depotauslieferungen').search({'q': 'id=' + res.join()});
+              $location.path('/depotauslieferungen').search({
+                'q': 'id=' + res.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         },{
@@ -946,7 +977,10 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/tourauslieferungen').search({'q': 'id=' + res.join()});
+              $location.path('/tourauslieferungen').search({
+                'q': 'id=' + res.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         },{
@@ -959,7 +993,10 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/postauslieferungen').search({'q': 'id=' + res.join()});
+              $location.path('/postauslieferungen').search({
+                'q': 'id=' + res.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         }];
@@ -993,6 +1030,31 @@ angular.module('openolitor-admin')
         onExecute: function() { }
       } ].concat($scope.getPostAbschliessenAktionen());
 
+      function refreshLieferung(){
+        if (changesInLieferungen) {
+          $scope.loadLieferungen();
+          changesInLieferungen = false;
+        }
+      }
+
+      msgBus.onMsg('EntityDeleted', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferung' ){
+          changesInLieferungen = true;
+        }
+      });
+
+      msgBus.onMsg('EntityModified', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferung' ){
+          changesInLieferungen = true;
+        }
+      });
+
+      msgBus.onMsg('EntityCreated', $scope, function(event, msg) {
+        if (msg.entity === 'Lieferung'){
+          changesInLieferungen = true;
+        }
+      });
+
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity === 'Lieferplanung' && msg.entity
           .id === $routeParams.id) {
@@ -1009,3 +1071,4 @@ angular.module('openolitor-admin')
       load();
     }
   ]);
+

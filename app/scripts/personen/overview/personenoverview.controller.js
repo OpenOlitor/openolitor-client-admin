@@ -16,10 +16,7 @@ angular.module('openolitor-admin')
 
       $scope.kundentypen = [];
       $scope.personCategories = [];
-      $scope.$watch(KundentypenService.getKundentypen,
-
-
-        function(list) {
+      $scope.$watch(KundentypenService.getKundentypen, function(list) {
           var unorderedKundenTyp = [];
           if (list) {
             angular.forEach(list, function(item) {
@@ -118,13 +115,13 @@ angular.module('openolitor-admin')
         var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
           return value;
         });
-        $scope.personIdsMailing = _($scope.filteredEntries)
+        $scope.personIdsMailing = _($scope.entries)
           .keyBy('id')
           .at(Object.keys(activeCheckboxes))
           .map('id')
           .value();
 
-        $scope.emailAddresses = _($scope.filteredEntries)
+        $scope.emailAddresses = _($scope.entries)
           .keyBy('id')
           .at(Object.keys(activeCheckboxes))
           .map('email')
@@ -230,7 +227,8 @@ angular.module('openolitor-admin')
               dataSet;
 
             $scope.filteredEntries = dataSet;
-
+            updateIds();
+          
             params.total(dataSet.length);
 
             $location.search({'q': $scope.search.query, 'tf': JSON.stringify($scope.tableParams.filter())});
@@ -246,20 +244,35 @@ angular.module('openolitor-admin')
         }
       }
 
+      function updateIds(){
+            var ids = [];
+            var checkedItems = [];
+            var items = [];
+            angular.forEach($scope.checkboxes.checkedItems, function(i){
+                ids.push(i.id);
+                checkedItems.push(i);
+                items.push([i.id,true]);
+            })
+
+            $scope.checkboxes.ids = ids;
+            $scope.checkboxes.checkedItems = checkedItems;
+            $scope.checkboxes.items = Object.fromEntries(items);
+            $scope.updateChecked();
+      }
+
       function search() {
         if ($scope.loading) {
           return;
         }
         $scope.tableParams.reload();
 
-        $scope.loading = true;
         $scope.entries = PersonenOverviewModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
       }
 
       var existingQuery = $location.search().q;

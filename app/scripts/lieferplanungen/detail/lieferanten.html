@@ -29,7 +29,7 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title"><span class="navbar-brand">{{bestellung.produzentKurzzeichen}} - {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).vorname}} {{getProduzentByKurzzeichen(bestellung.produzentKurzzeichen).name}}</span></h3>
               <div class="pull-right" role="group">
-                <button role="button" ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung versenden</span></button>
+                <button role="button" confirmation-send-email ng-show="planung.status === 'Abgeschlossen'" ng-click="sammelbestellungVersenden(sammelbestellung)" class="btn btn-success"><span class="fa fa-check"></span> <span translate>Bestellung versenden</span></button>
               </div>
             </div>
             <div class="panel-body" ng-repeat="lieferung in bestellung.lieferungen | toArray | orderBy: 'produktBeschrieb'">
@@ -61,13 +61,13 @@
                       {{position.mengeTotal | custNumber:position.einheit}} {{liefereinheiten[position.einheit.toUpperCase()].label.short|translate}}
                     </td>
                     <td ng-show="projekt.preiseSichtbar">
-                      {{position.preisEinheit | ooCHF}}
+                      {{position.preisEinheit | ooCurrency:true}}
                     </td>
                     <td ng-show="projekt.preiseSichtbar">
-                      {{position.preisPackung | ooCHF}}
+                      {{position.preisPackung | ooCurrency:true}}
                     </td>
                     <td ng-show="projekt.preiseSichtbar">
-                      {{position.preis | ooCHF}}
+                      {{position.preis | ooCurrency:true}}
                     </td>
                   </tr>
                 </tbody>
@@ -78,7 +78,7 @@
                       Total
                     </td>
                     <td>
-                      {{lieferung.total | ooCHF}}
+                      {{lieferung.total | ooCurrency:true}}
                     </td>
                   </tr>
                   <tr>
@@ -87,7 +87,7 @@
                       {{bestellung.adminProzente}} <span translate>% Adminanteil</span>
                     </td>
                     <td>
-                      {{bestellung.adminProzenteAbzug | ooCHF}}
+                      {{bestellung.adminProzenteAbzug | ooCurrency:true}}
                     </td>
                   </tr>
                   <tr ng-if="produzentIstBesteuert(sammelbestellung.produzentId)">
@@ -96,7 +96,7 @@
                       <span translate>MWST</span> {{lieferung.steuerSatz}}%
                     </td>
                     <td>
-                      {{bestellung.steuer | ooCHF}}
+                      {{bestellung.steuer | ooCurrency:true}}
                     </td>
                   </tr>
                   <tr>
@@ -107,7 +107,7 @@
                         <span ng-if="!produzentIstBesteuert(sammelbestellung.produzentId)" translate> (abz. Adminanteil)</span>
                     </td>
                     <td>
-                      {{bestellung.totalSteuer | ooCHF}}
+                      {{bestellung.totalSteuer | ooCurrency:true}}
                     </td>
                   </tr>
                 </tfoot>
@@ -119,7 +119,7 @@
                   <span translate>Total über alle Lieferungen</span>
                 </div>
                 <div class="col-md-3">
-                  {{bestellung.total | ooCHF}}
+                  {{bestellung.total | ooCurrency:true}}
                 </div>
               </div>
               <div class="row" ng-if="produzentIstBesteuert(sammelbestellung.produzentId)">
@@ -127,7 +127,7 @@
                   <span translate>MWST</span>
                 </div>
                 <div class="col-md-3">
-                  {{bestellung.steuer | ooCHF}}
+                  {{bestellung.steuer | ooCurrency:true}}
                 </div>
               </div>
               <div class="row" ng-if="produzentIstBesteuert(sammelbestellung.produzentId)">
@@ -135,7 +135,7 @@
                   <span translate>Total über alle Lieferungen (inkl. MWST)</span>
                 </div>
                 <div class="col-md-3">
-                  {{bestellung.totalSteuer | ooCHF}}
+                  {{bestellung.totalSteuer | ooCurrency:true}}
                 </div>
               </div>
             </div>

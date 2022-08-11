@@ -82,13 +82,13 @@ angular.module('openolitor-admin')
         var activeCheckboxes = lodash.pickBy($scope.checkboxes.items, function(value, key) {
           return value;
         });
-        $scope.kundeIdsMailing = lodash($scope.filteredEntries)
+        $scope.kundeIdsMailing = lodash($scope.entries)
           .keyBy('id')
           .at(Object.keys(activeCheckboxes))
           .map('id')
           .value();
 
-        $scope.emailAddresses = lodash($scope.filteredEntries)
+        $scope.emailAddresses = lodash($scope.entries)
           .keyBy('id')
           .at(Object.keys(activeCheckboxes))
           .flatMap('ansprechpersonen')
@@ -184,7 +184,8 @@ angular.module('openolitor-admin')
             bezeichnung: 'asc'
           },
           filter: {
-            typen: ''
+            typen: '',
+            aktiv: true
           }
         }, {
           filterDelay: 0,
@@ -210,6 +211,7 @@ angular.module('openolitor-admin')
               dataSet;
 
             $scope.filteredEntries = dataSet;
+            updateIds();
 
             params.total(dataSet.length);
 
@@ -229,20 +231,36 @@ angular.module('openolitor-admin')
         }
       }
 
+      function updateIds() {
+        var ids = [];
+        var checkedItems = [];
+        var items = [];
+        angular.forEach($scope.checkboxes.checkedItems, function(i){
+          ids.push(i.id);
+          checkedItems.push(i);
+          items.push([i.id,true]);
+        })
+
+        $scope.checkboxes.ids = ids;
+        $scope.checkboxes.checkedItems = checkedItems;
+        $scope.checkboxes.items = Object.fromEntries(items);
+        $scope.updateChecked();
+      }
+
       function search() {
         if ($scope.loading) {
           return;
         }
         $scope.tableParams.reload();
-
+        
         $scope.loading = true;
         $scope.entries = KundenOverviewModel.query({
+          q: $scope.search.queryQuery,
           f: $scope.search.filterQuery
-        }, function() {
+        }, function(kunden) {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
       }
 
       $scope.toggleShowAll = function() {
@@ -262,6 +280,5 @@ angular.module('openolitor-admin')
           .query);
         search();
       }, true);
-
     }
   ]);

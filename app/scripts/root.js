@@ -7,11 +7,11 @@ angular.module('openolitor-admin')
     'ServerService', 'ProjektService', 'gettextCatalog', 'amMoment',
     '$location', 'msgBus', 'checkSize', '$window', '$timeout', 'BUILD_NR',
     'appConfig', 'cssInjector', '$route',
-    'ooAuthService', '$cookies', 'moment', 'dialogService',
+    'ooAuthService', '$cookies', 'moment', 'dialogService', 'alertService','tmhDynamicLocale','uiDatetimePickerConfig', 'dateTimePickerValues',
     function($scope, $rootScope, ServerService, ProjektService,
       gettextCatalog, amMoment, $location, msgBus, checkSize, $window,
       $timeout, BUILD_NR, appConfig, cssInjector, $route,
-      ooAuthService, $cookies, moment, dialogService) {
+      ooAuthService, $cookies, moment, dialogService, alertService, tmhDynamicLocale,uiDatetimePickerConfig, dateTimePickerValues) {
       angular.element($window).bind('resize', function() {
         checkSize();
       });
@@ -38,6 +38,16 @@ angular.module('openolitor-admin')
       //initial launch
       checkSize();
 
+      $rootScope.translateCalendar = function(){
+        uiDatetimePickerConfig.buttonBar.close.text = gettextCatalog.getString(dateTimePickerValues.close);
+        uiDatetimePickerConfig.buttonBar.clear.text = gettextCatalog.getString(dateTimePickerValues.clear);
+        uiDatetimePickerConfig.buttonBar.now.text = gettextCatalog.getString(dateTimePickerValues.now);
+        uiDatetimePickerConfig.buttonBar.today.text = gettextCatalog.getString(dateTimePickerValues.today);
+        uiDatetimePickerConfig.buttonBar.date.text = gettextCatalog.getString(dateTimePickerValues.date);
+        uiDatetimePickerConfig.buttonBar.time.text = gettextCatalog.getString(dateTimePickerValues.time);
+        uiDatetimePickerConfig.buttonBar.cancel.text = gettextCatalog.getString(dateTimePickerValues.cancel);
+      }
+
       $scope.connected = false;
       $scope.showConnectionErrorMessage = false;
 
@@ -54,6 +64,7 @@ angular.module('openolitor-admin')
             }
           });
         if ($scope.loggedIn) {
+          //$scope.secondFactorType = ooAuthService.getSecondFactorType();
           ProjektService.resolveProjekt(false, !$scope.loadedProjectLoggedInOnce).then(function(projekt) {
             $scope.loadedProjectLoggedInOnce = true;
             $scope.projekt = projekt;
@@ -130,8 +141,10 @@ angular.module('openolitor-admin')
             reason: lang
           });
           $scope.storeActiveLang(lang);
+          tmhDynamicLocale.set(lang);
           $scope.$emit('languageChanged');
           moment.locale(lang);
+          $rootScope.translateCalendar();
         }
       };
 
@@ -206,6 +219,10 @@ angular.module('openolitor-admin')
           );
         }
       };
+
+      $rootScope.$on('$routeChangeStart', function (event, next, prev) {
+        alertService.clearAll();
+      });
 
       $scope.$on('destroy', function() {
         unwatchLoggedIn();

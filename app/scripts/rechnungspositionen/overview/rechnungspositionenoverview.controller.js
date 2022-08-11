@@ -9,12 +9,12 @@ angular.module('openolitor-admin')
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'appConfig', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettextCatalog',
-    'gettext',
+    'gettext','ProjektService',
     function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, appConfig,
       FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
-      localeSensitiveComparator, gettextCatalog, gettext) {
+      localeSensitiveComparator, gettextCatalog, gettext, ProjektService) {
       $rootScope.viewId = 'L-Repo';
 
       $scope.entries = [];
@@ -166,6 +166,11 @@ angular.module('openolitor-admin')
         }
       }
 
+      ProjektService.resolveProjekt(true).then(function(projekt) {
+            $scope.projekt = projekt;
+            $rootScope.projekt = projekt;
+          });
+
       function search() {
         if ($scope.loading) {
           return;
@@ -175,7 +180,8 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = RechnungsPositionenModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery 
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;

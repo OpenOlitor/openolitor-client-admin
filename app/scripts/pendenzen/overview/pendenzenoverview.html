@@ -28,7 +28,7 @@
                 {{pendenz.status|translate}}
               </td>
               <td data-title="'Kunde'|translate">
-                <a ng-href="#/kunden/{{pendenz.kundeId}}">{{pendenz.kundeBezeichnung}}</a>
+                {{pendenz.kundeBezeichnung}} &nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/kunden/{{pendenz.kundeId}}"><i class="glyphicon glyphicon-new-window"></i></a>
               </td>
               <td>
                 <button ng-if="isUnresolved(pendenz)" type="button" class="btn btn-xs btn-success" ng-click="markErledigt(pendenz)" title="{{'Pendenz als erledigt markieren'|translate}}"><span class="glyphicon glyphicon-ok"></span> </button>

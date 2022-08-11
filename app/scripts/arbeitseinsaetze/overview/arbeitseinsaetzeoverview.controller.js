@@ -46,8 +46,8 @@ angular
       $rootScope.viewId = 'L-Abein';
 
       $scope.zeitraumLAsArray = EnumUtil.asArray(ZEITRAUM);
-      $scope.zeitraumL = []; 
-      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, function(zr){ 
+      $scope.zeitraumL = [];
+      angular.forEach(lodash.sortBy($scope.zeitraumLAsArray, function(zr){
           return gettextCatalog.getString(zr.label).toLowerCase();
       }), function(value, key) {
         $scope.zeitraumL.push({
@@ -176,6 +176,9 @@ angular
                 } else if(f.zeitVonF === 'M') {
                   from = moment().startOf('month').toDate();
                   to = moment().endOf('month').toDate();
+                } else if(f.zeitVonF === 'V') {
+                  from =new Date(-8640000000000000);
+                  to = moment().startOf('day').toDate();
                 } else {
                   from =new Date(-8640000000000000);
                   to = new Date(8640000000000000);
@@ -207,6 +210,7 @@ angular
                 : orderedData;
 
               $scope.filteredEntries = filteredData;
+              updateIds();
 
               params.total(orderedData.length);
               return orderedData.slice(
@@ -218,6 +222,21 @@ angular
         );
       }
 
+      function updateIds() {
+        var ids = [];
+        var checkedItems = [];
+        var items = [];
+        angular.forEach($scope.checkboxes.checkedItems, function(i){
+          ids.push(i.id);
+          checkedItems.push(i);
+          items.push([i.id,true]);
+        })
+
+        $scope.checkboxes.ids = ids;
+        $scope.checkboxes.checkedItems = checkedItems;
+        $scope.checkboxes.items = Object.fromEntries(items);
+      }
+
       function search() {
         if ($scope.loading) {
           return;
@@ -227,7 +246,7 @@ angular
         $scope.loading = true;
         $scope.entries = ArbeitseinsaetzeModel.query(
           {
-            q: $scope.query
+            q: $scope.search.queryQuery
           },
           function() {
             $scope.tableParams.reload();

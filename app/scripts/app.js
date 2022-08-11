@@ -81,7 +81,8 @@ angular
     'mm.iban',
     'piwik',
     'openolitor-core',
-    'ngQuill'
+    'ngQuill',
+    'tmh.dynamicLocale'
   ])
   .constant('BUILD_NR', '@@BUILD_NR')
   .constant('LIEFERRHYTHMEN', {
@@ -180,34 +181,25 @@ angular
     )
   })
   .constant('ARBEITSEINSATZSTATUS', {
+    NEU: gettext('Neu'),
+    CANCELED: gettext('Canceled'),
     INVORBEREITUNG: gettext('InVorbereitung'),
     BEREIT: gettext('Bereit'),
     ABGESAGT: gettext('Abgesagt'),
     ARCHIVIERT: gettext('Archiviert')
   })
+
   .constant('ABOTYPEN_ARRAY', [
     'DepotlieferungAbo',
     'HeimlieferungAbo',
     'PostlieferungAbo'
   ])
   .constant('WAEHRUNG', {
-    CHF: addExtendedEnumValue(
-      'CHF',
-      gettext('Schweizer Franken'),
-      gettext('CHF')
-    ),
-    EUR: addExtendedEnumValue('EUR', gettext('Euro'), gettext('EUR')),
-    USD: addExtendedEnumValue('USD', gettext('US Dollar'), gettext('USD')),
-    GBP: addExtendedEnumValue(
-      'GBP',
-      gettext('Britisches Pfund'),
-      gettext('GBP')
-    ),
-    CAD: addExtendedEnumValue(
-      'CAD',
-      gettext('Kanadischer Dollar'),
-      gettext('CAD')
-    )
+    CHF: addExtendedEnumValue('CHF', gettext('Schweizer Franken'), gettext('CHF'), 'CHF'),
+    EUR: addExtendedEnumValue('EUR', gettext('Euro'), gettext('EUR'), '€'),
+    USD: addExtendedEnumValue('USD', gettext('US Dollar'), gettext('USD'), '$'),
+    GBP: addExtendedEnumValue('GBP', gettext('Britisches Pfund'), gettext('GBP'), '£'),
+    CAD: addExtendedEnumValue('CAD', gettext('Kanadischer Dollar'), gettext('CAD'), '$')
   })
   .constant('LIEFERZEITPUNKTE', {
     MONTAG: addExtendedEnumValue('Montag', gettext('Montag'), gettext('MO'), 1),
@@ -326,12 +318,26 @@ angular
     AB_HEUTE: addExtendedEnumValue('D', gettext('Ab Heute'), gettext('Ab Heute')),
     NUR_HEUTE: addExtendedEnumValue('d',gettext('Nur Heute'),gettext('Nur Heute')),
     DIESE_WOCHE: addExtendedEnumValue('w',gettext('Diese Woche'),gettext('Diese Woche')),
-    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat'))
+    DIESEN_MONAT: addExtendedEnumValue('M',gettext('Diesen Monat'),gettext('Diesen Monat')),
+    VERGANGENE: addExtendedEnumValue('V',gettext('Vergangene'),gettext('Vergangene'))
   })
   .constant('USER_ROLES', {
     Guest: 'Guest',
     Administrator: 'Administrator',
     Kunde:'Kunde'
+  })
+  .constant('SECOND_FACTOR_TYPES', {
+    OTP: addExtendedEnumValue('otp', gettext('One-Time-Password (OTP)'), gettext('OTP')),
+    EMAIL: addExtendedEnumValue('email', gettext('E-Mail'), gettext('E-Mail'))
+  })
+  .constant('dateTimePickerValues', {
+     now: gettext('Jetzt'),
+     close: gettext('Schliessen'),
+     clear: gettext('Löschen'),
+     today: gettext('Heute'),
+     date: gettext('Datum'),
+     time: gettext('Zeit'),
+     cancel: gettext('Abbrechen')
   })
   .constant('uiDatetimePickerConfig', {
     dateFormat: 'dd.MM.yyyy HH:mm',
@@ -394,7 +400,7 @@ angular
   .run(function($rootScope, $location) {
     $rootScope.location = $location;
   })
-  .service('appConfig', ['$http', function($http) {
+  .service('appConfig', function() {
     var loaded = false;
     var configData = {
     };
@@ -408,7 +414,7 @@ angular
         return loaded;
       }
     };
-  }])
+  })
   .run(function(appConfig) {
     appConfig.get();
   })
@@ -543,6 +549,12 @@ angular
       $qProvider.errorOnUnhandledRejections(false);
     }
   ])
+  .config([
+    'tmhDynamicLocaleProvider',
+    function (tmhDynamicLocaleProvider) {
+        tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale.toLowerCase().replace(\'_\',\'-\')}}.js');
+    }
+  ])
     .constant('NG_QUILL_CONFIG', {
     /*
      * @NOTE: this config/output is not localizable.
@@ -623,10 +635,21 @@ angular
       }
     };
   })
+  .factory('removeAlertInterceptor', function($q, alertService) {
+    return {
+      request: function(config) {
+        if(config.method === 'POST') {
+          alertService.clearAll();
+        }
+        return config;
+      }
+    };
+  })
   .config([
     '$httpProvider',
     function($httpProvider) {
       $httpProvider.interceptors.push('loggedOutInterceptor');
+      $httpProvider.interceptors.push('removeAlertInterceptor');
     }
   ])
   .filter('custNumber', function($filter, LIEFEREINHEIT) {

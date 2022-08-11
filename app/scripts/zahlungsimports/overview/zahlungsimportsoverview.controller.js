@@ -5,8 +5,9 @@
 angular.module('openolitor-admin')
   .controller('ZahlungsImportsOverviewController', ['$q', '$scope', '$rootScope', '$filter',
     'ZahlungsImportsOverviewModel', 'NgTableParams', 'localeSensitiveComparator',
+    'FilterQueryUtil',
     function($q, $scope, $rootScope, $filter, ZahlungsImportsOverviewModel, NgTableParams,
-      localeSensitiveComparator) {
+      localeSensitiveComparator, FilterQueryUtil) {
       $rootScope.viewId = 'L-ZaEx';
 
       $scope.entries = [];
@@ -61,16 +62,19 @@ angular.module('openolitor-admin')
 
         $scope.loading = true;
         $scope.entries = ZahlungsImportsOverviewModel.query({
-          q: $scope.query
+          f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery,
         }, function() {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
       }
 
-      search();
-
       $scope.$watch('search.query', function() {
+        $scope.search.filterQuery = FilterQueryUtil.transform($scope.search
+          .query);
+        $scope.search.queryQuery = FilterQueryUtil.withoutFilters($scope.search
+          .query);
         search();
       }, true);
 

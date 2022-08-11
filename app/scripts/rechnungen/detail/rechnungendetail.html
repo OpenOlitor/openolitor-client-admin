@@ -223,10 +223,10 @@
               <table class="table table-striped table-condensed">
                 <tr>
                   <th>#</th>
-                  <th tanslate>Nr.</th>
-                  <th tanslate>Beschrieb</th>
-                  <th tanslate>Betrag</th>
-                  <th tanslate>Typ</th>
+                  <th translate>Nr.</th>
+                  <th translate>Beschrieb</th>
+                  <th translate>Betrag</th>
+                  <th translate>Typ</th>
                 </tr>
                 <tr ng-repeat="position in rechnung.rechnungsPositionen | orderBy: 'sort'">
                   <td>
@@ -239,7 +239,7 @@
                     {{position.beschrieb}}
                   </td>
                   <td>
-                    {{position.betrag || ooCHF}}
+                    {{position.betrag | ooCurrency:true}}
                   </td>
                   <td>
                     <span ng-show="position.typ == 'Abo'">

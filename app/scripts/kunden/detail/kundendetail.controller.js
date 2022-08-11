@@ -20,6 +20,7 @@ angular.module('openolitor-admin')
       var defaults = {
         model: {
           id: undefined,
+          aktiv: true,
           typen: [],
           ansprechpersonen: [{
             id: undefined,
@@ -35,6 +36,9 @@ angular.module('openolitor-admin')
 
       $scope.einladungSend = {};
       $scope.einladungSendFailed = {};
+
+      $scope.resetOtpOk = {};
+      $scope.resetOtpFailed = {};
 
       $scope.personCategories = [];
 
@@ -134,6 +138,7 @@ angular.module('openolitor-admin')
           $scope.rechnungen = KundenRechnungenModel.query({
             kundeId: $scope.kunde.id
           });
+          $scope.kundeForm.$setPristine();
         });
       };
 
@@ -148,21 +153,19 @@ angular.module('openolitor-admin')
         $location.path('/kunden/'+item.id);
       };
 
-      $scope.getKunden = function(filter) {
+      $scope.getKunden = function(queryFilter) {
         if ($scope.loading) {
           return;
         }
 
         $scope.loading = true;
 
-        return KundenOverviewModel.query({
-          q: filter
+        return KundenOverviewModel.kundenSearch({
+          q: queryFilter
         }, function() {
           $scope.loading = false;
         }).$promise.then(function(kunden) {
-          var filtered = $filter('filter')(kunden, filter);
-          console.log('Filtered: ', filtered, ' with filter ', filter);
-          return filtered;
+          return kunden;
         });
       };
 
@@ -276,6 +279,17 @@ angular.module('openolitor-admin')
             $scope.einladungSendFailed[person.email] = true;
           });
       };
+
+      $scope.resetOtp = function(person) {
+        $scope.resetOtpOk[person.id] = false;
+        $scope.resetOtpFailed[person.id] = false;
+        KundenDetailService.resetOtp($routeParams.id, person.id)
+        .then(function successCallback(response) {
+          $scope.resetOtpOk[person.id] = true;
+        }, function errorCallback(response) {
+          $scope.resetOtpFailed[person.id] = true;
+        });
+      }
 
       $scope.changeRolle = function(person) {
         if(person.rolle === undefined || person.rolle === null) {

@@ -42,6 +42,7 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
     $scope.loading = false;
     $scope.selectedAbo = undefined;
     $scope.model = {};
+    $scope.initGJ = false;
 
     $scope.navigateToKunde = function(id) {
       $scope.filteredEntries = [];
@@ -107,7 +108,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
         angular.forEach(list, function(abotyp) {
           $scope.abotypL.push({
             id: abotyp.id,
-            title: abotyp.name
+            title: abotyp.name,
+            price: abotyp.preis
           });
         });
       }
@@ -117,13 +119,13 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       var activeCheckboxes = _.pickBy($scope.checkboxes.items, function(value, key) {
         return value;
       });
-      $scope.aboIdsMailing = _($scope.filteredEntries)
+      $scope.aboIdsMailing = _($scope.entries)
         .keyBy('id')
         .at(Object.keys(activeCheckboxes))
         .map('id')
         .value();
 
-      $scope.kundeIds = _($scope.filteredEntries)
+      $scope.kundeIds = _($scope.entries)
         .keyBy('id')
         .at(Object.keys(activeCheckboxes))
         .map('kundeId')
@@ -204,7 +206,8 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
           exportODSFilter: function() {
             return {
               f: $scope.search.filterQuery,
-              x: $scope.search.complexFlags
+              x: $scope.search.complexFlags,
+              g: $scope.geschaeftsjahr,
             };
           },
           getData: function(params) {
@@ -238,11 +241,13 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
             }
 
             $scope.filteredEntries = dataSet;
+            updateIds();
 
             params.total(dataSet.length);
 
             $location.search({
               q: $scope.search.query,
+              g: $scope.geschaeftsjahr,
               f: JSON.stringify($scope.search.complexFlags),
               tf: JSON.stringify($scope.tableParams.filter())
             });
@@ -259,6 +264,33 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
       if (existingFilter) {
         $scope.tableParams.filter(JSON.parse(existingFilter));
       }
+    }
+
+    function updateIds() {
+      var ids = [];
+      var checkedItems = [];
+      var items = [];
+      angular.forEach($scope.checkboxes.checkedItems, function(i){
+        ids.push(i.id);
+        checkedItems.push(i);
+        items.push([i.id,true]);
+      })
+
+      $scope.checkboxes.ids = ids;
+      $scope.checkboxes.checkedItems = checkedItems;
+      $scope.checkboxes.items = Object.fromEntries(items);
+      $scope.updateChecked();
+    }
+
+    $scope.selectedGeschaeftsjahr = function(gj) {
+      if(angular.isDefined(gj)) {
+        $scope.geschaeftsjahr = gj;
+      } else {
+        $scope.geschaeftsjahr = undefined;
+      }
+      $scope.initGJ = true;
+      search();
+      return false;
     }
 
     $scope.actions = [
@@ -320,21 +352,33 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
     ];
 
     function search() {
-      if ($scope.loading) {
+      if ($scope.loading || !$scope.initGJ) {
         return;
       }
       $scope.loading = true;
       ZusatzabosOverviewModel.query(
         {
           f: $scope.search.filterQuery,
-          x: $scope.search.complexFlags
+          q: $scope.search.queryQuery,
+          x: $scope.search.complexFlags,
+          g: $scope.geschaeftsjahr
         },
         function(entries) {
           $scope.entries = entries;
+          angular.forEach($scope.entries, function(entry) {
+            if (!entry.price){
+              entry.price = $scope.abotypL.find(x => x.id === entry.abotypId).price;
+            }
+          });
           $scope.tableParams.reload();
           $scope.loading = false;
         }
       );
+    }
+
+    var existingGJ = $location.search().g;
+    if (existingGJ) {
+      $scope.geschaeftsjahr = existingGJ;
     }
 
     var existingQuery = $location.search().q;
