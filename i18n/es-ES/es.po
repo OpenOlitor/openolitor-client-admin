@@ -8,10 +8,10 @@ msgstr ""
 "X-Crowdin-Project-ID: 393649\n"
 "X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: /[OpenOlitor.openolitor-client-admin] prod/template.pot\n"
-"X-Crowdin-File-ID: 72\n"
+"X-Crowdin-File-ID: 53\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-08-22 09:41\n"
+"PO-Revision-Date: 2022-08-22 12:44\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -22,31 +22,30 @@ msgctxt "notPerson"
 msgid "Name"
 msgstr "Nombre"
 
-#: app/scripts/kunden/detail/kundendetail.html:96
-#: app/scripts/kunden/detail/kundendetail.html:99
+#: app/scripts/kunden/detail/kundendetail.html:81
+#: app/scripts/kunden/detail/kundendetail.html:84
 msgctxt "person"
 msgid "Name"
 msgstr "Apellido(s)"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:33
-#: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:66
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:29
 msgid "#"
 msgstr "Nº"
 
 #: app/scripts/abotypen/overview/abotypen.html:35
 msgid "# Abonnenten"
-msgstr "Abonad@s"
+msgstr "Abonados"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:36
 #: app/scripts/depots/overview/depotsoverview.html:47
-#: app/scripts/kunden/overview/kundenoverview.html:51
+#: app/scripts/kunden/overview/kundenoverview.html:48
 #: app/scripts/touren/overview/tourenoverview.html:37
 msgid "# Abos"
 msgstr "Nº Abonos"
 
-#: app/scripts/abos/overview/abosoverview.html:67
+#: app/scripts/abos/overview/abosoverview.html:65
 #: app/scripts/kunden/detail/abo/abos.html:17
 msgid "# Abw."
 msgstr "Nº Aus."
@@ -66,7 +65,7 @@ msgstr "Nº de entregas hasta hoy:"
 msgid "# Pers."
 msgstr "Nº Pers."
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:190
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:186
 msgid "# Personen"
 msgstr "Nº Personas"
 
@@ -75,10 +74,14 @@ msgstr "Nº Personas"
 msgid "# Verknüpfungen"
 msgstr "Nº de enlaces"
 
+#: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:66
+msgid "#&nbsp;Lieferungen"
+msgstr "#&nbsp;Entregas"
+
 #: app/scripts/abotypen/detail/abotypendetail.html:203
 #: app/scripts/produzenten/detail/produzentendetail.html:100
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:42
 #: app/scripts/lieferplanungen/detail/lieferanten.html:87
@@ -93,12 +96,12 @@ msgstr "(después de deducir el porcentaje de administración de los productores
 msgid "(abz. Adminanteil, inkl. MWST)"
 msgstr "(después de deducir el porcentaje de administración de los productores, IVA incluido)"
 
-#: app/scripts/kunden/detail/kundendetail.html:135
+#: app/scripts/kunden/detail/kundendetail.html:116
 #: app/scripts/produzenten/detail/produzentendetail.html:173
 msgid "+41 ..."
 msgstr "+ 41..."
 
-#: app/scripts/kunden/detail/kundendetail.html:126
+#: app/scripts/kunden/detail/kundendetail.html:108
 #: app/scripts/produzenten/detail/produzentendetail.html:165
 msgid "+41 7..."
 msgstr "+ 41 7..."
@@ -108,19 +111,19 @@ msgstr "+ 41 7..."
 msgid "+41..."
 msgstr "+ 41..."
 
-#: app/scripts/app.js:123
+#: app/scripts/app.js:122
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #: app/scripts/produzenten/detail/produzentendetail.html:99
 msgid "2.0"
-msgstr ""
+msgstr "2.0"
 
 #: app/scripts/depots/overview/depotsoverview.html:38
 msgid "AP Tel"
 msgstr "Número de teléfono de la persona de contacto"
 
-#: app/scripts/app.js:330
+#: app/scripts/app.js:326
 msgid "Ab Heute"
 msgstr "A partir de hoy"
 
@@ -128,24 +131,24 @@ msgstr "A partir de hoy"
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:43
 #: app/scripts/abos/detail/create-abo.html:57
 #: app/scripts/abotypen/detail/lieferungen/generate-lieferungen.html:38
-#: app/scripts/app.js:391
+#: app/scripts/app.js:382
 #: app/scripts/arbeitsangebote/detail/addpersontoeinsatz.html:44
 #: app/scripts/arbeitsangebote/detail/duplicate/duplicate-arbeitsangebot.html:61
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:31
 msgid "Abbrechen"
 msgstr "Cancelar"
 
-#: app/scripts/app.js:188
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:50
+#: app/scripts/app.js:185
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:51
 msgid "Abgesagt"
 msgstr "Cancelado"
 
-#: app/scripts/app.js:140
-#: app/scripts/app.js:144
+#: app/scripts/app.js:139
+#: app/scripts/app.js:143
 msgid "Abgeschlossen"
 msgstr "Completado"
 
-#: app/index.html:79
+#: app/index.html:74
 msgid "Abmelden"
 msgstr "Cerrar sesión"
 
@@ -169,7 +172,7 @@ msgstr "Crear abono"
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
 msgstr "Crear abono para {{kunde.bezeichnung}}"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:458
+#: app/scripts/kunden/detail/kundendetail.controller.js:442
 msgid "Abo wurde erstellt"
 msgstr "Abono creado"
 
@@ -178,16 +181,16 @@ msgid "Abo:"
 msgstr "Abono:"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:163
-#: app/scripts/personen/overview/personenoverview.controller.js:179
+#: app/scripts/personen/overview/personenoverview.controller.js:182
 msgid "Aboliste anzeigen"
 msgstr "Mostrar la lista de abonos"
 
-#: app/scripts/abos/overview/abosoverview.html:46
-#: app/scripts/abos/overview/zusatzabosoverview.html:44
+#: app/scripts/abos/overview/abosoverview.html:44
+#: app/scripts/abos/overview/zusatzabosoverview.html:42
 msgid "Abonnentin"
-msgstr "Abonad@"
+msgstr "Abonado"
 
-#: app/index.html:100
+#: app/index.html:88
 #: app/scripts/abos/overview/abosoverview.html:6
 #: app/scripts/kunden/detail/abo/abos.html:4
 #: app/scripts/touren/detail/tourendetail.html:59
@@ -196,8 +199,8 @@ msgstr "Abonos"
 
 #: app/scripts/abos/detail/abosdetail.html:43
 #: app/scripts/abos/detail/create-abo.html:11
-#: app/scripts/abos/overview/abosoverview.html:38
-#: app/scripts/abos/overview/zusatzabosoverview.html:36
+#: app/scripts/abos/overview/abosoverview.html:36
+#: app/scripts/abos/overview/zusatzabosoverview.html:34
 #: app/scripts/abotypen/detail/abotypendetail.html:10
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:29
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:29
@@ -205,27 +208,27 @@ msgstr "Abonos"
 #: app/scripts/kunden/detail/abo/abos.html:11
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
-msgstr "Tipo de subscripción"
+msgstr "Tipo de abono"
 
-#: app/scripts/abos/overview/abosoverview.html:59
+#: app/scripts/abos/overview/abosoverview.html:57
 msgid "Abotyp / Vertrieb"
 msgstr "Tipo de subscr./Distr."
 
 #: app/scripts/abotypen/overview/abotypen.html:11
-#: app/scripts/abotypen/overview/abotypenoverview.controller.js:124
+#: app/scripts/abotypen/overview/abotypenoverview.controller.js:121
 msgid "Abotyp erstellen"
-msgstr "Crear un tipo de subscripción"
+msgstr "Crear un tipo de abono"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:36
 msgid "Abotyp hinzufügen:"
-msgstr "Añadir nuevo tipo de subscripción:"
+msgstr "Añadir nuevo tipo de abono:"
 
-#: app/index.html:167
+#: app/index.html:113
 #: app/scripts/abotypen/overview/abotypen.html:6
 #: app/scripts/dashboard/dashboard.html:57
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:36
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:32
 msgid "Abotypen"
-msgstr "Tipos de subscripciones"
+msgstr "Tipo de abono"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellungenabrechnen.html:30
 msgid "Abrechnen"
@@ -243,11 +246,11 @@ msgstr "Fecha de facturación"
 msgid "Absage bis Anzahl Tage vor Einsatz"
 msgstr "Anular hasta el número de días antes del día de trabajo"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:19
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:23
 msgid "Absagen"
 msgstr "Cancelar"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:20
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:24
 msgid "Abschliessen <i class=\"fa fa-info-circle\" aria-hidden=\"true\" uib-tooltip-template=\"'abschliessenTooltip.html'\"></i>"
 msgstr "Cerrar <i class=\"fa fa-info-circle\" aria-hidden=\"true\" uib-tooltip-template=\"'abschliessenTooltip.html'\"></i>"
 
@@ -255,11 +258,11 @@ msgstr "Cerrar <i class=\"fa fa-info-circle\" aria-hidden=\"true\" uib-tooltip-t
 msgid "Abw."
 msgstr "Aus."
 
-#: app/scripts/kunden/detail/kundendetail.html:474
+#: app/scripts/kunden/detail/kundendetail.html:403
 msgid "Abweichende Lieferadresse"
 msgstr "Dirección alternativa para la entrega"
 
-#: app/scripts/abos/detail/abosdetail.html:145
+#: app/scripts/abos/detail/abosdetail.html:138
 msgid "Abwesend"
 msgstr "Ausente"
 
@@ -271,11 +274,11 @@ msgstr "Ausencias"
 msgid "Achtung: Hier wird das aktuell bezahlte Guthaben neu gesetzt und nicht das berechnete Guthaben (bezahlt + verrechnet)!"
 msgstr "Cuidado: los créditos ya pagados serán reinicializados pero no el crédito calculado (pagado + compensado)!"
 
-#: app/scripts/kunden/detail/kundendetail.html:355
+#: app/scripts/kunden/detail/kundendetail.html:300
 msgid "Address of the Account Holder"
 msgstr "Dirección del titular de la cuenta"
 
-#: app/index.html:188
+#: app/index.html:121
 msgid "Administration"
 msgstr "Administración"
 
@@ -283,21 +286,21 @@ msgstr "Administración"
 msgid "Administrations-Anteil"
 msgstr "Porcentaje de administración"
 
-#: app/index.html:53
+#: app/index.html:51
 msgid "Administrationsumgebung <span ng-if=\"projekt\">für</span>"
 msgstr "Entorno de administración <span ng-if=\"projekt\"> para </span>"
 
-#: app/scripts/app.js:321
+#: app/scripts/app.js:317
 msgid "Administrator"
 msgstr "Administrador"
 
-#: app/scripts/kunden/detail/kundendetail.html:350
+#: app/scripts/kunden/detail/kundendetail.html:297
 msgid "Adresse Kontoinhaber"
 msgstr "Dirección de titular de cuenta"
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:28
-#: app/scripts/kunden/detail/kundendetail.html:260
-#: app/scripts/kunden/detail/kundendetail.html:492
+#: app/scripts/kunden/detail/kundendetail.html:219
+#: app/scripts/kunden/detail/kundendetail.html:419
 #: app/scripts/personen/overview/personenoverview.html:57
 #: app/scripts/produzenten/detail/produzentendetail.html:135
 #: app/scripts/projekt/settings/projektsettings.html:45
@@ -306,37 +309,35 @@ msgstr "Dirección de titular de cuenta"
 msgid "Adresszusatz"
 msgstr "Dirección suplementaria"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:130
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:126
 msgid "Aktionen"
 msgstr "Acciones"
 
-#: app/scripts/abos/overview/abosoverview.html:55
-#: app/scripts/abos/overview/zusatzabosoverview.html:53
+#: app/scripts/abos/overview/abosoverview.html:53
+#: app/scripts/abos/overview/zusatzabosoverview.html:51
 #: app/scripts/abotypen/detail/abotypendetail.html:43
 #: app/scripts/abotypen/overview/abotypen.html:47
 #: app/scripts/abotypen/overview/zusatzabotypen.html:42
 #: app/scripts/depots/detail/depotsdetail.html:43
 #: app/scripts/depots/overview/depotsoverview.html:50
-#: app/scripts/kunden/detail/kundendetail.html:179
-#: app/scripts/kunden/detail/kundendetail.html:35
-#: app/scripts/kunden/overview/kundenoverview.html:47
+#: app/scripts/kunden/detail/kundendetail.html:156
 #: app/scripts/produzenten/detail/produzentendetail.html:31
 #: app/scripts/produzenten/detail/produzentendetail.html:34
 #: app/scripts/produzenten/overview/produzentenoverview.html:41
 msgid "Aktiv"
 msgstr "Activo"
 
-#: app/scripts/abos/overview/abosoverview.html:12
+#: app/scripts/abos/overview/abosoverview.html:10
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
 #: app/scripts/touren/detail/tourendetail.html:61
 msgid "Aktive"
 msgstr "Activo"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:48
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:44
 msgid "Aktivität, Kurzbeschrieb, ..."
 msgstr "Actividad, descripción breve..."
 
-#: app/scripts/abos/detail/abosdetail.controller.js:696
+#: app/scripts/abos/detail/abosdetail.controller.js:684
 msgid "Aktuell"
 msgstr "Actual"
 
@@ -344,8 +345,8 @@ msgstr "Actual"
 msgid "Aktuellste Lieferplanungen"
 msgstr "Planificaciones abiertas"
 
-#: app/scripts/abos/detail/abosdetail.html:127
-#: app/scripts/abos/overview/abosoverview.html:12
+#: app/scripts/abos/detail/abosdetail.html:120
+#: app/scripts/abos/overview/abosoverview.html:10
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
 #: app/scripts/dashboard/dashboard.html:45
 #: app/scripts/dashboard/dashboard.html:6
@@ -366,9 +367,9 @@ msgstr "Descargar todo"
 msgid "Alle Lieferungen wurden einsortiert"
 msgstr "Todas las entregas han sido clasificadas"
 
-#: app/scripts/abos/overview/abosoverview.html:26
-#: app/scripts/abos/overview/zusatzabosoverview.html:24
-#: app/scripts/kunden/overview/kundenoverview.html:24
+#: app/scripts/abos/overview/abosoverview.html:24
+#: app/scripts/abos/overview/zusatzabosoverview.html:22
+#: app/scripts/kunden/overview/kundenoverview.html:25
 #: app/scripts/personen/overview/personenoverview.html:25
 msgid "Alle Spalten einblenden"
 msgstr "Mostrar todas las columnas"
@@ -377,7 +378,7 @@ msgstr "Mostrar todas las columnas"
 msgid "Allfällige Bemerkungen"
 msgstr "Comentarios"
 
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:174
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:162
 msgid "Als ausgeliefert markieren"
 msgstr "Marcar como \"entregado\""
 
@@ -385,15 +386,15 @@ msgstr "Marcar como \"entregado\""
 msgid "Alternative E-Mail"
 msgstr "Correo electrónico alternativo"
 
-#: app/scripts/kunden/detail/kundendetail.html:117
+#: app/scripts/kunden/detail/kundendetail.html:100
 msgid "Alternative E-Mail-Adresse"
 msgstr "Correo electrónico alternativo"
 
-#: app/scripts/app.js:128
+#: app/scripts/app.js:127
 msgid "Anderer"
 msgstr "Otro"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:64
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:60
 msgid "Angaben zum Ort, zur Anfahrt, etc."
 msgstr "Detalles sobre el lugar, como acceder, etc."
 
@@ -401,7 +402,7 @@ msgstr "Detalles sobre el lugar, como acceder, etc."
 msgid "Anprechperson"
 msgstr "Persona de contacto"
 
-#: app/scripts/kunden/detail/kundendetail.html:78
+#: app/scripts/kunden/detail/kundendetail.html:65
 msgid "Anrede"
 msgstr "Título"
 
@@ -409,33 +410,33 @@ msgstr "Título"
 msgid "Anschrift"
 msgstr "Dirección"
 
-#: app/scripts/kunden/detail/kundendetail.html:255
-#: app/scripts/kunden/detail/kundendetail.html:486
+#: app/scripts/kunden/detail/kundendetail.html:214
+#: app/scripts/kunden/detail/kundendetail.html:414
 #: app/scripts/rechnungen/detail/rechnungendetail.html:70
 msgid "Anschrift oder Bezeichnung"
 msgstr "Dirección o nombre"
 
 #: app/scripts/depots/overview/depotsoverview.html:35
-#: app/scripts/kunden/overview/kundenoverview.html:38
+#: app/scripts/kunden/overview/kundenoverview.html:39
 msgid "Ansprechpartner"
 msgstr "Persona de contacto"
 
-#: app/scripts/kunden/detail/kundendetail.html:216
+#: app/scripts/kunden/detail/kundendetail.html:177
 msgid "Ansprechperson erstellt"
 msgstr "La persona de contacto ha sido creada"
 
-#: app/scripts/kunden/detail/kundendetail.html:52
+#: app/scripts/kunden/detail/kundendetail.html:44
 msgid "Ansprechperson hinzufügen"
 msgstr "Añadir una persona de contacto"
 
-#: app/scripts/kunden/detail/kundendetail.html:49
+#: app/scripts/kunden/detail/kundendetail.html:41
 msgid "Ansprechpersonen"
 msgstr "Personas de contacto"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:156
 #: app/scripts/abotypen/detail/abotypendetail.html:164
 #: app/scripts/arbeitsangebote/detail/addpersontoeinsatz.html:26
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:146
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:142
 #: app/scripts/depots/detail/depotsdetail.html:78
 msgid "Anzahl"
 msgstr "Número"
@@ -450,9 +451,9 @@ msgstr "Número <i>crédito insuficiente</i>:"
 msgid "Anzahl Abwesenheiten:"
 msgstr "Número de ausencias:"
 
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:43
-#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:40
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:43
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:39
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:36
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:39
 msgid "Anzahl Körbe"
 msgstr "Número de cestas"
 
@@ -467,7 +468,7 @@ msgid "Anzahl Lieferungen"
 msgstr "Número de entregas"
 
 #: app/scripts/arbeitsangebote/detail/addpersontoeinsatz.html:23
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:138
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:134
 msgid "Anzahl Personen"
 msgstr "Número de personas"
 
@@ -491,15 +492,15 @@ msgstr "Número de abonos suplementarios a entregar:"
 msgid "Anzahl aktive Abonnemente"
 msgstr "Número de abonos activos"
 
-#: app/scripts/kunden/detail/kundendetail.html:469
+#: app/scripts/kunden/detail/kundendetail.html:398
 msgid "Anzeigen"
 msgstr "Visualizar"
 
-#: app/scripts/app.js:269
+#: app/scripts/app.js:265
 msgid "Apr"
 msgstr "Abr"
 
-#: app/scripts/app.js:269
+#: app/scripts/app.js:265
 msgid "April"
 msgstr "Abril"
 
@@ -512,7 +513,7 @@ msgstr "Oferta de colaboración"
 msgid "Arbeitsangebot duplizieren"
 msgstr "Duplicar la posibilidad de colaboración"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:382
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:381
 msgid "Arbeitsangebot eingefügt"
 msgstr "Crear una posibilidad de colaboración"
 
@@ -520,16 +521,16 @@ msgstr "Crear una posibilidad de colaboración"
 msgid "Arbeitsangebot erstellen"
 msgstr "Crear una oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:63
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:64
 msgid "Arbeitsangebot.odt"
 msgstr "OfertaColaboración.odt"
 
-#: app/index.html:130
+#: app/index.html:99
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:6
 msgid "Arbeitsangebote"
 msgstr "Oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:357
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:336
 msgid "Arbeitsangebote (alle eingeschriebenen Personen)"
 msgstr "Colaboraciones (todas las personas registradas)"
 
@@ -537,11 +538,11 @@ msgstr "Colaboraciones (todas las personas registradas)"
 msgid "Arbeitsangebote erstellen"
 msgstr "Crear una oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:327
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:306
 msgid "Arbeitsangebote löschen"
 msgstr "Borrar oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:341
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:320
 msgid "Arbeitseinsaetzebrief"
 msgstr "Carta de oferta de colaboración"
 
@@ -561,7 +562,7 @@ msgstr "Crear una oferta de colaboración"
 msgid "Arbeitseinsatz.odt"
 msgstr "OfertaColaboracion.odt"
 
-#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:211
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:209
 msgid "Arbeitseinsatzabrechnung-Brief"
 msgstr "Carta resumen de la colaboración"
 
@@ -569,12 +570,16 @@ msgstr "Carta resumen de la colaboración"
 msgid "Arbeitseinsatzabrechnung.odt"
 msgstr "ResumenColaboracion.odt"
 
-#: app/index.html:133
+#: app/index.html:100
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:6
 msgid "Arbeitseinsätze"
 msgstr "Tus días y horas de trabajo"
 
-#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:278
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:6
+msgid "Arbeitseinsätze & Abos"
+msgstr "Colaboraciones y abonos"
+
+#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.controller.js:257
 msgid "Arbeitseinsätze-Brief"
 msgstr "Informe de colaboraciones"
 
@@ -582,26 +587,26 @@ msgstr "Informe de colaboraciones"
 msgid "Arbeitskategorie erstellen"
 msgstr "Crear una categoría de colaboración"
 
-#: app/index.html:185
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:29
+#: app/index.html:119
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:12
 #: app/scripts/projekt/settings/arbeitskategorien.html:6
 msgid "Arbeitskategorien"
 msgstr "Categorías de colaboración"
 
-#: app/scripts/app.js:313
+#: app/scripts/app.js:309
 msgid "Archived"
 msgstr "Archivado"
 
-#: app/scripts/app.js:189
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:51
+#: app/scripts/app.js:186
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:52
 msgid "Archiviert"
 msgstr "Archivado"
 
-#: app/scripts/app.js:276
+#: app/scripts/app.js:272
 msgid "Aug"
 msgstr "Ago"
 
-#: app/scripts/app.js:275
+#: app/scripts/app.js:271
 msgid "August"
 msgstr "Agosto"
 
@@ -609,11 +614,11 @@ msgstr "Agosto"
 msgid "Ausführen"
 msgstr "Ejecutar"
 
-#: app/scripts/app.js:317
+#: app/scripts/app.js:313
 msgid "Ausgeliefert"
 msgstr "Entregado"
 
-#: app/scripts/app.js:305
+#: app/scripts/app.js:301
 msgid "Ausstehend"
 msgstr "Debe"
 
@@ -639,7 +644,7 @@ msgstr "Crear una evaluación"
 msgid "Auswertung verändern"
 msgstr "Modificar una evaluación"
 
-#: app/index.html:192
+#: app/index.html:122
 #: app/scripts/reports/overview/reportsoverview.html:6
 msgid "Auswertungen"
 msgstr "Consultas avanzadas"
@@ -648,19 +653,19 @@ msgstr "Consultas avanzadas"
 msgid "Automatisch erledigen"
 msgstr "Tratar automáticamente"
 
-#: app/scripts/kunden/detail/kundendetail.html:370
-#: app/scripts/kunden/detail/kundendetail.html:374
-#: app/scripts/projekt/settings/projektsettings.html:257
-#: app/scripts/projekt/settings/projektsettings.html:260
+#: app/scripts/kunden/detail/kundendetail.html:313
+#: app/scripts/kunden/detail/kundendetail.html:316
+#: app/scripts/projekt/settings/projektsettings.html:248
+#: app/scripts/projekt/settings/projektsettings.html:251
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 #: app/scripts/depots/detail/depotsdetail.html:112
 #: app/scripts/produzenten/detail/produzentendetail.html:71
 msgid "Bank"
 msgstr "Banco"
 
-#: app/scripts/kunden/detail/kundendetail.html:383
+#: app/scripts/kunden/detail/kundendetail.html:324
 msgid "Bank Name"
 msgstr "Nombre del Banco"
 
@@ -669,7 +674,7 @@ msgstr "Nombre del Banco"
 msgid "Bank, PLZ Ort"
 msgstr "Banco, código postal, municipio"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:40
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:36
 #: app/scripts/depots/detail/depotsdetail.html:19
 #: app/scripts/produzenten/detail/produzentendetail.html:26
 #: app/scripts/reports/detail/reportsdetail.html:28
@@ -694,16 +699,16 @@ msgstr "EjemploÑ es-ES"
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:36
 #: app/scripts/dashboard/dashboard.html:25
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:24
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:137
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:79
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:128
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:78
 msgid "Bemerkung"
 msgstr "Comentario"
 
 #: app/scripts/arbeitsangebote/detail/addpersontoeinsatz.html:33
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:199
-#: app/scripts/kunden/detail/kundendetail.html:148
-#: app/scripts/kunden/detail/kundendetail.html:295
-#: app/scripts/kunden/detail/kundendetail.html:299
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:195
+#: app/scripts/kunden/detail/kundendetail.html:129
+#: app/scripts/kunden/detail/kundendetail.html:249
+#: app/scripts/kunden/detail/kundendetail.html:252
 #: app/scripts/personen/overview/personenoverview.html:70
 #: app/scripts/produzenten/detail/produzentendetail.html:79
 msgid "Bemerkungen"
@@ -713,20 +718,20 @@ msgstr "Comentarios"
 msgid "Bemerkungen zu diesem Produzenten"
 msgstr "Comentarios sobre este productor"
 
-#: app/scripts/kunden/detail/kundendetail.html:152
+#: app/scripts/kunden/detail/kundendetail.html:132
 msgid "Bemerkungen zu dieser Person"
 msgstr "Comentarios sobre esta persona"
 
-#: app/scripts/projekt/settings/projektsettings.html:223
+#: app/scripts/projekt/settings/projektsettings.html:215
 msgid "Benachrichtigung der Kunden"
 msgstr "Notificación de usuari@s"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:143
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:139
 msgid "Benötigte Anzahl Personen"
 msgstr "Número de personas requeridas"
 
-#: app/scripts/app.js:187
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:49
+#: app/scripts/app.js:184
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:50
 msgid "Bereit"
 msgstr "Listo"
 
@@ -751,7 +756,6 @@ msgstr "Listo"
 msgid "Beschreibung"
 msgstr "Descripción"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.html:227
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:13
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:16
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:46
@@ -785,16 +789,15 @@ msgstr "Descontar los encargos"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:56
 #: app/scripts/dashboard/dashboard.html:94
-#: app/scripts/kunden/detail/kundendetail.html:619
+#: app/scripts/kunden/detail/kundendetail.html:530
 #: app/scripts/rechnungen/detail/rechnungendetail.html:139
 #: app/scripts/rechnungen/detail/rechnungendetail.html:144
-#: app/scripts/rechnungen/detail/rechnungendetail.html:228
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:52
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:48
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:40
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:45
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:49
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:133
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:75
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:124
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:74
 msgid "Betrag"
 msgstr "Monto"
 
@@ -802,15 +805,15 @@ msgstr "Monto"
 msgid "Betreff"
 msgstr "Asunto"
 
-#: app/scripts/app.js:150
-#: app/scripts/app.js:157
+#: app/scripts/app.js:149
+#: app/scripts/app.js:156
 msgid "Bezahlt"
 msgstr "Pagado"
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:15
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:53
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:49
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:26
-#: app/scripts/kunden/overview/kundenoverview.html:35
+#: app/scripts/kunden/overview/kundenoverview.html:36
 #: app/scripts/mailvorlagen/mailvorlagen.html:17
 #: app/scripts/mailvorlagen/mailvorlagen.html:60
 #: app/scripts/mailvorlagen/mailvorlagen.html:63
@@ -823,8 +826,8 @@ msgstr "Pagado"
 msgid "Bezeichnung"
 msgstr "Referencia"
 
-#: app/scripts/kunden/detail/kundendetail.html:251
-#: app/scripts/kunden/detail/kundendetail.html:482
+#: app/scripts/kunden/detail/kundendetail.html:211
+#: app/scripts/kunden/detail/kundendetail.html:411
 msgid "Bezeichnung am Briefkasten"
 msgstr "Nombre en el buzón"
 
@@ -840,25 +843,25 @@ msgstr "Hasta"
 msgid "Bis Guthaben"
 msgstr "Haber"
 
-#: app/scripts/kunden/detail/kundendetail.html:158
+#: app/scripts/kunden/detail/kundendetail.html:138
 msgid "Bitte mit Vorsicht!"
 msgstr "¡Ten cuidado!"
 
-#: app/scripts/app.js:207
+#: app/scripts/app.js:203
 msgid "Britisches Pfund"
 msgstr "Libra esterlina"
 
-#: app/scripts/app.js:169
+#: app/scripts/app.js:168
 msgid "Bu."
 msgstr "Cont."
 
-#: app/scripts/app.js:169
+#: app/scripts/app.js:168
 msgid "Bund"
 msgstr "Manojo"
 
-#: app/scripts/app.js:213
+#: app/scripts/app.js:209
 msgid "CAD"
-msgstr ""
+msgstr "CAD"
 
 #: app/scripts/depots/detail/depotsdetail.html:107
 #: app/scripts/produzenten/detail/produzentendetail.html:66
@@ -869,32 +872,28 @@ msgstr "ES..."
 msgid "CHE-xxx.yyy.zzz MWST"
 msgstr "ESA11111111 IVA"
 
-#: app/scripts/app.js:201
+#: app/scripts/app.js:197
 msgid "CHF"
-msgstr ""
+msgstr "CHF"
 
-#: app/scripts/projekt/settings/projektsettings.html:343
-#: app/scripts/projekt/settings/projektsettings.html:358
+#: app/scripts/projekt/settings/projektsettings.html:334
+#: app/scripts/projekt/settings/projektsettings.html:349
 msgid "CSS-Datei auswählen oder einfügen"
 msgstr "Elegir o insertar un nuevo fichero CSS"
 
-#: app/scripts/app.js:185
-msgid "Canceled"
-msgstr "Cancelado"
-
-#: app/scripts/app.js:312
+#: app/scripts/app.js:308
 msgid "Created"
 msgstr "Creado"
 
-#: app/scripts/app.js:221
+#: app/scripts/app.js:217
 msgid "DI"
 msgstr "MAR"
 
-#: app/scripts/app.js:233
+#: app/scripts/app.js:229
 msgid "DO"
 msgstr "JUE"
 
-#: app/scripts/kunden/detail/kundendetail.html:389
+#: app/scripts/kunden/detail/kundendetail.html:329
 msgid "Date of Signature"
 msgstr "Fecha de firma"
 
@@ -911,34 +910,34 @@ msgstr "Selecciona el fichero (transferir o arrastrar)"
 msgid "Datei importieren"
 msgstr "Importar el fichero"
 
-#: app/scripts/projekt/settings/projektsettings.html:313
+#: app/scripts/projekt/settings/projektsettings.html:304
 msgid "Dateien"
 msgstr "Ficheros"
 
-#: app/scripts/abos/detail/abosdetail.html:139
+#: app/scripts/abos/detail/abosdetail.html:132
 #: app/scripts/abos/detail/abwesenheiten/abwesenheiten.html:32
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:50
-#: app/scripts/app.js:376
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:40
-#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:37
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:40
+#: app/scripts/app.js:367
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:36
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:33
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:36
 #: app/scripts/dashboard/dashboard.html:22
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:36
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:31
 #: app/scripts/journal/overview/journaloverview.html:31
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:21
 msgid "Datum"
 msgstr "Fecha"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:31
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:32
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:44
 msgid "Datum & Zeit"
 msgstr "Fecha y hora"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:48
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:43
 msgid "Datum Abrechnung"
 msgstr "Fecha de pago"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:42
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:37
 msgid "Datum Versendet"
 msgstr "Fecha de envio"
 
@@ -946,13 +945,13 @@ msgstr "Fecha de envio"
 msgid "Datum wählen"
 msgstr "Establecer fecha"
 
-#: app/scripts/abos/detail/abosdetail.html:105
-#: app/scripts/abos/detail/abosdetail.html:198
+#: app/scripts/abos/detail/abosdetail.html:100
+#: app/scripts/abos/detail/abosdetail.html:191
 msgid "Den Standardpreis wiederherstellen"
 msgstr "Restaurar el precio por defecto"
 
 #: app/scripts/abos/detail/abosdetail.html:61
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:37
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:33
 msgid "Depot"
 msgstr "Punto de recogida"
 
@@ -961,7 +960,7 @@ msgstr "Punto de recogida"
 msgid "Depot erstellen"
 msgstr "Crear un punto de recogida"
 
-#: app/scripts/abos/overview/abosoverview.html:62
+#: app/scripts/abos/overview/abosoverview.html:60
 #: app/scripts/kunden/detail/abo/abos.html:15
 msgid "Depot/Tour"
 msgstr "Punto de recogida/ronda"
@@ -975,7 +974,7 @@ msgstr "Punto de recogida:"
 msgid "Depotauslieferung"
 msgstr "Entrega en punto de recogida"
 
-#: app/index.html:116
+#: app/index.html:94
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:6
 msgid "Depotauslieferungen"
 msgstr "Entregas en punto de recogida"
@@ -988,11 +987,11 @@ msgstr "Mostrar las entregas en el punto de recogida"
 msgid "Depotbrief erstellen"
 msgstr "Crear una carta de punto de recogida"
 
-#: app/scripts/app.js:109
+#: app/scripts/app.js:108
 msgid "Depotlieferung"
 msgstr "Entrega en punto de recogida"
 
-#: app/scripts/app.js:133
+#: app/scripts/app.js:132
 msgid "DepotlieferungAbo"
 msgstr "Abono a entrega en punto de recogida"
 
@@ -1000,7 +999,7 @@ msgstr "Abono a entrega en punto de recogida"
 msgid "Depotname"
 msgstr "Nombre del punto de recogida"
 
-#: app/index.html:161
+#: app/index.html:111
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:17
 #: app/scripts/depots/overview/depotsoverview.html:6
 msgid "Depots"
@@ -1010,15 +1009,15 @@ msgstr "Puntos de recogida"
 msgid "Depots (alle betroffenen Personen)"
 msgstr "Depositos (todas las personas afectadas)"
 
-#: app/scripts/app.js:300
+#: app/scripts/app.js:296
 msgid "Dez"
 msgstr "Dic"
 
-#: app/scripts/app.js:299
+#: app/scripts/app.js:295
 msgid "Dezember"
 msgstr "Diciembre"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:14
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:18
 msgid "Die Arbeitsangebote werden nach Ablauf der Einsatzzeit auch automatisch abgeschlossen."
 msgstr "Las ofertas de colaboración se cerrarán automáticamente al final de la duración de la colaboración."
 
@@ -1030,15 +1029,15 @@ msgstr "La rescisión del contrato debe ser transmitida como muy tarde el  <b>{{
 msgid "Die Lieferungen dürfen nicht mehr verändert werden."
 msgstr "Las entregas no pueden ser modificadas."
 
-#: app/scripts/app.js:220
+#: app/scripts/app.js:216
 msgid "Dienstag"
 msgstr "Martes"
 
-#: app/scripts/projekt/settings/projektsettings.controller.js:380
+#: app/scripts/projekt/settings/projektsettings.controller.js:377
 msgid "Diese Arbeitskategorie existiert bereits"
 msgstr "Esta categoría de colaboración ya existe"
 
-#: app/scripts/projekt/settings/projektsettings.controller.js:305
+#: app/scripts/projekt/settings/projektsettings.controller.js:302
 msgid "Diese Personenkategorie existiert bereits"
 msgstr "Esta categoría de persona ya existe"
 
@@ -1046,17 +1045,17 @@ msgstr "Esta categoría de persona ya existe"
 msgid "Diese Seite konnte nicht gefunden werden!"
 msgstr "¡No se puede encontrar la página solicitada!"
 
-#: app/scripts/app.js:332
+#: app/scripts/app.js:328
 msgid "Diese Woche"
 msgstr "Esta semana"
 
-#: app/scripts/app.js:333
+#: app/scripts/app.js:329
 msgid "Diesen Monat"
 msgstr "Este mes"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:5
 msgid "Dieser Abotyp ist derzeit nicht aktiv"
-msgstr "Este tipo de subscripción no está activo en este momento"
+msgstr "Este tipo de abono no está activo en este momento"
 
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:60
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:64
@@ -1065,7 +1064,7 @@ msgstr "Este/a productor/a ya existe"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:6
 msgid "Dieser Zusatzabotyp ist derzeit nicht aktiv"
-msgstr "Este tipo de subscripción suplementaria no está activo"
+msgstr "Este tipo de abono suplementario no está activo"
 
 #: app/scripts/abos/detail/abosdetail.html:30
 msgid "Dieses Abo ist inaktiv"
@@ -1075,7 +1074,7 @@ msgstr "Este abono está inactivo"
 msgid "Dieses Produkt wurde frei hinzugefügt. Es befindet sich nicht in den Stammdaten."
 msgstr "Este producto ha sido añadido manualmente y no se encuentra en el catálogo de productos."
 
-#: app/scripts/app.js:129
+#: app/scripts/app.js:128
 msgid "DirectDebit"
 msgstr "Direct Debit"
 
@@ -1083,39 +1082,38 @@ msgstr "Direct Debit"
 msgid "Dokumente download"
 msgstr "Descargar documento"
 
-#: app/scripts/app.js:232
+#: app/scripts/app.js:228
 msgid "Donnerstag"
 msgstr "Jueves"
 
-#: app/scripts/projekt/settings/projektsettings.html:337
-#: app/scripts/projekt/settings/projektsettings.html:352
-#: app/scripts/projekt/settings/projektsettings.html:367
+#: app/scripts/projekt/settings/projektsettings.html:328
+#: app/scripts/projekt/settings/projektsettings.html:343
+#: app/scripts/projekt/settings/projektsettings.html:358
 msgid "Download"
 msgstr "Descargar"
 
-#: app/scripts/app.js:343
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:193
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:189
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:38
 #: app/scripts/depots/detail/depotsdetail.html:153
 #: app/scripts/depots/detail/depotsdetail.html:156
 #: app/scripts/depots/detail/depotsdetail.html:193
 #: app/scripts/depots/detail/depotsdetail.html:196
-#: app/scripts/kunden/detail/kundendetail.html:108
+#: app/scripts/kunden/detail/kundendetail.html:92
 #: app/scripts/personen/overview/personenoverview.html:42
 #: app/scripts/produzenten/detail/produzentendetail.html:154
 #: app/scripts/produzenten/detail/produzentendetail.html:157
 msgid "E-Mail"
 msgstr "Correo electrónico"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:318
-#: app/scripts/abos/overview/zusatzabosoverview.controller.js:335
-#: app/scripts/abotypen/overview/abotypenoverview.controller.js:149
-#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:123
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:352
+#: app/scripts/abos/overview/abosoverview.controller.js:283
+#: app/scripts/abos/overview/zusatzabosoverview.controller.js:303
+#: app/scripts/abotypen/overview/abotypenoverview.controller.js:146
+#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:120
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:331
 #: app/scripts/depots/overview/depotsoverview.controller.js:109
 #: app/scripts/kunden/overview/kundenoverview.controller.js:148
-#: app/scripts/personen/overview/personenoverview.controller.js:163
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:274
+#: app/scripts/personen/overview/personenoverview.controller.js:166
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:272
 #: app/scripts/touren/overview/tourenoverview.controller.js:149
 msgid "E-Mail Formular"
 msgstr "Formulario Email"
@@ -1128,20 +1126,20 @@ msgstr "Modificar la plantilla para el correo electrónico"
 msgid "E-Mail Vorlage erfassen"
 msgstr "Nueva plantilla de correo electrónico"
 
-#: app/scripts/abotypen/overview/abotypenoverview.controller.js:132
+#: app/scripts/abotypen/overview/abotypenoverview.controller.js:129
 #: app/scripts/depots/overview/depotsoverview.controller.js:94
 #: app/scripts/touren/overview/tourenoverview.controller.js:132
 msgid "E-Mail an Kunden versenden"
 msgstr "Enviar un correo electrónico a los miembros"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:86
+#: app/scripts/kunden/detail/kundendetail.controller.js:81
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "Enviar email a todas las personas de contacto"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:299
-#: app/scripts/abos/overview/zusatzabosoverview.controller.js:312
+#: app/scripts/abos/overview/abosoverview.controller.js:264
+#: app/scripts/abos/overview/zusatzabosoverview.controller.js:280
 #: app/scripts/kunden/overview/kundenoverview.controller.js:137
-#: app/scripts/personen/overview/personenoverview.controller.js:152
+#: app/scripts/personen/overview/personenoverview.controller.js:155
 msgid "E-Mail versenden"
 msgstr "Enviar correo electrónico"
 
@@ -1149,15 +1147,15 @@ msgstr "Enviar correo electrónico"
 msgid "ESR"
 msgstr "Boletín de Pago con Número de Referencia"
 
-#: app/scripts/app.js:203
+#: app/scripts/app.js:199
 msgid "EUR"
-msgstr ""
+msgstr "EUR"
 
 #: app/scripts/reports/detail/reportsdetail.html:14
 msgid "Editieren"
 msgstr "Editar"
 
-#: app/scripts/projekt/settings/projektsettings.html:328
+#: app/scripts/projekt/settings/projektsettings.html:319
 msgid "Ein neues Logo auswählen oder einfügen"
 msgstr "Elegir o insertar un nuevo logotipo"
 
@@ -1167,7 +1165,7 @@ msgstr "Este producto ya se encuentra en la cesta. ¿Quieres realmente añadirlo
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:176
 #: app/scripts/rechnungen/detail/rechnungendetail.html:181
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:58
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:54
 msgid "Einbezahlter Betrag"
 msgstr "Cantidad pagada"
 
@@ -1175,7 +1173,7 @@ msgstr "Cantidad pagada"
 msgid "Eindeutige Bezeichnung"
 msgstr "Referencia única"
 
-#: app/scripts/kunden/detail/kundendetail.html:610
+#: app/scripts/kunden/detail/kundendetail.html:522
 msgid "Eine manuelle Rechnung für"
 msgstr "Factura creada manualmente por"
 
@@ -1205,8 +1203,8 @@ msgstr "Entrada muy larga"
 msgid "Eingabe: Preis pro Einheit <br>Anzeige: Preis für gewählte Menge"
 msgstr "Entrada: precio por unidad <br> Visualización: precio por la cantidad elegida"
 
-#: app/scripts/kunden/detail/kundendetail.html:623
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:70
+#: app/scripts/kunden/detail/kundendetail.html:534
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:66
 msgid "Eingang am"
 msgstr "Recepción del pago el "
 
@@ -1214,7 +1212,7 @@ msgstr "Recepción del pago el "
 msgid "Eingangsdatum"
 msgstr "Fecha de pago"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:167
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:163
 msgid "Eingeschriebene Personen"
 msgstr "Personas inscritas"
 
@@ -1222,12 +1220,12 @@ msgstr "Personas inscritas"
 msgid "Einheit"
 msgstr "Unidad"
 
-#: app/index.html:147
+#: app/index.html:106
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:6
 msgid "Einkaufsrechnungen"
 msgstr "Facturas de compra"
 
-#: app/scripts/kunden/detail/kundendetail.html:192
+#: app/scripts/kunden/detail/kundendetail.html:165
 msgid "Einladung schicken"
 msgstr "Enviar invitación"
 
@@ -1235,12 +1233,12 @@ msgstr "Enviar invitación"
 msgid "Einsatz Einheit"
 msgstr "Unidad de colaboración"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:119
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:115
 msgid "Einsatzzeit"
 msgstr "Hora de la colaboración"
 
-#: app/index.html:157
-#: app/index.html:77
+#: app/index.html:110
+#: app/index.html:71
 msgid "Einstellungen"
 msgstr "Parámetros"
 
@@ -1248,30 +1246,30 @@ msgstr "Parámetros"
 msgid "Einstellungen editieren"
 msgstr "Modificar los parámetros"
 
-#: app/index.html:136
+#: app/index.html:101
 msgid "Einsätze &amp; Abos"
 msgstr "Colaboraciones y abonos"
 
-#: app/scripts/kunden/detail/kundendetail.html:104
+#: app/scripts/kunden/detail/kundendetail.html:89
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: app/scripts/kunden/detail/kundendetail.html:113
+#: app/scripts/kunden/detail/kundendetail.html:97
 msgid "Email alt."
 msgstr "Dirección email alternativa"
 
-#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:105
+#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:102
 msgid "Email an Kunden versenden"
 msgstr "Enviar un correo electrónico a los miembros"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:521
-#: app/scripts/abos/detail/abosdetail.controller.js:531
+#: app/scripts/abos/detail/abosdetail.controller.js:510
+#: app/scripts/abos/detail/abosdetail.controller.js:520
 msgid "Enddatum muss vor Startdatum liegen"
 msgstr "La fecha de finalización ha de ser posterior a la fecha de inicio"
 
-#: app/scripts/abos/overview/abosoverview.html:52
-#: app/scripts/abos/overview/zusatzabosoverview.html:50
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:95
+#: app/scripts/abos/overview/abosoverview.html:50
+#: app/scripts/abos/overview/zusatzabosoverview.html:48
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:91
 #: app/scripts/kunden/detail/abo/abos.html:13
 msgid "Ende"
 msgstr "Fin"
@@ -1280,20 +1278,15 @@ msgstr "Fin"
 msgid "Entity/Action"
 msgstr "Unidad/Acción"
 
-#: app/scripts/app.js:316
+#: app/scripts/app.js:312
 msgid "Erfasst"
 msgstr "Captura realizada"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:80
-msgid "Erledigen/Ignorieren"
-msgstr "Tratar / Ignorar"
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:79
+msgid "Erledigen"
+msgstr "Pendiente de ajustar"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:111
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:112
-msgid "Erledigen: Zahlungseingang abschließen und Rechnung als bezahlt markieren"
-msgstr "Completar: Complete el pago entrante y marque la factura como pagada"
-
-#: app/scripts/app.js:306
+#: app/scripts/app.js:302
 msgid "Erledigt"
 msgstr "Cerrado"
 
@@ -1301,13 +1294,13 @@ msgstr "Cerrado"
 msgid "Erledigte Eingänge"
 msgstr "Recepción de pago aceptada"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:125
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:117
 msgid "Erledigte Zahlungseingänge"
 msgstr "Pagos concluidos"
 
 #: app/scripts/not-found.html:6
 msgid "Error 404"
-msgstr ""
+msgstr "Error 404"
 
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:33
 msgid "Erstelldat"
@@ -1320,20 +1313,20 @@ msgstr "Fecha de creación"
 msgid "Erstellen"
 msgstr "Crear"
 
-#: app/scripts/app.js:148
+#: app/scripts/app.js:147
 msgid "Erstellt"
 msgstr "Creado"
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:51
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:61
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:83
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:58
-#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:55
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:58
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:54
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:51
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:54
 msgid "Etiketten.zip"
 msgstr "Etiquetas.zip"
 
-#: app/scripts/app.js:203
+#: app/scripts/app.js:199
 msgid "Euro"
 msgstr "Euros"
 
@@ -1341,40 +1334,40 @@ msgstr "Euros"
 msgid "Event"
 msgstr "Evento"
 
-#: app/scripts/app.js:239
+#: app/scripts/app.js:235
 msgid "FR"
-msgstr ""
+msgstr "FR"
 
-#: app/scripts/kunden/detail/kundendetail.html:621
+#: app/scripts/kunden/detail/kundendetail.html:532
 msgid "Faelligkeitsdatum"
 msgstr "Fecha límite"
 
-#: app/scripts/app.js:163
+#: app/scripts/app.js:162
 msgid "FaelltAusAbwesend"
 msgstr "Anulado o ausente"
 
-#: app/scripts/app.js:165
+#: app/scripts/app.js:164
 msgid "FaelltAusGekuendigt"
 msgstr "Anulado rescisión de contrato"
 
-#: app/scripts/app.js:164
+#: app/scripts/app.js:163
 msgid "FaelltAusSaldoZuTief"
 msgstr "Anulado crédito muy bajo"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:108
 msgid "Falls dieser Zusatzabotyp wieder hinzugefügt werden soll, müssen vorgängig alle relevanten Hauptabotypen entfernt und wieder hinzugefügt werden. Soll der Löschvorgang fortgesetzt werden?"
-msgstr "Si deseas añadir un nuevo tipo de subscripción suplementaria, se tienen que borrar todos los tipos de abono concernientes previamente y crearlos de nuevo. ¿Aun así quieres borrarlos?"
+msgstr "Si deseas añadir un nuevo tipo de abono suplementario, se tienen que borrar todos los tipos de abono concernientes previamente y crearlos de nuevo. ¿Aun así quieres borrarlos?"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:169
 #: app/scripts/depots/detail/depotsdetail.html:83
 msgid "Farbe-Code"
 msgstr "Color"
 
-#: app/scripts/app.js:265
+#: app/scripts/app.js:261
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
-#: app/scripts/app.js:264
+#: app/scripts/app.js:260
 msgid "Februar"
 msgstr "Febrero"
 
@@ -1386,23 +1379,23 @@ msgstr "Error al transferir el fichero"
 msgid "Fehlerhafte E-Mail Adresse"
 msgstr "Dirección de correo electrónico no valida"
 
-#: app/index.html:138
+#: app/index.html:103
 msgid "Finanzen"
 msgstr "Tesorería"
 
-#: app/scripts/app.js:125
+#: app/scripts/app.js:124
 msgid "Fr."
 msgstr "Sra."
 
-#: app/scripts/app.js:125
+#: app/scripts/app.js:124
 msgid "Frau"
 msgstr "Sra."
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:17
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:21
 msgid "Freischalten"
 msgstr "Publicar"
 
-#: app/scripts/app.js:238
+#: app/scripts/app.js:234
 msgid "Freitag"
 msgstr "Viernes"
 
@@ -1411,7 +1404,7 @@ msgid "Frist"
 msgstr "Período de"
 
 #: app/scripts/dashboard/dashboard.html:97
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:67
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:63
 msgid "Fälligkeit"
 msgstr "Vencimiento"
 
@@ -1428,16 +1421,16 @@ msgstr "Por número de entregas"
 msgid "Für jedes Produkt muss ein Produzent ausgewählt sein."
 msgstr "Por favor, seleccione un productor para cada producto."
 
-#: app/scripts/app.js:208
+#: app/scripts/app.js:204
 msgid "GBP"
-msgstr ""
+msgstr "GBP"
 
-#: app/scripts/abos/detail/abosdetail.html:146
-#: app/scripts/app.js:162
+#: app/scripts/abos/detail/abosdetail.html:139
+#: app/scripts/app.js:161
 msgid "Geliefert"
 msgstr "Entregado"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:56
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:52
 msgid "Genauerer Beschrieb"
 msgstr "Descripción detallada"
 
@@ -1445,25 +1438,17 @@ msgstr "Descripción detallada"
 msgid "Geplante Lieferdaten"
 msgstr "Fechas de entrega previstas"
 
-#: app/scripts/utils/overview/overviewfiltergeschaeftsjahre.controller.html:2
-msgid "Geschäftsjahr"
-msgstr "Año fiscal"
-
-#: app/scripts/utils/overview/overviewfiltergeschaeftsjahre.controller.html:3
-msgid "Geschäftsjahre"
-msgstr "Años fiscales"
-
-#: app/scripts/projekt/settings/projektsettings.html:299
-#: app/scripts/projekt/settings/projektsettings.html:302
+#: app/scripts/projekt/settings/projektsettings.html:290
+#: app/scripts/projekt/settings/projektsettings.html:293
 msgid "Gläubiger-Identifikationsnummer"
 msgstr "Número de identificación del acreedor"
 
-#: app/scripts/app.js:170
+#: app/scripts/app.js:169
 msgid "Gramm"
 msgstr "Gramos"
 
-#: app/scripts/abos/detail/abosdetail.html:112
-#: app/scripts/abos/overview/abosoverview.html:73
+#: app/scripts/abos/detail/abosdetail.html:105
+#: app/scripts/abos/overview/abosoverview.html:71
 #: app/scripts/abotypen/detail/abotypendetail.html:135
 #: app/scripts/kunden/detail/abo/abos.html:14
 msgid "Guthaben"
@@ -1477,7 +1462,7 @@ msgstr "Haber mínimo requerido"
 msgid "Guthaben Neu"
 msgstr "Nuevo haber"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:480
+#: app/scripts/abos/detail/abosdetail.controller.js:472
 msgid "Guthaben anpassen"
 msgstr "Modificar el haber"
 
@@ -1485,20 +1470,20 @@ msgstr "Modificar el haber"
 msgid "Guthaben anpassen für Abo Nr."
 msgstr "Modificar el haber para el abono nº"
 
-#: app/scripts/abos/overview/abosoverview.html:76
+#: app/scripts/abos/overview/abosoverview.html:74
 msgid "Guthaben in Rechnung"
 msgstr "Haber facturado"
 
-#: app/scripts/abos/overview/abosoverview.html:79
+#: app/scripts/abos/overview/abosoverview.html:77
 msgid "Guthaben vertraglich"
 msgstr "Saldo a tu favor"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:354
+#: app/scripts/abos/detail/abosdetail.controller.js:346
 msgid "Guthaben wurde erfolgreich angepasst"
 msgstr "El haber se ha modificado con exito"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:135
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:77
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:126
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:76
 msgid "Gutschriftsdatum"
 msgstr "Fecha de crédito"
 
@@ -1506,31 +1491,31 @@ msgstr "Fecha de crédito"
 msgid "Gültig für"
 msgstr "Valido para"
 
-#: app/scripts/kunden/detail/kundendetail.html:406
+#: app/scripts/kunden/detail/kundendetail.html:343
 msgid "Gültige Zeichen: Buchstaben, Zahlen, Leerzeichen und +?/-:().,"
 msgstr "Carácteres válidos: letras, números, espacios y +? / - :()., "
 
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:2
 msgid "HTML / WYSIWYG"
-msgstr ""
+msgstr "HTML / WYSIWYG"
 
-#: app/scripts/app.js:325
+#: app/scripts/app.js:321
 msgid "Halbtage"
-msgstr "Medias jornadas"
+msgstr "Medios días"
 
-#: app/scripts/app.js:110
+#: app/scripts/app.js:109
 msgid "Heimlieferung"
 msgstr "Entrega a domicilio"
 
-#: app/scripts/app.js:134
+#: app/scripts/app.js:133
 msgid "HeimlieferungAbo"
 msgstr "Abono con entrega a domicilio"
 
-#: app/scripts/app.js:124
+#: app/scripts/app.js:123
 msgid "Herr"
 msgstr "Sr."
 
-#: app/scripts/app.js:366
+#: app/scripts/app.js:357
 msgid "Heute"
 msgstr "Hoy"
 
@@ -1538,37 +1523,32 @@ msgstr "Hoy"
 msgid "Hier Text einfügen und formatieren"
 msgstr "Insertar y editar el formato del texto aquí"
 
-#: app/scripts/kunden/detail/kundendetail.html:452
+#: app/scripts/kunden/detail/kundendetail.html:383
 msgid "Hinterlegung, Abgabe bei..."
 msgstr "Distribuir en casa de..."
 
-#: app/scripts/app.js:124
+#: app/scripts/app.js:123
 msgid "Hr."
 msgstr "Sr."
 
 #: app/scripts/depots/detail/depotsdetail.html:104
-#: app/scripts/kunden/detail/kundendetail.html:361
-#: app/scripts/kunden/detail/kundendetail.html:365
+#: app/scripts/kunden/detail/kundendetail.html:305
+#: app/scripts/kunden/detail/kundendetail.html:308
 #: app/scripts/produzenten/detail/produzentendetail.html:63
-#: app/scripts/projekt/settings/projektsettings.html:252
+#: app/scripts/projekt/settings/projektsettings.html:243
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:130
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:122
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:72
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:113
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:114
-msgid "Ignorieren: Beendigung des Zahlungseingangs und die Rechnung bleibt unbezahlt"
-msgstr "Ignorar: Finalización de la recepción del pago y la factura sigue sin pagar"
-
-#: app/scripts/kunden/detail/kundendetail.html:458
+#: app/scripts/kunden/detail/kundendetail.html:389
 msgid "Im Format"
 msgstr "En formato"
 
-#: app/scripts/projekt/settings/projektsettings.html:364
+#: app/scripts/projekt/settings/projektsettings.html:355
 msgid "Importdatei"
 msgstr "Fichero a importar"
 
@@ -1576,17 +1556,16 @@ msgstr "Fichero a importar"
 msgid "Importiert am"
 msgstr "Importado el"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:48
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:49
 msgid "In Vorbereitung"
 msgstr "En preparación"
 
-#: app/scripts/app.js:186
+#: app/scripts/app.js:183
 msgid "InVorbereitung"
 msgstr "En preparación"
 
 #: app/scripts/depots/detail/depotsdetail.html:43
-#: app/scripts/kunden/detail/kundendetail.html:180
-#: app/scripts/kunden/detail/kundendetail.html:35
+#: app/scripts/kunden/detail/kundendetail.html:156
 #: app/scripts/produzenten/detail/produzentendetail.html:34
 msgid "Inaktiv"
 msgstr "Inactivo"
@@ -1601,7 +1580,7 @@ msgstr "Sí"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:24
 #: app/scripts/abotypen/detail/abotypendetail.html:148
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:154
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:150
 #: app/scripts/produzenten/detail/produzentendetail.html:90
 #: app/scripts/projekt/settings/projektsettings.html:102
 #: app/scripts/projekt/settings/projektsettings.html:110
@@ -1610,48 +1589,48 @@ msgstr "Sí"
 #: app/scripts/projekt/settings/projektsettings.html:134
 #: app/scripts/projekt/settings/projektsettings.html:150
 #: app/scripts/projekt/settings/projektsettings.html:183
-#: app/scripts/projekt/settings/projektsettings.html:236
+#: app/scripts/projekt/settings/projektsettings.html:227
 msgid "Ja"
 msgstr "Sí"
 
-#: app/scripts/app.js:259
+#: app/scripts/app.js:255
 msgid "Jan"
 msgstr "Ene"
 
-#: app/scripts/app.js:258
+#: app/scripts/app.js:254
 msgid "Januar"
 msgstr "Enero"
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:3
 msgid "Je Vertrieb wird ein eigener Korb geplant"
-msgstr "La planificación de las cestas se hacer por distribución y por tipo de subscripción"
+msgstr "La planificación de las cestas se hacer por distribución y por tipo de abono"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:726
 msgid "Jedes Produkt muss über eine Beschreibung verfügen."
 msgstr "Todos los productos deben tener una descripción."
 
-#: app/scripts/app.js:361
+#: app/scripts/app.js:352
 msgid "Jetzt"
 msgstr "Ahora"
 
-#: app/index.html:195
+#: app/index.html:123
 #: app/scripts/journal/overview/journaloverview.html:6
 msgid "Journal"
 msgstr "Registro de actividades"
 
-#: app/scripts/app.js:272
+#: app/scripts/app.js:268
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
-#: app/scripts/app.js:272
+#: app/scripts/app.js:268
 msgid "Juli"
 msgstr "Julio"
 
-#: app/scripts/app.js:271
+#: app/scripts/app.js:267
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
-#: app/scripts/app.js:271
+#: app/scripts/app.js:267
 msgid "Juni"
 msgstr "Junio"
 
@@ -1661,25 +1640,25 @@ msgstr "Junio"
 msgid "KRZ"
 msgstr "ABR"
 
-#: app/scripts/app.js:212
+#: app/scripts/app.js:208
 msgid "Kanadischer Dollar"
 msgstr "Dólar canadiense"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:42
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:43
 #: app/scripts/produkte/overview/produkteoverview.html:61
 msgid "Kategorien"
 msgstr "Categorías"
 
 #: app/scripts/personen/overview/personenoverview.html:33
 msgid "Kdn / Pers"
-msgstr "Abonad@/Personas"
+msgstr "Abonado/Personas"
 
-#: app/scripts/abos/detail/abosdetail.html:163
+#: app/scripts/abos/detail/abosdetail.html:156
 msgid "Kein Zusatzabo vorhanden."
 msgstr "No hay abono suplementario."
 
-#: app/scripts/app.js:123
-#: app/scripts/kunden/detail/kundendetail.html:434
+#: app/scripts/app.js:122
+#: app/scripts/kunden/detail/kundendetail.html:368
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:209
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:215
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:24
@@ -1689,7 +1668,7 @@ msgstr "Ninguno"
 
 #: app/scripts/personen/util/emailutil.js:9
 msgid "Keine E-Mail-Adressen ausgewählt"
-msgstr "No hay ninguna dirección de correo electrónico elegida"
+msgstr "Elegir todos las direcciones de correo electrónico"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:53
 msgid "Keine Kunden"
@@ -1703,7 +1682,7 @@ msgstr "No queda ninguna entrega que realizar"
 msgid "Keine abgeschlossenen Bestellungen ausgewählt"
 msgstr "Ningun entrega concluida seleccionada"
 
-#: app/scripts/app.js:173
+#: app/scripts/app.js:172
 msgid "Kilogramm"
 msgstr "Kilogramos"
 
@@ -1716,22 +1695,22 @@ msgid "Kontaktdaten"
 msgstr "Datos de contacto"
 
 #: app/scripts/depots/detail/depotsdetail.html:99
-#: app/scripts/projekt/settings/projektsettings.html:243
+#: app/scripts/projekt/settings/projektsettings.html:234
 msgid "Kontodaten"
 msgstr "Datos de la cuenta"
 
-#: app/scripts/kunden/detail/kundendetail.html:338
-#: app/scripts/projekt/settings/projektsettings.html:265
-#: app/scripts/projekt/settings/projektsettings.html:269
+#: app/scripts/kunden/detail/kundendetail.html:288
+#: app/scripts/projekt/settings/projektsettings.html:256
+#: app/scripts/projekt/settings/projektsettings.html:260
 msgid "Kontoinhaber"
 msgstr "Titular de la cuenta"
 
-#: app/scripts/kunden/detail/kundendetail.html:457
-#: app/scripts/kunden/overview/kundenoverview.html:59
+#: app/scripts/kunden/detail/kundendetail.html:388
+#: app/scripts/kunden/overview/kundenoverview.html:56
 msgid "Koordinaten"
 msgstr "Coordenadas"
 
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:161
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:149
 msgid "Korbdetails drucken"
 msgstr "Mostrar los detalles de la cesta"
 
@@ -1740,7 +1719,7 @@ msgid "Korbinhalt"
 msgstr "Contenido de la cesta"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:95
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:148
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:136
 msgid "Korbübersicht drucken"
 msgstr "Imprimir el contenido de la cesta"
 
@@ -1748,26 +1727,24 @@ msgstr "Imprimir el contenido de la cesta"
 msgid "Krzz."
 msgstr "Abreviación"
 
-#: app/index.html:91
+#: app/index.html:85
 #: app/scripts/abos/detail/abosdetail.html:37
-#: app/scripts/app.js:320
+#: app/scripts/app.js:316
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:31
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:37
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
 #: app/scripts/dashboard/dashboard.html:28
 #: app/scripts/dashboard/dashboard.html:88
-#: app/scripts/kunden/detail/kundendetail.controller.js:79
+#: app/scripts/kunden/detail/kundendetail.controller.js:74
 #: app/scripts/kunden/detail/kundendetail.html:10
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:30
 #: app/scripts/rechnungen/detail/rechnungendetail.html:44
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:46
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:42
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:22
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:132
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:74
 msgid "Kunde"
 msgstr "Cliente"
 
-#: app/scripts/kunden/detail/kundendetail.html:243
+#: app/scripts/kunden/detail/kundendetail.html:203
 #: app/scripts/rechnungen/detail/rechnungendetail.html:59
 msgid "Kunde Nr."
 msgstr "Número de cliente"
@@ -1776,60 +1753,60 @@ msgstr "Número de cliente"
 #: app/scripts/kunden/overview/kundenoverview.html:10
 #: app/scripts/personen/overview/personenoverview.html:10
 msgid "Kunde erstellen"
-msgstr "Crear abonad@"
+msgstr "Crear abonado"
 
-#: app/scripts/kunden/detail/kundendetail.html:303
-#: app/scripts/kunden/detail/kundendetail.html:413
+#: app/scripts/kunden/detail/kundendetail.html:256
+#: app/scripts/kunden/detail/kundendetail.html:350
 msgid "Kunde erstellt"
-msgstr "Abonad@ cread@"
+msgstr "Abonado creado"
 
 #: app/scripts/kunden/detail/kundendetail.html:13
 #: app/scripts/rechnungen/detail/rechnungendetail.html:50
 msgid "Kunde suchen..."
-msgstr "Buscar abonad@..."
+msgstr "Buscar abonado..."
 
-#: app/index.html:94
+#: app/index.html:86
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
-msgstr "Abonad@s"
+msgstr "Abonados"
 
 #: app/scripts/projekt/settings/projektsettings.html:115
 msgid "Kunden E-Mail erforderlich"
-msgstr "Correo electrónico del abonad@ obligatorio"
+msgstr "Correo electrónico del abonado requerido"
 
 #: app/scripts/personen/overview/personenoverview.html:73
 msgid "Kundenbemerkungen"
-msgstr "Comentarios de l@s abonad@s"
+msgstr "Comentarios de los abonados"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:125
 msgid "Kundenbrief"
-msgstr "Resumen de abonad@"
+msgstr "Resumen del abonado"
 
-#: app/scripts/kunden/overview/kundenoverview.html:75
+#: app/scripts/kunden/overview/kundenoverview.html:72
 msgid "Kundenbrief.odt"
 msgstr "resumenAbonado.ODT"
 
-#: app/scripts/kunden/detail/kundendetail.html:228
+#: app/scripts/kunden/detail/kundendetail.html:189
 msgid "Kundendetails"
-msgstr "Detalles de abonad@"
+msgstr "Detalles del abonado"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:248
 msgid "Kundenliste anzeigen"
-msgstr "Mostrar la lista de abonad@s"
+msgstr "Mostrar la lista de abonados"
 
 #: app/scripts/personen/overview/personenoverview.html:60
 #: app/scripts/projekt/settings/kundentypen.html:21
 #: app/scripts/projekt/settings/kundentypen.html:24
 msgid "Kundentyp"
-msgstr "Tipo de abonad@"
+msgstr "Tipo de abonado"
 
 #: app/scripts/projekt/settings/kundentypen.html:9
 msgid "Kundentyp erstellen"
-msgstr "Crear un tipo de abonad@"
+msgstr "Crear un tipo de abonado"
 
-#: app/index.html:176
-#: app/scripts/kunden/detail/kundendetail.html:29
+#: app/index.html:116
+#: app/scripts/kunden/detail/kundendetail.html:24
 #: app/scripts/projekt/settings/kundentypen.html:6
 msgid "Kundentypen"
 msgstr "Tipo de cliente"
@@ -1853,15 +1830,15 @@ msgstr "Duración"
 msgid "Letzte Anmeldung"
 msgstr "Última conexión"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:43
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:39
 msgid "Letzte Bearbeitung"
 msgstr "Última modificación"
 
-#: app/scripts/kunden/detail/kundendetail.html:427
+#: app/scripts/kunden/detail/kundendetail.html:363
 msgid "Lieferadresse"
 msgstr "Dirección de entrega"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:181
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:165
 msgid "Lieferantenbericht"
 msgstr "Informe de entrega"
 
@@ -1878,11 +1855,11 @@ msgid "Lieferdatum"
 msgstr "fecha de entrega"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:86
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:135
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:123
 msgid "Lieferetiketten drucken"
 msgstr "Imprimir las etiquetas de entrega"
 
-#: app/scripts/app.js:307
+#: app/scripts/app.js:303
 msgid "Lieferinformation"
 msgstr "Información de entrega"
 
@@ -1908,7 +1885,7 @@ msgstr "Planificación descontada"
 msgid "Lieferplanungen"
 msgstr "Planificación de las entregas"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:125
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:112
 msgid "Lieferplanungsbericht"
 msgstr "Informe de planificación de la distribución"
 
@@ -1918,11 +1895,11 @@ msgid "Lieferrhythmus"
 msgstr "Ciclo de entrega"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:77
-#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:123
+#: app/scripts/auslieferungen/overview/auslieferungenoverview.controller.js:111
 msgid "Lieferschein drucken"
 msgstr "Imprimir albaranes de entrega"
 
-#: app/scripts/abos/detail/abosdetail.html:142
+#: app/scripts/abos/detail/abosdetail.html:135
 msgid "Lieferstatus"
 msgstr "Estado de entrega"
 
@@ -1930,7 +1907,7 @@ msgstr "Estado de entrega"
 msgid "Liefertag"
 msgstr "Día de entrega"
 
-#: app/scripts/app.js:105
+#: app/scripts/app.js:104
 msgid "Lieferung"
 msgstr "Entrega"
 
@@ -1939,15 +1916,15 @@ msgstr "Entrega"
 msgid "Lieferung vom"
 msgstr "Entrega de"
 
-#: app/index.html:109
-#: app/scripts/abos/detail/abosdetail.html:134
+#: app/index.html:92
+#: app/scripts/abos/detail/abosdetail.html:127
 #: app/scripts/abos/detail/abosdetail.html:25
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:3
-#: app/scripts/app.js:115
+#: app/scripts/app.js:114
 msgid "Lieferungen"
 msgstr "Entregas"
 
-#: app/scripts/app.js:176
+#: app/scripts/app.js:175
 msgid "Liter"
 msgstr "Litro"
 
@@ -1955,25 +1932,25 @@ msgstr "Litro"
 msgid "Login aktiv"
 msgstr "Conexión activa"
 
-#: app/scripts/projekt/settings/projektsettings.html:318
+#: app/scripts/projekt/settings/projektsettings.html:309
 msgid "Logo"
 msgstr "Logotipo"
 
-#: app/scripts/projekt/settings/projektsettings.html:327
+#: app/scripts/projekt/settings/projektsettings.html:318
 msgid "Logo auswählen oder einfügen"
 msgstr "Elegir o insertar un nuevo logotipo"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:439
-#: app/scripts/abos/detail/abosdetail.controller.js:469
-#: app/scripts/app.js:371
+#: app/scripts/abos/detail/abosdetail.controller.js:431
+#: app/scripts/abos/detail/abosdetail.controller.js:461
+#: app/scripts/app.js:362
 msgid "Löschen"
 msgstr "Eliminar"
 
-#: app/scripts/app.js:227
+#: app/scripts/app.js:223
 msgid "MI"
 msgstr "MIE"
 
-#: app/scripts/app.js:217
+#: app/scripts/app.js:213
 msgid "MO"
 msgstr "LU"
 
@@ -1995,7 +1972,7 @@ msgstr "Obligaciones de IVA"
 msgid "MWST-Satz"
 msgstr "IVA"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:247
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:246
 msgid "Mahnung verschickt"
 msgstr "Aviso enviada"
 
@@ -2003,11 +1980,11 @@ msgstr "Aviso enviada"
 msgid "Mahnung.odt"
 msgstr "AvisoPago.odt"
 
-#: app/scripts/app.js:151
+#: app/scripts/app.js:150
 msgid "MahnungVerschickt"
 msgstr "Aviso enviado"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:299
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:298
 msgid "Mahnungsdokument erstellen"
 msgstr "Crear un documento de aviso"
 
@@ -2019,7 +1996,7 @@ msgstr "Crear los documentos de aviso"
 msgid "Mahnungsdokumente herunterladen"
 msgstr "Descargar los documentos de aviso"
 
-#: app/scripts/app.js:270
+#: app/scripts/app.js:266
 msgid "Mai"
 msgstr "Mayo"
 
@@ -2028,16 +2005,16 @@ msgstr "Mayo"
 msgid "Mail-Body"
 msgstr "Cuerpo del correo"
 
-#: app/index.html:201
+#: app/index.html:125
 msgid "Mail-Vorlagen"
 msgstr "Plantilla de correo electrónico"
 
-#: app/scripts/kunden/detail/kundendetail.html:405
-#: app/scripts/kunden/detail/kundendetail.html:409
+#: app/scripts/kunden/detail/kundendetail.html:342
+#: app/scripts/kunden/detail/kundendetail.html:346
 msgid "Mandate Id"
 msgstr "ID de mandato"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:501
+#: app/scripts/abos/detail/abosdetail.controller.js:493
 msgid "Manuelle Rechnung erstellen"
 msgstr "Crear factura manualmente"
 
@@ -2046,7 +2023,7 @@ msgstr "Crear factura manualmente"
 msgid "Manueller Betrag"
 msgstr "Monto manual"
 
-#: app/scripts/app.js:268
+#: app/scripts/app.js:264
 msgid "Mar"
 msgstr "Marzo"
 
@@ -2069,54 +2046,54 @@ msgstr "Cantidad / unidad"
 msgid "Menge Total"
 msgstr "Cantidad total"
 
-#: app/index.html:127
+#: app/index.html:98
 msgid "Mitarbeit"
 msgstr "Colaboraciones"
 
-#: app/scripts/projekt/settings/projektsettings.html:213
+#: app/scripts/projekt/settings/projektsettings.html:206
 msgid "Mitteilung nach dem Login"
 msgstr "Mensage tras la conexión"
 
-#: app/scripts/projekt/settings/projektsettings.html:203
+#: app/scripts/projekt/settings/projektsettings.html:196
 msgid "Mitteilung vor dem Login"
 msgstr "Mensage previo a la conexión"
 
-#: app/scripts/projekt/settings/projektsettings.html:207
+#: app/scripts/projekt/settings/projektsettings.html:200
 msgid "Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird"
 msgstr "Mensaje que se muestra a todos los usuarios antes de iniciar sesión"
 
-#: app/scripts/projekt/settings/projektsettings.html:217
+#: app/scripts/projekt/settings/projektsettings.html:210
 msgid "Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird"
 msgstr "Mensaje que se muestra al usuario después de iniciar sesión correctamente"
 
-#: app/scripts/app.js:226
+#: app/scripts/app.js:222
 msgid "Mittwoch"
 msgstr "Miercoles"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:196
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:192
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:41
 msgid "Mobiltelefon"
 msgstr "Teléfono móvil"
 
-#: app/scripts/app.js:116
-#: app/scripts/app.js:119
+#: app/scripts/app.js:115
+#: app/scripts/app.js:118
 msgid "Monate"
 msgstr "Meses"
 
-#: app/scripts/app.js:91
-#: app/scripts/app.js:98
+#: app/scripts/app.js:90
+#: app/scripts/app.js:97
 msgid "Monatlich"
 msgstr "Mensual"
 
-#: app/scripts/app.js:217
+#: app/scripts/app.js:213
 msgid "Montag"
 msgstr "Lunes"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:133
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:129
 msgid "Multiplizieren"
 msgstr "Multiplicar"
 
-#: app/scripts/app.js:268
+#: app/scripts/app.js:264
 msgid "März"
 msgstr "Marzo"
 
@@ -2124,7 +2101,7 @@ msgstr "Marzo"
 msgid "N"
 msgstr "No"
 
-#: app/scripts/projekt/settings/projektsettings.html:227
+#: app/scripts/projekt/settings/projektsettings.html:219
 msgid "Nachricht, die den Benutzern mit einem Benachrichtigungssymbol in der Kopfzeile des Kundenportals angezeigt wird"
 msgstr "Mensaje que se muestra a los usuarios con un icono de notificación en el encabezado del portal del cliente"
 
@@ -2147,9 +2124,9 @@ msgstr "Nombre"
 msgid "Name / Betrieb"
 msgstr "Nombre, granja"
 
-#: app/scripts/kunden/detail/kundendetail.html:379
-#: app/scripts/projekt/settings/projektsettings.html:274
-#: app/scripts/projekt/settings/projektsettings.html:277
+#: app/scripts/kunden/detail/kundendetail.html:321
+#: app/scripts/projekt/settings/projektsettings.html:265
+#: app/scripts/projekt/settings/projektsettings.html:268
 msgid "Name der Bank"
 msgstr "Nombre del banco"
 
@@ -2161,13 +2138,13 @@ msgstr "Nombre o referencia a la granja"
 msgid "Name oder Bezeichnung"
 msgstr "Nombre o referencia"
 
-#: app/scripts/kunden/detail/kundendetail.html:344
+#: app/scripts/kunden/detail/kundendetail.html:292
 msgid "Name of the Account Holder"
 msgstr "Nombre del titular de la cuenta"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:24
 #: app/scripts/abotypen/detail/abotypendetail.html:148
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:154
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:150
 #: app/scripts/produzenten/detail/produzentendetail.html:90
 #: app/scripts/projekt/settings/projektsettings.html:102
 #: app/scripts/projekt/settings/projektsettings.html:110
@@ -2176,11 +2153,10 @@ msgstr "Nombre del titular de la cuenta"
 #: app/scripts/projekt/settings/projektsettings.html:134
 #: app/scripts/projekt/settings/projektsettings.html:150
 #: app/scripts/projekt/settings/projektsettings.html:183
-#: app/scripts/projekt/settings/projektsettings.html:236
+#: app/scripts/projekt/settings/projektsettings.html:227
 msgid "Nein"
 msgstr "No"
 
-#: app/scripts/app.js:184
 #: app/scripts/rechnungen/detail/rechnungendetail.html:118
 msgid "Neu"
 msgstr "Nuevo"
@@ -2189,11 +2165,11 @@ msgstr "Nuevo"
 msgid "Neue Bezeichnung"
 msgstr "Nueva designación"
 
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:117
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.controller.js:104
 msgid "Neue Lieferplanung generieren"
 msgstr "Crear una nueva planificación de la distribución"
 
-#: app/scripts/kunden/detail/kundendetail.html:536
+#: app/scripts/kunden/detail/kundendetail.html:457
 msgid "Neue Pendenz"
 msgstr "Nueva tarea pendiente"
 
@@ -2209,7 +2185,7 @@ msgstr "Nuevos abonos"
 msgid "Nicht erledigte Zahlungseingänge"
 msgstr "Recepción de pagos no tratados"
 
-#: app/scripts/app.js:308
+#: app/scripts/app.js:304
 msgid "NichtErledigt"
 msgstr "Sin concluir"
 
@@ -2221,37 +2197,36 @@ msgstr "Entrega a domicilio a catalogar"
 msgid "Noch zu leisten"
 msgstr "Por hacer"
 
-#: app/scripts/app.js:294
+#: app/scripts/app.js:290
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
-#: app/scripts/app.js:293
+#: app/scripts/app.js:289
 msgid "November"
 msgstr "Noviembre"
 
 #: app/scripts/depots/detail/depotsdetail.html:54
-#: app/scripts/kunden/detail/kundendetail.html:277
-#: app/scripts/kunden/detail/kundendetail.html:509
+#: app/scripts/kunden/detail/kundendetail.html:233
+#: app/scripts/kunden/detail/kundendetail.html:433
 #: app/scripts/produzenten/detail/produzentendetail.html:130
 #: app/scripts/projekt/settings/projektsettings.html:40
 #: app/scripts/rechnungen/detail/rechnungendetail.html:81
 msgid "Nr"
 msgstr "Nº"
 
-#: app/scripts/abos/overview/abosoverview.html:35
+#: app/scripts/abos/overview/abosoverview.html:33
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:14
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:34
-#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:34
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:34
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:30
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:30
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:30
 #: app/scripts/dashboard/dashboard.html:85
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:33
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:28
 #: app/scripts/kunden/detail/abo/abos.html:10
-#: app/scripts/kunden/detail/kundendetail.html:617
-#: app/scripts/kunden/overview/kundenoverview.html:32
+#: app/scripts/kunden/detail/kundendetail.html:528
+#: app/scripts/kunden/overview/kundenoverview.html:33
 #: app/scripts/rechnungen/detail/rechnungendetail.html:123
 #: app/scripts/rechnungen/detail/rechnungendetail.html:126
-#: app/scripts/rechnungen/detail/rechnungendetail.html:226
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:43
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:39
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:39
 #: app/scripts/touren/overview/tourenoverview.html:28
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:22
@@ -2259,11 +2234,11 @@ msgstr "Nº"
 msgid "Nr."
 msgstr "N°"
 
-#: app/scripts/abos/overview/zusatzabosoverview.html:33
+#: app/scripts/abos/overview/zusatzabosoverview.html:31
 msgid "Nr. (Haupt/Zusatzabo)"
 msgstr "Nº (Abonos principales y suplementarios)"
 
-#: app/scripts/app.js:331
+#: app/scripts/app.js:327
 msgid "Nur Heute"
 msgstr "Solo hoy"
 
@@ -2271,14 +2246,10 @@ msgstr "Solo hoy"
 msgid "Nächster Kündigungstermin:"
 msgstr "Rescisión de contrato próxima:"
 
-#: app/scripts/app.js:342
-msgid "OTP"
-msgstr ""
-
-#: app/scripts/app.js:139
-#: app/scripts/app.js:155
+#: app/scripts/app.js:138
+#: app/scripts/app.js:154
 #: app/scripts/dashboard/dashboard.html:61
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:40
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:36
 msgid "Offen"
 msgstr "Abierto"
 
@@ -2286,26 +2257,18 @@ msgstr "Abierto"
 msgid "Offene Pendenzen"
 msgstr "Tareas pendientes abiertas"
 
-#: app/scripts/app.js:288
+#: app/scripts/app.js:284
 msgid "Okt"
 msgstr "Oct"
 
-#: app/scripts/app.js:287
+#: app/scripts/app.js:283
 msgid "Oktober"
 msgstr "Octubre"
 
-#: app/scripts/app.js:342
-msgid "One-Time-Password (OTP)"
-msgstr "Autenticación con contraseña de un solo uso (OTP)"
-
-#: app/scripts/kunden/detail/kundendetail.html:200
-msgid "One-Time-Passwort"
-msgstr "Autenticación con contraseña de un solo uso"
-
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:61
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:57
 #: app/scripts/depots/detail/depotsdetail.html:65
-#: app/scripts/kunden/detail/kundendetail.html:290
-#: app/scripts/kunden/detail/kundendetail.html:522
+#: app/scripts/kunden/detail/kundendetail.html:244
+#: app/scripts/kunden/detail/kundendetail.html:444
 #: app/scripts/produzenten/detail/produzentendetail.html:149
 #: app/scripts/projekt/settings/projektsettings.html:59
 #: app/scripts/rechnungen/detail/rechnungendetail.html:100
@@ -2313,8 +2276,8 @@ msgid "Ort"
 msgstr "Municipio"
 
 #: app/scripts/depots/detail/depotsdetail.html:62
-#: app/scripts/kunden/detail/kundendetail.html:286
-#: app/scripts/kunden/detail/kundendetail.html:518
+#: app/scripts/kunden/detail/kundendetail.html:241
+#: app/scripts/kunden/detail/kundendetail.html:441
 #: app/scripts/produzenten/detail/produzentendetail.html:146
 #: app/scripts/projekt/settings/projektsettings.html:56
 #: app/scripts/rechnungen/detail/rechnungendetail.html:97
@@ -2323,8 +2286,8 @@ msgstr "Código postal"
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:29
 #: app/scripts/depots/detail/depotsdetail.html:59
-#: app/scripts/kunden/detail/kundendetail.html:282
-#: app/scripts/kunden/detail/kundendetail.html:514
+#: app/scripts/kunden/detail/kundendetail.html:238
+#: app/scripts/kunden/detail/kundendetail.html:438
 #: app/scripts/produzenten/detail/produzentendetail.html:143
 #: app/scripts/projekt/settings/projektsettings.html:53
 #: app/scripts/rechnungen/detail/rechnungendetail.html:94
@@ -2334,17 +2297,21 @@ msgstr "Código postal, municipio"
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:40
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:40
-#: app/scripts/kunden/overview/kundenoverview.html:44
+#: app/scripts/kunden/overview/kundenoverview.html:45
 #: app/scripts/personen/overview/personenoverview.html:54
 #: app/scripts/produzenten/overview/produzentenoverview.html:38
 msgid "PLZ Ort"
 msgstr "Código postal, municipio"
 
+#: app/index.html:73
+msgid "Passwort wechseln"
+msgstr "Cambiar la contraseña"
+
 #: app/scripts/journal/overview/journaloverview.html:45
 msgid "Payload"
 msgstr "Capacidad de carga"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:55
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:51
 msgid "Payment Type"
 msgstr "Tipo de pago"
 
@@ -2353,12 +2320,12 @@ msgstr "Tipo de pago"
 msgid "Pendenz als erledigt markieren"
 msgstr "Tareas pendientes completadas"
 
-#: app/index.html:106
+#: app/index.html:90
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:6
 msgid "Pendenzen"
 msgstr "Tareas pendientes"
 
-#: app/scripts/kunden/detail/kundendetail.html:534
+#: app/scripts/kunden/detail/kundendetail.html:456
 msgid "Pendenzen / History"
 msgstr "Tareas pendientes / histórico"
 
@@ -2367,17 +2334,17 @@ msgid "Persistence Id"
 msgstr "Id de la persistencia"
 
 #: app/scripts/arbeitsangebote/detail/addpersontoeinsatz.html:11
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:187
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:183
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:32
 msgid "Person"
 msgstr "Persona"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:172
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:171
 msgid "Person hinzufügen"
 msgstr "Añadir una persona de contacto"
 
-#: app/index.html:97
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:39
+#: app/index.html:87
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:40
 #: app/scripts/personen/overview/personenoverview.html:6
 msgid "Personen"
 msgstr "Personas"
@@ -2390,7 +2357,7 @@ msgstr "Categorías de persona"
 msgid "Personenbrief.odt"
 msgstr "CorreoPersona.odt"
 
-#: app/scripts/kunden/detail/kundendetail.html:140
+#: app/scripts/kunden/detail/kundendetail.html:121
 #: app/scripts/projekt/settings/personCategories.html:24
 msgid "Personenkategorie"
 msgstr "Categorías de personas"
@@ -2399,13 +2366,13 @@ msgstr "Categorías de personas"
 msgid "Personenkategorie Erstellen"
 msgstr "Crear una categoría de persona"
 
-#: app/index.html:179
+#: app/index.html:117
 #: app/scripts/personen/overview/personenoverview.html:65
 #: app/scripts/projekt/settings/personCategories.html:6
 msgid "Personenkategorien"
 msgstr "Categorías de personas"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:185
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:184
 msgid "Personenliste anzeigen"
 msgstr "Mostrar la lista de contactos"
 
@@ -2413,7 +2380,7 @@ msgstr "Mostrar la lista de contactos"
 msgid "Personenliste übrigen Teilnehmern anzeigen"
 msgstr "Mostrar la lista de otros participantes"
 
-#: app/index.html:113
+#: app/index.html:93
 #: app/scripts/lieferplanungen/detail/korbplanung.html:14
 #: app/scripts/lieferplanungen/detail/korbplanung.html:21
 #: app/scripts/lieferplanungen/detail/lieferanten.html:14
@@ -2428,24 +2395,24 @@ msgstr "Planificación #{{planung.id}} resumen por productor"
 msgid "Planung editieren"
 msgstr "Editar planificación"
 
-#: app/scripts/app.js:180
-msgid "Por."
-msgstr ""
-
 #: app/scripts/app.js:179
+msgid "Por."
+msgstr "Por."
+
+#: app/scripts/app.js:178
 msgid "Portion"
 msgstr "Porción"
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:25
 #: app/scripts/touren/detail/tourlieferungen.html:4
 msgid "Position"
-msgstr "Artículo"
+msgstr "Posición"
 
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:6
 msgid "Postauslieferung"
 msgstr "Entrega postal"
 
-#: app/index.html:123
+#: app/index.html:96
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:6
 msgid "Postauslieferungen"
 msgstr "Entregas postales"
@@ -2458,20 +2425,20 @@ msgstr "Mostrar las entregas en punto de recogida"
 msgid "Postfach, Etage, c/o, ..."
 msgstr "Apartado de correos, piso,..."
 
-#: app/scripts/kunden/detail/kundendetail.html:264
-#: app/scripts/kunden/detail/kundendetail.html:496
+#: app/scripts/kunden/detail/kundendetail.html:222
+#: app/scripts/kunden/detail/kundendetail.html:422
 #: app/scripts/projekt/settings/projektsettings.html:48
 #: app/scripts/rechnungen/detail/rechnungendetail.html:89
 msgid "Postfach, c/o, ..."
 msgstr "Apartado de correos, ..."
 
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:21
-#: app/scripts/app.js:111
+#: app/scripts/app.js:110
 #: app/scripts/kunden/detail/abo/abos.html:47
 msgid "Postlieferung"
 msgstr "Entrega a domicilio"
 
-#: app/scripts/app.js:135
+#: app/scripts/app.js:134
 msgid "PostlieferungAbo"
 msgstr "Abono de entrega a domicilio"
 
@@ -2500,11 +2467,11 @@ msgstr "Precio por unidad"
 msgid "Preis / Packung"
 msgstr "Precio por paquete"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:378
+#: app/scripts/abos/detail/abosdetail.controller.js:370
 msgid "Preis wurde erfolgreich angepasst"
 msgstr "El precio ha sido modificado"
 
-#: app/scripts/abos/detail/abosdetail.html:193
+#: app/scripts/abos/detail/abosdetail.html:186
 msgid "Preis:"
 msgstr "Precio:"
 
@@ -2516,11 +2483,12 @@ msgstr "Precios modificables"
 msgid "Preise sichtbar / relevant"
 msgstr "Precios visibles, pertinentes"
 
-#: app/scripts/app.js:629
+#: app/scripts/app.js:614
 msgid "Problem beim Aufruf einer Serverfunktion:"
 msgstr "Ha surgido un problema al intentar llamar una función del servidor:"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:161
+#: app/scripts/lieferplanungen/detail/korbplanung.html:72
 msgid "Prod."
 msgstr "Productor"
 
@@ -2539,7 +2507,7 @@ msgstr "Crear Producto"
 msgid "Produktbez."
 msgstr "Referencia del producto"
 
-#: app/index.html:173
+#: app/index.html:115
 #: app/scripts/produkte/overview/produkteoverview.html:6
 msgid "Produkte"
 msgstr "Productos"
@@ -2552,13 +2520,12 @@ msgstr "Productos disponibles"
 msgid "Produktekategorie erstellen"
 msgstr "Crear una categoría de productos"
 
-#: app/index.html:182
+#: app/index.html:118
 #: app/scripts/projekt/settings/produktkategorien.html:6
 msgid "Produktekategorien"
 msgstr "Categoría de productos"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:39
-#: app/scripts/lieferplanungen/detail/korbplanung.html:72
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:34
 #: app/scripts/produzenten/detail/produzentendetail.html:9
 msgid "Produzent"
 msgstr "Productores"
@@ -2570,7 +2537,7 @@ msgstr "Productores"
 msgid "Produzent erstellen"
 msgstr "Crear productor"
 
-#: app/index.html:170
+#: app/index.html:114
 #: app/scripts/produkte/overview/produkteoverview.html:70
 #: app/scripts/produzenten/overview/produzentenoverview.html:6
 msgid "Produzenten"
@@ -2580,7 +2547,7 @@ msgstr "Productores"
 msgid "Produzenten-Übersicht"
 msgstr "Lista de productores"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:68
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:63
 msgid "Produzentenabrechnung.odt"
 msgstr "balanceproductor.odt"
 
@@ -2592,7 +2559,7 @@ msgstr "Carta a los productores"
 msgid "Produzentenbrief.odt"
 msgstr "CartaProductores.odt"
 
-#: app/index.html:204
+#: app/index.html:126
 msgid "Projekt"
 msgstr "Proyecto"
 
@@ -2604,11 +2571,11 @@ msgstr "Parámetros del proyecto"
 msgid "Prägnanter Betreff"
 msgstr "Asunto"
 
-#: app/scripts/app.js:327
+#: app/scripts/app.js:323
 msgid "Punkte"
 msgstr "Puntos"
 
-#: app/scripts/projekt/settings/projektsettings.html:249
+#: app/scripts/projekt/settings/projektsettings.html:240
 msgid "QR-IBAN"
 msgstr "IBAN QR"
 
@@ -2621,30 +2588,30 @@ msgstr "Consulta"
 msgid "Rechnung"
 msgstr "Factura"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:258
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:257
 msgid "Rechnung bezahlt"
 msgstr "Factura pagada"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:211
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:210
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:175
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:15
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:10
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:10
 msgid "Rechnung erstellen"
 msgstr "Crear factura"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:450
+#: app/scripts/abos/detail/abosdetail.controller.js:442
 msgid "Rechnung manuell erstellen"
 msgstr "Crear una factura manualmente"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:209
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:208
 msgid "Rechnung speichern"
 msgstr "Guardar factura"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:273
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:272
 msgid "Rechnung storniert"
 msgstr "Anular factura"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:225
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:224
 msgid "Rechnung verschickt"
 msgstr "Factura enviada"
 
@@ -2652,8 +2619,8 @@ msgstr "Factura enviada"
 msgid "Rechnung.odt"
 msgstr "Factura.odt"
 
-#: app/index.html:144
-#: app/scripts/kunden/detail/kundendetail.html:608
+#: app/index.html:105
+#: app/scripts/kunden/detail/kundendetail.html:521
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:6
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:28
 msgid "Rechnungen"
@@ -2669,7 +2636,7 @@ msgstr "Mostrar las facturas"
 msgid "Rechnungen erstellen"
 msgstr "Crear facturas"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:303
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:301
 msgid "Rechnungen löschen"
 msgstr "Borrar las facturas"
 
@@ -2689,14 +2656,14 @@ msgstr "Dirección de facturación"
 msgid "Rechnungsdaten"
 msgstr "Datos de facturación"
 
-#: app/scripts/kunden/detail/kundendetail.html:620
+#: app/scripts/kunden/detail/kundendetail.html:531
 #: app/scripts/rechnungen/detail/rechnungendetail.html:150
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:64
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:60
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:22
 msgid "Rechnungsdatum"
 msgstr "Fecha de Factura"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:285
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:284
 msgid "Rechnungsdokument erstellen"
 msgstr "Crear un documento para la factura"
 
@@ -2708,7 +2675,7 @@ msgstr "Crear los documentos con las facturas"
 msgid "Rechnungsdokumente herunterladen"
 msgstr "Descargar las facturas"
 
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:131
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:123
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:73
 msgid "Rechnungsnummer"
 msgstr "Número de factura"
@@ -2721,7 +2688,7 @@ msgstr "Artículo de factura"
 msgid "Rechnungsposition löschen"
 msgstr "Cerrar artículos de factura"
 
-#: app/index.html:141
+#: app/index.html:104
 #: app/scripts/rechnungen/detail/rechnungendetail.html:220
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:6
 msgid "Rechnungspositionen"
@@ -2731,8 +2698,8 @@ msgstr "Artículos de factura"
 msgid "Rechnungspositionen anzeigen"
 msgstr "Mostrar los artículos de la factura"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:287
-#: app/scripts/abos/overview/zusatzabosoverview.controller.js:299
+#: app/scripts/abos/overview/abosoverview.controller.js:252
+#: app/scripts/abos/overview/zusatzabosoverview.controller.js:267
 msgid "Rechnungspositionen erstellen"
 msgstr "Crear un artículo a facturar"
 
@@ -2747,11 +2714,11 @@ msgstr "El artículo de factura no ha podido ser creado"
 
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:59
 msgid "Rechnungspositionen sind nicht im Status 'Offen' und können daher nicht einer Rechnung zugewiesen werden."
-msgstr "El artículo no está \"abierto\" y por lo tanto, no puede ser asignado a una factura."
+msgstr "La factura no está en el estado \"abierta\" y no puede ser atribuida a una factura."
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:72
 msgid "Rechnungspositionen wurden erstellt"
-msgstr "Los artículos han sido creados"
+msgstr "Los artículos de factura han sido creados"
 
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:62
 msgid "Rechnungspositionen wurden verarbeitet"
@@ -2761,26 +2728,26 @@ msgstr "Los artículos de factura han sido tratados"
 msgid "Rechnungstyp"
 msgstr "Tipo de factura"
 
-#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:236
+#: app/scripts/rechnungen/detail/rechnungendetail.controller.js:235
 msgid "Rechung per E-Mail verschicken"
 msgstr "Enviar una factura por correo electrónico"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:264
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:262
 msgid "Rechungen per E-Mail verschicken"
 msgstr "Enviar facturas por correo electrónico"
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:200
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:134
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:76
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:125
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:75
 msgid "Referenznummer"
 msgstr "Número de referencia"
 
-#: app/scripts/projekt/settings/projektsettings.html:290
-#: app/scripts/projekt/settings/projektsettings.html:293
+#: app/scripts/projekt/settings/projektsettings.html:281
+#: app/scripts/projekt/settings/projektsettings.html:284
 msgid "Referenznummer Präfix"
 msgstr "Prefijo del número de referencia"
 
-#: app/index.html:198
+#: app/index.html:124
 msgid "Report-Vorlagen"
 msgstr "Plantillas de informes"
 
@@ -2788,12 +2755,12 @@ msgstr "Plantillas de informes"
 msgid "Resultate"
 msgstr "Resultados"
 
-#: app/scripts/kunden/detail/kundendetail.html:162
+#: app/scripts/kunden/detail/kundendetail.html:142
 #: app/scripts/personen/overview/personenoverview.html:83
 msgid "Rolle"
 msgstr "Rol"
 
-#: app/scripts/kunden/detail/kundendetail.html:170
+#: app/scripts/kunden/detail/kundendetail.html:148
 msgid "Rolle speichern"
 msgstr "Guardar el rol"
 
@@ -2801,19 +2768,19 @@ msgstr "Guardar el rol"
 msgid "Rythmus"
 msgstr "Cadencia"
 
-#: app/scripts/app.js:245
+#: app/scripts/app.js:241
 msgid "SA"
 msgstr "Sa"
 
-#: app/scripts/app.js:251
+#: app/scripts/app.js:247
 msgid "SO"
 msgstr "DO"
 
-#: app/scripts/abos/detail/abosdetail.html:144
+#: app/scripts/abos/detail/abosdetail.html:137
 msgid "Saldo zu tief"
 msgstr "Crédito insuficiente"
 
-#: app/scripts/app.js:244
+#: app/scripts/app.js:240
 msgid "Samstag"
 msgstr "Sábado"
 
@@ -2823,7 +2790,7 @@ msgid "Satz"
 msgstr "Conjunto"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:65
-#: app/scripts/app.js:386
+#: app/scripts/app.js:377
 #: app/scripts/jobqueue/result/result.html:20
 #: app/scripts/lieferplanungen/detail/edit-bemerkungen.html:15
 #: app/scripts/mailvorlagen/mailvorlagen.html:86
@@ -2831,19 +2798,19 @@ msgstr "Conjunto"
 msgid "Schliessen"
 msgstr "Cerrar"
 
-#: app/scripts/app.js:200
+#: app/scripts/app.js:196
 msgid "Schweizer Franken"
 msgstr "Francos suizos"
 
-#: app/scripts/app.js:311
+#: app/scripts/app.js:307
 msgid "Sent"
 msgstr "Enviado"
 
-#: app/scripts/app.js:282
+#: app/scripts/app.js:278
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
-#: app/scripts/app.js:281
+#: app/scripts/app.js:277
 msgid "September"
 msgstr "Septiembre"
 
@@ -2863,7 +2830,7 @@ msgstr "¿Quieres borrar la planificación de la entrega?"
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr "¿Quieres borrar la planificación de distribución?"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:251
+#: app/scripts/kunden/detail/kundendetail.controller.js:246
 msgid "Soll diese Person wirklich gelöscht werden?"
 msgstr "¿Seguro que desea eliminar esta persona?"
 
@@ -2875,19 +2842,19 @@ msgstr "¿Quieres enviar este correo a todos los productores?"
 msgid "Sonderprodukt einfügen"
 msgstr "Añadir un producto fuera del catálogo"
 
-#: app/scripts/kunden/detail/kundendetail.html:339
-#: app/scripts/projekt/settings/projektsettings.html:266
+#: app/scripts/kunden/detail/kundendetail.html:289
+#: app/scripts/projekt/settings/projektsettings.html:257
 msgid "Sonderzeichen werden beim Sepa-Export entfernt"
 msgstr "Los carácteres especiales se eliminan durante la exportación SEPA"
 
-#: app/scripts/app.js:250
+#: app/scripts/app.js:246
 msgid "Sonntag"
 msgstr "Domingo"
 
 #: app/scripts/abos/detail/abosdetail-guthaben-anpassen.html:35
 #: app/scripts/abos/detail/abosdetail-vertriebsart-anpassen.html:42
-#: app/scripts/abos/detail/abosdetail.controller.js:433
-#: app/scripts/abos/detail/abosdetail.controller.js:460
+#: app/scripts/abos/detail/abosdetail.controller.js:425
+#: app/scripts/abos/detail/abosdetail.controller.js:452
 #: app/scripts/mailvorlagen/mailvorlagen.html:85
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.controller.js:35
 msgid "Speichern"
@@ -2897,7 +2864,7 @@ msgstr "Guardar"
 msgid "Sprache"
 msgstr "Idioma"
 
-#: app/scripts/app.js:168
+#: app/scripts/app.js:167
 msgid "St."
 msgstr "Unidad"
 
@@ -2906,13 +2873,9 @@ msgstr "Unidad"
 msgid "Stammdaten"
 msgstr "Base de datos"
 
-#: app/scripts/projekt/settings/projektsettings.html:188
-msgid "Standard Zwei-Faktor-Authentierungstyp"
-msgstr "Tipo de autenticación estándar de dos factores"
-
-#: app/scripts/abos/overview/abosoverview.html:27
-#: app/scripts/abos/overview/zusatzabosoverview.html:25
-#: app/scripts/kunden/overview/kundenoverview.html:25
+#: app/scripts/abos/overview/abosoverview.html:25
+#: app/scripts/abos/overview/zusatzabosoverview.html:23
+#: app/scripts/kunden/overview/kundenoverview.html:26
 #: app/scripts/personen/overview/personenoverview.html:26
 msgid "Standardansicht"
 msgstr "Vista predeterminada"
@@ -2926,9 +2889,9 @@ msgid "Standardvorlage"
 msgstr "Formato por Omisión"
 
 #: app/scripts/abos/detail/create-abo.html:42
-#: app/scripts/abos/overview/abosoverview.html:49
-#: app/scripts/abos/overview/zusatzabosoverview.html:47
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:82
+#: app/scripts/abos/overview/abosoverview.html:47
+#: app/scripts/abos/overview/zusatzabosoverview.html:45
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:78
 #: app/scripts/kunden/detail/abo/abos.html:12
 msgid "Start"
 msgstr "Inicio"
@@ -2937,37 +2900,37 @@ msgstr "Inicio"
 msgid "Start des Geschäftsjahres"
 msgstr "Inicio del año fiscal"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:69
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:47
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:65
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:48
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:52
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:46
-#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:43
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:46
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:42
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:39
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:42
 #: app/scripts/dashboard/dashboard.html:60
 #: app/scripts/depots/detail/depotsdetail.html:40
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:45
-#: app/scripts/kunden/detail/kundendetail.html:622
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:39
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:40
+#: app/scripts/kunden/detail/kundendetail.html:533
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:35
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:27
 #: app/scripts/rechnungen/detail/rechnungendetail.html:114
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:61
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:57
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:52
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:52
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:30
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:136
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:78
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:127
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:77
 msgid "Status"
 msgstr "Estado"
 
-#: app/scripts/app.js:152
-#: app/scripts/app.js:158
+#: app/scripts/app.js:151
+#: app/scripts/app.js:157
 msgid "Storniert"
 msgstr "Cancelado"
 
 #: app/scripts/depots/detail/depotsdetail.html:51
-#: app/scripts/kunden/detail/kundendetail.html:273
-#: app/scripts/kunden/detail/kundendetail.html:505
-#: app/scripts/kunden/overview/kundenoverview.html:41
+#: app/scripts/kunden/detail/kundendetail.html:230
+#: app/scripts/kunden/detail/kundendetail.html:430
+#: app/scripts/kunden/overview/kundenoverview.html:42
 #: app/scripts/personen/overview/personenoverview.html:51
 #: app/scripts/produzenten/detail/produzentendetail.html:127
 #: app/scripts/produzenten/overview/produzentenoverview.html:35
@@ -2978,8 +2941,8 @@ msgstr "Calle"
 
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:27
 #: app/scripts/depots/detail/depotsdetail.html:48
-#: app/scripts/kunden/detail/kundendetail.html:269
-#: app/scripts/kunden/detail/kundendetail.html:501
+#: app/scripts/kunden/detail/kundendetail.html:227
+#: app/scripts/kunden/detail/kundendetail.html:427
 #: app/scripts/produzenten/detail/produzentendetail.html:124
 #: app/scripts/projekt/settings/projektsettings.html:34
 #: app/scripts/rechnungen/detail/rechnungendetail.html:75
@@ -2987,19 +2950,19 @@ msgstr "Calle"
 msgid "Strasse / Nr."
 msgstr "Calle / Nº"
 
-#: app/scripts/app.js:324
+#: app/scripts/app.js:320
 msgid "Stunden"
 msgstr "Horas"
 
-#: app/scripts/projekt/settings/projektsettings.html:334
+#: app/scripts/projekt/settings/projektsettings.html:325
 msgid "Style<br>(Admin-Seite)"
-msgstr "Estilo<br>(Portal de administrador(a))"
+msgstr "Estilo<br>(Portal del administrador)"
 
-#: app/scripts/projekt/settings/projektsettings.html:349
+#: app/scripts/projekt/settings/projektsettings.html:340
 msgid "Style<br>(Kundenportal)"
-msgstr "Estilo<br>(Portal de abonad@)"
+msgstr "Estilo<br>(portal del abonado)"
 
-#: app/scripts/app.js:168
+#: app/scripts/app.js:167
 msgid "Stück"
 msgstr "Unidad"
 
@@ -3021,26 +2984,26 @@ msgstr "Búsqueda en tareas pendientes..."
 msgid "Suche in Resultaten..."
 msgstr "Búsqueda en resultados..."
 
-#: app/scripts/abos/overview/abosoverview.html:13
-#: app/scripts/abos/overview/zusatzabosoverview.html:11
+#: app/scripts/abos/overview/abosoverview.html:11
+#: app/scripts/abos/overview/zusatzabosoverview.html:9
 #: app/scripts/abotypen/overview/abotypen.html:10
 #: app/scripts/abotypen/overview/zusatzabotypen.html:10
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:9
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:9
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:11
-#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:14
-#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:14
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:14
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:9
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:9
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:9
 #: app/scripts/depots/overview/depotsoverview.html:9
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:14
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:9
 #: app/scripts/journal/overview/journaloverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:9
-#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:14
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:9
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:9
 #: app/scripts/personen/overview/personenoverview.html:9
 #: app/scripts/produkte/overview/produkteoverview.html:9
 #: app/scripts/produzenten/overview/produzentenoverview.html:9
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:14
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:9
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:9
 #: app/scripts/reports/overview/reportsoverview.html:9
 #: app/scripts/touren/overview/tourenoverview.html:9
@@ -3065,26 +3028,26 @@ msgstr "Suma de colaboraciones a realizar"
 msgid "Summe jeweils ohne Zusatzabos!"
 msgstr "¡Total sin abonos suplementarios!"
 
-#: app/scripts/app.js:326
+#: app/scripts/app.js:322
 msgid "Tage"
 msgstr "Días"
 
-#: app/scripts/projekt/settings/projektsettings.html:282
-#: app/scripts/projekt/settings/projektsettings.html:285
+#: app/scripts/projekt/settings/projektsettings.html:273
+#: app/scripts/projekt/settings/projektsettings.html:276
 msgid "Teilnehmernummer"
-msgstr "Número de abonad@ (sólo necesario en Suiza)"
+msgstr "Número de abonado"
 
 #: app/scripts/depots/detail/depotsdetail.html:161
 #: app/scripts/depots/detail/depotsdetail.html:201
 msgid "Telefon"
 msgstr "Número de teléfono"
 
-#: app/scripts/kunden/detail/kundendetail.html:131
+#: app/scripts/kunden/detail/kundendetail.html:113
 #: app/scripts/produzenten/detail/produzentendetail.html:170
 msgid "Telefon Festnetz"
 msgstr "Número de teléfono fijo"
 
-#: app/scripts/kunden/detail/kundendetail.html:122
+#: app/scripts/kunden/detail/kundendetail.html:105
 #: app/scripts/personen/overview/personenoverview.html:48
 #: app/scripts/produzenten/detail/produzentendetail.html:162
 msgid "Telefon Mobil"
@@ -3094,32 +3057,32 @@ msgstr "Número de teléfono móvil"
 msgid "Text mit [Platzhalter]"
 msgstr "Texto con [Platzhalter]"
 
-#: app/scripts/kunden/detail/kundendetail.html:554
-#: app/scripts/zahlungsimports/import/zahlungsimports.html:108
+#: app/scripts/kunden/detail/kundendetail.html:472
+#: app/scripts/zahlungsimports/import/zahlungsimports.html:102
 msgid "Text..."
 msgstr "Texto..."
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:29
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:32
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:45
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:28
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:41
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:29
 #: app/scripts/dashboard/dashboard.html:91
-#: app/scripts/kunden/detail/kundendetail.html:618
+#: app/scripts/kunden/detail/kundendetail.html:529
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
 #: app/scripts/rechnungen/detail/rechnungendetail.html:134
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:49
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:45
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:13
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:16
 msgid "Titel"
 msgstr "Título"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:32
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:51
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:46
 #: app/scripts/lieferplanungen/detail/korbplanung.html:176
 #: app/scripts/lieferplanungen/detail/lieferanten.html:105
 #: app/scripts/lieferplanungen/detail/lieferanten.html:77
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:61
 msgid "Total (abz. Adminanteil)"
@@ -3154,7 +3117,7 @@ msgid "Total über alle Lieferungen (inkl. MWST)"
 msgstr "Total de todas las entregas (incluido IVA)"
 
 #: app/scripts/abos/detail/abosdetail.html:67
-#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:37
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:33
 #: app/scripts/touren/detail/tourendetail.html:10
 #: app/scripts/touren/detail/tourendetail.html:33
 msgid "Tour"
@@ -3177,7 +3140,7 @@ msgstr "Desarrollo de la ronda"
 msgid "Tourauslieferung"
 msgstr "Entrega a domicilio"
 
-#: app/index.html:120
+#: app/index.html:95
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:6
 msgid "Tourauslieferungen"
 msgstr "Entregas a domicilio"
@@ -3186,7 +3149,7 @@ msgstr "Entregas a domicilio"
 msgid "Tourauslieferungen anzeigen"
 msgstr "Mostrar las entregas a domicilio"
 
-#: app/index.html:164
+#: app/index.html:112
 #: app/scripts/abotypen/detail/vertriebsarten/vertriebsarten.html:19
 #: app/scripts/touren/overview/tourenoverview.html:6
 msgid "Touren"
@@ -3200,49 +3163,52 @@ msgstr "Datos del recorrido"
 msgid "Tourlieferungen"
 msgstr "Ronda de entrega"
 
-#: app/scripts/app.js:130
+#: app/scripts/app.js:129
 msgid "Transfer"
 msgstr "Transferir"
 
-#: app/scripts/kunden/overview/kundenoverview.html:54
+#: app/scripts/projekt/settings/projektsettings.html:174
+msgid "Two-Factor-Authentisierung"
+msgstr "Autenticación de dos factores"
+
+#: app/scripts/kunden/overview/kundenoverview.html:51
 #: app/scripts/mailvorlagen/mailvorlagen.html:52
-#: app/scripts/rechnungen/detail/rechnungendetail.html:229
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:60
 msgid "Typ"
 msgstr "Tipo"
 
-#: app/scripts/app.js:95
+#: app/scripts/app.js:94
 msgid "Täglich"
 msgstr "Diariamente"
 
-#: app/scripts/app.js:204
+#: app/scripts/app.js:200
 msgid "US Dollar"
 msgstr "Dólar estadounidense"
 
-#: app/scripts/app.js:204
+#: app/scripts/app.js:200
 msgid "USD"
-msgstr ""
+msgstr "USD"
 
-#: app/scripts/app.js:114
+#: app/scripts/app.js:113
 msgid "Unbeschraenkt"
 msgstr "Ilimitado"
 
-#: app/scripts/app.js:138
+#: app/scripts/app.js:137
 msgid "Ungeplant"
 msgstr "Sin planificar"
 
-#: app/scripts/app.js:92
-#: app/scripts/app.js:99
+#: app/scripts/app.js:91
+#: app/scripts/app.js:98
 msgid "Unregelmaessig"
 msgstr "Irregularmente"
 
-#: app/scripts/projekt/settings/projektsettings.html:197
+#: app/scripts/projekt/settings/projektsettings.html:190
 msgid "Unterhalt"
 msgstr "Mantenimiento"
 
-#: app/scripts/projekt/settings/projektsettings.html:233
+#: app/scripts/projekt/settings/projektsettings.html:224
 msgid "Unterhaltsmodus (Login auf Kundenportal blockiert)"
-msgstr "Modo mantenimiento (inicio de sesión en el portal de abonad@ bloqueado)"
+msgstr "Modo mantenimiento (inicio de sesión en el portal de abonado bloqueado)"
 
 #: app/scripts/journal/overview/journaloverview.html:34
 msgid "User"
@@ -3260,24 +3226,20 @@ msgstr "Persona responsable"
 msgid "Verantwortliche_r"
 msgstr "Persona responsable"
 
-#: app/scripts/app.js:334
-msgid "Vergangene"
-msgstr "Pasado"
-
-#: app/scripts/app.js:141
-#: app/scripts/app.js:145
+#: app/scripts/app.js:140
+#: app/scripts/app.js:144
 msgid "Verrechnet"
 msgstr "Deducido"
 
-#: app/scripts/app.js:149
+#: app/scripts/app.js:148
 msgid "Verschickt"
 msgstr "Enviado"
 
-#: app/index.html:230
+#: app/index.html:152
 msgid "Version:"
 msgstr "Versión:"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:693
+#: app/scripts/abos/detail/abosdetail.controller.js:681
 msgid "Vertraglich"
 msgstr "Contractual"
 
@@ -3306,7 +3268,7 @@ msgstr "Tipo de distribución"
 msgid "Vertriebsart anpassen für Abo Nr."
 msgstr "Modificar la distribución para el abono nº"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:408
+#: app/scripts/abos/detail/abosdetail.controller.js:400
 msgid "Vertriebsart wurde erfolgreich angepasst"
 msgstr "Distribución modificada con éxito"
 
@@ -3322,7 +3284,7 @@ msgstr "Gestión de plantillas de informes"
 msgid "Verändern"
 msgstr "Pausar"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:487
+#: app/scripts/abos/detail/abosdetail.controller.js:479
 msgid "Vetriebsart anpassen"
 msgstr "Modificar el tipo de distribución"
 
@@ -3330,7 +3292,7 @@ msgstr "Modificar el tipo de distribución"
 msgid "Vom System generierte E-Mail versenden"
 msgstr "Enviar un correo electrónico creado por el sistema"
 
-#: app/scripts/kunden/detail/kundendetail.html:581
+#: app/scripts/kunden/detail/kundendetail.html:494
 msgid "Vom System generierter Eintrag"
 msgstr "Entrada generada por el sistema."
 
@@ -3340,8 +3302,8 @@ msgstr "Entrada generada por el sistema."
 msgid "Von"
 msgstr "De"
 
-#: app/scripts/abos/detail/abosdetail.html:121
-#: app/scripts/abos/overview/abosoverview.html:70
+#: app/scripts/abos/detail/abosdetail.html:114
+#: app/scripts/abos/overview/abosoverview.html:68
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:10
 #: app/scripts/abotypen/overview/abotypen.html:38
 #: app/scripts/kunden/detail/abo/abos.html:16
@@ -3360,24 +3322,24 @@ msgstr "Nombre de las plantillas..."
 #: app/scripts/depots/detail/depotsdetail.html:140
 #: app/scripts/depots/detail/depotsdetail.html:177
 #: app/scripts/depots/detail/depotsdetail.html:180
-#: app/scripts/kunden/detail/kundendetail.html:87
-#: app/scripts/kunden/detail/kundendetail.html:91
+#: app/scripts/kunden/detail/kundendetail.html:73
+#: app/scripts/kunden/detail/kundendetail.html:76
 #: app/scripts/personen/overview/personenoverview.html:36
 #: app/scripts/produzenten/detail/produzentendetail.html:55
 #: app/scripts/produzenten/detail/produzentendetail.html:58
 msgid "Vorname"
 msgstr "Nombre"
 
-#: app/scripts/kunden/detail/kundendetail.html:175
+#: app/scripts/kunden/detail/kundendetail.html:153
 msgid "Weblogin"
 msgstr "Conexión "
 
-#: app/scripts/kunden/detail/kundendetail.html:187
+#: app/scripts/kunden/detail/kundendetail.html:161
 msgid "Weblogin Einladung"
 msgstr "Invitación a conectarte"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:359
-#: app/scripts/personen/overview/personenoverview.controller.js:170
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:338
+#: app/scripts/personen/overview/personenoverview.controller.js:173
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3389,10 +3351,10 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre\n"
 " {{person.name}} Apellidos {{person.rolle}} Rol \n"
 " \n"
-" {{person.kundeId}} Nº de abonad@"
+" {{person.kundeId}} Nº de abonado"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:325
-#: app/scripts/abos/overview/zusatzabosoverview.controller.js:342
+#: app/scripts/abos/overview/abosoverview.controller.js:290
+#: app/scripts/abos/overview/zusatzabosoverview.controller.js:310
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3409,12 +3371,12 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
 " {{person.kundeId}} Nº de abonado \n"
-" {{abo.abotypName}} Nombre de tipo de subscripción \n"
+" {{abo.abotypName}} Nombre de tipo de abono \n"
 " {{abo.kunde}} Abonado \n"
 " {{abo.start}} Fecha de inicio de abono \n"
 " {{abo.ende}} Fecha de finalización de abono"
 
-#: app/scripts/abotypen/overview/abotypenoverview.controller.js:154
+#: app/scripts/abotypen/overview/abotypenoverview.controller.js:151
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3430,10 +3392,10 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.anrede}} Formula de cortesía \n"
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
-" {{person.rolle}} Rol\n"
-" {{person.kundeId}} Nº de abonad@\n"
-" {{abotyp.name}} Nombre del tipo de abono\n"
-" {{abotyp.beschreibung}} Descripción del tipo de subscripción \n"
+" {{person.rolle}} Rol \n"
+" {{person.kundeId}} Nº de abonado \n"
+" {{abotyp.name}} Nombre del tipo de abono \n"
+" {{abotyp.beschreibung}} Descripción del tipo de abono \n"
 " {{abotyp.preis}} Precio \n"
 " {{abotyp.preiseinheit}} Precio por unidad \n"
 " {{abotyp.laufzeiteinheit}} Unidad"
@@ -3455,7 +3417,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre\n"
 " {{person.name}} Apellido \n"
 " {{person.rolle}} Rol de la persona \n"
-" {{person.kundeId}} Id de abonad@\n"
+" {{person.kundeId}} Id del abonado \n"
 " {{depot.name}} nombre del punto de recogida \n"
 " {{depot.kurzzeichen}} \n"
 " {{depot.plz}} Dirección del punto de recogida \n"
@@ -3479,14 +3441,14 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Número de abonad@\n"
-" {{kunde.bezeichnung}} Descripción de abonad@ \n"
-" {{kunde.strasse}} Calle de abonad@\n"
+" {{person.kundeId}} Número de abonado \n"
+" {{kunde.bezeichnung}} Descripción de abonado \n"
+" {{kunde.strasse}} Calle de abonado \n"
 " {{kunde.hausNummer}} Número de calle \n"
 " {{kunde.plz}} Código postal \n"
 " {{kunde.ort}} Municipio"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:281
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:279
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3507,7 +3469,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonad@\n"
+" {{person.kundeId}} Nº de abonado \n"
 " {{rechnung.titel}} Título de factura \n"
 " {{rechnung.betrag}} Precio de factura \n"
 " {{rechnung.rechnungsDatum}} Fecha de factura \n"
@@ -3532,11 +3494,11 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonad@\n"
+" {{person.kundeId}} Nº de abonado \n"
 " {{tour.name}} Nombre de la ronda \n"
 " {{tour.beschreibung}} Descripción de la ronda"
 
-#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:128
+#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:125
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
 " {{person.vorname}} \n"
@@ -3553,18 +3515,18 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonad@\n"
+" {{person.kundeId}} Nº de abonado \n"
 " {{zusatzabotyp.name}} Nombre del abono suplementario \n"
 " {{zusatzabotyp.beschreibung}} Descripción del abono suplementario \n"
 " {{zusatzabotyp.preis}} Precio \n"
 " {{zusatzabotyp.preiseinheit}} Precio por unidad \n"
 " {{zusatzabotyp.laufzeiteinheit}} Unidad"
 
-#: app/index.html:219
+#: app/index.html:141
 msgid "Wir sind gleich bereit..."
 msgstr "Estaremos disponibles pronto..."
 
-#: app/scripts/kunden/detail/kundendetail.html:448
+#: app/scripts/kunden/detail/kundendetail.html:380
 msgid "Wird auf dem Lieferschein zur Tour aufgedruckt"
 msgstr "Impreso en la lista de entrega para la ronda (entrega a domicilio)"
 
@@ -3572,16 +3534,16 @@ msgstr "Impreso en la lista de entrega para la ronda (entrega a domicilio)"
 msgid "Wird standartmässig geplant"
 msgstr "Cesta planificada regularmente"
 
-#: app/scripts/abos/detail/abosdetail.html:143
-#: app/scripts/app.js:161
+#: app/scripts/abos/detail/abosdetail.html:136
+#: app/scripts/app.js:160
 msgid "WirdGeliefert"
 msgstr "entregada"
 
-#: app/scripts/app.js:120
+#: app/scripts/app.js:119
 msgid "Wochen"
 msgstr "Semanas"
 
-#: app/scripts/app.js:89
+#: app/scripts/app.js:88
 msgid "Woechentlich"
 msgstr "Semanal"
 
@@ -3589,11 +3551,11 @@ msgstr "Semanal"
 msgid "Währung"
 msgstr "Moneda"
 
-#: app/scripts/app.js:96
+#: app/scripts/app.js:95
 msgid "Wöchentlich"
 msgstr "Semanalmente"
 
-#: app/scripts/kunden/detail/kundendetail.html:329
+#: app/scripts/kunden/detail/kundendetail.html:280
 msgid "Zahlmethode"
 msgstr "Modo de pago"
 
@@ -3609,16 +3571,16 @@ msgstr "Importar los pagos"
 msgid "Zahlungs-Import-Datei"
 msgstr "Fichero de importación de los pagos"
 
-#: app/index.html:151
+#: app/index.html:107
 #: app/scripts/zahlungsimports/overview/zahlungsimportsoverview.html:6
 msgid "Zahlungs-Imports"
 msgstr "Importación de los pagos"
 
-#: app/index.html:154
+#: app/index.html:108
 msgid "Zahlungsauftrag-Exports"
 msgstr "Pagos importados"
 
-#: app/scripts/kunden/detail/kundendetail.html:317
+#: app/scripts/kunden/detail/kundendetail.html:269
 msgid "Zahlungsdetails"
 msgstr "Detalles de pago"
 
@@ -3626,15 +3588,15 @@ msgstr "Detalles de pago"
 msgid "Zahlungseingänge"
 msgstr "Pagos recibidos"
 
-#: app/scripts/app.js:381
+#: app/scripts/app.js:372
 msgid "Zeit"
 msgstr "Tiempo"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:123
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:119
 msgid "Zeit in Stunden"
 msgstr "Tiempo en horas"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:77
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:73
 msgid "Zeitpunkt"
 msgstr "Hora"
 
@@ -3646,11 +3608,11 @@ msgstr "Período"
 msgid "Zielpreis"
 msgstr "Precio deseado"
 
-#: app/scripts/app.js:156
+#: app/scripts/app.js:155
 msgid "Zugewiesen"
 msgstr "Atribuido a "
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:18
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:22
 msgid "Zurückziehen"
 msgstr "Retirar"
 
@@ -3660,40 +3622,40 @@ msgstr "Abono suplementario:"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:6
 msgid "ZusatzAbotypen"
-msgstr "Tipos de subscripciones suplementarias"
+msgstr "Tipos de abonos suplementarios"
 
-#: app/scripts/abos/detail/abosdetail.html:172
+#: app/scripts/abos/detail/abosdetail.html:165
 #: app/scripts/lieferplanungen/detail/korbplanung.html:109
 msgid "Zusatzabo"
 msgstr "Abono suplementario"
 
-#: app/index.html:103
-#: app/scripts/abos/detail/abosdetail.html:156
-#: app/scripts/abos/overview/abosoverview.html:11
-#: app/scripts/abos/overview/abosoverview.html:89
+#: app/index.html:89
+#: app/scripts/abos/detail/abosdetail.html:149
+#: app/scripts/abos/overview/abosoverview.html:87
+#: app/scripts/abos/overview/abosoverview.html:9
 #: app/scripts/abos/overview/zusatzabosoverview.html:6
 msgid "Zusatzabos"
 msgstr "Abonos suplementarios"
 
-#: app/scripts/abos/overview/abosoverview.html:82
+#: app/scripts/abos/overview/abosoverview.html:80
 msgid "Zusatzabos Ids"
 msgstr "Ids de abonos suplementarios"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:11
 msgid "Zusatzabotyp"
-msgstr "Tipo de subscripción suplementaria"
+msgstr "Tipo de abono suplementario"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
-#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:97
+#: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:94
 msgid "Zusatzabotyp erstellen"
-msgstr "Crear un tipo de subscripción suplementaria"
+msgstr "Crear un tipo de abono suplementario"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:140
 #: app/scripts/depots/detail/depotsdetail.html:70
 msgid "Zusatzdaten"
 msgstr "Datos suplementarios"
 
-#: app/scripts/kunden/detail/kundendetail.html:446
+#: app/scripts/kunden/detail/kundendetail.html:379
 msgid "Zusatzinfos"
 msgstr "Información adicional"
 
@@ -3703,28 +3665,24 @@ msgstr "Información adicional"
 msgid "Zusatzkorb"
 msgstr "Cesta suplementaria"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:151
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:147
 msgid "Zusätzliche Personen möglich"
 msgstr "Personas adicionales posible"
 
-#: app/scripts/projekt/settings/projektsettings.html:174
-msgid "Zwei-Faktor-Authentisierung"
-msgstr "Autenticación de dos factores"
-
-#: app/scripts/app.js:90
+#: app/scripts/app.js:89
 msgid "Zweiwoechentlich"
 msgstr "Quincenalmente"
 
-#: app/scripts/app.js:97
+#: app/scripts/app.js:96
 msgid "Zweiwöchentlich"
 msgstr "Quincenalmente"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:323
-#: app/scripts/abos/overview/zusatzabosoverview.controller.js:340
+#: app/scripts/abos/overview/abosoverview.controller.js:288
+#: app/scripts/abos/overview/zusatzabosoverview.controller.js:308
 msgid "abo"
 msgstr "Abono"
 
-#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:167
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.controller.js:151
 msgid "abrechnen"
 msgstr "Cuentas"
 
@@ -3736,12 +3694,12 @@ msgstr "Todos"
 msgid "als ausgeliefert markieren"
 msgstr "Marcar como \"entregado\""
 
-#: app/scripts/kunden/detail/kundendetail.html:303
-#: app/scripts/kunden/detail/kundendetail.html:413
+#: app/scripts/kunden/detail/kundendetail.html:256
+#: app/scripts/kunden/detail/kundendetail.html:350
 msgid "bearbeitet"
 msgstr "modificado"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:697
+#: app/scripts/abos/detail/abosdetail.controller.js:685
 msgid "bezahlt"
 msgstr "Pagado"
 
@@ -3749,8 +3707,8 @@ msgstr "Pagado"
 msgid "bis"
 msgstr "hasta"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:79
-#: app/scripts/kunden/detail/kundendetail.html:611
+#: app/scripts/kunden/detail/kundendetail.controller.js:74
+#: app/scripts/kunden/detail/kundendetail.html:522
 msgid "erstellen"
 msgstr "crear"
 
@@ -3758,27 +3716,27 @@ msgstr "crear"
 msgid "fehlerhaft"
 msgstr "incorrecto"
 
-#: app/scripts/app.js:170
+#: app/scripts/app.js:169
 msgid "gr"
-msgstr ""
+msgstr "gr"
 
-#: app/scripts/app.js:174
+#: app/scripts/app.js:173
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:153
 msgid "kunde"
-msgstr "abonad@"
+msgstr "abonado"
 
-#: app/scripts/app.js:176
+#: app/scripts/app.js:175
 msgid "l"
-msgstr ""
+msgstr "l"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:40
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:41
 msgid "max."
-msgstr ""
+msgstr "max."
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:290
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:288
 msgid "pain.008.001.07 erstellen"
 msgstr "Crear SEPA PAIN.008.001.07"
 
@@ -3786,7 +3744,7 @@ msgstr "Crear SEPA PAIN.008.001.07"
 msgid "pendente"
 msgstr "pendiente"
 
-#: app/scripts/personen/overview/personenoverview.controller.js:168
+#: app/scripts/personen/overview/personenoverview.controller.js:171
 msgid "person"
 msgstr "persona"
 
@@ -3798,30 +3756,26 @@ msgstr "por"
 msgid "pro Lieferung"
 msgstr "por entrega"
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:279
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:277
 msgid "rechnung"
 msgstr "factura"
 
 #: app/scripts/auslieferungen/detail/auslieferungdetail.controller.js:68
-#: app/scripts/kunden/detail/kundendetail.controller.js:77
+#: app/scripts/kunden/detail/kundendetail.controller.js:72
 msgid "speichern"
 msgstr "guardar"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:699
+#: app/scripts/abos/detail/abosdetail.controller.js:687
 msgid "total"
-msgstr ""
+msgstr "total"
 
-#: app/scripts/abos/detail/abosdetail.controller.js:698
+#: app/scripts/abos/detail/abosdetail.controller.js:686
 msgid "verrechnet"
 msgstr "facturado"
 
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:62
 msgid "von"
 msgstr "de"
-
-#: app/scripts/kunden/detail/kundendetail.html:204
-msgid "zurücksetzen"
-msgstr "restablecer"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:64
 msgid "{{batchCreated.openAboIds.length}} Rechnungspositionen mit Fehlern"
