@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-08-22 15:38\n"
+"PO-Revision-Date: 2022-08-23 11:37\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/depots/detail/depotsdetail.html:145
@@ -36,7 +36,7 @@ msgstr "Nº"
 
 #: app/scripts/abotypen/overview/abotypen.html:35
 msgid "# Abonnenten"
-msgstr "Abonados"
+msgstr "Abonad@s"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:36
 #: app/scripts/depots/overview/depotsoverview.html:47
@@ -188,7 +188,7 @@ msgstr "Mostrar la lista de abonos"
 #: app/scripts/abos/overview/abosoverview.html:44
 #: app/scripts/abos/overview/zusatzabosoverview.html:42
 msgid "Abonnentin"
-msgstr "Abonado"
+msgstr "Abonad@"
 
 #: app/index.html:88
 #: app/scripts/abos/overview/abosoverview.html:6
@@ -1753,31 +1753,31 @@ msgstr "Número de cliente"
 #: app/scripts/kunden/overview/kundenoverview.html:10
 #: app/scripts/personen/overview/personenoverview.html:10
 msgid "Kunde erstellen"
-msgstr "Crear abonado"
+msgstr "Crear abonad@"
 
 #: app/scripts/kunden/detail/kundendetail.html:256
 #: app/scripts/kunden/detail/kundendetail.html:350
 msgid "Kunde erstellt"
-msgstr "Abonado creado"
+msgstr "Abonad@ cread@"
 
 #: app/scripts/kunden/detail/kundendetail.html:13
 #: app/scripts/rechnungen/detail/rechnungendetail.html:50
 msgid "Kunde suchen..."
-msgstr "Buscar abonado..."
+msgstr "Buscar abonad@..."
 
 #: app/index.html:86
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
-msgstr "Abonados"
+msgstr "Abonad@s"
 
 #: app/scripts/projekt/settings/projektsettings.html:115
 msgid "Kunden E-Mail erforderlich"
-msgstr "Correo electrónico del abonado requerido"
+msgstr "Correo electrónico del abonad@ obligatorio"
 
 #: app/scripts/personen/overview/personenoverview.html:73
 msgid "Kundenbemerkungen"
-msgstr "Comentarios de los abonados"
+msgstr "Comentarios de l@s abonad@s"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:125
 msgid "Kundenbrief"
@@ -1789,21 +1789,21 @@ msgstr "resumenAbonado.ODT"
 
 #: app/scripts/kunden/detail/kundendetail.html:189
 msgid "Kundendetails"
-msgstr "Detalles del abonado"
+msgstr "Detalles de abonad@"
 
 #: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:248
 msgid "Kundenliste anzeigen"
-msgstr "Mostrar la lista de abonados"
+msgstr "Mostrar la lista de abonad@s"
 
 #: app/scripts/personen/overview/personenoverview.html:60
 #: app/scripts/projekt/settings/kundentypen.html:21
 #: app/scripts/projekt/settings/kundentypen.html:24
 msgid "Kundentyp"
-msgstr "Tipo de abonado"
+msgstr "Tipo de abonad@"
 
 #: app/scripts/projekt/settings/kundentypen.html:9
 msgid "Kundentyp erstellen"
-msgstr "Crear un tipo de abonado"
+msgstr "Crear un tipo de abonad@"
 
 #: app/index.html:116
 #: app/scripts/kunden/detail/kundendetail.html:24
@@ -2960,7 +2960,7 @@ msgstr "Estilo<br>(Portal del administrador)"
 
 #: app/scripts/projekt/settings/projektsettings.html:340
 msgid "Style<br>(Kundenportal)"
-msgstr "Estilo<br>(portal del abonado)"
+msgstr "Estilo<br>(Portal de abonad@)"
 
 #: app/scripts/app.js:167
 msgid "Stück"
@@ -3035,7 +3035,7 @@ msgstr "Días"
 #: app/scripts/projekt/settings/projektsettings.html:273
 #: app/scripts/projekt/settings/projektsettings.html:276
 msgid "Teilnehmernummer"
-msgstr "Número de abonado"
+msgstr "Número de abonad@ (sólo necesario en Suiza)"
 
 #: app/scripts/depots/detail/depotsdetail.html:161
 #: app/scripts/depots/detail/depotsdetail.html:201
@@ -3208,7 +3208,7 @@ msgstr "Mantenimiento"
 
 #: app/scripts/projekt/settings/projektsettings.html:224
 msgid "Unterhaltsmodus (Login auf Kundenportal blockiert)"
-msgstr "Modo mantenimiento (inicio de sesión en el portal de abonado bloqueado)"
+msgstr "Modo mantenimiento (inicio de sesión en el portal de abonad@ bloqueado)"
 
 #: app/scripts/journal/overview/journaloverview.html:34
 msgid "User"
@@ -3351,7 +3351,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre\n"
 " {{person.name}} Apellidos {{person.rolle}} Rol \n"
 " \n"
-" {{person.kundeId}} Nº de abonado"
+" {{person.kundeId}} Nº de abonad@"
 
 #: app/scripts/abos/overview/abosoverview.controller.js:290
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:310
@@ -3370,9 +3370,9 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{abo.abotypName}} Nombre de tipo de abono \n"
-" {{abo.kunde}} Abonado \n"
+" {{abo.kunde}} Abonad@\n"
 " {{abo.start}} Fecha de inicio de abono \n"
 " {{abo.ende}} Fecha de finalización de abono"
 
@@ -3392,10 +3392,10 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.anrede}} Formula de cortesía \n"
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
-" {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
-" {{abotyp.name}} Nombre del tipo de abono \n"
-" {{abotyp.beschreibung}} Descripción del tipo de abono \n"
+" {{person.rolle}} Rol\n"
+" {{person.kundeId}} Nº de abonad@\n"
+" {{abotyp.name}} Nombre del tipo de abono\n"
+" {{abotyp.beschreibung}} Descripción del tipo de subscripción \n"
 " {{abotyp.preis}} Precio \n"
 " {{abotyp.preiseinheit}} Precio por unidad \n"
 " {{abotyp.laufzeiteinheit}} Unidad"
@@ -3417,7 +3417,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre\n"
 " {{person.name}} Apellido \n"
 " {{person.rolle}} Rol de la persona \n"
-" {{person.kundeId}} Id del abonado \n"
+" {{person.kundeId}} Id de abonad@\n"
 " {{depot.name}} nombre del punto de recogida \n"
 " {{depot.kurzzeichen}} \n"
 " {{depot.plz}} Dirección del punto de recogida \n"
@@ -3441,9 +3441,9 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Número de abonado \n"
-" {{kunde.bezeichnung}} Descripción de abonado \n"
-" {{kunde.strasse}} Calle de abonado \n"
+" {{person.kundeId}} Número de abonad@\n"
+" {{kunde.bezeichnung}} Descripción de abonad@ \n"
+" {{kunde.strasse}} Calle de abonad@\n"
 " {{kunde.hausNummer}} Número de calle \n"
 " {{kunde.plz}} Código postal \n"
 " {{kunde.ort}} Municipio"
@@ -3469,7 +3469,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{rechnung.titel}} Título de factura \n"
 " {{rechnung.betrag}} Precio de factura \n"
 " {{rechnung.rechnungsDatum}} Fecha de factura \n"
@@ -3494,7 +3494,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{tour.name}} Nombre de la ronda \n"
 " {{tour.beschreibung}} Descripción de la ronda"
 
@@ -3515,7 +3515,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " {{person.vorname}} Nombre \n"
 " {{person.name}} Apellidos \n"
 " {{person.rolle}} Rol \n"
-" {{person.kundeId}} Nº de abonado \n"
+" {{person.kundeId}} Nº de abonad@\n"
 " {{zusatzabotyp.name}} Nombre del abono suplementario \n"
 " {{zusatzabotyp.beschreibung}} Descripción del abono suplementario \n"
 " {{zusatzabotyp.preis}} Precio \n"
@@ -3726,7 +3726,7 @@ msgstr "kg"
 
 #: app/scripts/kunden/overview/kundenoverview.controller.js:153
 msgid "kunde"
-msgstr "abonado"
+msgstr "abonad@"
 
 #: app/scripts/app.js:175
 msgid "l"
