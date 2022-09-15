@@ -211,7 +211,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
             'ids': $scope.checkboxes.ids,
-            'pdfMerge': 'pdfMerge'
+            'pdfMerge': 'zip'
           });
         },
         isDisabled: function() {
@@ -225,7 +225,7 @@ angular.module('openolitor-admin')
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
             'ids': $scope.checkboxes.ids,
-            'pdfMerge': 'pdfMerge'
+            'pdfMerge': 'zip'
           });
         },
         isDisabled: function() {
