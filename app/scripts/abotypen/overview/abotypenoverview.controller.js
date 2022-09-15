@@ -166,7 +166,8 @@ angular.module('openolitor-admin')
         }
         $scope.loading = true;
         $scope.entries = AbotypenOverviewModel.query({
-          f: $scope.search.filterQuery
+          f: $scope.search.filterQuery,
+          q: $scope.search.queryQuery
         }, function() {
           $scope.abosTableParams.reload();
           $scope.loading = false;

@@ -252,15 +252,15 @@ angular.module('openolitor-admin')
           return;
         }
         $scope.tableParams.reload();
-
+        
         $scope.loading = true;
         $scope.entries = KundenOverviewModel.query({
+          q: $scope.search.queryQuery,
           f: $scope.search.filterQuery
-        }, function() {
+        }, function(kunden) {
           $scope.tableParams.reload();
           $scope.loading = false;
         });
-
       }
 
       $scope.toggleShowAll = function() {
@@ -280,6 +280,5 @@ angular.module('openolitor-admin')
           .query);
         search();
       }, true);
-
     }
   ]);

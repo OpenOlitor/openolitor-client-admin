@@ -32,7 +32,7 @@ angular.module('openolitor-admin')
       };
 
       var interval = $interval(refreshLieferung, 5000);
-      var changesInLieferungen = false; 
+      var changesInLieferungen = false;
 
       var load = function() {
         LieferplanungModel.get({
@@ -786,10 +786,15 @@ angular.module('openolitor-admin')
       };
 
       $scope.sammelbestellungVersenden = function(bestellung) {
-        LieferplanungModel.sammelbestellungVersenden({
-          id: $routeParams.id,
-          bestellungId: bestellung.id
-        }, bestellung);
+        dialogService.displayDialogOkAbort(gettextCatalog.getString(
+          'Bist du sicher, dass du diese E-Mail and Produzent versenden möchtest'
+              ),
+              function() {
+                LieferplanungModel.sammelbestellungVersenden({
+                  id: $routeParams.id,
+                  bestellungId: bestellung.id
+                }, bestellung);
+              });
       };
 
       $scope.sammelbestellungenErstellen = function() {
@@ -838,7 +843,11 @@ angular.module('openolitor-admin')
           id: $routeParams.id,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search({'q': 'id=' + result.join()});
+          $location.path('/abos').search({
+            'q': 'id=' + result.join(),
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
+          });
         });
       };
 
@@ -848,7 +857,11 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search({'q': 'id=' + result.join()});
+          $location.path('/abos').search({
+            'q': 'id=' + result.join(),
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
+          });
         });
       };
 
@@ -858,7 +871,11 @@ angular.module('openolitor-admin')
           lieferungId: lieferungId,
           korbStatus: korbStatus
         }, function(result) {
-          $location.path('/abos').search({'q': 'id=' + result.join()});
+          $location.path('/abos').search({
+            'q': 'id=' + result.join(),
+            'gjDisabled': 'true',
+            'tf': '{ "abotypId":"" }'
+          });
         });
       };
 
@@ -928,7 +945,10 @@ angular.module('openolitor-admin')
           onExecute: function() {
             $scope.recalculateBestellungen(function() {
               var result = lodash.map($scope.sammelbestellungen, 'id');
-              $location.path('/einkaufsrechnungen').search({'q': 'id=' + result.join()});
+              $location.path('/einkaufsrechnungen').search({
+                'q': 'id=' + result.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         },{
@@ -941,7 +961,10 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/depotauslieferungen').search({'q': 'id=' + res.join()});
+              $location.path('/depotauslieferungen').search({
+                'q': 'id=' + res.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         },{
@@ -954,7 +977,10 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/tourauslieferungen').search({'q': 'id=' + res.join()});
+              $location.path('/tourauslieferungen').search({
+                'q': 'id=' + res.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         },{
@@ -967,7 +993,10 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(result) {
               var res = lodash.map(result, 'id');
-              $location.path('/postauslieferungen').search({'q': 'id=' + res.join()});
+              $location.path('/postauslieferungen').search({
+                'q': 'id=' + res.join(),
+                'gjDisabled': 'true'
+              });
             });
           }
         }];
@@ -1042,3 +1071,4 @@ angular.module('openolitor-admin')
       load();
     }
   ]);
+

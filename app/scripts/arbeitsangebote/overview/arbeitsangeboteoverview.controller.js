@@ -269,7 +269,7 @@ angular
         $scope.loading = true;
         $scope.entries = ArbeitsangeboteModel.query(
           {
-            q: $scope.query
+            q: $scope.search.queryQuery
           },
           function() {
             $scope.tableParams.reload();

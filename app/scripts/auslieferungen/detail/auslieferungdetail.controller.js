@@ -7,10 +7,10 @@ angular.module('openolitor-admin')
     '$route', '$routeParams',
     'DepotAuslieferungenModel', 'TourAuslieferungenModel',
     'PostAuslieferungenModel', 'KundenOverviewModel', 'DetailNavigationService', 'NgTableParams', 'AUSLIEFERUNGSTATUS', 'msgBus', 'DataUtil',
-    'ReportvorlagenService', 'localeSensitiveComparator', 'gettext','$location',
+    'ReportvorlagenService', 'localeSensitiveComparator', 'gettext','$location', 'FilterQueryUtil','lodash',
     function($q, $scope, $rootScope, $filter, $route, $routeParams, DepotAuslieferungenModel,
       TourAuslieferungenModel, PostAuslieferungenModel, KundenOverviewModel, DetailNavigationService, NgTableParams,
-      AUSLIEFERUNGSTATUS, msgBus, DataUtil, ReportvorlagenService, localeSensitiveComparator, gettext, $location) {
+      AUSLIEFERUNGSTATUS, msgBus, DataUtil, ReportvorlagenService, localeSensitiveComparator, gettext, $location, FilterQueryUtil, lodash) {
       $rootScope.viewId = 'D-Aus';
 
       $scope.loading = false;
@@ -129,11 +129,15 @@ angular.module('openolitor-admin')
             var filteredData = $filter('filter')($scope.model.koerbe,
               $scope
               .search.query);
-            var orderedData = $filter('filter')(filteredData, params.filter());
-            orderedData = params.sorting ?
-              $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
-              orderedData;
 
+            var orderedData = filteredData; 
+            
+            if ($scope.modelType !== 'Tour'){
+              var orderedData = $filter('filter')(filteredData, params.filter());
+              orderedData = params.sorting ?
+                $filter('orderBy')(orderedData, params.orderBy(), false, localeSensitiveComparator) :
+                orderedData;
+            }
             params.total(orderedData.length);
             return orderedData.slice((params.page() - 1) * params.count(),
               params.page() * params.count());
@@ -199,6 +203,14 @@ angular.module('openolitor-admin')
       $scope.unselectAboFunct = function() {
         return $scope.unselectAbo;
       };
+
+      function search() {
+        $scope.tableParams.reload();
+      }
+
+      $scope.$watch('search.query', function() {
+        search();
+      }, true);
 
       msgBus.onMsg('EntityModified', $scope, function(event, msg) {
         if (msg.entity.indexOf('Auslieferung') >= 0 && $scope.model.id === msg.data.id) {
