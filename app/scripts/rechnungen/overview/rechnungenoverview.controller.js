@@ -210,7 +210,8 @@ angular.module('openolitor-admin')
         iconClass: 'fa fa-download',
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadrechnungen', {
-            'ids': $scope.checkboxes.ids
+            'ids': $scope.checkboxes.ids,
+            'pdfMerge': 'pdfMerge'
           });
         },
         isDisabled: function() {
@@ -223,7 +224,8 @@ angular.module('openolitor-admin')
         iconClass: 'fa fa-download',
         onExecute: function() {
           return FileUtil.downloadPost('rechnungen/aktionen/downloadmahnungen', {
-            'ids': $scope.checkboxes.ids
+            'ids': $scope.checkboxes.ids,
+            'pdfMerge': 'pdfMerge'
           });
         },
         isDisabled: function() {
