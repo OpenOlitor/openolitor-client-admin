@@ -30,6 +30,7 @@ angular.module('openolitor-admin')
           page: 1,
           count: 10,
           sorting: {
+            journalVersion: 'desc',
             sequenceNr: 'desc'
           },
           filter: {
