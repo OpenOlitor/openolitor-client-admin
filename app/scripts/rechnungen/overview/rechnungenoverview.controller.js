@@ -394,7 +394,7 @@ angular.module('openolitor-admin')
         $scope.loading = true;
         $scope.entries = RechnungenOverviewModel.query({
           f: $scope.search.filterQuery,
-          g: $scope.geschaeftsjahr,
+          g: /^\d+$/.test($scope.geschaeftsjahr)?$scope.geschaeftsjahr:'',
           q: $scope.search.queryQuery
         }, function() {
           $scope.tableParams.reload();
