@@ -21,7 +21,6 @@ angular.module('openolitor-admin')
       $scope.filteredEntries = [];
       $scope.loading = false;
       $scope.model = {};
-      $scope.initGJ = false;
 
       function getFullName(item, index) {
           if (index === 0){
@@ -381,13 +380,12 @@ angular.module('openolitor-admin')
         } else {
           $scope.geschaeftsjahr = undefined;
         }
-        $scope.initGJ = true;
         search();
         return false;
       }
 
       function search() {
-        if ($scope.loading || !$scope.initGJ) {
+        if ($scope.loading) {
           return;
         }
 
