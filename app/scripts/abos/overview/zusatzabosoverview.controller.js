@@ -361,7 +361,7 @@ angular.module('openolitor-admin').controller('ZusatzabosOverviewController', [
           f: $scope.search.filterQuery,
           q: $scope.search.queryQuery,
           x: $scope.search.complexFlags,
-          g: $scope.geschaeftsjahr
+          g: /^\d+$/.test($scope.geschaeftsjahr)?$scope.geschaeftsjahr:''
         },
         function(entries) {
           $scope.entries = entries;
