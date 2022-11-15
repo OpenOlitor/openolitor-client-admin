@@ -55,7 +55,7 @@
       </div>
     </form>
   </div>
-  <div class="panel-footer" ng-if="rechnungsPositionen.length !== numberOfOpenRechnungPositionen(rechnungsPositionen)">
+  <div class="panel-footer" ng-if="!commandIssued && rechnungsPositionen.length !== numberOfOpenRechnungPositionen(rechnungsPositionen)">
       {{rechnungsPositionen.length - numberOfOpenRechnungPositionen(rechnungsPositionen)}} <span translate> Rechnungspositionen sind nicht im Status 'Offen' und können daher nicht einer Rechnung zugewiesen werden.</span>
   </div>
   <div class="panel-footer" ng-if="commandIssued">

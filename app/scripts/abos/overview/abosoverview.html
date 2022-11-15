@@ -36,7 +36,7 @@
                 <a ng-click="selectAbo(abo, 'selectedRow_' + abo.id)">{{abo.id}}&nbsp;<i class="fa fa-chevron-right"></i></a>
               </td>
               <td data-title="'Abotyp'|translate" sortable="'abotypName'" filter="{abotypId: 'select'}" filter-data="abotypL">
-                {{abo.abotypName}} &nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/abotypen/{{abo.abotypId}}"><i class="glyphicon glyphicon-new-window"></i></a>
+                {{abo.abotypName}} &nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/abotypen/{{abo.abotypId}}"><i class="glyphicon small glyphicon-new-window"></i></a>
                 &nbsp;
                 <span ng-if="abo.zusatzAboIds.length > 0">
                   <span ng-repeat="(name, occ) in abo.zusatzAbotypNames | countOcc " class="badge">
@@ -45,7 +45,7 @@
                 </span>
               </td>
               <td data-title="'Abonnentin'|translate" sortable="'kunde'">
-                {{abo.kunde}} &nbsp;<a target="_blank" rel="noopener noreferrer" ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}"><i class="glyphicon glyphicon-new-window"></i></a>
+                {{abo.kunde}} &nbsp;<a target="_blank" rel="noopener noreferrer" ng-click="navigateToKunde(abo.kundeId)" ng-href="#/kunden/{{abo.kundeId}}"><i class="glyphicon small glyphicon-new-window"></i></a>
               </td>
               <td data-title="'Start'|translate" sortable="'start'">
                 {{abo.start | date:'dd.MM.yyyy'}}
@@ -61,8 +61,8 @@
                  {{abo.abotypName}} / {{abo.vertriebBeschrieb}}
               </td>
               <td data-title="'Depot/Tour'|translate" sortable="'depotTourSortBy'" filter="{depotTourId: 'select'}" filter-data="depotTourL">
-                <div ng-if="abo.depotId">{{abo.depotName}}&nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/depots/{{abo.depotId}}"><i class="glyphicon glyphicon-new-window"></i></a></div>
-                <div ng-if="abo.tourId">{{abo.tourName}}&nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/touren/{{abo.tourId}}"><i class="glyphicon glyphicon-new-window"></i></a></div>
+                <div ng-if="abo.depotId">{{abo.depotName}}&nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/depots/{{abo.depotId}}"><i class="glyphicon small glyphicon-new-window"></i></a></div>
+                <div ng-if="abo.tourId">{{abo.tourName}}&nbsp; <a target="_blank" rel="noopener noreferrer" ng-href="#/touren/{{abo.tourId}}"><i class="glyphicon small glyphicon-new-window"></i></a></div>
               </td>
 
               <td ng-if="showAll" data-title="'# Abw.'|translate">
