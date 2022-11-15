@@ -46,7 +46,7 @@ angular.module('openolitor-admin')
         uiDatetimePickerConfig.buttonBar.date.text = gettextCatalog.getString(dateTimePickerValues.date);
         uiDatetimePickerConfig.buttonBar.time.text = gettextCatalog.getString(dateTimePickerValues.time);
         uiDatetimePickerConfig.buttonBar.cancel.text = gettextCatalog.getString(dateTimePickerValues.cancel);
-      }
+      };
 
       $scope.connected = false;
       $scope.showConnectionErrorMessage = false;
@@ -220,7 +220,7 @@ angular.module('openolitor-admin')
         }
       };
 
-      $rootScope.$on('$routeChangeStart', function (event, next, prev) {
+      $rootScope.$on('$routeChangeStart', function () { // event, next, prev) {
         alertService.clearAll();
       });
 
