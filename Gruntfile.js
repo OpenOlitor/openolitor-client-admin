@@ -21,7 +21,6 @@ module.exports = function(grunt) {
     env = grunt.option('env');
   }
 
-  // text replace in js files used for environment specific configurations
   var config = {
     BUILD_NR: grunt.option('buildnr') || 'dev',
   };
@@ -38,32 +37,34 @@ module.exports = function(grunt) {
     // task used to replace config values in js files
     replace: {
       options: {
-        patterns: [
-          {
-            json: config
-          }
-        ]
+        patterns: [{
+          json: config
+        }]
       },
       dev: {
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['<%= openolitor.app %>/scripts/app.js'],
-            dest: '.tmp/scripts'
-          }
-        ]
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['<%= openolitor.app %>/scripts/app.js'],
+          dest: '.tmp/scripts'
+        }]
       },
       prod: {
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['.tmp/concat/scripts/scripts.js'],
-            dest: '.tmp/concat/scripts'
-          }
-        ]
-      }
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['.tmp/concat/scripts/scripts.js'],
+          dest: '.tmp/concat/scripts'
+        }]
+      },
+      index: {
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['<%= openolitor.dist %>/index.html'],
+          dest: '<%= openolitor.dist %>'
+        }]
+      },
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -184,17 +185,15 @@ module.exports = function(grunt) {
     // Empties folders to start fresh
     clean: {
       dist: {
-        files: [
-          {
-            dot: true,
-            src: [
-              '.tmp',
-              '<%= openolitor.dist %>/*',
-              '!<%= openolitor.dist %>/.git*',
-              '!<%= openolitor.dist %>/index.php'
-            ]
-          }
-        ]
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= openolitor.dist %>/*',
+            '!<%= openolitor.dist %>/.git*',
+            '!<%= openolitor.dist %>/index.php'
+          ]
+        }]
       },
       server: '.tmp'
     },
@@ -205,14 +204,12 @@ module.exports = function(grunt) {
         browsers: ['last 1 version']
       },
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '.tmp/styles/',
-            src: '**/*.css',
-            dest: '.tmp/styles/'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '.tmp/styles/',
+          src: '**/*.css',
+          dest: '.tmp/styles/'
+        }]
       }
     },
 
@@ -240,26 +237,22 @@ module.exports = function(grunt) {
         includePaths: ['app/bower_components']
       },
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= openolitor.app %>/styles',
-            src: ['*.scss'],
-            dest: '.tmp/styles',
-            ext: '.css'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= openolitor.app %>/styles',
+          src: ['*.scss'],
+          dest: '.tmp/styles',
+          ext: '.css'
+        }]
       },
       server: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= openolitor.app %>/styles',
-            src: ['*.scss'],
-            dest: '.tmp/styles',
-            ext: '.css'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= openolitor.app %>/styles',
+          src: ['*.scss'],
+          dest: '.tmp/styles',
+          ext: '.css'
+        }]
       }
     },
 
@@ -320,27 +313,23 @@ module.exports = function(grunt) {
 
     imagemin: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= openolitor.app %>/images',
-            src: '**/*.{jpg,jpeg,gif}', // png doesn't work on buildserver
-            dest: '<%= openolitor.dist %>/images'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= openolitor.app %>/images',
+          src: '**/*.{jpg,jpeg,gif}', // png doesn't work on buildserver
+          dest: '<%= openolitor.dist %>/images'
+        }]
       }
     },
 
     svgmin: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= openolitor.app %>/images',
-            src: '{,*/}*.svg',
-            dest: '<%= openolitor.dist %>/images'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= openolitor.app %>/images',
+          src: '{,*/}*.svg',
+          dest: '<%= openolitor.dist %>/images'
+        }]
       }
     },
 
@@ -353,14 +342,12 @@ module.exports = function(grunt) {
           removeCommentsFromCDATA: true,
           removeOptionalTags: true
         },
-        files: [
-          {
-            expand: true,
-            cwd: '<%= openolitor.dist %>',
-            src: ['*.html', 'scripts/**/*.html'],
-            dest: '<%= openolitor.dist %>'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= openolitor.dist %>',
+          src: ['*.html', 'scripts/**/*.html'],
+          dest: '<%= openolitor.dist %>'
+        }]
       }
     },
 
@@ -369,22 +356,19 @@ module.exports = function(grunt) {
     // things like resolve or inject so those have to be done manually.
     ngAnnotate: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '.tmp/concat/scripts',
-            src: '*.js',
-            dest: '.tmp/concat/scripts'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/scripts',
+          src: '*.js',
+          dest: '.tmp/concat/scripts'
+        }]
       }
     },
 
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [
-          {
+        files: [{
             expand: true,
             dot: true,
             cwd: '<%= openolitor.app %>',
@@ -395,7 +379,6 @@ module.exports = function(grunt) {
               '*.html',
               'scripts/**/*.html',
               'images/**/*.{webp,png,jpg}',
-              'third_party/**',
               'fonts/**/*'
             ]
           },
@@ -470,8 +453,7 @@ module.exports = function(grunt) {
           outputFile: 'test/test-results.xml'
         },
         coverageReporter: {
-          reporters: [
-            {
+          reporters: [{
               type: 'lcov',
               dir: 'test/coverage/reports'
             },
@@ -586,6 +568,7 @@ module.exports = function(grunt) {
     'rev',
     'usemin',
     'htmlmin',
+    'replace:index'
   ]);
 
   grunt.registerTask('i18nextract', ['nggettext_extract']);
