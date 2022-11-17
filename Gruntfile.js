@@ -379,6 +379,7 @@ module.exports = function(grunt) {
               '*.html',
               'scripts/**/*.html',
               'images/**/*.{webp,png,jpg}',
+              'third_party/**',
               'fonts/**/*'
             ]
           },
