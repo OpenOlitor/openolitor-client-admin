@@ -6,7 +6,7 @@ on:
 
 jobs:
   call-workflow-build:
-    uses: OpenOlitor/openolitor-client-admin/.github/workflows/grunt-build.yml@fix/deps_node16
+    uses: OpenOlitor/openolitor-client-admin/.github/workflows/grunt-build.yml@fix/deps_node
   docker:
     name: Build Docker Image ($Version and latest)
     needs: call-workflow-build
