@@ -1,7 +1,7 @@
 {
   "name": "openolitor-admin",
   "version": "2.6.4",
-  "description": "OpenOlitor Client Webapplication",
+  "description": "OpenOlitor Client Webapplication - Admin-Portal",
   "repository": {
     "type": "git",
     "url": "git://github.com/OpenOlitor/openolitor-client-admin.git"
@@ -9,13 +9,14 @@
   "license": "GPL-3.0",
   "dependencies": {
     "angular-dynamic-locale": "^0.1.37",
-    "bower": "1.8.14",
-    "bower-npm-resolver": "^0.11.0",
     "file-saver": "^2.0.5",
     "openolitor-core": "https://github.com/OpenOlitor/openolitor-client-core.git#2.8.2",
     "pako": "^1.0.10"
   },
   "devDependencies": {
+    "bower": "1.8.14",
+    "bower-npm-resolver": "^0.11.0",
+    "browserslist": "^4.21.4",
     "grunt": "^1.5.3",
     "grunt-angular-gettext": "^2.5.0",
     "grunt-angular-templates": "^1.2.0",
@@ -32,7 +33,7 @@
     "grunt-contrib-imagemin": "^3.1.0",
     "grunt-contrib-jshint": "^3.2.0",
     "grunt-contrib-symlink": "^1.0.0",
-    "grunt-contrib-uglify": "^5.0.0",
+    "grunt-contrib-uglify": "^5.0.1",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-filerev": "^2.3.1",
     "grunt-istanbul": "^0.8.0",
@@ -48,16 +49,16 @@
     "http-server": "^0.12.3",
     "jasmine-core": "^2.6.4",
     "jshint-stylish": "^2.2.1",
-    "karma": "^6.3.16",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.1.0",
-    "karma-junit-reporter": "^1.2.0",
+    "karma": "^6.4.1",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-coverage": "^2.2.0",
+    "karma-jasmine": "^5.1.0",
+    "karma-junit-reporter": "^2.0.1",
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "load-grunt-tasks": "^3.5.2",
+    "load-grunt-tasks": "^5.1.0",
     "node-sass": "^8.0.0",
-    "phantomjs-prebuilt": "^2.1.14",
+    "phantomjs-prebuilt": "^2.1.16",
     "serve-static": "^1.15.0",
     "shelljs": "^0.8.5",
     "time-grunt": "^1.4.0"

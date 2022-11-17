@@ -1,0 +1,8 @@
+name: Build Webapp on Push
+
+on:
+  push:
+
+jobs:
+  call-workflow-build:
+    uses: OpenOlitor/openolitor-client-admin/.github/workflows/grunt-build.yml@fix/deps_node
