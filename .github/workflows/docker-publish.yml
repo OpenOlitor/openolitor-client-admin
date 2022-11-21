@@ -5,53 +5,19 @@ on:
     types: [released]
 
 jobs:
-  build:
-    name: Build Webapp using npm/bower
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Fix up git URLs
-      run: echo -e '[url "https://github.com/"]\n  insteadOf = "git://github.com/"' >> ~/.gitconfig
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    # https://help.github.com/en/actions/configuring-and-managing-workflows/caching-dependencies-to-speed-up-workflows
-    - name: Cache node modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-    - name: Fetch bower
-      run: npm install -g bower grunt-cli
-    - name: npm ci
-      run: npm ci
-    - name: bower install
-      run: bower install --allow-root
-    - name: Run Build
-      run: buildDate=`date +%Y%m%d` && grunt build --buildnr=$buildDate
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: client-admin-dist
-        path: dist
+  call-workflow-build:
+    uses: OpenOlitor/openolitor-client-admin/.github/workflows/grunt-build.yml@fix/deps_node
   docker:
-    name: Build Docker Image
-    needs: build
+    name: Build Docker Image ($Version and latest)
+    needs: call-workflow-build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Download build artifact
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v3
       with:
         name: client-admin-dist
+        path: client-admin-dist/
     - name: Set env
       run: echo VERSION=$(node -p "require('./package.json').version") >> $GITHUB_ENV
     - name: Docker Login
