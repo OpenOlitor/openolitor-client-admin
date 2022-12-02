@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6">
           <p class="input-group">
-            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="bestellungenAbrechnen.datum" is-open="open.abrechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" required/>
+            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="bestellungenAbrechnen.datum" is-open="open.abrechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" required/>
             <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'abrechnungsDatum')"><i class="fa fa-calendar"></i></button>
           </span>

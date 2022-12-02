@@ -15,7 +15,7 @@
       <span class="col-md-2"><label for="start" class="form-label" translate>Von</label></span>
       <span class="col-md-5">
         <p class="input-group">
-        <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="von" is-open="open.von" enable-time="false" max-date="bis" min-date="initVon" />
+        <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="von" is-open="open.von" enable-time="false" max-date="bis" min-date="initVon" />
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'von')"><i class="fa fa-calendar"></i></button>
         </span>
@@ -26,7 +26,7 @@
       <span class="col-md-offset-4 col-md-2"><label for="end" class="form-label" translate>Bis</label></span>
       <span class="col-md-5">
         <p class="input-group">
-        <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="bis" is-open="open.bis" enable-time="false" min-date="von" />
+        <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="bis" is-open="open.bis" enable-time="false" min-date="von" />
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'bis')"><i class="fa fa-calendar"></i></button>
         </span>
@@ -39,7 +39,7 @@
       <span class="col-md-offset-3 col-md-3"><label for="end" class="form-label" translate>Datum wählen</label></span>
       <span  class="col-md-6">
         <p  class="input-group">
-        <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="irregular" is-open="open.irregular" enable-time="false"/>
+        <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="irregular" is-open="open.irregular" enable-time="false"/>
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'irregular')"><i class="fa fa-calendar"></i></button>
         </span>

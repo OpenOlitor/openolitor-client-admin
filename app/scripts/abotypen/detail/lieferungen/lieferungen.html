@@ -25,7 +25,7 @@
               <form class="form" name="formCreateLieferung">
                 <div class="form-group">
                     <p class="input-group">
-                        <input type="text" name="datum" class="form-control input-date" date-disabled="datumExistiert(date)" datetime-picker="dd.MM.yyyy" placeholder="{{'Lieferdatum'|translate}}" ng-model="template.datum" is-open="open.lieferdat" enable-time="false" min-date="now" required/>
+                        <input type="text" name="datum" class="form-control input-date" date-disabled="datumExistiert(date)" localdate datetime-picker="dd.MM.yyyy" placeholder="{{'Lieferdatum'|translate}}" ng-model="template.datum" is-open="open.lieferdat" enable-time="false" min-date="now" required/>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'lieferdat')"><i class="fa fa-calendar"></i></button>
                         </span>
