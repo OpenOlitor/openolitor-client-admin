@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-4">
           <p class="input-group">
-            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnungen.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnungen.rechnungsDatum" required/>
+            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="rechnungen.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnungen.rechnungsDatum" required/>
             <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'rechnungsDatum')"><i class="fa fa-calendar"></i></button>
           </span>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-4">
           <p class="input-group">
-            <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnungen.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnungen.faelligkeitsDatum" required/>
+            <input type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="rechnungen.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnungen.faelligkeitsDatum" required/>
             <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'faelligkeitsDatum')"><i class="fa fa-calendar"></i></button>
           </span>

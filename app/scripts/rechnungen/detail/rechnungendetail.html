@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input ng-disabled="isExisting()" type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" />
+                    <input ng-disabled="isExisting()" type="text" class="form-control input-date" localdate  ng-model="rechnung.rechnungsDatum" is-open="open.rechnungsDatum" enable-time="false" max-date="rechnung.rechnungsDatum" />
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'rechnungsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input ng-disabled="isExisting()" type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnung.faelligkeitsDatum" />
+                    <input ng-disabled="isExisting()" type="text" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="rechnung.faelligkeitsDatum" is-open="open.faelligkeitsDatum" enable-time="false" max-date="rechnung.faelligkeitsDatum" />
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'faelligkeitsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="col-md-4">
                   <p class="input-group">
-                    <input type="text" ng-required="isVerschickt()" class="form-control input-date" datetime-picker="dd.MM.yyyy" ng-model="rechnung.eingangsDatum" is-open="open.eingangsDatum" enable-time="false" max-date="rechnung.eingangsDatum" />
+                    <input type="text" ng-required="isVerschickt()" class="form-control input-date" localdate datetime-picker="dd.MM.yyyy" ng-model="rechnung.eingangsDatum" is-open="open.eingangsDatum" enable-time="false" max-date="rechnung.eingangsDatum" />
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'eingangsDatum')"><i class="fa fa-calendar"></i></button>
                   </span>
