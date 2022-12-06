@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="panel-body" ng-repeat="lieferung in bestellung.lieferungen | toArray | orderBy: 'produktBeschrieb'">
-              <span translate>Lieferung vom</span> {{lieferung.datum | date}}
+              <span translate>Lieferung vom</span> {{lieferung.datum | date:'dd.MM.yyyy'}}
               <table class="table table-striped table-lieferplanung">
                 <thead>
                   <tr>

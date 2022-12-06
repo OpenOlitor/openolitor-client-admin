@@ -101,7 +101,7 @@
               </div>
             </span>
             <span class="pull-right">
-              <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCurrency:true}}</span></b> | </span>{{abotypLieferung.datum | date}}</small>
+              <small class="lieferplanung"><span ng-show="projekt.preiseSichtbar"><b><span title="{{getDurchschnittspreisInfo(abotypLieferung)}}">Ø {{getDurchschnittspreis(abotypLieferung)|ooCurrency:true}}</span></b> | </span>{{abotypLieferung.datum | date:'dd.MM.yyyy'}}</small>
               <span ng-show="valuesEditable()" class="btn btn-default btn-sm" oo-draggable="true" oo-draged-type="'korb'"><span class="fa fa-files-o"></span></span>
               <oo-delete-button model="abotypLieferung" ng-if="abotypLieferung.abotyp.typ !== 'ZusatzAbotyp'" entity="Lieferung" ng-show="valuesEditable()" on-delete="removeAbotypFromPlanung" button-class="btn-default" confirm="true" condensed="true" confirm-message="{{'Die Löschung wird sofort wirksam. Soll der Löschvorgang fortgesetzt werden' | translate}}"></oo-delete-button>
               <div ng-if="abotypLieferung.abotyp.typ === 'ZusatzAbotyp'" translate> Zusatzabo</div>

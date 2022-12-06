@@ -634,16 +634,16 @@
                 {{rechnung.betrag | ooCurrency:true}}
               </td>
               <td>
-                {{rechnung.rechnungsDatum | date}}
+                {{rechnung.rechnungsDatum | date:'dd.MM.yyyy'}}
               </td>
               <td>
-                {{rechnung.faelligkeitsDatum | date}}
+                {{rechnung.faelligkeitsDatum | date:'dd.MM.yyyy'}}
               </td>
               <td>
                 {{rechnung.status | translate}}
               </td>
               <td>
-                {{rechnung.eingangsDatum | date}}
+                {{rechnung.eingangsDatum | date:'dd.MM.yyyy'}}
               </td>
             </tr>
           </table>
