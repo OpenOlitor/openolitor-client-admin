@@ -53,7 +53,7 @@
                   <label for="erstelldat" translate>Importiert am</label>
                 </div>
                 <div class="col-md-10">
-                  <span>{{zahlungsImport.erstelldat | date}}</span>
+                  <span>{{zahlungsImport.erstelldat | date:'dd.MM.yyyy'}}</span>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
                     {{zahlungsEingang.referenzNummer}}
                   </td>
                   <td>
-                    {{zahlungsEingang.gutschriftsDatum | date}}
+                    {{zahlungsEingang.gutschriftsDatum | date:'dd.MM.yyyy'}}
                   </td>
                   <td>
                     {{zahlungsEingang.status | translate}}
@@ -155,7 +155,7 @@
                     {{zahlungsEingang.referenzNummer}}
                   </td>
                   <td>
-                    {{zahlungsEingang.gutschriftsDatum | date}}
+                    {{zahlungsEingang.gutschriftsDatum | date:'dd.MM.yyyy'}}
                   </td>
                   <td>
                     {{zahlungsEingang.status | translate}}

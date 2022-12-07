@@ -148,7 +148,7 @@ angular.module('openolitor-admin')
            var result = true ;
            lieferungen.forEach(function(lieferung){
                if (lieferung.lieferung.status !== 'Offen' && lieferung.lieferung.datum >= startDate){
-                   result = false;
+                   return false;
                }
            })
            return result;
