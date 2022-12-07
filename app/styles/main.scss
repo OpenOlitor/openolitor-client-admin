@@ -319,6 +319,21 @@ textarea.ng-invalid {
    opacity: inherit;
 }
 
+.openolitor .detail-header {
+  background-color: #fff3dc;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.openolitor .sticky-detail-header {
+  position:sticky;
+  top: 51px;
+  z-index: 10;
+  background-color: #fff3dc;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
 .nonboxed-title .navbar-brand {
   margin-left: 0px !important;
   padding-top: 5px;
