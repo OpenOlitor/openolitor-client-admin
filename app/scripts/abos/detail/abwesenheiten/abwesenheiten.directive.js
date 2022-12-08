@@ -29,8 +29,9 @@ angular.module('openolitor-admin').directive('ooAboAbwesenheiten', [
           creating: 0
         };
 
-        $scope.filterIfLieferungOpen = function(item) {
+        $scope.filterIfLieferungOpenOrNeedsToBeChecked = function(item) {
           if ($scope.isLieferungOpen(item)) {return item;}
+          else if (item.bemerkung) {return item;}
           else {return '';}
         };
 
