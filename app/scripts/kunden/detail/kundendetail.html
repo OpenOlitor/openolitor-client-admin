@@ -567,7 +567,7 @@
 
               <div class="row form-group" ng-hide="pendenz.editable">
                 <div class="col-md-2">{{pendenz.datum|date:"dd.MM.yyyy"}}</div>
-                <div class="col-md-6">{{pendenz.bemerkung}}</div>
+                <div class="col-md-6" ng-bind-html="pendenz.bemerkung"></div>
                 <div class="col-md-2">{{pendenz.status}}</div>
                 <div class="col-md-2">
                   <div class="pull-right" ng-if="!pendenz.generiert">
