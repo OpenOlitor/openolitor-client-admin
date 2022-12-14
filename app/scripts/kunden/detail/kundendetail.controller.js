@@ -6,19 +6,17 @@ angular.module('openolitor-admin')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
-    'PendenzDetailModel', 'KundenOverviewModel',
+    'PendenzDetailModel','PendenzenService', 'KundenOverviewModel',
     'KundentypenService', 'PersonCategoriesService' ,'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'PAYMENT_TYPES', 'ABOTYPEN', 'appConfig',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'dialogService', 'gettextCatalog', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
-      KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
+      PendenzenService, KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, appConfig,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, dialogService, gettextCatalog, EmailUtil) {
       $rootScope.viewId = 'D-Kun';
 
-      var regexAbo = /Abo Nr.: \d\d\d\d\d/g;
-      var regexCode = /\d\d\d\d\d/g;
       var defaults = {
         model: {
           id: undefined,
@@ -138,7 +136,7 @@ angular.module('openolitor-admin')
           });
 
           angular.forEach($scope.kunde.pendenzen, function(pendenz) {
-            pendenz.bemerkung = $scope.renderText(pendenz.bemerkung) ;
+            pendenz.bemerkung = PendenzenService.renderText(pendenz.bemerkung) ;
           });
 
           $scope.rechnungen = KundenRechnungenModel.query({
@@ -421,19 +419,6 @@ angular.module('openolitor-admin')
       $scope.updatingAbo = function(abo) {
         return abo.id && $scope.updatingAbo[
           abo.id];
-      };
-
-      $scope.renderText = function (text) {
-        if (text !== null) {
-          var foundValue = text.match(regexAbo);
-          if (foundValue) {
-            var code = text.match(regexCode);
-            var value = text.replace(foundValue, '<b><a target="_blank" href="#/abos?q=id%3D' + code + '">' + foundValue + '</a></b>')
-            return value;
-          } else {
-            return text;
-          }
-        } else return text;
       };
 
       $scope.selectAbo = function(abo, itemId) {

@@ -4,8 +4,8 @@
  */
 angular.module('openolitor-admin')
   .controller('DashboardController', ['$q', '$scope', '$rootScope', '$filter',
-    'PendenzenOverviewModel', 'LieferplanungModel', 'RechnungenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'RECHNUNGSTATUS', 'EnumUtil', 'localeSensitiveComparator', 'gettextCatalog',
-    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, LieferplanungModel, RechnungenOverviewModel,
+    'PendenzenOverviewModel', 'PendenzenService', 'LieferplanungModel', 'RechnungenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'RECHNUNGSTATUS', 'EnumUtil', 'localeSensitiveComparator', 'gettextCatalog',
+    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, PendenzenService, LieferplanungModel, RechnungenOverviewModel,
       NgTableParams, PENDENZSTATUS, RECHNUNGSTATUS, EnumUtil, localeSensitiveComparator, gettextCatalog) {
 
       $rootScope.viewId = 'S-Dshb';
@@ -56,6 +56,11 @@ angular.module('openolitor-admin')
             }
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.pendenzenEntries, $scope.pendenzen.search.query);
+            
+            angular.forEach(dataSet, function(pendenz) {
+              pendenz.bemerkung = PendenzenService.renderText(pendenz.bemerkung);
+            });
+
             // also filter by ngtable filters
             dataSet = $filter('filter')(dataSet, params.filter());
             dataSet = params.sorting ?

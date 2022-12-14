@@ -21,8 +21,7 @@
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{pendenz.datum|date:"dd.MM.yyyy"}}
               </td>
-              <td data-title="'Bemerkung'|translate" sortable="'bemerkung'">
-                {{pendenz.bemerkung}}
+              <td data-title="'Bemerkung'|translate" sortable="'bemerkung'" ng-bind-html="pendenz.bemerkung">
               </td>
               <td data-title="'Status'|translate" sortable="'status'" filter="{status: 'select'}" filter-data="statusL">
                 {{pendenz.status|translate}}
