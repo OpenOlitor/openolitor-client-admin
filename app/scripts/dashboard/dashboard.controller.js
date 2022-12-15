@@ -36,6 +36,10 @@ angular.module('openolitor-admin')
         return $scope.entries !== undefined;
       };
 
+      $scope.renderBemerkungText = function(text) {
+        return PendenzenService.renderText(text);
+      };
+
       if (!$scope.pendenzenTableParams) {
         //use default tableParams
         $scope.pendenzenTableParams = new NgTableParams({ // jshint ignore:line
@@ -56,10 +60,6 @@ angular.module('openolitor-admin')
             }
             // use build-in angular filter
             var dataSet = $filter('filter')($scope.pendenzenEntries, $scope.pendenzen.search.query);
-            
-            angular.forEach(dataSet, function(pendenz) {
-              pendenz.bemerkung = PendenzenService.renderText(pendenz.bemerkung);
-            });
 
             // also filter by ngtable filters
             dataSet = $filter('filter')(dataSet, params.filter());

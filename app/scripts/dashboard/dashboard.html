@@ -22,7 +22,7 @@
               <td data-title="'Datum'|translate" sortable="'datum'">
                 {{pendenz.datum|date:"dd.MM.yyyy"}}
               </td>
-              <td data-title="'Bemerkung'|translate" sortable="'bemerkung'" ng-bind-html="pendenz.bemerkung">
+              <td data-title="'Bemerkung'|translate" sortable="'bemerkung'" ng-bind-html="renderBemerkungText(pendenz.bemerkung)">
               </td>
               <td data-title="'Kunde'|translate">
                 <a ng-href="#/kunden/{{pendenz.kundeId}}">{{pendenz.kundeBezeichnung}}</a>
