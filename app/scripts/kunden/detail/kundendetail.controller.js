@@ -6,13 +6,13 @@ angular.module('openolitor-admin')
   .controller('KundenDetailController', ['$scope', '$rootScope', '$filter',
     '$routeParams', 'KundenDetailService',
     '$location', '$uibModal', 'gettext', 'KundenDetailModel', 'ROLLE',
-    'PendenzDetailModel', 'KundenOverviewModel',
+    'PendenzDetailModel','PendenzenService', 'KundenOverviewModel',
     'KundentypenService', 'PersonCategoriesService' ,'alertService',
     'EnumUtil', 'DataUtil', 'PENDENZSTATUS', 'ANREDE', 'PAYMENT_TYPES', 'ABOTYPEN', 'appConfig',
     'msgBus', 'lodash', 'KundenRechnungenModel', 'ooAuthService', 'dialogService', 'gettextCatalog', 'EmailUtil',
     function($scope, $rootScope, $filter, $routeParams, KundenDetailService, $location,
       $uibModal, gettext, KundenDetailModel, ROLLE, PendenzDetailModel,
-      KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
+      PendenzenService, KundenOverviewModel, KundentypenService, PersonCategoriesService, alertService, EnumUtil, DataUtil,
       PENDENZSTATUS, ANREDE, PAYMENT_TYPES, ABOTYPEN, appConfig,
       msgBus, lodash, KundenRechnungenModel, ooAuthService, dialogService, gettextCatalog, EmailUtil) {
       $rootScope.viewId = 'D-Kun';
@@ -133,6 +133,10 @@ angular.module('openolitor-admin')
 
           angular.forEach($scope.kunde.ansprechpersonen, function(person) {
             person.initRolle = person.rolle;
+          });
+
+          angular.forEach($scope.kunde.pendenzen, function(pendenz) {
+            pendenz.bemerkung = PendenzenService.renderText(pendenz.bemerkung) ;
           });
 
           $scope.rechnungen = KundenRechnungenModel.query({

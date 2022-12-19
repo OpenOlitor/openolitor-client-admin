@@ -4,10 +4,12 @@
  */
 angular.module('openolitor-admin')
   .controller('PendenzenOverviewController', ['$q', '$scope', '$rootScope', '$filter',
-    'PendenzenOverviewModel', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog', 'DetailNavigationService', 'lodash',
-    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService, lodash) {
+    'PendenzenOverviewModel','PendenzenService', 'NgTableParams', 'PENDENZSTATUS', 'localeSensitiveComparator', 'gettextCatalog', 'DetailNavigationService', 'lodash',
+    function($q, $scope, $rootScope, $filter, PendenzenOverviewModel, PendenzenService, NgTableParams, PENDENZSTATUS, localeSensitiveComparator, gettextCatalog, DetailNavigationService, lodash) {
       $rootScope.viewId = 'L-Pen';
 
+      var regexAbo = /Abo Nr.: \d\d\d\d\d|Abo Nr.:\d\d\d\d\d/g;
+      var regexCode = /\d\d\d\d\d/g;
       DetailNavigationService.cleanKundeList();
       $scope.entries = [];
       $scope.loading = false;
@@ -62,6 +64,14 @@ angular.module('openolitor-admin')
         });
       }
 
+
+      $scope.renderAllTexts = function(result) { 
+      angular.forEach(result, function(pendenz){
+            pendenz.bemerkung = PendenzenService.renderText(pendenz.bemerkung);
+            $scope.entries.push(pendenz);
+          });
+        }
+
       function search() {
         if ($scope.loading) {
           return;
@@ -69,9 +79,10 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = PendenzenOverviewModel.query({
+        PendenzenOverviewModel.query({
           q: $scope.query
-        }, function() {
+        }, function(result) {
+          $scope.renderAllTexts(result);
           $scope.tableParams.reload();
           $scope.loading = false;
         });

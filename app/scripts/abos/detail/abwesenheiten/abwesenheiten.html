@@ -28,14 +28,14 @@
             </span>
           </script>
           <table ng-table="abwesenheitenTableParams" class="table table-striped" show-filter="false" template-pagination="scripts/common/ngtable/oo-ngtable-noPaginationTemplate.html">
-            <tr ng-repeat="abw in $data | filter:(templateObject.showOnlyPending || '') && filterIfLieferungOpen | orderBy:'-datum'">
+            <tr ng-repeat="abw in $data | filter:(templateObject.showOnlyPending || '') && filterIfLieferungOpenOrNeedsToBeChecked | orderBy:'-datum'">
               <td data-title="'Datum'|translate">
                 {{abw.datum|date:"EEE, dd.MM.yyyy"}}
-                <i ng-if="abw.bemerkung"  class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{abw.bemerkung}}" tooltip-popup-close-delay="500"></i>
+                <i ng-if="abw.bemerkung" class="alert alert-warning fa fa-info-circle abscences-description" aria-hidden="true" uib-tooltip="{{abw.bemerkung}}" tooltip-popup-close-delay="500"></i>
               </td>
               <td header="'headerSwitch.html'">
-                <span  class="pull-right">
-                  <a href="" ng-if="isLieferungOpen(abw)" ng-hide="deletingAbwesenheit(abw)" ng-click="deleteAbwesenheit(abw)"><i class="glyphicon glyphicon-remove"></i></a>
+                <span  class="pull-right abwesenheit-action-button">
+                  <a href="" ng-if="abw.bemerkung || isLieferungOpen(abw)" ng-hide="deletingAbwesenheit(abw)" ng-click="deleteAbwesenheit(abw)" uib-tooltip="Remove Abscence" tooltip-popup-close-delay="500"><i class="glyphicon glyphicon-remove"></i></a>
                   <i ng-show="deletingAbwesenheit(abw)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
                 </span>
               </td>
