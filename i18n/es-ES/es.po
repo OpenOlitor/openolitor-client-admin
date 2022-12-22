@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-11-14 15:52\n"
+"PO-Revision-Date: 2022-12-22 12:07\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
@@ -91,11 +91,11 @@ msgstr "Porcentaje administrativo"
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:107
 msgid "(abz. Adminanteil)"
-msgstr "(después de deducir el porcentaje de administración de los productores)"
+msgstr "(después de deducir el porcentaje de administración de l@s productor@s)"
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:106
 msgid "(abz. Adminanteil, inkl. MWST)"
-msgstr "(después de deducir el porcentaje de administración de los productores, IVA incluido)"
+msgstr "(después de deducir el porcentaje de administración de l@s productor@s, IVA incluido)"
 
 #: app/scripts/kunden/detail/kundendetail.html:135
 #: app/scripts/produzenten/detail/produzentendetail.html:173
@@ -770,7 +770,7 @@ msgstr "Descontar el encargo"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:928
 msgid "Bestellung an alle Lieferanten versenden"
-msgstr "Enviar el encargo a los productores"
+msgstr "Enviar el encargo a l@s productor@s"
 
 #: app/scripts/lieferplanungen/detail/lieferanten.html:32
 msgid "Bestellung versenden"
@@ -2572,7 +2572,7 @@ msgstr "Categoría de productos"
 #: app/scripts/lieferplanungen/detail/korbplanung.html:70
 #: app/scripts/produzenten/detail/produzentendetail.html:9
 msgid "Produzent"
-msgstr "Productores"
+msgstr "Productor@s"
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:10
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:12
@@ -2585,11 +2585,11 @@ msgstr "Crear productor"
 #: app/scripts/produkte/overview/produkteoverview.html:70
 #: app/scripts/produzenten/overview/produzentenoverview.html:6
 msgid "Produzenten"
-msgstr "Productores"
+msgstr "Productor@s"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:19
 msgid "Produzenten-Übersicht"
-msgstr "Lista de productores"
+msgstr "Lista de productor@s"
 
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:68
 msgid "Produzentenabrechnung.odt"
@@ -2597,7 +2597,7 @@ msgstr "balanceproductor.odt"
 
 #: app/scripts/produzenten/overview/produzentenoverview.controller.js:125
 msgid "Produzentenbrief"
-msgstr "Carta a los productores"
+msgstr "Carta a l@s productor@s"
 
 #: app/scripts/produzenten/overview/produzentenoverview.html:53
 msgid "Produzentenbrief.odt"
@@ -2881,7 +2881,7 @@ msgstr "¿Seguro que desea eliminar esta persona?"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:929
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
-msgstr "¿Quieres enviar este correo a todos los productores?"
+msgstr "¿Quieres enviar este correo a tod@s l@s productor@s?"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:57
 msgid "Sonderprodukt einfügen"
@@ -3134,11 +3134,11 @@ msgstr "Total"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:61
 msgid "Total (abz. Adminanteil)"
-msgstr "Total (Deducido el porcentaje de administración a los productores)"
+msgstr "Total (Deducido el porcentaje de administración a l@s productor@s)"
 
 #: app/scripts/einkaufsrechnungen/detail/bestellung.html:60
 msgid "Total (abz. Adminanteil, inkl. MWST)"
-msgstr "Total (Deducido el porcentaje de administración a los productores, incluido IVA)"
+msgstr "Total (Deducido el porcentaje de administración a l@s productor@s, incluido IVA)"
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:12
 msgid "Total Anzahl <i>Saldo zu tief</i>:"
