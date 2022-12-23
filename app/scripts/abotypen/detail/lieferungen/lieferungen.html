@@ -56,6 +56,7 @@
               <td>
                 <a href="" ng-hide="deletingLieferung(lieferung)" ng-click="deleteLieferung(lieferung)" ng-if="!lieferung.lieferplanungId && lieferung.anzahlAbwesenheiten < 1"><i class="glyphicon glyphicon-remove"></i></a>
                 <i ng-show="deletingLieferung(lieferung)" ng-cloak class="fa fa-circle-o-notch fa-spin"></i>
+                <a target="_blank" rel="noopener noreferrer" href="" ng-click="createLinkForAbos(lieferung.id)" ng-if="lieferung.lieferplanungId || lieferung.anzahlAbwesenheiten >= 1"><i class="glyphicon small glyphicon-new-window"></i></a>
               </td>
             </tr>
           </table>

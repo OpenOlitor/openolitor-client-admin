@@ -166,6 +166,16 @@ angular.module('openolitor-admin')
         });
       }
 
+      $scope.createLinkForAbos = function(lieferungId){
+        $scope.abweisenheit = LieferungenListModel.getAbweisenheit({
+        lieferungId: lieferungId 
+        }, function(result){
+          $scope.abweisenheit = result;
+          result = lodash.map(result, 'aboId');
+          return $location.path('/abos').search('q', 'id=' + result.join()).search('tf','{"abotypId":""}');
+        });
+      }
+
       load();
 
       msgBus.onMsg('VertriebSelected', $scope, function(event, msg) {

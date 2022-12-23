@@ -9,5 +9,11 @@ angular.module('openolitor-admin')
         id: '@id',
         abotypId: '@abotypId',
         vertriebId: '@vertriebId'
-      });
+      },{
+      'getAbweisenheit': {
+        method: 'GET',
+        isArray: true,
+        url: appConfig.get().API_URL + 'abos/lieferung/:lieferungId/abweisenheit' 
+      }
+    });
   });
