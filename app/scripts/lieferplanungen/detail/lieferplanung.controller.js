@@ -553,6 +553,10 @@ angular.module('openolitor-admin')
         }
       };
 
+      function getDatumInNumericFormat(datum){
+        return datum.getDate() + datum.getMonth() + datum.getYear();
+      }
+
       $scope.recalculateBestellungen = function(callbackFunc) {
         var recalculate = function(callbackFunc) {
           $scope.sammelbestellungen = {};
@@ -581,40 +585,40 @@ angular.module('openolitor-admin')
               id: $routeParams.id
             }, function(sammelbestellungen) {
               lodash.forEach(sammelbestellungen, function(sammelbestellung) {
-                $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()] = {
+                $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)] = {
                   id: sammelbestellung.id,
                   produzentId: sammelbestellung.produzentId,
                   produzentKurzzeichen: sammelbestellung.produzentKurzzeichen,
-                  total: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()]) ?
-                    $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].total : 0) + sammelbestellung.preisTotal,
+                  total: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)]) ?
+                    $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].total : 0) + sammelbestellung.preisTotal,
                   steuer: sammelbestellung.steuer,
-                  totalSteuer: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()]) ?
-                    $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].totalSteuer : 0) + sammelbestellung.totalSteuer,
+                  totalSteuer: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)]) ?
+                    $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].totalSteuer : 0) + sammelbestellung.totalSteuer,
                   bestellungen: {}
                 };
 
                 lodash.forEach(sammelbestellung.bestellungen, function(bestellung) {
 
-                  $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente] = {
+                  $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente] = {
                     id: bestellung.id,
                     produzentId: bestellung.produzentId,
                     produzentKurzzeichen: sammelbestellung.produzentKurzzeichen,
-                    total: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente]) ?
-                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente].total : 0) + bestellung.preisTotal,
+                    total: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente].total : 0) + bestellung.preisTotal,
                     steuer: bestellung.steuer,
-                    totalSteuer: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente]) ?
-                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente].totalSteuer :
+                    totalSteuer: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente].totalSteuer :
                       0) + bestellung.totalSteuer,
                     adminProzente: bestellung.adminProzente,
-                    adminProzenteAbzug: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente]) ?
-                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente].adminProzenteAbzug :
+                    adminProzenteAbzug: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente].adminProzenteAbzug :
                       0) + bestellung.adminProzenteAbzug,
-                    totalNachAbzugAdminProzente: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente]) ?
-                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente].totalNachAbzugAdminProzente :
+                    totalNachAbzugAdminProzente: (($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente]) ?
+                      $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente].totalNachAbzugAdminProzente :
                       0) + bestellung.totalNachAbzugAdminProzente,
                     lieferungen: {}
                   };
-                  $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()].bestellungen[bestellung.adminProzente]
+                  $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)].bestellungen[bestellung.adminProzente]
                     .lieferungen[sammelbestellung.datum] = {
                       id: bestellung.id,
                       datum: sammelbestellung.datum,
@@ -628,10 +632,10 @@ angular.module('openolitor-admin')
                       totalNachAbzugAdminProzente: bestellung.totalNachAbzugAdminProzente
                     };
                     lodash.forEach(bestellung.positionen, function(bestellposition) {
-                      if(angular.isDefined($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()]
+                      if(angular.isDefined($scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)]
                         .bestellungen[bestellung.adminProzente]
                         .lieferungen[sammelbestellung.datum])) {
-                        $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + sammelbestellung.datum.getDate()]
+                        $scope.sammelbestellungen[sammelbestellung.produzentKurzzeichen + getDatumInNumericFormat(sammelbestellung.datum)]
                           .bestellungen[bestellung.adminProzente]
                           .lieferungen[sammelbestellung.datum].positionen[
                             bestellposition.produktBeschrieb +
