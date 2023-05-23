@@ -11,10 +11,11 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: French, Switzerland\n"
 "Language: fr_CH\n"
-"PO-Revision-Date: 2022-11-09 11:58\n"
+"PO-Revision-Date: 2023-05-23 07:58\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
+#: app/scripts/abotypen/detail/abotypendetail.html:29
 #: app/scripts/reports/detail/reportsdetail.html:33
 #: app/scripts/reports/detail/reportsdetail.html:36
 #: app/scripts/touren/detail/tourendetail.html:36
@@ -32,7 +33,7 @@ msgctxt "person"
 msgid "Name"
 msgstr "Nom"
 
-#: app/scripts/dashboard/dashboard.html:54
+#: app/scripts/dashboard/dashboard.html:53
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:33
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:65
@@ -174,7 +175,7 @@ msgstr "Créer un abonnement"
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
 msgstr "Créer un abonnement pour {{kunde.bezeichnung}}"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:456
+#: app/scripts/kunden/detail/kundendetail.controller.js:460
 msgid "Abo wurde erstellt"
 msgstr "L'abonnement a été créé"
 
@@ -227,7 +228,7 @@ msgstr "Ajouter un type d'abonnement"
 
 #: app/index.html:167
 #: app/scripts/abotypen/overview/abotypen.html:6
-#: app/scripts/dashboard/dashboard.html:57
+#: app/scripts/dashboard/dashboard.html:56
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:36
 msgid "Abotypen"
 msgstr "Types d'abonnement"
@@ -236,7 +237,7 @@ msgstr "Types d'abonnement"
 msgid "Abrechnen"
 msgstr "Annuler"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:941
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:945
 msgid "Abrechnungen anzeigen"
 msgstr "Afficher les décomptes"
 
@@ -345,16 +346,16 @@ msgstr "Activité, brève description..."
 msgid "Aktuell"
 msgstr "Actuel"
 
-#: app/scripts/dashboard/dashboard.html:45
+#: app/scripts/dashboard/dashboard.html:44
 msgid "Aktuellste Lieferplanungen"
 msgstr "Planifications de livraison actuelles"
 
 #: app/scripts/abos/detail/abosdetail.html:127
 #: app/scripts/abos/overview/abosoverview.html:12
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
-#: app/scripts/dashboard/dashboard.html:45
+#: app/scripts/dashboard/dashboard.html:44
 #: app/scripts/dashboard/dashboard.html:6
-#: app/scripts/dashboard/dashboard.html:76
+#: app/scripts/dashboard/dashboard.html:75
 #: app/scripts/touren/detail/tourendetail.html:61
 msgid "Alle"
 msgstr "Tous"
@@ -768,7 +769,7 @@ msgstr "Description"
 msgid "Bestellung abrechnen"
 msgstr "décompter la commande"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:928
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:932
 msgid "Bestellung an alle Lieferanten versenden"
 msgstr "Envoyer la commande aux producteurs"
 
@@ -789,7 +790,7 @@ msgid "Bestellungen abrechnen"
 msgstr "Décompter les commandes"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:56
-#: app/scripts/dashboard/dashboard.html:94
+#: app/scripts/dashboard/dashboard.html:93
 #: app/scripts/kunden/detail/kundendetail.html:619
 #: app/scripts/rechnungen/detail/rechnungendetail.html:139
 #: app/scripts/rechnungen/detail/rechnungendetail.html:144
@@ -845,7 +846,7 @@ msgstr "jusqu'à / au"
 msgid "Bis Guthaben"
 msgstr "Avoir"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:789
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:793
 msgid "Bist du sicher, dass du diese E-Mail and Produzent versenden möchtest"
 msgstr "Are you sure you want to send this email to Producer"
 
@@ -990,7 +991,7 @@ msgstr "Livraison au dépôt"
 msgid "Depotauslieferungen"
 msgstr "Livraisons au dépôt"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:955
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:959
 msgid "Depotauslieferungen anzeigen"
 msgstr "Montrer les livraisons au dépôt"
 
@@ -1193,7 +1194,7 @@ msgstr "Désignation unique"
 msgid "Eine manuelle Rechnung für"
 msgstr "Facture créé manuellement pour"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:906
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:910
 msgid "Eine oder mehrere Lieferungen aus Hauptabos haben keine Produkte eingetragen. \n"
 "Trotzdem fortfahren?"
 msgstr "Une ou plusieurs livraisons des abonnements principaux ne contiennent aucun produit. \n"
@@ -1420,7 +1421,7 @@ msgstr "Vendredi"
 msgid "Frist"
 msgstr "Délai"
 
-#: app/scripts/dashboard/dashboard.html:97
+#: app/scripts/dashboard/dashboard.html:96
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:68
 msgid "Fälligkeit"
 msgstr "Echéance"
@@ -1434,7 +1435,7 @@ msgstr "Date d'échéance"
 msgid "Für Anzahl Lieferungen"
 msgstr "Pour nombre de livraisons"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:728
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:732
 msgid "Für jedes Produkt muss ein Produzent ausgewählt sein."
 msgstr "Veuillez sélectionner un producteur pour chaque produit."
 
@@ -1637,7 +1638,7 @@ msgstr "Janvier"
 msgid "Je Vertrieb wird ein eigener Korb geplant"
 msgstr "La planification des paniers se fait d'après la distribution par type d'abonnement."
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:734
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:738
 msgid "Jedes Produkt muss über eine Beschreibung verfügen."
 msgstr "Description pour chaque produit requise."
 
@@ -1766,11 +1767,11 @@ msgstr "Abbréviation"
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:31
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:37
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
-#: app/scripts/dashboard/dashboard.html:28
-#: app/scripts/dashboard/dashboard.html:88
+#: app/scripts/dashboard/dashboard.html:27
+#: app/scripts/dashboard/dashboard.html:87
 #: app/scripts/kunden/detail/kundendetail.controller.js:78
 #: app/scripts/kunden/detail/kundendetail.html:10
-#: app/scripts/pendenzen/overview/pendenzenoverview.html:30
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:29
 #: app/scripts/rechnungen/detail/rechnungendetail.html:44
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:46
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:22
@@ -1898,21 +1899,21 @@ msgstr "Imprimer les étiquettes de livraison"
 msgid "Lieferinformation"
 msgstr "Information additionnelle"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:883
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:891
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:887
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:895
 msgid "Lieferplanung abschliessen"
 msgstr "Boucler la planification de livraison"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:916
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:920
 msgid "Lieferplanung löschen"
 msgstr "Supprimer la planification de livraison"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1006
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1015
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1010
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1019
 msgid "Lieferplanung verrechnen"
 msgstr "Décompter la planification"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1026
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1030
 msgid "Lieferplanung verrechnet"
 msgstr "Planification décomptée"
 
@@ -1956,6 +1957,7 @@ msgstr "Livraison du"
 #: app/scripts/abos/detail/abosdetail.html:25
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:3
 #: app/scripts/app.js:115
+#: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:65
 msgid "Lieferungen"
 msgstr "Livraisons"
 
@@ -2141,7 +2143,6 @@ msgstr "Non"
 msgid "Nachricht, die den Benutzern mit einem Benachrichtigungssymbol in der Kopfzeile des Kundenportals angezeigt wird"
 msgstr "Message affiché aux utilisateurs avec une icône de notification dans l'en-tête du portail client"
 
-#: app/scripts/abotypen/detail/abotypendetail.html:29
 #: app/scripts/abotypen/overview/abotypen.html:32
 #: app/scripts/abotypen/overview/zusatzabotypen.html:33
 #: app/scripts/depots/overview/depotsoverview.html:32
@@ -2252,7 +2253,7 @@ msgstr "N°"
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:34
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:34
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:34
-#: app/scripts/dashboard/dashboard.html:85
+#: app/scripts/dashboard/dashboard.html:84
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:33
 #: app/scripts/kunden/detail/abo/abos.html:10
 #: app/scripts/kunden/detail/kundendetail.html:617
@@ -2286,7 +2287,7 @@ msgstr "OTP"
 
 #: app/scripts/app.js:139
 #: app/scripts/app.js:155
-#: app/scripts/dashboard/dashboard.html:61
+#: app/scripts/dashboard/dashboard.html:60
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:40
 msgid "Offen"
 msgstr "Ouvert"
@@ -2357,8 +2358,8 @@ msgstr "Payload"
 msgid "Payment Type"
 msgstr "Type de paiement"
 
-#: app/scripts/dashboard/dashboard.html:32
-#: app/scripts/pendenzen/overview/pendenzenoverview.html:34
+#: app/scripts/dashboard/dashboard.html:31
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:33
 msgid "Pendenz als erledigt markieren"
 msgstr "Tâche accomplie"
 
@@ -2459,7 +2460,7 @@ msgstr "Livraison par poste"
 msgid "Postauslieferungen"
 msgstr "Livraisons par poste"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:987
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:991
 msgid "Postauslieferungen anzeigen"
 msgstr "Afficher les livraisons par poste"
 
@@ -2864,23 +2865,23 @@ msgstr "Septembre"
 msgid "Sequence-Nr"
 msgstr "N° séquence"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:892
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:896
 msgid "Soll die Lieferplanung abgeschlossen werden?"
 msgstr "Souhaites-vous fermer la planification de livraison?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:918
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:922
 msgid "Soll die Lieferplanung gelöscht werden?"
 msgstr "Souhaitez-vous supprimer la planification de livraison?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1017
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1021
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr "Souhaitez-vous décompter la planification de livraison?"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:249
+#: app/scripts/kunden/detail/kundendetail.controller.js:253
 msgid "Soll diese Person wirklich gelöscht werden?"
 msgstr "Voulez-vous vraiment supprimer cette personne?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:929
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:933
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
 msgstr "Souhaitez-vous envoyer ce courriel à tous les producteurs?"
 
@@ -2956,12 +2957,12 @@ msgstr "Début de l'exercice comptable"
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:46
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:43
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:46
-#: app/scripts/dashboard/dashboard.html:60
+#: app/scripts/dashboard/dashboard.html:59
 #: app/scripts/depots/detail/depotsdetail.html:40
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:45
 #: app/scripts/kunden/detail/kundendetail.html:622
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:39
-#: app/scripts/pendenzen/overview/pendenzenoverview.html:27
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:26
 #: app/scripts/rechnungen/detail/rechnungendetail.html:114
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:62
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:51
@@ -3115,7 +3116,7 @@ msgstr "Texte..."
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:32
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:45
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:28
-#: app/scripts/dashboard/dashboard.html:91
+#: app/scripts/dashboard/dashboard.html:90
 #: app/scripts/kunden/detail/kundendetail.html:618
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
 #: app/scripts/rechnungen/detail/rechnungendetail.html:134
@@ -3194,7 +3195,7 @@ msgstr "Livraison par tournée"
 msgid "Tourauslieferungen"
 msgstr "Livraison par tournées"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:971
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:975
 msgid "Tourauslieferungen anzeigen"
 msgstr "Afficher les livraisons à domicile"
 
@@ -3849,7 +3850,7 @@ msgstr "{{batchCreated.openAboIds.length}} positions de facture incorrectes"
 msgid "Öffnungszeiten"
 msgstr "Heures d'ouverture"
 
-#: app/scripts/dashboard/dashboard.html:76
+#: app/scripts/dashboard/dashboard.html:75
 msgid "Überfällige Rechnungen"
 msgstr "Payements dus"
 
