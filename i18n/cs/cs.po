@@ -11,10 +11,11 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-11-08 16:10\n"
+"PO-Revision-Date: 2023-05-23 07:57\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
+#: app/scripts/abotypen/detail/abotypendetail.html:29
 #: app/scripts/reports/detail/reportsdetail.html:33
 #: app/scripts/reports/detail/reportsdetail.html:36
 #: app/scripts/touren/detail/tourendetail.html:36
@@ -32,7 +33,7 @@ msgctxt "person"
 msgid "Name"
 msgstr "Název / jméno"
 
-#: app/scripts/dashboard/dashboard.html:54
+#: app/scripts/dashboard/dashboard.html:53
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:33
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:65
@@ -174,7 +175,7 @@ msgstr "Vytvořit odběr"
 msgid "Abo erstellen für {{kunde.bezeichnung}}"
 msgstr "Vytvořit odběr pro {{kunde.bezeichnung}}"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:456
+#: app/scripts/kunden/detail/kundendetail.controller.js:460
 msgid "Abo wurde erstellt"
 msgstr "Odběr byl vytvořen"
 
@@ -227,7 +228,7 @@ msgstr "Přidat typ podílu:"
 
 #: app/index.html:167
 #: app/scripts/abotypen/overview/abotypen.html:6
-#: app/scripts/dashboard/dashboard.html:57
+#: app/scripts/dashboard/dashboard.html:56
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:36
 msgid "Abotypen"
 msgstr "Typy podílu"
@@ -236,7 +237,7 @@ msgstr "Typy podílu"
 msgid "Abrechnen"
 msgstr "Platba"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:941
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:945
 msgid "Abrechnungen anzeigen"
 msgstr "Přehled plateb"
 
@@ -345,16 +346,16 @@ msgstr "Činnost, krátký popis..."
 msgid "Aktuell"
 msgstr "Aktualni"
 
-#: app/scripts/dashboard/dashboard.html:45
+#: app/scripts/dashboard/dashboard.html:44
 msgid "Aktuellste Lieferplanungen"
 msgstr "Nejaktuálnější plán dodávek"
 
 #: app/scripts/abos/detail/abosdetail.html:127
 #: app/scripts/abos/overview/abosoverview.html:12
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:10
-#: app/scripts/dashboard/dashboard.html:45
+#: app/scripts/dashboard/dashboard.html:44
 #: app/scripts/dashboard/dashboard.html:6
-#: app/scripts/dashboard/dashboard.html:76
+#: app/scripts/dashboard/dashboard.html:75
 #: app/scripts/touren/detail/tourendetail.html:61
 msgid "Alle"
 msgstr "Vše "
@@ -768,7 +769,7 @@ msgstr "Popis"
 msgid "Bestellung abrechnen"
 msgstr "Zrušit objednávku"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:928
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:932
 msgid "Bestellung an alle Lieferanten versenden"
 msgstr "Zaslat objednávku všem dodavatelům"
 
@@ -789,7 +790,7 @@ msgid "Bestellungen abrechnen"
 msgstr "Zrušit objednávky"
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:56
-#: app/scripts/dashboard/dashboard.html:94
+#: app/scripts/dashboard/dashboard.html:93
 #: app/scripts/kunden/detail/kundendetail.html:619
 #: app/scripts/rechnungen/detail/rechnungendetail.html:139
 #: app/scripts/rechnungen/detail/rechnungendetail.html:144
@@ -845,7 +846,7 @@ msgstr "Do"
 msgid "Bis Guthaben"
 msgstr "Moje vrácené produkty"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:789
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:793
 msgid "Bist du sicher, dass du diese E-Mail and Produzent versenden möchtest"
 msgstr ""
 
@@ -990,7 +991,7 @@ msgstr "Dodání na výdejní místo"
 msgid "Depotauslieferungen"
 msgstr "Dodání na výdejní místo"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:955
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:959
 msgid "Depotauslieferungen anzeigen"
 msgstr "Zobrazit výdejní místa"
 
@@ -1193,7 +1194,7 @@ msgstr "Jedinečný identifikátor"
 msgid "Eine manuelle Rechnung für"
 msgstr "Manuální faktura za"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:906
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:910
 msgid "Eine oder mehrere Lieferungen aus Hauptabos haben keine Produkte eingetragen. \n"
 "Trotzdem fortfahren?"
 msgstr "V jedné nebo více dodávkách z hlavních podílů nemáte žádné vybrané produkty. \n"
@@ -1420,7 +1421,7 @@ msgstr "Pátek"
 msgid "Frist"
 msgstr "Období"
 
-#: app/scripts/dashboard/dashboard.html:97
+#: app/scripts/dashboard/dashboard.html:96
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:68
 msgid "Fälligkeit"
 msgstr "Datum splatnosti"
@@ -1434,7 +1435,7 @@ msgstr "Datum splatnosti"
 msgid "Für Anzahl Lieferungen"
 msgstr "Pro počet dodávek"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:728
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:732
 msgid "Für jedes Produkt muss ein Produzent ausgewählt sein."
 msgstr "Pro každý produkt musí být vybrán výrobce."
 
@@ -1637,7 +1638,7 @@ msgstr "Leden"
 msgid "Je Vertrieb wird ein eigener Korb geplant"
 msgstr "Každý odběr má napláován vlastní podíl"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:734
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:738
 msgid "Jedes Produkt muss über eine Beschreibung verfügen."
 msgstr "Každý výrobek musí mít popis."
 
@@ -1766,11 +1767,11 @@ msgstr "Zkr."
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:31
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:37
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:37
-#: app/scripts/dashboard/dashboard.html:28
-#: app/scripts/dashboard/dashboard.html:88
+#: app/scripts/dashboard/dashboard.html:27
+#: app/scripts/dashboard/dashboard.html:87
 #: app/scripts/kunden/detail/kundendetail.controller.js:78
 #: app/scripts/kunden/detail/kundendetail.html:10
-#: app/scripts/pendenzen/overview/pendenzenoverview.html:30
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:29
 #: app/scripts/rechnungen/detail/rechnungendetail.html:44
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:46
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:22
@@ -1898,21 +1899,21 @@ msgstr "Tisk dodacích etiket"
 msgid "Lieferinformation"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:883
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:891
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:887
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:895
 msgid "Lieferplanung abschliessen"
 msgstr "Plánování závozů dokončeno"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:916
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:920
 msgid "Lieferplanung löschen"
 msgstr "Smazat plán závozů"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1006
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1015
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1010
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1019
 msgid "Lieferplanung verrechnen"
 msgstr "Zaúčtovat plán závozů"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1026
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1030
 msgid "Lieferplanung verrechnet"
 msgstr "Plán závozů smazán"
 
@@ -1956,6 +1957,7 @@ msgstr "Závoz od"
 #: app/scripts/abos/detail/abosdetail.html:25
 #: app/scripts/abotypen/detail/lieferungen/lieferungen.html:3
 #: app/scripts/app.js:115
+#: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:65
 msgid "Lieferungen"
 msgstr "Závozy"
 
@@ -2141,7 +2143,6 @@ msgstr ""
 msgid "Nachricht, die den Benutzern mit einem Benachrichtigungssymbol in der Kopfzeile des Kundenportals angezeigt wird"
 msgstr ""
 
-#: app/scripts/abotypen/detail/abotypendetail.html:29
 #: app/scripts/abotypen/overview/abotypen.html:32
 #: app/scripts/abotypen/overview/zusatzabotypen.html:33
 #: app/scripts/depots/overview/depotsoverview.html:32
@@ -2252,7 +2253,7 @@ msgstr "Č."
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:34
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:34
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:34
-#: app/scripts/dashboard/dashboard.html:85
+#: app/scripts/dashboard/dashboard.html:84
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:33
 #: app/scripts/kunden/detail/abo/abos.html:10
 #: app/scripts/kunden/detail/kundendetail.html:617
@@ -2286,7 +2287,7 @@ msgstr ""
 
 #: app/scripts/app.js:139
 #: app/scripts/app.js:155
-#: app/scripts/dashboard/dashboard.html:61
+#: app/scripts/dashboard/dashboard.html:60
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:40
 msgid "Offen"
 msgstr "Otevřeno"
@@ -2357,8 +2358,8 @@ msgstr "Platby"
 msgid "Payment Type"
 msgstr "Typ platby"
 
-#: app/scripts/dashboard/dashboard.html:32
-#: app/scripts/pendenzen/overview/pendenzenoverview.html:34
+#: app/scripts/dashboard/dashboard.html:31
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:33
 msgid "Pendenz als erledigt markieren"
 msgstr "Označit čekající jako dokončené"
 
@@ -2459,7 +2460,7 @@ msgstr "Doručení poštou"
 msgid "Postauslieferungen"
 msgstr "Doručení poštou"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:987
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:991
 msgid "Postauslieferungen anzeigen"
 msgstr "Zobrazení poštovní doručování"
 
@@ -2864,23 +2865,23 @@ msgstr "Září"
 msgid "Sequence-Nr"
 msgstr "Pořadové číslo"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:892
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:896
 msgid "Soll die Lieferplanung abgeschlossen werden?"
 msgstr "Chcete zavřít plánování závozů?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:918
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:922
 msgid "Soll die Lieferplanung gelöscht werden?"
 msgstr "Chcete smazat plánování závozů?"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1017
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:1021
 msgid "Soll die Lieferplanung verrechnet werden?"
 msgstr "Chcete přepočítat plánování závozů?"
 
-#: app/scripts/kunden/detail/kundendetail.controller.js:249
+#: app/scripts/kunden/detail/kundendetail.controller.js:253
 msgid "Soll diese Person wirklich gelöscht werden?"
 msgstr ""
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:929
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:933
 msgid "Sollen wirklich Mail an alle Lieferanten verschickt werden?"
 msgstr "Chcete skutečně poslat zprávu všem dodavatelům?"
 
@@ -2956,12 +2957,12 @@ msgstr "Začátek fiskálního roku"
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:46
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:43
 #: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:46
-#: app/scripts/dashboard/dashboard.html:60
+#: app/scripts/dashboard/dashboard.html:59
 #: app/scripts/depots/detail/depotsdetail.html:40
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:45
 #: app/scripts/kunden/detail/kundendetail.html:622
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:39
-#: app/scripts/pendenzen/overview/pendenzenoverview.html:27
+#: app/scripts/pendenzen/overview/pendenzenoverview.html:26
 #: app/scripts/rechnungen/detail/rechnungendetail.html:114
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:62
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:51
@@ -3115,7 +3116,7 @@ msgstr ""
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:32
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:45
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:28
-#: app/scripts/dashboard/dashboard.html:91
+#: app/scripts/dashboard/dashboard.html:90
 #: app/scripts/kunden/detail/kundendetail.html:618
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
 #: app/scripts/rechnungen/detail/rechnungendetail.html:134
@@ -3194,7 +3195,7 @@ msgstr "Postupné závozy"
 msgid "Tourauslieferungen"
 msgstr "Postupné závozy"
 
-#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:971
+#: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:975
 msgid "Tourauslieferungen anzeigen"
 msgstr "Zobrazit postupné závozy"
 
@@ -3849,7 +3850,7 @@ msgstr "{{batchCreated.openAboIds.length}} Doklady s chybami"
 msgid "Öffnungszeiten"
 msgstr "Otevírací doba"
 
-#: app/scripts/dashboard/dashboard.html:76
+#: app/scripts/dashboard/dashboard.html:75
 msgid "Überfällige Rechnungen"
 msgstr "Doklady po splatnosti"
 
