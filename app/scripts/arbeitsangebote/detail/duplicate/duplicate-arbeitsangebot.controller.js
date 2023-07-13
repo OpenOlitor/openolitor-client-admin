@@ -114,7 +114,7 @@ angular.module('openolitor-admin')
           });
 
           if (!alreadyPlanned){
-            addDaten(value);
+            addDaten(value.setHours($scope.initVon.getHours(),$scope.initVon.getMinutes(),$scope.initVon.getSeconds()));
           }
         }
       });
