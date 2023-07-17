@@ -7,6 +7,7 @@ angular.module('openolitor-admin')
     '$log', 'arbeitsangebot', 'moment', 'RHYTHMEN', 'EnumUtil','lodash',
     function($scope, $uibModalInstance, $log, arbeitsangebot, moment, RHYTHMEN, EnumUtil, lodash) {
       $scope.initVon = arbeitsangebot.zeitVon;
+      $scope.initBis = arbeitsangebot.zeitBis;
       $scope.von = arbeitsangebot.zeitVon;
       $scope.arbeitsangebot = arbeitsangebot;
       $scope.daten = [];
@@ -48,15 +49,17 @@ angular.module('openolitor-admin')
 
           var selectedWeekday = start.isoWeekday();
           var startingWeekday = moment($scope.initVon).isoWeekday();
-          if (selectedWeekday <= startingWeekday) {
-            //selektiere wochentag in derselben Woche
-            start = start.isoWeekday(startingWeekday);
-          } else {
-            //selektiere Wochentag in der darauffolgenden Woche
-            start = start.isoWeekday(startingWeekday + 7);
+          if ($scope.rhythmus !== RHYTHMEN.TAEGLICH) {
+            if (selectedWeekday <= startingWeekday) {
+              //select weekday in the same week
+              start = start.isoWeekday(startingWeekday);
+            } else {
+              //select weekday in the following week
+              start = start.isoWeekday(startingWeekday + 7);
+            }
           }
 
-          //iteriere abhängig vom lierferrythmus
+          //iterate depending on the distribution pace
           var step;
           var stepEinheit;
           if ($scope.rhythmus === RHYTHMEN.TAEGLICH) {
@@ -72,7 +75,7 @@ angular.module('openolitor-admin')
             step = 1;
             stepEinheit = 'M';
           } else {
-            //date können nicht berechnet werden
+            //date cannot be calculated
             return;
           }
 
@@ -93,12 +96,14 @@ angular.module('openolitor-admin')
 
       $scope.$watch('von', function(value) {
         if (value) {
+          value.setHours($scope.initVon.getHours(),$scope.initVon.getMinutes(),$scope.initVon.getSeconds());
           generateDaten();
         }
       });
 
       $scope.$watch('bis', function(value) {
         if (value) {
+          value.setHours($scope.initBis.getHours(),$scope.initBis.getMinutes(),$scope.initBis.getSeconds());
           generateDaten();
         }
       });
