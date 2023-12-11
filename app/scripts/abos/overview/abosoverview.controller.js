@@ -236,14 +236,10 @@ angular.module('openolitor-admin')
 
             $scope.filteredEntries = dataSet;
             updateIds();
-            angular.forEach($scope.abotypL, function(abotyp) {
-              if ( params.filter().aktiv === true && abotyp.aktiv === true){
-                $scope.displayedAbotypen.push({'id':abotyp.id, 'title':abotyp.title});
-              } else if (params.filter().aktiv !== true ) {
-                $scope.displayedAbotypen.push({'id':abotyp.id, 'title':abotyp.title});
-              }
+            $scope.displayedAbotypen.length = 0;
+            angular.forEach(fillFilter(params.filter().aktiv), function(abotyp) {
+              $scope.displayedAbotypen.push(abotyp);
             });
-
             params.total(dataSet.length);
 
             $location.search({
@@ -262,6 +258,18 @@ angular.module('openolitor-admin')
         if (existingFilter) {
           $scope.tableParams.filter(JSON.parse(existingFilter));
         }
+      }
+
+      function fillFilter(aktiv) {
+        var da = [];
+        angular.forEach($scope.abotypL, function(abotyp) {
+          if ( aktiv === true && abotyp.aktiv === true){
+            da.push({'id':abotyp.id, 'title':abotyp.title});
+          } else if (aktiv !== true ) {
+            da.push({'id':abotyp.id, 'title':abotyp.title});
+          }
+        });
+        return da;
       }
 
       function updateIds() {
