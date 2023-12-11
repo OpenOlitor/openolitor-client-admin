@@ -24,6 +24,7 @@ angular.module('openolitor-admin')
       $scope.model = {};
       $scope.vertriebL = [];
       $scope.initGJ = false;
+      $scope.displayedAbotypen  = [];
 
       $scope.navigateToKunde = function(id) {
           $scope.filteredEntries = [];
@@ -74,7 +75,8 @@ angular.module('openolitor-admin')
           $scope.abotypL.push({
             'id': abotyp.id,
             'title': abotyp.name,
-            'price': abotyp.preis
+            'price': abotyp.preis,
+            'aktiv': abotyp.aktiv
           });
         });
       });
@@ -234,7 +236,10 @@ angular.module('openolitor-admin')
 
             $scope.filteredEntries = dataSet;
             updateIds();
-
+            $scope.displayedAbotypen.length = 0;
+            angular.forEach(fillFilter(params.filter().aktiv), function(abotyp) {
+              $scope.displayedAbotypen.push(abotyp);
+            });
             params.total(dataSet.length);
 
             $location.search({
@@ -255,6 +260,18 @@ angular.module('openolitor-admin')
         }
       }
 
+      function fillFilter(aktiv) {
+        var da = [];
+        angular.forEach($scope.abotypL, function(abotyp) {
+          if ( aktiv === true && abotyp.aktiv === true){
+            da.push({'id':abotyp.id, 'title':abotyp.title});
+          } else if (aktiv !== true ) {
+            da.push({'id':abotyp.id, 'title':abotyp.title});
+          }
+        });
+        return da;
+      }
+
       function updateIds() {
             var ids = [];
             var checkedItems = [];
@@ -270,7 +287,7 @@ angular.module('openolitor-admin')
             $scope.checkboxes.items = Object.fromEntries(items);
             $scope.updateChecked();
       }
-      
+
       $scope.selectedGeschaeftsjahr = function(gj) {
         if(angular.isDefined(gj)) {
           $scope.geschaeftsjahr = gj;
@@ -339,7 +356,7 @@ angular.module('openolitor-admin')
 
         AbosOverviewModel.query({
           f: $scope.search.filterQuery,
-          q: $scope.search.queryQuery, 
+          q: $scope.search.queryQuery,
           x: $scope.search.complexFlags,
           g: /^\d+$/.test($scope.geschaeftsjahr)?$scope.geschaeftsjahr:'',
         }, function(entries) {
