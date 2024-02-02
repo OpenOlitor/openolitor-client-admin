@@ -97,6 +97,10 @@ angular
       if (existingQuery) {
         $scope.search.query = existingQuery;
       }
+      var existingGJ = $location.search().g;
+      if (existingGJ) {
+        $scope.geschaeftsjahr = existingGJ;
+      }
 
       $scope.hasData = function() {
         return $scope.entries !== undefined;
@@ -151,6 +155,17 @@ angular
         return ReportvorlagenService.getVorlagen('VorlageKundenbrief');
       };
 
+      $scope.selectGeschaeftsjahr = function(gj) {
+        if(angular.isDefined(gj)) {
+          $scope.geschaeftsjahr = gj;
+        } else {
+          $scope.geschaeftsjahr = undefined;
+        }
+        $scope.initGJ = true;
+        search();
+        return false;
+      }
+
       $scope.closeBericht = function() {
         $scope.showGenerateReport = false;
       };
@@ -177,6 +192,12 @@ angular
               isExpanded: true
             },
             exportODSModel: ArbeitsangeboteModel,
+            exportODSFilter: function() {
+              return {
+                f: $scope.search.filterQuery,
+                g: $scope.geschaeftsjahr
+              };
+            },
             getData: function(params) {
               if (!$scope.entries) {
                 return;
@@ -269,6 +290,7 @@ angular
         $scope.loading = true;
         $scope.entries = ArbeitsangeboteModel.query(
           {
+            g: /^\d+$/.test($scope.geschaeftsjahr)?$scope.geschaeftsjahr:'',
             q: $scope.search.queryQuery
           },
           function() {
