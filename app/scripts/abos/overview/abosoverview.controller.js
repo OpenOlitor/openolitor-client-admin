@@ -346,6 +346,19 @@ angular.module('openolitor-admin')
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         }
+      }, {
+        label: gettext('Zusatzabo enzeigen'),
+        iconClass: 'glyphicon glyphicon-gift',
+        isDisabled: function() {
+          return !$scope.checkboxes.checkedAny;
+        },
+        onExecute: function() {
+          var result = lodash.filter($scope.checkboxes.data, function(d) {
+            return lodash.includes($scope.checkboxes.ids, d.id);
+          });
+          result = lodash.map(result, 'id');
+          $location.path('/zusatzabos').search('q', 'HauptAboId=' + result.join()).search('tf','{"abotypId":""}');
+        }
       }];
 
       function search() {
