@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2023-05-23 07:57\n"
+"PO-Revision-Date: 2024-04-25 12:07\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
@@ -142,7 +142,7 @@ msgid "Abbrechen"
 msgstr "Mégse"
 
 #: app/scripts/app.js:188
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:50
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:55
 msgid "Abgesagt"
 msgstr "Törölve"
 
@@ -522,11 +522,11 @@ msgstr "Önkéntes felajánlás ismétlése"
 msgid "Arbeitsangebot eingefügt"
 msgstr "Önkéntes munka létrehozása"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:10
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:15
 msgid "Arbeitsangebot erstellen"
 msgstr "Önkéntes munka létrehozása"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:63
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:68
 msgid "Arbeitsangebot.odt"
 msgstr "onkentesmunka.odt"
 
@@ -535,7 +535,7 @@ msgstr "onkentesmunka.odt"
 msgid "Arbeitsangebote"
 msgstr "Önkéntes munka"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:357
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:379
 msgid "Arbeitsangebote (alle eingeschriebenen Personen)"
 msgstr ""
 
@@ -543,11 +543,11 @@ msgstr ""
 msgid "Arbeitsangebote erstellen"
 msgstr "Önkéntes munka létrehozása"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:327
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:349
 msgid "Arbeitsangebote löschen"
 msgstr ""
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:341
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:363
 msgid "Arbeitseinsaetzebrief"
 msgstr "Önkéntes munka leírása"
 
@@ -599,7 +599,7 @@ msgid "Archived"
 msgstr "Archív"
 
 #: app/scripts/app.js:189
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:51
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:56
 msgid "Archiviert"
 msgstr "Archiválva"
 
@@ -732,7 +732,7 @@ msgid "Benötigte Anzahl Personen"
 msgstr "Szükséges személyek száma"
 
 #: app/scripts/app.js:187
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:49
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:54
 msgid "Bereit"
 msgstr "Kész"
 
@@ -940,7 +940,7 @@ msgstr "Csatolmányok"
 msgid "Datum"
 msgstr "Dátum"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:31
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:36
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:44
 msgid "Datum & Zeit"
 msgstr "Dátum és idő"
@@ -1122,11 +1122,11 @@ msgstr "Letöltés"
 msgid "E-Mail"
 msgstr "E-mail"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:318
+#: app/scripts/abos/overview/abosoverview.controller.js:335
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:335
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:149
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:123
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:352
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:374
 #: app/scripts/depots/overview/depotsoverview.controller.js:109
 #: app/scripts/kunden/overview/kundenoverview.controller.js:148
 #: app/scripts/personen/overview/personenoverview.controller.js:163
@@ -1153,7 +1153,7 @@ msgstr "E-mail küldése a tagoknak"
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "E-mail az összes kapcsolatnak"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:299
+#: app/scripts/abos/overview/abosoverview.controller.js:316
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:312
 #: app/scripts/kunden/overview/kundenoverview.controller.js:137
 #: app/scripts/personen/overview/personenoverview.controller.js:152
@@ -1588,7 +1588,7 @@ msgstr "Fájl importálása"
 msgid "Importiert am"
 msgstr "Importált fájl"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:48
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:53
 msgid "In Vorbereitung"
 msgstr "Előkészítés"
 
@@ -1678,7 +1678,7 @@ msgstr "KRZ"
 msgid "Kanadischer Dollar"
 msgstr "Kanadai dollár"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:42
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:47
 #: app/scripts/produkte/overview/produkteoverview.html:61
 msgid "Kategorien"
 msgstr "Kategóriák"
@@ -2387,7 +2387,7 @@ msgid "Person hinzufügen"
 msgstr "Személy hozzáadása"
 
 #: app/index.html:97
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:39
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:44
 #: app/scripts/personen/overview/personenoverview.html:6
 msgid "Personen"
 msgstr "Személyek"
@@ -2743,7 +2743,7 @@ msgstr "Számla tételek"
 msgid "Rechnungspositionen anzeigen"
 msgstr "Számla tételek megjelenítése"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:287
+#: app/scripts/abos/overview/abosoverview.controller.js:304
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:299
 msgid "Rechnungspositionen erstellen"
 msgstr "Számla tételek létrehozása"
@@ -2952,7 +2952,7 @@ msgid "Start des Geschäftsjahres"
 msgstr "Pénzügyi év kezdete"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:69
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:47
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:52
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:52
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:46
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:43
@@ -3038,7 +3038,7 @@ msgstr "Keresés találatokban"
 #: app/scripts/abos/overview/zusatzabosoverview.html:11
 #: app/scripts/abotypen/overview/abotypen.html:10
 #: app/scripts/abotypen/overview/zusatzabotypen.html:10
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:9
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:14
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:9
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:11
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:14
@@ -3115,7 +3115,7 @@ msgstr "Szöveg..."
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:29
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:32
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:45
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:28
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:33
 #: app/scripts/dashboard/dashboard.html:90
 #: app/scripts/kunden/detail/kundendetail.html:618
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
@@ -3393,7 +3393,7 @@ msgstr "Bejelentkezés"
 msgid "Weblogin Einladung"
 msgstr "Meghívás bejelentkezésre"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:359
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:381
 #: app/scripts/personen/overview/personenoverview.controller.js:170
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3408,7 +3408,7 @@ msgstr "Ha a következő tételeket adja hozzá, azokat a megfelelő értékre c
 " {{person.rolle}} \n"
 " {{person.kundeId}}"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:325
+#: app/scripts/abos/overview/abosoverview.controller.js:342
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:342
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3685,6 +3685,10 @@ msgstr "További előfizetési típus"
 msgid "Zusatzabo"
 msgstr "Kiegészítő"
 
+#: app/scripts/abos/overview/abosoverview.controller.js:350
+msgid "Zusatzabo enzeigen"
+msgstr ""
+
 #: app/index.html:103
 #: app/scripts/abos/detail/abosdetail.html:156
 #: app/scripts/abos/overview/abosoverview.html:11
@@ -3737,7 +3741,7 @@ msgstr "Kétheti"
 msgid "Zweiwöchentlich"
 msgstr "Kétheti"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:323
+#: app/scripts/abos/overview/abosoverview.controller.js:340
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:340
 msgid "abo"
 msgstr "előfizetés"
@@ -3792,7 +3796,7 @@ msgstr "tag"
 msgid "l"
 msgstr ""
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:40
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:45
 msgid "max."
 msgstr ""
 
