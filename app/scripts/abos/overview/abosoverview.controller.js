@@ -348,7 +348,7 @@ angular.module('openolitor-admin')
         }
       }, {
         label: gettext('Zusatzabo enzeigen'),
-        iconClass: 'glyphicon glyphicon-gift',
+        iconClass: 'glyphicon glyphicon-zoom-in',
         isDisabled: function() {
           return !$scope.checkboxes.checkedAny;
         },
