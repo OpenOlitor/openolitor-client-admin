@@ -357,7 +357,7 @@ angular.module('openolitor-admin')
             return lodash.includes($scope.checkboxes.ids, d.id);
           });
           result = lodash.map(result, 'id');
-          $location.path('/zusatzabos').search('q', 'HauptAboId=' + result.join()).search('tf','{"abotypId":""}');
+          $location.path('/zusatzabos').search('q', 'HauptAboId=' + result.join()).search('tf','{"abotypId":"","aktiv":true}');
         }
       }];
 
