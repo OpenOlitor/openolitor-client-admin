@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-05-23 07:57\n"
+"PO-Revision-Date: 2024-04-26 10:35\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
@@ -142,7 +142,7 @@ msgid "Abbrechen"
 msgstr "Cancelar"
 
 #: app/scripts/app.js:188
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:50
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:55
 msgid "Abgesagt"
 msgstr "Cancelado"
 
@@ -522,11 +522,11 @@ msgstr "Duplicar la posibilidad de colaboración"
 msgid "Arbeitsangebot eingefügt"
 msgstr "Crear una posibilidad de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:10
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:15
 msgid "Arbeitsangebot erstellen"
 msgstr "Crear una oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:63
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:68
 msgid "Arbeitsangebot.odt"
 msgstr "OfertaColaboración.odt"
 
@@ -535,7 +535,7 @@ msgstr "OfertaColaboración.odt"
 msgid "Arbeitsangebote"
 msgstr "Oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:357
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:379
 msgid "Arbeitsangebote (alle eingeschriebenen Personen)"
 msgstr "Colaboraciones (todas las personas registradas)"
 
@@ -543,11 +543,11 @@ msgstr "Colaboraciones (todas las personas registradas)"
 msgid "Arbeitsangebote erstellen"
 msgstr "Crear una oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:327
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:349
 msgid "Arbeitsangebote löschen"
 msgstr "Borrar oferta de colaboración"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:341
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:363
 msgid "Arbeitseinsaetzebrief"
 msgstr "Carta de oferta de colaboración"
 
@@ -599,7 +599,7 @@ msgid "Archived"
 msgstr "Archivado"
 
 #: app/scripts/app.js:189
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:51
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:56
 msgid "Archiviert"
 msgstr "Archivado"
 
@@ -732,7 +732,7 @@ msgid "Benötigte Anzahl Personen"
 msgstr "Número de personas requeridas"
 
 #: app/scripts/app.js:187
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:49
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:54
 msgid "Bereit"
 msgstr "Listo"
 
@@ -940,7 +940,7 @@ msgstr "Ficheros"
 msgid "Datum"
 msgstr "Fecha"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:31
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:36
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:44
 msgid "Datum & Zeit"
 msgstr "Fecha y hora"
@@ -1122,11 +1122,11 @@ msgstr "Descargar"
 msgid "E-Mail"
 msgstr "Correo electrónico"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:318
+#: app/scripts/abos/overview/abosoverview.controller.js:335
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:335
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:149
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:123
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:352
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:374
 #: app/scripts/depots/overview/depotsoverview.controller.js:109
 #: app/scripts/kunden/overview/kundenoverview.controller.js:148
 #: app/scripts/personen/overview/personenoverview.controller.js:163
@@ -1153,7 +1153,7 @@ msgstr "Enviar un correo electrónico a los miembros"
 msgid "E-Mail an alle Ansprechpersonen"
 msgstr "Enviar email a todas las personas de contacto"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:299
+#: app/scripts/abos/overview/abosoverview.controller.js:316
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:312
 #: app/scripts/kunden/overview/kundenoverview.controller.js:137
 #: app/scripts/personen/overview/personenoverview.controller.js:152
@@ -1588,7 +1588,7 @@ msgstr "Fichero a importar"
 msgid "Importiert am"
 msgstr "Importado el"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:48
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:53
 msgid "In Vorbereitung"
 msgstr "En preparación"
 
@@ -1678,7 +1678,7 @@ msgstr "ABR"
 msgid "Kanadischer Dollar"
 msgstr "Dólar canadiense"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:42
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:47
 #: app/scripts/produkte/overview/produkteoverview.html:61
 msgid "Kategorien"
 msgstr "Categorías"
@@ -2387,7 +2387,7 @@ msgid "Person hinzufügen"
 msgstr "Añadir una persona de contacto"
 
 #: app/index.html:97
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:39
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:44
 #: app/scripts/personen/overview/personenoverview.html:6
 msgid "Personen"
 msgstr "Personas"
@@ -2743,7 +2743,7 @@ msgstr "Artículos de factura"
 msgid "Rechnungspositionen anzeigen"
 msgstr "Mostrar los artículos de la factura"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:287
+#: app/scripts/abos/overview/abosoverview.controller.js:304
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:299
 msgid "Rechnungspositionen erstellen"
 msgstr "Crear un artículo a facturar"
@@ -2951,7 +2951,7 @@ msgid "Start des Geschäftsjahres"
 msgstr "Inicio del año fiscal"
 
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:69
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:47
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:52
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:52
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:46
 #: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:43
@@ -3037,7 +3037,7 @@ msgstr "Búsqueda en resultados..."
 #: app/scripts/abos/overview/zusatzabosoverview.html:11
 #: app/scripts/abotypen/overview/abotypen.html:10
 #: app/scripts/abotypen/overview/zusatzabotypen.html:10
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:9
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:14
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:9
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:11
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:14
@@ -3114,7 +3114,7 @@ msgstr "Texto..."
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:29
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:32
 #: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.html:45
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:28
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:33
 #: app/scripts/dashboard/dashboard.html:90
 #: app/scripts/kunden/detail/kundendetail.html:618
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
@@ -3392,7 +3392,7 @@ msgstr "Conexión "
 msgid "Weblogin Einladung"
 msgstr "Invitación a conectarte"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:359
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:381
 #: app/scripts/personen/overview/personenoverview.controller.js:170
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3407,7 +3407,7 @@ msgstr "Si utilizas las variables mostradas a continuación, se remplazarán por
 " \n"
 " {{person.kundeId}} Nº de abonad@"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:325
+#: app/scripts/abos/overview/abosoverview.controller.js:342
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:342
 msgid "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3684,6 +3684,10 @@ msgstr "Tipos de abonos suplementarios"
 msgid "Zusatzabo"
 msgstr "Abono suplementario"
 
+#: app/scripts/abos/overview/abosoverview.controller.js:350
+msgid "Zusatzabo enzeigen"
+msgstr "Mostrar abonos adicionales"
+
 #: app/index.html:103
 #: app/scripts/abos/detail/abosdetail.html:156
 #: app/scripts/abos/overview/abosoverview.html:11
@@ -3736,7 +3740,7 @@ msgstr "Quincenalmente"
 msgid "Zweiwöchentlich"
 msgstr "Quincenalmente"
 
-#: app/scripts/abos/overview/abosoverview.controller.js:323
+#: app/scripts/abos/overview/abosoverview.controller.js:340
 #: app/scripts/abos/overview/zusatzabosoverview.controller.js:340
 msgid "abo"
 msgstr "Abono"
@@ -3791,7 +3795,7 @@ msgstr "abonad@"
 msgid "l"
 msgstr "l"
 
-#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:40
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:45
 msgid "max."
 msgstr "max."
 
