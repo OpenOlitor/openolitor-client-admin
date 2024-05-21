@@ -186,6 +186,7 @@ angular
     INVORBEREITUNG: gettext('InVorbereitung'),
     BEREIT: gettext('Bereit'),
     ABGESAGT: gettext('Abgesagt'),
+    BEENDET: gettext('Beendet'),
     ARCHIVIERT: gettext('Archiviert')
   })
 
