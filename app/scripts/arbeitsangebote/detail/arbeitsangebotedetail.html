@@ -86,7 +86,7 @@
                   <div class="col-md-4">
                     <p class="input-group">
                       <input type="text" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="true" timepicker-options="tpOptionsVon" max-date="arbeitsangebot.zeitBis" required />
-                      <span class="input-group-btn"
+                      <span class="input-group-btn">
                         <button type="button" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
                       </span>
                     </p>
