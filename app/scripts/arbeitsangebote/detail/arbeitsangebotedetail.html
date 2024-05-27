@@ -13,18 +13,13 @@
                 <script type="text/ng-template" id="abschliessenTooltip.html">
                   <span translate>Die Arbeitsangebote werden nach Ablauf der Einsatzzeit auch automatisch abgeschlossen.</span>
                 </script>
-                <script type="text/ng-template" id="archiviertTooltip.html">
-                  <span translate>Diesen abgeschlossenen Arbeitseinsatz als Archiviert markieren. Anschliessend ist eine Abänderung nicht mehr möglich.</span>
-                </script>
 
                 <button ng-if="arbeitsangebot.status === 'InVorbereitung' && !arbeitsangebotForm.$invalid" type="button" role="button" ng-click="aaFreischalten()" class="btn btn-success"><span class="fa fa-play"></span> <span translate>Freischalten</span></button>
                 <button ng-if="arbeitsangebot.status === 'Bereit'" type="button" role="button" ng-click="aaZurueckziehen()" class="btn btn-warning"><span class="fa fa-pause"></span> <span translate>Zurückziehen</span></button>
                 <button ng-if="arbeitsangebot.status === 'Bereit'" type="button" role="button" ng-click="aaAbsagen()" class="btn btn-info"><span class="fa fa-ban"></span> <span translate>Absagen</i></span></button>
                 <button ng-if="arbeitsangebot.status === 'Bereit'" type="button" role="button" ng-click="aaAbschliessen()" class="btn btn-danger"><span class="fa fa-stop"></span> <span translate>Abschliessen <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip-template="'abschliessenTooltip.html'"></i></span></button>
-<button ng-if="arbeitsangebot.status === 'Beendet'" type="button" role="button" ng-click="aaArchiviert()" class="btn btn-danger"><span class="fa fa-stop"></span> <span translate>Archivieren <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip-template="'archiviertTooltip.html'"></i></span></button>
-
-                <oo-save-button ng-show="arbeitsangebot.status !== 'Archiviert'" model="arbeitsangebot" form="arbeitsangebotForm" entity="Arbeitsangebot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Arbeitsangebot'|translate}}</oo-save-button>
-                <oo-delete-button ng-show="arbeitsangebot.status !== 'Archiviert'" ng-if="!arbeitsangebot.anzahlTeilnehmer || arbeitsangebot.anzahlTeilnehmer == 0" model="arbeitsangebot" entity="Arbeitsangebot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
+                <oo-save-button model="arbeitsangebot" form="arbeitsangebotForm" entity="Arbeitsangebot" on-save="save" on-cancel="backToList" on-created="created">{{fullName() || 'Arbeitsangebot'|translate}}</oo-save-button>
+                <oo-delete-button ng-if="!arbeitsangebot.anzahlTeilnehmer || arbeitsangebot.anzahlTeilnehmer == 0" model="arbeitsangebot" entity="Arbeitsangebot" on-delete="delete" on-deleted="backToList"></oo-delete-button>
               </div>
             </div>
           </h3>
@@ -50,7 +45,7 @@
                     <label for="titel" translate>Titel</label>
                   </div>
                   <div class="col-md-8">
-                    <input type="text" ng-disabled="arbeitsangebot.status === 'Archiviert' " class="form-control" name="titel" ng-model="arbeitsangebot.titel" placeholder="{{'Aktivität, Kurzbeschrieb, ...'|translate}}" maxlength="200" auto-focus required>
+                    <input type="text" class="form-control" name="titel" ng-model="arbeitsangebot.titel" placeholder="{{'Aktivität, Kurzbeschrieb, ...'|translate}}" maxlength="200" auto-focus required>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -58,7 +53,7 @@
                     <label for="bezeichnung" translate>Bezeichnung</label>
                   </div>
                   <div class="col-md-8">
-                    <textarea class="form-control" ng-disabled="arbeitsangebot.status === 'Archiviert' " name="bezeichnung" ng-model="arbeitsangebot.bezeichnung" placeholder="{{'Genauerer Beschrieb'|translate}}..."  maxlength="200"></textarea>
+                    <textarea class="form-control" name="bezeichnung" ng-model="arbeitsangebot.bezeichnung" placeholder="{{'Genauerer Beschrieb'|translate}}..."  maxlength="200"></textarea>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -66,7 +61,7 @@
                     <label for="ort" translate>Ort</label>
                   </div>
                   <div class="col-md-8">
-                    <textarea class="form-control" ng-disabled="arbeitsangebot.status === 'Archiviert' " name="ort" ng-model="arbeitsangebot.ort" placeholder="{{'Angaben zum Ort, zur Anfahrt, etc.'|translate}}..." maxlength="500"></textarea>
+                    <textarea class="form-control" name="ort" ng-model="arbeitsangebot.ort" placeholder="{{'Angaben zum Ort, zur Anfahrt, etc.'|translate}}..." maxlength="500"></textarea>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -88,9 +83,9 @@
                   </div>
                   <div class="col-md-4">
                     <p class="input-group">
-                      <input type="text" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="true" timepicker-options="tpOptionsVon" max-date="arbeitsangebot.zeitBis" required />
+                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitVon" is-open="open.start" enable-time="true" timepicker-options="tpOptionsVon" max-date="arbeitsangebot.zeitBis" required />
                       <span class="input-group-btn">
-                        <button type="button" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start')"><i class="fa fa-calendar"></i></button>
                       </span>
                     </p>
                   </div>
@@ -101,20 +96,20 @@
                   </div>
                   <div class="col-md-4">
                     <p class="input-group">
-                      <input type="text" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="true" timepicker-options="tpOptionsBis" min-date="arbeitsangebot.zeitVon" required />
+                      <input type="text" class="form-control input-date" datetime-picker="dd.MM.yyyy HH:mm" ng-model="arbeitsangebot.zeitBis" is-open="open.ende" enable-time="true" timepicker-options="tpOptionsBis" min-date="arbeitsangebot.zeitVon" required />
                       <span class="input-group-btn">
-                        <button type="button" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'ende')"><i class="fa fa-calendar"></i></button>
                       </span>
                     </p>
                   </div>
                   <div class="col-md-2">
                     <p class="input-group">
                       <span class="input-group-btn">
-                        <button ng-disabled="arbeitsangebot.status === 'Archiviert' || !arbeitsangebot.zeitVon" type="button" role="button" ng-click="modifBis(modifDelta)" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate></span></button>
+                        <button ng-disabled="!arbeitsangebot.zeitVon" type="button" role="button" ng-click="modifBis(modifDelta)" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate></span></button>
                       </span>
-                      <input type="number" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="form-control" ng-model="modifDelta" step="1" min="0"></input>
+                      <input type="number" class="form-control" ng-model="modifDelta" step="1" min="0"></input>
                       <span class="input-group-btn">
-                        <button ng-disabled="arbeitsangebot.status === 'Archiviert' || !arbeitsangebot.zeitVon || arbeitsangebot.zeitVon >= arbeitsangebot.zeitBis" type="button" role="button" ng-click="modifBis(-modifDelta)" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span> <span translate></span></button>
+                        <button ng-disabled="!arbeitsangebot.zeitVon || arbeitsangebot.zeitVon >= arbeitsangebot.zeitBis" type="button" role="button" ng-click="modifBis(-modifDelta)" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span> <span translate></span></button>
                       </span>
                     </p>
                   </div>
@@ -125,7 +120,7 @@
                   </div>
                   <div class="col-md-3">
                     <div class="input-group">
-                      <input type="number" ng-disabled="arbeitsangebot.status === 'Archiviert'" class="form-control" name="einsatzzeit" ng-model="arbeitsangebot.einsatzZeit" step="0.01" placeholder="{{'Zeit in Stunden'|translate}}">
+                      <input type="number" class="form-control" name="einsatzzeit" ng-model="arbeitsangebot.einsatzZeit" step="0.01" placeholder="{{'Zeit in Stunden'|translate}}">
                       <div class="input-group-addon">{{projekt.einsatzEinheit | translate}}</div>
                     </div>
                   </div>
@@ -135,7 +130,7 @@
                     <label for="aktionen" translate>Aktionen</label>
                   </div>
                   <div class="col-md-8">
-                    <button ng-if="!arbeitsangebotForm.$invalid" ng-disabled="arbeitsangebot.status === 'Archiviert'" type="button" role="button" ng-click="aaMultiplizieren()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Multiplizieren</span></button>
+                    <button ng-if="!arbeitsangebotForm.$invalid" type="button" role="button" ng-click="aaMultiplizieren()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span translate>Multiplizieren</span></button>
                   </div>
                 </div>
               </div>
@@ -148,21 +143,15 @@
                     <label for="anzahlPersonen" translate>Benötigte Anzahl Personen</label>
                   </div>
                   <div class="col-md-3">
-                    <input type="number" ng-disabled="arbeitsangebot.status === 'Archiviert'" min="0" step="1" class="form-control" name="anzahlPersonen" ng-model="arbeitsangebot.anzahlPersonen" placeholder="{{'Anzahl'|translate}}">
+                    <input type="number" min="0" step="1" class="form-control" name="anzahlPersonen" ng-model="arbeitsangebot.anzahlPersonen" placeholder="{{'Anzahl'|translate}}">
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-md-4">
                     <label for="mehrPersonenOk" translate>Zusätzliche Personen möglich</label>
                   </div>
-                  <div class="col-md-4" ng-show ="arbeitsangebot.status !== 'Archiviert'" >
+                  <div class="col-md-4">
                     <input bs-switch ng-model="arbeitsangebot.mehrPersonenOk" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                  </div>
-                  <div class="col-md-4" ng-show ="arbeitsangebot.status === 'Archiviert' && arbeitsangebot.mehrPersonenOk" >
-                    {{'Ja'|translate}}
-                  </div>
-                  <div class="col-md-4" ng-show ="arbeitsangebot.status === 'Archiviert' && !arbeitsangebot.mehrPersonenOk" >
-                    {{'Nein'|translate}}
                   </div>
                 </div>
               </div>
@@ -177,7 +166,7 @@
                   <div class="col-md-6">
                     <span translate>Eingeschriebene Personen</span> ({{sumPersonen()}})
                   </div>
-                  <div class="col-md-6" ng-if="arbeitsangebot.status === 'InVorbereitung' || arbeitsangebot.status === 'Bereit' || arbeitsangebot.status === 'Beendet' ">
+                  <div class="col-md-6" ng-if="arbeitsangebot.status === 'InVorbereitung' || arbeitsangebot.status === 'Bereit'">
                     <div class="btn-group pull-right" role="group">
                       <oo-actions-button model="arbeitsangebot" actions="einsatzActions"></oo-actions-button>
                     </div>
@@ -188,12 +177,12 @@
                 <div class="row">
                   <div class="col-md-12">
                     <script type="text/ng-template" id="headerCheckbox.html">
-                      <input type="checkbox" ng-show="arbeitsangebot.status !== 'Archiviert'" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" ignore-dirty />
+                      <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" ignore-dirty />
                     </script>
                     <table ng-table="tableParams" class="table table-striped" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
                       <tr ng-repeat="arbeitseinsatz in $data | filter: search.query.$">
                         <td header="'headerCheckbox.html'">
-                          <input ng-show="arbeitsangebot.status !== 'Archiviert'" type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" ignore-dirty/>
+                          <input type="checkbox" ng-model="checkboxes.items[arbeitseinsatz.id]" ignore-dirty/>
                         </td>
                         <td data-title="'Person'|translate" sortable="'titel'">
                         {{arbeitseinsatz.personName}}</a>
@@ -211,7 +200,7 @@
                           {{arbeitseinsatz.bemerkungen}}
                         </td>
                         <td>
-                          <oo-delete-button ng-show="arbeitsangebot.status !== 'Archiviert'" model="arbeitseinsatz" entity="Arbeitseinsatz" on-delete="deleteArbeitseinsatz" condensed="true" confirm="true"></oo-delete-button>
+                          <oo-delete-button model="arbeitseinsatz" entity="Arbeitseinsatz" on-delete="deleteArbeitseinsatz" condensed="true" confirm="true"></oo-delete-button>
                         </td>
                       </tr>
                     </table>
