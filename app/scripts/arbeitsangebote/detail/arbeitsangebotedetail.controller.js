@@ -333,6 +333,11 @@ angular.module('openolitor-admin')
       };
 
       $scope.aaAbschliessen = function() {
+        $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.BEENDET;
+        $scope.save();
+      };
+
+      $scope.aaArchiviert = function() {
         $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.ARCHIVIERT;
         $scope.save();
       };

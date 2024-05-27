@@ -25,6 +25,7 @@ angular
     'FilterQueryUtil',
     'lodash',
     'EmailUtil',
+    'ARBEITSEINSATZSTATUS',
     'msgBus',
     function(
       $q,
@@ -47,6 +48,7 @@ angular
       FilterQueryUtil,
       lodash,
       EmailUtil,
+      ARBEITSEINSATZSTATUS,
       msgBus
     ) {
       $rootScope.viewId = 'L-Aban';
@@ -55,6 +57,7 @@ angular
       $scope.loading = false;
       $scope.model = {};
       $scope.showCreateEMailDialog = false;
+      $scope.showArchived = false;
 
       //watch for set of Arbeitskategorien
       $scope.kategorienL = [];
@@ -294,6 +297,12 @@ angular
             q: $scope.search.queryQuery
           },
           function() {
+            if (!$scope.showArchived){
+              $scope.entries = lodash.filter($scope.entries, function(o) {return o.status !== ARBEITSEINSATZSTATUS.ARCHIVIERT})
+              $scope.tableParams.reload();
+            } else {
+              search();
+            }
             $scope.tableParams.reload();
             $scope.loading = false;
           }
@@ -301,6 +310,11 @@ angular
       }
 
       search();
+
+      $scope.$watch('showArchived', function() {
+        search();
+      });
+
 
       $scope.$watch(
         'search.query',
