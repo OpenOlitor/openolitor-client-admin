@@ -95,7 +95,7 @@ angular.module('openolitor-admin')
 
       $scope.setupFlagToKnowIfCreating = function(lieferungenModel,uniqueLieferdaten){
         $http.get(appConfig.get().API_URL +
-          'abotypen/' + lieferungenModel.abotypId + '/vertriebe/' + lieferungenModel.vertriebId + '/allesLieferungen', lieferungenModel).then(function(result) {
+          'abotypen/' + lieferungenModel.abotypId + '/vertriebe/' + lieferungenModel.vertriebId + '/alleLieferungen', lieferungenModel).then(function(result) {
             var allLieferungenDates = lodash.map(result.data, function(l){return l.datum.getFullYear() + '' + ("0" + (l.datum.getMonth() + 1 )).slice(-2) + '' + ("0" + l.datum.getDate()).slice(-2)});
             var dateFormatUniqueLieferdaten = lodash.map(uniqueLieferdaten, function(d){return d.getFullYear() + '' + ("0" + (d.getMonth() + 1 )).slice(-2) + '' + ("0" + d.getDate()).slice(-2)})
             $scope.template.creating = $scope.template.creating + dateFormatUniqueLieferdaten.length - lodash.intersectionWith(dateFormatUniqueLieferdaten, allLieferungenDates,lodash.isEqual).length;
