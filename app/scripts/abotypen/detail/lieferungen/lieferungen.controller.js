@@ -26,6 +26,7 @@ angular.module('openolitor-admin')
         return $scope.lieferungen !== undefined;
       };
 
+
       $scope.addLieferung = function() {
         if ($scope.datumExistiert($scope.template.datum)) {
           return;
@@ -38,7 +39,12 @@ angular.module('openolitor-admin')
           vertriebId: $scope.selectedVertrieb.id
         });
         newModel.$save();
-        $scope.template.creating = $scope.template.creating + 1;
+        var newModel = {
+          daten: [$scope.template.datum],
+          abotypId: parseInt($routeParams.id),
+          vertriebId: $scope.selectedVertrieb.id
+        };
+        $scope.setupFlagToKnowIfCreating(newModel,[$scope.template.datum]);
         $scope.template.datum = undefined;
         $scope.status.open = false;
       };
@@ -87,6 +93,14 @@ angular.module('openolitor-admin')
         });
       }
 
+      $scope.setupFlagToKnowIfCreating = function(lieferungenModel,uniqueLieferdaten){
+        $http.get(appConfig.get().API_URL +
+          'abotypen/' + lieferungenModel.abotypId + '/vertriebe/' + lieferungenModel.vertriebId + '/alleLieferungen', lieferungenModel).then(function(result) {
+            var allLieferungenDates = lodash.map(result.data, function(l){return l.datum.getFullYear() + '' + ("0" + (l.datum.getMonth() + 1 )).slice(-2) + '' + ("0" + l.datum.getDate()).slice(-2)});
+            var dateFormatUniqueLieferdaten = lodash.map(uniqueLieferdaten, function(d){return d.getFullYear() + '' + ("0" + (d.getMonth() + 1 )).slice(-2) + '' + ("0" + d.getDate()).slice(-2)})
+            $scope.template.creating = $scope.template.creating + dateFormatUniqueLieferdaten.length - lodash.intersectionWith(dateFormatUniqueLieferdaten, allLieferungenDates,lodash.isEqual).length;
+        });
+      };
 
       $scope.generateLieferungen = function(lieferdaten) {
         var uniqueLieferdaten = lodash.filter(lieferdaten, function(datum) {
@@ -100,11 +114,9 @@ angular.module('openolitor-admin')
         $http.post(appConfig.get().API_URL +
           'abotypen/' + newModel.abotypId + '/vertriebe/' + newModel.vertriebId +
           '/lieferungen/aktionen/generieren',
-          newModel).then(function() {
-          $scope.template.creating = $scope.template.creating +
-            lieferdaten
-            .length;
-        });
+          newModel).then(function(){
+            $scope.setupFlagToKnowIfCreating(newModel,uniqueLieferdaten);
+          });
       };
 
       $scope.canGenerateLieferungen = function() {

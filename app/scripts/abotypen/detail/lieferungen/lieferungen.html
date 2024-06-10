@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title"><span translate>Lieferungen</span>
-      <span class="pull-right" ng-show="showLoading()"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
+      <span class="pull-right" ng-show="loading || template.creating > 0"><i class="fa fa-circle-o-notch fa-spin fa-lg"></i></span>
     </h3>
   </div>
   <div class="panel-body">
@@ -17,7 +17,7 @@
       <div class="col-md-8">
         <label for="lieferungen" translate>Geplante Lieferdaten</label>
       </div>
-      <div class="col-md-4" ng-if="!showLoading()">
+      <div class="col-md-4" ng-if="!loading && !template.creating > 0">
         <div class="pull-right">
           <div uib-dropdown class="dropdown inline" is-open="status.open">
             <a role="button" href="" class="btn btn-sm btn-default" uib-dropdown-toggle><span class="glyphicon glyphicon-plus"></span> </a>
