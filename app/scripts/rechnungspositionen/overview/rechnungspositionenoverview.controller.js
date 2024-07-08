@@ -9,12 +9,12 @@ angular.module('openolitor-admin')
     'DataUtil', 'EnumUtil',
     'OverviewCheckboxUtil', 'appConfig', 'FilterQueryUtil', 'RECHNUNGSPOSITIONSSTATUS',
     'msgBus', 'lodash', 'ReportvorlagenService', 'localeSensitiveComparator', 'gettextCatalog',
-    'gettext','ProjektService',
+    'gettext','ProjektService','KundenOverviewModel', 'AbosOverviewModel', 'ZusatzabosOverviewModel',
     function($q, $scope, $rootScope, $filter, $location, RechnungsPositionenModel,
       NgTableParams, $http, FileUtil, DataUtil, EnumUtil,
       OverviewCheckboxUtil, appConfig,
       FilterQueryUtil, RECHNUNGSPOSITIONSSTATUS, msgBus, lodash, ReportvorlagenService,
-      localeSensitiveComparator, gettextCatalog, gettext, ProjektService) {
+      localeSensitiveComparator, gettextCatalog, gettext, ProjektService, KundenOverviewModel, AbosOverviewModel,ZusatzabosOverviewModel) {
       $rootScope.viewId = 'L-Repo';
 
       $scope.entries = [];
@@ -179,12 +179,33 @@ angular.module('openolitor-admin')
         $scope.tableParams.reload();
 
         $scope.loading = true;
-        $scope.entries = RechnungsPositionenModel.query({
-          f: $scope.search.filterQuery,
-          q: $scope.search.queryQuery 
-        }, function() {
-          $scope.tableParams.reload();
-          $scope.loading = false;
+
+        KundenOverviewModel.query({}, function(allKunden) {
+          AbosOverviewModel.query({}, function(abos) {
+            ZusatzabosOverviewModel.query({}, function(zusatzabos) {
+              $scope.entries = RechnungsPositionenModel.query({
+                f: $scope.search.filterQuery,
+                q: $scope.search.queryQuery 
+              }, function(rechnungsPosition) {
+                angular.forEach(rechnungsPosition, function(rp){
+                  var kunde = lodash.find(allKunden, {'id' : rp.kundeId});
+                  var abo = lodash.find(abos, {'id' : rp.aboId});
+                  var zusatzabo = lodash.find(zusatzabos, {'id' : rp.aboId});
+                  if (kunde !== undefined){
+                    rp.kundeBezeichnung = kunde.bezeichnung;
+                  }
+                  if (abo !== undefined){
+                    rp.abotypBezeichnung = abo.abotypName;
+                  } else if (zusatzabo !== undefined){
+                    rp.abotypBezeichnung = zusatzabo.abotypName;
+                  }
+                  $scope.entries.push(rp);
+                });
+                $scope.tableParams.reload();
+                $scope.loading = false;
+              });
+            });
+          });
         });
       }
 
