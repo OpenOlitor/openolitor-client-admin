@@ -44,6 +44,16 @@
                   <a ng-show="rechnungsPosition.typ === 'Abo'" target="_blank" rel="noopener noreferrer" ng-href="#/abos?q=id%3D{{rechnungsPosition.aboId}}"><i class="glyphicon small glyphicon-new-window"></i></a>
                   <a ng-show="rechnungsPosition.typ === 'ZusatzAbo'" target="_blank" rel="noopener noreferrer" ng-href="#/zusatzabos?q=id%3D{{rechnungsPosition.aboId}}"><i class="glyphicon small glyphicon-new-window"></i></a>
               </td>
+              <td data-title="'Abotyp'|translate" sortable="'abotypBezeichnung'">
+                {{rechnungsPosition.abotypBezeichnung}} 
+              </td>
+              <td data-title="'Kunde'|translate" sortable="'kundeId'">
+                {{rechnungsPosition.kundeId}} &nbsp;
+                <a target="_blank" rel="noopener noreferrer" ng-href="#/kunden/{{rechnungsPosition.kundeId}}"><i class="glyphicon small glyphicon-new-window"></i></a>
+              </td>
+              <td data-title="'Kunde Bezeichnung'|translate" sortable="'kundeBezeichnung'">
+                {{rechnungsPosition.kundeBezeichnung}} 
+              </td>
               <td data-title="'Beschrieb'|translate" sortable="'titel'">
                 {{rechnungsPosition.beschrieb}}
               </td>
