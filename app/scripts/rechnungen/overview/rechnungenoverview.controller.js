@@ -72,14 +72,10 @@ angular.module('openolitor-admin')
             listKundeIds.push($scope.checkboxes.data[id].kundeId);
         });
 
-        var allEntries = KundenOverviewModel.query({
-            f: $scope.search.filterQuery
-        }, function() {
-            angular.forEach(listKundeIds, function(kundeId){
-                $scope.filteredEntries.push($filter('filter')(allEntries,{id:kundeId},true)[0]);
-            });
-            DetailNavigationService.detailFromOverview(currentKundeId.kundeId, $scope, 'kunden', $location.url());
+        angular.forEach(listKundeIds, function(kundeId){
+          $scope.filteredEntries.push($filter('filter')($scope.allKunden, {id:kundeId},true)[0]);
         });
+        DetailNavigationService.detailFromOverview(currentKundeId.kundeId, $scope, 'kunden', $location.url());
       };
 
 
@@ -390,11 +386,24 @@ angular.module('openolitor-admin')
         }
 
         $scope.loading = true;
-        $scope.entries = RechnungenOverviewModel.query({
+
+        $scope.allKunden = KundenOverviewModel.query({
+            f: $scope.search.filterQuery
+        }, function() {
+          $scope.tableParams.reload();
+          $scope.loading = false;
+        });
+
+        RechnungenOverviewModel.query({
           f: $scope.search.filterQuery,
           g: /^\d+$/.test($scope.geschaeftsjahr)?$scope.geschaeftsjahr:'',
           q: $scope.search.queryQuery
-        }, function() {
+        }, function(rechnungen) {
+          angular.forEach(rechnungen, function(rechnung){
+            var kunde = lodash.find($scope.allKunden, {'id' : rechnung.kundeId});
+            rechnung.kundeBezeichnung = kunde.bezeichnung;
+            $scope.entries.push(rechnung);
+          });
           $scope.tableParams.reload();
           $scope.loading = false;
         });
