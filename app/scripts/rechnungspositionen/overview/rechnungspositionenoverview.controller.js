@@ -199,7 +199,6 @@ angular.module('openolitor-admin')
                   } else if (zusatzabo !== undefined){
                     rp.abotypBezeichnung = zusatzabo.abotypName;
                   }
-                  $scope.entries.push(rp);
                 });
                 $scope.tableParams.reload();
                 $scope.loading = false;
