@@ -520,14 +520,8 @@ angular.module('openolitor-admin').controller('RechnungenOverviewController', [
 
       $scope.loading = true;
 
-      $scope.allKunden = KundenOverviewModel.query(
-        {
-          f: $scope.search.filterQuery,
-        },
-        function () {
-          $scope.tableParams.reload();
-          $scope.loading = false;
-          RechnungenOverviewModel.query(
+      KundenOverviewModel.query( { }, function (allKunden) {
+          $scope.entries = RechnungenOverviewModel.query(
             {
               f: $scope.search.filterQuery,
               g: /^\d+$/.test($scope.geschaeftsjahr)
@@ -537,14 +531,14 @@ angular.module('openolitor-admin').controller('RechnungenOverviewController', [
             },
             function (rechnungen) {
               angular.forEach(rechnungen, function (rechnung) {
-                var kunde = lodash.find($scope.allKunden, {
+                var kunde = lodash.find(allKunden, {
                   id: rechnung.kundeId,
                 });
                 if (kunde) {
                   rechnung.kundeBezeichnung = kunde.bezeichnung;
                 }
-                $scope.entries.push(rechnung);
               });
+              $scope.allKunden = allKunden;
               $scope.tableParams.reload();
               $scope.loading = false;
             }
