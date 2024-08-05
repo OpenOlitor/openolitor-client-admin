@@ -186,6 +186,7 @@ msgstr ""
 
 #: app/index.html:100
 #: app/scripts/abos/overview/abosoverview.html:6
+#: app/scripts/abos/overview/zusatzabosoverview.html:27
 #: app/scripts/kunden/detail/abo/abos.html:4
 #: app/scripts/touren/detail/tourendetail.html:59
 msgid "Abos"
@@ -200,6 +201,7 @@ msgstr ""
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:29
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:29
 #: app/scripts/kunden/detail/abo/abos.html:11
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:47
 #: app/scripts/touren/detail/tourlieferungen.html:9
 msgid "Abotyp"
 msgstr ""
@@ -459,7 +461,7 @@ msgstr ""
 
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:14
 #: app/scripts/abos/overview/abosoverviewcreaterechnungspositionen.html:40
-#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:59
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:69
 msgid "Anzahl Lieferungen"
 msgstr ""
 
@@ -538,6 +540,11 @@ msgstr ""
 msgid "Arbeitsangebote löschen"
 msgstr ""
 
+#: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:26
+#: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:20
+msgid "Arbeitseinsaetze"
+msgstr ""
+
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.controller.js:377
 msgid "Arbeitseinsaetzebrief"
 msgstr ""
@@ -556,6 +563,10 @@ msgstr ""
 
 #: app/scripts/arbeitseinsaetze/overview/arbeitseinsaetzeoverview.html:64
 msgid "Arbeitseinsatz.odt"
+msgstr ""
+
+#: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:22
+msgid "Arbeitseinsatzabrechnung"
 msgstr ""
 
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.controller.js:211
@@ -764,7 +775,7 @@ msgstr ""
 #: app/scripts/rechnungen/detail/rechnungendetail.html:227
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:13
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:16
-#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:47
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:57
 #: app/scripts/touren/overview/tourenoverview.html:34
 msgid "Beschrieb"
 msgstr ""
@@ -799,10 +810,10 @@ msgstr ""
 #: app/scripts/rechnungen/detail/rechnungendetail.html:139
 #: app/scripts/rechnungen/detail/rechnungendetail.html:144
 #: app/scripts/rechnungen/detail/rechnungendetail.html:228
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:53
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:56
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:40
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:44
-#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:50
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:60
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:133
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:75
 msgid "Betrag"
@@ -829,6 +840,7 @@ msgstr ""
 #: app/scripts/projekt/settings/arbeitskategorien.html:21
 #: app/scripts/projekt/settings/produktkategorien.html:21
 #: app/scripts/projekt/settings/projektsettings.html:26
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:50
 #: app/scripts/touren/detail/tourlieferungen.html:5
 msgid "Bezeichnung"
 msgstr ""
@@ -991,6 +1003,7 @@ msgid "Depotauslieferung"
 msgstr ""
 
 #: app/index.html:116
+#: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:28
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:6
 msgid "Depotauslieferungen"
 msgstr ""
@@ -1138,7 +1151,7 @@ msgstr ""
 #: app/scripts/depots/overview/depotsoverview.controller.js:109
 #: app/scripts/kunden/overview/kundenoverview.controller.js:148
 #: app/scripts/personen/overview/personenoverview.controller.js:163
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:276
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:376
 #: app/scripts/touren/overview/tourenoverview.controller.js:149
 msgid "E-Mail Formular"
 msgstr ""
@@ -1190,7 +1203,7 @@ msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:176
 #: app/scripts/rechnungen/detail/rechnungendetail.html:181
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:59
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:62
 msgid "Einbezahlter Betrag"
 msgstr ""
 
@@ -1229,7 +1242,7 @@ msgid "Eingabe: Preis pro Einheit <br>Anzeige: Preis für gewählte Menge"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:623
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:71
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:74
 msgid "Eingang am"
 msgstr ""
 
@@ -1246,6 +1259,7 @@ msgid "Einheit"
 msgstr ""
 
 #: app/index.html:147
+#: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:26
 #: app/scripts/einkaufsrechnungen/overview/einkaufsrechnungenoverview.html:6
 msgid "Einkaufsrechnungen"
 msgstr ""
@@ -1430,7 +1444,7 @@ msgid "Frist"
 msgstr ""
 
 #: app/scripts/dashboard/dashboard.html:96
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:68
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:71
 msgid "Fälligkeit"
 msgstr ""
 
@@ -1785,9 +1799,14 @@ msgstr ""
 #: app/scripts/rechnungen/detail/rechnungendetail.html:44
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:46
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:22
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:50
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:132
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:74
 msgid "Kunde"
+msgstr ""
+
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:54
+msgid "Kunde Bezeichnung"
 msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:243
@@ -1813,6 +1832,7 @@ msgstr ""
 
 #: app/index.html:94
 #: app/scripts/arbeitseinsatzabrechnung/overview/arbeitseinsatzabrechnungoverview.html:9
+#: app/scripts/kunden/overview/kundenoverview.html:19
 #: app/scripts/kunden/overview/kundenoverview.html:6
 msgid "Kunden"
 msgstr ""
@@ -1837,7 +1857,7 @@ msgstr ""
 msgid "Kundendetails"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:250
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:347
 msgid "Kundenliste anzeigen"
 msgstr ""
 
@@ -1927,6 +1947,7 @@ msgstr ""
 msgid "Lieferplanung verrechnet"
 msgstr ""
 
+#: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:27
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:6
 msgid "Lieferplanungen"
 msgstr ""
@@ -2036,11 +2057,11 @@ msgstr ""
 msgid "Mahnungsdokument erstellen"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:196
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:275
 msgid "Mahnungsdokumente erstellen"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:223
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:312
 msgid "Mahnungsdokumente herunterladen"
 msgstr ""
 
@@ -2366,7 +2387,7 @@ msgstr ""
 msgid "Payload"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:56
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:59
 msgid "Payment Type"
 msgstr ""
 
@@ -2461,6 +2482,10 @@ msgstr ""
 #: app/scripts/auslieferungen/detail/tourauslieferungdetail.html:24
 #: app/scripts/touren/detail/tourlieferungen.html:4
 msgid "Position"
+msgstr ""
+
+#: app/scripts/auslieferungen/overview/postauslieferungenoverview.html:28
+msgid "PostAuslieferungen"
 msgstr ""
 
 #: app/scripts/auslieferungen/detail/postauslieferungdetail.html:6
@@ -2564,6 +2589,7 @@ msgid "Produktbez."
 msgstr ""
 
 #: app/index.html:173
+#: app/scripts/produkte/overview/produkteoverview.html:19
 #: app/scripts/produkte/overview/produkteoverview.html:6
 msgid "Produkte"
 msgstr ""
@@ -2596,6 +2622,7 @@ msgstr ""
 
 #: app/index.html:170
 #: app/scripts/produkte/overview/produkteoverview.html:70
+#: app/scripts/produzenten/overview/produzentenoverview.html:20
 #: app/scripts/produzenten/overview/produzentenoverview.html:6
 msgid "Produzenten"
 msgstr ""
@@ -2650,7 +2677,7 @@ msgid "Rechnung bezahlt"
 msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.controller.js:210
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:175
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:248
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:15
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:10
 msgid "Rechnung erstellen"
@@ -2678,6 +2705,7 @@ msgstr ""
 
 #: app/index.html:144
 #: app/scripts/kunden/detail/kundendetail.html:608
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:24
 #: app/scripts/rechnungen/overview/rechnungenoverview.html:6
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:28
 msgid "Rechnungen"
@@ -2693,16 +2721,20 @@ msgstr ""
 msgid "Rechnungen erstellen"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:305
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:420
 msgid "Rechnungen löschen"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:237
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:331
 msgid "Rechnungen verschickt"
 msgstr ""
 
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:5
 msgid "Rechnungs Position"
+msgstr ""
+
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:20
+msgid "RechnungsPositionen"
 msgstr ""
 
 #: app/scripts/rechnungen/detail/rechnungendetail.html:39
@@ -2715,7 +2747,7 @@ msgstr ""
 
 #: app/scripts/kunden/detail/kundendetail.html:620
 #: app/scripts/rechnungen/detail/rechnungendetail.html:150
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:65
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:68
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:22
 msgid "Rechnungsdatum"
 msgstr ""
@@ -2724,11 +2756,11 @@ msgstr ""
 msgid "Rechnungsdokument erstellen"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:183
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:257
 msgid "Rechnungsdokumente erstellen"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:209
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:293
 msgid "Rechnungsdokumente herunterladen"
 msgstr ""
 
@@ -2782,7 +2814,7 @@ msgstr ""
 msgid "Rechnungspositionen wurden verarbeitet"
 msgstr ""
 
-#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:56
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:66
 msgid "Rechnungstyp"
 msgstr ""
 
@@ -2790,7 +2822,7 @@ msgstr ""
 msgid "Rechung per E-Mail verschicken"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:266
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:365
 msgid "Rechungen per E-Mail verschicken"
 msgstr ""
 
@@ -2976,9 +3008,9 @@ msgstr ""
 #: app/scripts/lieferplanungen/overview/lieferplanungoverview.html:39
 #: app/scripts/pendenzen/overview/pendenzenoverview.html:26
 #: app/scripts/rechnungen/detail/rechnungendetail.html:114
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:62
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:65
 #: app/scripts/rechnungspositionen/detail/rechnungspositionendetail.html:51
-#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:53
+#: app/scripts/rechnungspositionen/overview/rechnungspositionenoverview.html:63
 #: app/scripts/zahlungsexports/overview/zahlungsexportsoverview.html:30
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:136
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:78
@@ -3132,7 +3164,7 @@ msgstr ""
 #: app/scripts/kunden/detail/kundendetail.html:618
 #: app/scripts/rechnungen/detail/rechnungendetail.html:131
 #: app/scripts/rechnungen/detail/rechnungendetail.html:134
-#: app/scripts/rechnungen/overview/rechnungenoverview.html:50
+#: app/scripts/rechnungen/overview/rechnungenoverview.html:53
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:13
 #: app/scripts/rechnungspositionen/overview/rechnungspositionenoverviewcreaterechnungen.html:16
 msgid "Titel"
@@ -3192,6 +3224,10 @@ msgstr ""
 
 #: app/scripts/kunden/detail/abo/abos.html:43
 msgid "Tour:"
+msgstr ""
+
+#: app/scripts/auslieferungen/overview/tourauslieferungenoverview.html:28
+msgid "TourAuslieferungen"
 msgstr ""
 
 #: app/scripts/touren/detail/tourendetail.html:76
@@ -3476,7 +3512,7 @@ msgid ""
 " {{kunde.ort}}"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:283
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:383
 msgid ""
 "Wenn Sie folgende Label einfügen, werden sie durch den entsprechenden Wert ersetzt: \n"
 " {{person.anrede}} \n"
@@ -3745,7 +3781,7 @@ msgstr ""
 msgid "max."
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:292
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:398
 msgid "pain.008.001.02 erstellen"
 msgstr ""
 
@@ -3765,7 +3801,7 @@ msgstr ""
 msgid "pro Lieferung"
 msgstr ""
 
-#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:281
+#: app/scripts/rechnungen/overview/rechnungenoverview.controller.js:381
 msgid "rechnung"
 msgstr ""
 

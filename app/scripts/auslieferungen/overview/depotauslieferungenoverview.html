@@ -25,7 +25,7 @@
           <script type="text/ng-template" id="headerCheckbox.html">
             <input type="checkbox" ng-model="checkboxes.checked" ng-class="checkboxes.css" value="" />
           </script>
-          <div ng-show="entries" id="auslieferungenTable" display-export="true" export-file-name="Depotauslieferungen" class="horizontal-scroll">
+          <div ng-show="entries" id="auslieferungenTable" display-export="true" export-file-name="{{'Depotauslieferungen'| translate}}" class="horizontal-scroll">
             <table ng-table="tableParams" class="table table-striped" show-filter="{{showFilter && hasData()}}" template-pagination="scripts/common/ngtable/oo-ngtable-paginationTemplate.html">
               <tr ng-repeat="depotauslieferung in $data | filter: search.query.$">
                 <td header="'headerCheckbox.html'">
