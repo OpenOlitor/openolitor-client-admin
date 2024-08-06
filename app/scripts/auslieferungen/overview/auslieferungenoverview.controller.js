@@ -201,7 +201,8 @@ angular.module('openolitor-admin')
           exportODSFilter: function() {
             return {
               f: $scope.search.filterQuery,
-              g: $scope.geschaeftsjahr
+              g: $scope.geschaeftsjahr,
+              'tf': JSON.stringify($scope.tableParams.filter())
             };
           },
           getData: function(params) {

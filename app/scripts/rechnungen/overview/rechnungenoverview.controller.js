@@ -457,6 +457,7 @@ angular.module('openolitor-admin').controller('RechnungenOverviewController', [
             return {
               f: $scope.search.filterQuery,
               g: $scope.geschaeftsjahr,
+              q: $scope.search.queryQuery,
             };
           },
           getData: function (params) {
