@@ -32,7 +32,7 @@ jobs:
     - name: Run Build
       run: buildDate=`date +%Y%m%d` && grunt build --buildnr=$buildDate
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: client-admin-dist
         path: dist
