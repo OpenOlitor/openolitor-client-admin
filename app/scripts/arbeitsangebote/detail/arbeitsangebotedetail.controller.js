@@ -328,8 +328,14 @@ angular.module('openolitor-admin')
       };
 
       $scope.aaAbsagen = function() {
-        $scope.arbeitsangebot.status = ARBEITSEINSATZSTATUS.ABGESAGT;
-        $scope.save();
+        $scope.arbeitsangebot.$absagen()
+          .then(function(response) {
+            alertService.addAlert('success', gettext('Arbeitsangebot wurde erfolgreich abgesagt.'));
+            $scope.backToList();
+          })
+          .catch(function(error) {
+            alertService.addAlert('error', gettext('Fehler beim Absagen des Arbeitsangebots: ') + error.data);
+          });
       };
 
       $scope.aaAbschliessen = function() {
