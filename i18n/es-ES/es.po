@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 53\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-08-07 07:16\n"
+"PO-Revision-Date: 2026-01-08 09:51\n"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:25
 #: app/scripts/abotypen/detail/abotypendetail.html:28
@@ -520,13 +520,17 @@ msgstr "Oferta de colaboración"
 msgid "Arbeitsangebot duplizieren"
 msgstr "Duplicar la posibilidad de colaboración"
 
-#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:386
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:392
 msgid "Arbeitsangebot eingefügt"
 msgstr "Crear una posibilidad de colaboración"
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:17
 msgid "Arbeitsangebot erstellen"
 msgstr "Crear una oferta de colaboración"
+
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:333
+msgid "Arbeitsangebot wurde erfolgreich abgesagt."
+msgstr "La oferta de colaboración ha sido anulada."
 
 #: app/scripts/arbeitsangebote/overview/arbeitsangeboteoverview.html:71
 msgid "Arbeitsangebot.odt"
@@ -1419,6 +1423,10 @@ msgstr "Feb"
 #: app/scripts/app.js:253
 msgid "Februar"
 msgstr "Febrero"
+
+#: app/scripts/arbeitsangebote/detail/arbeitsangebotedetail.controller.js:337
+msgid "Fehler beim Absagen des Arbeitsangebots:"
+msgstr "Ha habido un problema al cancelar la oferta de colaboración:"
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.controller.js:48
 msgid "Fehler beim importieren der ESR Datei"
