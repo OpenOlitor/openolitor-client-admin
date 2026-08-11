@@ -43,7 +43,7 @@
     "grunt-replace": "^2.0.2",
     "grunt-rev": "~0.1.0",
     "grunt-sass": "^3.1.0",
-    "grunt-svgmin": "^6.0.1",
+    "grunt-svgmin": "^7.0.0",
     "grunt-usemin": "^3.1.1",
     "grunt-wiredep": "^3.0.1",
     "http-server": "^14.1.1",
@@ -61,6 +61,14 @@
     "phantomjs-prebuilt": "^2.1.16",
     "shelljs": "^0.8.5",
     "time-grunt": "^1.4.0"
+  },
+  "overrides": {
+    "grunt-contrib-imagemin": {
+      "imagemin-svgo": "^9.0.0"
+    },
+    "imagemin-svgo": {
+      "svgo": "^2.8.3"
+    }
   },
   "engines": {
     "node": ">=14.0.0"
